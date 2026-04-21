@@ -1,2 +1,2 @@
-# Tetrator-j
+# Tetrator
 Another java mod!
