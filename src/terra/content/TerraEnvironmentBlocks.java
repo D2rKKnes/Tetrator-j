@@ -10,7 +10,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
 
-public class ExoEnvironmentBlocks {
+public class TerraEnvironmentBlocks {
     public static Block
 
         largeTree, iceBoulder, iceRift, 
