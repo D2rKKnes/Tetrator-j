@@ -5,7 +5,8 @@ import arc.util.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
-import terra.content.*;
+import terra.content.TerraItems;
+import terra.content.TerraEnvironmentBlocks;
 
 public class TerraMod extends Mod{
     @Override
