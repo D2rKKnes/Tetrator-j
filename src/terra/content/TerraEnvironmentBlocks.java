@@ -22,7 +22,7 @@ public class ExoEnvironmentBlocks {
             variants = 3;
             Blocks.ice.asFloor().decoration = this;
         }};
-        iceRift = new Floor("ice-rift") {{
+        iceRift = new SteamVent("ice-rift") {{
             variants = 2;
             parent = blendGroup = Blocks.ice;
             effect: Fx.none;
