@@ -25,7 +25,7 @@ public class ExoEnvironmentBlocks {
         iceRift = new SteamVent("ice-rift") {{
             variants = 2;
             parent = blendGroup = Blocks.ice;
-            effect: Fx.none;
+            effect = Fx.none;
         }};
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
