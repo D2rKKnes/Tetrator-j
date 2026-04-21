@@ -11,5 +11,6 @@ public class TerraMod extends Mod{
     @Override
     public void loadContent(){
         TerraItems.load();
+        TerraEnvironmentBlocks.load();
     }
 }
