@@ -8,5 +8,8 @@ import mindustry.ui.dialogs.*;
 import terra.content.TerraItems;
 
 public class TerraMod extends Mod{
-//Nothing to see now!
+    @Override
+    public void loadContent(){
+        TerraItems.load();
+    }
 }
