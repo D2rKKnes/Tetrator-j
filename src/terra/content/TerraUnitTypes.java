@@ -11,6 +11,7 @@ import terra.content.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
+import mindustry.core.*;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.entities.bullet.*;
@@ -335,7 +336,7 @@ public class TerraUnitTypes {
             flyingLayer = 110f;
             hidden = false;
             drawSoftShadow = false;
-            shadowRegion = "terra-void-shadow";
+            shadowRegion = Core.atlas.find("terra-void-shadow");
             constructor = TimedKillUnit::create;
             lifetime = 60f;
 
