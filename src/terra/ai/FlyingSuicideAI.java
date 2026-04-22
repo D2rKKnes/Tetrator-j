@@ -82,20 +82,9 @@ public class FlyingSuicideAI extends FlyingAI {
             vec.set(target).sub(unit).limit(unit.speed());
             unit.movePref(vec);
         } else {
-            boolean move = true;
-
-            if (core == null && state.rules.waves && unit.team == state.rules.defaultTeam) {
-                Tile spawner = getClosestSpawner();
-                if (spawner != null && unit.within(spawner, state.rules.dropZoneRadius + 120f)) {
-                    move = false;
-                }
-            }
-
-            if (move) {
-                if (core != null) {
-                    vec.set(core).sub(unit).limit(unit.speed());
-                    unit.movePref(vec);
-                }
+            if (core != null) {
+                vec.set(core).sub(unit).limit(unit.speed());
+                unit.movePref(vec);
             }
         }
 
@@ -108,20 +97,5 @@ public class FlyingSuicideAI extends FlyingAI {
         return Units.closestTarget(unit.team, x, y, range,
                 u -> u.checkTarget(air, ground),
                 t -> ground && !(t.block instanceof Conveyor || t.block instanceof Conduit));
-    }
-
-    private Tile getClosestSpawner() {
-        Tile closest = null;
-        float minDist = Float.MAX_VALUE;
-        for (Tile tile : state.rules.spawns) {
-            if (tile != null && tile.team() == unit.team) {
-                float dist = unit.dst2(tile);
-                if (dist < minDist) {
-                    minDist = dist;
-                    closest = tile;
-                }
-            }
-        }
-        return closest;
     }
 }
