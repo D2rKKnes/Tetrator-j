@@ -90,7 +90,7 @@ public class FlyingSuicideAI extends FlyingAI {
             if (spawnTile != null && !unit.within(spawnTile, state.rules.dropZoneRadius + 120f)) {
                 vec.set(spawnTile).sub(unit).limit(unit.speed());
                 unit.movePref(vec);
-            }
+            }}
         }
 
         unit.controlWeapons(rotate, shoot);
