@@ -167,7 +167,7 @@ public class TerraUnitTypes {
                     collidesAir = true;
                 }};
             }},
-            new Weapon("dynamite-weapon"){{
+            new Weapon("terra-dynamite-weapon"){{
                 x = 13.5f / 4f;
                 y = -5.5f / 4f;
                 reload = 13f;
@@ -188,25 +188,25 @@ public class TerraUnitTypes {
         }};
                 
         incident = new UnitType("incident"){{
-        flying = true;
-        speed = 1.6f;
-        drag = 0.04f;
-        accel = 0.042f;
-        hitSize = 19f;
-        health = 1150;
-        armor = 6;
-        engineSize = 3.5f;
-        engineOffset = 7f;
-        range = 120f;
-        itemCapacity = 40;
-        ammoType = new PowerAmmoType(2000);
-        lowAltitude = true;
-        constructor = UnitEntity::create;
-        immunities = ObjectSet.with(StatusEffects.sapped);
-        abilities.add(new SpawnDeathAbility(wick, 3, 11f));
+            flying = true;
+            speed = 1.6f;
+            drag = 0.04f;
+            accel = 0.042f;
+            hitSize = 19f;
+            health = 1150;
+            armor = 6;
+            engineSize = 3.5f;
+            engineOffset = 7f;
+            range = 120f;
+            itemCapacity = 40;
+            ammoType = new PowerAmmoType(2000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = ObjectSet.with(StatusEffects.sapped);
+            abilities.add(new SpawnDeathAbility(wick, 3, 11f));
 
-        weapons.add(
-        new Weapon(){{
+            weapons.add(
+            new Weapon(){{
                 shootOnDeath = true;
                 controllable = false;
                 reload = 60f;
@@ -230,7 +230,7 @@ public class TerraUnitTypes {
                     collidesAir = true;
                 }};
             }},
-            new Weapon("incident-mount"){{
+            new Weapon("terra-incident-mount"){{
                 x = 24.5f / 4f;
                 y = -1.5f / 4f;
                 shootY = 4f;
@@ -253,7 +253,7 @@ public class TerraUnitTypes {
                     knockback = -0.4f;
                 }};
             }},
-            new Weapon("incident-weapon"){{
+            new Weapon("terra-incident-weapon"){{
                 x = 31.5f / 4f;
                 y = 13.5f / 4f;
                 shootY = 1f;
@@ -281,6 +281,8 @@ public class TerraUnitTypes {
                     rangeOverride = 140f;
                     speed = 3f;
                     damage = 115f;
+                    splashDamage = 43f;
+                    splashDamageRadius = 2.6f * 8;
                     drag = 0.02f;
                     width = 4f;
                     height = 16f;
@@ -297,13 +299,13 @@ public class TerraUnitTypes {
                     buildingDamageMultiplier = 0.5f;
                     hitEffect = despawnEffect = new WaveEffect(){{
                         colorFrom = colorTo = Pal.sapBulletBack;
-                        sizeTo = 7f;
+                        sizeTo = 11f;
                         strokeFrom = 6f;
-                        lifetime = 20f;
+                        lifetime = 13f;
                     }};
                     bulletInterval = 8f;
                     intervalBullets = 1;
-                    fragBullets = 3;
+                    fragBullets = 7;
                     intervalBullet = fragBullet = new LightningBulletType(){{
                         damage = 12f;
                         collidesAir = false;
