@@ -6,6 +6,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
+import terra.ai.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
@@ -36,6 +37,7 @@ public class TerraUnitTypes {
     public static void load() {
         wick = new UnitType("wick"){{
             flying = true;
+            aiController = FlyingSuicideAI::new;
             speed = 3.1f;
             drag = 0.04f;
             accel = 0.08f;
@@ -79,6 +81,7 @@ public class TerraUnitTypes {
             playerControllable = false;
             logicControllable = false;
             flying = true;
+            aiController = FlyingSuicideAI::new;
             speed = 3.1f;
             drag = 0.04f;
             accel = 0.08f;
