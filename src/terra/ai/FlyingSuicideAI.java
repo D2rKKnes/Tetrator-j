@@ -87,9 +87,9 @@ public class FlyingSuicideAI extends FlyingAI {
                 vec.set(core).sub(unit).limit(unit.speed());
                 unit.movePref(vec);
             } else if (state.rules.waves && unit.team == state.rules.defaultTeam) {
-            Tile spawnTile = getNearestSpawnTile();
-            if (spawnTile != null && !unit.within(spawnTile, state.rules.dropZoneRadius + 120f)) {
-                vec.set(spawnTile).sub(unit).limit(unit.speed());
+            Tile spawnTile = getClosestSpawner();
+            if (spawnTile != null && !unit.within(spawner, state.rules.dropZoneRadius + 120f)) {
+                vec.set(spawner).sub(unit).limit(unit.speed());
                 unit.movePref(vec);
             }}
         }
