@@ -11,9 +11,10 @@ import java.lang.reflect.Field;
 
 public class TerraSounds {
     public static Sound
-            shootLaunch = new Sound(), railGunCharge = new Sound();
+        shootLaunch = new Sound(), railGunCharge = new Sound();
     public static void load(){
-                shootLaunch = loadSound("shootLaunch"), railGunCharge = loadSound("railGunCharge");
+        shootLaunch = loadSound("shootLaunch"); 
+        railGunCharge = loadSound("railGunCharge");
     }
 
     private static Sound loadSound(String soundName){
