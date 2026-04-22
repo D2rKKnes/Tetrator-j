@@ -183,6 +183,135 @@ public class TerraUnitTypes {
                     lifetime = 25f;
                     knockback = -0.4f;
                 }};
+            }},
+            incident = new UnitType("incident"){{
+            flying = true;
+            speed = 1.6f;
+            drag = 0.04f;
+            accel = 0.042f;
+            hitSize = 19f;
+            health = 1150;
+            armor = 6;
+            engineSize = 3.5f;
+            engineOffset = 7f;
+            range = 120f;
+            itemCapacity = 40;
+            ammoType = new PowerAmmoType(2000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = ObjectSet.with(StatusEffects.sapped);
+            abilities.add(new SpawnDeathAbility(wick, 3, 11f));
+
+            weapons.add(
+            new Weapon(){{
+                shootOnDeath = true;
+                controllable = false;
+                reload = 60f;
+                shootCone = 180f;
+                ejectEffect = Fx.none;
+                shootSound = Sounds.explosionCrawler;
+                shootSoundVolume = 0.7f;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = new BulletType(){{
+                    collidesTiles = false;
+                    collides = false;
+                    hitEffect = Fx.pulverize;
+                    speed = 0f;
+                    splashDamageRadius = 60f;
+                    instantDisappear = true;
+                    splashDamage = 250f;
+                    buildingDamageMultiplier = 0.68f;
+                    killShooter = true;
+                    hittable = false;
+                    collidesAir = true;
+                }};
+            }},
+            new Weapon("incident-mount"){{
+                x = 24.5f / 4f;
+                y = -1.5f / 4f;
+                shootY = 4f;
+                shootSound = Sounds.shootAvert;
+                reload = 28f;
+                rotate = true;
+                shoot = new ShootSpread() {{
+                    shots = 3;
+                    spread = 10f;
+                }};
+                bullet = new SapBulletType(){{
+                    sapStrength = 0.4f;
+                    length = 75f;
+                    damage = 22f;
+                    shootEffect = Fx.shootSmall;
+                    hitColor = color = Color.valueOf("bf92f9");
+                    despawnEffect = Fx.none;
+                    width = 0.5f;
+                    lifetime = 25f;
+                    knockback = -0.4f;
+                }};
+            }},
+            new Weapon("incident-weapon"){{
+                x = 31.5f / 4f;
+                y = 13.5f / 4f;
+                shootY = 1f;
+                shootSound = Sounds.shootAfflict;
+                reload = 135f;
+                recoil = 0.8f;
+                rotate = true;
+                rotateSpeed = 1.2f;
+                rotationLimit = 35f;
+                parts.addAll(
+                    new RegionPart("-part") {{
+                        mirror = true;
+                        progress = PartProgress.recoil;
+                        moveX = 0.75f;
+                        outline = false;
+                    }},
+                    new RegionPart("-part-outline") {{
+                        mirror = true;
+                        progress = PartProgress.recoil;
+                        moveX = 0.75f;
+                        outline = false;
+                    }}
+                );
+                bullet = new BasicBulletType(){{
+                    rangeOverride = 140f;
+                    speed = 3f;
+                    damage = 115f;
+                    drag = 0.02f;
+                    width = 4f;
+                    height = 16f;
+                    shrinkX = -1f;
+                    shrinkY = 0.5f;
+                    shrinkInterp = Interp.circleIn;
+                    sprite = "circle-bullet";
+                    backColor = Pal.sapBulletBack;
+                    frontColor = lightningColor = Pal.sapBullet;
+                    lifetime = 115f;
+                    despawnSound = hitSound = Sounds.explosionAfflict;
+                    status = StatusEffects.sapped;
+                    statusDuration = 300f;
+                    buildingDamageMultiplier = 0.5f;
+                    hitEffect = despawnEffect = new WaveEffect(){{
+                        colorFrom = colorTo = Pal.sapBulletBack;
+                        sizeTo = 7f;
+                        strokeFrom = 6f;
+                        lifetime = 20f;
+                    }};
+                    bulletInterval = 8f;
+                    intervalBullets = 1;
+                    fragBullets = 3;
+                    intervalBullet = fragBullet = new LightningBulletType(){{
+                        damage = 12f;
+                        collidesAir = false;
+                        lightningLength = 5f;
+                        lightningColor = Pal.sapBulletBack;
+                        hitSoundVolume = 0.3f;
+                        hitSoundPitch = 0.7f;
+                        lightningLengthRand = 3f;
+                        buildingDamageMultiplier = 0.15f;
+                    }};
+                }};
             }});
         }};
     }
