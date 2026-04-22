@@ -169,8 +169,8 @@ public class TerraUnitTypes {
                 x = 13.5f / 4f;
                 y = -5.5f / 4f;
                 reload = 13f;
-                rotate: true;
-                rotateSpeed: 5f;
+                rotate = true;
+                rotateSpeed = 5f;
                 bullet = new SapBulletType(){{
                     sapStrength = 0.5f;
                     length = 95f;
