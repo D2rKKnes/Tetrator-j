@@ -139,6 +139,7 @@ public class TerraUnitTypes {
             itemCapacity = 15;
             ammoType = new PowerAmmoType(1000);
             lowAltitude = true;
+            constructor = UnitEntity::create;
 
             weapons.add(
             new Weapon(){{
