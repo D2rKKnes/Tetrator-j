@@ -29,7 +29,7 @@ public class TerraStatusEffects{
                     unit.damage(transitionDamage);
 
                     if(unit.team == state.rules.waveTeam){
-                        Events.fire(Trigger.shock);
+                        Events.fire(EventType.Trigger.shock);
                     }
                 });
             });
