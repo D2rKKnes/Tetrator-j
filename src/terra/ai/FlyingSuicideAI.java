@@ -3,6 +3,7 @@ package terra.ai;
 import arc.math.geom.*;
 import mindustry.*;
 import mindustry.ai.*;
+import mindustry.ai.types.*;
 import mindustry.entities.Units;
 import mindustry.gen.*;
 import mindustry.world.*;
