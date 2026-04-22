@@ -7,6 +7,7 @@ import mindustry.ai.types.*;
 import mindustry.core.*;
 import mindustry.entities.Units;
 import mindustry.gen.*;
+import mindustry.game.SpawnGroup;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import mindustry.world.blocks.distribution.Conveyor;
