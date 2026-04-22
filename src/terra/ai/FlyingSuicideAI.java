@@ -17,7 +17,7 @@ public class FlyingSuicideAI extends FlyingAI {
     private final Vec2 vec = new Vec2();
 
     @Override
-    public void updateMovement() {)
+    public void updateMovement() {
         unloadPayloads();
 
         if (Units.invalidateTarget(target, unit.team, unit.x, unit.y, Float.MAX_VALUE)) {
