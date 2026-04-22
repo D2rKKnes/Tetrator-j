@@ -49,6 +49,7 @@ public class TerraUnitTypes {
             itemCapacity = 10;
             ammoType = new ItemAmmoType(TerraItems.carbon);
             createWreck = false;
+            constructor = UnitEntity::create;
 
             weapons.add(new Weapon(){{
                 shootOnDeath = true;
