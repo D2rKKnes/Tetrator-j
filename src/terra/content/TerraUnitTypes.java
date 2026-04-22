@@ -330,12 +330,12 @@ public class TerraUnitTypes {
             engineSize = 4f;
             engineLayer = 109.9f;
             engineColor = Pal.sapBullet;
-            trailLength = 12f;
+            trailLength = 12;
             trailColor = Pal.sapBullet;
             flyingLayer = 110f;
             hidden = false;
             drawSoftShadow = false;
-            shadowRegion = Core.atlas.find("terra-void-shadow");
+            shadowRegion = "terra-void-shadow";
             constructor = TimedKillUnit::create;
             lifetime = 60f;
 
