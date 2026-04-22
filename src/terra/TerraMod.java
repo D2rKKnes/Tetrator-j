@@ -13,5 +13,6 @@ public class TerraMod extends Mod{
         TerraItems.load();
         TerraEnvironmentBlocks.load();
         TerraStatusEffects.load();
+        TerraUnitTypes.load();
     }
 }
