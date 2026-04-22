@@ -184,7 +184,7 @@ public class TerraUnitTypes {
                     lifetime = 25f;
                     knockback = -0.4f;
                 }};
-            }})
+            }});
         }};
                 
         incident = new UnitType("incident"){{
