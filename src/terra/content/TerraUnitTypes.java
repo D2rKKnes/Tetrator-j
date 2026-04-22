@@ -335,7 +335,7 @@ public class TerraUnitTypes {
             flyingLayer = 110f;
             hidden = false;
             drawSoftShadow = false;
-            shadowRegion = "terra-void-shadow";
+            shadowRegion = Core.atlas.find("terra-void-shadow");
             constructor = TimedKillUnit::create;
             lifetime = 60f;
 
