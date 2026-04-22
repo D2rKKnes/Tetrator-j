@@ -7,6 +7,7 @@ import mindustry.ai.types.*;
 import mindustry.entities.Units;
 import mindustry.gen.*;
 import mindustry.world.*;
+import mindustry.world.meta.*;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.storage.CoreBlock;
