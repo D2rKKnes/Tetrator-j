@@ -126,5 +126,63 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+        dynamite = new UnitType("dynamite"){{
+            flying = true;
+            speed = 2.1f;
+            drag = 0.04f;
+            accel = 0.058f;
+            hitSize = 12f;
+            health = 420;
+            engineSize = 2.75f;
+            engineOffset = 7.7f;
+            range = 90f;
+            itemCapacity = 15;
+            ammoType = new PowerAmmoType(1000);
+            lowAltitude = true;
+
+            weapons.add(
+            new Weapon(){{
+                shootOnDeath = true;
+                controllable = false;
+                reload = 60f;
+                shootCone = 180f;
+                ejectEffect = Fx.none;
+                shootSound = Sounds.explosionCrawler;
+                shootSoundVolume = 0.7f;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = new BulletType(){{
+                    collidesTiles = false;
+                    collides = false;
+                    hitEffect = Fx.pulverize;
+                    speed = 0f;
+                    splashDamageRadius = 60f;
+                    instantDisappear = true;
+                    splashDamage = 187f;
+                    buildingDamageMultiplier = 0.68f;
+                    killShooter = true;
+                    hittable = false;
+                    collidesAir = true;
+                }};
+            }},
+            new Weapon("dynamite-weapon"){{
+                x = 13.5f / 4f;
+                y = -5.5f / 4f;
+                reload = 13f;
+                rotate: true;
+                rotateSpeed: 5f;
+                bullet = new SapBulletType(){{
+                    sapStrength = 0.5f;
+                    length = 95f;
+                    damage = 19f;
+                    shootEffect = Fx.shootSmall;
+                    hitColor = color = Color.valueOf("bf92f9");
+                    despawnEffect = Fx.none;
+                    width = 0.4f;
+                    lifetime = 25f;
+                    knockback = -0.4f;
+                }};
+            }});
+        }};
     }
 }
