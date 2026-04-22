@@ -1,20 +1,21 @@
 package terra.ai;
 
-import arc.math.geom.Vec2;
-import mindustry.ai.types.FlyingAI;
-import mindustry.gen.Building;
-import mindustry.gen.Hitboxc;
-import mindustry.gen.Teamc;
-import mindustry.gen.Unit;
-import mindustry.world.Tile;
+import arc.math.geom.*;
+import mindustry.*;
+import mindustry.ai.*;
+import mindustry.entities.Units;
+import mindustry.gen.*;
+import mindustry.world.*;
+import mindustry.world.blocks.distribution.Conveyor;
+import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.storage.CoreBlock;
 
-import static mindustry.Vars.state;
-import static mindustry.Vars.world;
+import static mindustry.Vars.*;
 
 public class FlyingSuicideAI extends FlyingAI {
 
     private final Vec2 vec = new Vec2();
+    private boolean blockedByBlock = false;
 
     @Override
     public void updateMovement() {
@@ -28,25 +29,74 @@ public class FlyingSuicideAI extends FlyingAI {
             target = target(unit.x, unit.y, unit.range(), unit.type.targetAir, unit.type.targetGround);
         }
 
+        Building core = unit.closestEnemyCore();
         if (target == null) {
-            target = unit.closestEnemyCore();
+            target = core;
         }
 
+        boolean rotate = false;
         boolean shoot = false;
+        boolean moveToTarget = false;
 
-        if (target != null && !Units.invalidateTarget(target, unit, unit.range()) && unit.hasWeapons()) {
-            float range = unit.type.weapons.first().bullet.range;
-            float targetSize = target instanceof Building b ? b.block.size * world.tilesize / 2f
-                    : ((Hitboxc) target).hitSize() / 2f;
-            shoot = unit.within(target, range + targetSize);
+        if (!Units.invalidateTarget(target, unit, unit.range()) && unit.hasWeapons()) {
+            rotate = true;
+            shoot = unit.within(target, unit.type.weapons.first().bullet.range +
+                    (target instanceof Building b ? b.block.size * tilesize / 2f : ((Hitboxc) target).hitSize() / 2f));
+
+            if (!(target instanceof Building build &&
+                    !(build.block instanceof CoreBlock) &&
+                    (build.block.group == BlockGroup.walls ||
+                            build.block.group == BlockGroup.liquids ||
+                            build.block.group == BlockGroup.transportation))) {
+
+                blockedByBlock = false;
+
+                boolean blocked = world.raycast(unit.tileX(), unit.tileY(), target.tileX(), target.tileY(), (x, y) -> {
+                    for (Point2 p : Geometry.d4c) {
+                        Tile tile = world.tile(x + p.x, y + p.y);
+                        if (tile != null && tile.build == target) return false;
+                        if (tile != null && tile.build != null && tile.build.team != unit.team()) {
+                            blockedByBlock = true;
+                            return true;
+                        } else {
+                            return tile == null || tile.solid();
+                        }
+                    }
+                    return false;
+                });
+
+                if (blockedByBlock) {
+                    shoot = true;
+                }
+
+                if (!blocked) {
+                    moveToTarget = true;
+                }
+            }
         }
 
-        if (target != null) {
+        if (moveToTarget) {
             vec.set(target).sub(unit).limit(unit.speed());
             unit.movePref(vec);
+        } else {
+            boolean move = true;
+
+            if (core == null && state.rules.waves && unit.team == state.rules.defaultTeam) {
+                Tile spawner = getClosestSpawner();
+                if (spawner != null && unit.within(spawner, state.rules.dropZoneRadius + 120f)) {
+                    move = false;
+                }
+            }
+
+            if (move) {
+                if (core != null) {
+                    vec.set(core).sub(unit).limit(unit.speed());
+                    unit.movePref(vec);
+                }
+            }
         }
 
-        unit.controlWeapons(true, shoot);
+        unit.controlWeapons(rotate, shoot);
         faceTarget();
     }
 
@@ -55,5 +105,20 @@ public class FlyingSuicideAI extends FlyingAI {
         return Units.closestTarget(unit.team, x, y, range,
                 u -> u.checkTarget(air, ground),
                 t -> ground && !(t.block instanceof Conveyor || t.block instanceof Conduit));
+    }
+
+    private Tile getClosestSpawner() {
+        Tile closest = null;
+        float minDist = Float.MAX_VALUE;
+        for (Tile tile : state.rules.spawns) {
+            if (tile != null && tile.team() == unit.team) {
+                float dist = unit.dst2(tile);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closest = tile;
+                }
+            }
+        }
+        return closest;
     }
 }
