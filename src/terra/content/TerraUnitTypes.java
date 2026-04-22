@@ -126,6 +126,7 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+        
         dynamite = new UnitType("dynamite"){{
             flying = true;
             speed = 2.1f;
@@ -183,27 +184,29 @@ public class TerraUnitTypes {
                     lifetime = 25f;
                     knockback = -0.4f;
                 }};
-            }},
-            incident = new UnitType("incident"){{
-            flying = true;
-            speed = 1.6f;
-            drag = 0.04f;
-            accel = 0.042f;
-            hitSize = 19f;
-            health = 1150;
-            armor = 6;
-            engineSize = 3.5f;
-            engineOffset = 7f;
-            range = 120f;
-            itemCapacity = 40;
-            ammoType = new PowerAmmoType(2000);
-            lowAltitude = true;
-            constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped);
-            abilities.add(new SpawnDeathAbility(wick, 3, 11f));
+            }})
+        }};
+                
+        incident = new UnitType("incident"){{
+        flying = true;
+        speed = 1.6f;
+        drag = 0.04f;
+        accel = 0.042f;
+        hitSize = 19f;
+        health = 1150;
+        armor = 6;
+        engineSize = 3.5f;
+        engineOffset = 7f;
+        range = 120f;
+        itemCapacity = 40;
+        ammoType = new PowerAmmoType(2000);
+        lowAltitude = true;
+        constructor = UnitEntity::create;
+        immunities = ObjectSet.with(StatusEffects.sapped);
+        abilities.add(new SpawnDeathAbility(wick, 3, 11f));
 
-            weapons.add(
-            new Weapon(){{
+        weapons.add(
+        new Weapon(){{
                 shootOnDeath = true;
                 controllable = false;
                 reload = 60f;
