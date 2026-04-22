@@ -307,11 +307,11 @@ public class TerraUnitTypes {
                     intervalBullet = fragBullet = new LightningBulletType(){{
                         damage = 12f;
                         collidesAir = false;
-                        lightningLength = 5f;
+                        lightningLength = 5;
                         lightningColor = Pal.sapBulletBack;
                         hitSoundVolume = 0.3f;
                         hitSoundPitch = 0.7f;
-                        lightningLengthRand = 3f;
+                        lightningLengthRand = 3;
                         buildingDamageMultiplier = 0.15f;
                     }};
                 }};
