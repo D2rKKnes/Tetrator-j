@@ -7,6 +7,7 @@ import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
 import terra.ai.*;
+import terra.content.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
@@ -32,7 +33,7 @@ import static mindustry.Vars.*;
 public class TerraUnitTypes {
     public static UnitType
     //flying special units
-    wick, wickC, dynamite, incident, catastrophe, inevitability, inevitabilityCore, inevitabilityMissile;
+    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -316,6 +317,41 @@ public class TerraUnitTypes {
                         lightningLengthRand = 3;
                         buildingDamageMultiplier = 0.15f;
                     }};
+                }};
+            }});
+        }};
+        sapEnergyMissile = new MissileUnitType("sap-energy-missile"){{
+            speed = 4.6f;
+            hitSize = 6f;
+            health = 68f;
+            maxRange = 4f;
+            outlines = false;
+            engineOffset = 1f;
+            engineSize = 4f;
+            engineLayer = 109.9f;
+            engineColor = Pal.sapBullet;
+            trailLength = 12f;
+            trailColor = Pal.sapBullet;
+            flyingLayer = 110f;
+            hidden = false;
+            drawSoftShadow = false;
+            shadowRegion = "terra-void-shadow";
+            constructor = TimedKillUnit::create;
+            lifetime = 60f;
+
+            weapons.add(new Weapon() {{
+                shootSound = Sounds.none;
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                shootOnDeath = true;
+                shootOnDeathEffect = Fx.massiveExplosion;
+                bullet = new ExplosionBulletType(78f, 33f){{
+                    shootEffect = new WrapEffect(Fx.shootQuellPulse, Pal.suppress);
+                    collidesAir = true;
+                    status = TerraStatusEffects.energyOverload;
+                    statusDuration = 80f;
+                    buildingDamageMultiplier = 0.5f;
                 }};
             }});
         }};
