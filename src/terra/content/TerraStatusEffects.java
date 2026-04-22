@@ -21,7 +21,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("bf92f9");
             speedMultiplier = 0.7f;
             reloadMultiplier = 0.4f;
-            damage: 0.6f;
+            damage = 0.6f;
             transitionDamage = 17f;
             effect = Fx.circleColorSpark;
             init(() -> {
