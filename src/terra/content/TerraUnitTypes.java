@@ -11,7 +11,7 @@ import terra.content.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
-import mindustry.core.*;
+import mindustry.core.Core;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.entities.bullet.*;
