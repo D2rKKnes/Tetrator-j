@@ -12,5 +12,6 @@ public class TerraMod extends Mod{
     public void loadContent(){
         TerraItems.load();
         TerraEnvironmentBlocks.load();
+        TerraStatusEffects.load();
     }
 }
