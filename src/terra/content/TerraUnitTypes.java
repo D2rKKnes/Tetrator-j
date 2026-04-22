@@ -138,7 +138,7 @@ public class TerraUnitTypes {
             health = 420;
             engineSize = 2.75f;
             engineOffset = 7.7f;
-            range = 90f;
+            //range = 90f;
             itemCapacity = 15;
             ammoType = new PowerAmmoType(1000);
             lowAltitude = true;
@@ -199,7 +199,7 @@ public class TerraUnitTypes {
             armor = 6;
             engineSize = 3.5f;
             engineOffset = 7f;
-            range = 120f;
+            //range = 120f;
             itemCapacity = 40;
             ammoType = new PowerAmmoType(2000);
             lowAltitude = true;
@@ -265,18 +265,21 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.2f;
                 rotationLimit = 35f;
+                layerOffset = -0.001f;
                 parts.addAll(
                     new RegionPart("-part") {{
                         mirror = true;
                         progress = PartProgress.recoil;
                         moveX = 0.75f;
                         outline = false;
+                        under = true;
                     }},
                     new RegionPart("-part-outline") {{
                         mirror = true;
                         progress = PartProgress.recoil;
                         moveX = 0.75f;
                         outline = false;
+                        under = true;
                     }}
                 );
                 bullet = new BasicBulletType(){{
@@ -335,8 +338,9 @@ public class TerraUnitTypes {
             trailColor = Pal.sapBullet;
             flyingLayer = 110f;
             hidden = false;
+            targetable = false;
             drawSoftShadow = false;
-            shadowRegion = Core.atlas.find("terra-void-shadow");
+            shadowRegion = Core.atlas.find("void-shadow");
             constructor = TimedKillUnit::create;
             lifetime = 60f;
 
