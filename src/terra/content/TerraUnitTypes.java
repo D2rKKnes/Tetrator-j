@@ -30,8 +30,8 @@ import static mindustry.Vars.*;
 
 public class TerraUnitTypes {
     public static UnitType
-    
-    wick;
+    //flying special units
+    wick, wickC, dynamite, incident, catastrophe, inevitability, inevitabilityCore, inevitabilityMissile;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -47,6 +47,53 @@ public class TerraUnitTypes {
             itemCapacity = 10;
             ammoType = new ItemAmmoType(TerraItems.carbon);
             createWreck = false;
+
+            weapons.add(new Weapon(){{
+                shootOnDeath = true;
+                targetUnderBlocks = false;
+                reload = 24f;
+                shootCone = 180f;
+                ejectEffect = Fx.none;
+                shootSound = Sounds.explosionCrawler;
+                shootSoundVolume = 0.4f;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = new BulletType(){{
+                    collidesTiles = false;
+                    collides = false;
+
+                    rangeOverride = 25f;
+                    hitEffect = Fx.pulverize;
+                    speed = 0f;
+                    splashDamageRadius = 44f;
+                    instantDisappear = true;
+                    splashDamage = 70f;
+                    buildingDamageMultiplier = 0.68f;
+                    killShooter = true;
+                    hittable = false;
+                    collidesAir = true;
+                }};
+            }});
+        }};
+        wickC = new UnitType("wick-c"){{
+            playerControllable = false;
+            logicControllable = false;
+            flying = true;
+            speed = 3.1f;
+            drag = 0.04f;
+            accel = 0.08f;
+            hitSize = 8f;
+            health = 95;
+            engineSize = 2.25f;
+            engineOffset = 5.25f;
+            range = 40f;
+            itemCapacity = 0;
+            ammoType = new ItemAmmoType(TerraItems.carbon);
+            createWreck = false;
+            useUnitCap = false;
+            hidden = true;
+            constructor = TimedKillUnit::create;
+            lifetime = 2400f;
 
             weapons.add(new Weapon(){{
                 shootOnDeath = true;
