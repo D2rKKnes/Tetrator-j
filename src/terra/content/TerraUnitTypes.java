@@ -34,7 +34,7 @@ import static mindustry.Vars.*;
 public class TerraUnitTypes {
     public static UnitType
     //flying special units
-    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore;
+    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternity;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -343,6 +343,7 @@ public class TerraUnitTypes {
             drawSoftShadow = false;
             constructor = TimedKillUnit::create;
             lifetime = 70f;
+            shadowElevation = 0f;
 
             weapons.add(new Weapon() {{
                 shootSound = Sounds.none;
@@ -543,20 +544,6 @@ public class TerraUnitTypes {
                     reload = 600f;
                 }}, 
                 new SpawnDeathAbility(inevitabilityCore, 1, 11f));
-
-            BulletType sapper = new LaserBulletType(){{
-                damage = 28f;
-                recoil = 0f;
-                sideAngle = 90f;
-                sideWidth = 0.8f;
-                sideLength = 30f;
-                status = StatusEffects.sapped;
-                statusDuration = 90f;
-                length = 130f;
-                colors = new Color[]{Pal.sapBullet.cpy().a(0.4f), Pal.sapBullet, Color.white};
-                knockback = -0.1f;
-            }};
-
             weapons.add(
             new Weapon("terra-inevitability-mount"){{
                 x = 44.5f / 4f;
@@ -732,6 +719,56 @@ public class TerraUnitTypes {
                         sizeFrom = 42f;
                         region = "circle-shadow";
                     }};
+                }};
+            }});
+        }};
+
+        eternity = new UnitType("eternity"){{
+            flying = true;
+            speed = 0.3f;
+            rotateSpeed = 0.5f;
+            drag = 0.04f;
+            accel = 0.03f;
+            hitSize = 100f;
+            softShadowScl = 1f;
+            health = 88000;
+            armor = 56;
+            engineSize = 0f;
+            engineOffset = 0f;
+            outlineRadius = 6;
+            crashDamageMultiplier = 10;
+            targetPriority = 4f;
+            fallSpeed = 13000;
+            faceTarget = false;
+            setEnginesMirror(
+                new UnitEngine(168f / 4f, 0.25f, 14f, -135f),
+                new UnitEngine(100f / 4f, 55f / 4f, 14f, -135f)
+            );
+            //range = 120f;
+            itemCapacity = 200;
+            ammoType = new PowerAmmoType(9000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.energyOverload);
+            abilities.addAll(
+                new SuppressionFieldAbility(){{
+                    range = 450f;
+                    maxDelay = 60f;
+                    reload = 1200f;
+                    y = 39.25f;
+                    orbRadius = 20f;
+                    particleSize = 13;
+                }});
+
+            weapons.add(
+            new Weapon("terra-eternity-mount"){{
+                x = 128.5f / 4f;
+                y = 94.5f / 4f;
+                rotate = true;
+                rotateSpeed = 1.8f;
+                
+                bullet = new BasicBulletType(){{
+
                 }};
             }});
         }};
