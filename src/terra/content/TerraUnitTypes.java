@@ -535,22 +535,14 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
             abilities.addAll(
-            new ShieldRegenFieldAbility(){{
-                range = 120f;
-                amount = 1500f;
-                max = 6000f;
-                reload = 1200f;
-            }}, 
-            new SuppressionFieldAbility(){{
-                range = 180f;
-                maxDelay = 60f;
-                layer = 89f;
-                reload = 600f;
-            }}, 
-            new SpawnDeathAbility(){{
-                amount = 1;
-                unit = inevitabilityCore;
-            }});
+                new ShieldRegenFieldAbility(1500f, 6000f, 1200f, 120f), 
+                new SuppressionFieldAbility(){{
+                    range = 180f;
+                    maxDelay = 60f;
+                    layer = 89f;
+                    reload = 600f;
+                }}, 
+                new SpawnDeathAbility(inevitabilityCore, 1, 11f));
 
             BulletType sapper = new LaserBulletType(){{
                 damage = 28f;
