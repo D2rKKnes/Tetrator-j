@@ -452,5 +452,295 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+
+        inevitabilityCore = new UnitType("inevitability-core"){{
+            playerControllable = false;
+            logicControllable = false;
+            flying = true;
+            speed = 4f;
+            drag = 0.04f;
+            accel = 0.08f;
+            hitSize = 8f;
+            health = 95;
+            engineSize = 1f;
+            engineOffset = 0f;
+            range = 40f;
+            itemCapacity = 0;
+            ammoType = new PowerAmmoType(50000);
+            useUnitCap = false;
+            hidden = false;
+            constructor = TimedKillUnit::create;
+            immunities = ObjectSet.with(StatusEffects.sapped);
+            lifetime = 7500f;
+            setEnginesMirror(
+                new UnitEngine(4f, 4f, 2f, 45f),
+                new UnitEngine(4f, -4f, 2f, 135f)
+            );
+
+            weapons.add(new Weapon(){{
+                mirror = false;
+                shootY = 0f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.3f;
+                shootCone = 361f;
+                inaccuracy = 360f;
+                bullet = new BasicBulletType(){{
+                    speed = 5.6f;
+                    lifetime = 30f;
+                    damage = 42f;
+                    homingPower = 0.2f;
+                    width = 4.4f;
+                    height = 7f;
+                    shrinkY = 0.2f;
+                    hitColor = backColor = trailColor = Pal.sapBulletBack;
+                    frontColor = Pal.sapBullet;
+                    trailWidth = 1f;
+                    trailLength = 4f;
+                    despawnEffect = hitEffect = Fx.none;
+                    fragRandomSpread = 20f;
+                    fragBullets = 1;
+                    fragBullet = new SapBulletType(){{
+                        sapStrength = 0.68f;
+                        width = 0.7f;
+                        length = 52f;
+                        damage = 31f;
+                        shootEffect = smokeEffect = despawnEffect = Fx.none;
+                        color = hitColor = Pal.sapBulletBack;
+                        lifetime = 18f;
+                        knockback = -0.3f;
+                    }};
+                }};
+            }});
+        }};
+
+        inevitability = new UnitType("inevitability"){{
+            flying = true;
+            speed = 0.7f;
+            rotateSpeed = 1.3f;
+            drag = 0.04f;
+            accel = 0.03f;
+            hitSize = 36f;
+            softShadowScl = 0.7f;
+            health = 24000;
+            armor = 21;
+            engineSize = 5.75f;
+            engineOffset = 14f;
+            setEnginesMirror(
+                new UnitEngine(17f, -9f, 5f, -45f)
+            );
+            //range = 120f;
+            itemCapacity = 90;
+            ammoType = new PowerAmmoType(6000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = ObjectSet.with(StatusEffects.sapped);
+            abilities.add(
+            new ShieldRegenFieldAbility(){{
+                range = 120f;
+                amount = 1500f;
+                max = 6000f;
+                reload = 1200f;
+            }}, 
+            new SuppressionFieldAbility(){{
+                range = 180f;
+                maxDelay = 60f;
+                layer = 89f;
+                reload = 600f;
+            }}, 
+            new SpawnDeathAbility(){{
+                amount = 1;
+                unit = inevitabilityCore
+            }});
+
+            BulletType sapper = new LaserBulletType(){{
+                damage = 28f;
+                recoil = 0f;
+                sideAngle = 90f;
+                sideWidth = 0.8f;
+                sideLength = 30f;
+                status = StatusEffects.sapped;
+                statusDuration = 90f;
+                length = 130f;
+                colors = new Color[]{Pal.sapBullet.cpy().a(0.4f), Pal.sapBullet, Color.white};
+                knockback = -0.1f;
+            }};
+
+            weapons.add(
+            new Weapon("terra-inevitability-mount"){{
+                x = 44.5f / 4f;
+                y = 24.5f / 4f;
+                shootSound = Sounds.shootAvert;
+                reload = 24f;
+                rotate = true;
+                inaccuracy = 6f;
+                shoot = new ShootPattern() {{
+                    shots = 4;
+                    shotDelay = 2f;
+                }};
+                bullet = new BasicBulletType(){{
+                    speed = 5.6f;
+                    lifetime = 30f;
+                    damage = 42f;
+                    width = 4.4f;
+                    height = 7f;
+                    shrinkY = 0.2f;
+                    hitColor = backColor = trailColor = Pal.sapBulletBack;
+                    frontColor = Pal.sapBullet;
+                    trailWidth = 1f;
+                    trailLength = 4f;
+                    despawnEffect = hitEffect = Fx.none;
+                    fragRandomSpread = 20f;
+                    fragBullets = 1;
+                    fragBullet = new SapBulletType(){{
+                        sapStrength = 0.34f;
+                        width = 0.7f;
+                        length = 52f;
+                        damage = 31f;
+                        shootEffect = smokeEffect = despawnEffect = Fx.none;
+                        color = hitColor = Pal.sapBulletBack;
+                        lifetime = 18f;
+                        knockback = -0.3f;
+                    }};
+                }};
+            }},
+            new Weapon("terra-small-sap-launcher"){{
+                x = -62.5f / 4f;
+                y = -15.5f / 4f;
+                shootSound = TerraSounds.shootLaunch;
+                reload = 87f;
+                rotate = true;
+                rotateSpeed = 3.2f;
+                shoot = new ShootAlternate() {{
+                    shots = 3;
+                    shotDelay = 9f;
+                    barrels = 2;
+                    spread = 4f;
+                }};
+                bullet = new BulletType(){{
+                    shootEffect = Fx.sparkShoot;
+                    hitColor = Pal.suppress;
+                    shake = 0.4f;
+                    speed = 0f;
+                    keepVelocity = false;
+
+                    spawnUnit = sapEnergyMissile;
+                }};
+            }},
+            new Weapon("terra-railgun"){{
+                x = 0f;
+                y = -7.5f / 4f;
+                shootY = 5f;
+                shootSound = Sounds.shootSmite;
+                chargeSound = TerraSounds.railGunCharge;
+                soundPitchMin = 0.93f;
+                reload = 246f;
+                recoilTime = 173f;
+                minWarmup = 0.8f;
+                rotate = true;
+                rotateSpeed = 3.2f;
+                shake = 3f;
+                shoot = new ShootPattern() {{
+                    firstShotDelay = 148f;
+                }};
+                parts.addAll(
+                    new RegionPart("-antenna-charge-line-l") {{
+                        mirror = true;
+                        progress = PartProgress.charge;
+                        y = 30f;
+                        color = Color.valueOf("ffd37f00");
+                        colorTo = Color.valueOf("ffd37fff");
+                        under = true;
+                        outline = false;
+                        moves.addAll(
+                            new PartMove(){{
+                                progress = PartProgress.warmup;
+                                x = -1;
+                            }},
+                            new PartMove(){{
+                                progress = PartProgress.recoil;
+                                y = -7;
+                            }}
+                        );
+                    }},
+                    new RegionPart("-antenna-l") {{
+                        mirror = true;
+                        progress = PartProgress.warmup;
+                        y = 5.75f;
+                        moveX = -1f;
+                        under = true;
+                        moves.addAll(
+                            new PartMove(){{
+                                progress = PartProgress.recoil;
+                                y = -7;
+                            }}
+                        );
+                    }},
+                    new RegionPart("-arrow") {{
+                        mirror = false;
+                        progress = PartProgress.charge;
+                        y = 17.5f;
+                        color = Color.valueOf("ffd37f00");
+                        colorTo = Color.valueOf("ffd37fff");
+                        outline = false;
+                    }},
+                    new RegionPart("-arrow") {{
+                        mirror = false;
+                        progress = PartProgress.charge.delay(0.333f);
+                        y = 27.5f;
+                        color = Color.valueOf("ffd37f00");
+                        colorTo = Color.valueOf("ffd37fff");
+                        outline = false;
+                    }},
+                    new RegionPart("-arrow") {{
+                        mirror = false;
+                        progress = PartProgress.charge.delay(0.666f);
+                        y = 37.5f;
+                        color = Color.valueOf("ffd37f00");
+                        colorTo = Color.valueOf("ffd37fff");
+                        outline = false;
+                    }}
+                );
+                bullet = new BasicBulletType(){{
+                    sprite = "missile-large";
+                    hitColor = trailColor = backColor = Color.valueOf("ffd37f");
+                    speed = 8.4f;
+                    lifetime = 53f;
+                    damage = 900f;
+                    buildingDamageMultiplier = 0.85f;
+                    knockback = 9f;
+                    impact = true;
+                    targetMissiles = false;
+                    reflectable = false;
+                    pierceArmor = true;
+                    despawnShake = 8f;
+                    hitShake = 2.3f;
+                    hitSize = 14f;
+                    width = 18f;
+                    height = 22f;
+                    trailWidth = 5f;
+                    trailLength = 26f;
+                    shrinkY = 0.2f;
+                    pierce = true;
+                    pierceCap = 5;
+                    pierceBuilding = true;
+                    status = StatusEffects.disarmed;
+                    statusDuration = 40f;
+                    smokeEffect = Fx.shootSmokeTitan;
+                    hitSound = despawnSound = Sounds.explosionTitan;
+                    hitEffect = despawnEffect = new ParticleEffect(){{
+                        lifetime = 128f;
+                        layer = 122f;
+                        particles = 17;
+                        cone = 360f;
+                        length = 90f;
+                        interp = Interp.circleOut;
+                        colorFrom = Color.valueOf("ffd37f");
+                        colorTo = Color.valueOf("ffd37f00");
+                        sizeFrom = 42f;
+                        region = "circle-shadow";
+                    }}
+                }};
+            }});
+        }};
     }
 }
