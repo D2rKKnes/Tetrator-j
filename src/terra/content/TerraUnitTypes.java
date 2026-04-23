@@ -414,7 +414,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 16f;
                 rotate = true;
-                inaccuracy: 4
+                inaccuracy = 4f;
                 bullet = sapper;
             }},
             new Weapon("terra-dynamite-weapon"){{
@@ -423,7 +423,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 18f;
                 rotate = true;
-                inaccuracy: 4
+                inaccuracy = 4f;
                 bullet = sapper;
             }},
             new Weapon("terra-sap-launcher"){{
