@@ -1,4 +1,4 @@
-package exogenesis.type.bullet;
+package terra.type.bullet;
 
 import arc.func.*;
 import arc.graphics.*;
@@ -11,7 +11,7 @@ import mindustry.content.*;
 import mindustry.entities.bullet.BulletType;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import exogenesis.util.util.*;
+import terra.util.*;
 
 /** @author EyeOfDarkness */
 public class AcceleratingLaserBulletType extends BulletType {
