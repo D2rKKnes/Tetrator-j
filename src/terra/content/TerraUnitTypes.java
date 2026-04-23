@@ -52,6 +52,7 @@ public class TerraUnitTypes {
             ammoType = new ItemAmmoType(TerraItems.carbon);
             createWreck = false;
             constructor = UnitEntity::create;
+            healColor = Pal.suppress;
 
             weapons.add(new Weapon(){{
                 shootOnDeath = true;
@@ -99,6 +100,7 @@ public class TerraUnitTypes {
             useUnitCap = false;
             hidden = true;
             constructor = TimedKillUnit::create;
+            healColor = Pal.suppress;
             lifetime = 2400f;
 
             weapons.add(new Weapon(){{
@@ -143,6 +145,7 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(1000);
             lowAltitude = true;
             constructor = UnitEntity::create;
+            healColor = Pal.suppress;
 
             weapons.add(
             new Weapon(){{
@@ -206,6 +209,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
+            healColor = Pal.suppress;
             abilities.add(new SpawnDeathAbility(wick, 3, 11f));
 
             weapons.add(
@@ -380,6 +384,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
+            healColor = Pal.suppress;
             abilities.add(new UnitSpawnAbility(wickC, 480f, 19.125f, -8.375f), new UnitSpawnAbility(wickC, 480f, -19.125f, -8.375f), 
             new ShieldArcAbility(){{
                 region = "terra-catastrophe-shield";
@@ -472,6 +477,7 @@ public class TerraUnitTypes {
             hidden = false;
             constructor = TimedKillUnit::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
+            healColor = Pal.suppress;
             lifetime = 7500f;
             setEnginesMirror(
                 new UnitEngine(4f, 4f, 2f, 45f),
@@ -535,6 +541,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
+            healColor = Pal.suppress;
             abilities.addAll(
                 new ShieldRegenFieldAbility(1500f, 6000f, 1200f, 120f), 
                 new SuppressionFieldAbility(){{
@@ -750,6 +757,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.energyOverload);
+            healColor = Pal.suppress;
             abilities.addAll(
                 new SuppressionFieldAbility(){{
                     range = 450f;
@@ -769,9 +777,12 @@ public class TerraUnitTypes {
                 shootY = 8f;
                 rotate = true;
                 rotateSpeed = 1.8f;
+                shootSound = TerraSounds.shootHeavy;
+                reload = 186f;
                 
                 bullet = new BasicBulletType(){{
-
+                    status: TerraStatuses.energyOverload;
+                    statusDuration: 120f;
                 }};
             }});
         }};
