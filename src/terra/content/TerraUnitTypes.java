@@ -175,6 +175,7 @@ public class TerraUnitTypes {
                 reload = 13f;
                 rotate = true;
                 rotateSpeed = 5f;
+                shootSound = Sounds.shootSap;
                 bullet = new SapBulletType(){{
                     sapStrength = 0.5f;
                     length = 95f;
@@ -324,6 +325,7 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+        
         sapEnergyMissile = new MissileUnitType("sap-energy-missile"){{
             speed = 4.6f;
             hitSize = 6f;
@@ -357,6 +359,90 @@ public class TerraUnitTypes {
                     status = TerraStatusEffects.energyOverload;
                     statusDuration = 80f;
                     buildingDamageMultiplier = 0.5f;
+                }};
+            }});
+        }};
+
+        catastrophe = new UnitType("catastrophe"){{
+            flying = true;
+            speed = 1.2f;
+            drag = 0.04f;
+            accel = 0.042f;
+            hitSize = 31f;
+            softShadowScl = 0.8f;
+            health = 8600;
+            armor = 10;
+            engineSize = 6f;
+            engineOffset = 14f;
+            //range = 120f;
+            itemCapacity = 60;
+            ammoType = new PowerAmmoType(4000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = ObjectSet.with(StatusEffects.sapped);
+            abilities.add(new UnitSpawnAbility(wickC, 480f, 19.125f, -8.375f), new UnitSpawnAbility(wickC, 480f, -19.125f, -8.375f), 
+            new ShieldArcAbility(){{
+                region = "terra-catastrophe-shield";
+                radius = 32f;
+                angle = 146f;
+                regen = 1.4f;
+                cooldown = 60f * 4f;
+                max = 4000f;
+                width = 8f;
+                whenShooting = false;
+                chanceDeflect = 0.25f;
+                missileUnitMultiplier = 0.5f;
+            }});
+
+            BulletType sapper = new LaserBulletType(){{
+                damage = 28f;
+                recoil = 0f;
+                sideAngle = 90f;
+                sideWidth = 1f;
+                sideLength = 40f;
+                status = StatusEffects.sapped;
+                statusDuration = 90f;
+                length = 130f;
+                colors = new Color[]{Pal.sapBullet.cpy().a(0.4f), Pal.sapBullet, Color.white};
+                knockback = -0.1f;
+            }};
+
+            weapons.add(
+            new Weapon("terra-dynamite-weapon"){{
+                x = 40.5f / 4f;
+                y = -34.5f / 4f;
+                shootSound = Sounds.shootScepterSecondary;
+                reload = 16f;
+                rotate = true;
+                inaccuracy: 4
+                bullet = sapper;
+            }},
+            new Weapon("terra-dynamite-weapon"){{
+                x = 49.5f / 4f;
+                y = -3.5f / 4f;
+                shootSound = Sounds.shootScepterSecondary;
+                reload = 18f;
+                rotate = true;
+                inaccuracy: 4
+                bullet = sapper;
+            }},
+            new Weapon("terra-sap-launcher"){{
+                x = 0f;
+                y = -12.5f / 4f;
+                shootY = 5f;
+                shootSound = TerraSounds.shootLaunch;
+                reload = 175f;
+                rotate = true;
+                rotateSpeed = 1.2f;
+                bullet = new BulletType(){{
+                    shootEffect = Fx.sparkShoot;
+                    smokeEffect = Fx.shootSmokeTitan;
+                    hitColor = Pal.suppress;
+                    shake = 1f;
+                    speed = 0f;
+                    keepVelocity = false;
+
+                    spawnUnit = sapEnergyMissile;
                 }};
             }});
         }};
