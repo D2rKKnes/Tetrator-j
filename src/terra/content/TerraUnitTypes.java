@@ -335,14 +335,12 @@ public class TerraUnitTypes {
             engineOffset = 1f;
             engineSize = 4f;
             engineLayer = 109.9f;
-            engineColor = Pal.sapBullet;
+            engineColor = trailColor = Pal.sapBullet;
             trailLength = 12;
-            trailColor = Pal.sapBullet;
             flyingLayer = 110f;
             hidden = false;
             targetable = false;
             drawSoftShadow = false;
-            shadowRegion = Core.atlas.find("void-shadow");
             constructor = TimedKillUnit::create;
             lifetime = 70f;
 
