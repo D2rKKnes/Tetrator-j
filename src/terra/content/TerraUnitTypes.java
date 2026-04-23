@@ -366,6 +366,7 @@ public class TerraUnitTypes {
         catastrophe = new UnitType("catastrophe"){{
             flying = true;
             speed = 1.2f;
+            rotateSpeed = 2.1f;
             drag = 0.04f;
             accel = 0.042f;
             hitSize = 31f;
@@ -398,8 +399,8 @@ public class TerraUnitTypes {
                 damage = 28f;
                 recoil = 0f;
                 sideAngle = 90f;
-                sideWidth = 1f;
-                sideLength = 40f;
+                sideWidth = 0.8f;
+                sideLength = 30f;
                 status = StatusEffects.sapped;
                 statusDuration = 90f;
                 length = 130f;
@@ -431,7 +432,7 @@ public class TerraUnitTypes {
                 y = -12.5f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
-                reload = 175f;
+                reload = 184f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 mirror = false;
