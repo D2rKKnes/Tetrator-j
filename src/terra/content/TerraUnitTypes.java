@@ -344,7 +344,7 @@ public class TerraUnitTypes {
             drawSoftShadow = false;
             shadowRegion = Core.atlas.find("void-shadow");
             constructor = TimedKillUnit::create;
-            lifetime = 60f;
+            lifetime = 70f;
 
             weapons.add(new Weapon() {{
                 shootSound = Sounds.none;
@@ -432,12 +432,12 @@ public class TerraUnitTypes {
                 y = -12.5f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
-                reload = 184f;
+                reload = 170f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 mirror = false;
                 shoot = new ShootAlternate() {{
-                    shots = 8;
+                    shots = 5;
                     shotDelay = 8f;
                     barrels = 3;
                     spread = 4f;
