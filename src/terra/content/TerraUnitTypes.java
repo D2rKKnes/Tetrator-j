@@ -549,7 +549,7 @@ public class TerraUnitTypes {
             }}, 
             new SpawnDeathAbility(){{
                 amount = 1;
-                unit = inevitabilityCore
+                unit = inevitabilityCore;
             }});
 
             BulletType sapper = new LaserBulletType(){{
@@ -738,7 +738,7 @@ public class TerraUnitTypes {
                         colorTo = Color.valueOf("ffd37f00");
                         sizeFrom = 42f;
                         region = "circle-shadow";
-                    }}
+                    }};
                 }};
             }});
         }};
