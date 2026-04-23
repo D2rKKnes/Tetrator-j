@@ -792,7 +792,7 @@ public class TerraUnitTypes {
                     statusDuration = 120f;
                     colors = new Color[]{Pal.suppress.cpy().a(0.2f), Pal.suppress, Color.white};
                     pierceCap = 3;
-                    pierceBuildings = true;
+                    pierceBuilding = true;
                     hitColor = Pal.suppress;
                 }};
             }});
