@@ -434,6 +434,13 @@ public class TerraUnitTypes {
                 reload = 175f;
                 rotate = true;
                 rotateSpeed = 1.2f;
+                mirror = false;
+                shoot = new ShootAlternate() {{
+                    shots = 8;
+                    shotDelay = 8f;
+                    barrels = 3;
+                    spread = 4f;
+                }};
                 bullet = new BulletType(){{
                     shootEffect = Fx.sparkShoot;
                     smokeEffect = Fx.shootSmokeTitan;
