@@ -495,7 +495,7 @@ public class TerraUnitTypes {
                     hitColor = backColor = trailColor = Pal.sapBulletBack;
                     frontColor = Pal.sapBullet;
                     trailWidth = 1f;
-                    trailLength = 4f;
+                    trailLength = 4;
                     despawnEffect = hitEffect = Fx.none;
                     fragRandomSpread = 20f;
                     fragBullets = 1;
@@ -534,7 +534,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
-            abilities.add(
+            abilities.addAll(
             new ShieldRegenFieldAbility(){{
                 range = 120f;
                 amount = 1500f;
@@ -587,7 +587,7 @@ public class TerraUnitTypes {
                     hitColor = backColor = trailColor = Pal.sapBulletBack;
                     frontColor = Pal.sapBullet;
                     trailWidth = 1f;
-                    trailLength = 4f;
+                    trailLength = 4;
                     despawnEffect = hitEffect = Fx.none;
                     fragRandomSpread = 20f;
                     fragBullets = 1;
@@ -718,7 +718,7 @@ public class TerraUnitTypes {
                     width = 18f;
                     height = 22f;
                     trailWidth = 5f;
-                    trailLength = 26f;
+                    trailLength = 26;
                     shrinkY = 0.2f;
                     pierce = true;
                     pierceCap = 5;
