@@ -9,6 +9,7 @@ import arc.util.*;
 import arc.*;
 import terra.ai.*;
 import terra.content.*;
+import terra.type.bullet.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
