@@ -778,11 +778,21 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.8f;
                 shootSound = TerraSounds.shootHeavy;
-                reload = 186f;
+                reload = 326f;
                 
-                bullet = new BasicBulletType(){{
-                    status: TerraStatuses.energyOverload;
+                bullet = new AcceleratingLaserBulletType(120f){{
+                    maxLength = 230f;
+                    maxRange = 230f;
+                    oscOffset = 0.3f;
+                    lifetime = 200;
+                    width = 20f;
+                    collisionWidth = 10f;
+                    status: TerraStatusEffects.energyOverload;
                     statusDuration: 120f;
+                    colors = new Color[]{Pal.suppress.cpy().a(0.2f), Pal.suppress, Color.white};
+                    pierceCap = 3;
+                    pierceBuildings = true;
+                    hitColor = Pal.suppress;
                 }};
             }});
         }};
