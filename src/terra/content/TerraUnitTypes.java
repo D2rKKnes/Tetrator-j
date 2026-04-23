@@ -787,8 +787,8 @@ public class TerraUnitTypes {
                     lifetime = 200;
                     width = 20f;
                     collisionWidth = 10f;
-                    status: TerraStatusEffects.energyOverload;
-                    statusDuration: 120f;
+                    status = TerraStatusEffects.energyOverload;
+                    statusDuration = 120f;
                     colors = new Color[]{Pal.suppress.cpy().a(0.2f), Pal.suppress, Color.white};
                     pierceCap = 3;
                     pierceBuildings = true;
