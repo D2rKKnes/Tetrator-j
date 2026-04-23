@@ -474,7 +474,7 @@ public class TerraUnitTypes {
             lifetime = 7500f;
             setEnginesMirror(
                 new UnitEngine(4f, 4f, 2f, 45f),
-                new UnitEngine(4f, -4f, 2f, 135f)
+                new UnitEngine(4f, -4f, 2f, -135f)
             );
 
             weapons.add(new Weapon(){{
@@ -629,8 +629,9 @@ public class TerraUnitTypes {
                 recoilTime = 173f;
                 minWarmup = 0.8f;
                 rotate = true;
-                rotateSpeed = 3.2f;
+                rotateSpeed = 0.6f;
                 shake = 3f;
+                mirror = false;
                 shoot = new ShootPattern() {{
                     firstShotDelay = 148f;
                 }};
