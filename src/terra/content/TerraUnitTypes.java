@@ -725,8 +725,8 @@ public class TerraUnitTypes {
 
         eternity = new UnitType("eternity"){{
             flying = true;
-            speed = 0.3f;
-            rotateSpeed = 0.5f;
+            speed = 0.46f;
+            rotateSpeed = 0.8f;
             drag = 0.04f;
             accel = 0.03f;
             hitSize = 100f;
@@ -741,8 +741,8 @@ public class TerraUnitTypes {
             fallSpeed = 13000;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(168f / 4f, 0.25f, 14f, -135f),
-                new UnitEngine(100f / 4f, 55f / 4f, 14f, -135f)
+                new UnitEngine(168f / 4f, 0.25f, 14f, 135f),
+                new UnitEngine(100f / 4f, -55f / 4f, 14f, 135f)
             );
             //range = 120f;
             itemCapacity = 200;
@@ -756,14 +756,17 @@ public class TerraUnitTypes {
                     maxDelay = 60f;
                     reload = 1200f;
                     y = 39.25f;
-                    orbRadius = 20f;
-                    particleSize = 13;
+                    orbRadius = 17f;
+                    orbMidScl = 0.2f;
+                    orbSinScl = 4f;
+                    particleSize = 7;
                 }});
 
             weapons.add(
             new Weapon("terra-eternity-mount"){{
                 x = 128.5f / 4f;
                 y = 94.5f / 4f;
+                shootY = 8f;
                 rotate = true;
                 rotateSpeed = 1.8f;
                 
