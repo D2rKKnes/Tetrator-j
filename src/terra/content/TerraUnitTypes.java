@@ -865,7 +865,7 @@ public class TerraUnitTypes {
                         color(Pal.suppress, e.fin());
                         Lines.stroke(1.5f);
                         Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
-                    })),
+                    }));
                 }};
             }},
             new Weapon("terra-rocket-launcher") {{
