@@ -59,6 +59,8 @@ dependencies{
     compileOnly useLatest ? "Anuken:MindustryBuilds:latest" : "Anuken:Mindustry:$mindustryVersion"
 
     annotationProcessor "Anuken:jabel:v1.0.0"
+
+    compileOnly "com.github.Ame-X:black-hole-renderer:master-SNAPSHOT"
 }
 
 tasks.register('jarAndroid'){
