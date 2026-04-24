@@ -35,7 +35,7 @@ import static mindustry.Vars.*;
 public class TerraUnitTypes {
     public static UnitType
     //flying special units
-    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternity;
+    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -732,6 +732,58 @@ public class TerraUnitTypes {
             }});
         }};
 
+        eternityMissile = new MissileUnitType("eternity-missile"){{
+            targetAir = true;
+            speed = 7.6f;
+            rotateSpeed = 4;
+            maxRange = 5f;
+            health = 70;
+            homingDelay = 3f;
+            lowAltitude = true;
+
+            engineSize = 3f;
+            engineColor = trailColor = Pal.sapBulletBack;
+            engineLayer = Layer.effect;
+            deathExplosionEffect = Fx.none;
+            loopSoundVolume = 0.1f;
+
+            parts.add(new ShapePart(){{
+                layer = Layer.effect;
+                circle = true;
+                y = -0.25f;
+                radius = 1.5f;
+                color = Pal.suppress;
+                colorTo = Color.white;
+                progress = PartProgress.life.curve(Interp.pow5In);
+            }});
+
+            weapons.add(new Weapon(){{
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                shootOnDeath = true;
+                bullet = new ExplosionBulletType(100f, 45f){{
+                    collidesAir = false;
+                    suppressionRange = 140f;
+                    shootEffect = new ExplosionEffect(){{
+                        lifetime = 50f;
+                        waveStroke = 5f;
+                        waveLife = 8f;
+                        waveColor = Color.white;
+                        sparkColor = smokeColor = Pal.suppress;
+                        waveRad = 40f;
+                        smokeSize = 4f;
+                        smokes = 7;
+                        smokeSizeBase = 0f;
+                        sparks = 10;
+                        sparkRad = 40f;
+                        sparkLen = 6f;
+                        sparkStroke = 2f;
+                    }};
+                }};
+            }});
+        }};
+        
         eternity = new UnitType("eternity"){{
             flying = true;
             speed = 0.46f;
@@ -766,10 +818,10 @@ public class TerraUnitTypes {
                     maxDelay = 60f;
                     reload = 1200f;
                     y = 39.25f;
-                    orbRadius = 17f;
+                    orbRadius = 13f;
                     orbMidScl = 0.2f;
                     orbSinScl = 4f;
-                    particleSize = 7;
+                    particleSize = 6;
                 }},
                 new RegenAbility() {{
                     amount = 3.2f;
@@ -799,10 +851,46 @@ public class TerraUnitTypes {
                     collisionWidth = 10f;
                     status = TerraStatusEffects.energyOverload;
                     statusDuration = 120f;
-                    colors = new Color[]{Pal.suppress.cpy().a(0.2f), Pal.suppress, Color.white};
+                    colors = new Color[]{Pal.suppress.cpy().a(0.3f), Pal.suppress, Color.white};
                     pierceCap = 3;
                     pierceBuilding = true;
                     hitColor = Pal.suppress;
+                }};
+            }},
+            new Weapon("terra-rocket-launcher") {{
+                reload = 130f;
+                mirror = true;
+                rotate = false;
+                x = 34;
+                y = 46.25f;
+                shootSound = TerraSounds.shootLaunch;
+                shootSoundVolume = 0.4f;
+                baseRotation = -65;
+                shootY = 2;
+                shoot = new ShootMulti(new ShootAlternate() {{
+                    spread = 7;
+                    shots = 3;
+                    barrels = 3;
+                }}, new ShootPattern() {{
+                    shots = 5;
+                    shotDelay = 3.5f;
+                }});
+                velocityRnd = 0.2f;
+                shootCone = 165;
+                inaccuracy = 6;
+                layerOffset = -0.001f;
+                recoil = 0;
+                shake = 0.5f;
+                bullet = new BulletType(){{
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                    smokeEffect = Fx.shootSmokeTitan;
+                    hitColor = Pal.suppress;
+                    shake = 1f;
+                    speed = 0f;
+                    keepVelocity = false;
+                    collidesAir = true;
+
+                    spawnUnit = eternityMissile
                 }};
             }});
         }};
