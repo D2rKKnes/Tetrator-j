@@ -913,7 +913,7 @@ public class TerraUnitTypes {
                     sizeTo = 14f;
                     edge = 0f;
                     edgeTo = 14f * 1.2f;
-                    progress = growProgress = PartProgress.reload.inv().delay(0.2);
+                    progress = growProgress = PartProgress.reload.inv().delay(0.2f);
                 }});
                 bullet = new BlackHoleBulletType(0.8f, 168f){{
                     lifetime = 300f;
