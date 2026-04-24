@@ -838,6 +838,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.8f;
                 shootSound = TerraSounds.acceleratinglaserloop;
+                shootSoundVolume = 0.6f;
                 reload = 126f;
                 continuous = true;
                 parentizeEffects = true;
@@ -898,10 +899,10 @@ public class TerraUnitTypes {
             new Weapon("terra-eternity-singularity") {{
                 reload = 900f;
                 mirror = false;
-                rotate = false;
+                rotate = true;
                 x = 0f;
                 y = 39.25f;
-                shootSound = TerraSounds.shootHeavy;
+                shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
                 shootCone = 361f;
                 recoil = 0;
@@ -909,13 +910,15 @@ public class TerraUnitTypes {
                 parts.add(new BlackHolePart(){{
                     color = Pal.suppress;
                     size = 0f;
-                    sizeTo = 7f;
-                    progress = PartProgress.reload;
+                    sizeTo = 7f * 4;
+                    progress = growProgrss = PartProgress.reload;
                 }});
-                bullet = new BlackHoleBulletType(1f, 218f){{
-                    lifetime = 180f;
+                bullet = new BlackHoleBulletType(0.8f, 218f){{
+                    lifetime = 300f;
                     color = Pal.suppress;
-                    damageRadius = 7f;
+                    damageRadius = 7f * 4;
+                    growTime = 0f;
+                    shrinkTime = 20f;
                 }};
             }});
         }};
