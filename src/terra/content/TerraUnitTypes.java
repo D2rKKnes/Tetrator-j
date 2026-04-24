@@ -802,7 +802,7 @@ public class TerraUnitTypes {
             outlineRadius = 6;
             crashDamageMultiplier = 10;
             targetPriority = 4f;
-            fallSpeed = 0.008;
+            fallSpeed = 0.008f;
             faceTarget = false;
             setEnginesMirror(
                 new UnitEngine(168f / 4f, 0.25f, 14f, 315f),
