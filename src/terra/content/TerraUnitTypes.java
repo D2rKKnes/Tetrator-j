@@ -911,7 +911,7 @@ public class TerraUnitTypes {
                     color = Pal.suppress;
                     size = 0f;
                     sizeTo = 7f * 4;
-                    progress = growProgrss = PartProgress.reload;
+                    progress = growProgress = PartProgress.reload;
                 }});
                 bullet = new BlackHoleBulletType(0.8f, 218f){{
                     lifetime = 300f;
