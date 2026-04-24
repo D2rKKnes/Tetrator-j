@@ -931,8 +931,20 @@ public class TerraUnitTypes {
                     damageRadius = 14f * 1.2f;
                     growTime = 0f;
                     shrinkTime = 20f;
-                    status = TerraStatusEffects.singularEvaporation;
+                    status = TerraStatusEffects.singularEvaporation; //somehow didn't work...
                     statusDuration = 60f;
+                    intervalBullets = 1;
+                    intervalBullet = new BulletType(){{
+                        speed = 0f;
+                        damage = 0f;
+                        lifetime = 0f;
+                        instantDisappear = true;
+                        shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                        splashDamage = 0.001f;
+                        splashDamageRadius = 14f * 1.2f;
+                        status = TerraStatusEffects.singularEvaporation; //i hope it work
+                        statusDuration = 60f;
+                    }};
                 }};
             }},
             new Weapon("terra-last") {{
@@ -946,17 +958,29 @@ public class TerraUnitTypes {
                 y = 0f;
                 shootY = 0;
                 recoil = 0;
-                bullet = new BlackHoleBulletType(0f, 226f){{ //more damage because it releases a colossal amount of energy
+                bullet = new BlackHoleBulletType(0f, 142f){{ //less damage but more lifetime
                     lifetime = 500f;
                     color = Pal.suppress;
-                    damageRadius = 40f;
-                    suctionRadius = 400f;
+                    damageRadius = 30f;
+                    suctionRadius = 300f;
                     growTime = 40f;
                     shrinkTime = 60f;
                     status = TerraStatusEffects.singularEvaporation;
                     loopSoundVolume = 5f;
                     statusDuration = 60f;
                     keepVelocity = false;
+                    intervalBullets = 1;
+                    intervalBullet = new BulletType(){{
+                        speed = 0f;
+                        damage = 0f;
+                        lifetime = 0f;
+                        instantDisappear = true;
+                        shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                        splashDamage = 0.001f;
+                        splashDamageRadius = 30f;
+                        status = TerraStatusEffects.singularEvaporation;
+                        statusDuration = 60f;
+                    }};
                 }};
             }});
         }};
