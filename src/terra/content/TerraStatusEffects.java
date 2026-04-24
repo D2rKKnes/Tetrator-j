@@ -34,5 +34,11 @@ public class TerraStatusEffects{
                 });
             });
         }};
+        singularEvaporation = new StatusEffect("singular-evaporation"){{
+            color = Color.valueOf("3d1f7a");
+            speedMultiplier = 0.5f;
+            reloadMultiplier = 0.15f;
+            damage = 7.8f;
+        }};
     }
 }
