@@ -482,7 +482,7 @@ public class TerraUnitTypes {
             lifetime = 7500f;
             setEnginesMirror(
                 new UnitEngine(4f, 4f, 2f, 45f),
-                new UnitEngine(4f, -4f, 2f, -135f)
+                new UnitEngine(4f, -4f, 2f, 315f)
             );
 
             weapons.add(new Weapon(){{
@@ -740,7 +740,7 @@ public class TerraUnitTypes {
             health = 70;
             homingDelay = 3f;
             lowAltitude = true;
-
+            outlineColor = Pal.darkerMetal;
             engineSize = 3f;
             engineColor = trailColor = Pal.sapBulletBack;
             engineLayer = Layer.effect;
@@ -802,8 +802,8 @@ public class TerraUnitTypes {
             fallSpeed = 13000;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(168f / 4f, 0.25f, 14f, 45f),
-                new UnitEngine(100f / 4f, -55f / 4f, 14f, 45f)
+                new UnitEngine(168f / 4f, 0.25f, 14f, 315f),
+                new UnitEngine(100f / 4f, -55f / 4f, 14f, 315f)
             );
             //range = 120f;
             itemCapacity = 200;
@@ -819,7 +819,7 @@ public class TerraUnitTypes {
                     reload = 1200f;
                     y = 39.25f;
                     orbRadius = 13f;
-                    orbMidScl = 0.2f;
+                    orbMidScl = 0.4f;
                     orbSinScl = 4f;
                     particleSize = 6;
                 }},
@@ -835,8 +835,8 @@ public class TerraUnitTypes {
                 shootY = 8f;
                 rotate = true;
                 rotateSpeed = 1.8f;
-                shootSound = TerraSounds.shootHeavy;
-                reload = 326f;
+                shootSound = TerraSounds.acceleratinglaserloop;
+                reload = 126f;
                 continuous = true;
                 parentizeEffects = true;
                 shake = 0.6f;
@@ -861,11 +861,11 @@ public class TerraUnitTypes {
                 reload = 130f;
                 mirror = true;
                 rotate = false;
-                x = 34;
-                y = 46.25f;
+                x = 204f / 4f;
+                y = 104f / 4f;
                 shootSound = TerraSounds.shootLaunch;
                 shootSoundVolume = 0.4f;
-                baseRotation = -65;
+                baseRotation = -45;
                 shootY = 2;
                 shoot = new ShootMulti(new ShootAlternate() {{
                     spread = 7;
