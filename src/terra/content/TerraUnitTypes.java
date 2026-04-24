@@ -805,7 +805,7 @@ public class TerraUnitTypes {
             faceTarget = false;
             setEnginesMirror(
                 new UnitEngine(168f / 4f, 0.25f, 14f, 315f),
-                new UnitEngine(100f / 4f, -55f / 4f, 14f, 315f)
+                new UnitEngine(100f / 4f, -55f / 4f, 11f, 315f)
             );
             //range = 120f;
             itemCapacity = 200;
@@ -897,28 +897,31 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-eternity-singularity") {{
-                reload = 900f;
+                reload = 1124f;
                 mirror = false;
                 rotate = true;
                 x = 0f;
                 y = 39.25f;
                 shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
-                shootCone = 361f;
                 recoil = 0;
                 shake = 5f;
                 parts.add(new BlackHolePart(){{
+                    //layer = 110.1f;
                     color = Pal.suppress;
                     size = 0f;
-                    sizeTo = 7f * 4;
+                    sizeTo = 7f * 2.6f;
+                    edgeTo = (7 * 2.6f) * 1.2f;
                     progress = growProgress = PartProgress.reload;
                 }});
-                bullet = new BlackHoleBulletType(0.8f, 218f){{
+                bullet = new BlackHoleBulletType(0.8f, 168f){{
                     lifetime = 300f;
                     color = Pal.suppress;
-                    damageRadius = 7f * 4;
+                    damageRadius = 7f * 2.6f;
                     growTime = 0f;
                     shrinkTime = 20f;
+                    status = TerraStatusEffects.singularEvaporation;
+                    statusDuration = 60f;
                 }};
             }});
         }};
