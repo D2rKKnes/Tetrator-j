@@ -14,7 +14,7 @@ import static mindustry.content.StatusEffects.sapped;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload;
+    energyOverload, singularEvaporation;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
