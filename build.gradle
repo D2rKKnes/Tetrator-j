@@ -28,6 +28,7 @@ repositories{
         metadataSources{ artifact() }
     }
 
+    mavenCentral()
     maven { url 'https://jitpack.io' }
 }
 
