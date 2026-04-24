@@ -859,6 +859,13 @@ public class TerraUnitTypes {
                     pierceCap = 3;
                     pierceBuilding = true;
                     hitColor = Pal.suppress;
+                    shootEffect = hitEffect = new Effect(27f, e ->
+                    Angles.randLenVectors(e.id, 8, 90f * e.fin(), e.rotation, 80f, (x, y) -> {
+                        float angle = Mathf.angle(x, y);
+                        color(Pal.suppress, e.fin());
+                        Lines.stroke(1.5f);
+                        Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
+                    })),
                 }};
             }},
             new Weapon("terra-rocket-launcher") {{
@@ -907,6 +914,8 @@ public class TerraUnitTypes {
                 shootY = 0;
                 recoil = 0;
                 shake = 15f;
+                shootStatus = StatusEffects.slow;
+                shootStatusDuration = 20f;
                 parts.add(new BlackHolePart(){{
                     color = Pal.suppress;
                     size = 0f;
@@ -925,23 +934,26 @@ public class TerraUnitTypes {
                     statusDuration = 60f;
                 }};
             }},
-            new Weapon("terra-eternity-singularity") {{
-                reload = 1f;
+            new Weapon("terra-last") {{
+                reload = 60f;
                 mirror = false;
+                shootOnDeath = true;
                 controllable = false;
                 display = false;
-                shootOnDeath = true;
+                shootCone = 360f;
                 x = 0f;
                 y = 0f;
                 shootY = 0;
                 recoil = 0;
-                bullet = new BlackHoleBulletType(0f, 196f){{ //more damage because it releases a colossal amount of energy
+                bullet = new BlackHoleBulletType(0f, 226f){{ //more damage because it releases a colossal amount of energy
                     lifetime = 500f;
                     color = Pal.suppress;
-                    damageRadius = 60f;
-                    growTime = 10f;
-                    shrinkTime = 40f;
+                    damageRadius = 40f;
+                    suctionRadius = 400f;
+                    growTime = 40f;
+                    shrinkTime = 60f;
                     status = TerraStatusEffects.singularEvaporation;
+                    loopSoundVolume = 5f;
                     statusDuration = 60f;
                     keepVelocity = false;
                 }};
