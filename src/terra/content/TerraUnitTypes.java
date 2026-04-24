@@ -882,7 +882,7 @@ public class TerraUnitTypes {
                 shootCone = 165;
                 inaccuracy = 6;
                 layerOffset = -0.001f;
-                recoil = 0;
+                recoil = 1;
                 shake = 0.5f;
                 bullet = new BulletType(){{
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
@@ -905,19 +905,20 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
                 recoil = 0;
-                shake = 5f;
+                shake = 15f;
                 parts.add(new BlackHolePart(){{
                     //layer = 110.1f;
                     color = Pal.suppress;
-                    size = 0f;
-                    sizeTo = 7f * 2.6f;
-                    edgeTo = (7 * 2.6f) * 1.2f;
-                    progress = growProgress = PartProgress.reload;
+                    sizeTo = 0f;
+                    size = 7f * 2.4f;
+                    edgeTo = 0f;
+                    edge = (7 * 2.6f) * 1.25f;
+                    progress = growProgress = PartProgress.reload.delay(0.1f);
                 }});
                 bullet = new BlackHoleBulletType(0.8f, 168f){{
                     lifetime = 300f;
                     color = Pal.suppress;
-                    damageRadius = 7f * 2.6f;
+                    damageRadius = 7f * 2.4f;
                     growTime = 0f;
                     shrinkTime = 20f;
                     status = TerraStatusEffects.singularEvaporation;
