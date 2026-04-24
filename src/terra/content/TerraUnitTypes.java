@@ -617,6 +617,7 @@ public class TerraUnitTypes {
                 x = 0f;
                 y = -7.5f / 4f;
                 shootY = 5f;
+                layerOffset = 0.002f;
                 shootSound = Sounds.shootSmite;
                 chargeSound = TerraSounds.railGunCharge;
                 soundPitchMin = 0.93f;
@@ -749,8 +750,8 @@ public class TerraUnitTypes {
             fallSpeed = 13000;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(168f / 4f, 0.25f, 14f, 135f),
-                new UnitEngine(100f / 4f, -55f / 4f, 14f, 135f)
+                new UnitEngine(168f / 4f, 0.25f, 14f, 45f),
+                new UnitEngine(100f / 4f, -55f / 4f, 14f, 45f)
             );
             //range = 120f;
             itemCapacity = 200;
@@ -769,7 +770,11 @@ public class TerraUnitTypes {
                     orbMidScl = 0.2f;
                     orbSinScl = 4f;
                     particleSize = 7;
-                }});
+                }},
+                new RegenAbility() {{
+                    amount = 3.2f;
+                }}
+            );
 
             weapons.add(
             new Weapon("terra-eternity-mount"){{
@@ -780,8 +785,12 @@ public class TerraUnitTypes {
                 rotateSpeed = 1.8f;
                 shootSound = TerraSounds.shootHeavy;
                 reload = 326f;
+                continuous = true;
+                parentizeEffects = true;
+                shake = 0.6f;
+                alternate = false;
                 
-                bullet = new AcceleratingLaserBulletType(120f){{
+                bullet = new AcceleratingLaserBulletType(90f){{
                     maxLength = 230f;
                     maxRange = 230f;
                     oscOffset = 0.3f;
