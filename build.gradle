@@ -66,38 +66,28 @@ dependencies{
 task jarAndroid {
     dependsOn jar
     doLast {
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+        
         def desktopJar = file("$buildDir/libs/${project.archivesBaseName}Desktop.jar")
-        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [desktopJar] + [new File(platformRoot, "android.jar")]).collect{ "--classpath $it.path" }.join(" ")
-        "$d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar $desktopJar".execute()
-    }
-}
-
-jar{
-    archiveFileName = "${project.name}Desktop.jar"
-
-    from{
-        configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
-    }
-
-    from(projectDir){
-        include "mod.hjson"
-    }
-
-    from("assets/"){
-        include "**"
-    }
-}
-
-tasks.register('deploy', Jar){
-    dependsOn jarAndroid
-    dependsOn jar
-    archiveFileName = "${project.name}.jar"
-
-    from{ [zipTree("build/libs/${project.name}Desktop.jar"), zipTree("build/libs/${project.name}Android.jar")] }
-
-    doLast{
-        delete{
-            delete "build/libs/${project.name}Android.jar"
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [desktopJar] + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+        def d8 = isWindows ? "d8.bat" : "d8"
+        
+        exec {
+            commandLine d8, *dependencies.tokenize(' '), "--min-api", "14", "--output", "${project.archivesBaseName}Android.jar", desktopJar
+            workingDir "$buildDir/libs"
         }
+    }
+}
+
+task deploy(type: Jar) {
+    dependsOn jarAndroid, jar
+    archiveFileName = "${project.archivesBaseName}.jar"
+    from(zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"))
+    from(zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar"))
+    doLast {
+        delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
+        delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
     }
 }
