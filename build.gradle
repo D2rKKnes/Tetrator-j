@@ -63,31 +63,54 @@ dependencies{
     compileOnly "com.github.MEEPofFaith:MindustryBlackHoleRenderer:master-SNAPSHOT"
 }
 
-task jarAndroid {
-    dependsOn jar
-    doLast {
-        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
-        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find { f -> new File(f, "android.jar").exists() }
-        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
-        
-        def desktopJar = file("$buildDir/libs/${project.archivesBaseName}Desktop.jar")
-        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [desktopJar] + [new File(platformRoot, "android.jar")]).collect { "--classpath $it.path" }.join(" ")
+task jarAndroid{
+    dependsOn "jar"
+
+    doLast{
+        if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
+
+        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
+
+        if(!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+
+        //collect dependencies needed for desugaring
+        def dependencies = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect{ "--classpath $it.path" }.join(" ")
+
         def d8 = isWindows ? "d8.bat" : "d8"
-        
-        exec {
-            commandLine d8, *dependencies.tokenize(' '), "--min-api", "14", "--output", "${project.archivesBaseName}Android.jar", desktopJar
-            workingDir "$buildDir/libs"
-        }
+
+        //dex and desugar files - this requires d8 in your PATH
+        "$d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${project.archivesBaseName}Desktop.jar"
+            .execute(null, new File("$buildDir/libs")).waitForProcessOutput(System.out, System.err)
     }
 }
 
-task deploy(type: Jar) {
-    dependsOn jarAndroid, jar
-    archiveFileName = "${project.archivesBaseName}.jar"
-    from(zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"))
-    from(zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar"))
-    doLast {
-        delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
-        delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
+jar{
+    archiveFileName = "${base.archivesBaseName}Desktop.jar"
+
+    from{
+        configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
+    }
+
+    from(rootDir){
+        include "mod.hjson"
+    }
+
+    from("assets/"){
+        include "**"
+    }
+}
+
+task deploy(type: Jar){
+    dependsOn jarAndroid
+    dependsOn jar
+    archiveFileName = "${base.archivesBaseName}.jar"
+
+    from{ [zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"), zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar")] }
+
+    doLast{
+        delete{
+            delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
+            delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
+        }
     }
 }
