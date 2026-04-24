@@ -470,7 +470,7 @@ public class TerraUnitTypes {
             drag = 0.04f;
             accel = 0.08f;
             hitSize = 8f;
-            health = 95;
+            health = 4000f;
             engineSize = 1f;
             engineOffset = 0f;
             range = 40f;
