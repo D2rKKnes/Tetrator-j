@@ -802,7 +802,7 @@ public class TerraUnitTypes {
             outlineRadius = 6;
             crashDamageMultiplier = 10;
             targetPriority = 4f;
-            fallSpeed = 13000;
+            fallSpeed = 0.008;
             faceTarget = false;
             setEnginesMirror(
                 new UnitEngine(168f / 4f, 0.25f, 14f, 315f),
@@ -813,7 +813,7 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(9000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.energyOverload);
+            immunities = ObjectSet.with(StatusEffects.sapped, StatusEffects.electrified, StatusEffects.disarmed, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation);
             healColor = Pal.suppress;
             abilities.addAll(
                 new SuppressionFieldAbility(){{
@@ -923,6 +923,27 @@ public class TerraUnitTypes {
                     shrinkTime = 20f;
                     status = TerraStatusEffects.singularEvaporation;
                     statusDuration = 60f;
+                }};
+            }},
+            new Weapon("terra-eternity-singularity") {{
+                reload = 1f;
+                mirror = false;
+                controllable = false;
+                display = false;
+                shootOnDeath = true;
+                x = 0f;
+                y = 0f;
+                shootY = 0;
+                recoil = 0;
+                bullet = new BlackHoleBulletType(0f, 196f){{ //more damage because it releases a colossal amount of energy
+                    lifetime = 500f;
+                    color = Pal.suppress;
+                    damageRadius = 60f;
+                    growTime = 10f;
+                    shrinkTime = 40f;
+                    status = TerraStatusEffects.singularEvaporation;
+                    statusDuration = 60f;
+                    keepVelocity = false;
                 }};
             }});
         }};
