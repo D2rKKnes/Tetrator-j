@@ -14,7 +14,7 @@ import static mindustry.content.StatusEffects.sapped;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation;
+    energyOverload, singularEvaporation, impactStun;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -39,6 +39,11 @@ public class TerraStatusEffects{
             speedMultiplier = 0.5f;
             reloadMultiplier = 0.15f;
             damage = 7.8f;
+        }};
+        impactStun = new StatusEffect("impact-stun"){{
+            color = Color.valueOf("d46a36");
+            speedMultiplier = 0.3f;
+            disarm = true;
         }};
     }
 }
