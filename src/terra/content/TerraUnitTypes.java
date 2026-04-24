@@ -543,7 +543,7 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(6000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped);
+            immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.impactStun);
             healColor = Pal.suppress;
             abilities.addAll(
                 new ShieldRegenFieldAbility(1500f, 6000f, 1200f, 120f), 
@@ -934,6 +934,7 @@ public class TerraUnitTypes {
                     status = TerraStatusEffects.singularEvaporation; //somehow didn't work...
                     statusDuration = 60f;
                     intervalBullets = 1;
+                    bulletInterval = 1f;
                     intervalBullet = new BulletType(){{
                         speed = 0f;
                         damage = 0f;
@@ -942,7 +943,7 @@ public class TerraUnitTypes {
                         shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                         splashDamage = 0.001f;
                         splashDamageRadius = 14f * 1.2f;
-                        status = TerraStatusEffects.singularEvaporation; //i hope it work
+                        status = TerraStatusEffects.singularEvaporation; //i work now
                         statusDuration = 60f;
                     }};
                 }};
@@ -970,6 +971,7 @@ public class TerraUnitTypes {
                     statusDuration = 60f;
                     keepVelocity = false;
                     intervalBullets = 1;
+                    bulletInterval = 1f;
                     intervalBullet = new BulletType(){{
                         speed = 0f;
                         damage = 0f;
