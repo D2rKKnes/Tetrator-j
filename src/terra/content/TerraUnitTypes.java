@@ -595,6 +595,7 @@ public class TerraUnitTypes {
             new Weapon("terra-small-sap-launcher"){{
                 x = -62.5f / 4f;
                 y = -15.5f / 4f;
+                shootY = 2.5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 87f;
                 rotate = true;
@@ -603,7 +604,7 @@ public class TerraUnitTypes {
                     shots = 3;
                     shotDelay = 9f;
                     barrels = 2;
-                    spread = 4f;
+                    spread = 3.5f;
                 }};
                 bullet = new BulletType(){{
                     shootEffect = Fx.sparkShoot;
@@ -696,7 +697,7 @@ public class TerraUnitTypes {
                     hitColor = trailColor = backColor = Color.valueOf("ffd37f");
                     speed = 8.4f;
                     lifetime = 53f;
-                    damage = 900f;
+                    damage = 840f;
                     buildingDamageMultiplier = 0.85f;
                     knockback = 9f;
                     impact = true;
@@ -714,7 +715,7 @@ public class TerraUnitTypes {
                     pierce = true;
                     pierceCap = 5;
                     pierceBuilding = true;
-                    status = StatusEffects.disarmed;
+                    status = TerraStatusEffects.impactStun;
                     statusDuration = 40f;
                     smokeEffect = Fx.shootSmokeTitan;
                     hitSound = despawnSound = Sounds.explosionTitan;
@@ -813,7 +814,7 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(9000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped, StatusEffects.electrified, StatusEffects.disarmed, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation);
+            immunities = ObjectSet.with(StatusEffects.sapped, StatusEffects.electrified, TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation);
             healColor = Pal.suppress;
             abilities.addAll(
                 new SuppressionFieldAbility(){{
