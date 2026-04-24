@@ -26,6 +26,8 @@ import mindustry.type.ammo.*;
 import mindustry.type.unit.*;
 import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
+import blackhole.entities.bullet.*;
+import blackhole.entities.part.*;
 
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
@@ -891,6 +893,29 @@ public class TerraUnitTypes {
                     collidesAir = true;
 
                     spawnUnit = eternityMissile;
+                }};
+            }},
+            new Weapon("terra-eternity-singularity") {{
+                reload = 900f;
+                mirror = false;
+                rotate = false;
+                x = 0f;
+                y = 39.25f;
+                shootSound = TerraSounds.shootHeavy;
+                shootY = 0;
+                shootCone = 361f;
+                recoil = 0;
+                shake = 5f;
+                parts.add(new BlackHolePart(){{
+                    color = Pal.suppress;
+                    size = 0f;
+                    sizeTo = 7f;
+                    progress = PartProgress.reload;
+                }});
+                bullet = new BlackHoleBulletType(1f, 218f){{
+                    lifetime = 180f;
+                    color = Pal.suppress;
+                    damageRadius = 7f;
                 }};
             }});
         }};
