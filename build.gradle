@@ -79,13 +79,13 @@ task jarAndroid{
         def d8 = isWindows ? "d8.bat" : "d8"
 
         //dex and desugar files - this requires d8 in your PATH
-        "$d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${project.archivesBaseName}Desktop.jar"
+        "$d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar TerraJavaModDesktop.jar"
             .execute(null, new File("$buildDir/libs")).waitForProcessOutput(System.out, System.err)
     }
 }
 
 jar{
-    archiveFileName = "${project.name}Desktop.jar"
+    archiveFileName = "TerraJavaModDesktop.jar"
 
     from{
         configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
@@ -103,13 +103,13 @@ jar{
 tasks.register('deploy', Jar){
     dependsOn jarAndroid
     dependsOn jar
-    archiveFileName = "${project.name}.jar"
+    archiveFileName = "TerraJavaMod.jar"
 
-    from{ [zipTree("build/libs/${project.name}Desktop.jar"), zipTree("build/libs/${project.name}Android.jar")] }
+    from{ [zipTree("build/libs/${project.name}Desktop.jar"), zipTree("build/libs/TerraJavaModAndroid.jar")] }
 
     doLast{
         delete{
-            delete "build/libs/${project.name}Android.jar"
+            delete "build/libs/TerraJavaModAndroid.jar"
         }
     }
 }
