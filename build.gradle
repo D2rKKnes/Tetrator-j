@@ -27,6 +27,8 @@ repositories{
         patternLayout{artifact '/[organisation]/[module]/releases/download/[revision]/jabel.jar'}
         metadataSources{ artifact() }
     }
+
+    maven { url 'https://jitpack.io' }
 }
 
 java{
