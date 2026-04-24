@@ -748,6 +748,7 @@ public class TerraUnitTypes {
             engineLayer = Layer.effect;
             deathExplosionEffect = Fx.none;
             loopSoundVolume = 0.1f;
+            hidden = false;
 
             parts.add(new ShapePart(){{
                 layer = Layer.effect;
@@ -765,7 +766,7 @@ public class TerraUnitTypes {
                 reload = 1f;
                 shootOnDeath = true;
                 bullet = new ExplosionBulletType(100f, 45f){{
-                    collidesAir = false;
+                    collidesAir = true;
                     suppressionRange = 140f;
                     shootEffect = new ExplosionEffect(){{
                         lifetime = 50f;
@@ -907,18 +908,17 @@ public class TerraUnitTypes {
                 recoil = 0;
                 shake = 15f;
                 parts.add(new BlackHolePart(){{
-                    //layer = 110.1f;
                     color = Pal.suppress;
-                    sizeTo = 0f;
-                    size = 7f * 2.4f;
-                    edgeTo = 0f;
-                    edge = (7 * 2.6f) * 1.25f;
-                    progress = growProgress = PartProgress.reload.delay(0.1f);
+                    size = 0f;
+                    sizeTo = 14f;
+                    edge = 0f;
+                    edgeTo = 14f * 1.2f;
+                    progress = growProgress = PartProgress.reload.inv().delay(0.2);
                 }});
                 bullet = new BlackHoleBulletType(0.8f, 168f){{
                     lifetime = 300f;
                     color = Pal.suppress;
-                    damageRadius = 7f * 2.4f;
+                    damageRadius = 14f * 1.2f;
                     growTime = 0f;
                     shrinkTime = 20f;
                     status = TerraStatusEffects.singularEvaporation;
