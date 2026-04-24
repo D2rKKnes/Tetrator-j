@@ -890,7 +890,7 @@ public class TerraUnitTypes {
                     keepVelocity = false;
                     collidesAir = true;
 
-                    spawnUnit = eternityMissile
+                    spawnUnit = eternityMissile;
                 }};
             }});
         }};
