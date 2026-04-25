@@ -3,6 +3,7 @@ package terra.world.blocks;
 import arc.graphics.*;
 import arc.math.*;
 import arc.util.*;
+import arc.struct.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
