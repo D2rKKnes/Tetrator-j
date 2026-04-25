@@ -1,4 +1,4 @@
-package terra.world.blocks
+package terra.world.blocks;
 
 import arc.graphics.g2d.*;
 import arc.math.*;
