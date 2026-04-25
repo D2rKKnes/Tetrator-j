@@ -12,6 +12,9 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.*;
 
 public class AdvancedWall extends Wall {
+    var hitChance = new Stat("hitChance", StatCat.function);
+    var hitAmount = new Stat("hitAmount", StatCat.function);
+    
     public float hitBulletSpawnChance = 0f;
     public BulletType hitBullet = new BulletType();
     public int hitBulletAmount = 4;
@@ -46,8 +49,8 @@ public class AdvancedWall extends Wall {
         
         if (hitBulletSpawnChance > 0) {
             stats.add(Stat.bullet, StatValues.ammo(ObjectMap.of(Items.metaglass, hitBullet)));
-            stats.add("hitChance", hitBulletSpawnChance * 100f, StatUnit.percent);
-            stats.add("hitAmount", (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
+            stats.add(hitChance, hitBulletSpawnChance * 100f, StatUnit.percent);
+            stats.add(hitAmount, (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
         }
 
         if (autoRegeneration && regenAmount > 0) {
