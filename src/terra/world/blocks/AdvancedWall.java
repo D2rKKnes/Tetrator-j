@@ -44,11 +44,9 @@ public class AdvancedWall extends Wall {
         super.setStats();
         
         if (hitBulletSpawnChance > 0) {
-            stats.add(Stat.abilities, t -> {
-                t.left();
-                t.add("[lightgray]Bullet Chance: [white]" + (int)(hitBulletSpawnChance * 100) + "%").row();
-                t.add("[lightgray]Bullets: [white]" + (hitBulletAmount - hitBulletAmountRand) + "-" + (hitBulletAmount + hitBulletAmountRand)).row();
-            });
+            stats.add(Stat.bullet, hitBullet);
+            stats.add(hitChance, hitBulletSpawnChance * 100f, StatUnit.percent);
+            stats.add(hitAmount, (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
         }
 
         if (autoRegeneration && regenAmount > 0) {
