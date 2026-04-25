@@ -26,6 +26,10 @@ public class TerraEnvironmentBlocks {
             variants = 2;
             parent = blendGroup = Blocks.ice;
             effect = Fx.none;
+            dragMultiplier = 0.35f;
+            speedMultiplier = 0.9f;
+            attributes.set(Attribute.water, 0.4f);
+            albedo = 0.65f;
         }};
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
