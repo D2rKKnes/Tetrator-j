@@ -12,6 +12,8 @@ import arc.math.geom.Geometry;
 import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.game.EventType.*;
+import mindustry.game.*;
 import mindustry.Vars;
 import mindustry.gen.*;
 import mindustry.graphics.*;
