@@ -4,6 +4,7 @@ import arc.graphics.*;
 import arc.math.*;
 import arc.util.*;
 import arc.struct.*;
+import arc.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
