@@ -44,7 +44,7 @@ public class AdvancedWall extends Wall {
         super.setStats();
         
         if (hitBulletSpawnChance > 0) {
-            stats.add(Stat.bullet, hitBullet);
+            stats.add(Stat.bullet, new AmmoStatValue(ObjectMap.of(this, hitBullet)));
             stats.add(hitChance, hitBulletSpawnChance * 100f, StatUnit.percent);
             stats.add(hitAmount, (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
         }
