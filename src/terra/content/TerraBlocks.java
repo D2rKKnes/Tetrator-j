@@ -1,6 +1,7 @@
 package terra.content;
 
 import terra.type.bullet.*;
+import terra.world.blocks.*;
 import arc.util.Tmp;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
@@ -63,6 +64,40 @@ public class TerraBlocks{
             health = 60 * 25 * 4;
             size = 5;
             buildCostMultiplier = 4f;
+        }};
+        glassWave = new WaveEffect(){{
+            sizeFrom = strokeTo = 0f;
+            sizeTo = 40f;
+            strokeFrom = 3f;
+            lifetime = 20f;
+            colorFrom = pal.glassAmmoFront;
+            colorTo = pal.glassAmmoBack;
+        }};
+        glassShard = new BasicBulletType(){{
+            damage = 21f;
+            lifetime = 30f;
+            width = 12f;
+            length = 26f;
+            shrinkY = 0.4f;
+            shrinkX = 1f;
+            speed = 2f;
+            backColor = hitColor = trailColor = pal.glassAmmoBack;
+            frontColor = pal.glassAmmoFront;
+            despawnEffect = Fx.none;
+            ammoMultiplier = 1f;
+        }};
+        metaglassWall = new AdvancedWall("metaglass-wall"){{
+            requirements(Category.defense, with(Items.metaglass, 6));
+            health = 380;
+            size = 1;
+            hitBullet = glassShard;
+            hitBulletAmount = 9;
+            hitBulletAmountRand = 3;
+            hitBulletSpawnChance = 0.08f;
+            hitBulletEffect = glassWave;
+            hitBulletSound = Sounds.explosionDull;
+            hitBulletSoundPitchMin = 3.8;
+            hitBulletSoundPitchMax = 4f;
         }};
     }
 }
