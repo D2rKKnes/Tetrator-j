@@ -109,6 +109,7 @@ tasks.register('deploy', Jar){
     doLast{
         delete{
             delete "build/libs/Tetrator-j-Android.jar"
+            delete "build/libs/TerraJavaModDesktop.jar"
         }
     }
 }
