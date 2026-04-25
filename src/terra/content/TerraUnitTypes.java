@@ -473,7 +473,7 @@ public class TerraUnitTypes {
             health = 4000f;
             engineSize = 1f;
             engineOffset = 0f;
-            range = 40f;
+            range = 80f;
             itemCapacity = 0;
             ammoType = new PowerAmmoType(50000);
             useUnitCap = false;
@@ -489,11 +489,14 @@ public class TerraUnitTypes {
 
             weapons.add(new Weapon(){{
                 mirror = false;
+                x = 0f;
+                y = 0f;
                 shootY = 0f;
                 shootSound = Sounds.shootAvert;
                 shootSoundVolume = 0.3f;
                 shootCone = 361f;
                 inaccuracy = 360f;
+                reload = 4f;
                 bullet = new BasicBulletType(){{
                     speed = 5.6f;
                     lifetime = 30f;
@@ -750,6 +753,7 @@ public class TerraUnitTypes {
             deathExplosionEffect = Fx.none;
             loopSoundVolume = 0.1f;
             hidden = false;
+            softShadowScl = 0.8f;
 
             parts.add(new ShapePart(){{
                 layer = Layer.effect;
@@ -803,18 +807,21 @@ public class TerraUnitTypes {
             outlineRadius = 6;
             crashDamageMultiplier = 10;
             targetPriority = 4f;
-            fallSpeed = 0.008f;
+            fallSpeed = 0.01f;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(168f / 4f, 0.25f, 14f, 315f),
+                new UnitEngine(168f / 4f, 0.25f, 13.5f, 315f),
                 new UnitEngine(100f / 4f, -55f / 4f, 11f, 315f)
             );
-            //range = 120f;
+            range = 210f;
             itemCapacity = 200;
             ammoType = new PowerAmmoType(9000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped, StatusEffects.electrified, TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation);
+            immunities = ObjectSet.with(
+                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, 
+                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation
+            );
             healColor = Pal.suppress;
             abilities.addAll(
                 new SuppressionFieldAbility(){{
@@ -915,8 +922,6 @@ public class TerraUnitTypes {
                 shootY = 0;
                 recoil = 0;
                 shake = 15f;
-                shootStatus = StatusEffects.slow;
-                shootStatusDuration = 20f;
                 parts.add(new BlackHolePart(){{
                     color = Pal.suppress;
                     size = 0f;
@@ -932,7 +937,8 @@ public class TerraUnitTypes {
                     growTime = 0f;
                     shrinkTime = 20f;
                     status = TerraStatusEffects.singularEvaporation; //somehow didn't work...
-                    statusDuration = 60f;
+                    statusDuration = 180f;
+                    keepVelocity = false;
                     intervalBullets = 1;
                     bulletInterval = 1f;
                     intervalBullet = new BulletType(){{
@@ -943,8 +949,8 @@ public class TerraUnitTypes {
                         shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                         splashDamage = 0.001f;
                         splashDamageRadius = 14f * 1.2f;
-                        status = TerraStatusEffects.singularEvaporation; //i work now
-                        statusDuration = 60f;
+                        status = TerraStatusEffects.singularEvaporation;
+                        statusDuration = 180f;
                     }};
                 }};
             }},
@@ -959,7 +965,7 @@ public class TerraUnitTypes {
                 y = 0f;
                 shootY = 0;
                 recoil = 0;
-                bullet = new BlackHoleBulletType(0f, 142f){{ //less damage but more lifetime
+                bullet = new BlackHoleBulletType(0f, 142f){{
                     lifetime = 500f;
                     color = Pal.suppress;
                     damageRadius = 30f;
@@ -968,7 +974,7 @@ public class TerraUnitTypes {
                     shrinkTime = 60f;
                     status = TerraStatusEffects.singularEvaporation;
                     loopSoundVolume = 5f;
-                    statusDuration = 60f;
+                    statusDuration = 180f;
                     keepVelocity = false;
                     intervalBullets = 1;
                     bulletInterval = 1f;
@@ -981,7 +987,7 @@ public class TerraUnitTypes {
                         splashDamage = 0.001f;
                         splashDamageRadius = 30f;
                         status = TerraStatusEffects.singularEvaporation;
-                        statusDuration = 60f;
+                        statusDuration = 180f;
                     }};
                 }};
             }});
