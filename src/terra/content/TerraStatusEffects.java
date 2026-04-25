@@ -34,16 +34,22 @@ public class TerraStatusEffects{
                 });
             });
         }};
-        singularEvaporation = new StatusEffect("singular-evaporation"){{
-            color = Color.valueOf("3d1f7a");
-            speedMultiplier = 0.5f;
-            reloadMultiplier = 0.15f;
-            damage = 7.8f;
-        }};
         impactStun = new StatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
             speedMultiplier = 0.3f;
             disarm = true;
+        }};
+        singularEvaporation = new StatusEffect("singular-evaporation"){{
+            color = Color.valueOf("3d1f7a");
+            speedMultiplier = 0.5f;
+            reloadMultiplier = 0.15f;
+            damage = 17.8f;
+            effectChance = 0.075f;
+            effect = new Effect(20f, 20f, e -> {
+                Draw.color(Color.white, color, e.fin() + 0.35f);
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
+            });
         }};
     }
 }
