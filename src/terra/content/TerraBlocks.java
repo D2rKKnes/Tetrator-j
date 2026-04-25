@@ -59,7 +59,7 @@ public class TerraBlocks{
     //other
     public static void load(){
         scrapWallColossol = new Wall("scrap-wall-colossol"){{
-            requirements(Category.defense, ItemStack.mult(scrapWall.requirements, 25));
+            requirements(Category.defense, ItemStack.mult(Items.scrap, 6, 25));
             health = 60 * 25 * 4;
             size = 5;
             buildCostMultiplier = 4f;
