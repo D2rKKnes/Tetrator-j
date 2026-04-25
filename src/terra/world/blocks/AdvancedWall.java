@@ -1,16 +1,14 @@
 package terra.world.blocks;
 
-import arc.graphics.g2d.*;
+import arc.graphics.*;
 import arc.math.*;
-import arc.struct.*;
 import arc.util.*;
-import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
-import mindustry.graphics.*;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.*;
+import mindustry.world.meta.values.*;
 
 public class AdvancedWall extends Wall {
     public float hitBulletSpawnChance = 0f;
@@ -46,15 +44,16 @@ public class AdvancedWall extends Wall {
         super.setStats();
         
         if (hitBulletSpawnChance > 0) {
-            stats.add(Stat.shootEffect, hitBulletEffect);
-            stats.add(Stat.bullet, hitBullet);
-            stats.add(Stat.chance, hitBulletSpawnChance * 100, StatUnit.percent);
-            stats.add(Stat.ammo, (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
+            stats.add(Stat.abilities, t -> {
+                t.add("[lightgray]Bullet: []").add(hitBullet.getClass().getSimpleName()).row();
+                t.add("[lightgray]Chance: []").add(Strings.autoFixed(hitBulletSpawnChance * 100, 1) + "%").row();
+                t.add("[lightgray]Bullets: []").add((hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
+            });
         }
 
         if (autoRegeneration && regenAmount > 0) {
             float displayRegen = regenAmount * 60f;
-            stats.add(Stat.health, displayRegen * (regenPercent ? 100f : 1f), regenPercent ? StatUnit.percentPerSecond : StatUnit.perSecond);
+            stats.add(Stat.repairSpeed, displayRegen * (regenPercent ? 100f : 1f), regenPercent ? StatUnit.percentPerSecond : StatUnit.perSecond);
         }
     }
 
@@ -68,9 +67,9 @@ public class AdvancedWall extends Wall {
             if (autoRegeneration && regenAmount > 0 && health < maxHealth) {
                 if (Time.time >= lastDamageTime + regenStartDelay) {
                     float add = regenPercent ? maxHealth * regenAmount : regenAmount;
-                    heal(add);
+                    heal(add * delta());
 
-                    if (Mathf.chance(regenEffectChance)) {
+                    if (Mathf.chance(regenEffectChance * delta())) {
                         regenEffect.at(x, y, 0, Color.scarlet, this);
                     }
                 }
@@ -78,8 +77,8 @@ public class AdvancedWall extends Wall {
         }
 
         @Override
-        public void collision(Bullet bullet) {
-            super.collision(bullet);
+        public boolean collision(Bullet bullet) {
+            boolean result = super.collision(bullet);
 
             if (Mathf.chance(hitBulletSpawnChance)) {
                 spawnHitBullets();
@@ -88,6 +87,7 @@ public class AdvancedWall extends Wall {
             if (regenDamageStop) {
                 lastDamageTime = Time.time;
             }
+            return result;
         }
 
         @Override
@@ -104,7 +104,7 @@ public class AdvancedWall extends Wall {
 
             int amount = hitBulletAmount + Mathf.random(-hitBulletAmountRand, hitBulletAmountRand);
             for (int i = 0; i < amount; i++) {
-                float angle = (i * hitBulletSpread / amount) - (hitBulletSpread / 2f) + hitBulletAngleOffset + Mathf.range(hitBulletSpread / amount / 2f);
+                float angle = (i * hitBulletSpread / Math.max(amount, 1)) - (hitBulletSpread / 2f) + hitBulletAngleOffset + Mathf.range(hitBulletSpread / Math.max(amount, 1) / 2f);
                 hitBullet.create(this, team, x, y, angle, 
                     1f + Mathf.range(hitBulletSpeedRandScl), 
                     1f + Mathf.range(hitBulletLifeRandScl));
