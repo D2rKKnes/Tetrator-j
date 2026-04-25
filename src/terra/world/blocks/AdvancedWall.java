@@ -46,8 +46,8 @@ public class AdvancedWall extends Wall {
         
         if (hitBulletSpawnChance > 0) {
             stats.add(Stat.bullet, StatValues.ammo(ObjectMap.of(Items.metaglass, hitBullet)));
-            stats.add(hitChance, hitBulletSpawnChance * 100f, StatUnit.percent);
-            stats.add(hitAmount, (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
+            stats.add("hitChance", hitBulletSpawnChance * 100f, StatUnit.percent);
+            stats.add("hitAmount", (hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
         }
 
         if (autoRegeneration && regenAmount > 0) {
