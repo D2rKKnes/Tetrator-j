@@ -46,7 +46,7 @@ import static arc.graphics.g2d.Lines.*;
 public class TerraBlocks{
     public static Block
     //walls
-    scrapWallColossol;
+    scrapWallColossol, metaglassWall;
     //distrubution
 
     //power
@@ -65,36 +65,34 @@ public class TerraBlocks{
             size = 5;
             buildCostMultiplier = 4f;
         }};
-        glassWave = new WaveEffect(){{
-            sizeFrom = strokeTo = 0f;
-            sizeTo = 40f;
-            strokeFrom = 3f;
-            lifetime = 20f;
-            colorFrom = Pal.glassAmmoFront;
-            colorTo = Pal.glassAmmoBack;
-        }};
-        glassShard = new BasicBulletType(){{
-            damage = 21f;
-            lifetime = 30f;
-            width = 12f;
-            height = 26f;
-            shrinkY = 0.4f;
-            shrinkX = 1f;
-            speed = 2f;
-            backColor = hitColor = trailColor = Pal.glassAmmoBack;
-            frontColor = Pal.glassAmmoFront;
-            despawnEffect = Fx.none;
-            ammoMultiplier = 1f;
-        }};
         metaglassWall = new AdvancedWall("metaglass-wall"){{
             requirements(Category.defense, with(Items.metaglass, 6));
             health = 380;
             size = 1;
-            hitBullet = glassShard;
+            hitBullet = new BasicBulletType(){{
+                damage = 21f;
+                lifetime = 30f;
+                width = 12f;
+                height = 26f;
+                shrinkY = 0.4f;
+                shrinkX = 1f;
+                speed = 2f;
+                backColor = hitColor = trailColor = Pal.glassAmmoBack;
+                frontColor = Pal.glassAmmoFront;
+                despawnEffect = Fx.none;
+                ammoMultiplier = 1f;
+            }};
             hitBulletAmount = 9;
             hitBulletAmountRand = 3;
             hitBulletSpawnChance = 0.08f;
-            hitBulletEffect = glassWave;
+            hitBulletEffect = new WaveEffect(){{
+                sizeFrom = strokeTo = 0f;
+                sizeTo = 40f;
+                strokeFrom = 3f;
+                lifetime = 20f;
+                colorFrom = Pal.glassAmmoFront;
+                colorTo = Pal.glassAmmoBack;
+            }};
             hitBulletSound = Sounds.explosionDull;
             hitBulletSoundPitchMin = 3.8f;
             hitBulletSoundPitchMax = 4f;
