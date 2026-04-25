@@ -3,12 +3,12 @@ package terra.world.blocks;
 import arc.graphics.*;
 import arc.math.*;
 import arc.util.*;
+import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.*;
-import mindustry.world.meta.values.*;
 
 public class AdvancedWall extends Wall {
     public float hitBulletSpawnChance = 0f;
@@ -45,15 +45,15 @@ public class AdvancedWall extends Wall {
         
         if (hitBulletSpawnChance > 0) {
             stats.add(Stat.abilities, t -> {
-                t.add("[lightgray]Bullet: []").add(hitBullet.getClass().getSimpleName()).row();
-                t.add("[lightgray]Chance: []").add(Strings.autoFixed(hitBulletSpawnChance * 100, 1) + "%").row();
-                t.add("[lightgray]Bullets: []").add((hitBulletAmount - hitBulletAmountRand) + " - " + (hitBulletAmount + hitBulletAmountRand));
+                t.left();
+                t.add("[lightgray]Bullet Chance: [white]" + (int)(hitBulletSpawnChance * 100) + "%").row();
+                t.add("[lightgray]Bullets: [white]" + (hitBulletAmount - hitBulletAmountRand) + "-" + (hitBulletAmount + hitBulletAmountRand)).row();
             });
         }
 
         if (autoRegeneration && regenAmount > 0) {
-            float displayRegen = regenAmount * 60f;
-            stats.add(Stat.repairSpeed, displayRegen * (regenPercent ? 100f : 1f), regenPercent ? StatUnit.percentPerSecond : StatUnit.perSecond);
+            float displayRegen = regenAmount * 60f * (regenPercent ? 100f : 1f);
+            stats.add(Stat.repairSpeed, displayRegen, regenPercent ? StatUnit.none : StatUnit.perSecond);
         }
     }
 
