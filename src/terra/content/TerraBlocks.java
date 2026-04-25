@@ -70,19 +70,19 @@ public class TerraBlocks{
             sizeTo = 40f;
             strokeFrom = 3f;
             lifetime = 20f;
-            colorFrom = pal.glassAmmoFront;
-            colorTo = pal.glassAmmoBack;
+            colorFrom = Pal.glassAmmoFront;
+            colorTo = Pal.glassAmmoBack;
         }};
         glassShard = new BasicBulletType(){{
             damage = 21f;
             lifetime = 30f;
             width = 12f;
-            length = 26f;
+            height = 26f;
             shrinkY = 0.4f;
             shrinkX = 1f;
             speed = 2f;
-            backColor = hitColor = trailColor = pal.glassAmmoBack;
-            frontColor = pal.glassAmmoFront;
+            backColor = hitColor = trailColor = Pal.glassAmmoBack;
+            frontColor = Pal.glassAmmoFront;
             despawnEffect = Fx.none;
             ammoMultiplier = 1f;
         }};
@@ -96,7 +96,7 @@ public class TerraBlocks{
             hitBulletSpawnChance = 0.08f;
             hitBulletEffect = glassWave;
             hitBulletSound = Sounds.explosionDull;
-            hitBulletSoundPitchMin = 3.8;
+            hitBulletSoundPitchMin = 3.8f;
             hitBulletSoundPitchMax = 4f;
         }};
     }
