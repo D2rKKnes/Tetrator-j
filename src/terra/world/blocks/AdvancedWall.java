@@ -55,7 +55,7 @@ public class AdvancedWall extends Wall {
 
         if (autoRegeneration && regenAmount > 0) {
             float displayRegen = regenAmount * 60f * (regenPercent ? 100f : 1f);
-            stats.add(Stat.repairSpeed, displayRegen, regenPercent ? StatUnit.none : StatUnit.perSecond);
+            stats.add(Stat.repairSpeed, displayRegen + (regenPercent ? "%" : Stat.health), StatUnit.perSecond);
         }
     }
 
@@ -72,7 +72,8 @@ public class AdvancedWall extends Wall {
                     heal(add * delta());
 
                     if (Mathf.chance(regenEffectChance * delta())) {
-                        regenEffect.at(x, y, 0, Color.scarlet, this);
+                        float offset = (size * mindustry.Vars.tilesize) / 2f;
+                        regenEffect.at(x + Mathf.range(offset), y + Mathf.range(offset), 0, team.color, this);
                     }
                 }
             }
