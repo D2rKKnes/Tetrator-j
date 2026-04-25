@@ -12,8 +12,8 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.*;
 
 public class AdvancedWall extends Wall {
-    var hitChance = new Stat("hitChance", StatCat.function);
-    var hitAmount = new Stat("hitAmount", StatCat.function);
+    public static final Stat hitChance = new Stat("hitChance", StatCat.function);
+    public static final Stat hitAmount = new Stat("hitAmount", StatCat.function);
     
     public float hitBulletSpawnChance = 0f;
     public BulletType hitBullet = new BulletType();
