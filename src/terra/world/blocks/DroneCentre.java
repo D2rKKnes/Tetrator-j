@@ -1,107 +1,132 @@
 package terra.world.blocks;
 
+import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.util.*;
+import arc.math.geom.*;
 import arc.struct.*;
+import arc.util.*;
 import arc.scene.ui.layout.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
-import mindustry.world.*;
 import mindustry.ui.*;
-import mindustry.content.*;
-import mindustry.world.blocks.*;
+import mindustry.world.blocks.units.*;
+import mindustry.world.blocks.ItemSelection;
+import mindustry.entities.*;
+import mindustry.annotations.Annotations.*;
 import terra.ai.*;
 
-public class DroneCentre extends Block {
-    public Seq<DroneEntry> drones = new Seq<>();
-    public boolean individualConstructTime = false;
-    public float droneConstructTime = 210f;
-    public int droneMax = 3;
+import static mindustry.Vars.*;
 
-    public static class DroneEntry {
-        public UnitType type;
-        public float buildTime;
-        public DroneEntry(UnitType type) { this.type = type; }
-        public DroneEntry(UnitType type, float buildTime) { this.type = type; this.buildTime = buildTime; }
-    }
+public class DroneCentre extends Block {
+    public Seq<DronePlan> plans = new Seq<>();
+    public int droneMax = 3;
+    public float droneConstructTime = 210f;
+    public boolean individualConstructTime = false;
 
     public DroneCentre(String name) {
         super(name);
         update = true;
         configurable = true;
         hasPower = true;
-        consumePower(3f);
-        
-        config(UnitType.class, (DroneCentreBuild build, UnitType type) -> build.changeType(type));
+        solid = true;
+        ambientSound = Sounds.loopUnitBuilding;
+
+        config(Integer.class, (DroneCentreBuild build, Integer i) -> {
+            build.currentPlan = i < 0 || i >= plans.size ? -1 : i;
+            build.progress = 0;
+            build.despawnDrones();
+        });
     }
 
-   public class DroneCentreBuild extends Building {
-        public UnitType currentType = null;
-        public float progress = 0;
-        public Seq<Unit> spawnedDrones = new Seq<>();
+    @Remote(called = Loc.server)
+    public static void unitTetherBlockSpawned(Tile tile, int id){
+        if(tile == null || !(tile.build instanceof DroneCentreBuild build)) return;
+        build.spawned(id);
+    }
 
-        public void changeType(UnitType type) {
-            if (currentType == type) return;
-            currentType = type;
+    public static class DronePlan {
+        public UnitType unit;
+        public float time;
+        public DronePlan(UnitType unit, float time) { this.unit = unit; this.time = time; }
+    }
+
+    public class DroneCentreBuild extends Building implements UnitTetherBlock {
+        public int currentPlan = -1;
+        public float progress, totalProgress;
+        public Seq<Unit> spawnedDrones = new Seq<>();
+        public int readUnitId = -1;
+
+        public void despawnDrones() {
             spawnedDrones.each(u -> {
-                mindustry.content.Fx.unitDespawn.at(u.x, u.y, 0, u.type);
-                u.remove();
+                if (u != null) {
+                    mindustry.content.Fx.unitDespawn.at(u.x, u.y, 0, u.type);
+                    u.remove();
+                }
             });
             spawnedDrones.clear();
-            progress = 0;
         }
 
         @Override
         public void updateTile() {
             spawnedDrones.removeAll(u -> !u.isValid());
 
-            if (currentType != null && spawnedDrones.size < droneMax && enabled) {
-                float finalTime = droneConstructTime;
-                if (individualConstructTime) {
-                    DroneEntry entry = drones.find(e -> e.type == currentType);
-                    if (entry != null && entry.buildTime > 0) finalTime = entry.buildTime;
-                }
+            if(readUnitId != -1){
+                Unit u = Groups.unit.getByID(readUnitId);
+                if(u != null || !net.client()) readUnitId = -1;
+            }
 
-                progress += edelta() / finalTime;
+            if (currentPlan != -1 && spawnedDrones.size < droneMax && enabled) {
+                float time = individualConstructTime ? plans.get(currentPlan).time : droneConstructTime;
+                
+                progress += edelta() / time;
+                totalProgress += edelta();
+
                 if (progress >= 1f) {
-                    spawnDrone();
+                    if(!net.client()){
+                        Unit unit = plans.get(currentPlan).unit.create(team);
+                        unit.set(x, y);
+                        unit.controller(new DroneAI(this));
+                        unit.add();
+                        spawnedDrones.add(unit);
+                        
+                        Call.unitTetherBlockSpawned(tile, unit.id);
+                    }
                     progress = 0;
                 }
             }
         }
 
-        public void spawnDrone() {
-            Unit unit = currentType.create(team);
-            unit.set(x, y);
-            unit.controller(new DroneAI(this));
-            unit.add();
-            spawnedDrones.add(unit);
+        public void spawned(int id){
             mindustry.content.Fx.spawn.at(x, y);
-        }
-
-        @Override
-        public void buildConfiguration(Table table) {
-            Seq<UnitType> types = new Seq<>();
-            drones.each(e -> types.add(e.type));
-            ItemSelection.buildTable(DroneCentre.this, table, types, () -> currentType, this::changeType);
+            if(net.client()) readUnitId = id;
         }
 
         @Override
         public void draw() {
             super.draw();
-            if (currentType != null && progress > 0) {
+            if (currentPlan != -1 && progress > 0) {
+                DronePlan plan = plans.get(currentPlan);
                 Draw.draw(Layer.blockOver, () -> {
-                    Shaders.build.region = currentType.fullIcon;
-                    Shaders.build.progress = progress;
-                    Shaders.build.color.set(Pal.accent);
-                    Draw.shader(Shaders.build);
-                    Draw.rect(currentType.fullIcon, x, y, currentType.hitSize, currentType.hitSize, -90);
-                    Draw.shader();
+                    Drawf.construct(this, plan.unit.fullIcon, 0f, progress, efficiency, totalProgress);
                 });
             }
         }
+
+        @Override
+        public void buildConfiguration(Table table) {
+            Seq<UnitType> units = Seq.with(plans).map(p -> p.unit).retainAll(u -> u.unlockedNow());
+            if (units.any()) {
+                ItemSelection.buildTable(DroneCentre.this, table, units, 
+                    () -> currentPlan == -1 ? null : plans.get(currentPlan).unit, 
+                    unit -> configure(plans.indexOf(p -> p.unit == unit))
+                );
+            }
+        }
+
+        @Override public float progress() { return progress; }
+        @Override public float totalProgress() { return totalProgress; }
     }
 }
