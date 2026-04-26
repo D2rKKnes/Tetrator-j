@@ -186,7 +186,7 @@ public class TerraBlocks{
             regenDamageStop = true;
         }};
 
-        droneCentre = new Wall("drone-centre"){{
+        droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.defense, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             size = 2;
             droneTypes.addAll(TerraUnitTypes.healDrone);
