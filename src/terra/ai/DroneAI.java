@@ -2,102 +2,76 @@ package terra.ai;
 
 import arc.math.*;
 import arc.math.geom.*;
+import arc.struct.*;
 import arc.util.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
+import mindustry.type.*;
 import mindustry.entities.units.*;
-import mindustry.content.*;
+import mindustry.world.meta.*;
+
+import static mindustry.Vars.*;
 
 public class DroneAI extends AIController {
-    public Building parent;
-    public Unit targetUnit;
-    public Player targetPlayer;
-    public float timer = 0;
-
-    public DroneAI(Building parent) {
-        this.parent = parent;
-    }
+    public static float moveRange = 6f, moveSmoothing = 20f;
+    
+    public @Nullable Entityc target;
+    public float timer = Mathf.random(60f);
 
     @Override
-    public void updateUnit() {
-        if (parent == null || !parent.isValid()) {
-            Fx.unitDespawn.at(unit.x, unit.y, 0f, unit.type);
-            unit.remove();
+    public void updateMovement() {
+        if (!(unit instanceof BuildingTetherc tether) || tether.building() == null) {
+            unit.despawn();
             return;
         }
 
-        timer += Time.delta;
-        if (timer >= 10f || !isTargetValid()) {
-            findTargets();
+        var build = tether.building();
+
+        if ((timer += Time.delta) >= 5f || target == null) {
+            findTarget();
             timer = 0;
         }
 
+        if (unit.type.buildSpeed > 0 && target instanceof Player p) {
+            handleBuild(p, build);
+        } else if (target instanceof Unit u) {
+            circle(u, u.hitSize + 40f);
+        } else {
+            circle(build, 48f);
+        }
+
+        if (!unit.vel.isZero()) {
+            unit.lookAt(unit.vel.angle());
+        }
+    }
+
+    void findTarget() {
         if (unit.type.buildSpeed > 0) {
-            handleBuilderLogic();
+            target = Groups.player.size() > 0 ? Groups.player.random() : null;
         } else {
-            handleSupportLogic();
-        }
-        
-        unit.lookAt(unit.vel.angle());
-    }
-
-    boolean isTargetValid() {
-        if (unit.type.buildSpeed > 0) return targetPlayer != null && targetPlayer.unit() != null && targetPlayer.unit().isValid();
-        return targetUnit != null && targetUnit.isValid();
-    }
-
-    void findTargets() {
-        targetPlayer = Groups.player.size() > 0 ? Groups.player.first() : null;
-
-        targetUnit = null;
-        float maxH = -1;
-        for(Unit u : Groups.unit){
-            if(u.team == unit.team && u != unit && u.type != unit.type && u.maxHealth > maxH) {
-                maxH = u.maxHealth;
-                targetUnit = u;
-            }
+            target = Groups.unit.select(u -> u.team == unit.team && u.type != unit.type)
+                               .max(u -> u.maxHealth);
         }
     }
 
-    void handleBuilderLogic() {
-        if (targetPlayer != null && targetPlayer.unit() != null && targetPlayer.isValid()) {
-            Unit pUnit = targetPlayer.unit();
+    void handleBuild(Player p, Building build) {
+        Unit pUnit = p.unit();
+        if (pUnit != null && pUnit.plans().size > 0) {
+            BuildPlan plan = pUnit.plans().first();
+            moveTo(Tmp.v1.set(plan.x * tilesize, plan.y * tilesize), unit.type.buildRange * 0.7f, moveSmoothing);
+            unit.addBuild(plan);
             
-            if (pUnit.plans().size > 0) {
-                BuildPlan plan = pUnit.plans().first();
-                moveTo(Tmp.v1.set(plan.x * 8f, plan.y * 8f), unit.type.buildRange * 0.8f);
-                unit.addBuild(plan);
-            } else {
-                circle(pUnit, unit.type.buildRange / 2f);
-            }
-            
-            if (unit.hasWeapons()) {
-                Unit enemy = Units.closestEnemy(unit.team, unit.x, unit.y, unit.range(), u -> true);
-                if (enemy != null) {
-                    unit.lookAt(enemy);
-                    unit.controlWeapons(true);
-                }
+            if (Mathf.chanceDelta(0.1)) {
+                mindustry.content.Fx.buildBeam.at(unit.x, unit.y, unit.angleTo(plan.x * tilesize, plan.y * tilesize), pUnit);
             }
         } else {
-            orbitParent();
+            circle(pUnit, 40f);
         }
-    }
-
-    void handleSupportLogic() {
-        if (targetUnit != null && targetUnit.isValid()) {
-            circle(targetUnit, targetUnit.hitSize + 40f);
-        } else {
-            orbitParent();
-        }
-    }
-
-    void orbitParent() {
-        circle(parent, 40f);
     }
 
     @Override
     public void circle(Position target, float radius) {
-        float angle = (Time.time * 2f) + (unit.id * 50); 
-        moveTo(Tmp.v1.trns(angle, radius).add(target.getX(), target.getY()), 0f);
+        float angle = (Time.time * 1.2f) + (unit.id * 50f);
+        moveTo(Tmp.v1.trns(angle, radius).add(target), moveRange, moveSmoothing);
     }
 }
