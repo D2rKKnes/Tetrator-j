@@ -62,8 +62,7 @@ public class DroneCentre extends Block {
         public void despawnDrones() {
             spawnedDrones.each(u -> {
                 if (u != null) {
-                    mindustry.content.Fx.unitDespawn.at(u.x, u.y, 0, u.type);
-                    u.remove();
+                    u.constructor = tether.null::create;
                 }
             });
             spawnedDrones.clear();
@@ -101,7 +100,7 @@ public class DroneCentre extends Block {
 
         public void spawned(int id){
             mindustry.content.Fx.spawn.at(x, y);
-            if(net.client()) readUnitId = id;
+            if(unit instanceof BuildingTetherc bt) bt.building(this);
         }
 
         @Override
