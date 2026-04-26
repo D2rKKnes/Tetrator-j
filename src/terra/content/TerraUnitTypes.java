@@ -995,7 +995,7 @@ public class TerraUnitTypes {
             }});
         }};
 
-        healDrone = new UnitType("healDrone"){{
+        healDrone = new UnitType("heal-drone"){{
             flying = true;
             speed = 3.6f;
             drag = 0.02f;
