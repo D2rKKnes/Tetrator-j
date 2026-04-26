@@ -27,7 +27,7 @@ public class DroneAI extends AIController {
         }
 
         timer += Time.delta;
-        if (timer >= 300f || !isTargetValid()) {
+        if (timer >= 10f || !isTargetValid()) {
             findTargets();
             timer = 0;
         }
@@ -52,7 +52,7 @@ public class DroneAI extends AIController {
         targetUnit = null;
         float maxH = -1;
         for(Unit u : Groups.unit){
-            if(u.team == unit.team && u != unit && u.maxHealth > maxH){
+            if(u.team == unit.team && u != unit && u.type != unit.type && u.maxHealth > maxH) {
                 maxH = u.maxHealth;
                 targetUnit = u;
             }
@@ -60,7 +60,7 @@ public class DroneAI extends AIController {
     }
 
     void handleBuilderLogic() {
-        if (targetPlayer != null && targetPlayer.unit() != null) {
+        if (targetPlayer != null && targetPlayer.unit() != null && targetPlayer.isValid()) {
             Unit pUnit = targetPlayer.unit();
             
             if (pUnit.plans().size > 0) {
@@ -84,7 +84,7 @@ public class DroneAI extends AIController {
     }
 
     void handleSupportLogic() {
-        if (targetUnit != null) {
+        if (targetUnit != null && targetUnit.isValid()) {
             circle(targetUnit, targetUnit.hitSize + 40f);
         } else {
             orbitParent();
