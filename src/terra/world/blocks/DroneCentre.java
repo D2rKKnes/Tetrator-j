@@ -12,6 +12,7 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.ui.*;
 import mindustry.content.*;
+import mindustry.world.blocks.*;
 import terra.ai.*;
 
 public class DroneCentre extends Block {
