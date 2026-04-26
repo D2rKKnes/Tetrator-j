@@ -28,7 +28,7 @@ public class DroneAI extends AIController {
         }
 
         timer += Time.delta;
-        if (timer >= 120f || targetPlayer == null || (targetUnit != null && !targetUnit.isValid())) {
+        if (timer >= 10f || targetPlayer == null || (targetUnit != null && !targetUnit.isValid())) {
             findTargets();
             timer = 0;
         }
@@ -42,7 +42,19 @@ public class DroneAI extends AIController {
 
     void findTargets() {
         int pSize = Groups.player.size();
-        targetPlayer = pSize > 0 ? Groups.player.indexAt(rand.nextInt(pSize)) : null;
+        if (pSize > 0) {
+            int targetIndex = rand.nextInt(pSize);
+            int current = 0;
+            for (Player p : Groups.player) {
+                if (current == targetIndex) {
+                    targetPlayer = p;
+                    break;
+                }
+                current++;
+            }
+        } else {
+            targetPlayer = null;
+        }
         
         targetUnit = null;
         float maxHealth = -1;
