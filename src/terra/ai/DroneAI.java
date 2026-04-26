@@ -1,5 +1,6 @@
 package terra.ai;
 
+import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.entities.*;
