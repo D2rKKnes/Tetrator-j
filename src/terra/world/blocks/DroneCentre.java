@@ -33,7 +33,6 @@ public class DroneCentre extends Block {
         update = true;
         configurable = true;
         hasPower = true;
-        drawUnitPlan = false;
         consumePower(3f);
         
         config(UnitType.class, (DroneCentreBuild build, UnitType type) -> build.changeType(type));
