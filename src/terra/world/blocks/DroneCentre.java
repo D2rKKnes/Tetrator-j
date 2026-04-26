@@ -38,9 +38,11 @@ public class DroneCentre extends Block {
         public void changeType(int index) {
             if (index < 0 || index >= droneTypes.size) return;
             currentTypeIndex = index;
+            
             spawnedDrones.each(u -> {
-                if (u != null) u.despawn();
+                if (u != null) u.remove(); 
             });
+            
             spawnedDrones.clear();
             progress = 0;
         }
@@ -49,8 +51,9 @@ public class DroneCentre extends Block {
         public void updateTile() {
             spawnedDrones.removeAll(u -> !u.isValid());
 
-            if (enabled && spawnedDrones.size < droneMax && power.status >= 1f) {
+            if (enabled && spawnedDrones.size < droneMax) {
                 progress += edelta();
+        
                 if (progress >= droneConstructTime) {
                     spawnDrone();
                     progress = 0;
