@@ -65,7 +65,7 @@ public class DroneAI extends AIController {
             
             if (pUnit.plans().size > 0) {
                 BuildPlan plan = pUnit.plans().first();
-                moveTo(plan.x * 8f, plan.y * 8f, unit.type.buildRange * 0.8f);
+                moveTo(Tmp.v1.set(plan.x * 8f, plan.y * 8f), unit.type.buildRange * 0.8f);
                 unit.addBuild(plan);
             } else {
                 circle(pUnit, unit.type.buildRange / 2f);
