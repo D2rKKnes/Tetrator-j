@@ -997,7 +997,6 @@ public class TerraUnitTypes {
 
         healDrone = new UnitType("healDrone"){{
             flying = true;
-            aiController = DroneAI::new;
             speed = 3.6f;
             drag = 0.02f;
             accel = 0.03f;
