@@ -2,9 +2,10 @@ package terra.ai;
 
 import arc.math.geom.*;
 import arc.util.*;
-import mindustry.entities.units.*;
+import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.world.*;
+import mindustry.entities.units.*;
 
 public class DroneAI extends AIController {
     public Building parent;
@@ -19,7 +20,7 @@ public class DroneAI extends AIController {
     @Override
     public void updateUnit() {
         if (parent == null || !parent.isValid()) {
-            unit.despawn();
+            unit.remove();
             return;
         }
 
@@ -29,7 +30,7 @@ public class DroneAI extends AIController {
             timer = 0;
         }
 
-        if (unit.type.canBuild) {
+        if (unit.type.buildSpeed > 0) {
             handleBuilderLogic();
         } else {
             handleSupportLogic();
@@ -37,10 +38,16 @@ public class DroneAI extends AIController {
     }
 
     void findTargets() {
-        targetPlayer = Groups.player.size() > 0 ? Groups.player.random() : null;
+        targetPlayer = Groups.player.size() > 0 ? Groups.player.getByID(MathUtils.random(Groups.player.size() - 1)) : null;
         
-        targetUnit = Groups.unit.select(u -> u.team == unit.team && u != unit)
-                                .max(u -> u.maxHealth);
+        targetUnit = null;
+        float maxHealth = -1;
+        for (Unit u : Groups.unit) {
+            if (u.team == unit.team && u != unit && u.health > maxHealth) {
+                maxHealth = u.health;
+                targetUnit = u;
+            }
+        }
     }
 
     void handleBuilderLogic() {
@@ -48,7 +55,11 @@ public class DroneAI extends AIController {
             float orbitRadius = unit.type.buildRange / 2f;
             circle(targetPlayer.unit(), orbitRadius);
             
-            unit.plans().addFirst(targetPlayer.unit().plans());
+            if(targetPlayer.unit().plans().size > 0){
+                for(BuildPlan plan : targetPlayer.unit().plans()){
+                    unit.plans().addFirst(plan);
+                }
+            }
             
             if (unit.hasWeapons()) {
                 Unit enemy = Units.closestEnemy(unit.team, unit.x, unit.y, unit.range(), u -> true);
@@ -75,8 +86,9 @@ public class DroneAI extends AIController {
         circle(parent, 40f);
     }
 
-    void circle(Position target, float radius) {
-        Vec2 vec = new Vec2().trns(Time.time * 2f, radius).add(target);
-        moveTo(vec, 10f);
+    @Override
+    public void circle(Position target, float radius) {
+        float angle = Time.time * 2f;
+        moveTo(Tmp.v1.trns(angle, radius).add(target), 10f);
     }
 }
