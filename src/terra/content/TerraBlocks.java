@@ -46,7 +46,7 @@ import static arc.graphics.g2d.Lines.*;
 public class TerraBlocks{
     public static Block
     //walls
-    scrapWallColossol, metaglassWall, metaglassWallLarge, metaglassWallHuge, darkSteelWall, darkSteelWallLarge;
+    scrapWallColossol, metaglassWall, metaglassWallLarge, metaglassWallHuge, darkSteelWall, darkSteelWallLarge,
     //distrubution
 
     //power
@@ -56,7 +56,7 @@ public class TerraBlocks{
     //turrets
 
     //units
-
+    droneCentre;
     //other
     public static void load(){
         scrapWallColossol = new Wall("scrap-wall-colossol"){{
@@ -184,6 +184,12 @@ public class TerraBlocks{
             autoRegeneration = true;
             regenStartDelay = 150f;
             regenDamageStop = true;
+        }};
+
+        droneCentre = new Wall("drone-centre"){{
+            requirements(Category.defense, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
+            size = 2;
+            droneTypes.addAll(TerraUnitTypes.healDrone);
         }};
     }
 }
