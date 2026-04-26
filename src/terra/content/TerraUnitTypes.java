@@ -37,7 +37,9 @@ import static mindustry.Vars.*;
 public class TerraUnitTypes {
     public static UnitType
     //flying special units
-    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity;
+    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
+    //drones
+    healDrone;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -989,6 +991,32 @@ public class TerraUnitTypes {
                         status = TerraStatusEffects.singularEvaporation;
                         statusDuration = 180f;
                     }};
+                }};
+            }});
+        }};
+
+        healDrone = new UnitType("healDrone"){{
+            flying = true;
+            aiController = DroneAI::new;
+            speed = 3.6f;
+            drag = 0.02f;
+            accel = 0.03f;
+            hitSize = 8f;
+            health = 600;
+            engineSize = 1.75f;
+            engineOffset = 5.5f;
+            itemCapacity = 0;
+            fallSpeed = 0.06f;
+            constructor = UnitEntity::create;
+
+            weapons.add(new RepairBeamWeapon(){{
+                mirror = false;
+                shootY = x = y = 0f;
+                beamWidth = 0.6f;
+                repairSpeed = 0.7f;
+
+                bullet = new BulletType(){{
+                    maxRange = 7.5f * 8;
                 }};
             }});
         }};
