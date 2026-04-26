@@ -6,14 +6,13 @@ import arc.util.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.entities.units.*;
+import mindustry.content.*;
 
 public class DroneAI extends AIController {
     public Building parent;
     public Unit targetUnit;
     public Player targetPlayer;
     public float timer = 0;
-    
-    public float rotation = 0;
 
     public DroneAI(Building parent) {
         this.parent = parent;
@@ -48,11 +47,16 @@ public class DroneAI extends AIController {
     }
 
     void findTargets() {
-        int pSize = Groups.player.size();
-        targetPlayer = pSize > 0 ? Groups.player.indexAt(MathUtils.random(pSize - 1)) : null;
+        targetPlayer = Groups.player.size() > 0 ? Groups.player.first() : null;
 
-        targetUnit = Groups.unit.select(u -> u.team == unit.team && u != unit)
-                                .max(u -> u.maxHealth);
+        targetUnit = null;
+        float maxH = -1;
+        for(Unit u : Groups.unit){
+            if(u.team == unit.team && u != unit && u.maxHealth > maxH){
+                maxH = u.maxHealth;
+                targetUnit = u;
+            }
+        }
     }
 
     void handleBuilderLogic() {
@@ -61,7 +65,7 @@ public class DroneAI extends AIController {
             
             if (pUnit.plans().size > 0) {
                 BuildPlan plan = pUnit.plans().first();
-                moveTo(plan.x * 8, plan.y * 8, unit.type.buildRange * 0.8f);
+                moveTo(plan.worldx(), plan.worldy(), unit.type.buildRange * 0.8f);
                 unit.addBuild(plan);
             } else {
                 circle(pUnit, unit.type.buildRange / 2f);
