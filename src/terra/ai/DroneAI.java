@@ -1,20 +1,19 @@
 package terra.ai;
 
+import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
-import arc.math.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
-import mindustry.world.*;
 import mindustry.entities.units.*;
-import java.util.Random;
 
 public class DroneAI extends AIController {
     public Building parent;
     public Unit targetUnit;
     public Player targetPlayer;
     public float timer = 0;
-    private static final Random rand = new Random();
+    
+    public float rotation = 0;
 
     public DroneAI(Building parent) {
         this.parent = parent;
@@ -23,12 +22,13 @@ public class DroneAI extends AIController {
     @Override
     public void updateUnit() {
         if (parent == null || !parent.isValid()) {
+            Fx.unitDespawn.at(unit.x, unit.y, 0f, unit.type);
             unit.remove();
             return;
         }
 
         timer += Time.delta;
-        if (timer >= 10f || targetPlayer == null || (targetUnit != null && !targetUnit.isValid())) {
+        if (timer >= 300f || !isTargetValid()) {
             findTargets();
             timer = 0;
         }
@@ -38,43 +38,33 @@ public class DroneAI extends AIController {
         } else {
             handleSupportLogic();
         }
+        
+        unit.lookAt(unit.vel.angle());
+    }
+
+    boolean isTargetValid() {
+        if (unit.type.buildSpeed > 0) return targetPlayer != null && targetPlayer.unit() != null && targetPlayer.unit().isValid();
+        return targetUnit != null && targetUnit.isValid();
     }
 
     void findTargets() {
         int pSize = Groups.player.size();
-        if (pSize > 0) {
-            int targetIndex = rand.nextInt(pSize);
-            int current = 0;
-            for (Player p : Groups.player) {
-                if (current == targetIndex) {
-                    targetPlayer = p;
-                    break;
-                }
-                current++;
-            }
-        } else {
-            targetPlayer = null;
-        }
-        
-        targetUnit = null;
-        float maxHealth = -1;
-        for (Unit u : Groups.unit) {
-            if (u.team == unit.team && u != unit && u.health > maxHealth) {
-                maxHealth = u.health;
-                targetUnit = u;
-            }
-        }
+        targetPlayer = pSize > 0 ? Groups.player.indexAt(MathUtils.random(pSize - 1)) : null;
+
+        targetUnit = Groups.unit.select(u -> u.team == unit.team && u != unit)
+                                .max(u -> u.maxHealth);
     }
 
     void handleBuilderLogic() {
         if (targetPlayer != null && targetPlayer.unit() != null) {
-            float orbitRadius = unit.type.buildRange / 2f;
-            circle(targetPlayer.unit(), orbitRadius);
+            Unit pUnit = targetPlayer.unit();
             
-            if(targetPlayer.unit().plans().size > 0){
-                for(BuildPlan plan : targetPlayer.unit().plans()){
-                    unit.plans().addFirst(plan);
-                }
+            if (pUnit.plans().size > 0) {
+                BuildPlan plan = pUnit.plans().first();
+                moveTo(plan.x * 8, plan.y * 8, unit.type.buildRange * 0.8f);
+                unit.addBuild(plan);
+            } else {
+                circle(pUnit, unit.type.buildRange / 2f);
             }
             
             if (unit.hasWeapons()) {
@@ -90,9 +80,8 @@ public class DroneAI extends AIController {
     }
 
     void handleSupportLogic() {
-        if (targetUnit != null && targetUnit.isValid()) {
-            float orbitRadius = targetUnit.hitSize + 40f; 
-            circle(targetUnit, orbitRadius);
+        if (targetUnit != null) {
+            circle(targetUnit, targetUnit.hitSize + 40f);
         } else {
             orbitParent();
         }
@@ -104,7 +93,7 @@ public class DroneAI extends AIController {
 
     @Override
     public void circle(Position target, float radius) {
-        float angle = Time.time * 2f;
+        float angle = (Time.time * 2f) + (unit.id * 50); 
         moveTo(Tmp.v1.trns(angle, radius).add(target.getX(), target.getY()), 0f);
     }
 }
