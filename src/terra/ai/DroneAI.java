@@ -1,18 +1,20 @@
 package terra.ai;
 
-import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
+import arc.math.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.world.*;
 import mindustry.entities.units.*;
+import java.util.Random;
 
 public class DroneAI extends AIController {
     public Building parent;
     public Unit targetUnit;
     public Player targetPlayer;
     public float timer = 0;
+    private static final Random rand = new Random();
 
     public DroneAI(Building parent) {
         this.parent = parent;
@@ -26,7 +28,7 @@ public class DroneAI extends AIController {
         }
 
         timer += Time.delta;
-        if (timer >= 10f || targetPlayer == null || targetUnit == null) {
+        if (timer >= 120f || targetPlayer == null || (targetUnit != null && !targetUnit.isValid())) {
             findTargets();
             timer = 0;
         }
@@ -39,7 +41,8 @@ public class DroneAI extends AIController {
     }
 
     void findTargets() {
-        targetPlayer = Groups.player.size() > 0 ? Groups.player.getByID(MathUtils.random(Groups.player.size() - 1)) : null;
+        int pSize = Groups.player.size();
+        targetPlayer = pSize > 0 ? Groups.player.indexAt(rand.nextInt(pSize)) : null;
         
         targetUnit = null;
         float maxHealth = -1;
@@ -90,6 +93,6 @@ public class DroneAI extends AIController {
     @Override
     public void circle(Position target, float radius) {
         float angle = Time.time * 2f;
-        moveTo(Tmp.v1.trns(angle, radius).add(target), 10f);
+        moveTo(Tmp.v1.trns(angle, radius).add(target.getX(), target.getY()), 0f);
     }
 }
