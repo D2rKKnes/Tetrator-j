@@ -47,22 +47,24 @@ public class TerraItems{
             hardness = 5;
         }};
         tesseract = new AdvancedItem("tesseract"){{
-            color = Color.valueOf("ffffff");
+            color = Color.valueOf("000000");
             cost = 40f;
             healthScaling = 5f;
-            threat = 0.8f;
+            threat = 0.6f;
+            
             spawnBulletOnDestroy = true;
             spawnBulletStatsScale = true;
+            spawnBulletChance = 0.1f;
             spawnBullet = new BlackHoleBulletType(0f, 16f){{
-                lifetime = 80f;
+                lifetime = 140f;
                 color = Pal.suppress;
-                damageRadius = 11f;
-                suctionRadius = 33f;
-                growTime = 20f;
-                shrinkTime = 20f;
+                damageRadius = 9f;
+                suctionRadius = 27f;
+                growTime = 14f;
+                shrinkTime = 14f;
                 status = TerraStatusEffects.singularEvaporation;
                 loopSoundVolume = 0.8f;
-                statusDuration = 180f;
+                statusDuration = 120f;
                 keepVelocity = false;
                 intervalBullets = 1;
                 bulletInterval = 1f;
@@ -73,11 +75,14 @@ public class TerraItems{
                     instantDisappear = true;
                     shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                     splashDamage = 0.001f;
-                    splashDamageRadius = 11f;
+                    splashDamageRadius = 9f;
                     status = TerraStatusEffects.singularEvaporation;
-                    statusDuration = 180f;
+                    statusDuration = 120f;
                 }};
             }};
+            damageContainer = true;
+            damage = 2.3f;
+            damageRand = 0.9f;
         }};
     }
 }
