@@ -3,13 +3,14 @@ package terra.content;
 import arc.graphics.*;
 import arc.struct.Seq;
 import mindustry.type.*;
+import blackhole.entities.bullet.BlackHoleBulletType;
 
 import static mindustry.content.Items.*;
 
 public class TerraItems{
     public static Item
 
-            carbon, diamondDust, cryotite, darkSteel, rawThermoxite, thermoxite;
+            carbon, diamondDust, cryotite, darkSteel, rawThermoxite, thermoxite, tesseract;
 
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
@@ -36,6 +37,39 @@ public class TerraItems{
         thermoxite = new Item("thermoxite", Color.valueOf("e13131")){{
             cost = 1.5f;
             hardness = 5;
+        }};
+        tesseract = new AdvancedItem("tesseract"){{
+            color = Color.valueOf("ffffff")
+            cost = 40f;
+            healthScaling = 5f;
+            threat = 0.8f;
+            spawnBulletOnDestroy = true;
+            spawnBulletStatsScale = true;
+            spawnBullet = = new BlackHoleBulletType(0f, 16f){{
+                lifetime = 80f;
+                color = Pal.suppress;
+                damageRadius = 11f;
+                suctionRadius = 33f;
+                growTime = 20f;
+                shrinkTime = 20f;
+                status = TerraStatusEffects.singularEvaporation;
+                loopSoundVolume = 0.8f;
+                statusDuration = 180f;
+                keepVelocity = false;
+                intervalBullets = 1;
+                bulletInterval = 1f;
+                intervalBullet = new BulletType(){{
+                    speed = 0f;
+                    damage = 0f;
+                    lifetime = 0f;
+                    instantDisappear = true;
+                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                    splashDamage = 0.001f;
+                    splashDamageRadius = 11f;
+                    status = TerraStatusEffects.singularEvaporation;
+                    statusDuration = 180f;
+                }};
+            }};
         }};
     }
 }
