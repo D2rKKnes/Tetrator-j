@@ -13,7 +13,7 @@ import mindustry.type.*;
 import mindustry.world.meta.*;
 
 public class AdvancedItem extends Item {
-    public static final Stat hitChance = new Stat("statthreat", StatCat.function);
+    public static final Stat statthreat = new Stat("statthreat", StatCat.function);
 
     public float threat = -1;
     public boolean showThreat = true;
