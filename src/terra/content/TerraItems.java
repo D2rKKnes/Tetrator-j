@@ -1,9 +1,17 @@
 package terra.content;
 
+import terra.type.*;
 import arc.graphics.*;
 import arc.struct.Seq;
 import mindustry.type.*;
 import blackhole.entities.bullet.BlackHoleBulletType;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.type.ammo.*;
+import mindustry.type.unit.*;
+import mindustry.type.weapons.*;
+import mindustry.world.meta.*;
+import blackhole.entities.bullet.*;
 
 import static mindustry.content.Items.*;
 
