@@ -57,7 +57,7 @@ public class AdvancedItem extends Item {
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.items != null && e.tile.build.items != null){
+            if(spawnBulletOnDestroy && e.tile.build != null && e.tile.build.items != null){
                 int amount = e.tile.build.items.get(this);
                 if(amount > 0) spawnBullet(e.tile.build, amount);
             }
