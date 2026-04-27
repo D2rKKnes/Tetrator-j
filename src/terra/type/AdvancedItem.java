@@ -45,7 +45,7 @@ public class AdvancedItem extends Item {
                 }
             });
 
-            Groups.build.each(b -> b.items.has(this), b -> {
+            Groups.build.each(b -> b.items != null && b.items.has(this), b -> {
                 if(Mathf.chance(getChance(damageChance, b.items.get(this), damageChanceMul))){
                     applyDamage(b, b.block.size * 4f);
                 }
@@ -57,7 +57,7 @@ public class AdvancedItem extends Item {
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.tile.build.items != null){
+            if(spawnBulletOnDestroy && b.items != null && e.tile.build.items != null){
                 int amount = e.tile.build.items.get(this);
                 if(amount > 0) spawnBullet(e.tile.build, amount);
             }
