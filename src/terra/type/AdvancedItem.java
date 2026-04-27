@@ -51,9 +51,7 @@ public class AdvancedItem extends Item {
         });
 
         Events.on(UnitDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.unit.stack.item == this){
-                spawnBullet(e.unit, e.unit.stack.amount);
-            }
+            if(spawnBulletOnDestroy && e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
@@ -82,9 +80,8 @@ public class AdvancedItem extends Item {
         
         entity.damage(fDamage);
 
-        if (damageEffect != null) {
-            entity.as(Posc.class);
-            damageEffect.at(entity.getX() + Mathf.range(hitSize), entity.getY() + Mathf.range(hitSize), color);
+        if (damageEffect != null && entity instanceof Posc p) {
+            damageEffect.at(p.getX() + Mathf.range(hitSize), p.getY() + Mathf.range(hitSize), color);
         }
     }
 
