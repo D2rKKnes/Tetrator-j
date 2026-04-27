@@ -1,16 +1,15 @@
 package terra.type;
 
-import arc.Events;
-import arc.graphics.Color;
-import arc.math.Mathf;
-import arc.util.Strings;
-import mindustry.entities.bullet.BulletType;
+import arc.*;
+import arc.graphics.*;
+import arc.math.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.entities.bullet.*;
 import mindustry.game.EventType.*;
-import mindustry.gen.Building;
-import mindustry.gen.Unit;
-import mindustry.type.Item;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.meta.*;
 
 public class AdvancedItem extends Item {
     public float threat = -1;
@@ -33,38 +32,33 @@ public class AdvancedItem extends Item {
 
     public AdvancedItem(String name) {
         super(name);
-        
-        Events.on(UnitUpdateEvent.class, e -> {
-            if (e.unit.stack.item == this) updateUnit(e.unit, e.unit.stack.amount);
+
+        Events.run(Trigger.update, () -> {
+            if(!damageContainer) return;
+            Groups.unit.each(u -> {
+                if(u.stack.item == this){
+                    updateUnit(u, u.stack.amount);
+                }
+            });
         });
-        
+
         Events.on(UnitDestroyEvent.class, e -> {
-            if (e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
+            if(spawnBulletOnDestroy && e.unit.stack.item == this){
+                spawnBullet(e.unit, e.unit.stack.amount);
+            }
         });
     }
 
     @Override
     public void init() {
+        super.init();
         if (threat == -1) threat = (explosiveness / 2f) + (flammability / 4f) + (radioactivity / 6f) + (charge / 8f);
         if (threatMul == -1) threatMul = Mathf.pow(threat * 2.1f, 2f);
     }
 
-    @Override
-    public void update(Building build, int amount) {
-        if (damageContainer && Mathf.chance(getChance(damageChance, amount, damageChanceMul))) {
-            applyDamage(build, amount);
-        }
-    }
-
-    @Override
-    public void onRemoved(Building build, int amount) {
-        if (spawnBulletOnDestroy) spawnBullet(build, amount);
-    }
-
-    // Логика для юнитов
     public void updateUnit(Unit unit, int amount) {
-        if (damageContainer && Mathf.chance(getChance(damageChance, amount, damageChanceMul))) {
-            applyDamage(unit, amount);
+        if (Mathf.chance(getChance(damageChance, amount, damageChanceMul))) {
+            applyDamage(unit, unit.hitSize);
         }
     }
 
@@ -73,23 +67,23 @@ public class AdvancedItem extends Item {
         return mul ? c * threatMul : c;
     }
 
-    private void applyDamage(mindustry.gen.Healthc entity, int amount) {
+    private void applyDamage(Healthc entity, float hitSize) {
         float fDamage = damage + Mathf.range(damageRand);
         if (damagePercent) fDamage = (fDamage / 100f) * entity.maxHealth();
         
         entity.damage(fDamage);
 
         if (damageEffect != null) {
-            float size = (entity instanceof Building b) ? b.block.size * 4f : ((Unit)entity).hitSize;
-            damageEffect.at(entity.x() + Mathf.range(size), entity.y() + Mathf.range(size), color);
+            damageEffect.at(entity.x() + Mathf.range(hitSize), entity.y() + Mathf.range(hitSize), color);
         }
     }
 
-    private void spawnBullet(mindustry.gen.Positionc pos, int amount) {
+    private void spawnBullet(Posc pos, int amount) {
         if (spawnBullet == null) return;
         if (Mathf.chance(getChance(spawnBulletChance, amount, spawnBulletChanceMul))) {
             float dmg = spawnBulletStatsScale ? threatMul : 1f;
-            spawnBullet.create(null, (pos instanceof mindustry.gen.Teamc t) ? t.team() : mindustry.game.Team.derelict, pos.getX(), pos.getY(), Mathf.random(360f), dmg, 1f);
+            Team team = (pos instanceof Teamc t) ? t.team() : Team.derelict;
+            spawnBullet.create(null, team, pos.getX(), pos.getY(), Mathf.random(360f), dmg, 1f);
         }
     }
 
@@ -101,7 +95,7 @@ public class AdvancedItem extends Item {
             stats.add(Stat.health, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "% (Threat)[]");
         }
         if (damageContainer && damage > 0) {
-            stats.add(Stat.damage, (damagePercent ? damage + "%" : damage), StatUnit.perSecond);
+            stats.add(Stat.damage, "{0}{1}", damage, (damagePercent ? "%" : ""));
         }
     }
 }
