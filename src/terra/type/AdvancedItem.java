@@ -102,7 +102,7 @@ public class AdvancedItem extends Item {
         super.setStats();
         if (showThreat && threat >= 0) {
             Color tCol = Color.white.cpy().lerp(Color.red, Mathf.clamp(threat));
-            stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "% (Threat)[]");
+            stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "%[]");
         }
         if (damageContainer && damage > 0) {
             stats.add(Stat.damage, "{0}{1}", damage, (damagePercent ? "%" : ""));
