@@ -7,6 +7,7 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.entities.bullet.*;
 import mindustry.game.EventType.*;
+import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
@@ -34,10 +35,17 @@ public class AdvancedItem extends Item {
         super(name);
 
         Events.run(Trigger.update, () -> {
-            if(!damageContainer) return;
-            Groups.unit.each(u -> {
-                if(u.stack.item == this){
-                    updateUnit(u, u.stack.amount);
+            if(!damageContainer || Vars.state.isPaused()) return;
+
+            Groups.unit.each(u -> u.stack.item == this, u -> {
+                if(Mathf.chance(getChance(damageChance, u.stack.amount, damageChanceMul))){
+                    applyDamage(u, u.hitSize);
+                }
+            });
+
+            Groups.build.each(b -> b.items != null && b.items.has(this), b -> {
+                if(Mathf.chance(getChance(damageChance, b.items.get(this), damageChanceMul))){
+                    applyDamage(b, b.block.size * 4f);
                 }
             });
         });
@@ -47,6 +55,13 @@ public class AdvancedItem extends Item {
                 spawnBullet(e.unit, e.unit.stack.amount);
             }
         });
+        
+        Events.on(BlockDestroyEvent.class, e -> {
+            if(spawnBulletOnDestroy && e.tile.build != null && e.tile.build.items != null){
+                int amount = e.tile.build.items.get(this);
+                if(amount > 0) spawnBullet(e.tile.build, amount);
+            }
+        });
     }
 
     @Override
@@ -54,12 +69,6 @@ public class AdvancedItem extends Item {
         super.init();
         if (threat == -1) threat = (explosiveness / 2f) + (flammability / 4f) + (radioactivity / 6f) + (charge / 8f);
         if (threatMul == -1) threatMul = Mathf.pow(threat * 2.1f, 2f);
-    }
-
-    public void updateUnit(Unit unit, int amount) {
-        if (Mathf.chance(getChance(damageChance, amount, damageChanceMul))) {
-            applyDamage(unit, unit.hitSize);
-        }
     }
 
     private float getChance(float base, int amount, boolean mul) {
@@ -74,7 +83,8 @@ public class AdvancedItem extends Item {
         entity.damage(fDamage);
 
         if (damageEffect != null) {
-            damageEffect.at(entity.x() + Mathf.range(hitSize), entity.y() + Mathf.range(hitSize), color);
+            entity.as(Posc.class);
+            damageEffect.at(entity.getX() + Mathf.range(hitSize), entity.getY() + Mathf.range(hitSize), color);
         }
     }
 
