@@ -59,11 +59,26 @@ public class DroneCentre extends Block {
         public Seq<Unit> spawnedDrones = new Seq<>();
         public int readUnitId = -1;
 
+        public void spawnDrone() {
+            DronePlan plan = plans.get(currentPlan);
+            Unit unit = plan.unit.create(team);
+            unit.set(x, y);
+
+            if(unit instanceof BuildingTetherc bt) {
+                bt.building(this);
+            }
+
+            unit.controller(new DroneAI(this));
+            unit.add();
+            spawnedDrones.add(unit);
+        
+            mindustry.content.Fx.unitSpawn.at(this);
+        }
+
         public void despawnDrones() {
             spawnedDrones.each(u -> {
                 if (u instanceof BuildingTetherc bt) {
                     bt.building(null);
-                    u.capLimit();
                 }
             });
             spawnedDrones.clear();
@@ -80,7 +95,7 @@ public class DroneCentre extends Block {
 
             if (currentPlan != -1 && spawnedDrones.size < droneMax && enabled) {
                 float time = individualConstructTime ? plans.get(currentPlan).time : droneConstructTime;
-                
+        
                 progress += edelta() / time;
                 totalProgress += edelta();
 
@@ -88,10 +103,13 @@ public class DroneCentre extends Block {
                     if(!net.client()){
                         Unit unit = plans.get(currentPlan).unit.create(team);
                         unit.set(x, y);
+                
+                        if(unit instanceof BuildingTetherc bt) bt.building(this);
+                
                         unit.controller(new DroneAI(this));
                         unit.add();
                         spawnedDrones.add(unit);
-                        
+                
                         Call.unitTetherBlockSpawned(tile, unit.id);
                     }
                     progress = 0;
