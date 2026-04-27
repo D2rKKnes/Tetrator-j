@@ -106,7 +106,7 @@ public class AdvancedItem extends Item {
             stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "%[]");
         }
         if (damageContainer && damage > 0) {
-            stats.add(Stat.damage, damage, (damagePercent ? "%" : ""));
+            stats.add(Stat.damage, damage);
         }
     }
 }
