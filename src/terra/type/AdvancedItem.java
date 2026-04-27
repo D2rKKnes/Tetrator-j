@@ -24,7 +24,6 @@ public class AdvancedItem extends Item {
     public boolean spawnBulletChanceMul = true;
     public BulletType spawnBullet;
     public boolean spawnBulletStatsScale = false;
-    public boolean spawnBulletTeam = false;
 
     public boolean damageContainer = false;
     public float damageChance = 0.1f / 60f;
@@ -93,8 +92,7 @@ public class AdvancedItem extends Item {
         if (spawnBullet == null) return;
         if (Mathf.chance(getChance(spawnBulletChance, amount, spawnBulletChanceMul))) {
             float dmg = spawnBulletStatsScale ? threatMul : 1f;
-            Team team = (spawnBulletTeam) ? t.team() : Team.derelict;
-            spawnBullet.create(null, team, pos.getX(), pos.getY(), Mathf.random(360f), dmg, 1f);
+            spawnBullet.create(null, Team.derelict, pos.getX(), pos.getY(), Mathf.random(360f), dmg, 1f);
         }
     }
 
