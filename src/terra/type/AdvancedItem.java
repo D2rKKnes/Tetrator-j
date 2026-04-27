@@ -80,7 +80,8 @@ public class AdvancedItem extends Item {
         
         entity.damage(fDamage);
 
-        if (damageEffect != null && entity instanceof Posc p) {
+        if (damageEffect != null) {
+            Posc p = (Posc)entity;
             damageEffect.at(p.getX() + Mathf.range(hitSize), p.getY() + Mathf.range(hitSize), color);
         }
     }
