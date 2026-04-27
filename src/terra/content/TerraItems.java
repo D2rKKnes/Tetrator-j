@@ -84,6 +84,7 @@ public class TerraItems{
             damage = 12.3f;
             damageRand = 6.7f;
             damagePercent = false;
+            damageEffect = Fx.circleColorSpark;
         }};
     }
 }
