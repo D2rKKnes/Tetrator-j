@@ -24,6 +24,7 @@ public class AdvancedItem extends Item {
     public boolean spawnBulletChanceMul = true;
     public BulletType spawnBullet;
     public boolean spawnBulletStatsScale = false;
+    public boolean spawnBulletTeam = false;
 
     public boolean damageContainer = false;
     public float damageChance = 0.1f / 60f;
@@ -45,7 +46,7 @@ public class AdvancedItem extends Item {
                 }
             });
 
-            Groups.build.each(b -> b.items != null && b.items.has(this), b -> {
+            Groups.build.each(b.items.has(this), b -> {
                 if(Mathf.chance(getChance(damageChance, b.items.get(this), damageChanceMul))){
                     applyDamage(b, b.block.size * 4f);
                 }
@@ -57,7 +58,7 @@ public class AdvancedItem extends Item {
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.tile.build != null && e.tile.build.items != null){
+            if(spawnBulletOnDestroy && e.tile.build.items != null){
                 int amount = e.tile.build.items.get(this);
                 if(amount > 0) spawnBullet(e.tile.build, amount);
             }
@@ -72,7 +73,7 @@ public class AdvancedItem extends Item {
     }
 
     private float getChance(float base, int amount, boolean mul) {
-        float c = base + (threat / 50f * amount);
+        float c = base + ((threat / 50f * amount) / 60f);
         return mul ? c * threatMul : c;
     }
 
@@ -92,7 +93,7 @@ public class AdvancedItem extends Item {
         if (spawnBullet == null) return;
         if (Mathf.chance(getChance(spawnBulletChance, amount, spawnBulletChanceMul))) {
             float dmg = spawnBulletStatsScale ? threatMul : 1f;
-            Team team = (pos instanceof Teamc t) ? t.team() : Team.derelict;
+            Team team = (spawnBulletTeam) ? t.team() : Team.derelict;
             spawnBullet.create(null, team, pos.getX(), pos.getY(), Mathf.random(360f), dmg, 1f);
         }
     }
@@ -105,7 +106,7 @@ public class AdvancedItem extends Item {
             stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "%[]");
         }
         if (damageContainer && damage > 0) {
-            stats.add(Stat.damage, "{0}{1}", damage, (damagePercent ? "%" : ""));
+            stats.add(Stat.damage, damage, (damagePercent ? "%" : ""));
         }
     }
 }
