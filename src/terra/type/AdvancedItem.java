@@ -45,7 +45,7 @@ public class AdvancedItem extends Item {
                 }
             });
 
-            Groups.build.each(b.items.has(this), b -> {
+            Groups.build.each(b -> b.items.has(this), b -> {
                 if(Mathf.chance(getChance(damageChance, b.items.get(this), damageChanceMul))){
                     applyDamage(b, b.block.size * 4f);
                 }
