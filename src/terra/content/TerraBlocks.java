@@ -186,13 +186,10 @@ public class TerraBlocks{
             regenDamageStop = true;
         }};
 
-        droneCentre = new DroneCentre("drone-centre"){{
+        /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             health = 480;
             size = 2;
-            drones.addAll(
-                new DroneEntry(TerraUnitTypes.healDrone)
-            );
-        }};
+        }};*/
     }
 }
