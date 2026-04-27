@@ -39,13 +39,13 @@ public class TerraItems{
             hardness = 5;
         }};
         tesseract = new AdvancedItem("tesseract"){{
-            color = Color.valueOf("ffffff")
+            color = Color.valueOf("ffffff");
             cost = 40f;
             healthScaling = 5f;
             threat = 0.8f;
             spawnBulletOnDestroy = true;
             spawnBulletStatsScale = true;
-            spawnBullet = = new BlackHoleBulletType(0f, 16f){{
+            spawnBullet = new BlackHoleBulletType(0f, 16f){{
                 lifetime = 80f;
                 color = Pal.suppress;
                 damageRadius = 11f;
