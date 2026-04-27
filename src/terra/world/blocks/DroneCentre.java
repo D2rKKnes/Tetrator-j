@@ -61,8 +61,9 @@ public class DroneCentre extends Block {
 
         public void despawnDrones() {
             spawnedDrones.each(u -> {
-                if (u != null) {
-                    u.constructor = tether.null::create;
+                if (u instanceof BuildingTetherc bt) {
+                    bt.building(null);
+                    u.capLimit();
                 }
             });
             spawnedDrones.clear();
