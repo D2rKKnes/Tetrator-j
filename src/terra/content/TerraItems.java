@@ -81,8 +81,9 @@ public class TerraItems{
                 }};
             }};
             damageContainer = true;
-            damage = 2.3f;
-            damageRand = 0.9f;
+            damage = 12.3f;
+            damageRand = 6.7f;
+            damagePercent = false;
         }};
     }
 }
