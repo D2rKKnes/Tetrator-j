@@ -13,6 +13,8 @@ import mindustry.type.*;
 import mindustry.world.meta.*;
 
 public class AdvancedItem extends Item {
+    public static final Stat hitChance = new Stat("statthreat", StatCat.function);
+
     public float threat = -1;
     public boolean showThreat = true;
     public float threatMul = -1;
@@ -100,7 +102,7 @@ public class AdvancedItem extends Item {
         super.setStats();
         if (showThreat && threat >= 0) {
             Color tCol = Color.white.cpy().lerp(Color.red, Mathf.clamp(threat));
-            stats.add(Stat.health, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "% (Threat)[]");
+            stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "% (Threat)[]");
         }
         if (damageContainer && damage > 0) {
             stats.add(Stat.damage, "{0}{1}", damage, (damagePercent ? "%" : ""));
