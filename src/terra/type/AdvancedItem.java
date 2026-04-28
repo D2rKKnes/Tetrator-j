@@ -39,7 +39,7 @@ public class AdvancedItem extends Item {
         Events.run(Trigger.update, () -> {
             if(!damageContainer || Vars.state.isPaused()) return;
 
-            Groups.unit.each(u -> u.stack.item == this, u -> {
+            Groups.unit.each(u -> u.stack.item != null && u.stack.item == this, u -> {
                 if(Mathf.chance(getChance(damageChance, u.stack.amount, damageChanceMul))){
                     applyDamage(u, u.hitSize);
                 }
@@ -53,7 +53,7 @@ public class AdvancedItem extends Item {
         });
 
         Events.on(UnitDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
+            if(spawnBulletOnDestroy && e.stack.item != null && e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
@@ -104,7 +104,7 @@ public class AdvancedItem extends Item {
             stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 0) + "%[]");
         }
         if (damageContainer && damage > 0) {
-            stats.add(Stat.damage, (damage - damageRand) + "-" + (damage + damageRand));
+            stats.add(Stat.damage, Strings.fixed((damage - damageRand), 1) + "-" + Strings.fixed((damage + damageRand), 1));
         }
     }
 }
