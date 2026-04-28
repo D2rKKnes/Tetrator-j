@@ -215,7 +215,7 @@ public class TerraBlocks{
             );
             results = with(
                 TerraItems.carbone, 17,
-                Items.graphite, 3,
+                Items.graphite, 3
             );
         }};
 
