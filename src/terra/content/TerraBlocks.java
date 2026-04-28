@@ -2,6 +2,7 @@ package terra.content;
 
 import terra.type.bullet.*;
 import terra.world.blocks.*;
+import terra.world.meta.*;
 import arc.util.Tmp;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
@@ -193,11 +194,12 @@ public class TerraBlocks{
         mechanicalWell = new AttributeSeparator("mechanical-well"){{
             requirements(Category.production, with(Items.graphite, 25, Items.titanium, 40));
             size = 2;
-            craftTime = 135
+            craftTime = 135f;
             minEfficiency = 0.1f;
             baseEfficiency = 0f;
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.02f;
+            attribute = TerraAttributes.carbon;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawRegion("-rotator"){{
