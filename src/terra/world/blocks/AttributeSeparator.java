@@ -5,6 +5,7 @@ import arc.util.io.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
+import mindustry.world.consumers.*;
 import mindustry.world.blocks.production.AttributeCrafter;
 
 public class AttributeSeparator extends AttributeCrafter {
@@ -36,6 +37,7 @@ public class AttributeSeparator extends AttributeCrafter {
     @Override
     public void init(){
         super.init();
+        consItems = findConsumer(c -> c instanceof ConsumeItems);
     }
 
     public class AttributeSeparatorBuild extends AttributeCrafterBuild {
@@ -48,28 +50,35 @@ public class AttributeSeparator extends AttributeCrafter {
         }
 
         @Override
+        public boolean shouldConsume(){
+            int total = items.total();
+            if(consItems != null){
+                for(ItemStack stack : consItems.items) total -= items.get(stack.item);
+            }
+            return total < itemCapacity && enabled;
+        }
+
+        @Override
         public void craft(){
+            int sum = 0;
+            for(ItemStack stack : results) sum += stack.amount;
+
+            int i = Mathf.randomSeed(seed++, 0, sum - 1);
+            int count = 0;
+            Item item = null;
+
+            for(ItemStack stack : results){
+                if(i >= count && i < count + stack.amount){
+                    item = stack.item;
+                    break;
+                }
+                count += stack.amount;
+            }
+
             consume();
 
-            if(results != null && results.length > 0){
-                int sum = 0;
-                for(ItemStack stack : results) sum += stack.amount;
-
-                int i = Mathf.randomSeed(seed++, 0, sum - 1);
-                int count = 0;
-                Item item = null;
-
-                for(ItemStack stack : results){
-                    if(i >= count && i < count + stack.amount){
-                        item = stack.item;
-                        break;
-                    }
-                    count += stack.amount;
-                }
-
-                if(item != null && items.get(item) < itemCapacity){
-                    offload(item);
-                }
+            if(item != null && items.get(item) < itemCapacity){
+                offload(item);
             }
 
             if(craftEffect != null) craftEffect.at(x, y);
