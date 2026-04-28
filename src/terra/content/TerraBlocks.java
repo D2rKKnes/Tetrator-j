@@ -71,9 +71,9 @@ public class TerraBlocks{
             size = 1;
             hitBullet = new BasicBulletType(){{
                 damage = 21f;
-                lifetime = 30f;
-                width = 12f;
-                height = 26f;
+                lifetime = 20f;
+                width = 8f;
+                height = 14f;
                 shrinkY = 0.4f;
                 shrinkX = 1f;
                 speed = 2f;
@@ -105,9 +105,9 @@ public class TerraBlocks{
             size = 2;
             hitBullet = new BasicBulletType(){{
                 damage = 21f;
-                lifetime = 30f;
-                width = 12f;
-                height = 26f;
+                lifetime = 25f;
+                width = 10f;
+                height = 18f;
                 shrinkY = 0.4f;
                 shrinkX = 1f;
                 speed = 2f;
@@ -141,7 +141,7 @@ public class TerraBlocks{
                 damage = 21f;
                 lifetime = 30f;
                 width = 12f;
-                height = 26f;
+                height = 22f;
                 shrinkY = 0.4f;
                 shrinkX = 1f;
                 speed = 2f;
@@ -173,6 +173,7 @@ public class TerraBlocks{
             size = 2;
             absorbLasers = true;
             autoRegeneration = true;
+            regenAmount = 0.012f / 60f;
             regenStartDelay = 150f;
             regenDamageStop = true;
         }};
@@ -182,6 +183,7 @@ public class TerraBlocks{
             size = 3;
             absorbLasers = true;
             autoRegeneration = true;
+            regenAmount = 0.012f / 60f;
             regenStartDelay = 150f;
             regenDamageStop = true;
         }};
