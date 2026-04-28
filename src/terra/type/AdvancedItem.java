@@ -53,7 +53,7 @@ public class AdvancedItem extends Item {
         });
 
         Events.on(UnitDestroyEvent.class, e -> {
-            if(spawnBulletOnDestroy && e.stack.item != null && e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
+            if(spawnBulletOnDestroy && e.unit.stack.item != null && e.unit.stack.item == this) spawnBullet(e.unit, e.unit.stack.amount);
         });
         
         Events.on(BlockDestroyEvent.class, e -> {
