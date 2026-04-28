@@ -37,7 +37,7 @@ public class AttributeSeparator extends AttributeCrafter {
     @Override
     public void init(){
         super.init();
-        consItems = findConsumer(c -> c instanceof ConsumeItems);
+        consItems = (ConsumeItems)findConsumer(c -> c instanceof ConsumeItems);
     }
 
     public class AttributeSeparatorBuild extends AttributeCrafterBuild {
@@ -52,8 +52,8 @@ public class AttributeSeparator extends AttributeCrafter {
         @Override
         public boolean shouldConsume(){
             int total = items.total();
-            if(consItems != null){
-                for(ItemStack stack : consItems.items) total -= items.get(stack.item);
+            if(AttributeSeparator.this.consItems != null){
+                for(ItemStack stack : AttributeSeparator.this.consItems.items) total -= items.get(stack.item);
             }
             return total < itemCapacity && enabled;
         }
