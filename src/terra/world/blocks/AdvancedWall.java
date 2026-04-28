@@ -57,7 +57,7 @@ public class AdvancedWall extends Wall {
         if (autoRegeneration && regenAmount > 0) {
             float displayRegen = regenAmount * 60f * 100;
             String sign = regenPercent ? "%" : Core.bundle.get("stat.health");
-            stats.add(Stat.repairSpeed, displayRegen + sign, StatUnit.perSecond);
+            stats.add(Stat.repairSpeed, displayRegen + sign + StatUnit.perSecond);
         }
     }
 
