@@ -214,7 +214,7 @@ public class TerraBlocks{
                 new DrawRegion("-top")
             );
             results = with(
-                TerraItems.carbone, 17,
+                TerraItems.carbon, 17,
                 Items.graphite, 3
             );
         }};
