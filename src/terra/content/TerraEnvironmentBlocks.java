@@ -2,6 +2,7 @@ package terra.content;
 
 
 import terra.content.TerraItems;
+import terra.world.meta.*;
 import mindustry.content.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.CacheLayer;
@@ -17,6 +18,8 @@ public class TerraEnvironmentBlocks {
         carbonizedThermoxite, thermoxiteCrystal, oreRawThermoxite, oreThermoxite;
 
     public static void load() {
+        Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
+        Blocks.redIce.attributes.set(TerraAttributes.ice, 0.25f);
         largeTree = new TreeBlock("large-tree");
         iceBoulder = new Prop("ice-boulder") {{
             variants = 3;
@@ -31,6 +34,8 @@ public class TerraEnvironmentBlocks {
             attributes.set(Attribute.water, 0.4f);
             albedo = 0.65f;
         }};
+        Blocks.carbonStone.attributes.set(TerraAttributes.carbon, 0.25f);
+        Blocks.carbonStone.attributes.set(Attribute.sand, 1f / 8);
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
         }};
