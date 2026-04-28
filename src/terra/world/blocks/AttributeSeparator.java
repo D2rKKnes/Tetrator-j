@@ -34,12 +34,6 @@ public class AttributeSeparator extends AttributeCrafter {
         }
     }
 
-    @Override
-    public void init(){
-        super.init();
-        consItems = (ConsumeItems)findConsumer(c -> c instanceof ConsumeItems);
-    }
-
     public class AttributeSeparatorBuild extends AttributeCrafterBuild {
         public int seed;
 
@@ -52,14 +46,21 @@ public class AttributeSeparator extends AttributeCrafter {
         @Override
         public boolean shouldConsume(){
             int total = items.total();
-            if(AttributeSeparator.this.consItems != null){
-                for(ItemStack stack : AttributeSeparator.this.consItems.items) total -= items.get(stack.item);
+            
+            ConsumeItems cons = (ConsumeItems)block.consumers.find(c -> c instanceof ConsumeItems);
+            
+            if(cons != null){
+                for(ItemStack stack : cons.items){
+                    total -= items.get(stack.item);
+                }
             }
             return total < itemCapacity && enabled;
         }
 
         @Override
         public void craft(){
+            if(results == null || results.length == 0) return;
+            
             int sum = 0;
             for(ItemStack stack : results) sum += stack.amount;
 
