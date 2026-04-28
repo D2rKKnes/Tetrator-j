@@ -37,10 +37,13 @@ public class TerraItems{
         rawThermoxite = new Item("raw-thermoxite", Color.valueOf("ff7163")){{
             cost = 0.8f;
             hardness = 4;
+            radioactivity = 0.2f;
         }};
         thermoxite = new Item("thermoxite", Color.valueOf("e13131")){{
             cost = 1.5f;
             hardness = 5;
+            radioactivity = 0.6f;
+            charge = 0.3f;
         }};
         darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
@@ -50,6 +53,7 @@ public class TerraItems{
             color = Color.valueOf("000000");
             cost = 40f;
             healthScaling = 5f;
+            charge = 10f;
             threat = 0.6f;
             
             spawnBulletOnDestroy = true;
