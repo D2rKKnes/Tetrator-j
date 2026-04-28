@@ -40,6 +40,9 @@ public class AttributeSeparator extends AttributeCrafter {
         @Override
         public void updateTile(){
             super.updateTile();
+            if(timer(timerDump, dumpTime / timeScale)){
+                dump();
+            }
         }
 
         @Override
