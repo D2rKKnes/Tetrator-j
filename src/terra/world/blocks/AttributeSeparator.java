@@ -46,11 +46,8 @@ public class AttributeSeparator extends AttributeCrafter {
         @Override
         public boolean shouldConsume(){
             int total = items.total();
-            
-            ConsumeItems cons = (ConsumeItems)block.consumers.find(c -> c instanceof ConsumeItems);
-            
-            if(cons != null){
-                for(ItemStack stack : cons.items){
+            if(consItems != null){
+                for(ItemStack stack : consItems.items){
                     total -= items.get(stack.item);
                 }
             }
