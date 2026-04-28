@@ -101,10 +101,10 @@ public class AdvancedItem extends Item {
         super.setStats();
         if (showThreat && threat >= 0) {
             Color tCol = Color.white.cpy().lerp(Color.red, Mathf.clamp(threat));
-            stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 1) + "%[]");
+            stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 0) + "%[]");
         }
         if (damageContainer && damage > 0) {
-            stats.add(Stat.damage, damage);
+            stats.add(Stat.damage, (damage - damageRand) + "-" + (damage + damageRand));
         }
     }
 }
