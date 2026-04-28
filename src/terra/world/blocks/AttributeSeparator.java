@@ -5,6 +5,7 @@ import arc.util.io.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
+import mindustry.world.blocks.production.AttributeCrafter;
 
 public class AttributeSeparator extends AttributeCrafter {
     public ItemStack[] results;
@@ -30,6 +31,11 @@ public class AttributeSeparator extends AttributeCrafter {
                 }
             });
         }
+    }
+
+    @Override
+    public void init(){
+        super.init();
     }
 
     public class AttributeSeparatorBuild extends AttributeCrafterBuild {
@@ -66,7 +72,7 @@ public class AttributeSeparator extends AttributeCrafter {
                 }
             }
 
-            craftEffect.at(x, y);
+            if(craftEffect != null) craftEffect.at(x, y);
         }
 
         @Override
