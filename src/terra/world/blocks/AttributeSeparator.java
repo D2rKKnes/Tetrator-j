@@ -38,6 +38,11 @@ public class AttributeSeparator extends AttributeCrafter {
         public int seed;
 
         @Override
+        public void updateTile(){
+            super.updateTile();
+        }
+
+        @Override
         public void created(){
             super.created();
             seed = Mathf.randomSeed(tile.pos(), 0, Integer.MAX_VALUE - 1);
@@ -59,6 +64,8 @@ public class AttributeSeparator extends AttributeCrafter {
 
         @Override
         public void craft(){
+            progress %= 1f;
+            
             if(results == null || results.length == 0) return;
             
             int sum = 0;
