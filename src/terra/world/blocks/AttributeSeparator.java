@@ -15,6 +15,7 @@ public class AttributeSeparator extends AttributeCrafter {
         super(name);
         hasItems = true;
         hasLiquids = true;
+        outputsItems = true; 
     }
 
     @Override
