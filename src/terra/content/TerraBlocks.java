@@ -53,6 +53,8 @@ public class TerraBlocks{
 
     //crafters
 
+    //production
+    mechanicalWell, electricalWell,
     //turrets
 
     //units
@@ -186,6 +188,33 @@ public class TerraBlocks{
             regenAmount = 0.012f / 60f;
             regenStartDelay = 150f;
             regenDamageStop = true;
+        }};
+
+        mechanicalWell = new AttributeSeparator("mechanical-well"){{
+            requirements(Category.production, with(Items.graphite, 25, Items.titanium, 40));
+            size = 2;
+            craftTime = 135
+            minEfficiency = 0.1f;
+            baseEfficiency = 0f;
+            updateEffect = Fx.pulverizeSmall;
+            updateEffectChance = 0.02f;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawRegion("-rotator"){{
+                    spinSprite = true;
+                    rotateSpeed = -1.25f;
+                }},
+                new DrawRegion("-rotator"){{
+                    spinSprite = true;
+                    rotateSpeed = 1.75f;
+                }},
+                new DrawDefault(),
+                new DrawRegion("-top")
+            );
+            results = with(
+                TerraItems.carbone, 17,
+                Items.graphite, 3,
+            );
         }};
 
         /*droneCentre = new DroneCentre("drone-centre"){{
