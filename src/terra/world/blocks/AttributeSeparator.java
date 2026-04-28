@@ -46,9 +46,12 @@ public class AttributeSeparator extends AttributeCrafter {
         @Override
         public boolean shouldConsume(){
             int total = items.total();
-            if(consItems != null){
-                for(ItemStack stack : consItems.items){
-                    total -= items.get(stack.item);
+            for(var cons : block.consumers){
+                if(cons instanceof ConsumeItems c){
+                    for(ItemStack stack : c.items){
+                        total -= items.get(stack.item);
+                    }
+                    break;
                 }
             }
             return total < itemCapacity && enabled;
