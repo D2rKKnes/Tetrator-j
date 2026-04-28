@@ -53,7 +53,7 @@ public class TerraItems{
             color = Color.valueOf("000000");
             cost = 40f;
             healthScaling = 5f;
-            charge = 10f;
+            //charge = 10f;
             threat = 0.6f;
             
             spawnBulletOnDestroy = true;
