@@ -34,16 +34,16 @@ public class TerraItems{
             explosiveness = 1f;
             hardness = 2;
         }};
-        darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
-            cost = 2f;
-            hardness = 5;
-        }};
         rawThermoxite = new Item("raw-thermoxite", Color.valueOf("ff7163")){{
             cost = 0.8f;
             hardness = 4;
         }};
         thermoxite = new Item("thermoxite", Color.valueOf("e13131")){{
             cost = 1.5f;
+            hardness = 5;
+        }};
+        darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
+            cost = 2f;
             hardness = 5;
         }};
         tesseract = new AdvancedItem("tesseract"){{
