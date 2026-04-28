@@ -12,10 +12,10 @@ public class TerraMod extends Mod{
     @Override
     public void loadContent(){
         Utils.init();
-        TerraItems.load();
         TerraSounds.load();
-        TerraEnvironmentBlocks.load();
         TerraStatusEffects.load();
+        TerraItems.load();
+        TerraEnvironmentBlocks.load();
         TerraUnitTypes.load();
         TerraBlocks.load();
     }
