@@ -47,9 +47,9 @@ public class AdvancedItem extends Item {
 
             Groups.build.each(b -> b.items != null && b.items.has(this), b -> {
                 if(Vars.state.rules.attackMode && !Vars.state.rules.pvp){
-                    if(b.block.isCore() && b.team != Vars.state.rules.defaultTeam) return;
+                    if(b instanceof mindustry.world.blocks.storage.CoreBlock.CoreBuild && b.team != Vars.state.rules.defaultTeam) return;
                 }else if(Vars.state.rules.waveTimer){
-                    if(b.block.isCore() && b.team == Vars.state.rules.waveTeam) return;
+                    if(b instanceof mindustry.world.blocks.storage.CoreBlock.CoreBuild && b.team == Vars.state.rules.waveTeam) return;
                 }
                 if(Mathf.chance(getChance(damageChance, b.items.get(this), damageChanceMul))){
                     applyDamage(b, b.block.size * 4f);
@@ -65,9 +65,9 @@ public class AdvancedItem extends Item {
             Building b = e.tile.build;
             if (b != null){
                 if(Vars.state.rules.attackMode && !Vars.state.rules.pvp){
-                    if(b.block.isCore() && b.team != Vars.state.rules.defaultTeam) return;
+                    if(b instanceof mindustry.world.blocks.storage.CoreBlock.CoreBuild && b.team != Vars.state.rules.defaultTeam) return;
                 }else if(Vars.state.rules.waveTimer){
-                    if(b.block.isCore() && b.team == Vars.state.rules.waveTeam) return;
+                    if(b instanceof mindustry.world.blocks.storage.CoreBlock.CoreBuild && b.team == Vars.state.rules.waveTeam) return;
                 }
             }
 
