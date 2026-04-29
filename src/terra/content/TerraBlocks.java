@@ -245,9 +245,9 @@ public class TerraBlocks{
                 new DrawRegion("-top")
             );
             results = with(
-                TerraItems.carbon, 17,
-                Items.graphite, 2,
-                Items.thorium, 1
+                TerraItems.carbon, 80,
+                Items.graphite, 17,
+                Items.thorium, 3
             );
         }};
 
