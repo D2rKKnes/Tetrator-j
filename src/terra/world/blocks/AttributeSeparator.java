@@ -13,9 +13,11 @@ public class AttributeSeparator extends AttributeCrafter {
 
     public AttributeSeparator(String name){
         super(name);
+        update = true;
+        solid = true;
         hasItems = true;
         hasLiquids = true;
-        outputsItems = true; 
+        sync = true;
     }
 
     @Override
@@ -94,6 +96,11 @@ public class AttributeSeparator extends AttributeCrafter {
             }
 
             if(craftEffect != null) craftEffect.at(x, y);
+        }
+
+        @Override
+        public boolean canDump(Building to, Item item){
+            return !consumesItem(item);
         }
 
         @Override
