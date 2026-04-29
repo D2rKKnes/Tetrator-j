@@ -219,6 +219,38 @@ public class TerraBlocks{
             );
         }};
 
+        electricalWell = new AttributeSeparator("electrical-well"){{
+            requirements(Category.production, with(Items.graphite, 75, Items.thorium, 90, Items.silicon, 120));
+            size = 3;
+            itemCapacity = 30;
+            craftTime = 35f;
+            minEfficiency = 0.1f;
+            baseEfficiency = 0f;
+            updateEffect = Fx.pulverizeSmall;
+            updateEffectChance = 0.02f;
+            attribute = TerraAttributes.carbon;
+            boostScale = 4/9;
+            consumePower(1.4f);
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawRegion("-rotator"){{
+                    spinSprite = true;
+                    rotateSpeed = -2f;
+                }},
+                new DrawRegion("-rotator"){{
+                    spinSprite = true;
+                    rotateSpeed = 2.75f;
+                }},
+                new DrawDefault(),
+                new DrawRegion("-top")
+            );
+            results = with(
+                TerraItems.carbon, 17,
+                Items.graphite, 2,
+                Items.thorium, 1
+            );
+        }};
+
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             health = 480;
