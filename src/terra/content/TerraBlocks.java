@@ -229,7 +229,7 @@ public class TerraBlocks{
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.02f;
             attribute = TerraAttributes.carbon;
-            boostScale = 4/9;
+            boostScale = 4f / 9;
             consumePower(1.4f);
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
