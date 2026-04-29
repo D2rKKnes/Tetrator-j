@@ -37,6 +37,10 @@ public class AttributeSeparator extends AttributeCrafter {
         }
     }
 
+    public boolean outputsItems(){
+        return outputItems != null || results != null;
+    }
+
     public class AttributeSeparatorBuild extends AttributeCrafterBuild {
         public int seed;
 
