@@ -15,7 +15,7 @@ public class TerraEnvironmentBlocks {
     public static Block
 
         largeTree, iceBoulder, iceRift, 
-        carbonizedThermoxite, thermoxiteCrystal, oreRawThermoxite, oreThermoxite;
+        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, oreRawThermoxite, oreThermoxite;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
@@ -38,9 +38,26 @@ public class TerraEnvironmentBlocks {
         Blocks.carbonStone.attributes.set(Attribute.sand, 1f / 8);
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
+            attributes.set(TerraAttributes.carbon, 0.1f);
         }};
         thermoxiteCrystal = new Floor("thermoxite-crystal") {{
             variants = 1;
+        }};
+        carbonizedThermoxiteWall = new StaticWall("carbonized-thermoxite-wall"){{
+            variants = 3;
+            carbonizedThermoxite.asFloor().wall = this;
+        }};
+        thermoxiteWall = new StaticWall("thermoxite-wall"){{
+            variants = 3;
+            thermoxiteCrystal.asFloor().wall = this;
+        }};
+        carbonizedThermoxiteCluster = new TallBlock("carbonized-thermoxite-cluster"){{
+            variants = 3;
+            clipSize = 128f;
+        }};
+        thermoxiteCluster = new TallBlock("thermoxite-cluster"){{
+            variants = 3;
+            clipSize = 128f;
         }};
         oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
             variants = 3;
