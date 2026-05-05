@@ -112,19 +112,19 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 }
             }
         });
-        pass((x, y) -> {
-            if(floor == Blocks.carbonStone){
-                for(int dx = -1; dx <= 1; dx++){
-                    for(int dy = -1; dy <= 1; dy++){
-                        Tile other = tiles.get(x + dx, y + dy);
-                        if(other != null && other.floor() == TerraEnvironmentBlocks.thermoxiteCrystal){
-                            floor = TerraEnvironmentBlocks.thermoxiteCrystal;
-                            return; 
-                        }
+        Seq<Tile> toChange = new Seq<>();
+        tiles.eachTile(t -> {
+            if(t.floor() == TerraEnvironmentBlocks.carbonizedThermoxite){
+                for(Point2 p : Geometry.d4){
+                    Tile other = tiles.get(t.x + p.x, t.y + p.y);
+                    if(other != null && other.floor() == TerraEnvironmentBlocks.thermoxiteCrystal){
+                        toChange.add(t);
+                        break;
                     }
                 }
             }
         });
+        toChange.each(t -> t.setFloor(TerraEnvironmentBlocks.thermoxiteCrystal));
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite && rand.chance(0.135)){
                 floor = Blocks.carbonStone;
