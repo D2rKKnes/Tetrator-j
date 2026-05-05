@@ -98,6 +98,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             block = floor.asFloor().wall;
         });
 
+        int ventCount = 0;
         //vents and rfits
         outer:
         for(Tile tile : tiles){
@@ -117,6 +118,9 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                         }
                     }
                 }
+
+                Block
+                vent = Blocks.stoneVent;
 
                 if(tile.floor() == Blocks.carbonStone){
                     vent = Blocks.carbonVent;
