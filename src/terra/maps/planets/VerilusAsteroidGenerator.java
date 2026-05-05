@@ -20,7 +20,7 @@ import mindustry.world.meta.*;
 import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
-    public int min = 26, max = 38, octaves = 2, foct = 3;
+    public int min = 26, max = 35, octaves = 2, foct = 3;
     public float radMin = 12f, radMax = 68f, persistence = 0.4f, scale = 30f, mag = 0.46f, thresh = 1f;
     public float fmag = 0.5f, fscl = 50f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.35f;
@@ -113,20 +113,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 }
             }
         });
-        Block[] floorBuffer = new Block[width * height];
-        tiles.eachTile(t -> floorBuffer[t.y * width + t.x] = t.floor());
-
-        pass((x, y) -> {
-            if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
-                for(Point2 p : Geometry.d4){
-                    int nx = x + p.x, ny = y + p.y;
-                    if(tiles.in(nx, ny) && floorBuffer[ny * width + nx] == TerraEnvironmentBlocks.thermoxiteCrystal){
-                        floor = TerraEnvironmentBlocks.thermoxiteCrystal;
-                        break; 
-                    }
-                }
-            }
-        });
+        blend(TerraEnvironmentBlocks.thermoxiteCrystal, TerraEnvironmentBlocks.carbonizedThermoxite, 1f);
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite && rand.chance(0.135)){
                 floor = Blocks.carbonStone;
@@ -210,7 +197,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //thermoxite ores
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
-                if(Simplex.noise2d(seed, 8, 0.4f, 1f / 5f, x, y) > 0.6f){
+                if(Simplex.noise2d(seed, 8, 0.4f, 5f, x, y) > 0.6f){
                     ore = TerraEnvironmentBlocks.oreRawThermoxite;
                 }
             }
@@ -218,7 +205,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.thermoxiteCrystal){
-                if(Simplex.noise2d(seed + 4, 8, 0.3f, 1f / 5f, x, y) > 0.635f){
+                if(Simplex.noise2d(seed + 4, 8, 0.3f, 5f, x, y) > 0.635f){
                     ore = TerraEnvironmentBlocks.oreThermoxite;
                 }
             }
