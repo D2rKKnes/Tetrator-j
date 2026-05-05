@@ -6,6 +6,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.noise.*;
+import arc.struct.*;
 import mindustry.ai.*;
 import mindustry.content.*;
 import mindustry.game.*;
