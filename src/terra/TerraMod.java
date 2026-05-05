@@ -8,10 +8,11 @@ import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 import mindustry.content.Planets;
 import terra.content.*;
+import terra.maps.planets.*;
 import terra.util.*;
 
 public class TerraMod extends Mod{
-    public MyMod(){
+    public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
             Planets.verilus.rebuild();
