@@ -100,14 +100,14 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //thermoxite infection
         pass((x, y) -> {
             if(floor == Blocks.carbonStone){
-                if(Noise.noise((float)x, (float)y, 74.85, 0.63, 9, 0.815f) > 0.63f){
+                if(Noise.noise((float)x, (float)y, 75f, 0.63f, 9, 0.815f) > 0.63f){
                     floor = TerraEnvironmentBlocks.carbonizedThermoxite;
                 }
             }
         });
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
-                if(Noise.noise((float)x, (float)y, 4.99, 0.6f, 6, 0.63f) > 0.595f){
+                if(Noise.noise((float)x, (float)y, 5f, 0.6f, 6, 0.63f) > 0.6f){
                     floor = TerraEnvironmentBlocks.thermoxiteCrystal;
                 }
             }
