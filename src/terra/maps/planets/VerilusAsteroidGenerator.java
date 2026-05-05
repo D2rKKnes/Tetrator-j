@@ -125,7 +125,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 }
             }
         });
-        toChange.each(t -> t.setFloor(TerraEnvironmentBlocks.thermoxiteCrystal));
+        toChange.each(t -> t.setFloor(TerraEnvironmentBlocks.thermoxiteCrystal.asFloor()));
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite && rand.chance(0.135)){
                 floor = Blocks.carbonStone;
