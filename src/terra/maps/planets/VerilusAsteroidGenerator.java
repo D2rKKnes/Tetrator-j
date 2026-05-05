@@ -27,7 +27,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public float thoriumScl = 1f, leadScale = 1f, graphiteScale = 1f;
 
     @Nullable Rand rand;
-    int seed = rand.random(30000);
+    int seed = Mathf.random(30000);
 
     {
         defaultLoadout = Loadouts.basicNucleus;
