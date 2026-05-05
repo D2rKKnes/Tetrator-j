@@ -113,6 +113,19 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             }
         });
         pass((x, y) -> {
+            if(floor == Blocks.carbonStone){
+                for(int dx = -1; dx <= 1; dx++){
+                    for(int dy = -1; dy <= 1; dy++){
+                        Tile other = tiles.get(x + dx, y + dy);
+                        if(other != null && other.floor() == TerraEnvironmentBlocks.thermoxiteCrystal){
+                            floor = TerraEnvironmentBlocks.thermoxiteCrystal;
+                            return; 
+                        }
+                    }
+                }
+            }
+        });
+        pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite && rand.chance(0.135)){
                 floor = Blocks.carbonStone;
             }
@@ -193,8 +206,21 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         wallOre(Blocks.carbonWall, Blocks.graphiticWall, 35f, 0.57f * graphiteScale);
 
         //thermoxite ores
-        ore(TerraEnvironmentBlocks.oreRawThermoxite, TerraEnvironmentBlocks.carbonizedThermoxite, 5f, 0.6f);
-        ore(TerraEnvironmentBlocks.oreThermoxite, TerraEnvironmentBlocks.thermoxiteCrystal, 5f, 0.64f);
+        pass((x, y) -> {
+            if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
+                if(Simplex.noise2d(seed, 8, 0.4f, 1f / 5f, x, y) > 0.6f){
+                    ore = TerraEnvironmentBlocks.oreRawThermoxite;
+                }
+            }
+        });
+
+        pass((x, y) -> {
+            if(floor == TerraEnvironmentBlocks.thermoxiteCrystal){
+                if(Simplex.noise2d(seed + 4, 8, 0.3f, 1f / 5f, x, y) > 0.635f){
+                    ore = TerraEnvironmentBlocks.oreThermoxite;
+                }
+            }
+        });
 
         //titanium
         pass((x, y) -> {
