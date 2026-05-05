@@ -1,16 +1,18 @@
 package terra.maps.planets;
 
 import terra.content.TerraEnvironmentBlocks;
+import arc.graphics.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.noise.*;
+import mindustry.ai.*;
 import mindustry.content.*;
 import mindustry.game.*;
-import mindustry.graphics.g3d.*;
 import mindustry.maps.generators.*;
-import mindustry.type.*;
+import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
+import mindustry.world.meta.*;
 
 import static mindustry.Vars.*;
 
@@ -104,11 +106,11 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for(Tile tile : tiles){
             var floor = tile.floor();
             if(floor == Blocks.carbonStone || floor == Blocks.stone){
-                float chanc = 0.002;
+                float chanc = 0.002f;
             }else if(floor == Blocks.ice){
-                float chanc = 0.003;
+                float chanc = 0.003f;
             }
-            if((floor == Blocks.carbonStone || floor == Blocks.stone || floor == Blocks.ice) && rand.chance(0.002)){
+            if((floor == Blocks.carbonStone || floor == Blocks.stone || floor == Blocks.ice) && rand.chance(chanc)){
                 int radius = 2;
                 for(int x = -radius; x <= radius; x++){
                     for(int y = -radius; y <= radius; y++){
