@@ -106,10 +106,11 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         outer:
         for(Tile tile : tiles){
             var floor = tile.floor();
+            float chanc = 0f;
             if(floor == Blocks.carbonStone || floor == Blocks.stone){
-                float chanc = 0.002f;
+                chanc = 0.002f;
             }else if(floor == Blocks.ice){
-                float chanc = 0.003f;
+                chanc = 0.003f;
             }
             if((floor == Blocks.carbonStone || floor == Blocks.stone || floor == Blocks.ice) && rand.chance(chanc)){
                 int radius = 2;
