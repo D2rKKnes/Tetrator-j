@@ -276,7 +276,7 @@ public class TerraBlocks{
                     particleLen = 4f;
                 }},
                 new DrawRegion("-top"),
-                new DrawTeamTop(),
+                new DrawTeamTop()
                 //new DrawDrillOreTop()
             );
         }};
@@ -304,7 +304,7 @@ public class TerraBlocks{
                 new DrawRegion("-bottom"),
                 new DrawDrillMineBeam(),
                 new DrawRegion("-top"),
-                new DrawTeamTop(),
+                new DrawTeamTop()
                 //new DrawDrillOreTop()
             );
         }};
