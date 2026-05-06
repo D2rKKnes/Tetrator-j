@@ -18,6 +18,7 @@ public class VerilusWaves {
             {wick, poly, mega, quad, oct},
             {wick, dynamite, incident, catastrophe, inevitability}
         };
+        UnitType[][] fspec = species;
 
         Seq<SpawnGroup> out = new Seq<>();
 
