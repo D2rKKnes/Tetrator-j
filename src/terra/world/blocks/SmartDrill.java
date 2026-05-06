@@ -13,13 +13,15 @@ import mindustry.graphics.*;
 import mindustry.ui.*;
 import mindustry.type.*;
 import mindustry.world.*;
-import mindustry.world.draw.*;
+import mindustry.world.draw.DrawBlock;
+import mindustry.world.draw.DrawDefault;
 import mindustry.world.blocks.*;
 import mindustry.world.blocks.production.*;
 
 import static mindustry.Vars.*;
 
 public class SmartDrill extends Drill{
+    public DrawBlock drawer = new DrawDefault();
     public SmartDrill(String name){
         super(name);
 
