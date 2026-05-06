@@ -57,7 +57,7 @@ public class DrawDrillMineBeam extends DrawBlock {
                     moveX, build.y - (-shooterOffset + drill.warmup * shooterExtendOffset + shootY),
                     stroke);
 
-            Draw.color(drill.dominantItem.color);
+            Draw.color(drill.team.color);
 
             float sine = 1f + Mathf.sin(6f, 0.1f);
 
