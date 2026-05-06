@@ -17,6 +17,7 @@ import mindustry.world.draw.DrawBlock;
 import mindustry.world.draw.DrawDefault;
 import mindustry.world.blocks.*;
 import mindustry.world.blocks.production.*;
+import mindustry.entities.units.BuildPlan;
 
 import static mindustry.Vars.*;
 
