@@ -277,7 +277,7 @@ public class TerraBlocks{
                 }},
                 new DrawRegion("-top"),
                 new DrawTeamTop(),
-                new DrawDrillOreTop()
+                //new DrawDrillOreTop()
             );
         }};
 
@@ -305,7 +305,7 @@ public class TerraBlocks{
                 new DrawDrillMineBeam(),
                 new DrawRegion("-top"),
                 new DrawTeamTop(),
-                new DrawDrillOreTop()
+                //new DrawDrillOreTop()
             );
         }};
 
