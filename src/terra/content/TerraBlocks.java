@@ -2,6 +2,7 @@ package terra.content;
 
 import terra.type.bullet.*;
 import terra.world.blocks.*;
+import terra.world.drawer.*;
 import terra.world.meta.*;
 import arc.util.*;
 import mindustry.entities.part.*;
