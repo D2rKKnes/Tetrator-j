@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.scene.ui.layout.*;
+import arc.util.*;
 import arc.util.io.*;
 import arc.util.pooling.*;
 import mindustry.gen.*;
@@ -16,7 +17,6 @@ import mindustry.world.blocks.*;
 import mindustry.world.blocks.production.*;
 
 import static mindustry.Vars.*;
-import static arc.graphics.g2d.Align.*;
 
 public class SmartDrill extends Drill{
     public SmartDrill(String name){
