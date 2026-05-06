@@ -1,6 +1,7 @@
 package terra.world.drawer;
 
 import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
 import mindustry.gen.Building;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawBlock;
