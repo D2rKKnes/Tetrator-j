@@ -43,7 +43,7 @@ public class SmartDrill extends Drill{
     @Override
     public void loadIcon() {
         super.loadIcon();
-        uiIcon = Core.atlas.find(name, name);
+        uiIcon = Core.atlas.find(name);
     }
 
     @Override
