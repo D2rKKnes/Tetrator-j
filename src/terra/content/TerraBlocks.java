@@ -313,7 +313,7 @@ public class TerraBlocks{
         beamMiningFacility = new SmartDrill("beam-mining-facility"){{
             requirements(Category.production, with(Items.phaseFabric, 65, TerraItems.darkSteel, 185, TerraItems.diamondDust, 110));
             size = 4;
-            tier = 5
+            tier = 5;
             itemCapacity = 75;
             drillTime = 35f;
             hardnessDrillMultiplier = 4f;
