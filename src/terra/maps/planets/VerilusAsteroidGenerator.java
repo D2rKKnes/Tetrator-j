@@ -1,6 +1,7 @@
 package terra.maps.planets;
 
 import terra.content.TerraEnvironmentBlocks;
+import terra.maps.generators.VerilusWaves;
 import arc.graphics.*;
 import arc.math.*;
 import arc.math.geom.*;
@@ -258,8 +259,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //state.rules.hiddenBuildItems.addAll(Items.plastanium, Items.surgeAlloy);
         //TODO maybe make this on by default everywhere
         state.rules.showSpawns = true;
-        //TODO better wavegen, do it by hand even
-        state.rules.spawns = Waves.generate(0.5f, rand, false, true, false);
+        //TODO custom wavegen 
+        state.rules.spawns = VerilusWaves.generate(0.8f, rand, false);
     }
 
     @Override
