@@ -19,6 +19,7 @@ import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawBlock;
 
 public class DrawDrillMineBeam extends DrawBlock {
+    private final Rand rand = new Rand();
     public float shooterOffset = 12f, shooterExtendOffset = 1.8f, shooterMoveRange = 5.2f, shootY = 1.55f;
     public float moveScale = 60f, moveScaleRand = 20f;
     public float laserScl = 0.2f, laserAlpha = 0.75f, laserAlphaSine = 0.2f;
