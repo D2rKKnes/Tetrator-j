@@ -16,6 +16,7 @@ import mindustry.world.blocks.*;
 import mindustry.world.blocks.production.*;
 
 import static mindustry.Vars.*;
+import static arc.graphics.g2d.Align.*;
 
 public class SmartDrill extends Drill{
     public SmartDrill(String name){
