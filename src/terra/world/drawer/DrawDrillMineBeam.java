@@ -10,6 +10,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
+import arc.math.Rand;
 import arc.util.Log;
 import arc.util.Time;
 import mindustry.gen.Building;
