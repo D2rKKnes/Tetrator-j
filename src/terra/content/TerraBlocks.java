@@ -6,6 +6,7 @@ import terra.world.meta.*;
 import arc.util.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
+import arc.Coren;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
