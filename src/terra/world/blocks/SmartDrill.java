@@ -164,6 +164,11 @@ public class SmartDrill extends Drill{
         }
 
         @Override
+        public void draw(){
+            drawer.draw(this);
+        }
+
+        @Override
         public void updateTile(){
             if(!isDrilling()){ //Literally the only thing changed from the original code. Wind down for deselecting.
                 timeDrilled += warmup * delta();
