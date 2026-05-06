@@ -39,6 +39,22 @@ public class SmartDrill extends Drill{
         return drawText(x, y, true, -1, color, text);
     }
 
+    @Override
+    public void loadIcon() {
+        super.loadIcon();
+        uiIcon = Core.atlas.find(name + "-icon", name);
+    }
+
+    @Override
+    public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list){
+        drawer.drawPlan(this, plan, list);
+    }
+
+    @Override
+    public TextureRegion[] icons(){
+        return drawer.finalIcons(this);
+    }
+
     private static float drawText(float x, float y, boolean underline, float maxWidth, Color color, CharSequence text) {
         Font font = Fonts.outline;
         GlyphLayout layout = Pools.obtain(GlyphLayout.class, GlyphLayout::new);
