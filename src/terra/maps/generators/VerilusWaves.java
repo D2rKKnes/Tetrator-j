@@ -1,12 +1,12 @@
 package terra.maps.generators;
 
-import arc.func.Intc;
+import arc.func.*;
 import arc.math.*;
-import arc.struct.Seq;
-import arc.util.Structs;
+import arc.struct.*;
+import arc.util.*;
 import mindustry.content.*;
+import mindustry.type.*;
 import mindustry.game.SpawnGroup;
-import mindustry.type.UnitType;
 import terra.content.*;
 
 import static terra.content.TerraUnitTypes.*;
@@ -14,7 +14,9 @@ import static mindustry.content.UnitTypes.*;
 
 public class VerilusWaves {
     public static UnitType pick(UnitType[][] species, int tier, Rand rand){
-        return rand.select(species[tier]);
+        int t = Math.min(tier, species.length - 1);
+        UnitType[] row = species[t];
+        return row[rand.random(row.length - 1)];
     }
     public static Seq<SpawnGroup> generate(Rand rand) {
         UnitType[][] species = {
