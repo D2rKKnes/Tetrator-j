@@ -3,13 +3,14 @@ package terra.content;
 import terra.type.bullet.*;
 import terra.world.blocks.*;
 import terra.world.meta.*;
-import arc.util.Tmp;
+import arc.util.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
+import mindustry.core.*;
 import mindustry.entities.effect.*;
 import mindustry.content.*;
 import mindustry.entities.*;
@@ -263,6 +264,7 @@ public class TerraBlocks{
             consumePower(1.85f);
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
             drawer = b -> {
+                Rand rand = rand(b.id);
                 float shooterOffset = 12f;
                 float shooterExtendOffset = 1.8f;
                 float shooterMoveRange = 5.2f;
