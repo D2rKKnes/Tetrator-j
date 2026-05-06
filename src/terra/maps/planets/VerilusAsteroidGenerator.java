@@ -260,7 +260,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //TODO maybe make this on by default everywhere
         state.rules.showSpawns = true;
         //TODO custom wavegen 
-        state.rules.spawns = VerilusWaves.generate(0.8f, rand, false);
+        state.rules.spawns = VerilusWaves.generate(rand);
     }
 
     @Override
