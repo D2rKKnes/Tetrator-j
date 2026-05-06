@@ -197,7 +197,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //thermoxite ores
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
-                if(Simplex.noise2d(seed, 8, 0.4f, 5f, x, y) > 0.6f){
+                if(Simplex.noise2d(seed, 8, 0.4f, 5f, x, y) > 0.53f){
                     ore = TerraEnvironmentBlocks.oreRawThermoxite;
                 }
             }
@@ -205,7 +205,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.thermoxiteCrystal){
-                if(Simplex.noise2d(seed + 4, 8, 0.3f, 5f, x, y) > 0.635f){
+                if(Simplex.noise2d(seed + 4, 8, 0.3f, 5f, x, y) > 0.6f){
                     ore = TerraEnvironmentBlocks.oreThermoxite;
                 }
             }
@@ -246,10 +246,10 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             camPos = new Vec3(1.2388899f, 1.6047299f, 2.4758825f);
         }};
 
-        state.rules.dragMultiplier = 0.5f; //yes, space actually has 0 drag but true 0% drag is very annoying
+        state.rules.dragMultiplier = 0.7f; //yes, space actually has 0 drag but true 0% drag is very annoying
         state.rules.borderDarkness = false;
         state.rules.waves = true;
-        state.rules.dropZoneRadius = 100f;
+        state.rules.dropZoneRadius = 150f;
         state.rules.waveSpacing = 3 * Time.toMinutes;
         state.rules.airUseSpawns = true;
         state.rules.loadout = ItemStack.list(Items.lead, 100);
