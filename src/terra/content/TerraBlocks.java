@@ -269,7 +269,12 @@ public class TerraBlocks{
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
-                new DrawDrillMineBeam(),
+                new DrawDrillMineBeam(){{
+                    laserScl = 0.3f;
+                    particles = 10;
+                    particleRad = 6f;
+                    particleLen = 4f;
+                }},
                 new DrawRegion("-top"),
                 new DrawTeamTop(),
                 new DrawDrillOreTop()
@@ -291,7 +296,7 @@ public class TerraBlocks{
                 Draw.color(e.color, Color.white, e.fout() * 0.66f);
                 Draw.alpha(0.55f * e.fout() + 0.5f);
                 Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
-                    Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4), 45);
+                    Fill.square(e.x + x, e.y + y, e.fout() * new Rand(e.id).random(2.5f, 4), 45);
                 });
             });
             updateEffectChance = 0.06f;
