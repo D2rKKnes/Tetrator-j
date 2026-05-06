@@ -6,7 +6,6 @@ import terra.world.meta.*;
 import arc.util.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
-import mindustry.core.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -267,56 +266,13 @@ public class TerraBlocks{
             canOverdrive = false;
             consumePower(1.85f);
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
-            drawer = new DrawBlock() {
-                @Override
-                public void draw(Building b) {
-                    Rand rand = new Rand(b.id);
-                    float shooterOffset = 12f;
-                    float shooterExtendOffset = 1.8f;
-                    float shooterMoveRange = 5.2f;
-                    float shootY = 1.55f;
-                    float moveScale = 60f;
-                    float moveScaleRand = 20f;
-                    float laserScl = 0.3f;
-                    Color laserColor = Color.valueOf("f58349");
-                    float laserAlpha = 0.75f;
-                    float laserAlphaSine = 0.2f;
-                    int particles = 10;
-                    float particleLife = 25f, particleRad = 6f, particleLen = 4f;
-    
-                    float timeDrilled = Time.time;
-                    float
-                            moveX = Mathf.sin(timeDrilled, moveScale + Mathf.randomSeed(b.id, -moveScaleRand, moveScaleRand), shooterMoveRange) + b.x,
-                            moveY = Mathf.sin(timeDrilled + Mathf.randomSeed(b.id >> 1, moveScale), moveScale + Mathf.randomSeed(b.id >> 2, -moveScaleRand, moveScaleRand), shooterMoveRange) + b.y;
-    
-                    float stroke = laserScl * b.warmup;
-                    Draw.mixcol(laserColor, Mathf.absin(4f, 0.6f));
-                    Draw.alpha(laserAlpha + Mathf.absin(8f, laserAlphaSine));
-                    Draw.blend(Blending.additive);
-                    Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), b.x + (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveY, b.x - (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveY, stroke);
-                    Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), moveX, b.y + (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveX, b.y - (-shooterOffset + b.warmup * shooterExtendOffset + shootY), stroke);
-    
-                    Draw.color(b.dominantItem.color);
-    
-                    float sine = 1f + Mathf.sin(6f, 0.1f);
-    
-                    Lines.stroke(stroke / laserScl / 2f);
-                    Lines.circle(moveX, moveY, stroke * 12f * sine);
-                    Fill.circle(moveX, moveY, stroke * 8f * sine);
-    
-                    rand.setSeed(id);
-                    float base = (Time.time / particleLife);
-                    for (int i = 0; i < particles; i++) {
-                        float fin = (rand.random(1f) + base) % 1f, fout = 1f - fin;
-                        float angle = rand.random(360f);
-                        float len = Mathf.randomSeed(rand.nextLong(), particleRad * 0.8f, particleRad * 1.1f) * Interp.pow2Out.apply(fin);
-                        Lines.lineAngle(moveX + Angles.trnsx(angle, len), moveY + Angles.trnsy(angle, len), angle, particleLen * fout * stroke / laserScl);
-                    }
-    
-                    Draw.blend();
-                    Draw.reset();
-                }
-            };
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawDrillMineBeam(),
+                new DrawRegion("-top"),
+                new DrawTeamTop(),
+                new DrawDrillOreTop()
+            );
         }};
 
         beamMiningFacility = new SmartDrill("beam-mining-facility"){{
@@ -331,63 +287,20 @@ public class TerraBlocks{
             consumePower(5.25f);
             consumeLiquid(Liquids.cryofluid, 0.6f);
             updateEffect = new Effect(30f, e -> {
-                Rand rand = new Rand(e.id);
                 Draw.color(e.color, Color.white, e.fout() * 0.66f);
                 Draw.alpha(0.55f * e.fout() + 0.5f);
                 Angles.randLenVectors(e.id, 2, 4f + e.finpow() * 17f, (x, y) -> {
-                    Fill.square(e.x + x, e.y + y, e.fout() * rand.random(2.5f, 4), 45);
+                    Fill.square(e.x + x, e.y + y, e.fout() * rand(e.id).random(2.5f, 4), 45);
                 });
             });
             updateEffectChance = 0.06f;
-            drawer = new DrawBlock() {
-                @Override
-                public void draw(Building b) {
-                    float shooterOffset = 12f;
-                    float shooterExtendOffset = 1.8f;
-                    float shooterMoveRange = 5.2f;
-                    float shootY = 1.55f;
-                    float moveScale = 60f;
-                    float moveScaleRand = 20f;
-                    float laserScl = 0.2f;
-                    Color laserColor = Color.valueOf("f58349");
-                    float laserAlpha = 0.75f;
-                    float laserAlphaSine = 0.2f;
-                    int particles = 25;
-                    float particleLife = 40f, particleRad = 9.75f, particleLen = 4f;
-    
-                    float timeDrilled = Time.time / 2.5f;
-                    float
-                            moveX = Mathf.sin(timeDrilled, moveScale + Mathf.randomSeed(b.id, -moveScaleRand, moveScaleRand), shooterMoveRange) + b.x,
-                            moveY = Mathf.sin(timeDrilled + Mathf.randomSeed(b.id >> 1, moveScale), moveScale + Mathf.randomSeed(b.id >> 2, -moveScaleRand, moveScaleRand), shooterMoveRange) + b.y;
-    
-                    float stroke = laserScl * b.warmup;
-                    Draw.mixcol(laserColor, Mathf.absin(4f, 0.6f));
-                    Draw.alpha(laserAlpha + Mathf.absin(8f, laserAlphaSine));
-                    Draw.blend(Blending.additive);
-                    Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), b.x + (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveY, b.x - (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveY, stroke);
-                    Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), moveX, b.y + (-shooterOffset + b.warmup * shooterExtendOffset + shootY), moveX, b.y - (-shooterOffset + b.warmup * shooterExtendOffset + shootY), stroke);
-    
-                    Draw.color(b.dominantItem.color);
-    
-                    float sine = 1f + Mathf.sin(6f, 0.1f);
-    
-                    Lines.stroke(stroke / laserScl / 2f);
-                    Lines.circle(moveX, moveY, stroke * 12f * sine);
-                    Fill.circle(moveX, moveY, stroke * 8f * sine);
-    
-                    rand.setSeed(id);
-                    float base = (Time.time / particleLife);
-                    for (int i = 0; i < particles; i++) {
-                        float fin = (rand.random(1f) + base) % 1f, fout = 1f - fin;
-                        float angle = rand.random(360f);
-                        float len = Mathf.randomSeed(rand.nextLong(), particleRad * 0.8f, particleRad * 1.1f) * Interp.pow2Out.apply(fin);
-                        Lines.lineAngle(moveX + Angles.trnsx(angle, len), moveY + Angles.trnsy(angle, len), angle, particleLen * fout * stroke / laserScl);
-                    }
-    
-                    Draw.blend();
-                    Draw.reset();
-                }
-            };
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawDrillMineBeam(),
+                new DrawRegion("-top"),
+                new DrawTeamTop(),
+                new DrawDrillOreTop()
+            );
         }};
 
         /*droneCentre = new DroneCentre("drone-centre"){{
