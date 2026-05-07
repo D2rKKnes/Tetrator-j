@@ -29,7 +29,7 @@ public class VerilusWaves {
             {quad, quad, catastrophe}, //special, index 6
             {eclipse, oct, inevitability}, //index 7
             {oct, oct, inevitability}, //special, index 8
-            {eclipse, inevitability} //boss only, index 9
+            {eclipse, inevitability, inevitability} //boss only, index 9
         };
         UnitType[][] fspec = species;
 
@@ -485,7 +485,7 @@ public class VerilusWaves {
             shieldScaling = 83f;
         }});
         out.add(new SpawnGroup(TerraUnitTypes.eternity){{
-            begin = 198;
+            begin = 178;
             spacing = 18;
             max = 4;
             unitScaling = 5f;
