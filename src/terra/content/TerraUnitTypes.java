@@ -1038,6 +1038,8 @@ public class TerraUnitTypes {
             armor = 200;
             engineSize = 0f;
             engineOffset = 0f;
+
+            float o = Mathf.random(5);
             for (float i = -50f / 4f; i < 50 / 4f; i += 2f) {
                 engines.add(new AncientEngine(i, -320f / 4f, 4f, -90, o));
             }
