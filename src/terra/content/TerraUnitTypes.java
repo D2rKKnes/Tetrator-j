@@ -1025,7 +1025,7 @@ public class TerraUnitTypes {
         }};
 
         //TEST UNIT
-        end = new UnitType("end"){{
+        end = new ErekirUnitType("end"){{
             flying = true;
             speed = 0.2f;
             rotateSpeed = 0.6f;
@@ -1059,7 +1059,7 @@ public class TerraUnitTypes {
                 status = TerraStatusEffects.energyOverload;
                 statusDuration = 120f;
                 colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
-                pierceCap = 50;
+                pierceCap = 9;
                 pierceBuilding = true;
                 hitColor = Color.valueOf("e13131");
                 shootEffect = hitEffect = new Effect(27f, e ->
@@ -1075,12 +1075,13 @@ public class TerraUnitTypes {
             new Weapon("terra-end-laser"){{
                 x = 354.5f / 4f;
                 y = 74.5f / 4f;
-                shootY = 14f;
+                shootY = 17f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.6f;
                 reload = 190f;
+                recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
                 shake = 1.2f;
@@ -1088,14 +1089,31 @@ public class TerraUnitTypes {
                 bullet = redLaser;
             }},
             new Weapon("terra-end-laser"){{
-                x = 460f / 4f;
-                y = 150f / 4f;
-                shootY = 14f;
+                x = -460f / 4f;
+                y = -150f / 4f;
+                shootY = 17f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.6f;
                 reload = 160f;
+                recoil = 4f;
+                continuous = true;
+                parentizeEffects = true;
+                shake = 1.2f;
+                
+                bullet = redLaser;
+            }},
+            new Weapon("terra-end-laser"){{
+                x = 538f / 4f;
+                y = 71f / 4f;
+                shootY = 17f;
+                rotate = true;
+                rotateSpeed = 1.2f;
+                shootSound = TerraSounds.acceleratinglaserloop;
+                shootSoundVolume = 0.6f;
+                reload = 130f;
+                recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
                 shake = 1.2f;
