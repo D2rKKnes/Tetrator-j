@@ -1040,16 +1040,17 @@ public class TerraUnitTypes {
             engineOffset = 0f;
 
             float o = Mathf.random(5);
-            for (float i = -50f / 4f; i < 50 / 4f; i += 2f) {
+            for (float i = -50f / 4f; i <= 50 / 4f; i += 2f) {
                 engines.add(new AncientEngine(i, -320f / 4f, 4f, -90, o));
             }
-            for (float i = -388f / 4f; i < -304 / 4f; i += 2f) {
+            for (float i = -388f / 4f; i <= -304 / 4f; i += 2f) {
                 engines.add(new AncientEngine(i, -360f / 4f, 4f, -90, o));
             }
-            for (float i = 304f / 4f; i < 388 / 4f; i += 2f) {
+            for (float i = 304f / 4f; i <= 388 / 4f; i += 2f) {
                 engines.add(new AncientEngine(i, -360f / 4f, 4f, -90, o));
             }
             outlineRadius = 6;
+            outlineColor = Color.valueOf("36363c");
             crashDamageMultiplier = 10;
             targetPriority = 4f;
             fallSpeed = 0.01f;
