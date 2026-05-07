@@ -80,7 +80,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
         //special asteroid for core zone
-        asteroid(xr, yr, rand.random(30, 50), Blocks.stone.asFloor());
+        asteroid(xr, yr, rand.random(30, 50), Blocks.grass.asFloor());
 
         //spawn asteroids
         int amount = rand.random(min, max);
