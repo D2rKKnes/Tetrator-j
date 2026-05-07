@@ -1024,16 +1024,16 @@ public class TerraUnitTypes {
             }});
         }};
 
-        //TEST UNIT
+        //WIP
         end = new ErekirUnitType("end"){{
             flying = true;
             speed = 0.2f;
-            rotateSpeed = 0.6f;
+            rotateSpeed = 0.5f;
             drag = 0.04f;
             accel = 0.03f;
             hitSize = 150f;
             softShadowScl = 1f;
-            health = 450000;
+            health = 650000;
             armor = 200;
             engineSize = 0f;
             engineOffset = 0f;
@@ -1047,6 +1047,19 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
             constructor = UnitEntity::create;
+            immunities = new ObjectSet<>();
+            for (StatusEffect effect : content.statusEffects()) {
+                if (effect == null || effect == StatusEffects.none) continue;
+                
+                if (effect.damage > 0
+                    || effect.healthMultiplier < 1f
+                    || effect.speedMultiplier < 1f
+                    || effect.damageMultiplier < 1f
+                    || effect.disarm
+                    || effect.reloadMultiplier < 1f) {
+                    immunities.add(effect);
+                }
+            }
             healColor = Color.valueOf("e13131");
 
             BulletType redLaser = new AcceleratingLaserBulletType(175f){{
@@ -1106,7 +1119,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-end-laser"){{
                 x = 538f / 4f;
-                y = 71f / 4f;
+                y = 35f / 4f;
                 shootY = 17f;
                 rotate = true;
                 rotateSpeed = 1.2f;
