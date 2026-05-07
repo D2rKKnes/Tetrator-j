@@ -39,7 +39,9 @@ public class TerraUnitTypes {
     //flying special units
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones
-    healDrone;
+    healDrone,
+    //forgoten gods
+    end;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -1019,6 +1021,86 @@ public class TerraUnitTypes {
                 bullet = new BulletType(){{
                     maxRange = 7.5f * 8;
                 }};
+            }});
+        }};
+
+        //TEST UNIT
+        end = new UnitType("end"){{
+            flying = true;
+            speed = 0.2f;
+            rotateSpeed = 0.6f;
+            drag = 0.04f;
+            accel = 0.03f;
+            hitSize = 150f;
+            softShadowScl = 1f;
+            health = 450000;
+            armor = 200;
+            engineSize = 0f;
+            engineOffset = 0f;
+            outlineRadius = 6;
+            crashDamageMultiplier = 10;
+            targetPriority = 4f;
+            fallSpeed = 0.01f;
+            faceTarget = false;
+            range = 460f;
+            itemCapacity = 1000;
+            ammoType = new PowerAmmoType(80000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            healColor = Color.valueOf("e13131");
+
+            BulletType redLaser = new AcceleratingLaserBulletType(175f){{
+                maxLength = 460f;
+                maxRange = 460f;
+                oscOffset = 0.3f;
+                lifetime = 300;
+                width = 25f;
+                collisionWidth = 12f;
+                status = TerraStatusEffects.energyOverload;
+                statusDuration = 120f;
+                colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
+                pierceCap = 50;
+                pierceBuilding = true;
+                hitColor = Color.valueOf("e13131");
+                shootEffect = hitEffect = new Effect(27f, e ->
+                Angles.randLenVectors(e.id, 8, 90f * e.fin(), e.rotation, 80f, (x, y) -> {
+                    float angle = Mathf.angle(x, y);
+                    color(Color.valueOf("e13131"), e.fin());
+                    Lines.stroke(1.5f);
+                    Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
+                }));
+            }};
+
+            weapons.add(
+            new Weapon("terra-end-laser"){{
+                x = 354.5f / 4f;
+                y = 74.5f / 4f;
+                shootY = 14f;
+                rotate = true;
+                rotateSpeed = 1.2f;
+                shootSound = TerraSounds.acceleratinglaserloop;
+                shootSoundVolume = 0.6f;
+                reload = 190f;
+                continuous = true;
+                parentizeEffects = true;
+                shake = 1.2f;
+                
+                bullet = redLaser;
+            }},
+            new Weapon("terra-end-laser"){{
+                x = 460f / 4f;
+                y = 150f / 4f;
+                shootY = 14f;
+                rotate = true;
+                rotateSpeed = 1.2f;
+                shootSound = TerraSounds.acceleratinglaserloop;
+                shootSoundVolume = 0.6f;
+                reload = 160f;
+                continuous = true;
+                parentizeEffects = true;
+                shake = 1.2f;
+                
+                bullet = redLaser;
             }});
         }};
     }
