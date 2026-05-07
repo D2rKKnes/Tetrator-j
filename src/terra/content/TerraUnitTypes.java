@@ -208,7 +208,7 @@ public class TerraUnitTypes {
             armor = 6;
             engineSize = 3.5f;
             engineOffset = 7f;
-            //range = 120f;
+            range = 70f;
             itemCapacity = 40;
             ammoType = new PowerAmmoType(2000);
             lowAltitude = true;
@@ -441,13 +441,13 @@ public class TerraUnitTypes {
                 y = -12.5f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
-                reload = 170f;
+                reload = 190f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 mirror = false;
                 shoot = new ShootAlternate() {{
                     shots = 5;
-                    shotDelay = 8f;
+                    shotDelay = 9f;
                     barrels = 3;
                     spread = 4f;
                 }};
@@ -478,7 +478,7 @@ public class TerraUnitTypes {
             range = 80f;
             itemCapacity = 0;
             ammoType = new PowerAmmoType(50000);
-            useUnitCap = false;
+            //useUnitCap = false;
             hidden = false;
             constructor = TimedKillUnit::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
@@ -927,7 +927,7 @@ public class TerraUnitTypes {
                 parts.add(new BlackHolePart(){{
                     color = Pal.suppress;
                     size = 0f;
-                    sizeTo = 14f;
+                    sizeTo = 10f;
                     edge = 0f;
                     edgeTo = 14f * 1.2f;
                     progress = growProgress = PartProgress.reload.inv().delay(0.2f);
@@ -976,7 +976,7 @@ public class TerraUnitTypes {
                     shrinkTime = 60f;
                     status = TerraStatusEffects.singularEvaporation;
                     loopSoundVolume = 5f;
-                    statusDuration = 180f;
+                    statusDuration = 240f;
                     keepVelocity = false;
                     intervalBullets = 1;
                     bulletInterval = 1f;
@@ -989,13 +989,15 @@ public class TerraUnitTypes {
                         splashDamage = 0.001f;
                         splashDamageRadius = 30f;
                         status = TerraStatusEffects.singularEvaporation;
-                        statusDuration = 180f;
+                        statusDuration = 240f;
                     }};
                 }};
             }});
         }};
 
         healDrone = new UnitType("heal-drone"){{
+            playerControllable = false;
+            logicControllable = false;
             flying = true;
             speed = 3.6f;
             drag = 0.02f;
