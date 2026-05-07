@@ -76,8 +76,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         float radr = 400f + Mathf.random(10f, 50f);
         float anglr = Mathf.random(360f);
-        int xr = sx + (int)Mathf.cosDeg(anglr) * radr;
-        int yr = sy + (int)Mathf.sinDeg(anglr) * radr;
+        int xr = sx + (int)(Mathf.cosDeg(anglr) * radr);
+        int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
         //special asteroid for core zone
         asteroid(xr, yr, rand.random(30, 50), Blocks.stone.asFloor());
