@@ -27,6 +27,7 @@ public class SmartDrill extends Drill{
         super(name);
 
         configurable = true;
+        saveConfig = true;
 
         config(Item.class, (SmartDrillBuild tile, Item item) -> {
             countOre(tile.tile);
