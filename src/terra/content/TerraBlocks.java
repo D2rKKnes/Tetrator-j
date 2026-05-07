@@ -257,7 +257,7 @@ public class TerraBlocks{
         }};
 
         plasmaDrill = new SmartDrill("plasma-drill"){{
-            requirements(Category.production, with(Items.graphite, 65, Items.thorium, 80, Items.silicon, 65, Items.metaglass, 32));
+            requirements(Category.production, with(Items.graphite, 65, Items.titanium, 80, Items.silicon, 65, Items.metaglass, 32));
             size = 3;
             tier = 4;
             itemCapacity = 20;
