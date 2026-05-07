@@ -9,6 +9,7 @@ import arc.util.*;
 import arc.*;
 import terra.ai.*;
 import terra.content.*;
+import terra.type.*
 import terra.type.bullet.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
@@ -1037,6 +1038,15 @@ public class TerraUnitTypes {
             armor = 200;
             engineSize = 0f;
             engineOffset = 0f;
+            for (float i = -50f; i < 50; i += 2f) {
+                engines.add(new AncientEngine(i, -320f, 4f, -90, o));
+            }
+            for (float i = -388f; i < -304; i += 2f) {
+                engines.add(new AncientEngine(i, -360f, 4f, -90, o));
+            }
+            for (float i = 304f; i < 388; i += 2f) {
+                engines.add(new AncientEngine(i, -360f, 4f, -90, o));
+            }
             outlineRadius = 6;
             crashDamageMultiplier = 10;
             targetPriority = 4f;
