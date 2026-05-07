@@ -21,10 +21,10 @@ import mindustry.world.meta.*;
 import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
-    public int min = 26, max = 35, octaves = 2, foct = 3;
+    public int min = 26, max = 34, octaves = 2, foct = 3;
     public float radMin = 12f, radMax = 68f, persistence = 0.4f, scale = 30f, mag = 0.46f, thresh = 1f;
     public float fmag = 0.5f, fscl = 50f, fper = 0.6f;
-    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.35f;
+    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.37f;
 
     public float thoriumScl = 1f, leadScale = 1f, graphiteScale = 1f;
 
@@ -71,10 +71,18 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         tiles.eachTile(t -> t.setFloor(background));
 
-        //spawn asteroids
         //the center asteroid is always stone
         asteroid(sx, sy, rand.random(30, 50), Blocks.stone.asFloor());
 
+        float radr = 400f + Mathf.random(10f, 50f);
+        float anglr = Mathf.random(360f);
+        int xr = sx + Mathf.cosDeg(anglr) * radr;
+        int yr = sy + Mathf.sinDeg(anglr) * radr;
+
+        //special asteroid for core zone
+        asteroid(xr, yr, rand.random(30, 50), Blocks.stone.asFloor());
+
+        //spawn asteroids
         int amount = rand.random(min, max);
         for(int i = 0; i < amount; i++){
             float radius = rand.random(radMin, radMax), ax = rand.random(radius, width - radius), ay = rand.random(radius, height - radius);
@@ -98,6 +106,16 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 }
             }
         });
+
+        //place core zone
+        for (int dxr = -1; dxr <= 1; dxr++) {
+            for (int dyr = -1; dyr <= 1; dyr++) {
+                Tile tile = world.tile(xr + dxr, yr + dyr);
+                if (tile != null) {
+                    tile.setFloor(Blocks.coreZone.asFloor());
+                }
+            }
+        }
 
         //thermoxite infection
         pass((x, y) -> {
@@ -123,7 +141,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         //walls at insides
         pass((x, y) -> {
-            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.7f, 1f / 60f) > 0.45f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
+            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.7f, 1f / 60f) > 0.45f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
 
             int radius = 6;
             for(int dx = x - radius; dx <= x + radius; dx++){
@@ -198,7 +216,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //thermoxite ores
         pass((x, y) -> {
             if(floor == TerraEnvironmentBlocks.carbonizedThermoxite){
-                if(Simplex.noise2d(seed, 8, 0.4f, 5f, x, y) > 0.53f){
+                if(Simplex.noise2d(seed, 8, 0.4f, 5f, x, y) > 0.55f){
                     ore = TerraEnvironmentBlocks.oreRawThermoxite;
                 }
             }
