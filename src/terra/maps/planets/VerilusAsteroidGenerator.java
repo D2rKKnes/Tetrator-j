@@ -72,7 +72,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         tiles.eachTile(t -> t.setFloor(background));
 
         //the center asteroid is always stone
-        asteroid(sx, sy, rand.random(38, radMax), Blocks.stone.asFloor());
+        asteroid(sx, sy, rand.random(38f, radMax), Blocks.stone.asFloor());
 
         float radr = 170f + Mathf.random(10f, 50f);
         float anglr = Mathf.random(360f);
@@ -80,7 +80,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
         //special asteroid for core zone also is always stone
-        asteroid(xr, yr, rand.random(38, radMax), Blocks.stone.asFloor());
+        asteroid(xr, yr, rand.random(38f, radMax), Blocks.stone.asFloor());
 
         //spawn asteroids
         int amount = rand.random(min, max);
@@ -145,7 +145,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                     continue;
                 }
                 Tile tile = world.tile(x, y);
-                if (tile != null && tile.withinBounds()) {
+                if (tile != null) {
                     if (Mathf.random() < 0.2f) {
                         tile.setFloor(Blocks.metalFloorDamaged.asFloor());
                     }else if (Mathf.random() < 0.5f) {
