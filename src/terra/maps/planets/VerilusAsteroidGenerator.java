@@ -72,15 +72,15 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         tiles.eachTile(t -> t.setFloor(background));
 
         //the center asteroid is always stone
-        asteroid(sx, sy, rand.random(30, 50), Blocks.stone.asFloor());
+        asteroid(sx, sy, rand.random(38, radMax), Blocks.stone.asFloor());
 
         float radr = 170f + Mathf.random(10f, 50f);
         float anglr = Mathf.random(360f);
         int xr = sx + (int)(Mathf.cosDeg(anglr) * radr);
         int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
-        //special asteroid for core zone
-        asteroid(xr, yr, rand.random(30, 50), Blocks.stone.asFloor());
+        //special asteroid for core zone also is always stone
+        asteroid(xr, yr, rand.random(38, radMax), Blocks.stone.asFloor());
 
         //spawn asteroids
         int amount = rand.random(min, max);
@@ -107,16 +107,6 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             }
         });
 
-        //place core zone
-        for (int dxr = -1; dxr <= 1; dxr++) {
-            for (int dyr = -1; dyr <= 1; dyr++) {
-                Tile tile = world.tile(xr + dxr, yr + dyr);
-                if (tile != null) {
-                    tile.setFloor(Blocks.coreZone.asFloor());
-                }
-            }
-        }
-
         //thermoxite infection
         pass((x, y) -> {
             if(floor == Blocks.carbonStone){
@@ -138,6 +128,32 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 floor = Blocks.carbonStone;
             }
         });
+        
+        //place core zone
+        for (int dxr = -1; dxr <= 1; dxr++) {
+            for (int dyr = -1; dyr <= 1; dyr++) {
+                Tile tile = world.tile(xr + dxr, yr + dyr);
+                if (tile != null) {
+                    tile.setFloor(Blocks.coreZone.asFloor());
+                }
+            }
+        }
+        //metal around core zone
+        for (int x = xr - 2; x <= xr + 2; x++) {
+            for (int y = yr - 2; y <= yr + 2; y++) {
+                if (x >= xr - 1 && x <= xr + 1 && y >= yr - 1 && y <= yr + 1) {
+                    continue;
+                }
+                Tile tile = world.tile(x, y);
+                if (tile != null && tile.withinBounds()) {
+                    if (Mathf.random() < 0.2f) {
+                        tile.setFloor(Blocks.metalFloorDamaged.asFloor());
+                    }else if (Mathf.random() < 0.5f) {
+                        tile.setFloor(Blocks.metalFloor.asFloor());
+                    }
+                }
+            }
+        }
 
         //walls at insides
         pass((x, y) -> {
@@ -240,7 +256,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             }
         });
 
-        //clusters
+        //decor clusters
         pass((x, y) -> {
             if(block == TerraEnvironmentBlocks.carbonizedThermoxiteWall && rand.chance(0.23) && nearAir(x, y) && !near(x, y, 3, TerraEnvironmentBlocks.carbonizedThermoxiteCluster)){
                 block = TerraEnvironmentBlocks.carbonizedThermoxiteCluster;
@@ -257,6 +273,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         int sizeOffset = width / 2 - 1;
         tiles.getn(sizeOffset * Geometry.d8edge[spawnSide].x + width/2, sizeOffset * Geometry.d8edge[spawnSide].y + height/2).setOverlay(Blocks.spawn);
 
+        //core in the center
         Schematics.placeLaunchLoadout(sx, sy);
 
         state.rules.planetBackground = new PlanetParams(){{
