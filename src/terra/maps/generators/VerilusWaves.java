@@ -166,7 +166,6 @@ public class VerilusWaves {
             begin = 15;
             end = 51;
             unitScaling = 2.8f;
-            unitAmount = 7;
             spacing = 3;
             max = 10;
             shieldScaling = 52f;
