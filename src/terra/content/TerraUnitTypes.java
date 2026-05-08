@@ -1096,8 +1096,86 @@ public class TerraUnitTypes {
                     Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
                 }));
             }};
+            BulletType redSmall = new BasicBulletType(8f, 172){{
+                    width = 7f;
+                    height = 12f;
+                    lifetime = 38f;
+                    buildingDamageMultiplier = 1.2f;
+                    shootEffect = Fx.sparkShoot;
+                    smokeEffect = Fx.shootBigSmoke;
+                    hitColor = backColor = trailColor = Color.valueOf("e13131");
+                    frontColor = Color.white;
+                    trailWidth = 1.5f;
+                    trailLength = 3;
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                }};
 
             weapons.add(
+            new Weapon("terra-end-smaller-mount"){{
+                x = 184f / 4f;
+                y = 210f / 4f;
+                shootY = 3f;
+                rotate = true;
+                rotateSpeed = 12f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.6f;
+                reload = 19f;
+                shoot = new ShootHelix();
+                
+                bullet = redSmall;
+            }},
+            new Weapon("terra-end-smaller-mount"){{
+                x = 400f / 4f;
+                y = -34f / 4f;
+                shootY = 3f;
+                rotate = true;
+                rotateSpeed = 12f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.6f;
+                reload = 22f;
+                shoot = new ShootHelix();
+                
+                bullet = redSmall;
+            }},
+            new Weapon("terra-end-smaller-mount"){{
+                x = 630f / 4f;
+                y = -250f / 4f;
+                shootY = 3f;
+                rotate = true;
+                rotateSpeed = 12f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.6f;
+                reload = 16f;
+                shoot = new ShootHelix();
+                
+                bullet = redSmall;
+            }},
+            new Weapon("terra-end-smaller-mount"){{
+                x = 754f / 4f;
+                y = -99f / 4f;
+                shootY = 3f;
+                rotate = true;
+                rotateSpeed = 12f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.6f;
+                reload = 18f;
+                shoot = new ShootHelix();
+                
+                bullet = redSmall;
+            }},
+            new Weapon("terra-end-smaller-mount"){{
+                x = 817f / 4f;
+                y = -148f / 4f;
+                shootY = 3f;
+                rotate = true;
+                rotateSpeed = 12f;
+                shootSound = Sounds.shootAvert;
+                shootSoundVolume = 0.6f;
+                reload = 20f;
+                shoot = new ShootHelix();
+                
+                bullet = redSmall;
+            }},
             new Weapon("terra-end-laser"){{
                 x = 354.5f / 4f;
                 y = 74.5f / 4f;
@@ -1110,6 +1188,7 @@ public class TerraUnitTypes {
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
+                alternate = false;
                 shake = 1.2f;
                 
                 bullet = redLaser;
@@ -1126,6 +1205,7 @@ public class TerraUnitTypes {
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
+                alternate = false;
                 shake = 1.2f;
                 
                 bullet = redLaser;
@@ -1142,6 +1222,7 @@ public class TerraUnitTypes {
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
+                alternate = false;
                 shake = 1.2f;
                 
                 bullet = redLaser;
