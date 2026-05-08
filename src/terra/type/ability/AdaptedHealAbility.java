@@ -1,4 +1,4 @@
-package terra.type.ablility;
+package terra.type.ability;
 
 import arc.func.Cons;
 import arc.graphics.Color;
