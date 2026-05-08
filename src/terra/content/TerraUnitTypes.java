@@ -43,8 +43,8 @@ public class TerraUnitTypes {
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones
     healDrone,
-    //probably never be used
-    end;
+    //your end
+    endSpawn, end;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -1034,7 +1034,7 @@ public class TerraUnitTypes {
             drag = 0.04f;
             accel = 0.03f;
             hitSize = 150f;
-            softShadowScl = 1f;
+            softShadowScl = 0.6f;
             health = 650000;
             armor = 200;
             engineSize = 0f;
@@ -1075,6 +1075,52 @@ public class TerraUnitTypes {
                 }
             }
             healColor = Color.valueOf("e13131");
+
+            abilities.add(new Ability() {
+                private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
+                private static final int SPAWN_COUNT = 4;
+                private static final float SPAWN_RADIUS_FACTOR = 1.85f;
+            
+                private float reload = REINFORCEMENTS_SPACING;
+            
+                @Override
+                public void update(Unit unit) {
+                    reload += Time.delta;
+                    if (reload > REINFORCEMENTS_SPACING) reload = REINFORCEMENTS_SPACING;
+            
+                    if (unit.healthf() < 0.75f && reload >= REINFORCEMENTS_SPACING) {
+                        reload = 0f;
+                        for (int i = 0; i < SPAWN_COUNT; i++) {
+                            float angleOffset = 360f / SPAWN_COUNT * i;
+                            float spawnAngle = unit.rotation + angleOffset;
+                            float distance = unit.hitSize() * SPAWN_RADIUS_FACTOR;
+                            Tmp.v1.trns(spawnAngle, distance);
+                            float spawnX = unit.x + Tmp.v1.x;
+                            float spawnY = unit.y + Tmp.v1.y;
+                            UnitType spawnType = inevitability;
+                            if (spawnType != null) {
+                                Time.run(i * 2f, () -> {
+                                    Unit newUnit = spawnType.create(unit.team);
+                                    newUnit.set(spawnX, spawnY, spawnAngle);
+                                    newUnit.add();
+                                });
+                            }
+                        }
+                    }
+                }
+            
+                @Override
+                public void draw(Unit unit) {
+                    float progress = reload / REINFORCEMENTS_SPACING;
+                    Draw.z(Layer.bullet);
+                    Tmp.c1.set(unit.team.color).lerp(Color.white, Mathf.absin(4f, 0.15f));
+                    Draw.color(Tmp.c1);
+                    Lines.stroke(3f);
+                    float radius = unit.hitSize() * 2.5f;
+                    Angles.drawPie(unit.x, unit.y, radius, 0f, progress * 360f, 0f);
+                    Draw.reset();
+                }
+            });
 
             BulletType redLaser = new AcceleratingLaserBulletType(175f){{
                 maxLength = 420f;
@@ -1117,8 +1163,8 @@ public class TerraUnitTypes {
                 recoil = 2f;
                 reload = 39f;
                 cooldownTime = 60f;
-                accelPerShot = 2f;
-                minReload = 13f;
+                accelPerShot = 1f;
+                minReload = 6f;
 
                 bullet = new ShrapnelBulletType() {{
                     length = 520;
@@ -1139,7 +1185,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.2f;
                 shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.5f;
+                shootSoundVolume = 0.3f;
                 reload = 190f;
                 cooldownTime = 160f;
                 recoil = 4f;
@@ -1183,6 +1229,7 @@ public class TerraUnitTypes {
                     lifetime = 52f;
                     width = 19f;
                     height = 19f;
+                    shrinkY = 0f;
                     frontColor = Color.valueOf("ffb59f");
                     hitColor = lightColor = backColor = trailColor = Color.valueOf("e13131");
                     trailWidth = 1.3f;
@@ -1245,17 +1292,20 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.8f;
                 shootSound = Sounds.shootSmite;
-                reload = 116f;
+                reload = 146f;
                 cooldownTime = 60f;
                 shake = 0.6f;
                 layerOffset = 0.002f;
                 minWarmup = 0.75f;
 
-                shoot = new ShootAlternate() {{
+                shoot = new ShootMulti(new ShootAlternate() {{
+                    spread = 12.3;
                     shots = 2;
-                    shotDelay = 0f;
-                    spread = 12.3f;
-                }};
+                    barrels = 2;
+                }}, new ShootPattern() {{
+                    shots = 3;
+                    shotDelay = 12f;
+                }});
 
                 parts.add(new RegionPart("-side") {{
                     outline = mirror = under = true;
@@ -1274,16 +1324,14 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(7f, 780) {{
                     status = TerraStatusEffects.impactStun;
                     statusDuration = 120f;
+                    sprite = "missile-large";
         
                     pierceArmor = true;
-        
                     lightOpacity = 0.7f;
-        
                     reflectable = false;
                     knockback = 3f;
                     impact = true;
-                    drag = -0.02f;
-        
+                    drag = -0.04f;
                     pierce = pierceBuilding = true;
                     buildingDamageMultiplier = 3f;
                     pierceCap = 7;
@@ -1292,14 +1340,12 @@ public class TerraUnitTypes {
                     lightRadius = 70f;
                     smokeEffect = Fx.shootSmokeTitan;
                     lifetime = 40f;
-        
                     frontColor = Color.white;
         
                     lightning = 2;
                     lightningDamage = damage * 0.4f;
                     lightningLength = 7;
                     lightningLengthRand = 16;
-        
                     splashDamageRadius = 36f;
                     splashDamage = damage / 2f;
         
@@ -1308,9 +1354,6 @@ public class TerraUnitTypes {
                     trailLength = 20;
                     trailWidth = 2.3f;
                     hitShake = 8f;
-        
-                    hitSound = Sounds.beamPlasma;
-        
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                 }};
             }});
