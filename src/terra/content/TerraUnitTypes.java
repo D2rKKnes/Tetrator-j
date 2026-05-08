@@ -1123,10 +1123,10 @@ public class TerraUnitTypes {
             }};
 
             weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
-            weapons.add(copyAndMoveAnd(smallerMount, 400f / 4f, -34f / 4f, w -> {w.reload = 22f}));
-            weapons.add(copyAndMoveAnd(smallerMount, 630f / 4f, -250f / 4f, w -> {w.reload = 16f}));
-            weapons.add(copyAndMoveAnd(smallerMount, 754f / 4f, -99f / 4f, w -> {w.reload = 18f}));
-            weapons.add(copyAndMoveAnd(smallerMount, 817f / 4f, -148f / 4f, w -> {w.reload = 20f}));
+            weapons.add(copyAndMoveAnd(smallerMount, 400f / 4f, -34f / 4f, w -> {w.reload = 22f;}));
+            weapons.add(copyAndMoveAnd(smallerMount, 630f / 4f, -250f / 4f, w -> {w.reload = 16f;}));
+            weapons.add(copyAndMoveAnd(smallerMount, 754f / 4f, -99f / 4f, w -> {w.reload = 18f;}));
+            weapons.add(copyAndMoveAnd(smallerMount, 817f / 4f, -148f / 4f, w -> {w.reload = 20f;}));
             weapons.add(
             new Weapon("terra-end-laser"){{
                 x = 354.5f / 4f;
