@@ -1027,7 +1027,6 @@ public class TerraUnitTypes {
             }});
         }};
 
-        //WIP
         end = new ErekirUnitType("end"){{
             flying = true;
             speed = 0.2f;
@@ -1117,9 +1116,9 @@ public class TerraUnitTypes {
                 shootY = 10;
                 recoil = 2f;
                 reload = 39f;
-                cooldownTime = 45f;
-                accelPerShot = 1.13f;
-                minReload = 4f;
+                cooldownTime = 60f;
+                accelPerShot = 2f;
+                minReload = 13f;
 
                 bullet = new ShrapnelBulletType() {{
                     length = 520;
@@ -1180,13 +1179,17 @@ public class TerraUnitTypes {
                 cooldownTime = 220f;
                 recoil = 4f;
                 shake = 2f;
-                bullet = new BasicBulletType(14f, 455f){{
-                    lifetime = 58f;
-                    width = 7f;
+                bullet = new BasicBulletType(13.4f, 455f){{
+                    lifetime = 52f;
+                    width = 19f;
                     height = 19f;
                     frontColor = Color.valueOf("ffb59f");
-                    hitColor = lightColor = backColor = Color.valueOf("e13131");
+                    hitColor = lightColor = backColor = trailColor = Color.valueOf("e13131");
+                    trailWidth = 1.3f;
+                    trailLength = 4;
                     smokeEffect = Fx.shootSmokeTitan;
+                    hitEffect = despawnEffect = Fx.titanSmokeSmall
+                    sprite = "large-orb";
                     fragBullets = 1;
                     fragBullet = new BlackHoleBulletType(0f, 76f){{
                         lifetime = 200f;
@@ -1232,7 +1235,85 @@ public class TerraUnitTypes {
             weapons.add(copyAndMoveAnd(accelLaser, 538f / 4f, 35f / 4f, w -> {w.reload = 130f;}));
 
             weapons.add(copyAndMove(blackCannon, 328f / 4f, -154f / 4f));
-            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {w.reload = 320f;}));
+            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {w.reload = 240f;}));
+
+            weapons.add(
+            new Weapon("terra-end-multi-turret"){{
+                x = 201f / 4f;
+                y = -86f / 4f;
+                shootY = 20f;
+                rotate = true;
+                rotateSpeed = 1.8f;
+                shootSound = Sounds.shootSmite;
+                reload = 116f;
+                shake = 0.6f;
+
+                shoot = new ShootAlternate() {{
+                    shots = 2;
+                    shotDelay = 0f;
+                    spread = 12.3f;
+                }};
+
+                parts.add(new RegionPart("-side") {{
+                    outline = mirror = under = true;
+                    x = y = 0;
+                    moveX = -2;
+                    //moveRot = -6f;
+                    //moveY = -2f;
+                    progress = PartProgress.warmup;
+                }}, new RegionPart("-barrel") {{
+                    under = outline = true;
+                    x = y = 0;
+                    moveY = -4f;
+                    progress = PartProgress.recoil;
+                }});
+                
+                bullet = new BasicBulletType(7f, 780) {{
+                    status = TerraStatusEffects.impactStun;
+                    statusDuration = 120f;
+        
+                    pierceArmor = true;
+        
+                    lightOpacity = 0.7f;
+        
+                     reflectable = false;
+                    knockback = 3f;
+                    impact = true;
+                    drag = 1.03f;
+        
+                    pierce = pierceBuilding = true;
+                    buildingDamageMultiplier = 3f;
+                    pierceCap = 7;
+        
+                    lightningColor = backColor = trailColor = hitColor = lightColor = Color.valueOf("e13131");
+                    lightRadius = 70f;
+                    smokeEffect = Fx.shootSmokeTitan;
+                    lifetime = 40f;
+        
+                    frontColor = Color.white;
+        
+                    lightning = 2;
+                    lightningDamage = 200f;
+                    lightningLength = 7;
+                    lightningLengthRand = 16;
+        
+                    splashDamageRadius = 36f;
+                    splashDamage = damage / 2f;
+        
+                    width = 13f;
+                    height = 35f;
+                    trailLength = 20;
+                    trailWidth = 2.3f;
+                    trailInterval = 1.76f;
+                    hitShake = 8f;
+                    trailRotation = true;
+                    keepVelocity = true;
+        
+                    hitSound = Sounds.beamPlasma;
+        
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                }};
+            }});
         }};
     }
 
