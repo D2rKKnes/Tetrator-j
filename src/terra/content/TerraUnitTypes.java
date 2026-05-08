@@ -1131,7 +1131,7 @@ public class TerraUnitTypes {
                         Fill.circle(b.x, b.y, (width / 2f) * b.fout());
                         DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation + 60);
                         DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation - 60);
-                    })));
+                    }));
                 }};
 
                 shoot = new ShootPattern();
