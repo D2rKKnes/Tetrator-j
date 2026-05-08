@@ -1186,7 +1186,7 @@ public class TerraUnitTypes {
                     height = 19f;
                     frontColor = Color.valueOf("ffb59f");
                     hitColor = lightColor = backColor = Color.valueOf("e13131");
-                    smokeEffect = Fx.shootSmokeTitan
+                    smokeEffect = Fx.shootSmokeTitan;
                     fragBullets = 1;
                     fragBullet = new BlackHoleBulletType(0f, 76f){{
                         lifetime = 200f;
