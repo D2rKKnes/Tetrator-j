@@ -34,7 +34,7 @@ import static arc.math.Angles.randLenVectors;
 import static mindustry.Vars.state;
 import static mindustry.Vars.tilesize;
 
-public class NHFx {
+public class TerraFx {
     public static final Effect
     jumpTrail = new Effect(120f, 5000, e -> {
         if (!(e.data instanceof UnitType)) return;
