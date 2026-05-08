@@ -15,7 +15,6 @@ public class TerraMod extends Mod{
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
-            //Planets.verilus.rebuild();
         });
     }
     
@@ -23,6 +22,7 @@ public class TerraMod extends Mod{
     public void loadContent(){
         Utils.init();
         TerraSounds.load();
+        TerraFx.load();
         TerraStatusEffects.load();
         TerraItems.load();
         TerraEnvironmentBlocks.load();
