@@ -1101,7 +1101,8 @@ public class TerraUnitTypes {
                             if (spawnType != null) {
                                 Time.run(i * 2f, () -> {
                                     Unit newUnit = spawnType.create(unit.team);
-                                    newUnit.set(spawnX, spawnY, spawnAngle);
+                                    newUnit.set(spawnX, spawnY);
+                                    newUnit.rotation = spawnAngle;
                                     newUnit.add();
                                 });
                             }
@@ -1117,7 +1118,9 @@ public class TerraUnitTypes {
                     Draw.color(Tmp.c1);
                     Lines.stroke(3f);
                     float radius = unit.hitSize() * 2.5f;
-                    Angles.drawPie(unit.x, unit.y, radius, 0f, progress * 360f, 0f);
+                    float startAngle = 0f;
+                    float sweep = progress * 360f;
+                    Lines.arc(unit.x, unit.y, radius, startAngle, sweep);
                     Draw.reset();
                 }
             });
@@ -1299,7 +1302,7 @@ public class TerraUnitTypes {
                 minWarmup = 0.75f;
 
                 shoot = new ShootMulti(new ShootAlternate() {{
-                    spread = 12.3;
+                    spread = 12.3f;
                     shots = 2;
                     barrels = 2;
                 }}, new ShootPattern() {{
