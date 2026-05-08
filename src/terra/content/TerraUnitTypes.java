@@ -1078,7 +1078,7 @@ public class TerraUnitTypes {
 
             abilities.add(new Ability() {
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
-                private static final int SPAWN_COUNT = 4;
+                private static final int SPAWN_COUNT = 3;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
             
                 private float reload = REINFORCEMENTS_SPACING;
@@ -1088,10 +1088,10 @@ public class TerraUnitTypes {
                     reload += Time.delta;
                     if (reload > REINFORCEMENTS_SPACING) reload = REINFORCEMENTS_SPACING;
             
-                    if (unit.healthf() < 0.75f && reload >= REINFORCEMENTS_SPACING) {
+                    if (unit.healthf() < 0.8f && reload >= REINFORCEMENTS_SPACING) {
                         reload = 0f;
                         for (int i = 0; i < SPAWN_COUNT; i++) {
-                            float angleOffset = 360f / SPAWN_COUNT * i;
+                            float angleOffset = (360f / SPAWN_COUNT * i) - (360f / SPAWN_COUNT);
                             float spawnAngle = unit.rotation + angleOffset;
                             float distance = unit.hitSize() * SPAWN_RADIUS_FACTOR;
                             Tmp.v1.trns(spawnAngle, distance);
@@ -1102,7 +1102,7 @@ public class TerraUnitTypes {
                                 Time.run(i * 2f, () -> {
                                     Unit newUnit = spawnType.create(unit.team);
                                     newUnit.set(spawnX, spawnY);
-                                    newUnit.rotation = spawnAngle;
+                                    newUnit.rotation = unit.rotation;
                                     newUnit.add();
                                 });
                             }
@@ -1113,14 +1113,18 @@ public class TerraUnitTypes {
                 @Override
                 public void draw(Unit unit) {
                     float progress = reload / REINFORCEMENTS_SPACING;
-                    Draw.z(Layer.bullet);
-                    Tmp.c1.set(unit.team.color).lerp(Color.white, Mathf.absin(4f, 0.15f));
-                    Draw.color(Tmp.c1);
+                    if (progress <= 0f) return;
+            
+                    Draw.z(Layer.effect);
                     Lines.stroke(3f);
-                    float radius = unit.hitSize() * 2.5f;
-                    float startAngle = 0f;
-                    float sweep = progress * 360f;
-                    Lines.arc(unit.x, unit.y, radius, startAngle, sweep);
+                    float radius = unit.hitSize() * 1.3f;
+            
+                    //Draw.color(Color.gray, 0.4f);
+                    //Lines.circle(unit.x, unit.y, radius);
+            
+                    Draw.color(unit.team.color);
+                    Lines.arc(unit.x, unit.y, radius, -90f, progress * 360f);
+            
                     Draw.reset();
                 }
             });
@@ -1320,7 +1324,7 @@ public class TerraUnitTypes {
                 }}, new RegionPart("-barrels") {{
                     under = outline = true;
                     x = y = 0;
-                    moveY = -4f;
+                    moveY = -5f;
                     progress = PartProgress.recoil;
                 }});
                 
