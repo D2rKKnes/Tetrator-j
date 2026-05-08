@@ -1097,18 +1097,18 @@ public class TerraUnitTypes {
                 }));
             }};
             BulletType redSmall = new BasicBulletType(8f, 172){{
-                    width = 7f;
-                    height = 12f;
-                    lifetime = 38f;
-                    buildingDamageMultiplier = 1.2f;
-                    shootEffect = Fx.sparkShoot;
-                    smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Color.valueOf("e13131");
-                    frontColor = Color.white;
-                    trailWidth = 1.5f;
-                    trailLength = 3;
-                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
-                }};
+                width = 7f;
+                height = 12f;
+                lifetime = 38f;
+                buildingDamageMultiplier = 1.2f;
+                shootEffect = Fx.sparkShoot;
+                smokeEffect = Fx.shootBigSmoke;
+                hitColor = backColor = trailColor = Color.valueOf("e13131");
+                frontColor = Color.white;
+                trailWidth = 1.5f;
+                trailLength = 3;
+                hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+            }};
 
             weapons.add(
             new Weapon("terra-end-smaller-mount"){{
@@ -1175,7 +1175,8 @@ public class TerraUnitTypes {
                 shoot = new ShootHelix();
                 
                 bullet = redSmall;
-            }},
+            }});
+            weapons.add( //too much turrets :(
             new Weapon("terra-end-laser"){{
                 x = 354.5f / 4f;
                 y = 74.5f / 4f;
