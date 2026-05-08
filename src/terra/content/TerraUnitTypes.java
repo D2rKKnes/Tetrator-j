@@ -1118,10 +1118,12 @@ public class TerraUnitTypes {
                 recoil = 2f;
                 reload = 39f;
                 cooldownTime = 45f;
+                accelPerShot = 1.13f;
+                minReload = 4f;
 
                 bullet = new ShrapnelBulletType() {{
                     length = 520;
-                    damage = 300.0F;
+                    damage = 218f;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
                     width = 11f;
@@ -1133,24 +1135,12 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootHeavy;
                 shake = 1f;
             }};
-
-            weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
-            weapons.add(copyAndMove(smallerMount, 400f / 4f, -34f / 4f));
-            weapons.add(copyAndMove(smallerMount, 630f / 4f, -250f / 4f));
-            weapons.add(copyAndMove(smallerMount, 754f / 4f, -99f / 4f));
-            weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
-            weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
-            weapons.add(copyAndMove(smallMount, -507f / 4f, -284f / 4f));
-            weapons.add(copyAndMove(smallMount, 585f / 4f, -202f / 4f));
-            weapons.add(
-            new Weapon("terra-end-laser"){{
-                x = 354.5f / 4f;
-                y = 74.5f / 4f;
+            Weapon accelLaser = new Weapon("terra-end-laser"){{
                 shootY = 17f;
                 rotate = true;
                 rotateSpeed = 1.2f;
                 shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.6f;
+                shootSoundVolume = 0.5f;
                 reload = 190f;
                 cooldownTime = 160f;
                 recoil = 4f;
@@ -1158,45 +1148,91 @@ public class TerraUnitTypes {
                 parentizeEffects = true;
                 alternate = false;
                 shake = 1.2f;
-                
-                bullet = redLaser;
-            }},
-            new Weapon("terra-end-laser"){{
-                x = -460f / 4f;
-                y = -150f / 4f;
-                shootY = 17f;
+                bullet = new AcceleratingLaserBulletType(175f){{
+                    maxLength = 420f;
+                    maxRange = 420f;
+                    oscOffset = 0.3f;
+                    lifetime = 300;
+                    width = 25f;
+                    collisionWidth = 12f;
+                    status = TerraStatusEffects.energyOverload;
+                    statusDuration = 120f;
+                    colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
+                    pierceCap = 9;
+                    pierceBuilding = true;
+                    hitColor = Color.valueOf("e13131");
+                    shootEffect = hitEffect = new Effect(27f, e ->
+                    Angles.randLenVectors(e.id, 8, 90f * e.fin(), e.rotation, 80f, (x, y) -> {
+                        float angle = Mathf.angle(x, y);
+                        color(Color.valueOf("e13131"), e.fin());
+                        Lines.stroke(1.5f);
+                        Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
+                    }));
+                }};
+            }};
+            Weapon blackCannon = new Weapon("terra-end-cannon"){{
+                shootY = 24f;
                 rotate = true;
-                rotateSpeed = 1.2f;
-                shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.6f;
-                reload = 160f;
-                cooldownTime = 130f;
+                rotateSpeed = 2.6f;
+                shootSound = TerraSounds.shootBlackhole;
+                shootSoundVolume = 0.2f;
+                reload = 290f;
+                cooldownTime = 220f;
                 recoil = 4f;
-                continuous = true;
-                parentizeEffects = true;
-                alternate = false;
-                shake = 1.2f;
-                
-                bullet = redLaser;
-            }},
-            new Weapon("terra-end-laser"){{
-                x = 538f / 4f;
-                y = 35f / 4f;
-                shootY = 17f;
-                rotate = true;
-                rotateSpeed = 1.2f;
-                shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.6f;
-                reload = 130f;
-                cooldownTime = 100f;
-                recoil = 4f;
-                continuous = true;
-                parentizeEffects = true;
-                alternate = false;
-                shake = 1.2f;
-                
-                bullet = redLaser;
-            }});
+                shake = 2f;
+                bullet = new BasicBulletType(14f, 455f){{
+                    lifetime = 58f;
+                    width = 7f;
+                    height = 19f;
+                    frontColor = Color.valueOf("ffb59f");
+                    hitColor = lightColor = backColor = Color.valueOf("e13131");
+                    smokeEffect = Fx.shootSmokeTitan
+                    fragBullets = 1;
+                    fragBullet = new BlackHoleBulletType(0f, 76f){{
+                        lifetime = 200f;
+                        color = Color.valueOf("e13131");
+                        damageRadius = 12f;
+                        suctionRadius = 90f;
+                        growTime = 20f;
+                        shrinkTime = 70f;
+                        status = TerraStatusEffects.singularEvaporation;
+                        loopSoundVolume = 0.6f;
+                        statusDuration = 90f;
+                        keepVelocity = false;
+                        intervalBullets = 1;
+                        bulletInterval = 1f;
+                        intervalBullet = new BulletType(){{
+                            speed = 0f;
+                            damage = 0f;
+                            lifetime = 0f;
+                            instantDisappear = true;
+                            shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                            splashDamage = 0.001f;
+                            splashDamageRadius = 12f;
+                            status = TerraStatusEffects.singularEvaporation;
+                            statusDuration = 90f;
+                        }};
+                    }};
+                }};
+            }};
+
+            //change to not-PointDefence?
+            weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
+            weapons.add(copyAndMove(smallerMount, 400f / 4f, -34f / 4f));
+            weapons.add(copyAndMove(smallerMount, 630f / 4f, -250f / 4f));
+            weapons.add(copyAndMove(smallerMount, 754f / 4f, -99f / 4f));
+            weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
+            
+            weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
+            weapons.add(copyAndMove(smallMount, -507f / 4f, -284f / 4f));
+            weapons.add(copyAndMove(smallMount, 585f / 4f, -202f / 4f));
+            
+            weapons.add(copyAndMove(accelLaser, 354.5f / 4f, 74.5f / 4f));
+            weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {reload = 160f;}));
+            weapons.add(copyAndMoveAnd(accelLaser, 538f / 4f, 35f / 4f, w -> {reload = 130f;}));
+
+            weapons.add(copyAndMove(blackCannon, 328f / 4f, -154f / 4f));
+            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {reload = 320f;}));
         }};
     }
 
