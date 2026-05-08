@@ -1290,6 +1290,7 @@ public class TerraUnitTypes {
                                     Unit newUnit = spawnType.create(unit.team);
                                     newUnit.set(spawnX, spawnY);
                                     newUnit.rotation = unit.rotation;
+                                    TerraFx.jumpTrail.at(spawnX, spawnY, unit.rotation, unit.team.color, spawnType);
                                     newUnit.add();
                                 });
                             }
