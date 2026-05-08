@@ -1234,7 +1234,7 @@ public class TerraUnitTypes {
             }
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
-            crashDamageMultiplier = 10;
+            crashDamageMultiplier = 0;
             targetPriority = 4f;
             fallSpeed = 0.01f;
             faceTarget = false;
@@ -1259,7 +1259,7 @@ public class TerraUnitTypes {
             healColor = Color.valueOf("e13131");
 
             abilities.add(new AdaptedHealAbility(3250f, 120f, hitSize * 2f, healColor){{
-                selfHealReloadTime = 1250f;
+                selfHealReloadTime = 150f;
             }});
                 abilities.add(new Ability() {
                     {
@@ -1441,7 +1441,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 2.6f;
                 shootSound = TerraSounds.shootBlackhole;
-                shootSoundVolume = 0.2f;
+                shootSoundVolume = 0.3f;
                 reload = 290f;
                 cooldownTime = 220f;
                 recoil = 4f;
@@ -1542,7 +1542,7 @@ public class TerraUnitTypes {
                     progress = PartProgress.recoil;
                 }});
                 
-                bullet = new BasicBulletType(7f, 780) {{
+                bullet = new BasicBulletType(7f, 230) {{
                     status = TerraStatusEffects.impactStun;
                     statusDuration = 120f;
                     sprite = "missile-large";
