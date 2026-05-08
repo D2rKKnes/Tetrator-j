@@ -22,7 +22,7 @@ public class TerraMod extends Mod{
     public void loadContent(){
         Utils.init();
         TerraSounds.load();
-        TerraFx.load();
+        //TerraFx.load();
         TerraStatusEffects.load();
         TerraItems.load();
         TerraEnvironmentBlocks.load();
