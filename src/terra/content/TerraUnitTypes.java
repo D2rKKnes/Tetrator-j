@@ -1120,7 +1120,7 @@ public class TerraUnitTypes {
                     trailLength = 3;
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                 }};
-            }},
+            }};
 
             weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
             weapons.add(copyAndMoveAnd(smallerMount, 400f / 4f, -34f / 4f, w -> {w.reload = 22f}));
