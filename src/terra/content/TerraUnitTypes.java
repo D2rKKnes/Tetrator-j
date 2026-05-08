@@ -13,6 +13,7 @@ import terra.content.*;
 import terra.type.*;
 import terra.type.bullet.*;
 import terra.type.weapons.*;
+import terra.type.ability.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
@@ -1027,6 +1028,187 @@ public class TerraUnitTypes {
             }});
         }};
 
+        endSpawn = new ErekirUnitType("end-spawn"){{
+            flying = true;
+            speed = 1.9f;
+            drag = 0.05f;
+            accel = 0.03f;
+            hitSize = 58f;
+            health = 20000;
+            armor = 20;
+            engineSize = 8f;
+            engineOffset = 70f / 4;
+            outlineRadius = 6;
+            outlineColor = Color.valueOf("36363c");
+            ammoType = new PowerAmmoType(5000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            immunities = new ObjectSet<>();
+            for (StatusEffect effect : content.statusEffects()) {
+                if (effect == null || effect == StatusEffects.none) continue;
+                
+                if (effect.damage > 0
+                    || effect.healthMultiplier < 1f
+                    || effect.speedMultiplier < 1f
+                    || effect.damageMultiplier < 1f
+                    || effect.disarm
+                    || effect.reloadMultiplier < 1f) {
+                    immunities.add(effect);
+                }
+            }
+            healColor = Color.valueOf("e13131");
+
+            weapons.add(
+            new Weapon("terra-end-cannon"){{
+                x = 107f / 4f;
+                y = 69f / 4f;
+                shootY = 24f;
+                rotate = false;
+                shootSound = TerraSounds.shootHeavy;
+                reload = 78f;
+                cooldownTime = 78f;
+                shake = 0.6f;
+                layerOffset = -0.001f;
+                minWarmup = 0.75f;
+                recoil = 4f;
+                shake = 2f;
+                
+                bullet = new ArtilleryBulletType(6.5f, 185){{
+                    collidesTiles = collides = true;
+                    lifetime = 60f;
+                    shootEffect = Fx.shootBigColor;
+                    smokeEffect = Fx.shootSmokeSquareBig;
+                    frontColor = Color.white;
+                    trailEffect = new MultiEffect(Fx.artilleryTrail, Fx.artilleryTrailSmoke);
+                    hitSound = Sounds.none;
+                    width = 18f;
+                    height = 24f;
+                    rangeOverride = 385f;
+
+                    lightColor = trailColor = hitColor = backColor = Color.valueOf("e13131");
+                    lightRadius = 40f;
+                    lightOpacity = 0.7f;
+
+                    trailWidth = 4.5f;
+                    trailLength = 19;
+                    trailChance = -1f;
+
+                    despawnEffect = Fx.none;
+                    despawnSound = Sounds.explosionDull;
+
+                    hitEffect = despawnEffect = new ExplosionEffect(){{
+                        lifetime = 50f;
+                        waveStroke = 5f;
+                        waveColor = sparkColor = trailColor;
+                        waveRad = 45f;
+                        smokeSize = 0f;
+                        smokeSizeBase = 0f;
+                        sparks = 10;
+                        sparkRad = 25f;
+                        sparkLen = 8f;
+                        sparkStroke = 3f;
+                    }};
+
+                    splashDamage = 120f;
+                    splashDamageRadius = 36f;
+
+                    fragBullets = 15;
+                    fragVelocityMin = 0.5f;
+                    fragRandomSpread = 130f;
+                    fragLifeMin = 0.3f;
+                    despawnShake = 5f;
+
+                    collidesAir = true;
+
+                    fragBullet = new BasicBulletType(5.5f, 37){{
+                        pierceCap = 2;
+                        pierceBuilding = true;
+
+                        homingPower = 0.09f;
+                        homingRange = 150f;
+
+                        lifetime = 40f;
+                        shootEffect = Fx.shootBigColor;
+                        smokeEffect = Fx.shootSmokeSquareBig;
+                        frontColor = Color.white;
+                        hitSound = Sounds.none;
+                        width = 12f;
+                        height = 20f;
+
+                        lightColor = trailColor = hitColor = backColor = Color.valueOf("e13131");
+                        lightRadius = 40f;
+                        lightOpacity = 0.7f;
+
+                        trailWidth = 2.2f;
+                        trailLength = 7;
+                        trailChance = -1f;
+
+                        collidesAir = true;
+
+                        despawnEffect = Fx.none;
+                        splashDamage = 35f;
+                        splashDamageRadius = 30f;
+
+                        hitEffect = despawnEffect = new MultiEffect(new ExplosionEffect(){{
+                            lifetime = 30f;
+                            waveStroke = 2f;
+                            waveColor = sparkColor = trailColor;
+                            waveRad = 5f;
+                            smokeSize = 0f;
+                            smokeSizeBase = 0f;
+                            sparks = 5;
+                            sparkRad = 20f;
+                            sparkLen = 6f;
+                            sparkStroke = 2f;
+                        }}, Fx.blastExplosion);
+                    }};
+                }};
+            }},
+            new SpeedUpWeapon("terra-end-small-mount"){{
+                x = 62f / 4f;
+                y = 15f / 4f;
+                rotate = true;
+                rotateSpeed = 4;
+                shootY = 10;
+                reload = 62f;
+                cooldownTime = 60f;
+                accelPerShot = 1f;
+                minReload = 18f;
+
+                bullet = new ShrapnelBulletType() {{
+                    length = 160;
+                    damage = 75f;
+                    //status = StatusEffects.slow;
+                    statusDuration = 60f;
+                    width = 9f;
+                    fromColor = Color.valueOf("ffb59f");
+                    hitColor = lightColor = lightningColor = toColor = Color.valueOf("e13131");
+                }};
+
+                shoot = new ShootSpread(){{
+                    shots = 3;
+                    spread = 20f;
+                }};
+                shootSound = TerraSounds.shootFuse;
+                shake = 2f;
+            }},
+            new PointDefenseWeapon("terra-end-smaller-mount"){{
+                x = 117f / 4f;
+                y = -17f / 4f;
+                shootY = 3f;
+                reload = 7f;
+                targetInterval = 4f;
+                targetSwitchInterval = 8f;
+                
+                bullet = new BulletType(){{
+                    shootEffect = Fx.sparkShoot;
+                    hitEffect = Fx.pointHit;
+                    maxRange = 220f;
+                    damage = 43f;
+                }};
+            }});
+        }};
+
         end = new ErekirUnitType("end"){{
             flying = true;
             speed = 0.2f;
@@ -1076,9 +1258,11 @@ public class TerraUnitTypes {
             }
             healColor = Color.valueOf("e13131");
 
-            abilities.add(new Ability() {
+            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5, healColor))
+            abilities.add(new Ability() {{
+                display = false;
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
-                private static final int SPAWN_COUNT = 3;
+                private static final int SPAWN_COUNT = 5;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
             
                 private float reload = REINFORCEMENTS_SPACING;
@@ -1091,13 +1275,13 @@ public class TerraUnitTypes {
                     if (unit.healthf() < 0.8f && reload >= REINFORCEMENTS_SPACING) {
                         reload = 0f;
                         for (int i = 0; i < SPAWN_COUNT; i++) {
-                            float angleOffset = (360f / SPAWN_COUNT * i) - (360f / SPAWN_COUNT);
+                            float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
                             float spawnAngle = unit.rotation + angleOffset;
                             float distance = unit.hitSize() * SPAWN_RADIUS_FACTOR;
                             Tmp.v1.trns(spawnAngle, distance);
                             float spawnX = unit.x + Tmp.v1.x;
                             float spawnY = unit.y + Tmp.v1.y;
-                            UnitType spawnType = inevitability;
+                            UnitType spawnType = endSpawn;
                             if (spawnType != null) {
                                 Time.run(i * 2f, () -> {
                                     Unit newUnit = spawnType.create(unit.team);
