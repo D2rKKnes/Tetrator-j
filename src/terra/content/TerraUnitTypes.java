@@ -1181,4 +1181,19 @@ public class TerraUnitTypes {
             }});
         }};
     }
+
+    public static Weapon copyAndMove(Weapon weapon, float x, float y) {
+        Weapon n = weapon.copy();
+        n.x = x;
+        n.y = y;
+        return n;
+    }
+
+    public static Weapon copyAndMoveAnd(Weapon weapon, float x, float y, Cons<Weapon> modifier) {
+        Weapon n = weapon.copy();
+        n.x = x;
+        n.y = y;
+        modifier.get(n);
+        return n;
+    }
 }
