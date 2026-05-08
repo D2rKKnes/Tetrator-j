@@ -25,6 +25,15 @@ import mindustry.graphics.Trail;
 import mindustry.type.UnitType;
 import mindustry.ui.Fonts;
 
+import java.util.Arrays;
+
+import static arc.graphics.g2d.Draw.rect;
+import static arc.graphics.g2d.Draw.*;
+import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.randLenVectors;
+import static mindustry.Vars.state;
+import static mindustry.Vars.tilesize;
+
 public class NHFx {
     public static final Effect
     jumpTrail = new Effect(120f, 5000, e -> {
