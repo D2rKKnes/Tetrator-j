@@ -41,7 +41,7 @@ public class TerraUnitTypes {
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones
     healDrone,
-    //forgoten gods
+    //probably never be used
     end;
 
     public static void load() {
