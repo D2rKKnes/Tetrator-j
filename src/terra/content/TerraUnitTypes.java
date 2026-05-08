@@ -1228,11 +1228,11 @@ public class TerraUnitTypes {
             weapons.add(copyAndMove(smallMount, 585f / 4f, -202f / 4f));
             
             weapons.add(copyAndMove(accelLaser, 354.5f / 4f, 74.5f / 4f));
-            weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {reload = 160f;}));
-            weapons.add(copyAndMoveAnd(accelLaser, 538f / 4f, 35f / 4f, w -> {reload = 130f;}));
+            weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {w.reload = 160f;}));
+            weapons.add(copyAndMoveAnd(accelLaser, 538f / 4f, 35f / 4f, w -> {w.reload = 130f;}));
 
             weapons.add(copyAndMove(blackCannon, 328f / 4f, -154f / 4f));
-            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {reload = 320f;}));
+            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {w.reload = 320f;}));
         }};
     }
 
