@@ -1258,7 +1258,7 @@ public class TerraUnitTypes {
             }
             healColor = Color.valueOf("e13131");
 
-            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5, healColor));
+            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5f, healColor));
             abilities.add(new Ability() {
                 {
                     display = false;
