@@ -30,6 +30,7 @@ import java.util.Arrays;
 import static arc.graphics.g2d.Draw.rect;
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
+import static arc.graphics.g2d.Fill.*;
 import static arc.math.Angles.randLenVectors;
 import static mindustry.Vars.state;
 import static mindustry.Vars.tilesize;
