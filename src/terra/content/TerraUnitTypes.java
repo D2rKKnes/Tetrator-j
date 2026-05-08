@@ -1188,7 +1188,7 @@ public class TerraUnitTypes {
                     trailWidth = 1.3f;
                     trailLength = 4;
                     smokeEffect = Fx.shootSmokeTitan;
-                    hitEffect = despawnEffect = Fx.titanSmokeSmall
+                    hitEffect = despawnEffect = Fx.titanSmokeSmall;
                     sprite = "large-orb";
                     fragBullets = 1;
                     fragBullet = new BlackHoleBulletType(0f, 76f){{
