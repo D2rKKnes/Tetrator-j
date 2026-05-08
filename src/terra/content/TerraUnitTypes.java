@@ -1246,7 +1246,10 @@ public class TerraUnitTypes {
                 rotateSpeed = 1.8f;
                 shootSound = Sounds.shootSmite;
                 reload = 116f;
+                cooldownTime = 60f;
                 shake = 0.6f;
+                layerOffset = 0.002f;
+                minWarmup = 0.75f;
 
                 shoot = new ShootAlternate() {{
                     shots = 2;
@@ -1261,7 +1264,7 @@ public class TerraUnitTypes {
                     //moveRot = -6f;
                     //moveY = -2f;
                     progress = PartProgress.warmup;
-                }}, new RegionPart("-barrel") {{
+                }}, new RegionPart("-barrels") {{
                     under = outline = true;
                     x = y = 0;
                     moveY = -4f;
@@ -1276,10 +1279,10 @@ public class TerraUnitTypes {
         
                     lightOpacity = 0.7f;
         
-                     reflectable = false;
+                    reflectable = false;
                     knockback = 3f;
                     impact = true;
-                    drag = 1.03f;
+                    drag = -0.02f;
         
                     pierce = pierceBuilding = true;
                     buildingDamageMultiplier = 3f;
@@ -1293,7 +1296,7 @@ public class TerraUnitTypes {
                     frontColor = Color.white;
         
                     lightning = 2;
-                    lightningDamage = 200f;
+                    lightningDamage = damage * 0.4f;
                     lightningLength = 7;
                     lightningLengthRand = 16;
         
@@ -1304,10 +1307,7 @@ public class TerraUnitTypes {
                     height = 35f;
                     trailLength = 20;
                     trailWidth = 2.3f;
-                    trailInterval = 1.76f;
                     hitShake = 8f;
-                    trailRotation = true;
-                    keepVelocity = true;
         
                     hitSound = Sounds.beamPlasma;
         
