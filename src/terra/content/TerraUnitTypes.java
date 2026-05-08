@@ -460,7 +460,7 @@ public class TerraUnitTypes {
                     smokeEffect = Fx.shootSmokeTitan;
                     hitColor = Pal.suppress;
                     shake = 1f;
-                    speed = 0f;
+                    speed = 0.001f;
                     keepVelocity = false;
 
                     spawnUnit = sapEnergyMissile;
@@ -619,7 +619,7 @@ public class TerraUnitTypes {
                     shootEffect = Fx.sparkShoot;
                     hitColor = Pal.suppress;
                     shake = 0.4f;
-                    speed = 0f;
+                    speed = 0.001f;
                     keepVelocity = false;
 
                     spawnUnit = sapEnergyMissile;
@@ -911,7 +911,7 @@ public class TerraUnitTypes {
                     smokeEffect = Fx.shootSmokeTitan;
                     hitColor = Pal.suppress;
                     shake = 1f;
-                    speed = 0f;
+                    speed = 0.001f;
                     keepVelocity = false;
                     collidesAir = true;
 
@@ -1056,7 +1056,7 @@ public class TerraUnitTypes {
             targetPriority = 4f;
             fallSpeed = 0.01f;
             faceTarget = false;
-            range = 460f;
+            range = 420f;
             itemCapacity = 1000;
             ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
@@ -1077,8 +1077,8 @@ public class TerraUnitTypes {
             healColor = Color.valueOf("e13131");
 
             BulletType redLaser = new AcceleratingLaserBulletType(175f){{
-                maxLength = 460f;
-                maxRange = 460f;
+                maxLength = 420f;
+                maxRange = 420f;
                 oscOffset = 0.3f;
                 lifetime = 300;
                 width = 25f;
@@ -1097,37 +1097,60 @@ public class TerraUnitTypes {
                     Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
                 }));
             }};
-            Weapon smallerMount = new Weapon("terra-end-smaller-mount"){{
-                x = 184f / 4f;
-                y = 210f / 4f;
+            Weapon smallerMount = new PointDefenseWeapon("terra-end-smaller-mount"){{
                 shootY = 3f;
-                rotate = true;
-                rotateSpeed = 12f;
-                shootSound = Sounds.shootAvert;
-                shootSoundVolume = 0.6f;
-                reload = 19f;
-                shoot = new ShootHelix();
+                reload = 4f;
+                targetInterval = 4f;
+                targetSwitchInterval = 6f;
                 
-                bullet = new BasicBulletType(8f, 172){{
-                    width = 7f;
-                    height = 12f;
-                    lifetime = 38f;
-                    buildingDamageMultiplier = 1.2f;
+                bullet = new BulletType(){{
                     shootEffect = Fx.sparkShoot;
-                    smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Color.valueOf("e13131");
-                    frontColor = Color.white;
-                    trailWidth = 1.5f;
-                    trailLength = 3;
-                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                    hitEffect = Fx.pointHit;
+                    maxRange = 680f;
+                    damage = 118f;
                 }};
+            }};
+            Weapon smallMount = new SpeedUpWeapon("terra-end-small-mount"){{
+                rotate = true;
+                rotateSpeed = 9;
+                shootY = 10;
+                recoil = 2f;
+                reload = 39f;
+                cooldownTime = 45f;
+
+                bullet = new ShrapnelBulletType() {{
+                    length = 520;
+                    damage = 300.0F;
+                    status = StatusEffects.slow;
+                    statusDuration = 60f;
+                    width = 11f;
+                    fromColor = Color.valueOf("ffb59f");
+                    hitColor = lightColor = lightningColor = toColor = Color.valueOf("e13131");
+                    smokeEffect = new OptionalMultiEffect(new Effect(lifetime + 2f, b -> {
+                        Draw.color(fromColor, toColor, b.fin());
+                        Fill.circle(b.x, b.y, (width / 2f) * b.fout());
+                        DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation + 60);
+                        DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation - 60);
+                    })));
+                }};
+
+                shoot = new ShootPattern();
+
+                x = 20;
+                y = -34;
+
+                shootSound = TerraSounds.shootHeavy;
+                shake = 1f;
             }};
 
             weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
-            weapons.add(copyAndMoveAnd(smallerMount, 400f / 4f, -34f / 4f, w -> {w.reload = 22f;}));
-            weapons.add(copyAndMoveAnd(smallerMount, 630f / 4f, -250f / 4f, w -> {w.reload = 16f;}));
-            weapons.add(copyAndMoveAnd(smallerMount, 754f / 4f, -99f / 4f, w -> {w.reload = 18f;}));
-            weapons.add(copyAndMoveAnd(smallerMount, 817f / 4f, -148f / 4f, w -> {w.reload = 20f;}));
+            weapons.add(copyAndMove(smallerMount, 400f / 4f, -34f / 4f));
+            weapons.add(copyAndMove(smallerMount, 630f / 4f, -250f / 4f));
+            weapons.add(copyAndMove(smallerMount, 754f / 4f, -99f / 4f));
+            weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
+            weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
+            weapons.add(copyAndMove(smallMount, -507f / 4f, -284f / 4f));
+            weapons.add(copyAndMove(smallMount, 585f / 4f, -202f / 4f));
             weapons.add(
             new Weapon("terra-end-laser"){{
                 x = 354.5f / 4f;
@@ -1138,6 +1161,7 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.6f;
                 reload = 190f;
+                cooldownTime = 160f;
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
@@ -1155,6 +1179,7 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.6f;
                 reload = 160f;
+                cooldownTime = 130f;
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
@@ -1172,6 +1197,7 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.6f;
                 reload = 130f;
+                cooldownTime = 100f;
                 recoil = 4f;
                 continuous = true;
                 parentizeEffects = true;
