@@ -1258,9 +1258,11 @@ public class TerraUnitTypes {
             }
             healColor = Color.valueOf("e13131");
 
-            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5, healColor))
-            abilities.add(new Ability() {{
-                display = false;
+            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5, healColor));
+            abilities.add(new Ability() {
+                {
+                    display = false;
+                }
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
                 private static final int SPAWN_COUNT = 5;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
