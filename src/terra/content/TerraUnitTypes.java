@@ -1176,7 +1176,7 @@ public class TerraUnitTypes {
                 minReload = 18f;
 
                 bullet = new ShrapnelBulletType() {{
-                    length = 160;
+                    length = 60;
                     damage = 75f;
                     //status = StatusEffects.slow;
                     statusDuration = 60f;
@@ -1189,7 +1189,7 @@ public class TerraUnitTypes {
                     shots = 3;
                     spread = 20f;
                 }};
-                shootSound = TerraSounds.shootFuse;
+                shootSound = Sounds.shootFuse;
                 shake = 2f;
             }},
             new PointDefenseWeapon("terra-end-smaller-mount"){{
