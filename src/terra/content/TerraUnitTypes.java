@@ -1031,12 +1031,13 @@ public class TerraUnitTypes {
         endSpawn = new ErekirUnitType("end-spawn"){{
             flying = true;
             speed = 1.9f;
+            rotateSpeed = 4f;
             drag = 0.05f;
             accel = 0.03f;
-            hitSize = 58f;
-            health = 20000;
-            armor = 20;
-            engineSize = 8f;
+            hitSize = 51f;
+            health = 40000;
+            armor = 30;
+            engineSize = 8.3f;
             engineOffset = 70f / 4;
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
@@ -1049,10 +1050,7 @@ public class TerraUnitTypes {
                 
                 if (effect.damage > 0
                     || effect.healthMultiplier < 1f
-                    || effect.speedMultiplier < 1f
-                    || effect.damageMultiplier < 1f
-                    || effect.disarm
-                    || effect.reloadMultiplier < 1f) {
+                    || effect.damageMultiplier < 1f) {
                     immunities.add(effect);
                 }
             }
@@ -1176,9 +1174,9 @@ public class TerraUnitTypes {
                 minReload = 18f;
 
                 bullet = new ShrapnelBulletType() {{
-                    length = 60;
+                    length = 118;
                     damage = 75f;
-                    //status = StatusEffects.slow;
+                    status = StatusEffects.slow;
                     statusDuration = 60f;
                     width = 9f;
                     fromColor = Color.valueOf("ffb59f");
@@ -1221,6 +1219,7 @@ public class TerraUnitTypes {
             armor = 200;
             engineSize = 0f;
             engineOffset = 0f;
+            drawCell = false;
 
             float o = Mathf.random(5);
             for (float i = -50f / 4f; i <= 50 / 4f; i += 2f) {
@@ -1238,7 +1237,7 @@ public class TerraUnitTypes {
             targetPriority = 4f;
             fallSpeed = 0.01f;
             faceTarget = false;
-            range = 420f;
+            range = 380f;
             itemCapacity = 1000;
             ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
@@ -1258,7 +1257,9 @@ public class TerraUnitTypes {
             }
             healColor = Color.valueOf("e13131");
 
-            abilities.add(new AdaptedHealAbility(0.0005f, 120f, hitSize * 1.5f, healColor));
+            abilities.add(new AdaptedHealAbility(0.04f, 120f, hitSize * 2f, healColor){{
+                selfHealReloadTime = 120f;
+            }});
             abilities.add(new Ability() {
                 {
                     display = false;
@@ -1299,43 +1300,55 @@ public class TerraUnitTypes {
                 @Override
                 public void draw(Unit unit) {
                     float progress = reload / REINFORCEMENTS_SPACING;
-                    if (progress <= 0f) return;
+                    if (progress <= 0.005f) return;
             
                     Draw.z(Layer.effect);
                     Lines.stroke(3f);
-                    float radius = unit.hitSize() * 1.3f;
-            
-                    //Draw.color(Color.gray, 0.4f);
-                    //Lines.circle(unit.x, unit.y, radius);
-            
                     Draw.color(unit.team.color);
-                    Lines.arc(unit.x, unit.y, radius, -90f, progress * 360f);
             
+                    float rad = unit.hitSize() * 2.5f;
+                    float p = Mathf.clamp(progress);
+                    int sides = 11 + (int)(rad * 0.4f);
+                    float space = 360f / sides;
+                    float hstep = Lines.getStroke() / 2f / Mathf.cosDeg(space / 2f);
+                    float r1 = rad - hstep;
+                    float r2 = rad + hstep;
+                    float angle = -90f;
+            
+                    int max = (int)(sides * p);
+                    for (int i = 0; i < max; i++) {
+                        float a = space * i + angle;
+                        float cos = Mathf.cosDeg(a);
+                        float sin = Mathf.sinDeg(a);
+                        float cos2 = Mathf.cosDeg(a + space);
+                        float sin2 = Mathf.sinDeg(a + space);
+                        Fill.quad(
+                            unit.x + r1 * cos, unit.y + r1 * sin,
+                            unit.x + r1 * cos2, unit.y + r1 * sin2,
+                            unit.x + r2 * cos2, unit.y + r2 * sin2,
+                            unit.x + r2 * cos, unit.y + r2 * sin
+                        );
+                    }
+                    if (Math.abs(max - sides * p) > 0.001f) {
+                        float a = space * max + angle;
+                        float cos = Mathf.cosDeg(a);
+                        float sin = Mathf.sinDeg(a);
+                        float cos2 = Mathf.cosDeg(a + space);
+                        float sin2 = Mathf.sinDeg(a + space);
+                        float f = sides * p - max;
+                        float len = 2 * rad * Mathf.sinDeg(space / 2);
+                        Tmp.v3.trns(a, 0, len * (f - 1));
+                        Fill.quad(
+                            unit.x + r1 * cos, unit.y + r1 * sin,
+                            unit.x + r1 * cos2 + Tmp.v3.x, unit.y + r1 * sin2 + Tmp.v3.y,
+                            unit.x + r2 * cos2 + Tmp.v3.x, unit.y + r2 * sin2 + Tmp.v3.y,
+                            unit.x + r2 * cos, unit.y + r2 * sin
+                        );
+                    }
                     Draw.reset();
                 }
             });
 
-            BulletType redLaser = new AcceleratingLaserBulletType(175f){{
-                maxLength = 420f;
-                maxRange = 420f;
-                oscOffset = 0.3f;
-                lifetime = 300;
-                width = 25f;
-                collisionWidth = 12f;
-                status = TerraStatusEffects.energyOverload;
-                statusDuration = 120f;
-                colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
-                pierceCap = 9;
-                pierceBuilding = true;
-                hitColor = Color.valueOf("e13131");
-                shootEffect = hitEffect = new Effect(27f, e ->
-                Angles.randLenVectors(e.id, 8, 90f * e.fin(), e.rotation, 80f, (x, y) -> {
-                    float angle = Mathf.angle(x, y);
-                    color(Color.valueOf("e13131"), e.fin());
-                    Lines.stroke(1.5f);
-                    Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
-                }));
-            }};
             Weapon smallerMount = new PointDefenseWeapon("terra-end-smaller-mount"){{
                 shootY = 3f;
                 reload = 4f;
