@@ -1127,19 +1127,9 @@ public class TerraUnitTypes {
                     width = 11f;
                     fromColor = Color.valueOf("ffb59f");
                     hitColor = lightColor = lightningColor = toColor = Color.valueOf("e13131");
-                    smokeEffect = new OptionalMultiEffect(new Effect(lifetime + 2f, b -> {
-                        Draw.color(fromColor, toColor, b.fin());
-                        Fill.circle(b.x, b.y, (width / 2f) * b.fout());
-                        DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation + 60);
-                        DrawFunc.tri(b.x, b.y, width / 1.75f * b.fout(Interp.circleIn), 30f, b.rotation - 60);
-                    }));
                 }};
 
                 shoot = new ShootPattern();
-
-                x = 20;
-                y = -34;
-
                 shootSound = TerraSounds.shootHeavy;
                 shake = 1f;
             }};
