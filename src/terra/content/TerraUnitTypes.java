@@ -1035,6 +1035,7 @@ public class TerraUnitTypes {
             drag = 0.05f;
             accel = 0.03f;
             hitSize = 51f;
+            softShadowScl = 0.6f;
             health = 40000;
             armor = 30;
             engineSize = 8.3f;
@@ -1063,7 +1064,7 @@ public class TerraUnitTypes {
                 shootY = 24f;
                 rotate = false;
                 shootSound = TerraSounds.shootHeavy;
-                reload = 78f;
+                reload = 108f;
                 cooldownTime = 78f;
                 shake = 0.6f;
                 layerOffset = -0.001f;
@@ -1257,15 +1258,28 @@ public class TerraUnitTypes {
             }
             healColor = Color.valueOf("e13131");
 
-            abilities.add(new AdaptedHealAbility(0.04f, 120f, hitSize * 2f, healColor){{
-                selfHealReloadTime = 120f;
+            abilities.add(new AdaptedHealAbility(3250f, 120f, hitSize * 2f, healColor){{
+                selfHealReloadTime = 1250f;
             }});
+                abilities.add(new Ability() {
+                    {
+                        display = false;
+                    }
+
+                    @Override
+                    public void death(Unit unit) {
+                        Effect.shake(unit.hitSize / 10f, unit.hitSize / 8f, unit.x, unit.y);
+                        //NHFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
+                        TerraFx.jumpTrailOut.at(unit.x, unit.y, unit.rotation, unit.team.color, unit.type);
+                        //NHSounds.jumpIn.at(unit.x, unit.y, 1, 3);
+                    }
+                });
             abilities.add(new Ability() {
                 {
                     display = false;
                 }
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
-                private static final int SPAWN_COUNT = 5;
+                private static final int SPAWN_COUNT = 4;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
             
                 private float reload = REINFORCEMENTS_SPACING;
@@ -1304,10 +1318,10 @@ public class TerraUnitTypes {
                     if (progress <= 0.005f) return;
             
                     Draw.z(Layer.effect);
-                    Lines.stroke(3f);
+                    Lines.stroke(4f);
                     Draw.color(unit.team.color);
             
-                    float rad = unit.hitSize() * 2.5f;
+                    float rad = unit.hitSize() * 2f;
                     float p = Mathf.clamp(progress);
                     int sides = 11 + (int)(rad * 0.4f);
                     float space = 360f / sides;
