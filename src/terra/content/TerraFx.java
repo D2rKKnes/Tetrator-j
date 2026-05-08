@@ -35,6 +35,7 @@ import static mindustry.Vars.state;
 import static mindustry.Vars.tilesize;
 
 public class TerraFx {
+    private static final Rand rand = new Rand();
     public static final Effect
     jumpTrail = new Effect(120f, 5000, e -> {
         if (!(e.data instanceof UnitType)) return;
