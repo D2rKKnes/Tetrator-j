@@ -55,7 +55,7 @@ public class EndEntity extends UnitEntity {
         reload += Time.delta;
         if (reload > REINFORCEMENTS_SPACING) reload = REINFORCEMENTS_SPACING;
 
-        if (healthf() < 0.8f && reload >= REINFORCEMENTS_SPACING) {
+        if (healthf() < 0.75f && reload >= REINFORCEMENTS_SPACING) {
             reload = 0f;
             for (int i = 0; i < SPAWN_COUNT; i++) {
                 float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
@@ -66,15 +66,13 @@ public class EndEntity extends UnitEntity {
                     Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.endSpawn, x + Tmp.v1.x, y + Tmp.v1.y, rotation));
                 }
             }
-            if (healthf() < 0.5f) {
-                for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
-                    float angleOffset2 = (360f / SPAWN_SECOND_COUNT * i) - ((360f / SPAWN_SECOND_COUNT) / 2);
-                    float spawnAngle2 = rotation + angleOffset2;
-                    float distance2 = 150f * SPAWN_RADIUS_FACTOR;
-                    Tmp.v1.trns(spawnAngle2, distance2);
-                    if (TerraUnitTypes.eternity != null) {
-                        Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.eternity, x + Tmp.v1.x, y + Tmp.v1.y, rotation));
-                    }
+            for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
+                float angleOffset2 = (360f / SPAWN_SECOND_COUNT * i) - ((360f / SPAWN_SECOND_COUNT) / 2);
+                float spawnAngle2 = rotation + angleOffset2;
+                float distance2 = 150f * SPAWN_RADIUS_FACTOR;
+                Tmp.v1.trns(spawnAngle2, distance2);
+                if (TerraUnitTypes.eternity != null) {
+                    Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.eternity, x + Tmp.v1.x, y + Tmp.v1.y, rotation));
                 }
             }
         }
