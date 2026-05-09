@@ -1380,12 +1380,12 @@ public class TerraUnitTypes {
                         float time = Time.time;
             
                         for (int i = 0; i < ARROW_COUNT; i++) {
-                            float angle = 360f / ARROW_COUNT * i;
-                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + angle) * (arrowScale * 0.15f);
-                            float rad = baseRadius + wobble;
-                            float x = unit.x + Mathf.cosDeg(angle) * rad;
-                            float y = unit.y + Mathf.sinDeg(angle) * rad;
-                            float rot = angle + 180f;
+                            float aangle = 360f / ARROW_COUNT * i;
+                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 0.15f);
+                            float arad = baseRadius + wobble;
+                            float x = unit.x + Mathf.cosDeg(aangle) * arad;
+                            float y = unit.y + Mathf.sinDeg(aangle) * arad;
+                            float rot = aangle + 180f;
             
                             Draw.color(unit.team.color);
                             Draw.rect(arrowSprite, x, y, arrowSprite.width * arrowScale / Draw.scl, arrowSprite.height * arrowScale / Draw.scl, rot);
