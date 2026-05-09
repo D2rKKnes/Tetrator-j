@@ -15,6 +15,7 @@ import terra.type.bullet.*;
 import terra.type.weapons.*;
 import terra.type.ability.*;
 import terra.type.units.*;
+import mindustry.Vars;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
