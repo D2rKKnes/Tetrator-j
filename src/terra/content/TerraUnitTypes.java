@@ -1225,7 +1225,7 @@ public class TerraUnitTypes {
             accel = 0.04f;
             hitSize = 150f;
             softShadowScl = 0.6f;
-            health = 850000;
+            health = 1250000;
             armor = 200;
             engineSize = engineOffset = 0f;
             drawCell = false;
