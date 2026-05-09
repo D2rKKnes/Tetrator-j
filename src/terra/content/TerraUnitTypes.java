@@ -1195,7 +1195,7 @@ public class TerraUnitTypes {
             new PointDefenseWeapon("terra-end-smaller-mount"){{
                 x = 117f / 4f;
                 y = -17f / 4f;
-                shootY = 3f;
+                shootY = 3.3f;
                 reload = 7f;
                 targetInterval = 4f;
                 targetSwitchInterval = 8f;
@@ -1235,6 +1235,8 @@ public class TerraUnitTypes {
             }
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
+            deathExplosionEffect = Fx.none;
+            deathSound = TerraSounds.jumpIn;
             crashDamageMultiplier = 0;
             targetPriority = 4f;
             fallSpeed = 0.01f;
@@ -1282,6 +1284,11 @@ public class TerraUnitTypes {
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
                 private static final int SPAWN_COUNT = 4;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
+
+                private static final int ARROW_COUNT = 5;
+                private static final float ARROW_MAX_SIZE = 5f * 8f;
+                private static final float ARROW_WOBBLE_SPEED = 2f;
+                private static final float ARROW_RADIUS_FACTOR = 2.2f;
             
                 private float reload = REINFORCEMENTS_SPACING;
             
@@ -1362,12 +1369,35 @@ public class TerraUnitTypes {
                             unit.x + r2 * cos, unit.y + r2 * sin
                         );
                     }
+                    if (progress > 0.25f && ARROW_MAX_SIZE > 0) {
+                        float arrowScale = Interp.pow2Out.apply((progress - 0.25f) / 0.75f) * ARROW_MAX_SIZE;
+                        if (arrowScale <= 0.01f) return;
+            
+                        TextureRegion arrowSprite = Core.atlas.find("logic-node");
+                        if (!arrowSprite.found()) return;
+            
+                        float baseRadius = unit.hitSize() * ARROW_RADIUS_FACTOR;
+                        float time = Time.time;
+            
+                        for (int i = 0; i < ARROW_COUNT; i++) {
+                            float angle = 360f / ARROW_COUNT * i;
+                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + angle) * (arrowScale * 0.15f);
+                            float rad = baseRadius + wobble;
+                            float x = unit.x + Mathf.cosDeg(angle) * rad;
+                            float y = unit.y + Mathf.sinDeg(angle) * rad;
+                            float rot = angle + 180f;
+            
+                            Draw.color(unit.team.color);
+                            Draw.rect(arrowSprite, x, y, arrowSprite.width * arrowScale / Draw.scl, arrowSprite.height * arrowScale / Draw.scl, rot);
+                        }
+                        Draw.reset();
+                    }
                     Draw.reset();
                 }
             });
 
             Weapon smallerMount = new Weapon("terra-end-smaller-mount"){{
-                shootY = 3f;
+                shootY = 3.3f;
                 reload = 75f;
                 shootCone = 5f;
                 rotate = true;
@@ -1384,6 +1414,7 @@ public class TerraUnitTypes {
                     statusDuration = 200f;
                     despawnShake = hitShake = 2f;
                     collidesAir = collidesGround = true;
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                 }};
             }};
             Weapon smallMount = new SpeedUpWeapon("terra-end-small-mount"){{
