@@ -1504,8 +1504,8 @@ public class TerraUnitTypes {
             weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
             
             weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
-            weapons.add(copyAndMoveAnd(smallMount, 507f / 4f, -284f / 4f, w -> {w.reload = 36f; w.minReload = 5.5f;}));
-            weapons.add(copyAndMoveAnd(smallMount, 585f / 4f, -202f / 4f, w -> {w.reload = 33f; w.minReload = 5f;}));
+            weapons.add(copyAndMoveAnd(smallMount, 507f / 4f, -284f / 4f, w -> {w.reload = 36f;}));
+            weapons.add(copyAndMoveAnd(smallMount, 585f / 4f, -202f / 4f, w -> {w.reload = 33f;}));
             
             weapons.add(copyAndMove(accelLaser, 354.5f / 4f, 74.5f / 4f));
             weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {w.reload = 160f;}));
