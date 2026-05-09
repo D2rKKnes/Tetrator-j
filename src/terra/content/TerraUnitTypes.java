@@ -1238,7 +1238,9 @@ public class TerraUnitTypes {
             deathExplosionEffect = Fx.none;
             deathSound = TerraSounds.jumpIn;
             crashDamageMultiplier = 0;
-            fallSpeed = Float.POSITIVE_INFINITY;
+            createScorch = false;
+            createWreck = false;
+            //fallSpeed = Float.POSITIVE_INFINITY;
             targetPriority = 4f;
             fallSpeed = 0.01f;
             faceTarget = false;
@@ -1284,12 +1286,13 @@ public class TerraUnitTypes {
                 }
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
                 private static final int SPAWN_COUNT = 4;
+                private static final int SPAWN_SECOND_COUNT = 2;
                 private static final float SPAWN_RADIUS_FACTOR = 1.8f;
 
                 private static final int ARROW_COUNT = 5;
                 private static final float ARROW_MAX_SIZE = 0.2f;
-                private static final float ARROW_ROTATION_SPEED = 0.1f;
-                private static final float ARROW_WOBBLE_SPEED = 1f;
+                private static final float ARROW_ROTATION_SPEED = 0.15f;
+                private static final float ARROW_WOBBLE_SPEED = 0.1f;
                 private static final float ARROW_RADIUS_FACTOR = 2.2f;
             
                 private float reload = REINFORCEMENTS_SPACING;
@@ -1314,10 +1317,33 @@ public class TerraUnitTypes {
                                     Unit newUnit = spawnType.create(unit.team);
                                     newUnit.set(spawnX, spawnY);
                                     newUnit.rotation = unit.rotation;
+                                    Effect.shake(spawnType.hitSize / 10f, spawnType.hitSize / 8f, spawnX, spawnY);
                                     TerraFx.jumpTrail.at(spawnX, spawnY, unit.rotation, unit.team.color, spawnType);
                                     TerraSounds.jumpIn.at(spawnX, spawnY, 1, 2);
                                     newUnit.add();
                                 });
+                            }
+                        }
+                        if (unit.healthf() < 0.5f) {
+                            for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
+                                float angleOffset2 = (360f / SPAWN_SECOND_COUNT * i) - ((360f / SPAWN_SECOND_COUNT) / 2);
+                                float spawnAngle2 = unit.rotation + angleOffset2;
+                                float distance2 = unit.hitSize() * SPAWN_RADIUS_FACTOR;
+                                Tmp.v1.trns(spawnAngle2, distance2);
+                                float spawnX2 = unit.x + Tmp.v1.x;
+                                float spawnY2 = unit.y + Tmp.v1.y;
+                                UnitType spawnType2 = eternity; //TODO: add "endGuardian" or something like that
+                                if (spawnType2 != null) {
+                                    Time.run(i * 2f, () -> {
+                                        Unit newUnit2 = spawnType2.create(unit.team);
+                                        newUnit2.set(spawnX2, spawnY2);
+                                        newUnit2.rotation = unit.rotation;
+                                        Effect.shake(spawnType2.hitSize / 10f, spawnType2.hitSize / 8f, spawnX2, spawnY2);
+                                        TerraFx.jumpTrail.at(spawnX2, spawnY2, unit.rotation, unit.team.color, spawnType2);
+                                        TerraSounds.jumpIn.at(spawnX2, spawnY2, 1, 2);
+                                        newUnit2.add();
+                                    });
+                                }
                             }
                         }
                     }
@@ -1383,7 +1409,7 @@ public class TerraUnitTypes {
             
                         for (int i = 0; i < ARROW_COUNT; i++) {
                             float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
-                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 1.25f);
+                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 3f);
                             float arad = baseRadius + wobble;
                             float x = unit.x + Mathf.cosDeg(aangle) * arad;
                             float y = unit.y + Mathf.sinDeg(aangle) * arad;
