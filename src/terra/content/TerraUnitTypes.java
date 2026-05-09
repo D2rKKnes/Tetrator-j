@@ -1284,9 +1284,9 @@ public class TerraUnitTypes {
                 }
                 private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
                 private static final int SPAWN_COUNT = 4;
-                private static final float SPAWN_RADIUS_FACTOR = 1.85f;
+                private static final float SPAWN_RADIUS_FACTOR = 1.8f;
 
-                private static final int ARROW_COUNT = 4;
+                private static final int ARROW_COUNT = 5;
                 private static final float ARROW_MAX_SIZE = 0.2f;
                 private static final float ARROW_ROTATION_SPEED = 0.1f;
                 private static final float ARROW_WOBBLE_SPEED = 1f;
@@ -1383,7 +1383,7 @@ public class TerraUnitTypes {
             
                         for (int i = 0; i < ARROW_COUNT; i++) {
                             float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
-                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 0.25f);
+                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 1.25f);
                             float arad = baseRadius + wobble;
                             float x = unit.x + Mathf.cosDeg(aangle) * arad;
                             float y = unit.y + Mathf.sinDeg(aangle) * arad;
@@ -1409,10 +1409,10 @@ public class TerraUnitTypes {
                 bullet = new DelayedPointBulletType(){{
                     width = 10f;
                     damage = 70;
-                    rangeOverride = 670;
+                    rangeOverride = 770;
                     trailEffect = Fx.none;
                     lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
-                    status = StatusEffects.sapped;
+                    status = StatusEffects.sapped; //TODO: new effect
                     statusDuration = 200f;
                     despawnShake = hitShake = 2f;
                     collidesAir = collidesGround = true;
