@@ -13,7 +13,7 @@ import mindustry.entities.Effect;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
-import terra.content;
+import terra.content.*;
 
 import static mindustry.Vars.content;
 
@@ -37,7 +37,7 @@ public class EndEntity extends UnitEntity {
 
     @Override
     public int classId() {
-        return EntityRegister.getID(NucleoidEntity.class);
+        return EntityRegister.getID(EndEntity.class);
     }
 
     @Override
