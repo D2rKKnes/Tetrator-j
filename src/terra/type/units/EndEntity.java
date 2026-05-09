@@ -21,9 +21,9 @@ import terra.type.units.*;
 import static mindustry.Vars.content;
 
 public class EndEntity extends UnitEntity {
-    public static final float MAX_DAMAGE_PER_SEC = 50000f;
+    public static final float MAX_DAMAGE_PER_SEC = 40000f;
     public static final float RECENT_DAMAGE_RESUME = MAX_DAMAGE_PER_SEC / 60f;
-    public static float maxOnceDamage = 5000f;
+    public static float maxOnceDamage = 4000f;
     public float recentDamage = MAX_DAMAGE_PER_SEC;
 
     private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
