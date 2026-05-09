@@ -1285,7 +1285,7 @@ public class TerraUnitTypes {
                 
                 bullet = new DelayedPointBulletType(){{
                     width = 10f;
-                    damage = 170;
+                    damage = 1700;
                     rangeOverride = 770;
                     trailEffect = Fx.none;
                     lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
@@ -1309,7 +1309,7 @@ public class TerraUnitTypes {
 
                 bullet = new ShrapnelBulletType() {{
                     length = 520;
-                    damage = 218f;
+                    damage = 1218f;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
                     width = 11f;
@@ -1319,6 +1319,7 @@ public class TerraUnitTypes {
 
                 shoot = new ShootPattern();
                 shootSound = TerraSounds.shootHeavy;
+                shootSoundVolume = 0.4f;
                 shake = 1f;
             }};
             Weapon accelLaser = new Weapon("terra-end-laser"){{
@@ -1326,7 +1327,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.2f;
                 shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.3f;
+                shootSoundVolume = 0.2f;
                 reload = 190f;
                 cooldownTime = 160f;
                 recoil = 4f;
@@ -1334,7 +1335,7 @@ public class TerraUnitTypes {
                 parentizeEffects = true;
                 alternate = false;
                 shake = 1.2f;
-                bullet = new AcceleratingLaserBulletType(200f){{
+                bullet = new AcceleratingLaserBulletType(400f){{
                     maxLength = 420f;
                     maxRange = 420f;
                     oscOffset = 0.3f;
@@ -1361,13 +1362,13 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 2.6f;
                 shootSound = TerraSounds.shootBlackhole;
-                shootSoundVolume = 0.3f;
-                reload = 190f;
+                shootSoundVolume = 0.5f;
+                reload = 150f;
                 cooldownTime = 220f;
                 recoil = 4f;
                 shake = 2f;
-                bullet = new BasicBulletType(13.4f, 455f){{
-                    lifetime = 52f;
+                bullet = new BasicBulletType(26.8f, 955f){{
+                    lifetime = 26f;
                     width = 19f;
                     height = 19f;
                     shrinkY = 0f;
@@ -1379,16 +1380,16 @@ public class TerraUnitTypes {
                     hitEffect = despawnEffect = Fx.titanSmoke;
                     sprite = "large-orb";
                     fragBullets = 1;
-                    fragBullet = new BlackHoleBulletType(0f, 76f){{
+                    fragBullet = new BlackHoleBulletType(0f, 376f){{
                         lifetime = 200f;
                         color = Color.valueOf("e13131");
-                        damageRadius = 18f;
-                        suctionRadius = 110f;
-                        growTime = 20f;
+                        damageRadius = 22f;
+                        suctionRadius = 120f;
+                        growTime = 40f;
                         shrinkTime = 70f;
                         status = TerraStatusEffects.singularEvaporation;
-                        loopSoundVolume = 0.6f;
-                        statusDuration = 90f;
+                        loopSoundVolume = 1.2f;
+                        statusDuration = 150f;
                         keepVelocity = false;
                         intervalBullets = 1;
                         bulletInterval = 1f;
@@ -1399,7 +1400,7 @@ public class TerraUnitTypes {
                             instantDisappear = true;
                             shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                             splashDamage = 0.001f;
-                            splashDamageRadius = 18f;
+                            splashDamageRadius = 22f;
                             status = TerraStatusEffects.singularEvaporation;
                             statusDuration = 90f;
                         }};
@@ -1422,7 +1423,7 @@ public class TerraUnitTypes {
             weapons.add(copyAndMoveAnd(accelLaser, 538f / 4f, 35f / 4f, w -> {w.reload = 130f;}));
 
             weapons.add(copyAndMove(blackCannon, 328f / 4f, -154f / 4f));
-            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {w.reload = 240f;}));
+            weapons.add(copyAndMoveAnd(blackCannon, 730f / 4f, 28f / 4f, w -> {w.reload = 190f;}));
 
             weapons.add(
             new Weapon("terra-end-multi-turret"){{
@@ -1461,7 +1462,7 @@ public class TerraUnitTypes {
                     progress = PartProgress.recoil;
                 }});
                 
-                bullet = new BasicBulletType(7f, 520) {{
+                bullet = new BasicBulletType(7f, 720) {{
                     status = TerraStatusEffects.impactStun;
                     statusDuration = 120f;
                     sprite = "missile-large";
