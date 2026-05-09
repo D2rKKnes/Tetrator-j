@@ -14,6 +14,7 @@ import terra.type.*;
 import terra.type.bullet.*;
 import terra.type.weapons.*;
 import terra.type.ability.*;
+import terra.type.units.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.content.*;
@@ -1248,7 +1249,7 @@ public class TerraUnitTypes {
             itemCapacity = 1000;
             ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
-            constructor = UnitEntity::create;
+            constructor = EndEntity::create;
             immunities = new ObjectSet<>();
             for (StatusEffect effect : content.statusEffects()) {
                 if (effect == null || effect == StatusEffects.none) continue;
@@ -1267,160 +1268,16 @@ public class TerraUnitTypes {
             abilities.add(new AdaptedHealAbility(3250f, 120f, hitSize * 2f, healColor){{
                 selfHealReloadTime = 150f;
             }});
-                abilities.add(new Ability() {
-                    {
-                        display = false;
-                    }
-
-                    @Override
-                    public void death(Unit unit) {
-                        Effect.shake(unit.hitSize / 10f, unit.hitSize / 8f, unit.x, unit.y);
-                        TerraFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
-                        TerraFx.jumpTrailOut.at(unit.x, unit.y, unit.rotation, unit.team.color, unit.type);
-                        TerraSounds.jumpIn.at(unit.x, unit.y, 1, 3);
-                    }
-                });
             abilities.add(new Ability() {
                 {
                     display = false;
                 }
-                private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
-                private static final int SPAWN_COUNT = 4;
-                private static final int SPAWN_SECOND_COUNT = 2;
-                private static final float SPAWN_RADIUS_FACTOR = 1.8f;
-
-                private static final int ARROW_COUNT = 5;
-                private static final float ARROW_MAX_SIZE = 0.2f;
-                private static final float ARROW_ROTATION_SPEED = 0.15f;
-                private static final float ARROW_WOBBLE_SPEED = 0.1f;
-                private static final float ARROW_RADIUS_FACTOR = 2.2f;
-            
-                private float reload = REINFORCEMENTS_SPACING;
-            
                 @Override
-                public void update(Unit unit) {
-                    reload += Time.delta;
-                    if (reload > REINFORCEMENTS_SPACING) reload = REINFORCEMENTS_SPACING;
-            
-                    if (unit.healthf() < 0.8f && reload >= REINFORCEMENTS_SPACING) {
-                        reload = 0f;
-                        for (int i = 0; i < SPAWN_COUNT; i++) {
-                            float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
-                            float spawnAngle = unit.rotation + angleOffset;
-                            float distance = unit.hitSize() * SPAWN_RADIUS_FACTOR;
-                            Tmp.v1.trns(spawnAngle, distance);
-                            float spawnX = unit.x + Tmp.v1.x;
-                            float spawnY = unit.y + Tmp.v1.y;
-                            UnitType spawnType = endSpawn;
-                            if (spawnType != null) {
-                                Time.run(i * 2f, () -> {
-                                    Unit newUnit = spawnType.create(unit.team);
-                                    newUnit.set(spawnX, spawnY);
-                                    newUnit.rotation = unit.rotation;
-                                    Effect.shake(spawnType.hitSize / 10f, spawnType.hitSize / 8f, spawnX, spawnY);
-                                    TerraFx.jumpTrail.at(spawnX, spawnY, unit.rotation, unit.team.color, spawnType);
-                                    TerraSounds.jumpIn.at(spawnX, spawnY, 1, 2);
-                                    newUnit.add();
-                                });
-                            }
-                        }
-                        if (unit.healthf() < 0.5f) {
-                            for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
-                                float angleOffset2 = (360f / SPAWN_SECOND_COUNT * i) - ((360f / SPAWN_SECOND_COUNT) / 2);
-                                float spawnAngle2 = unit.rotation + angleOffset2;
-                                float distance2 = unit.hitSize() * SPAWN_RADIUS_FACTOR;
-                                Tmp.v1.trns(spawnAngle2, distance2);
-                                float spawnX2 = unit.x + Tmp.v1.x;
-                                float spawnY2 = unit.y + Tmp.v1.y;
-                                UnitType spawnType2 = eternity; //TODO: add "endGuardian" or something like that
-                                if (spawnType2 != null) {
-                                    Time.run(i * 2f, () -> {
-                                        Unit newUnit2 = spawnType2.create(unit.team);
-                                        newUnit2.set(spawnX2, spawnY2);
-                                        newUnit2.rotation = unit.rotation;
-                                        Effect.shake(spawnType2.hitSize / 10f, spawnType2.hitSize / 8f, spawnX2, spawnY2);
-                                        TerraFx.jumpTrail.at(spawnX2, spawnY2, unit.rotation, unit.team.color, spawnType2);
-                                        TerraSounds.jumpIn.at(spawnX2, spawnY2, 1, 2);
-                                        newUnit2.add();
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-            
-                @Override
-                public void draw(Unit unit) {
-                    float progress = reload / REINFORCEMENTS_SPACING;
-                    if (progress <= 0.005f) return;
-            
-                    Draw.z(Layer.effect);
-                    Lines.stroke(4f);
-                    Draw.color(unit.team.color);
-            
-                    float rad = unit.hitSize() * 2f;
-                    float p = Mathf.clamp(progress);
-                    int sides = 11 + (int)(rad * 0.4f);
-                    float space = 360f / sides;
-                    float hstep = Lines.getStroke() / 2f / Mathf.cosDeg(space / 2f);
-                    float r1 = rad - hstep;
-                    float r2 = rad + hstep;
-                    float angle = -90f;
-            
-                    int max = (int)(sides * p);
-                    for (int i = 0; i < max; i++) {
-                        float a = space * i + angle;
-                        float cos = Mathf.cosDeg(a);
-                        float sin = Mathf.sinDeg(a);
-                        float cos2 = Mathf.cosDeg(a + space);
-                        float sin2 = Mathf.sinDeg(a + space);
-                        Fill.quad(
-                            unit.x + r1 * cos, unit.y + r1 * sin,
-                            unit.x + r1 * cos2, unit.y + r1 * sin2,
-                            unit.x + r2 * cos2, unit.y + r2 * sin2,
-                            unit.x + r2 * cos, unit.y + r2 * sin
-                        );
-                    }
-                    if (Math.abs(max - sides * p) > 0.001f) {
-                        float a = space * max + angle;
-                        float cos = Mathf.cosDeg(a);
-                        float sin = Mathf.sinDeg(a);
-                        float cos2 = Mathf.cosDeg(a + space);
-                        float sin2 = Mathf.sinDeg(a + space);
-                        float f = sides * p - max;
-                        float len = 2 * rad * Mathf.sinDeg(space / 2);
-                        Tmp.v3.trns(a, 0, len * (f - 1));
-                        Fill.quad(
-                            unit.x + r1 * cos, unit.y + r1 * sin,
-                            unit.x + r1 * cos2 + Tmp.v3.x, unit.y + r1 * sin2 + Tmp.v3.y,
-                            unit.x + r2 * cos2 + Tmp.v3.x, unit.y + r2 * sin2 + Tmp.v3.y,
-                            unit.x + r2 * cos, unit.y + r2 * sin
-                        );
-                    }
-                    if (progress > 0.25f && ARROW_MAX_SIZE > 0) {
-                        float arrowScale = Interp.pow2Out.apply((progress - 0.25f) / 0.75f) * ARROW_MAX_SIZE;
-                        if (arrowScale <= 0.01f) return;
-            
-                        TextureRegion arrowSprite = Core.atlas.find("logic-node");
-                        if (!arrowSprite.found()) return;
-            
-                        float baseRadius = unit.hitSize() * ARROW_RADIUS_FACTOR;
-                        float time = Time.time;
-            
-                        for (int i = 0; i < ARROW_COUNT; i++) {
-                            float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
-                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 3f);
-                            float arad = baseRadius + wobble;
-                            float x = unit.x + Mathf.cosDeg(aangle) * arad;
-                            float y = unit.y + Mathf.sinDeg(aangle) * arad;
-                            float rot = aangle + 180f;
-            
-                            Draw.color(unit.team.color);
-                            Draw.rect(arrowSprite, x, y, arrowSprite.width * arrowScale / Draw.scl, arrowSprite.height * arrowScale / Draw.scl, rot);
-                        }
-                        Draw.reset();
-                    }
-                    Draw.reset();
+                public void death(Unit unit) {
+                    Effect.shake(unit.hitSize / 10f, unit.hitSize / 8f, unit.x, unit.y);
+                    TerraFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
+                    TerraFx.jumpTrailOut.at(unit.x, unit.y, unit.rotation, unit.team.color, unit.type);
+                    TerraSounds.jumpIn.at(unit.x, unit.y, 1, 3);
                 }
             });
 
