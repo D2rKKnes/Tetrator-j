@@ -1366,17 +1366,24 @@ public class TerraUnitTypes {
                 }
             });
 
-            Weapon smallerMount = new PointDefenseWeapon("terra-end-smaller-mount"){{
+            Weapon smallerMount = new Weapon("terra-end-smaller-mount"){{
                 shootY = 3f;
-                reload = 4f;
-                targetInterval = 4f;
-                targetSwitchInterval = 6f;
+                reload = 75f;
+                shootCone = 5f;
+                rotate = true;
+                predictTarget = false;
+                alternate = false;
                 
-                bullet = new BulletType(){{
-                    shootEffect = Fx.sparkShoot;
-                    hitEffect = Fx.pointHit;
-                    maxRange = 680f;
-                    damage = 118f;
+                bullet = new DelayedPointBulletType(){{
+                    width = 10f;
+                    damage = 70;
+                    rangeOverride = 670;
+                    trailEffect = Fx.none;
+                    lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
+                    status = StatusEffects.sapped;
+                    statusDuration = 200f;
+                    despawnShake = hitShake = 2f;
+                    collidesAir = collidesGround = true;
                 }};
             }};
             Weapon smallMount = new SpeedUpWeapon("terra-end-small-mount"){{
@@ -1490,7 +1497,6 @@ public class TerraUnitTypes {
                 }};
             }};
 
-            //change to not-PointDefence?
             weapons.add(copyAndMove(smallerMount, 184f / 4f, 210f / 4f));
             weapons.add(copyAndMove(smallerMount, 400f / 4f, -34f / 4f));
             weapons.add(copyAndMove(smallerMount, 630f / 4f, -250f / 4f));
@@ -1498,8 +1504,8 @@ public class TerraUnitTypes {
             weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
             
             weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
-            weapons.add(copyAndMove(smallMount, -507f / 4f, -284f / 4f));
-            weapons.add(copyAndMove(smallMount, 585f / 4f, -202f / 4f));
+            weapons.add(copyAndMoveAnd(smallMount, 507f / 4f, -284f / 4f, w -> {w.reload = 36f; w.minReload = 5.5f;}));
+            weapons.add(copyAndMoveAnd(smallMount, 585f / 4f, -202f / 4f, w -> {w.reload = 33f; w.minReload = 5f;}));
             
             weapons.add(copyAndMove(accelLaser, 354.5f / 4f, 74.5f / 4f));
             weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {w.reload = 160f;}));
