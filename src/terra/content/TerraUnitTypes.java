@@ -1301,26 +1301,33 @@ public class TerraUnitTypes {
                 rotateSpeed = 9;
                 shootY = 10;
                 recoil = 2f;
-                reload = 39f;
+                reload = 49f;
                 cooldownTime = 60f;
-                accelPerShot = 1f;
+                accelPerShot = 0.4f;
                 minReload = reload / 2f;
                 accelCooldownWaitTime = reload * 3f;
-
-                bullet = new ShrapnelBulletType() {{
-                    length = 520;
-                    damage = 1218f;
+                shoot = new ShootMulti(new ShootHelix(), new ShootPattern() {{
+                    shots = 3;
+                    shotDelay = 6f;
+                }});
+                bullet = new BasicBulletType(8.9f, 421) {{
+                    lifetime = 98f;
+                    drag = 0.01f;
+                    sprite = "missile";
+                    width = 6f;
+                    height = 18f;
+                    pierce = true;
+                    pierceCap = 2;
+                    armorMultiplier = 2f;
+                    homingPower = 0.2f;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
-                    width = 11f;
-                    fromColor = Color.valueOf("ffb59f");
-                    hitColor = lightColor = lightningColor = toColor = Color.valueOf("e13131");
+                    hitColor = lightColor = trailColor = backColor = Color.valueOf("e13131");
+                    frontColor = Color.valueOf("ffb59f");
                 }};
-
-                shoot = new ShootPattern();
-                shootSound = TerraSounds.shootHeavy;
+                shootSound = TerraSounds.shootFastLaser;
                 shootSoundVolume = 0.4f;
-                shake = 1f;
+                shake = 1.4f;
             }};
             Weapon accelLaser = new Weapon("terra-end-laser"){{
                 shootY = 17f;
@@ -1415,8 +1422,8 @@ public class TerraUnitTypes {
             weapons.add(copyAndMove(smallerMount, 817f / 4f, -148f / 4f));
             
             weapons.add(copyAndMove(smallMount, 233f / 4f, 161f / 4f));
-            weapons.add(copyAndMoveAnd(smallMount, 507f / 4f, -284f / 4f, w -> {w.reload = 36f;}));
-            weapons.add(copyAndMoveAnd(smallMount, 585f / 4f, -202f / 4f, w -> {w.reload = 33f;}));
+            weapons.add(copyAndMoveAnd(smallMount, 507f / 4f, -284f / 4f, w -> {w.reload = 46f;}));
+            weapons.add(copyAndMoveAnd(smallMount, 585f / 4f, -202f / 4f, w -> {w.reload = 43f;}));
             
             weapons.add(copyAndMove(accelLaser, 354.5f / 4f, 74.5f / 4f));
             weapons.add(copyAndMoveAnd(accelLaser, 460f / 4f, -150f / 4f, w -> {w.reload = 160f;}));
