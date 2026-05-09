@@ -1380,7 +1380,7 @@ public class TerraUnitTypes {
                     sprite = "large-orb";
                     fragBullets = 1;
                     fragBullet = new BlackHoleBulletType(0f, 76f){{
-                        lifetime = Fx.titanSmoke.lifetime;
+                        lifetime = 200f;
                         color = Color.valueOf("e13131");
                         damageRadius = 18f;
                         suctionRadius = 110f;
