@@ -13,7 +13,7 @@ import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
-import mindustry.entities.Effect
+import mindustry.entities.Effect;
 import mindustry.Vars;
 import terra.content.*;
 
