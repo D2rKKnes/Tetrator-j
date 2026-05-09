@@ -1046,14 +1046,19 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(5000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = new ObjectSet<>();
-            for (StatusEffect effect : content.statusEffects()) {
-                if (effect == null || effect == StatusEffects.none) continue;
-                
-                if (effect.damage > 0
-                    || effect.healthMultiplier < 1f
-                    || effect.damageMultiplier < 1f) {
-                    immunities.add(effect);
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.damageMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
                 }
             }
             healColor = Color.valueOf("e13131");
@@ -1218,11 +1223,12 @@ public class TerraUnitTypes {
             accel = 0.03f;
             hitSize = 150f;
             softShadowScl = 0.6f;
-            health = 650000;
+            health = 850000;
             armor = 200;
             engineSize = 0f;
             engineOffset = 0f;
             drawCell = false;
+            targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.core, null};
 
             float o = Mathf.random(5);
             for (float i = -50f / 4f; i <= 50 / 4f; i += 2f) {
@@ -1249,24 +1255,29 @@ public class TerraUnitTypes {
             itemCapacity = 1000;
             ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
-            constructor = EndEntity::create;
-            immunities = new ObjectSet<>();
-            for (StatusEffect effect : content.statusEffects()) {
-                if (effect == null || effect == StatusEffects.none) continue;
-                
-                if (effect.damage > 0
-                    || effect.healthMultiplier < 1f
-                    || effect.speedMultiplier < 1f
-                    || effect.damageMultiplier < 1f
-                    || effect.disarm
-                    || effect.reloadMultiplier < 1f) {
-                    immunities.add(effect);
+            constructor = EndEntity::new;
+            healColor = Color.valueOf("e13131");
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.speedMultiplier < 1f
+                        || effect.damageMultiplier < 1f
+                        || effect.disarm
+                        || effect.reloadMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
                 }
             }
-            healColor = Color.valueOf("e13131");
 
             abilities.add(new AdaptedHealAbility(3250f, 120f, hitSize * 2f, healColor){{
-                selfHealReloadTime = 150f;
+                selfHealReloadTime = 200f;
             }});
             abilities.add(new Ability() {
                 {
