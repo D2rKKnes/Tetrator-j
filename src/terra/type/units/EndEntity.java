@@ -1,18 +1,19 @@
 package terra.type.units;
 
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.graphics.g2d.TextureRegion;
+import arc.Core;
+import arc.graphics.g2d.*;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.util.Time;
 import arc.util.Tmp;
-import mindustry.core.World;
-import mindustry.entities.Effect;
+import arc.util.io.Reads;
+import arc.util.io.Writes;
+import mindustry.content.Fx;
+import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
+import mindustry.Vars;
 import terra.content.*;
 
 import static mindustry.Vars.content;
@@ -34,11 +35,6 @@ public class EndEntity extends UnitEntity {
     private static final float ARROW_RADIUS_FACTOR = 2.2f;
 
     private float reload = REINFORCEMENTS_SPACING;
-
-    @Override
-    public int classId() {
-        return EntityRegister.getID(EndEntity.class);
-    }
 
     @Override
     public void update() {
