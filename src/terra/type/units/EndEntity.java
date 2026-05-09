@@ -153,7 +153,7 @@ public class EndEntity extends UnitEntity {
 
             for (int i = 0; i < ARROW_COUNT; i++) {
                 float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
-                float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 10f);
+                float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 0f);
                 float arad = baseRadius + wobble;
                 float xx = x + Mathf.cosDeg(aangle) * arad;
                 float yy = y + Mathf.sinDeg(aangle) * arad;
