@@ -47,7 +47,7 @@ public class EndEntity extends UnitEntity {
     public void update() {
         super.update();
 
-        recentDamage += RecentDamageResume * Time.delta;
+        recentDamage += RECENT_DAMAGE_RESUME * Time.delta;
         if (recentDamage >= MAX_DAMAGE_PER_SEC) {
             recentDamage = MAX_DAMAGE_PER_SEC;
         }
