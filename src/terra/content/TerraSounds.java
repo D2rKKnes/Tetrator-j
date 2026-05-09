@@ -21,7 +21,7 @@ public class TerraSounds {
 
     public static void load() {
         try {
-            for (Field field : NHSounds.class.getFields()) {
+            for (Field field : TerraSounds.class.getFields()) {
                 if (field.getType().equals(Sound.class)) {
                     field.set(null, loadSound(field.getName()));
                 }
