@@ -38,6 +38,11 @@ import static mindustry.Vars.tilesize;
 public class TerraFx {
     private static final Rand rand = new Rand();
     public static final Effect
+    circleOut = new Effect(60f, 500f, e -> {
+        Lines.stroke(2.5f * e.fout(), e.color);
+        Lines.circle(e.x, e.y, e.rotation * e.fin(Interp.pow3Out));
+    }),
+    
     jumpTrail = new Effect(120f, 5000, e -> {
         if (!(e.data instanceof UnitType)) return;
         UnitType type = e.data();
