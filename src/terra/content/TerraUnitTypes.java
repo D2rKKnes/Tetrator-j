@@ -1046,21 +1046,6 @@ public class TerraUnitTypes {
             ammoType = new PowerAmmoType(5000);
             lowAltitude = true;
             constructor = UnitEntity::create;
-            @Override
-            public void init() {
-                super.init();
-        
-                immunities = new ObjectSet<>();
-                for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.damageMultiplier < 1f) {
-                        immunities.add(effect);
-                    }
-                }
-            }
             healColor = Color.valueOf("e13131");
 
             weapons.add(
@@ -1213,7 +1198,23 @@ public class TerraUnitTypes {
                     damage = 43f;
                 }};
             }});
-        }};
+        }
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.damageMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
+                }
+            }
+        };
 
         end = new ErekirUnitType("end"){{
             flying = true;
@@ -1257,24 +1258,6 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = EndEntity::new;
             healColor = Color.valueOf("e13131");
-            @Override
-            public void init() {
-                super.init();
-        
-                immunities = new ObjectSet<>();
-                for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.speedMultiplier < 1f
-                        || effect.damageMultiplier < 1f
-                        || effect.disarm
-                        || effect.reloadMultiplier < 1f) {
-                        immunities.add(effect);
-                    }
-                }
-            }
 
             abilities.add(new AdaptedHealAbility(3250f, 120f, hitSize * 2f, healColor){{
                 selfHealReloadTime = 200f;
@@ -1514,7 +1497,26 @@ public class TerraUnitTypes {
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                 }};
             }});
-        }};
+        }
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.speedMultiplier < 1f
+                        || effect.damageMultiplier < 1f
+                        || effect.disarm
+                        || effect.reloadMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
+                }
+            }
+        };
     }
 
     public static Weapon copyAndMove(Weapon weapon, float x, float y) {
