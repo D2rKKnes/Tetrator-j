@@ -60,7 +60,7 @@ public class EndEntity extends UnitEntity {
             for (int i = 0; i < SPAWN_COUNT; i++) {
                 float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
                 float spawnAngle = rotation + angleOffset;
-                float distance = hitSize * SPAWN_RADIUS_FACTOR;
+                float distance = 150f * SPAWN_RADIUS_FACTOR;
                 Tmp.v1.trns(spawnAngle, distance);
                 if (TerraUnitTypes.endSpawn != null) {
                     Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.endSpawn, x + Tmp.v1.x, y + Tmp.v1.y, rotation));
@@ -70,7 +70,7 @@ public class EndEntity extends UnitEntity {
                 for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
                     float angleOffset2 = (360f / SPAWN_SECOND_COUNT * i) - ((360f / SPAWN_SECOND_COUNT) / 2);
                     float spawnAngle2 = rotation + angleOffset2;
-                    float distance2 = hitSize * SPAWN_RADIUS_FACTOR;
+                    float distance2 = 150f * SPAWN_RADIUS_FACTOR;
                     Tmp.v1.trns(spawnAngle2, distance2);
                     if (TerraUnitTypes.eternity != null) {
                         Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.eternity, x + Tmp.v1.x, y + Tmp.v1.y, rotation));
