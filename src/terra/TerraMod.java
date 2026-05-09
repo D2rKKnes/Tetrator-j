@@ -8,6 +8,7 @@ import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 import mindustry.content.Planets;
 import terra.content.*;
+import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
 import terra.util.*;
 
@@ -21,6 +22,7 @@ public class TerraMod extends Mod{
     @Override
     public void loadContent(){
         Utils.init();
+        EntityRegister.load();
         TerraSounds.load();
         //TerraFx.load();
         TerraStatusEffects.load();
