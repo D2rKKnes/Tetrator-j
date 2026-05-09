@@ -16,6 +16,7 @@ import mindustry.type.UnitType;
 import mindustry.entities.Effect;
 import mindustry.Vars;
 import terra.content.*;
+import terra.type.units.*;
 
 import static mindustry.Vars.content;
 
