@@ -1271,7 +1271,7 @@ public class TerraUnitTypes {
                         Effect.shake(unit.hitSize / 10f, unit.hitSize / 8f, unit.x, unit.y);
                         //NHFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
                         TerraFx.jumpTrailOut.at(unit.x, unit.y, unit.rotation, unit.team.color, unit.type);
-                        //NHSounds.jumpIn.at(unit.x, unit.y, 1, 3);
+                        TerraSounds.jumpIn.at(unit.x, unit.y, 1, 3);
                     }
                 });
             abilities.add(new Ability() {
@@ -1305,6 +1305,7 @@ public class TerraUnitTypes {
                                     newUnit.set(spawnX, spawnY);
                                     newUnit.rotation = unit.rotation;
                                     TerraFx.jumpTrail.at(spawnX, spawnY, unit.rotation, unit.team.color, spawnType);
+                                    TerraSounds.jumpIn.at(spawnX, spawnY, 1, 2);
                                     newUnit.add();
                                 });
                             }
