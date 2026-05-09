@@ -33,7 +33,7 @@ public class EndEntity extends UnitEntity {
     private static final int ARROW_COUNT = 5;
     private static final float ARROW_MAX_SIZE = 0.2f;
     private static final float ARROW_ROTATION_SPEED = 0.15f;
-    private static final float ARROW_WOBBLE_SPEED = 0.1f;
+    private static final float ARROW_WOBBLE_SPEED = 0.02f;
     private static final float ARROW_RADIUS_FACTOR = 2.2f;
 
     private float reload = REINFORCEMENTS_SPACING;
@@ -48,8 +48,8 @@ public class EndEntity extends UnitEntity {
         super.update();
 
         recentDamage += RecentDamageResume * Time.delta;
-        if (recentDamage >= MaxDamagedPerSec) {
-            recentDamage = MaxDamagedPerSec;
+        if (recentDamage >= MAX_DAMAGE_PER_SEC) {
+            recentDamage = MAX_DAMAGE_PER_SEC;
         }
 
         reload += Time.delta;
@@ -153,7 +153,7 @@ public class EndEntity extends UnitEntity {
 
             for (int i = 0; i < ARROW_COUNT; i++) {
                 float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
-                float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 3f);
+                float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 10f);
                 float arad = baseRadius + wobble;
                 float xx = x + Mathf.cosDeg(aangle) * arad;
                 float yy = y + Mathf.sinDeg(aangle) * arad;
