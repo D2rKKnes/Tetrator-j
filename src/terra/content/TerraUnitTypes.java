@@ -1238,6 +1238,7 @@ public class TerraUnitTypes {
             deathExplosionEffect = Fx.none;
             deathSound = TerraSounds.jumpIn;
             crashDamageMultiplier = 0;
+            fallSpeed = Float.POSITIVE_INFINITY;
             targetPriority = 4f;
             fallSpeed = 0.01f;
             faceTarget = false;
@@ -1286,7 +1287,8 @@ public class TerraUnitTypes {
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
 
                 private static final int ARROW_COUNT = 5;
-                private static final float ARROW_MAX_SIZE = 5f * 8f;
+                private static final float ARROW_MAX_SIZE = 2f;
+                private static final float ARROW_ROTATION_SPEED = 1.2f;
                 private static final float ARROW_WOBBLE_SPEED = 2f;
                 private static final float ARROW_RADIUS_FACTOR = 2.2f;
             
@@ -1380,8 +1382,8 @@ public class TerraUnitTypes {
                         float time = Time.time;
             
                         for (int i = 0; i < ARROW_COUNT; i++) {
-                            float aangle = 360f / ARROW_COUNT * i;
-                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 0.15f);
+                            float aangle = time * ARROW_ROTATION_SPEED + (360f / ARROW_COUNT) * i;
+                            float wobble = Mathf.sin(time * ARROW_WOBBLE_SPEED + aangle) * (arrowScale * 0.25f);
                             float arad = baseRadius + wobble;
                             float x = unit.x + Mathf.cosDeg(aangle) * arad;
                             float y = unit.y + Mathf.sinDeg(aangle) * arad;
