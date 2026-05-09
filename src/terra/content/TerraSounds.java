@@ -4,36 +4,42 @@ import arc.Core;
 import arc.assets.AssetDescriptor;
 import arc.assets.loaders.SoundLoader;
 import arc.audio.Sound;
-import arc.struct.Seq;
+import arc.files.Fi;
+import arc.struct.ObjectMap;
+import arc.util.Log;
 import mindustry.Vars;
+import mindustry.gen.Sounds;
+import mindustry.mod.Mods;
 
 import java.lang.reflect.Field;
 
 public class TerraSounds {
+    public static ObjectMap<String, Sound> sounds = new ObjectMap<>();
+
     public static Sound
-        shootLaunch = new Sound(), railGunCharge = new Sound(), shootHeavy = new Sound(), acceleratinglaserloop = new Sound(), shootBlackhole = new Sound();
-    public static void load(){
-        shootLaunch = loadSound("shootLaunch"); 
-        railGunCharge = loadSound("railGunCharge");
-        shootHeavy = loadSound("shootHeavy");
-        acceleratinglaserloop = loadSound("acceleratinglaserloop");
-        shootBlackhole = loadSound("shootBlackhole");
+            shootLaunch, railGunCharge, shootHeavy, acceleratinglaserloop, shootBlackhole, lumpIn;
+
+    public static void load() {
+        try {
+            for (Field field : NHSounds.class.getFields()) {
+                if (field.getType().equals(Sound.class)) {
+                    field.set(null, loadSound(field.getName()));
+                }
+            }
+        } catch (IllegalAccessException e) {
+            Log.err(e);
+        }
     }
 
-    private static Sound loadSound(String soundName){
-        if(!Vars.headless){
-            String name = "sounds/" + soundName;
-            String path = Vars.tree.get(name + ".ogg").exists() ? name + ".ogg" : name + ".mp3";
+    private static Sound loadSound(String soundName) {
+        Sound sound = new Sound();
+        if (Vars.headless) return sound;
 
-            Sound sound = new Sound();
+        String path = "sounds/" + soundName;
+        String filePath = Vars.tree.get(path + ".ogg").exists() ? path + ".ogg" : path + ".mp3";
 
-            AssetDescriptor<?> desc = Core.assets.load(path, Sound.class, new SoundLoader.SoundParameter(sound));
-            desc.errored = Throwable::printStackTrace;
-
-            return sound;
-
-        }else{
-            return new Sound();
-        }
+        AssetDescriptor<?> desc = Core.assets.load(filePath, Sound.class, new SoundLoader.SoundParameter(sound));
+        desc.errored = Throwable::printStackTrace;
+        return sound;
     }
 }
