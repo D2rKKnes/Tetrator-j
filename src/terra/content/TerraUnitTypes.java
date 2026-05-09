@@ -1173,6 +1173,7 @@ public class TerraUnitTypes {
                 cooldownTime = 60f;
                 accelPerShot = 1f;
                 minReload = 18f;
+                accelCooldownWaitTime = reload * 3f;
 
                 bullet = new ShrapnelBulletType() {{
                     length = 118;
@@ -1269,7 +1270,7 @@ public class TerraUnitTypes {
                     @Override
                     public void death(Unit unit) {
                         Effect.shake(unit.hitSize / 10f, unit.hitSize / 8f, unit.x, unit.y);
-                        //NHFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
+                        TerraFx.circleOut.at(unit.x, unit.y, unit.hitSize, unit.team.color);
                         TerraFx.jumpTrailOut.at(unit.x, unit.y, unit.rotation, unit.team.color, unit.type);
                         TerraSounds.jumpIn.at(unit.x, unit.y, 1, 3);
                     }
@@ -1387,6 +1388,7 @@ public class TerraUnitTypes {
                 cooldownTime = 60f;
                 accelPerShot = 1f;
                 minReload = 6f;
+                accelCooldownWaitTime = reload * 3f;
 
                 bullet = new ShrapnelBulletType() {{
                     length = 520;
