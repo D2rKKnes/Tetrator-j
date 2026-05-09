@@ -23,9 +23,9 @@ public class SpeedUpWeapon extends Weapon{
         AcceleratingMount aMount = (AcceleratingMount)mount;
         //mount.reload -= ((aMount.accel / minReload) * unit.reloadMultiplier * Time.delta) * (reload - minReload);
         float r = ((aMount.accel / reload) * unit.reloadMultiplier * Time.delta) * (reload - minReload);
-        if(!alternate || otherSide == -1){
+        //if(!alternate || otherSide == -1){
             mount.reload -= r;
-        }else{
+        /*}else{
             WeaponMount other = unit.mounts[otherSide];
             other.reload -= r / 2f;
             mount.reload -= r / 2f;
@@ -37,7 +37,7 @@ public class SpeedUpWeapon extends Weapon{
                 aMount.accel = accel;
                 aMount.waitTime = wTime;
             }
-        }
+        }*/
         if(aMount.waitTime <= 0f){
             aMount.accel = Math.max(0f, aMount.accel - (minReload / accelCooldownTime) * Time.delta);
         }else{
