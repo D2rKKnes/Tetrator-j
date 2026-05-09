@@ -1286,10 +1286,10 @@ public class TerraUnitTypes {
                 private static final int SPAWN_COUNT = 4;
                 private static final float SPAWN_RADIUS_FACTOR = 1.85f;
 
-                private static final int ARROW_COUNT = 5;
-                private static final float ARROW_MAX_SIZE = 2f;
-                private static final float ARROW_ROTATION_SPEED = 1.2f;
-                private static final float ARROW_WOBBLE_SPEED = 2f;
+                private static final int ARROW_COUNT = 4;
+                private static final float ARROW_MAX_SIZE = 0.2f;
+                private static final float ARROW_ROTATION_SPEED = 0.1f;
+                private static final float ARROW_WOBBLE_SPEED = 1f;
                 private static final float ARROW_RADIUS_FACTOR = 2.2f;
             
                 private float reload = REINFORCEMENTS_SPACING;
