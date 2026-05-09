@@ -38,6 +38,11 @@ public class EndEntity extends UnitEntity {
     private float reload = REINFORCEMENTS_SPACING;
 
     @Override
+    public int classId() {
+        return EntityRegister.getID(EndEntity.class);
+    }
+
+    @Override
     public void update() {
         super.update();
 
