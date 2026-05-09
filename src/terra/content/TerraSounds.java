@@ -17,7 +17,7 @@ public class TerraSounds {
     public static ObjectMap<String, Sound> sounds = new ObjectMap<>();
 
     public static Sound
-            shootLaunch, railGunCharge, shootHeavy, acceleratinglaserloop, shootBlackhole, jumpIn;
+            shootLaunch, railGunCharge, shootHeavy, acceleratinglaserloop, shootBlackhole, jumpIn, shootFastLaser;
 
     public static void load() {
         try {
