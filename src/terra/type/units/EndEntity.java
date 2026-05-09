@@ -108,7 +108,7 @@ public class EndEntity extends UnitEntity {
         float hstep = Lines.getStroke() / 2f / Mathf.cosDeg(space / 2f);
         float r1 = rad - hstep;
         float r2 = rad + hstep;
-        float angle = -90f;
+        float angle = 0f;
 
         int max = (int)(sides * p);
         for (int i = 0; i < max; i++) {
@@ -141,8 +141,8 @@ public class EndEntity extends UnitEntity {
             );
         }
 
-        if (progress > 0.25f && ARROW_MAX_SIZE > 0) {
-            float arrowScale = Interp.pow2Out.apply((progress - 0.25f) / 0.75f) * ARROW_MAX_SIZE;
+        if (progress > 0.9f && ARROW_MAX_SIZE > 0) {
+            float arrowScale = Interp.pow2Out.apply((progress - 0.9f) / 0.1f) * ARROW_MAX_SIZE;
             if (arrowScale <= 0.01f) return;
 
             TextureRegion arrowSprite = Core.atlas.find("logic-node");
