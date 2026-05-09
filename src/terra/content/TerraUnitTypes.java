@@ -1219,28 +1219,27 @@ public class TerraUnitTypes {
 
         end = new ErekirUnitType("end"){{
             flying = true;
-            speed = 0.2f;
-            rotateSpeed = 0.5f;
-            drag = 0.04f;
-            accel = 0.03f;
+            speed = 0.22f;
+            rotateSpeed = 0.4f;
+            drag = 0.035f;
+            accel = 0.04f;
             hitSize = 150f;
             softShadowScl = 0.6f;
             health = 850000;
             armor = 200;
-            engineSize = 0f;
-            engineOffset = 0f;
+            engineSize = engineOffset = 0f;
             drawCell = false;
             targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.core, null};
 
             float o = Mathf.random(5);
-            for (float i = -50f / 4f; i <= 50 / 4f; i += 2f) {
-                engines.add(new AncientEngine(i, -320f / 4f, 4f, -90, o));
+            for (float i = -50f / 4f; i <= 50 / 4f; i += 4f) {
+                engines.add(new AncientEngine(i, -320f / 4f, 8f, -90, o));
             }
-            for (float i = -388f / 4f; i <= -304 / 4f; i += 2f) {
-                engines.add(new AncientEngine(i, -360f / 4f, 4f, -90, o));
+            for (float i = -388f / 4f; i <= -304 / 4f; i += 4f) {
+                engines.add(new AncientEngine(i, -360f / 4f, 8f, -90, o));
             }
-            for (float i = 304f / 4f; i <= 388 / 4f; i += 2f) {
-                engines.add(new AncientEngine(i, -360f / 4f, 4f, -90, o));
+            for (float i = 304f / 4f; i <= 388 / 4f; i += 4f) {
+                engines.add(new AncientEngine(i, -360f / 4f, 8f, -90, o));
             }
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
