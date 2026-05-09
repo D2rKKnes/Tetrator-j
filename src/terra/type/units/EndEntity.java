@@ -47,6 +47,11 @@ public class EndEntity extends UnitEntity {
     public void update() {
         super.update();
 
+        recentDamage += RecentDamageResume * Time.delta;
+        if (recentDamage >= MaxDamagedPerSec) {
+            recentDamage = MaxDamagedPerSec;
+        }
+
         reload += Time.delta;
         if (reload > REINFORCEMENTS_SPACING) reload = REINFORCEMENTS_SPACING;
 
