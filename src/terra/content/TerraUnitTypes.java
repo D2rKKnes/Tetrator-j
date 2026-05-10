@@ -1288,7 +1288,7 @@ public class TerraUnitTypes {
                     hitColor = lightColor = trailColor = backColor = Color.valueOf("e13131");
                     frontColor = Color.valueOf("ffb59f");
                     trailWidth = 3f;
-                    trailLength = 12f;
+                    trailLength = 12;
                     pierce = true;
                     hitEffect = TerraFx.hitSparkLarge;
                     despawnEffect = new MultiEffect(hitEffect, Fx.massiveExplosion);
