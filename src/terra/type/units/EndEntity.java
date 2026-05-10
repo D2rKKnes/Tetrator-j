@@ -66,7 +66,7 @@ public class EndEntity extends UnitEntity {
                 float spawnX = x + Tmp.v1.x;
                 float spawnY = y + Tmp.v1.y;
                 if (TerraUnitTypes.endSpawn != null) {
-                    spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation, 300f));
+                    spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation, 300f);
                 }
             }
             for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
@@ -77,7 +77,7 @@ public class EndEntity extends UnitEntity {
                 float spawnX2 = x + Tmp.v1.x;
                 float spawnY2 = y + Tmp.v1.y;
                 if (TerraUnitTypes.eternity != null) { //eternity is a placeholder for now
-                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, 600f));
+                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, 600f);
                 }
             }
         }
