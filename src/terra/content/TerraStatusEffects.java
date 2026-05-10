@@ -2,12 +2,8 @@ package terra.content;
 
 import arc.graphics.Blending;
 import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.math.Interp;
-import arc.math.Mathf;
-import arc.math.Rand;
+import arc.graphics.g2d.*;
+import arc.math.*;
 import arc.math.geom.Geometry;
 import arc.struct.Seq;
 import arc.util.Time;
@@ -81,13 +77,13 @@ public class TerraStatusEffects{
         }};
 
         extinction = new StatusEffect("extinction"){{
-            color = Color.valueOf(e13131);
+            color = Color.valueOf("e13131");
             speedMultiplier = 0.4f;
             healthMultiplier = 0.2f;
             reloadMultiplier = 0.6f;
             damage = 3.7f;
-            effect = new Effect(40f, e -> {
-                 color(Color.valueOf(e13131));
+            effect = new Effect(30f, e -> {
+                 color(Color.valueOf("e13131"));
 
                 randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
                     Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
