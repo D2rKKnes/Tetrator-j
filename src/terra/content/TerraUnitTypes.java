@@ -1310,7 +1310,7 @@ public class TerraUnitTypes {
                     }));
                 }};
             }},
-            weapons.add(new RepairBeamWeapon("terra-end-small-mount"){{
+            new RepairBeamWeapon("terra-end-small-mount"){{
                 shootY = 4f;
                 x = 0f;
                 y = 0f;
