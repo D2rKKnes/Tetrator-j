@@ -1250,21 +1250,19 @@ public class TerraUnitTypes {
                 rotate = true;
                 predictTarget = false;
                 alternate = false;
-                
-                bullet = new DelayedPointBulletType(){{
-                    width = 10f;
-                    damage = 1700;
-                    rangeOverride = 770;
-                    trailEffect = Fx.none;
-                    lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
-                    status = TerraStatusEffects.extinction;
-                    statusDuration = 200f;
-                    despawnShake = hitShake = 2f;
-                    collidesAir = collidesGround = true;
-                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                continuous = true;
+                parentizeEffects = true;
+                bullet = new PointLaserBulletType(){{
+                    damage = 310f;
+                    buildingDamageMultiplier = 0.6f;
+                    hitColor = Color.valueOf("e13131");
+                    status = StatusEffects.melting;
+                    statusDuration = 20f;
                 }};
             }};
 
+            weapons.add(copyAndMove(smallerIIMount, 113f / 4f, 2f / 4f));
+            weapons.add(copyAndMove(smallerIIMount, 46f / 4f, 179f / 4f));
             weapons.add(
             new Weapon("terra-end-heavy-blaster"){{
                 x = 0f;
@@ -1401,6 +1399,7 @@ public class TerraUnitTypes {
                 bullet = new DelayedPointBulletType(){{
                     width = 10f;
                     damage = 1700;
+                    buildingDamageMultiplier = 0.8f;
                     rangeOverride = 770;
                     trailEffect = Fx.none;
                     lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
