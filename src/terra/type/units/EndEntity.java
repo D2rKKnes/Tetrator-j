@@ -93,6 +93,11 @@ public class EndEntity extends UnitEntity {
         unit.add();
         unit.setStatus(StatusEffects.shielded, statusDuration);
     }
+    
+    private void setStatus(StatusEffect status, float statusDuration) {
+        statusEntry.effect = status;
+        statusEntry.time = statusDuration;
+    }
 
     @Override
     public void draw() {
