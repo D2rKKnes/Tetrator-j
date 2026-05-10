@@ -1246,6 +1246,7 @@ public class TerraUnitTypes {
             abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = -81f / 4f;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
+                shootY = 2f;
                 reload = 60f;
                 rotate = true;
                 rotateSpeed = 6f;
@@ -1256,7 +1257,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.beamLustre;
                 bullet = new PointLaserBulletType(){{
                     lifetime = 98f;
-                    speed = 0.01f;
+                    speed = 1f;
                     damage = 310f;
                     buildingDamageMultiplier = 0.6f;
                     hitColor = Color.valueOf("e13131");
@@ -1269,7 +1270,7 @@ public class TerraUnitTypes {
                 shootY = 24f;
                 reload = cooldownTime = 78f;
                 rotate = false;
-                baseRotation = 30f;
+                baseRotation = -30f;
                 predictTarget = false;
                 alternate = false;
                 inaccuracy = 20f;
@@ -1305,24 +1306,25 @@ public class TerraUnitTypes {
             weapons.add(copyAndMove(smallerIIMount, 113f / 4f, 2f / 4f));
             weapons.add(copyAndMove(smallerIIMount, 46f / 4f, 179f / 4f));
             weapons.add(copyAndMove(staticCannon, 91f / 4f, 69f / 4f));
-            weapons.add(copyAndMoveAnd(staticCannon, 119f / 4f, 12f / 4f, w -> {w.shoot.firstShotDelay = 20f; w.baseRotation = 45f;}));
-            weapons.add(copyAndMoveAnd(staticCannon, 137f / 4f, -50f / 4f, w -> {w.shoot.firstShotDelay = 40f; w.baseRotation = 60f;}));
+            weapons.add(copyAndMoveAnd(staticCannon, 119f / 4f, 12f / 4f, w -> {w.shoot = new ShootPattern(){{shots = 2; firstShotDelay = 20f;}}; w.baseRotation = -45f;}));
+            weapons.add(copyAndMoveAnd(staticCannon, 137f / 4f, -50f / 4f, w -> {w.shoot = new ShootPattern(){{shots = 2; firstShotDelay = 40f;}}; w.baseRotation = -60f;}));
             weapons.add(
             new Weapon("terra-end-big-mount"){{
-                x = y = 87f / 4f;
+                x = 87f / 4f;
+                y = -87f / 4f;
                 shootY = 4f;
                 rotate = true;
                 rotateSpeed = 2.8f;
                 shootSound = TerraSounds.shootHeavy;
-                reload = 228f;
+                reload = 163f;
                 shake = 3f;
                 bullet = new BasicBulletType(5.2f, 420){{
-                    lifetime = 120f;
+                    lifetime = 70f;
                     width = height = 15f;
                     trailWidth = 5f;
                     trailLength = 24;
-                    hitColor = trailColor = backColor = Color.valueOf("ffb59f");
-                    frontColor = lightColor = Color.white;
+                    hitColor = trailColor = backColor = Color.valueOf("e13131");
+                    frontColor = lightColor = Color.valueOf("ffb59f");
                     sprite = "circle-bullet";
                     lightning = 7;
                     lightningDamage = damage * 0.25f;
@@ -1344,12 +1346,12 @@ public class TerraUnitTypes {
                     );
                     fragBullets = 5;
                     fragBullet = new BasicBulletType(22f, 210){{
-                        lifetime = 16f;
+                        lifetime = 6f;
                         width = height = 10f;
                         trailWidth = 5f;
                         trailLength = 75;
-                        hitColor = trailColor = backColor = Color.valueOf("ffb59f");
-                        frontColor = lightColor = Color.white;
+                        hitColor = trailColor = backColor = Color.valueOf("e13131");
+                        frontColor = lightColor = Color.valueOf("ffb59f");
                         sprite = "circle-bullet";
                         lightning = 4;
                         lightningDamage = damage * 0.25f;
@@ -1360,11 +1362,11 @@ public class TerraUnitTypes {
                         status = TerraStatusEffects.extinction;
                         statusDuration = 40f;
                         hitEffect = despawnEffect = new MultiEffect(
-                            TerraFx.hitSparkLarge,
+                            TerraFx.hitSpark,
                             new WaveEffect(){{
                                 colorFrom = lightColor = frontColor;
                                 colorTo = hitColor;
-                                lifetime = 20f;
+                                lifetime = 13f;
                                 sizeTo = 30f;
                                 strokeFrom = 3f;
                             }}
@@ -1420,7 +1422,7 @@ public class TerraUnitTypes {
             new RepairBeamWeapon("terra-end-small-mount"){{
                 shootY = 4f;
                 x = 160f / 4f;
-                y = 187f / 4f;
+                y = -187f / 4f;
                 beamWidth = 0.8f;
                 repairSpeed = 3.7f;
                 targetBuildings = true;
