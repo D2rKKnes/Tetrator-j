@@ -32,7 +32,7 @@ public class EndEntity extends UnitEntity {
     private static final int SPAWN_SECOND_COUNT = 2;
     private static final float SPAWN_RADIUS_FACTOR = 1.8f;
     private static final int ARROW_COUNT = 5;
-    private static final float ARROW_MAX_SIZE = 0.2f;
+    private static final float ARROW_MAX_SIZE = 0.25f;
     private static final float ARROW_ROTATION_SPEED = 0.15f;
     private static final float ARROW_WOBBLE_SPEED = 0.02f;
     private static final float ARROW_RADIUS_FACTOR = 2f;
@@ -65,8 +65,9 @@ public class EndEntity extends UnitEntity {
                 Tmp.v1.trns(spawnAngle, distance);
                 float spawnX = x + Tmp.v1.x;
                 float spawnY = y + Tmp.v1.y;
+                float duration = TerraUnitTypes.endSpawn.hitSize * 9f;
                 if (TerraUnitTypes.endSpawn != null) {
-                    spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation, 300f);
+                    spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation, duration);
                 }
             }
             for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
@@ -76,10 +77,12 @@ public class EndEntity extends UnitEntity {
                 Tmp.v1.trns(spawnAngle2, distance2);
                 float spawnX2 = x + Tmp.v1.x;
                 float spawnY2 = y + Tmp.v1.y;
+                float duration2 = TerraUnitTypes.eternity.hitSize * 9f;
                 if (TerraUnitTypes.eternity != null) { //eternity is a placeholder for now
-                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, 600f);
+                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, duration2);
                 }
             }
+            apply(TerraStatusEffects.warpPower, 900f);
         }
     }
 
