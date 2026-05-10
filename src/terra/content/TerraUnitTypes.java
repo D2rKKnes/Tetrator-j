@@ -1252,8 +1252,10 @@ public class TerraUnitTypes {
                 alternate = false;
                 continuous = true;
                 parentizeEffects = true;
+                shootSound = Sounds.beamLustre;
                 bullet = new PointLaserBulletType(){{
-                    lifetime = 450f;
+                    lifetime = 98f;
+                    speed = 10f;
                     damage = 310f;
                     buildingDamageMultiplier = 0.6f;
                     hitColor = Color.valueOf("e13131");
@@ -1261,9 +1263,43 @@ public class TerraUnitTypes {
                     statusDuration = 20f;
                 }};
             }};
+            Weapon staticCannon = new Weapon("terra-end-cannon"){{
+                reload = 118f;
+                rotate = false;
+                predictTarget = false;
+                alternate = false;
+                inaccuracy = 20f;
+                shootCone = 361f;
+                shootSound = TerraSounds.shootLaunch;
+                shoot = new ShootPattern(){{
+                    shots = 2;
+                    shotDelay = 0f;
+                }};
+                bullet = new BasicBulletType(4.5f, 318){{
+                    lifetime = 98f;
+                    splashDamage = damage / 2f;
+                    splashDamageRadius = 25f;
+                    scaledSplashDamage = true;
+                    sprite = "missile-large";
+                    followAimSpeed = 6f;
+                    width = 6f;
+                    height = 22f;
+                    shrinkY = 0f;
+                    hitColor = lightColor = trailColor = backColor = Color.valueOf("e13131");
+                    frontColor = Color.valueOf("ffb59f");
+                    trailWidth = 3f;
+                    trailLength = 12f;
+                    pierce = true;
+                    hitEffect = TerraFx.hitSparkLarge;
+                    despawnEffect = new MultiEffect(hitEffect, Fx.massiveExplosion);
+                }};
+            }};
 
             weapons.add(copyAndMove(smallerIIMount, 113f / 4f, 2f / 4f));
             weapons.add(copyAndMove(smallerIIMount, 46f / 4f, 179f / 4f));
+            weapons.add(copyAndMove(staticCannon, 91f / 4f, 69f / 4f));
+            weapons.add(copyAndMoveAnd(staticCannon, 119f / 4f, 12f / 4f, w -> {w.shoot.shotDelay = 20f;}));
+            weapons.add(copyAndMoveAnd(staticCannon, 137f / 4f, -50f / 4f, w -> {w.shoot.shotDelay = 40f;}));
             weapons.add(
             new Weapon("terra-end-heavy-blaster"){{
                 x = 0f;
@@ -1288,7 +1324,7 @@ public class TerraUnitTypes {
                     moveRot = 10f;
                     progress = PartProgress.recoil;
                 }});
-                bullet = new AcceleratingLaserBulletType(100f){{
+                bullet = new AcceleratingLaserBulletType(148f){{
                     maxLength = 288f;
                     maxRange = 288f;
                     oscOffset = 0.3f;
