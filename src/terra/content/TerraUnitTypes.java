@@ -46,8 +46,8 @@ public class TerraUnitTypes {
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones
     healDrone,
-    //your end
-    endSpawn, end;
+    //lost NH
+    endSpawn, endGuard, end;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -1206,11 +1206,99 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == TerraStatusEffects.warped) continue;
+                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
         
                     if (effect.damage > 0
                         || effect.healthMultiplier < 1f
-                        || effect.damageMultiplier < 1f) {
+                        || effect.speedMultiplier < 1f
+                        || effect.damageMultiplier < 1f
+                        || effect.disarm
+                        || effect.reloadMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
+                }
+            }
+        };
+
+        endGuard = new ErekirUnitType("end-guard"){{
+            flying = true;
+            speed = 1.1f;
+            rotateSpeed = 2f;
+            drag = 0.05f;
+            accel = 0.03f;
+            hitSize = 94f;
+            softShadowScl = 0.6f;
+            health = 280000;
+            armor = 70;
+            engineSize = 6f;
+            engineOffset = 270f / 4;
+            outlineRadius = 6;
+            outlineColor = Color.valueOf("36363c");
+            ammoType = new PowerAmmoType(20000);
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+            healColor = Color.valueOf("e13131");
+
+            weapons.add(
+            new Weapon("terra-end-heavy-blaster"){{
+                x = 0f;
+                y = 60f / 4f;
+                shootY = 17f;
+                rotate = true;
+                rotateSpeed = 1.8f;
+                shootSound = TerraSounds.acceleratinglaserloop;
+                shootSoundVolume = 0.5f;
+                reload = 228f;
+                cooldownTime = 140f;
+                recoil = 4f;
+                continuous = true;
+                parentizeEffects = true;
+                mirror = false;
+                shake = 1.2f;
+                parts.add(new RegionPart("-blade") {{
+                    outline = mirror = true;
+                    x = y = 0;
+                    moveX = 2;
+                    moveRot = 15f;
+                    progress = PartProgress.recoil;
+                }});
+                bullet = new AcceleratingLaserBulletType(100f){{
+                    maxLength = 288f;
+                    maxRange = 288f;
+                    oscOffset = 0.3f;
+                    lifetime = 275;
+                    width = 20f;
+                    collisionWidth = 10f;
+                    status = TerraStatusEffects.extinction;
+                    statusDuration = 120f;
+                    colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
+                    pierceCap = 4;
+                    pierceBuilding = true;
+                    hitColor = Color.valueOf("e13131");
+                    shootEffect = hitEffect = new Effect(27f, e ->
+                    Angles.randLenVectors(e.id, 8, 90f * e.fin(), e.rotation, 80f, (x, y) -> {
+                        float angle = Mathf.angle(x, y);
+                        color(Color.valueOf("e13131"), e.fin());
+                        Lines.stroke(1.5f);
+                        Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
+                    }));
+                }}
+            }});
+        }
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.speedMultiplier < 1f
+                        || effect.damageMultiplier < 1f
+                        || effect.disarm
+                        || effect.reloadMultiplier < 1f) {
                         immunities.add(effect);
                     }
                 }
@@ -1226,7 +1314,7 @@ public class TerraUnitTypes {
             hitSize = 150f;
             softShadowScl = 0.6f;
             health = 1250000;
-            armor = 200;
+            armor = 300;
             engineSize = engineOffset = 0f;
             drawCell = false;
             targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.core, null};
@@ -1514,7 +1602,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == TerraStatusEffects.warped) continue;
+                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
         
                     if (effect.damage > 0
                         || effect.healthMultiplier < 1f
