@@ -1232,7 +1232,7 @@ public class TerraUnitTypes {
             targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.core, null};
 
             float o = Mathf.random(5);
-            for (float i = -50f / 4f; i <= 50 / 4f; i += 4f) {
+            for (float i = -50f / 4f; i <= 50 / 4f; i += 5f) {
                 engines.add(new AncientEngine(i, -320f / 4f, 7f, -90, o));
             }
             for (float i = -388f / 4f; i <= -304 / 4f; i += 4f) {
@@ -1316,6 +1316,8 @@ public class TerraUnitTypes {
                     sprite = "missile";
                     width = 6f;
                     height = 18f;
+                    trailWidth = 1.3f;
+                    trailLength = 7;
                     pierce = true;
                     pierceCap = 2;
                     armorMultiplier = 2f;
