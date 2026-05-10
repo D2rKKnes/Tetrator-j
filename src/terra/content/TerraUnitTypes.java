@@ -1223,15 +1223,18 @@ public class TerraUnitTypes {
         endGuard = new ErekirUnitType("end-guard"){{
             flying = true;
             speed = 1.1f;
-            rotateSpeed = 2f;
+            rotateSpeed = 1.7f;
             drag = 0.05f;
             accel = 0.03f;
             hitSize = 94f;
             softShadowScl = 0.6f;
             health = 280000;
             armor = 70;
-            engineSize = 6f;
+            engineSize = 10f;
             engineOffset = 270f / 4;
+            setEnginesMirror(
+                new UnitEngine(90f / 4f, 270f / 4f, 8f, 0f)
+            );
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
             ammoType = new PowerAmmoType(20000);
@@ -1239,13 +1242,36 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             healColor = Color.valueOf("e13131");
 
+            abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
+            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = 81f / 4f;}});
+
+            Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
+                reload = 30f;
+                rotate = true;
+                predictTarget = false;
+                alternate = false;
+                
+                bullet = new DelayedPointBulletType(){{
+                    width = 10f;
+                    damage = 1700;
+                    rangeOverride = 770;
+                    trailEffect = Fx.none;
+                    lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
+                    status = TerraStatusEffects.extinction;
+                    statusDuration = 200f;
+                    despawnShake = hitShake = 2f;
+                    collidesAir = collidesGround = true;
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                }};
+            }};
+
             weapons.add(
             new Weapon("terra-end-heavy-blaster"){{
                 x = 0f;
                 y = 60f / 4f;
-                shootY = 17f;
+                shootY = 14f;
                 rotate = true;
-                rotateSpeed = 1.8f;
+                rotateSpeed = 1.5f;
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = 0.5f;
                 reload = 228f;
@@ -1255,11 +1281,12 @@ public class TerraUnitTypes {
                 parentizeEffects = true;
                 mirror = false;
                 shake = 1.2f;
+                layerOffset = 0.001f;
                 parts.add(new RegionPart("-blade") {{
                     outline = mirror = true;
                     x = y = 0;
-                    moveX = 2;
-                    moveRot = 15f;
+                    moveX = 3;
+                    moveRot = 10f;
                     progress = PartProgress.recoil;
                 }});
                 bullet = new AcceleratingLaserBulletType(100f){{
@@ -1314,7 +1341,7 @@ public class TerraUnitTypes {
             hitSize = 150f;
             softShadowScl = 0.6f;
             health = 1250000;
-            armor = 300;
+            armor = 260;
             engineSize = engineOffset = 0f;
             drawCell = false;
             targetFlags = new BlockFlag[]{BlockFlag.turret, BlockFlag.core, null};
@@ -1408,7 +1435,7 @@ public class TerraUnitTypes {
                     trailLength = 7;
                     pierce = true;
                     pierceCap = 2;
-                    armorMultiplier = 2f;
+                    armorMultiplier = 0.5f;
                     homingPower = 0.2f;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
