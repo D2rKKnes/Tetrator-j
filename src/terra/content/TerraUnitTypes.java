@@ -1233,7 +1233,7 @@ public class TerraUnitTypes {
             engineSize = 10f;
             engineOffset = 270f / 4;
             setEnginesMirror(
-                new UnitEngine(90f / 4f, 270f / 4f, 8f, 0f)
+                new UnitEngine(90f / 4f, -270f / 4f, 8f, -90f)
             );
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
@@ -1243,7 +1243,7 @@ public class TerraUnitTypes {
             healColor = Color.valueOf("e13131");
 
             abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
-            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = 81f / 4f;}});
+            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = -81f / 4f;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
                 reload = 30f;
@@ -1283,7 +1283,7 @@ public class TerraUnitTypes {
                 parts.add(new RegionPart("-blade") {{
                     outline = mirror = true;
                     x = y = 0;
-                    moveX = 3;
+                    moveX = 5;
                     moveRot = 10f;
                     progress = PartProgress.recoil;
                 }});
