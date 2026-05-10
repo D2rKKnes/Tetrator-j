@@ -1282,7 +1282,7 @@ public class TerraUnitTypes {
                         Lines.stroke(1.5f);
                         Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
                     }));
-                }}
+                }};
             }});
         }
             @Override
