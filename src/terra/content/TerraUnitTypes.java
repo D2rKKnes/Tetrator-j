@@ -1245,10 +1245,10 @@ public class TerraUnitTypes {
             healColor = Color.valueOf("e13131");
 
             abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
-            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = -81f / 4f;}});
+            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; displayHeal = hitBuildings = false; healPercent = 0f; healEffect = Fx.none;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
-                shootY = 2f;
+                shootY = 0f;
                 reload = 90f;
                 rotate = true;
                 rotateSpeed = 5f;
@@ -1289,7 +1289,7 @@ public class TerraUnitTypes {
                     scaledSplashDamage = true;
                     sprite = "missile-large";
                     drag = 0.005f;
-                    followAimSpeed = 3.3f;
+                    followAimSpeed = 4.3f;
                     width = 6f;
                     height = 22f;
                     shrinkY = 0.1f;
@@ -1320,10 +1320,10 @@ public class TerraUnitTypes {
                 reload = 163f;
                 shake = 3f;
                 bullet = new BasicBulletType(11f, 420){{
-                    lifetime = 28f;
+                    lifetime = 40f;
                     width = height = 28f;
                     shrinkY = 0f;
-                    trailWidth = 6f;
+                    trailWidth = 9f;
                     trailLength = 24;
                     hitColor = trailColor = backColor = Color.valueOf("e13131");
                     frontColor = lightColor = lightningColor = Color.valueOf("ffb59f");
