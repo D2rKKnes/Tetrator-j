@@ -38,6 +38,17 @@ import static mindustry.Vars.tilesize;
 public class TerraFx {
     private static final Rand rand = new Rand();
     public static final Effect
+    hitSpark = new Effect(45, e -> {
+        color(e.color, Color.white, e.fout() * 0.3f);
+        stroke(e.fout() * 1.6f);
+
+        rand.setSeed(e.id);
+        randLenVectors(e.id, 8, e.finpow() * 20f, (x, y) -> {
+            float ang = Mathf.angle(x, y);
+            lineAngle(e.x + x, e.y + y, ang, e.fout() * rand.random(1.95f, 4.25f) + 1f);
+        });
+    }),
+    
     hitSparkLarge = new Effect(40, e -> {
         color(e.color, Color.white, e.fout() * 0.3f);
         stroke(e.fout() * 1.6f);
