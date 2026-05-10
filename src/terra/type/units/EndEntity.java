@@ -91,7 +91,7 @@ public class EndEntity extends UnitEntity {
         unit.set(spawnX, spawnY);
         unit.rotation = rot;
         unit.add();
-        unit.apply(StatusEffects.shielded, statusDuration);
+        unit.apply(TerraStatusEffects.warped, statusDuration);
     }
     
     @Override
