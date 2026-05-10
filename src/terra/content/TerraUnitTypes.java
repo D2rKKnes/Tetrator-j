@@ -1170,7 +1170,7 @@ public class TerraUnitTypes {
                 bullet = new ShrapnelBulletType() {{
                     length = 118;
                     damage = 75f;
-                    status = StatusEffects.slow;
+                    status = TerraStatusEffects.extinction;
                     statusDuration = 60f;
                     width = 9f;
                     fromColor = Color.valueOf("ffb59f");
@@ -1206,7 +1206,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none) continue;
+                    if (effect == null || effect == StatusEffects.none || effect == TerraStatusEffects.warped) continue;
         
                     if (effect.damage > 0
                         || effect.healthMultiplier < 1f
@@ -1289,7 +1289,7 @@ public class TerraUnitTypes {
                     rangeOverride = 770;
                     trailEffect = Fx.none;
                     lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
-                    status = StatusEffects.sapped; //TODO: new effect
+                    status = TerraStatusEffects.extinction;
                     statusDuration = 200f;
                     despawnShake = hitShake = 2f;
                     collidesAir = collidesGround = true;
@@ -1514,7 +1514,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none) continue;
+                    if (effect == null || effect == StatusEffects.none || effect == TerraStatusEffects.warped) continue;
         
                     if (effect.damage > 0
                         || effect.healthMultiplier < 1f
