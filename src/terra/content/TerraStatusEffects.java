@@ -58,11 +58,13 @@ public class TerraStatusEffects{
                 });
             });
         }};
+
         impactStun = new StatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
             speedMultiplier = 0.3f;
             disarm = true;
         }};
+
         singularEvaporation = new StatusEffect("singular-evaporation"){{
             color = Color.valueOf("3d1f7a");
             speedMultiplier = 0.5f;
@@ -74,6 +76,22 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
             });
+        }};
+
+        extinction = new StatusEffect("extinction"){{
+            color = Color.valueOf(e13131);
+            speedMultiplier = 0.4f;
+            healthMultiplier = 0.2f;
+            reloadMultiplier = 0.6f;
+            damage = 3.7f;
+            effect = new Effect(40f, e -> {
+                 color(Color.valueOf(e13131));
+
+                randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
+                    Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
+                });
+            });
+            effectChance = 0.1f;
         }};
     }
 }
