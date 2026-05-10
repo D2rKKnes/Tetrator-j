@@ -1459,6 +1459,7 @@ public class TerraUnitTypes {
         };
 
         end = new ErekirUnitType("end"){{
+            hideDetails = false;
             flying = true;
             speed = 0.22f;
             rotateSpeed = 0.4f;
