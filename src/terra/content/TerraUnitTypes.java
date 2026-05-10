@@ -1429,7 +1429,6 @@ public class TerraUnitTypes {
                 x = 160f / 4f;
                 y = -187f / 4f;
                 beamWidth = 0.8f;
-                damage = 0f;
                 repairSpeed = 3.7f;
                 targetBuildings = true;
                 laserColor = healColor = Color.valueOf("e13131");
