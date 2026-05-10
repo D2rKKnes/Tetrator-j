@@ -1230,6 +1230,8 @@ public class TerraUnitTypes {
             softShadowScl = 0.6f;
             health = 280000;
             armor = 70;
+            fallSpeed = 0.01f;
+            faceTarget = false;
             engineSize = 10f;
             engineOffset = 270f / 4;
             setEnginesMirror(
@@ -1247,18 +1249,18 @@ public class TerraUnitTypes {
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
                 shootY = 2f;
-                reload = 60f;
+                reload = 90f;
                 rotate = true;
-                rotateSpeed = 6f;
+                rotateSpeed = 5f;
                 predictTarget = false;
                 alternate = false;
                 continuous = true;
                 parentizeEffects = true;
                 shootSound = Sounds.beamLustre;
                 bullet = new PointLaserBulletType(){{
-                    lifetime = 98f;
-                    speed = 1f;
-                    damage = 310f;
+                    lifetime = 168f;
+                    speed = 4f;
+                    damage = 64f;
                     buildingDamageMultiplier = 0.6f;
                     color = hitColor = Color.valueOf("ffb59f");
                     status = StatusEffects.melting;
@@ -1272,7 +1274,7 @@ public class TerraUnitTypes {
                 baseRotation = -30f;
                 predictTarget = false;
                 alternate = false;
-                inaccuracy = 20f;
+                inaccuracy = 40f;
                 layerOffset = -0.001f;
                 shootCone = 361f;
                 shootSound = TerraSounds.shootLaunch;
@@ -1280,14 +1282,14 @@ public class TerraUnitTypes {
                     shots = 2;
                     firstShotDelay = 0f;
                 }};
-                bullet = new BasicBulletType(8f, 318){{
+                bullet = new BasicBulletType(8f, 518){{
                     lifetime = 98f;
                     splashDamage = damage / 2f;
                     splashDamageRadius = 25f;
                     scaledSplashDamage = true;
                     sprite = "missile-large";
                     drag = 0.005f;
-                    followAimSpeed = 7f;
+                    followAimSpeed = 3.3f;
                     width = 6f;
                     height = 22f;
                     shrinkY = 0.1f;
@@ -1317,13 +1319,14 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootHeavy;
                 reload = 163f;
                 shake = 3f;
-                bullet = new BasicBulletType(5.2f, 420){{
-                    lifetime = 70f;
-                    width = height = 15f;
-                    trailWidth = 5f;
+                bullet = new BasicBulletType(11f, 420){{
+                    lifetime = 28f;
+                    width = height = 28f;
+                    shrinkY = 0f;
+                    trailWidth = 6f;
                     trailLength = 24;
                     hitColor = trailColor = backColor = Color.valueOf("e13131");
-                    frontColor = lightColor = Color.valueOf("ffb59f");
+                    frontColor = lightColor = lightningColor = Color.valueOf("ffb59f");
                     sprite = "circle-bullet";
                     lightning = 7;
                     lightningDamage = damage * 0.25f;
@@ -1333,6 +1336,7 @@ public class TerraUnitTypes {
                     splashDamage = damage / 3f;
                     status = TerraStatusEffects.extinction;
                     statusDuration = 180f;
+                    smokeEffect = Fx.shootSmokeSquareBig;
                     hitEffect = despawnEffect = new MultiEffect(
                         TerraFx.hitSparkLarge,
                         new WaveEffect(){{
@@ -1344,13 +1348,14 @@ public class TerraUnitTypes {
                         }}
                     );
                     fragBullets = 5;
-                    fragBullet = new BasicBulletType(22f, 210){{
-                        lifetime = 6f;
+                    fragBullet = new BasicBulletType(19f, 210){{
+                        lifetime = 12f;
                         width = height = 10f;
+                        shrinkY = 0f;
                         trailWidth = 5f;
                         trailLength = 75;
                         hitColor = trailColor = backColor = Color.valueOf("e13131");
-                        frontColor = lightColor = Color.valueOf("ffb59f");
+                        frontColor = lightColor = lightningColor = Color.valueOf("ffb59f");
                         sprite = "circle-bullet";
                         lightning = 4;
                         lightningDamage = damage * 0.25f;
@@ -1360,6 +1365,7 @@ public class TerraUnitTypes {
                         splashDamage = damage / 2f;
                         status = TerraStatusEffects.extinction;
                         statusDuration = 40f;
+                        smokeEffect = Fx.shootSmokeSquareBig;
                         hitEffect = despawnEffect = new MultiEffect(
                             TerraFx.hitSpark,
                             new WaveEffect(){{
@@ -1397,8 +1403,8 @@ public class TerraUnitTypes {
                     progress = PartProgress.recoil;
                 }});
                 bullet = new AcceleratingLaserBulletType(148f){{
-                    maxLength = 288f;
-                    maxRange = 288f;
+                    maxLength = 338f;
+                    maxRange = 338f;
                     oscOffset = 0.3f;
                     lifetime = 275;
                     width = 30f;
@@ -1423,6 +1429,7 @@ public class TerraUnitTypes {
                 x = 160f / 4f;
                 y = -187f / 4f;
                 beamWidth = 0.8f;
+                damage = 0f;
                 repairSpeed = 3.7f;
                 targetBuildings = true;
                 laserColor = healColor = Color.valueOf("e13131");
@@ -1485,7 +1492,6 @@ public class TerraUnitTypes {
             createWreck = false;
             //fallSpeed = Float.POSITIVE_INFINITY;
             targetPriority = 4f;
-            fallSpeed = 0.01f;
             faceTarget = false;
             range = 380f;
             itemCapacity = 1000;
