@@ -1411,7 +1411,7 @@ public class TerraUnitTypes {
                             splashDamage = 0.001f;
                             splashDamageRadius = 22f;
                             status = TerraStatusEffects.singularEvaporation;
-                            statusDuration = 90f;
+                            statusDuration = 150f;
                         }};
                     }};
                 }};
