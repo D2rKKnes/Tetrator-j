@@ -1246,13 +1246,14 @@ public class TerraUnitTypes {
             abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; y = -81f / 4f;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
-                reload = 30f;
+                reload = 60f;
                 rotate = true;
                 predictTarget = false;
                 alternate = false;
                 continuous = true;
                 parentizeEffects = true;
                 bullet = new PointLaserBulletType(){{
+                    lifetime = 450f;
                     damage = 310f;
                     buildingDamageMultiplier = 0.6f;
                     hitColor = Color.valueOf("e13131");
@@ -1267,7 +1268,7 @@ public class TerraUnitTypes {
             new Weapon("terra-end-heavy-blaster"){{
                 x = 0f;
                 y = 60f / 4f;
-                shootY = 14f;
+                shootY = 10f;
                 rotate = true;
                 rotateSpeed = 1.5f;
                 shootSound = TerraSounds.acceleratinglaserloop;
@@ -1292,8 +1293,8 @@ public class TerraUnitTypes {
                     maxRange = 288f;
                     oscOffset = 0.3f;
                     lifetime = 275;
-                    width = 20f;
-                    collisionWidth = 10f;
+                    width = 30f;
+                    collisionWidth = 15f;
                     status = TerraStatusEffects.extinction;
                     statusDuration = 120f;
                     colors = new Color[]{Color.valueOf("e13131").cpy().a(0.3f), Color.valueOf("e13131"), Color.white};
@@ -1307,6 +1308,19 @@ public class TerraUnitTypes {
                         Lines.stroke(1.5f);
                         Lines.lineAngleCenter(e.x + x, e.y + y, angle, e.fslope() * 13f);
                     }));
+                }};
+            }},
+            weapons.add(new RepairBeamWeapon("terra-end-small-mount"){{
+                shootY = 4f;
+                x = 0f;
+                y = 0f;
+                beamWidth = 0.8f;
+                repairSpeed = 3.7f;
+                targetBuildings = true;
+                laserColor = healColor = Color.valueOf("e13131");
+
+                bullet = new BulletType(){{
+                    maxRange = 14f * 8;
                 }};
             }});
         }
