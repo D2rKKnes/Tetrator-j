@@ -62,6 +62,7 @@ public class TerraStatusEffects{
         impactStun = new StatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
             speedMultiplier = 0.3f;
+            buildSpeedMultiplier = 0f;
             disarm = true;
         }};
 
@@ -69,6 +70,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("3d1f7a");
             speedMultiplier = 0.5f;
             reloadMultiplier = 0.15f;
+            buildSpeedMultiplier = 0.5f;
             damage = 17.8f;
             effectChance = 0.075f;
             effect = new Effect(20f, 20f, e -> {
@@ -92,6 +94,15 @@ public class TerraStatusEffects{
                 });
             });
             effectChance = 0.1f;
+        }};
+
+        warped = new StatusEffect("warped"){{
+            color = Pal.accent;
+            speedMultiplier = 0.5f;
+            healthMultiplier = 5f;
+            buildSpeedMultiplier = 0.2f;
+            effect = Fx.overdriven;
+            effectChance = 0.03f;
         }};
     }
 }
