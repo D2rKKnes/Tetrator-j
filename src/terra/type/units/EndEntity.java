@@ -79,7 +79,7 @@ public class EndEntity extends UnitEntity {
                 float spawnY2 = y + Tmp.v1.y;
                 float duration2 = TerraUnitTypes.endGuard.hitSize * 9f;
                 if (TerraUnitTypes.endGuard != null) {
-                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, duration2);
+                    spawnUnit(TerraUnitTypes.endGuard, spawnX2, spawnY2, rotation, duration2);
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 9f);
