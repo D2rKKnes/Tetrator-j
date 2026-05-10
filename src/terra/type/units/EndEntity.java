@@ -82,7 +82,7 @@ public class EndEntity extends UnitEntity {
                     spawnUnit(TerraUnitTypes.endGuard, spawnX2, spawnY2, rotation, duration2);
                 }
             }
-            apply(TerraStatusEffects.warpPower, hitSize * 9f);
+            apply(TerraStatusEffects.warpPower, hitSize * 4f);
         }
     }
 
