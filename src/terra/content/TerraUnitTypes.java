@@ -1260,8 +1260,7 @@ public class TerraUnitTypes {
                     speed = 1f;
                     damage = 310f;
                     buildingDamageMultiplier = 0.6f;
-                    hitColor = Color.valueOf("e13131");
-                    color = Color.valueOf("ffb59f");
+                    color = hitColor = Color.valueOf("ffb59f");
                     status = StatusEffects.melting;
                     statusDuration = 20f;
                 }};
