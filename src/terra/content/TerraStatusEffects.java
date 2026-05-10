@@ -37,7 +37,7 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun;
+    energyOverload, singularEvaporation, impactStun, extinction, warped;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
