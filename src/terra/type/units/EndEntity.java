@@ -9,6 +9,7 @@ import arc.util.Tmp;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
@@ -65,7 +66,7 @@ public class EndEntity extends UnitEntity {
                 float spawnX = x + Tmp.v1.x;
                 float spawnY = y + Tmp.v1.y;
                 if (TerraUnitTypes.endSpawn != null) {
-                    Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation));
+                    spawnUnit(TerraUnitTypes.endSpawn, spawnX, spawnY, rotation, 300f));
                 }
             }
             for (int i = 0; i < SPAWN_SECOND_COUNT; i++) {
@@ -75,14 +76,14 @@ public class EndEntity extends UnitEntity {
                 Tmp.v1.trns(spawnAngle2, distance2);
                 float spawnX2 = x + Tmp.v1.x;
                 float spawnY2 = y + Tmp.v1.y;
-                if (TerraUnitTypes.eternity != null) {
-                    Time.run(i * 2f, () -> spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation));
+                if (TerraUnitTypes.eternity != null) { //eternity is a placeholder for now
+                    spawnUnit(TerraUnitTypes.eternity, spawnX2, spawnY2, rotation, 600f));
                 }
             }
         }
     }
 
-    private void spawnUnit(UnitType type, float spawnX, float spawnY, float rot) {
+    private void spawnUnit(UnitType type, float spawnX, float spawnY, float rot, float statusDuration) {
         Effect.shake(type.hitSize / 10f, type.hitSize / 8f, spawnX, spawnY);
         TerraFx.jumpTrail.at(spawnX, spawnY, rot, team.color, type);
         TerraSounds.jumpIn.at(spawnX, spawnY, 1, 2);
@@ -90,6 +91,7 @@ public class EndEntity extends UnitEntity {
         unit.set(spawnX, spawnY);
         unit.rotation = rot;
         unit.add();
+        unit.setStatus(StatusEffects.shelded, statusDuration);
     }
 
     @Override
