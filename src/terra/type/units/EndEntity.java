@@ -21,9 +21,9 @@ import terra.type.units.*;
 import static mindustry.Vars.content;
 
 public class EndEntity extends UnitEntity {
-    public static final float MAX_DAMAGE_PER_SEC = 40000f;
+    public static final float MAX_DAMAGE_PER_SEC = 30000f;
     public static final float RECENT_DAMAGE_RESUME = MAX_DAMAGE_PER_SEC / 60f;
-    public static float maxOnceDamage = 4000f;
+    public static float maxOnceDamage = 3000f;
     public float recentDamage = MAX_DAMAGE_PER_SEC;
 
     private static final float REINFORCEMENTS_SPACING = Time.toMinutes * 0.75f;
@@ -34,7 +34,7 @@ public class EndEntity extends UnitEntity {
     private static final float ARROW_MAX_SIZE = 0.2f;
     private static final float ARROW_ROTATION_SPEED = 0.15f;
     private static final float ARROW_WOBBLE_SPEED = 0.02f;
-    private static final float ARROW_RADIUS_FACTOR = 2.2f;
+    private static final float ARROW_RADIUS_FACTOR = 2f;
 
     private float reload = REINFORCEMENTS_SPACING;
 
@@ -103,7 +103,7 @@ public class EndEntity extends UnitEntity {
         Lines.stroke(4f);
         Draw.color(team.color);
 
-        float rad = hitSize() * 2f;
+        float rad = hitSize() * 1.8f;
         float p = Mathf.clamp(progress);
         int sides = 11 + (int)(rad * 0.4f);
         float space = 360f / sides;
