@@ -87,6 +87,19 @@ public class EndEntity extends UnitEntity {
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
             shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
         }
+        
+        private boolean shockOne = true;
+        private boolean shockTwo = true;
+        if (healthf() < 0.75f && reload >= (REINFORCEMENTS_SPACING / 3) && shockOne == true) {
+            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
+            shockOne = false;
+            shockTwo = true;
+        }
+        if (healthf() < 0.75f && reload >= (REINFORCEMENTS_SPACING / 3 * 2) && shockTwo == true) {
+            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
+            shockOne = true;
+            shockTwo = false;
+        }
     }
 
     private void spawnUnit(UnitType type, float spawnX, float spawnY, float rot, float statusDuration) {
