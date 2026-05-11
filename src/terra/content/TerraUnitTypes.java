@@ -1276,6 +1276,7 @@ public class TerraUnitTypes {
                 alternate = false;
                 inaccuracy = 40f;
                 layerOffset = -0.001f;
+                flipSprite = true;
                 shootCone = 361f;
                 shootSound = TerraSounds.shootLaunch;
                 shoot = new ShootPattern(){{
@@ -1289,7 +1290,7 @@ public class TerraUnitTypes {
                     scaledSplashDamage = true;
                     sprite = "missile-large";
                     drag = 0.005f;
-                    followAimSpeed = 4.3f;
+                    followAimSpeed = 4.5f;
                     width = 6f;
                     height = 22f;
                     shrinkY = 0.1f;
@@ -1425,11 +1426,11 @@ public class TerraUnitTypes {
                 }};
             }},
             new RepairBeamWeapon("terra-end-small-mount"){{
-                shootY = 4f;
+                shootY = 7f;
                 x = 160f / 4f;
                 y = -187f / 4f;
                 beamWidth = 0.8f;
-                repairSpeed = 3.7f;
+                repairSpeed = 12.7f;
                 targetBuildings = true;
                 laserColor = healColor = Color.valueOf("e13131");
 
