@@ -15,6 +15,8 @@ import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.entities.Effect;
+import mindustry.entities.effect.MultiEffect;
+import mindustry.graphics.Color; 
 import mindustry.Vars;
 import terra.content.*;
 import terra.type.units.*;
@@ -83,7 +85,7 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
-            new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf(e13131), 55, 40, (hitSize * 1.8f) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf(e13131), hitSize * 1.8f, 60, 0.3f)).at(x, y);
+            new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (hitSize * 1.8f) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), hitSize * 1.8f, 60, 0.3f)).at(x, y);
         }
     }
 
