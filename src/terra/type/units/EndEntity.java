@@ -83,6 +83,7 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
+            new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf(e13131), 55, 40, (hitSize * 1.8f) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf(e13131), hitSize * 1.8f, 60, 0.3f)).at(x, y);
         }
     }
 
