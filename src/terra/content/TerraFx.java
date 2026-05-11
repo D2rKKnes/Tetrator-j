@@ -149,4 +149,24 @@ public class TerraFx {
         float wx = Angles.trnsx(angle + 90, width), wy = Angles.trnsy(angle + 90, width);
         Fill.tri(x + wx, y + wy, x - wx, y - wy, Angles.trnsx(angle, length) + x, Angles.trnsy(angle, length) + y);
     }
+
+    public static Effect smoothColorCircle(Color out, float rad, float lifetime) {
+        return new Effect(lifetime, rad * 2, e -> {
+            Draw.blend(Blending.additive);
+            float radius = e.fin(Interp.pow3Out) * rad;
+            Fill.light(e.x, e.y, circleVertices(radius), radius, Color.clear, Tmp.c1.set(out).a(e.fout(Interp.pow5Out)));
+            Drawf.light(e.x, e.y, radius * 1.3f, out, 0.7f * e.fout(0.23f));
+            Draw.blend();
+        }).layer(Layer.effect + 0.15f);
+    }
+
+    public static Effect smoothColorCircle(Color out, float rad, float lifetime, float alpha) {
+        return new Effect(lifetime, rad * 2, e -> {
+            Draw.blend(Blending.additive);
+            float radius = e.fin(Interp.pow3Out) * rad;
+            Fill.light(e.x, e.y, circleVertices(radius), radius, Color.clear, Tmp.c1.set(out).a(e.fout(Interp.pow5Out) * alpha));
+            Drawf.light(e.x, e.y, radius * 1.3f, out, 0.7f * e.fout(0.23f));
+            Draw.blend();
+        }).layer(Layer.effect + 0.15f);
+    }
 }
