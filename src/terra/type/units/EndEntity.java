@@ -15,7 +15,7 @@ import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
-import mindustry.entities.Effect;
+import mindustry.entities.*;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.Vars;
 import terra.content.*;
@@ -85,7 +85,7 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
-            new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (hitSize * 1.8f) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), hitSize * 1.8f, 60, 0.3f)).at(x, y);
+            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
         }
     }
 
@@ -98,6 +98,16 @@ public class EndEntity extends UnitEntity {
         unit.rotation = rot;
         unit.add();
         unit.apply(TerraStatusEffects.warped, statusDuration);
+    }
+
+    private void shockwave(float knockback, float damage, float radius, StatusEffect effect, float effectDuration) {
+    Units.nearbyEnemies(team, x, y, radius, other -> {
+        other.damage(damage);
+        Tmp.v1.set(other.x - x, other.y - y).nor().scl(knockback);
+        other.velocity.add(Tmp.v1);
+        other.apply(effect, effectDuration);
+    });
+    new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (radius) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), radius, 60, 0.6f)).at(x, y);
     }
     
     @Override
