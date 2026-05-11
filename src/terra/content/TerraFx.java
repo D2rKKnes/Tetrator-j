@@ -150,6 +150,18 @@ public class TerraFx {
         Fill.tri(x + wx, y + wy, x - wx, y - wy, Angles.trnsx(angle, length) + x, Angles.trnsy(angle, length) + y);
     }
 
+    public static Effect hitSpark(Color color, float lifetime, int num, float range, float stroke, float length) {
+        return new Effect(lifetime, e -> {
+            color(color, Color.white, e.fout() * 0.3f);
+            stroke(e.fout() * stroke);
+
+            randLenVectors(e.id, num, e.finpow() * range, e.rotation, 360f, (x, y) -> {
+                float ang = Mathf.angle(x, y);
+                lineAngle(e.x + x, e.y + y, ang, e.fout() * length * 0.85f + length * 0.15f);
+            });
+        });
+    }
+
     public static Effect smoothColorCircle(Color out, float rad, float lifetime) {
         return new Effect(lifetime, rad * 2, e -> {
             Draw.blend(Blending.additive);
