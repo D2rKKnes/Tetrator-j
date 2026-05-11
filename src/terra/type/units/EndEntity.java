@@ -2,6 +2,7 @@ package terra.type.units;
 
 import arc.Core;
 import arc.graphics.g2d.*;
+import arc.graphics.*;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.util.Time;
@@ -16,7 +17,6 @@ import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.entities.Effect;
 import mindustry.entities.effect.MultiEffect;
-import mindustry.graphics.Color; 
 import mindustry.Vars;
 import terra.content.*;
 import terra.type.units.*;
