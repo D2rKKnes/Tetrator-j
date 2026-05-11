@@ -64,6 +64,27 @@ public class TerraFx {
         Lines.stroke(2.5f * e.fout(), e.color);
         Lines.circle(e.x, e.y, e.rotation * e.fin(Interp.pow3Out));
     }),
+
+    crossBlastArrow45 = new Effect(65, 140, e -> {
+        color(e.color, Color.white, e.fout() * 0.55f);
+        Drawf.light(e.x, e.y, e.fout() * 70, e.color, 0.7f);
+
+        e.scaled(10f, i -> {
+            stroke(1.35f * i.fout());
+            circle(e.x, e.y, 49 * i.finpow());
+        });
+
+        rand.setSeed(e.id);
+        float sizeDiv = 138;
+        float randL = rand.random(sizeDiv);
+
+        float f = Mathf.curve(e.fin(), 0, 0.05f);
+
+        for (int i = 0; i < 4; i++) {
+            Tmp.v1.trns(45 + i * 90, 66);
+            DrawFunc.arrow(e.x + Tmp.v1.x, e.y + Tmp.v1.y, 27.5f * (e.fout() * 3f + 1) / 4 * e.fout(Interp.pow3In), (sizeDiv + randL) * f * e.fout(Interp.pow3), -randL / 6f * f, i * 90 + 45);
+        }
+    }),
     
     jumpTrail = new Effect(120f, 5000, e -> {
         if (!(e.data instanceof UnitType)) return;
