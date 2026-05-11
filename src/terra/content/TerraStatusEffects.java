@@ -37,7 +37,7 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, extinction, warped, warpPower, delta32;
+    energyOverload, singularEvaporation, impactStun, extinction, warped, warpPower, delta32, deltaImmunized;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -87,7 +87,7 @@ public class TerraStatusEffects{
             damageMultiplier = 0.5f;
             damage = 3.7f;
             effect = new Effect(30f, e -> {
-                 color(Color.valueOf("e13131"));
+                color(Color.valueOf("e13131"));
 
                 randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
                     Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
@@ -113,7 +113,7 @@ public class TerraStatusEffects{
             effectChance = 0.008f;
         }};
 
-        delta32 = new StatusEffect("delta32"){{ //virus
+        delta32 = new StatusEffect("delta32"){{
             color = Color.valueOf("ba31e1");
             healthMultiplier = 0.05f;
             damageMultiplier = 0.1f;
@@ -121,6 +121,12 @@ public class TerraStatusEffects{
             reloadMultiplier = 0.3f;
             buildSpeedMultiplier = 0.5f;
             damage = 28.2f;
+            permanent = true;
+            init(() -> opposite(deltaImmunized));
+        }};
+
+        deltaImmunized = new StatusEffect("delta-immunized"){{
+            color = Pal.heal;
             permanent = true;
         }};
     }
