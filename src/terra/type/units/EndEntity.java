@@ -63,7 +63,7 @@ public class EndEntity extends UnitEntity {
 
         if (healthf() < 0.75f && reload >= REINFORCEMENTS_SPACING) {
             reload = 0f;
-            nextShockIndex = 1;
+            nextShockIndex = 0;
             for (int i = 0; i < SPAWN_COUNT; i++) {
                 float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
                 float spawnAngle = rotation + angleOffset;
@@ -92,14 +92,15 @@ public class EndEntity extends UnitEntity {
             shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
         }
         
-    
-        while (nextShockIndex < shockCount) {
-            float threshold = (float) (nextShockIndex + 1) / shockCount * REINFORCEMENTS_SPACING;
-            if (reload >= threshold) {
-                shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
-                nextShockIndex++;
-            } else {
-                break;
+        if (reload < 0.999f) {
+            while (nextShockIndex < shockCount) {
+                float threshold = (float) (nextShockIndex + 1) / shockCount * REINFORCEMENTS_SPACING;
+                if (reload >= threshold) {
+                    shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
+                    nextShockIndex++;
+                } else {
+                    break;
+                }
             }
         }
     }
