@@ -88,9 +88,7 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
-            shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
-            shockOne = true;
-            shockTwo = true;
+            shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);;
         }
         
     
