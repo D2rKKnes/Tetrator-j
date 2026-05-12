@@ -117,7 +117,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("cbcbcb");
             speedMultiplier = 0f;
             buildSpeedMultiplier = 0f;
-            dragMultiplier = 0.5f;
+            dragMultiplier = 2f;
             disarm = true;
         }};
 
