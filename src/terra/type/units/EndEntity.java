@@ -39,10 +39,8 @@ public class EndEntity extends UnitEntity {
     private static final float ARROW_WOBBLE_SPEED = 0.02f;
     private static final float ARROW_RADIUS_FACTOR = 2f;
 
-    private boolean shockOne = true;
-    private boolean shockTwo = true;
-    private float reloadOne = REINFORCEMENTS_SPACING / 3;
-    private float reloadTwo = reloadOne * 2;
+    private static final int shockCount = 7;
+    private int nextShockIndex = 0;
 
     private float reload = REINFORCEMENTS_SPACING;
 
@@ -90,26 +88,27 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
-            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
+            shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
             shockOne = true;
             shockTwo = true;
         }
         
     
-        if (healthf() < 0.75f && reload >= reloadOne && shockOne == true) {
-            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
-            shockOne = false;
-        }
-        if (healthf() < 0.75f && reload >= reloadTwo && shockTwo == true) {
-            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
-            shockTwo = false;
+        while (nextShockIndex < shockCount) {
+            float threshold = (float) (nextShockIndex + 1) / shockCount * REINFORCEMENTS_SPACING;
+            if (reload >= threshold) {
+                shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
+                nextShockIndex++;
+            } else {
+                break;
+            }
         }
     }
 
     private void spawnUnit(UnitType type, float spawnX, float spawnY, float rot, float statusDuration) {
         Effect.shake(type.hitSize / 10f, type.hitSize / 8f, spawnX, spawnY);
         TerraFx.jumpTrail.at(spawnX, spawnY, rot, team.color, type);
-        TerraSounds.jumpIn.at(spawnX, spawnY, 1, 2);
+        TerraSounds.jumpIn.at(spawnX, spawnY, 1, 3);
         Unit unit = type.create(team);
         unit.set(spawnX, spawnY);
         unit.rotation = rot;
@@ -118,13 +117,14 @@ public class EndEntity extends UnitEntity {
     }
 
     private void shockwave(float knockback, float damage, float radius, StatusEffect effect, float effectDuration) {
-    Units.nearbyEnemies(team, x, y, radius, other -> {
-        other.damage(damage);
-        Tmp.v1.set(other.x - x, other.y - y).nor().scl(knockback);
-        other.vel().add(Tmp.v1);
-        other.apply(effect, effectDuration);
-    });
-    new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (radius) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), radius, 60, 0.6f)).at(x, y);
+        Units.nearbyEnemies(team, x, y, radius, other -> {
+            other.damage(damage);
+            Tmp.v1.set(other.x - x, other.y - y).nor().scl(knockback);
+            other.vel().add(Tmp.v1);
+            other.apply(effect, effectDuration);
+        });
+        TerraSounds.shockwave.at(x, y, 1 + Mathf.range(0.15f), 3);
+        new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (radius) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), radius, 60, 0.6f)).at(x, y);
     }
     
     @Override
