@@ -40,7 +40,7 @@ public class EndEntity extends UnitEntity {
     private static final float ARROW_RADIUS_FACTOR = 2f;
 
     private static final int shockCount = 7;
-    private int nextShockIndex = 0;
+    private int nextShockIndex = shockCount;
 
     private float reload = REINFORCEMENTS_SPACING;
 
@@ -63,6 +63,7 @@ public class EndEntity extends UnitEntity {
 
         if (healthf() < 0.75f && reload >= REINFORCEMENTS_SPACING) {
             reload = 0f;
+            nextShockIndex = 1;
             for (int i = 0; i < SPAWN_COUNT; i++) {
                 float angleOffset = (360f / SPAWN_COUNT * i) - ((360f / SPAWN_COUNT) / 2);
                 float spawnAngle = rotation + angleOffset;
@@ -88,7 +89,7 @@ public class EndEntity extends UnitEntity {
                 }
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
-            shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);;
+            shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
         }
         
     
