@@ -39,6 +39,9 @@ public class EndEntity extends UnitEntity {
     private static final float ARROW_WOBBLE_SPEED = 0.02f;
     private static final float ARROW_RADIUS_FACTOR = 2f;
 
+    private boolean shockOne = true;
+    private boolean shockTwo = true;
+
     private float reload = REINFORCEMENTS_SPACING;
 
     @Override
@@ -86,18 +89,18 @@ public class EndEntity extends UnitEntity {
             }
             apply(TerraStatusEffects.warpPower, hitSize * 4f);
             shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
-        }
-        
-        private boolean shockOne = true;
-        private boolean shockTwo = true;
-        if (healthf() < 0.75f && reload >= (REINFORCEMENTS_SPACING / 3) && shockOne == true) {
-            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
-            shockOne = false;
+            shockOne = true;
             shockTwo = true;
         }
-        if (healthf() < 0.75f && reload >= (REINFORCEMENTS_SPACING / 3 * 2) && shockTwo == true) {
+        
+        private float reloadOne = REINFORCEMENTS_SPACING / 3;
+        private float reloadTwo = reloadOne * 2;
+        if (healthf() < 0.75f && reload >= reloadOne && shockOne == true) {
             shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
-            shockOne = true;
+            shockOne = false;
+        }
+        if (healthf() < 0.75f && reload >= reloadTwo && shockTwo == true) {
+            shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
             shockTwo = false;
         }
     }
