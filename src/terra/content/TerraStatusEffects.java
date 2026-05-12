@@ -113,6 +113,14 @@ public class TerraStatusEffects{
             effectChance = 0.008f;
         }};
 
+        shockwaveImpact = new StatusEffect("shockwave-impact"){{
+            color = Color.valueOf("cbcbcb");
+            speedMultiplier = 0f;
+            buildSpeedMultiplier = 0f;
+            dragMultiplier = 0.5f;
+            disarm = true;
+        }};
+
         delta32 = new StatusEffect("delta32"){{
             color = Color.valueOf("ba31e1");
             healthMultiplier = 0.05f;
@@ -128,6 +136,7 @@ public class TerraStatusEffects{
         deltaImmunized = new StatusEffect("delta-immunized"){{
             color = Pal.heal;
             permanent = true;
+            init(() -> opposite());
         }};
     }
 }
