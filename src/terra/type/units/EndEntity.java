@@ -92,7 +92,7 @@ public class EndEntity extends UnitEntity {
             shockwave(20f, 2000f, hitSize * 1.8f, TerraStatusEffects.shockwaveImpact, 300f);
         }
         
-        if (reload < 0.999f) {
+        if (reload < REINFORCEMENTS_SPACING) {
             while (nextShockIndex < shockCount) {
                 float threshold = (float) (nextShockIndex + 1) / shockCount * REINFORCEMENTS_SPACING;
                 if (reload >= threshold) {
