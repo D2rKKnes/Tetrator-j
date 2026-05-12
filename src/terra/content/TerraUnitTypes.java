@@ -1168,7 +1168,7 @@ public class TerraUnitTypes {
                 accelCooldownWaitTime = reload * 3f;
 
                 bullet = new ShrapnelBulletType() {{
-                    length = 118;
+                    length = 178;
                     damage = 75f;
                     status = TerraStatusEffects.extinction;
                     statusDuration = 60f;
@@ -1179,7 +1179,7 @@ public class TerraUnitTypes {
 
                 shoot = new ShootSpread(){{
                     shots = 3;
-                    spread = 20f;
+                    spread = 10f;
                 }};
                 shootSound = Sounds.shootFuse;
                 shake = 2f;
@@ -1577,6 +1577,7 @@ public class TerraUnitTypes {
                     fragBullet = new DelayedPointBulletType(){{
                         width = 6f;
                         damage = 90;
+                        rangeOverride = 70;
                         buildingDamageMultiplier = 0.8f;
                         trailEffect = Fx.none;
                         lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
@@ -1602,7 +1603,7 @@ public class TerraUnitTypes {
                 parentizeEffects = true;
                 alternate = false;
                 shake = 1.2f;
-                bullet = new AcceleratingLaserBulletType(400f){{
+                bullet = new AcceleratingLaserBulletType(428f){{
                     maxLength = 420f;
                     maxRange = 420f;
                     oscOffset = 0.3f;
@@ -1746,7 +1747,7 @@ public class TerraUnitTypes {
         
                     lightningColor = backColor = trailColor = hitColor = lightColor = Color.valueOf("e13131");
                     lightRadius = 70f;
-                    smokeEffect = Fx.shootSmokeTitan;
+                    smokeEffect = Fx.shootSmokeSquareBig;
                     lifetime = 40f;
                     frontColor = Color.white;
         
@@ -1762,7 +1763,13 @@ public class TerraUnitTypes {
                     trailLength = 20;
                     trailWidth = 2.3f;
                     hitShake = 8f;
-                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect, 
+                        new ExplosionEffect(){{
+                            waveColor = sparkColor = Color.valueOf("e13131");
+                            smokeColor = Color.valueOf("ffb59f");
+                            smokes = 9;
+                        }}
+                    );
                 }};
             }});
         }
