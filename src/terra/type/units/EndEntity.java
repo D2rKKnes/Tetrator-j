@@ -120,7 +120,7 @@ public class EndEntity extends UnitEntity {
     Units.nearbyEnemies(team, x, y, radius, other -> {
         other.damage(damage);
         Tmp.v1.set(other.x - x, other.y - y).nor().scl(knockback);
-        other.velocity.add(Tmp.v1);
+        other.vel().add(Tmp.v1);
         other.apply(effect, effectDuration);
     });
     new MultiEffect(TerraFx.circleOut, TerraFx.hitSpark(Color.valueOf("e13131"), 55, 40, (radius) + 30, 3, 8), TerraFx.crossBlastArrow45, TerraFx.smoothColorCircle(Color.valueOf("e13131"), radius, 60, 0.6f)).at(x, y);
