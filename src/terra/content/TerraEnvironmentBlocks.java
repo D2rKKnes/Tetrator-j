@@ -15,7 +15,8 @@ public class TerraEnvironmentBlocks {
     public static Block
 
         largeTree, iceBoulder, iceRift, 
-        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, oreRawThermoxite, oreThermoxite;
+        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, oreRawThermoxite, oreThermoxite,
+        metalTilesSpace;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
@@ -64,6 +65,15 @@ public class TerraEnvironmentBlocks {
         }};
         oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
             variants = 3;
+        }};
+        metalTilesSpace = new Floor("metal-tiles-space"){{
+            cacheLayer = CacheLayer.space;
+            placeableOn = false;
+            solid = true;
+            canShadow = false;
+            autotile = true;
+            drawEdgeOut = false;
+            drawEdgeIn = false;
         }};
     }
 }
