@@ -1259,7 +1259,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.beamLustre;
                 bullet = new PointLaserBulletType(){{
                     lifetime = 168f;
-                    speed = 4f;
+                    speed = 3f;
                     damage = 64f;
                     buildingDamageMultiplier = 0.6f;
                     color = hitColor = Color.valueOf("ffb59f");
@@ -1567,8 +1567,23 @@ public class TerraUnitTypes {
                     homingPower = 0.2f;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
-                    hitColor = lightColor = trailColor = backColor = Color.valueOf("e13131");
+                    hitColor = lightColor = trailColor = backColor = lightningColor = Color.valueOf("e13131");
                     frontColor = Color.valueOf("ffb59f");
+                    lightning = 4;
+                    lightningDamage = damage * 0.3f;
+                    lightningLength = 5;
+                    lightningLengthRand = 4;
+                    fragBullets = 2;
+                    fragBullet = new DelayedPointBulletType(){{
+                        width = 6f;
+                        damage = 90;
+                        buildingDamageMultiplier = 0.8f;
+                        trailEffect = Fx.none;
+                        lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
+                        despawnShake = hitShake = 1f;
+                        collidesAir = collidesGround = true;
+                        hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                    }};
                 }};
                 shootSound = TerraSounds.shootFastLaser;
                 shootSoundVolume = 0.4f;
@@ -1635,8 +1650,8 @@ public class TerraUnitTypes {
                     fragBullet = new BlackHoleBulletType(0f, 376f){{
                         lifetime = 200f;
                         color = Color.valueOf("e13131");
-                        damageRadius = 22f;
-                        suctionRadius = 120f;
+                        damageRadius = 44f;
+                        suctionRadius = 240f;
                         growTime = 40f;
                         shrinkTime = 70f;
                         status = TerraStatusEffects.singularEvaporation;
@@ -1652,7 +1667,7 @@ public class TerraUnitTypes {
                             instantDisappear = true;
                             shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                             splashDamage = 0.001f;
-                            splashDamageRadius = 22f;
+                            splashDamageRadius = 44f;
                             status = TerraStatusEffects.singularEvaporation;
                             statusDuration = 150f;
                         }};
