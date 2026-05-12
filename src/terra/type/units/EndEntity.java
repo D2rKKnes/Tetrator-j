@@ -14,7 +14,7 @@ import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
-import mindustry.type.UnitType;
+import mindustry.type.*;
 import mindustry.entities.*;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.Vars;
