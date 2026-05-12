@@ -41,6 +41,8 @@ public class EndEntity extends UnitEntity {
 
     private boolean shockOne = true;
     private boolean shockTwo = true;
+    private float reloadOne = REINFORCEMENTS_SPACING / 3;
+    private float reloadTwo = reloadOne * 2;
 
     private float reload = REINFORCEMENTS_SPACING;
 
@@ -93,8 +95,7 @@ public class EndEntity extends UnitEntity {
             shockTwo = true;
         }
         
-        private float reloadOne = (Time.toMinutes * 0.75f) / 3;
-        private float reloadTwo = reloadOne * 2;
+    
         if (healthf() < 0.75f && reload >= reloadOne && shockOne == true) {
             shockwave(20f, 2000f, hitSize * 1.8f, StatusEffects.unmoving, 300f);
             shockOne = false;
