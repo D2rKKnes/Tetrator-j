@@ -1245,7 +1245,7 @@ public class TerraUnitTypes {
             healColor = Color.valueOf("e13131");
 
             abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
-            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; displayHeal = hitBuildings = false; healPercent = 0f; healEffect = Fx.none;}});
+            abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; hitBuildings = false; healPercent = 0.003f;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
                 shootY = 0f;
@@ -1306,7 +1306,7 @@ public class TerraUnitTypes {
             }};
 
             weapons.add(copyAndMove(smallerIIMount, 113f / 4f, 2f / 4f));
-            weapons.add(copyAndMove(smallerIIMount, 46f / 4f, 179f / 4f));
+            weapons.add(copyAndMoveAnd(smallerIIMount, 46f / 4f, 179f / 4f, w -> {w.reload = 110f;}));
             weapons.add(copyAndMove(staticCannon, 91f / 4f, 69f / 4f));
             weapons.add(copyAndMoveAnd(staticCannon, 119f / 4f, 12f / 4f, w -> {w.shoot = new ShootPattern(){{shots = 2; firstShotDelay = 20f;}}; w.baseRotation = -45f;}));
             weapons.add(copyAndMoveAnd(staticCannon, 137f / 4f, -50f / 4f, w -> {w.shoot = new ShootPattern(){{shots = 2; firstShotDelay = 40f;}}; w.baseRotation = -60f;}));
@@ -1435,7 +1435,7 @@ public class TerraUnitTypes {
                 laserColor = healColor = Color.valueOf("e13131");
 
                 bullet = new BulletType(){{
-                    maxRange = 14f * 8;
+                    maxRange = 26f * 8;
                 }};
             }});
         }
@@ -1549,6 +1549,7 @@ public class TerraUnitTypes {
                 accelPerShot = 0.4f;
                 minReload = reload / 2f;
                 accelCooldownWaitTime = reload * 3f;
+                ejectEffect = Fx.casing1;
                 shoot = new ShootMulti(new ShootHelix(), new ShootPattern() {{
                     shots = 3;
                     shotDelay = 6f;
@@ -1569,11 +1570,12 @@ public class TerraUnitTypes {
                     statusDuration = 60f;
                     hitColor = lightColor = trailColor = backColor = lightningColor = Color.valueOf("e13131");
                     frontColor = Color.valueOf("ffb59f");
-                    lightning = 4;
+                    lightning = 3;
                     lightningDamage = damage * 0.3f;
                     lightningLength = 5;
                     lightningLengthRand = 4;
                     fragBullets = 2;
+                    fragLifeMin = 0.7f;
                     fragBullet = new DelayedPointBulletType(){{
                         width = 6f;
                         damage = 90;
@@ -1648,10 +1650,11 @@ public class TerraUnitTypes {
                     hitEffect = despawnEffect = Fx.titanSmoke;
                     sprite = "large-orb";
                     fragBullets = 1;
+                    targetMissiles = absorbable = reflectable = false;
                     fragBullet = new BlackHoleBulletType(0f, 376f){{
                         lifetime = 200f;
                         color = Color.valueOf("e13131");
-                        damageRadius = 44f;
+                        damageRadius = 33f;
                         suctionRadius = 240f;
                         growTime = 40f;
                         shrinkTime = 70f;
@@ -1668,7 +1671,7 @@ public class TerraUnitTypes {
                             instantDisappear = true;
                             shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                             splashDamage = 0.001f;
-                            splashDamageRadius = 44f;
+                            splashDamageRadius = 33f;
                             status = TerraStatusEffects.singularEvaporation;
                             statusDuration = 150f;
                         }};
@@ -1762,12 +1765,13 @@ public class TerraUnitTypes {
                     height = 35f;
                     trailLength = 20;
                     trailWidth = 2.3f;
-                    hitShake = 8f;
+                    hitShake = 5f;
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect, 
                         new ExplosionEffect(){{
                             waveColor = sparkColor = Color.valueOf("e13131");
                             smokeColor = Color.valueOf("ffb59f");
-                            smokes = 9;
+                            smokes = waveLife = 9;
+                            waveRad = 40f;
                         }}
                     );
                 }};
