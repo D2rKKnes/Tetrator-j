@@ -1770,8 +1770,9 @@ public class TerraUnitTypes {
                         new ExplosionEffect(){{
                             waveColor = sparkColor = Color.valueOf("e13131");
                             smokeColor = Color.valueOf("ffb59f");
-                            smokes = waveLife = 9;
+                            smokes = 9;
                             waveRad = 40f;
+                            waveLife = 9f;
                         }}
                     );
                 }};
