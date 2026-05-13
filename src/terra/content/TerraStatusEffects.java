@@ -122,7 +122,7 @@ public class TerraStatusEffects{
         }};
 
         delta32 = new StatusEffect("delta32"){{
-            color = Color.valueOf("ba31e1");
+            color = Pal.negativeStat;
             healthMultiplier = 0.05f;
             damageMultiplier = 0.1f;
             speedMultiplier = 0.3f;
