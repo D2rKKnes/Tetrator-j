@@ -119,8 +119,8 @@ public class EndEntity extends UnitEntity {
     private void shockwave(float knockback, float damage, float radius, StatusEffect effect, float effectDuration) {
         Units.nearbyEnemies(team, x, y, radius, other -> {
             other.damage(damage);
-            Tmp.v1.set(other.x - x, other.y - y).nor().scl(knockback);
-            other.vel().add(Tmp.v1);
+            Tmp.v3.set(other.x - x, other.y - y).nor().scl(knockback * 80f);
+            other.impulse(Tmp.v3);
             other.apply(effect, effectDuration);
         });
         TerraSounds.shockwave.at(x, y, 1 + Mathf.range(0.15f), 3);
