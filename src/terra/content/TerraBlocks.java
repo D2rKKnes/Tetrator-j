@@ -4,6 +4,7 @@ import terra.type.bullet.*;
 import terra.world.blocks.*;
 import terra.world.drawer.*;
 import terra.world.meta.*;
+import arc.*;
 import arc.util.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
@@ -20,6 +21,7 @@ import mindustry.entities.effect.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
+import mindustry.entities.units.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import mindustry.gen.*;
@@ -214,7 +216,7 @@ public class TerraBlocks{
 
         
         //crafters
-        bisiliconOven = new GenericCrafter("bisilicon-oven"){{
+        bisiliconOven = new AttributeCrafter("bisilicon-oven"){{
             requirements(Category.crafting, with(Items.lead, 485, Items.graphite, 275, Items.titanium, 360));
             consumeItems(with(Items.lead, 2, Items.graphite, 3));
             consumePower(8.25f);
@@ -228,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find(block.name + "-glow");
+                    region = Core.atlas.find("bisilicon-oven-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
@@ -259,6 +261,7 @@ public class TerraBlocks{
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 1.3f;
             researchCostMultiplier = 0.25f;
+            attribute = TerraAttributes.ice;
             maxBoost = 1.25f;
             boostScale = 0.0625f;
         }};
