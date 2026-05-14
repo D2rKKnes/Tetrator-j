@@ -51,22 +51,33 @@ import static arc.graphics.g2d.Lines.*;
 
 public class TerraBlocks{
     public static Block
+    //VERILUS & SERPULO =---
     //walls
-    scrapWallColossol, metaglassWall, metaglassWallLarge, metaglassWallHuge, darkSteelWall, darkSteelWallLarge,
+    scrapWallColossol,
+    metaglassWall, metaglassWallLarge, metaglassWallHuge,
+    darkSteelWall, darkSteelWallLarge,
     //distrubution
-
+    
     //power
-
+    
     //crafters
-
+    bisiliconOven,
     //production
-    mechanicalWell, electricalWell, plasmaDrill, beamMiningFacility,
+    mechanicalWell, electricalWell,
+    plasmaDrill, beamMiningFacility,
     //turrets
-
+    
     //units
     droneCentre;
     //other
+    //NOTVA =---
+    //GIER =---
+    //TATNTROS =---
+    //EREKIR & COPIS =---
+    //OTHER =---
     public static void load(){
+        //VERILUS & SERPULO =---
+        //walls
         scrapWallColossol = new Wall("scrap-wall-colossol"){{
             requirements(Category.defense, with(Items.scrap, 6 * 25));
             health = 60 * 25 * 4;
@@ -196,6 +207,63 @@ public class TerraBlocks{
             regenDamageStop = true;
         }};
 
+        //distrubution
+
+        
+        //power
+
+        
+        //crafters
+        bisiliconOven = new GenericCrafter("bisilicon-oven"){{
+            requirements(Category.crafting, with(Items.lead, 485, Items.graphite, 275, Items.titanium, 360));
+            consumeItems(with(Items.lead, 2, Items.graphite, 3));
+            consumePower(8.25f);
+            outputItems = with(Items.silicon, 15, Items.sand, 23, TerraItems.carbon, 18);
+            size = 4;
+            hasPower = true;
+            hasItems = true;
+            envEnabled = Env.any;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"), 
+                new DrawWarmupRegion() {{
+                    sinMag = 0.3f;
+                    sinScl = 16f;
+                    region = Core.atlas.find(block.name + "-glow");
+                }},
+                new DrawRegion() {{
+                    suffix = "-part2";
+                    spinSprite = true;
+                    rotateSpeed = 3f;
+                    x = 7.5f;
+                }},
+                new DrawRegion() {{
+                    suffix = "-part3";
+                    spinSprite = true;
+                    rotateSpeed = -1.4f;
+                    x = 3.75f;
+                    y = -10.75f;
+                }},
+                new DrawDefault(),
+                new DrawPistons() {{
+                    suffix = "-part1";
+                    sides = 1;
+                    angleOffset = 90f;
+                    sinMag = 5f;
+                    sinScl = 3.6f;
+                    lenOffset = 0f;
+                }},
+                new DrawWarmupRegion()
+            );
+            craftTime = 120;
+            itemCapacity = 50;
+            ambientSound = Sounds.loopSmelter;
+            ambientSoundVolume = 1.3f;
+            researchCostMultiplier = 0.25f;
+            maxBoost = 1.25f;
+            boostScale = 0.0625f;
+        }};
+
+        //production
         mechanicalWell = new AttributeSeparator("mechanical-well"){{
             requirements(Category.production, with(Items.graphite, 25, Items.titanium, 40));
             size = 2;
@@ -205,6 +273,7 @@ public class TerraBlocks{
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.02f;
             attribute = TerraAttributes.carbon;
+            hasLiquids = false;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawRegion("-rotator"){{
@@ -234,6 +303,7 @@ public class TerraBlocks{
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.02f;
             attribute = TerraAttributes.carbon;
+            hasLiquids = false;
             boostScale = 4f / 9;
             consumePower(1.4f);
             drawer = new DrawMulti(
@@ -309,10 +379,38 @@ public class TerraBlocks{
             );
         }};
 
+        //turrets
+
+        
+        //units
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             health = 480;
             size = 2;
         }};*/
+
+        //other
+
+        
+        //NOTVA =---
+
+
+        
+        //GIER =---
+
+
+        
+        //TATNTROS =---
+
+
+        
+        //EREKIR & COPIS =---
+
+
+        
+        //OTHER =---
+
+
+        
     }
 }
