@@ -41,7 +41,7 @@ public class TerraFx {
     arcSmoke = new Effect(100f, 80f, e -> {
         rand.setSeed(e.id);
 
-        Draw.color(Pal.darkerGray, Pal.darkishGray, s);
+        Draw.color(Pal.darkerGray, Pal.darkishGray, e.fin(Interp.sineIn));
         Draw.alpha(e.fout() * 0.7f);
         float angle = 135f + (Mathf.sin(e.fin(Interp.pow2Out) * 2f) * rand.range(20f)) + rand.range(10f);
         float len = e.fin(Interp.pow2Out) * 40f * rand.random(0.8f, 1.3f);
