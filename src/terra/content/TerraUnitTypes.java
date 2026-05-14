@@ -66,6 +66,7 @@ public class TerraUnitTypes {
             createWreck = false;
             constructor = UnitEntity::create;
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
 
             weapons.add(new Weapon(){{
                 shootOnDeath = true;
@@ -114,6 +115,7 @@ public class TerraUnitTypes {
             hidden = true;
             constructor = TimedKillUnit::create;
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             lifetime = 2400f;
 
             weapons.add(new Weapon(){{
@@ -159,6 +161,7 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
 
             weapons.add(
             new Weapon(){{
@@ -223,6 +226,7 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             abilities.add(new SpawnDeathAbility(wick, 3, 11f));
 
             weapons.add(
@@ -398,6 +402,7 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             abilities.add(new UnitSpawnAbility(wickC, 480f, 19.125f, -8.375f), new UnitSpawnAbility(wickC, 480f, -19.125f, -8.375f), 
             new ShieldArcAbility(){{
                 region = "terra-catastrophe-shield";
@@ -491,6 +496,7 @@ public class TerraUnitTypes {
             constructor = TimedKillUnit::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             lifetime = 7500f;
             setEnginesMirror(
                 new UnitEngine(4f, 4f, 2f, 45f),
@@ -558,6 +564,7 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.impactStun);
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             abilities.addAll(
                 new ShieldRegenFieldAbility(1500f, 6000f, 1200f, 120f), 
                 new SuppressionFieldAbility(){{
@@ -833,6 +840,7 @@ public class TerraUnitTypes {
                 TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation
             );
             healColor = Pal.suppress;
+            outlineColor = Pal.darkerMetal;
             abilities.addAll(
                 new SuppressionFieldAbility(){{
                     range = 450f;
@@ -1017,6 +1025,7 @@ public class TerraUnitTypes {
             itemCapacity = 0;
             fallSpeed = 0.06f;
             constructor = UnitEntity::create;
+            outlineColor = Pal.darkerMetal;
 
             weapons.add(new RepairBeamWeapon(){{
                 mirror = false;
