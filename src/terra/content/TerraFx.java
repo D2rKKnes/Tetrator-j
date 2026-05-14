@@ -38,6 +38,16 @@ import static mindustry.Vars.tilesize;
 public class TerraFx {
     private static final Rand rand = new Rand();
     public static final Effect
+    arcSmoke = new Effect(100f, 80f, e -> {
+        rand.setSeed(e.id);
+
+        Draw.color(Pal.darkerGray, Pal.darkishGray, s);
+        Draw.alpha(e.fout() * 0.7f);
+        float angle = 135f + (Mathf.sin(e.fin(Interp.pow2Out) * 2f) * rand.range(20f)) + rand.range(10f);
+        float len = e.fin(Interp.pow2Out) * 40f * rand.random(0.8f, 1.3f);
+        Fill.circle(e.x + Angles.trnsx(angle, len), e.y + Angles.trnsy(angle, len), (1.5f + e.fin(Interp.sineIn) * 5f) * rand.random(0.8f, 1.3f));
+    }).layer(111f),
+    
     hitSpark = new Effect(45, e -> {
         color(e.color, Color.white, e.fout() * 0.3f);
         stroke(e.fout() * 1.6f);
