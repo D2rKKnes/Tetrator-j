@@ -22,7 +22,6 @@ import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.units.*;
-import mindustry.сtype.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import mindustry.gen.*;
@@ -231,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find(this.name + "-glow");
+                    region = Core.atlas.find(name + "-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
