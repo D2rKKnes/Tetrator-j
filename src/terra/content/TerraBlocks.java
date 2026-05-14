@@ -230,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find(name + "-glow");
+                    region = Core.atlas.find(bisiliconOven.name + "-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
@@ -280,10 +280,10 @@ public class TerraBlocks{
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
             requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, Items.titanium, 360, Items.metaglass, 225));
-            consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 4, TerraItems.carbon, 8));
-            consumeLiquid(Liquids.cryofluid, 1f);
+            consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
+            consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
-            outputItem = new ItemStack(TerraItems.darkSteel, 3);
+            outputItem = new ItemStack(TerraItems.darkSteel, 4);
             size = 5;
             hasPower = true;
             hasItems = true;
@@ -294,7 +294,7 @@ public class TerraBlocks{
                 new DrawLiquidRegion(Liquids.cryofluid){{drawLiquidLight = true;}},
                 new DrawArcSmelt() {{
                     x = y = -43f / 4f;
-                    particleRad = 4f;
+                    particleRad = 5.6f;
                     particleLife = 30f;
                     
                 }},
@@ -311,7 +311,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion()
             );
             craftTime = 190;
-            itemCapacity = 18;
+            itemCapacity = 24;
             researchCostMultiplier = 0.25f;
             lightLiquid = Liquids.cryofluid;
         }};
