@@ -230,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find("bisilicon-oven-glow");
+                    region = Core.atlas.find(this.name + "-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
@@ -280,7 +280,7 @@ public class TerraBlocks{
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
             requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, Items.titanium, 360, Items.metaglass, 225));
-            consumeItems(with(Items.lead, 5, Items.titanium, 2, Items.thorium, 3, TerraItems.carbon, 6));
+            consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 4, TerraItems.carbon, 8));
             consumeLiquid(Liquids.cryofluid, 1f);
             consumePower(12.5f);
             outputItem = new ItemStack(TerraItems.darkSteel, 3);
@@ -291,13 +291,19 @@ public class TerraBlocks{
             envEnabled = Env.any;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
-                new DrawLiquidTile(Liquids.cryofluid){{drawLiquidLight = true;}},
+                new DrawLiquidRegion(Liquids.cryofluid){{drawLiquidLight = true;}},
+                new DrawArcSmelt() {{
+                    x = y = -43f / 4f;
+                    particleRad = 4f;
+                    particleLife = 30f;
+                    
+                }},
                 new DrawDefault(),
                 new DrawTeamTop(),
                 new DrawPistons() {{
                     suffix = "-cap";
                     sides = 1;
-                    angleOffset = 90f;
+                    angleOffset = 0f;
                     sinMag = 0.3f;
                     sinScl = 0.5f;
                     lenOffset = 0f;
