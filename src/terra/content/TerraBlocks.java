@@ -265,21 +265,15 @@ public class TerraBlocks{
             maxBoost = 1.25f;
             boostScale = 0.0625f;
 
-            buildType = new BuildingBlock() {
+            buildType = () -> new AttributeCrafterBuild() {
                 @Override
-                public Building create(Block block) {
-                    return new AttributeCrafter.AttributeCrafterBuild(block) {
-                        @Override
-                        public void updateTile() {
-                            super.updateTile();
-                            if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
-                                float randX1 = Mathf.range(2f), randY1 = Mathf.range(2f);
-                                arcSmoke.at(x - 7.5f - randX1, y + 0.5f + randY1);
-                                float randX2 = Mathf.range(2f), randY2 = Mathf.range(2f);
-                                arcSmoke.at(x - 8.5f - randX2, y - 8.5f + randY2);
-                            }
-                        }
-                    };
+                public void updateTile() {
+                    super.updateTile();
+                    if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
+                        float rand1 = Mathf.range(2f), rand2 = Mathf.range(2f);
+                        TerraFx.arcSmoke.at(x - 7.5f - rand1, y + 0.5f + rand1);
+                        TerraFx.arcSmoke.at(x - 8.5f - rand2, y - 8.5f + rand2);
+                    }
                 }
             };
         }};
