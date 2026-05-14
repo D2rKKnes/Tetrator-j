@@ -218,9 +218,9 @@ public class TerraBlocks{
         //crafters
         bisiliconOven = new AttributeCrafter("bisilicon-oven"){{
             requirements(Category.crafting, with(Items.lead, 485, Items.graphite, 275, Items.titanium, 360));
-            consumeItems(with(Items.lead, 2, Items.graphite, 3));
+            consumeItems(with(Items.lead, 15, Items.sand, 23, TerraItems.carbon, 18));
             consumePower(8.25f);
-            outputItems = with(Items.silicon, 15, Items.sand, 23, TerraItems.carbon, 18);
+            outputItems = with(Items.silicon, 10, Items.metaglass, 7);
             size = 4;
             hasPower = true;
             hasItems = true;
@@ -230,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find("terra-bisilicon-oven-glow");
+                    region = Core.atlas.find("bisilicon-oven-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
