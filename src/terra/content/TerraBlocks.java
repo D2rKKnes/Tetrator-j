@@ -265,18 +265,23 @@ public class TerraBlocks{
             maxBoost = 1.25f;
             boostScale = 0.0625f;
 
-            buildType = () -> extend(AttributeCrafter.AttributeCrafterBuild, bisiliconOven, {
+            buildType = new BuildingBlock() {
                 @Override
-                public void updateTile() {
-                    super.updateTile();
-                    if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
-                        float randX1 = Mathf.range(2f), randY1 = Mathf.range(2f);
-                        arcSmoke.at(x - 7.5f - randX1, y + 0.5f + randY1);
-                        float randX2 = Mathf.range(2f), randY2 = Mathf.range(2f);
-                        arcSmoke.at(x - 8.5f - randX2, y - 8.5f + randY2);
-                    }
+                public Building create(Block block) {
+                    return new AttributeCrafter.AttributeCrafterBuild(block) {
+                        @Override
+                        public void updateTile() {
+                            super.updateTile();
+                            if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
+                                float randX1 = Mathf.range(2f), randY1 = Mathf.range(2f);
+                                arcSmoke.at(x - 7.5f - randX1, y + 0.5f + randY1);
+                                float randX2 = Mathf.range(2f), randY2 = Mathf.range(2f);
+                                arcSmoke.at(x - 8.5f - randX2, y - 8.5f + randY2);
+                            }
+                        }
+                    };
                 }
-            });
+            };
         }};
 
         //production
