@@ -22,6 +22,7 @@ import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.units.*;
+import mindustry.сtype.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import mindustry.gen.*;
