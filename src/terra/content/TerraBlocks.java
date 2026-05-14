@@ -63,7 +63,7 @@ public class TerraBlocks{
     //power
     
     //crafters
-    bisiliconOven,
+    bisiliconOven, darkSteelWorkshop,
     //production
     mechanicalWell, electricalWell,
     plasmaDrill, beamMiningFacility,
@@ -276,6 +276,38 @@ public class TerraBlocks{
                     }
                 }
             };
+        }};
+
+        darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
+            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, Items.titanium, 360, Items.metaglass, 225));
+            consumeItems(with(Items.lead, 5, Items.titanium, 2, Items.thorium, 3, TerraItems.carbon, 6));
+            consumeLiquid(Liquids.cryofluid, 1f);
+            consumePower(12.5f);
+            outputItem = new ItemStack(TerraItems.darkSteel, 3);
+            size = 5;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            envEnabled = Env.any;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawLiquidTile(Liquids.cryofluid){{drawLiquidLight = true;}},
+                new DrawDefault(),
+                new DrawTeamTop(),
+                new DrawPistons() {{
+                    suffix = "-cap";
+                    sides = 1;
+                    angleOffset = 90f;
+                    sinMag = 0.3f;
+                    sinScl = 0.5f;
+                    lenOffset = 0f;
+                }},
+                new DrawWarmupRegion()
+            );
+            craftTime = 190;
+            itemCapacity = 18;
+            researchCostMultiplier = 0.25f;
+            lightLiquid = Liquids.cryofluid;
         }};
 
         //production
