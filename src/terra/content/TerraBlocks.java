@@ -266,20 +266,14 @@ public class TerraBlocks{
             boostScale = 0.0625f;
 
             buildType = () -> extend(AttributeCrafter.AttributeCrafterBuild, bisiliconOven, {
-                private final float[][] smokeOffsets = {
-                    {-7.5f, 0.5f},
-                    {-8.5f, -8.5f}
-                };
-                
                 @Override
                 public void updateTile() {
                     super.updateTile();
                     if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
-                        for (float[] off : smokeOffsets) {
-                            float randX = Mathf.range(2f);
-                            float randY = Mathf.range(2f);
-                            TerraFx.arcSmoke.at(x + off[0] + randX, y + off[1] + randY);
-                        }
+                        float randX1 = Mathf.range(2f), randY1 = Mathf.range(2f);
+                        arcSmoke.at(x - 7.5f - randX1, y + 0.5f + randY1);
+                        float randX2 = Mathf.range(2f), randY2 = Mathf.range(2f);
+                        arcSmoke.at(x - 8.5f - randX2, y - 8.5f + randY2);
                     }
                 }
             });
