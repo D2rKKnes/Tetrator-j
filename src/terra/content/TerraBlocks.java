@@ -269,7 +269,7 @@ public class TerraBlocks{
                 @Override
                 public void updateTile() {
                     super.updateTile();
-                    if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
+                    if (this.efficiency() > 0 && Mathf.chanceDelta(0.8f * this.efficiency() * warmup)) {
                         float rand1 = Mathf.range(2f), rand2 = Mathf.range(2f);
                         TerraFx.arcSmoke.at(x - 7.5f - rand1, y + 0.5f + rand1);
                         TerraFx.arcSmoke.at(x - 8.5f - rand2, y - 8.5f + rand2);
