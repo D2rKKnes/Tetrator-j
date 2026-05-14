@@ -230,7 +230,7 @@ public class TerraBlocks{
                 new DrawWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find("bisilicon-oven-glow");
+                    region = Core.atlas.find("terra-bisilicon-oven-glow");
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
@@ -264,6 +264,25 @@ public class TerraBlocks{
             attribute = TerraAttributes.ice;
             maxBoost = 1.25f;
             boostScale = 0.0625f;
+
+            buildType = () -> extend(AttributeCrafter.AttributeCrafterBuild, bisiliconOven, {
+                private final float[][] smokeOffsets = {
+                    {-7.5f, 0.5f},
+                    {-8.5f, -8.5f}
+                };
+                
+                @Override
+                public void updateTile() {
+                    super.updateTile();
+                    if (efficiency() > 0 && Mathf.chanceDelta(0.8f * efficiency() * warmup)) {
+                        for (float[] off : smokeOffsets) {
+                            float randX = Mathf.range(2f);
+                            float randY = Mathf.range(2f);
+                            TerraFx.arcSmoke.at(x + off[0] + randX, y + off[1] + randY);
+                        }
+                    }
+                }
+            });
         }};
 
         //production
