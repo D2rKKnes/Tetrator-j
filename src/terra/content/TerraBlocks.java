@@ -230,7 +230,7 @@ public class TerraBlocks{
                 new DrawCustomWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    suffix = "-glow"!
+                    suffix = "-glow";
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
