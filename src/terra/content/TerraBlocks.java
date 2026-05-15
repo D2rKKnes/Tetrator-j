@@ -246,6 +246,7 @@ public class TerraBlocks{
                     y = -10.75f;
                 }},
                 new DrawDefault(),
+                new DrawTeamTop(),
                 new DrawPistons() {{
                     suffix = "-part1";
                     sides = 1;
