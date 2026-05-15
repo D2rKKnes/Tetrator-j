@@ -227,10 +227,10 @@ public class TerraBlocks{
             envEnabled = Env.any;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"), 
-                new DrawWarmupRegion() {{
+                new DrawCustomWarmupRegion() {{
                     sinMag = 0.3f;
                     sinScl = 16f;
-                    region = Core.atlas.find(bisiliconOven.name + "-glow");
+                    suffix = "-glow"!
                 }},
                 new DrawRegion() {{
                     suffix = "-part2";
