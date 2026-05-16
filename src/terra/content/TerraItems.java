@@ -50,6 +50,21 @@ public class TerraItems{
             radioactivity = 0.6f;
             charge = 0.3f;
         }};
+        uranium = new AdvancedItem("uranium"){{
+            color = Color.valueOf("75ab77");
+            cost = 0.3f;
+            hardness = 5;
+            radioactivity = 270f;
+            threat = 0.87f;
+        }};
+        plutonium = new AdvancedItem("plutonium"){{
+            color = Color.valueOf("83a8ad");
+            cost = 3f;
+            hardness = 6;
+            healthScaling = 0.5f;
+            radioactivity = 575000f; //damn that a lot
+            threat = 1f;
+        }};
         darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
             hardness = 5;
