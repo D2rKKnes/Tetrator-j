@@ -18,7 +18,7 @@ import static mindustry.content.Items.*;
 public class TerraItems{
     public static Item
 
-            carbon, diamondDust, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, tesseract;
+            carbon, diamondDust, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, tesseract;
 
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
