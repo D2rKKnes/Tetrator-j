@@ -87,6 +87,7 @@ public class AdvancedItem extends Item {
 
     private float getChance(float base, int amount, boolean mul) {
         float c = base + ((threat / 50f * amount) / 60f);
+        if (amount == 0) c = 0f;
         return mul ? c * threatMul : c;
     }
 
