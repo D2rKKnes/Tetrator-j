@@ -30,11 +30,11 @@ public class TerraItems{
             hardness = 4;
             healthScaling = 2f;
         }};
-        cryotite = new Item("cryotite", Color.valueOf("b1f6fa")){{
+        /*cryotite = new Item("cryotite", Color.valueOf("b1f6fa")){{
             flammability = -1f;
             explosiveness = 1f;
             healthScaling = 0.5f;
-        }};
+        }};*/
         titaniumPlate = new Item("titanium-plate", Color.valueOf("787ac9")){{
             cost = 1.2f;
             healthScaling = 0.6f;
