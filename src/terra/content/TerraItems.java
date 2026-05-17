@@ -37,7 +37,7 @@ public class TerraItems{
         }};
         titaniumPlate = new Item("titanium-plate", Color.valueOf("787ac9")){{
             cost = 1.2f;
-            healthScaling = 1.2f;
+            healthScaling = 0.6f;
         }};
         rawThermoxite = new Item("raw-thermoxite", Color.valueOf("ff7163")){{
             cost = 0.8f;
@@ -50,20 +50,21 @@ public class TerraItems{
             radioactivity = 0.6f;
             charge = 0.3f;
         }};
-        uranium = new AdvancedItem("uranium"){{
+        uranium = new Item("uranium"){{
             color = Color.valueOf("75ab77");
-            cost = 0.3f;
+            cost = 1.7f;
             hardness = 5;
-            radioactivity = 270f;
-            threat = 0.87f;
+            radioactivity = 3f;
+            explosiveness = 0.3f;
         }};
         plutonium = new AdvancedItem("plutonium"){{
             color = Color.valueOf("83a8ad");
-            cost = 3f;
+            cost = 5.8f;
             hardness = 6;
-            healthScaling = 0.5f;
-            radioactivity = 575000f; //damn that a lot
-            threat = 1f;
+            healthScaling = -0.1f;
+            radioactivity = 57.5f;
+            explosiveness = 0.5f;
+            threat = 0.38f;
         }};
         darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
@@ -71,7 +72,7 @@ public class TerraItems{
         }};
         tesseract = new AdvancedItem("tesseract"){{
             color = Color.valueOf("010101");
-            cost = 40f;
+            cost = 60f;
             healthScaling = 5f;
             //charge = 10f;
             threat = 0.6f;
