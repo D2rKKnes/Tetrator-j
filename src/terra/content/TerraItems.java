@@ -18,7 +18,7 @@ import static mindustry.content.Items.*;
 public class TerraItems{
     public static Item
 
-            carbon, diamondDust, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, tesseract;
+            carbon, diamondDust, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, cesium, tesseract;
 
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
@@ -76,7 +76,15 @@ public class TerraItems{
             threat = 0.46f;
             frames = 2;
             transitionFrames = 10;
-            hidden = true;
+            //hidden = true;
+        }};
+        cesium = new AdvancedItem("cesium"){{
+            color = Color.valueOf("bebdc3");
+            cost = 20f;
+            healthScaling = -0.3f;
+            radioactivity = 7850f;
+            threat = 1f;
+            //hidden = true;
         }};
         darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
