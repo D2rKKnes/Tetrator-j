@@ -38,6 +38,14 @@ public class TerraEnvironmentBlocks {
         
         Blocks.carbonStone.attributes.set(TerraAttributes.carbon, 0.25f);
         Blocks.carbonStone.attributes.set(Attribute.sand, 1f / 8);
+        Blocks.sand.attributes.set(Attribute.sand, 1f);
+        Blocks.darksand.attributes.set(Attribute.sand, 1f);
+        Blocks.stone.attributes.set(Attribute.sand, 1f / 4);
+        Blocks.craters.attributes.set(Attribute.sand, 1f / 4);
+        Blocks.charr.attributes.set(Attribute.sand, 1f / 5);
+        Blocks.ferricStone.attributes.set(Attribute.sand, 1f / 2);
+        Blocks.ferricCraters.attributes.set(Attribute.sand, 1f / 2);
+        
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
             attributes.set(TerraAttributes.carbon, 0.1f);
