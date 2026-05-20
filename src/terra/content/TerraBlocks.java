@@ -61,7 +61,7 @@ public class TerraBlocks{
     //distrubution
     
     //power
-    
+    photonPanel,
     //crafters
     bisiliconOven, darkSteelWorkshop,
     //production
@@ -213,7 +213,16 @@ public class TerraBlocks{
 
         
         //power
-
+        photonPanel = new SolarGenerator("photon-solar-panel"){{
+            requirements(Category.power, with(Items.lead, 35, Items.silicon, 40, TerraItems.diamondDust, 15));
+            size = 2;
+            powerProduction = 0.88f;
+            drawer = new DrawMulti(
+                new DrawVariantRegion("-bottom", 3),
+                new DrawVariantRegion("-shine", 3, 50),
+                new DrawRegion("-top")
+            );
+        }};
         
         //crafters
         bisiliconOven = new AttributeCrafter("bisilicon-oven"){{
