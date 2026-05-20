@@ -27,6 +27,8 @@ public class DrawVariantRegion extends DrawBlock {
     @Override
     public void load(Block block) {
         super.load(block);
+
+        region = Core.atlas.find(name != null ? name : block.name + suffix);
         
         variantRegions = new TextureRegion[Math.max(1, variants)];
         for (int i = 0; i < variantRegions.length; i++) {
@@ -39,6 +41,13 @@ public class DrawVariantRegion extends DrawBlock {
         int index = Mathf.randomSeed(build.tile.pos() + randOffset, 0, Math.max(0, variantRegions.length - 1));
         
         Draw.rect(variantRegions[index], build.x, build.y);
+    }
+
+    @Override
+    public void drawPlan(Block block, BuildPlan plan, Eachable<BuildPlan> list){
+        if(кegion.found()){
+            Draw.rect(кegion, plan.drawx(), plan.drawy());
+        }
     }
 
     @Override
