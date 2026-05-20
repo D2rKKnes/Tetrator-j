@@ -89,7 +89,7 @@ public class TerraEnvironmentBlocks {
             drawEdgeOut = false;
             drawEdgeIn = false;
         }};
-        metalWall4 = new StaticWall("metal-wall-3"){{
+        metalWall4 = new StaticWall("metal-wall-4"){{
             autotile = true;
         }};
     }
