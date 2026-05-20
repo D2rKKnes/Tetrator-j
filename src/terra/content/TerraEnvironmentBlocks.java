@@ -64,7 +64,7 @@ public class TerraEnvironmentBlocks {
         carbonizedThermoxiteSmallCluster = new Prop("carbonized-thermoxite-small-cluster"){{
             variants = 2;
             customShadow = true;
-            carbonizedThermoxited.asFloor().decoration = this;
+            carbonizedThermoxite.asFloor().decoration = this;
             obstructsLight = false;
         }};
         thermoxiteSmallCluster = new Prop("thermoxite-small-cluster"){{
