@@ -28,18 +28,6 @@ public class DrawVariantRegion extends DrawBlock {
     public void load(Block block) {
         super.load(block);
         
-        if (variants > 0) {
-            variantRegions = new TextureRegion[variants];
-            for (int i = 0; i < variants; i++) {
-                variantRegions[i] = Core.atlas.find(block.name + suffix + (i + 1), block.region);
-            }
-        }
-    }
-
-    @Override
-    public void load(Block block) {
-        super.load(block);
-        
         variantRegions = new TextureRegion[Math.max(1, variants)];
         for (int i = 0; i < variantRegions.length; i++) {
             variantRegions[i] = Core.atlas.find(block.name + suffix + (i + 1), block.region);
@@ -55,6 +43,6 @@ public class DrawVariantRegion extends DrawBlock {
 
     @Override
     public TextureRegion[] icons(Block block) {
-        return new TextureRegion[]{variantRegions != null && variantRegions.length > 0 ? variantRegions : block.region};
+        return new TextureRegion[]{variantRegions != null && variantRegions.length > 0 ? variantRegions[0] : block.region};
     }
 }
