@@ -3,8 +3,9 @@ package terra.world.drawer;
 import arc.Core;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
-import mindustry.gen.Building;
-import mindustry.world.Block;
+import mindustry.entities.units.*;
+import mindustry.gen.*;
+import mindustry.world.*;
 import mindustry.world.draw.DrawBlock;
 
 public class DrawVariantRegion extends DrawBlock {
@@ -46,8 +47,8 @@ public class DrawVariantRegion extends DrawBlock {
 
     @Override
     public void drawPlan(Block block, BuildPlan plan, Eachable<BuildPlan> list){
-        if(кegion.found()){
-            Draw.rect(кegion, plan.drawx(), plan.drawy());
+        if(region.found()){
+            Draw.rect(region, plan.drawx(), plan.drawy());
         }
     }
 
