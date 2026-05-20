@@ -15,13 +15,13 @@ public class TerraEnvironmentBlocks {
     public static Block
 
         largeTree, iceBoulder, iceRift, 
-        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, oreRawThermoxite, oreThermoxite,
-        metalTilesSpace;
+        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster, oreRawThermoxite, oreThermoxite,
+        metalTilesSpace, metalWall4;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
         Blocks.redIce.attributes.set(TerraAttributes.ice, 0.25f);
-        largeTree = new TreeBlock("large-tree");
+        //largeTree = new TreeBlock("large-tree");
         iceBoulder = new Prop("ice-boulder") {{
             variants = 3;
             Blocks.ice.asFloor().decoration = this;
@@ -35,6 +35,7 @@ public class TerraEnvironmentBlocks {
             attributes.set(Attribute.water, 0.4f);
             albedo = 0.65f;
         }};
+        
         Blocks.carbonStone.attributes.set(TerraAttributes.carbon, 0.25f);
         Blocks.carbonStone.attributes.set(Attribute.sand, 1f / 8);
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
@@ -60,20 +61,36 @@ public class TerraEnvironmentBlocks {
             variants = 3;
             clipSize = 128f;
         }};
+        carbonizedThermoxiteSmallCluster = new Prop("carbonized-thermoxite-small-cluster"){{
+            variants = 2;
+            customShadow = true;
+            carbonizedThermoxited.asFloor().decoration = this;
+            obstructsLight = false;
+        }};
+        thermoxiteSmallCluster = new Prop("thermoxite-small-cluster"){{
+            variants = 2;
+            customShadow = true;
+            thermoxiteCrystal.asFloor().decoration = this;
+            obstructsLight = false;
+        }};
         oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
             variants = 3;
         }};
         oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
             variants = 3;
         }};
+        
         metalTilesSpace = new Floor("metal-tiles-space"){{
-            cacheLayer = CacheLayer.space;
+            //cacheLayer = CacheLayer.space;
             placeableOn = false;
             solid = true;
             canShadow = false;
             autotile = true;
             drawEdgeOut = false;
             drawEdgeIn = false;
+        }};
+        metalWall4 = new StaticWall("metal-wall-3"){{
+            autotile = true;
         }};
     }
 }
