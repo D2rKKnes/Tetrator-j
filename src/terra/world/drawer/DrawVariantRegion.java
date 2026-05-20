@@ -1,8 +1,9 @@
 package terra.world.drawer;
 
-import arc.Core;
+import arc.*;
 import arc.graphics.g2d.*;
-import arc.math.Mathf;
+import arc.math.*;
+import arc.util.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.world.*;
