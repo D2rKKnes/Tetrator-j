@@ -63,8 +63,9 @@ public class TerraBlocks{
     //power
     photonPanel, photonPanelLarge,
     //crafters
-    bisiliconOven, darkSteelWorkshop,
+    sandExtractor, iceMelter, bisiliconOven, darkSteelWorkshop, titaniumPress,
     //production
+    graphiteMiner,
     mechanicalWell, electricalWell,
     plasmaDrill, beamMiningFacility,
     //turrets
@@ -235,6 +236,63 @@ public class TerraBlocks{
         }};
         
         //crafters
+        sandExtractor = new AttributeCrafter("sand-extractor"){{
+            requirements(Category.crafting, with(Items.graphite, 20, Items.titanium, 35));
+            outputItem = new ItemStack(Items.sand, 2);
+            size = 2;
+            hasPower = true;
+            hasItems = true;
+            envEnabled = Env.any;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"), 
+                new DrawRegion("-rotator1", 4.2f, true) {{
+                    x = y = 3f;
+                }},
+                new DrawRegion("-rotator2", 2.6f, true) {{
+                    x = 4f;
+                    y = -4f;
+                }},
+                new DrawRegion("-rotator3", -1.8f, true) {{
+                    x = y = -3.5f;
+                }},
+                new DrawDefault()
+            );
+            craftTime = 110;
+            itemCapacity = 20;
+            updateEffect = Fx.pulverizeSmall;
+            updateEffectChance = 0.03f;
+            attribute = Attributes.sand;
+            minEfficiency = 0.1f;
+            baseEfficiency = 0f;
+        }};
+        iceMelter = new AttributeCrafter("ice-melter"){{
+            requirements(Category.crafting, with(Items.graphite, 25, Items.titanium, 30, Items.silicon, 45));
+            outputLiquid = new LiquidStack(Liquids.water, 0.2f);
+            size = 2;
+            hasPower = true;
+            hasLiquids = true;
+            envEnabled = Env.any;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"), 
+                new DrawLiquidTile(Liquids.water),
+                new DrawCultivator() {{
+                    plantColor = Color.valueOf("596ab866");
+                    plantColorLight = Color.valueOf("7090ea");
+                    bottomColor = Color.valueOf("596ab800");
+                    timeScl = 25;
+                    strokeMin = 0f;
+                    radius = 2f;
+                    spread = recurrence = 3.5f;
+                    sides = 75;
+                    bubbles = 18;
+                }},
+                new DrawDefault(),
+                new DrawRegion("-top")
+            );
+            attribute = TerraAttributes.ice;
+            minEfficiency = 0.1f;
+            baseEfficiency = 0f;
+        }};
         bisiliconOven = new AttributeCrafter("bisilicon-oven"){{
             requirements(Category.crafting, with(Items.lead, 485, Items.graphite, 275, Items.titanium, 360));
             consumeItems(with(Items.lead, 15, Items.sand, 23, TerraItems.carbon, 18));
@@ -336,7 +394,36 @@ public class TerraBlocks{
             lightLiquid = Liquids.cryofluid;
         }};
 
+        titaniumPress = new GenericCrafter("titanium-press"){{
+            requirements(Category.crafting, with(Items.titanium, 180, Items.silicon, 45, Items.lead, 100, Items.graphite, 50));
+
+            craftEffect = Fx.pulverizeMedium;
+            outputItem = new ItemStack(TerraItems.titaniumPlate, 3);
+            craftTime = 40f;
+            itemCapacity = 15;
+            size = 3;
+            hasItems = true;
+            hasLiquids = true;
+            hasPower = true;
+
+            consumePower(2.1f);
+            consumeItems(with(Items.silicon, 1, Items.titanium, 3));
+            consumeLiquid(Liquids.water, 0.3f);
+        }};
+
         //production
+        graphiteMiner = new WallCrafter("graphite-miner"){{
+            requirements(Category.production, with(Items.lead, 12));
+            output = Items.graphite;
+            size = 2;
+            envEnabled = Env.any;
+            drillTime = 270f;
+            fogRadius = 2f;
+            ambientSound = Sounds.loopDrill;
+            ambientSoundVolume = 0.04f;
+            itemCapacity = 20;
+            attribute = TerraAttributes.graphite;
+        }};
         mechanicalWell = new AttributeSeparator("mechanical-well"){{
             requirements(Category.production, with(Items.graphite, 25, Items.titanium, 40));
             size = 2;
@@ -663,8 +750,8 @@ public class TerraBlocks{
                     armorMultiplier = 0.6f;
 
                     hitEffect = despawnEffect = Fx.hitBulletColor;
-                    hitColor = backColor = trailColor = Color.white;
-                    frontColor = Pal.lancerLaser;
+                    hitColor = backColor = trailColor = Pal.lancerLaser;
+                    frontColor = Color.white;
                 }},
                 Items.thorium, new BasicBulletType(4f, 28, "bullet"){{
                     width = 8f;
@@ -695,7 +782,7 @@ public class TerraBlocks{
                     }});
                 }
                 parts.add(new RegionPart("-side"){{
-                    progress = PartProgress.reload;
+                    progress = PartProgress.recoil;
                     moveY = 0.5f;
                     mirror = under = true;
                 }});
@@ -705,10 +792,10 @@ public class TerraBlocks{
             range = 210f;
             reload = 33f;
             consumeAmmoOnce = false;
-            ammoEjectBack = 2f;
+            ammoEjectBack = 1.2f;
             recoil = 0.5f;
             shake = 1f;
-            shoot = new ShootMulti(new ShootAlternate(4.5f), new ShootPattern() {{
+            shoot = new ShootMulti(new ShootAlternate(5f), new ShootPattern() {{
                 shots = 2;
                 shotDelay = 4.5f;
             }});
