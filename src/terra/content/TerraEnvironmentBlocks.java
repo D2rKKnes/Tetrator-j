@@ -38,6 +38,8 @@ public class TerraEnvironmentBlocks {
         
         Blocks.carbonStone.attributes.set(TerraAttributes.carbon, 0.25f);
         Blocks.carbonStone.attributes.set(Attribute.sand, 1f / 8);
+        Blocks.carbonWall.attributes.set(TerraAttributes.graphite, 0.1f);
+        Blocks.graphiticWall.attributes.set(TerraAttributes.graphite, 1f);
         Blocks.sand.attributes.set(Attribute.sand, 1f);
         Blocks.darksand.attributes.set(Attribute.sand, 1f);
         Blocks.stone.attributes.set(Attribute.sand, 1f / 4);
