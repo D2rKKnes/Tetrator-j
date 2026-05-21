@@ -608,13 +608,13 @@ public class TerraBlocks{
             );
 
             drawer = new DrawTurret(){{
-                parts.add(new RegionPart("-missile")){{
+                parts.add(new RegionPart("-missile"){{
                     progress = PartProgress.reload;
                     colorTo = mixColor = Color.valueOf("ffffff00");
                     color = Color.valueOf("ffffffff");
                     mixColorTo = Pal.stat;
                     outline = false;
-                }};
+                }});
             }};
 
             shootSound = Sounds.shootMissileSmall;
