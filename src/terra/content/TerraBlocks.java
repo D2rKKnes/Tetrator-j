@@ -603,7 +603,7 @@ public class TerraBlocks{
                                 }};
                             }};
                         }});
-                    }};t;
+                    }};
                 }}
             );
 
@@ -614,7 +614,7 @@ public class TerraBlocks{
                     color = Color.valueOf("ffffffff");
                     mixColorTo = Pal.stat;
                     outline = false;
-                }});
+                }};
             }};
 
             shootSound = Sounds.shootMissileSmall;
