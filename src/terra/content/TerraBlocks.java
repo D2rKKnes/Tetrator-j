@@ -682,14 +682,6 @@ public class TerraBlocks{
 
             recoils = 2;
             drawer = new DrawTurret(){{
-                parts.add(new RegionPart("-side"){{
-                    progress = PartProgress.warmup;
-                    moveX = 0.6f;
-                    moveRot = -15f;
-                    mirror = true;
-                    layerOffset = 0.001f;
-                    moves.add(new PartMove(PartProgress.recoil, 0.5f, -0.5f, -8f));
-                }},
                 for(int i = 0; i < 2; i ++){
                     int f = i;
                     parts.add(new RegionPart("-barrel-" + (i == 0 ? "l" : "r")){{
@@ -699,6 +691,14 @@ public class TerraBlocks{
                         moveY = -1.5f;
                     }});
                 }
+                parts.add(new RegionPart("-side"){{
+                    progress = PartProgress.warmup;
+                    moveX = 0.6f;
+                    moveRot = -15f;
+                    mirror = true;
+                    layerOffset = 0.001f;
+                    moves.add(new PartMove(PartProgress.recoil, 0.5f, -0.5f, -8f));
+                }}
             }};
 
             size = 2;
