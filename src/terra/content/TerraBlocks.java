@@ -224,9 +224,9 @@ public class TerraBlocks{
             );
         }};
         photonPanelLarge = new SolarGenerator("photon-solar-panel-large"){{
-            requirements(Category.power, with(TerraItems.thermoxite, 20, TerraItems.darkSteel, 65, TerraItems.diamondDust, 40));
+            requirements(Category.power, with(TerraItems.titaniumPlate, 80, TerraItems.darkSteel, 65, TerraItems.diamondDust, 40));
             size = 4;
-            powerProduction = 3.6f;
+            powerProduction = 5.6f;
             drawer = new DrawMulti(
                 new DrawVariantRegion("-bottom", 3),
                 new DrawVariantRegion("-shine", 4, 2),
@@ -299,7 +299,7 @@ public class TerraBlocks{
         }};
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
-            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, Items.titanium, 360, Items.metaglass, 225));
+            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, Items.metaglass, 225));
             consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
             consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
