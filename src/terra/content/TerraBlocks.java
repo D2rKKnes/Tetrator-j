@@ -688,20 +688,21 @@ public class TerraBlocks{
                         progress = PartProgress.recoil;
                         recoilIndex = f;
                         moveY = -1.5f;
+                        //layerOffset = 0.001f;
                     }});
                 }
                 parts.add(new RegionPart("-side"){{
                     progress = PartProgress.recoil;
-                    moveX = 0.5f;
+                    moveY = 0.5f;
                     mirror = under = true;
                 }});
             }};
 
             size = 2;
             range = 190f;
-            reload = 40f;
+            reload = 33f;
             consumeAmmoOnce = false;
-            ammoEjectBack = 3f;
+            ammoEjectBack = 2f;
             recoil = 0.5f;
             shake = 1f;
             shoot = new ShootMulti(new ShootAlternate(3.5f), new ShootPattern() {{
