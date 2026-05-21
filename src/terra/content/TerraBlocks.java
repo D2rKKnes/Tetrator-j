@@ -264,7 +264,25 @@ public class TerraBlocks{
             attribute = Attribute.sand;
             minEfficiency = 0.1f;
             baseEfficiency = 0f;
-        }};
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
         iceMelter = new AttributeCrafter("ice-melter"){{
             requirements(Category.crafting, with(Items.graphite, 25, Items.titanium, 30, Items.silicon, 45));
             outputLiquid = new LiquidStack(Liquids.water, 0.2f);
@@ -355,7 +373,25 @@ public class TerraBlocks{
                     }
                 }
             };
-        }};
+        }                                                
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
             requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, Items.metaglass, 225));
