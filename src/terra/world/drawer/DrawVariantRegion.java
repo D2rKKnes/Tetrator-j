@@ -31,7 +31,7 @@ public class DrawVariantRegion extends DrawBlock {
     public void load(Block block) {
         super.load(block);
 
-        region = Core.atlas.find(block.name + suffix);
+        region = Core.atlas.find(block.name + suffix + "0");
         
         variantRegions = new TextureRegion[Math.max(1, variants)];
         for (int i = 0; i < variantRegions.length; i++) {
