@@ -61,7 +61,7 @@ public class TerraBlocks{
     //distrubution
     
     //power
-    photonPanel,
+    photonPanel, photonPanelLarge,
     //crafters
     bisiliconOven, darkSteelWorkshop,
     //production
@@ -219,7 +219,17 @@ public class TerraBlocks{
             powerProduction = 0.88f;
             drawer = new DrawMulti(
                 new DrawVariantRegion("-bottom", 3),
-                new DrawVariantRegion("-shine", 3, 50),
+                new DrawVariantRegion("-shine", 4, 2),
+                new DrawRegion("-top")
+            );
+        }};
+        photonPanelLarge = new SolarGenerator("photon-solar-panel-large"){{
+            requirements(Category.power, with(TerraItems.thermoxite, 20, TerraItems.darkSteel, 65, TerraItems.diamondDust, 40));
+            size = 4;
+            powerProduction = 3.6f;
+            drawer = new DrawMulti(
+                new DrawVariantRegion("-bottom", 3),
+                new DrawVariantRegion("-shine", 4, 2),
                 new DrawRegion("-top")
             );
         }};
