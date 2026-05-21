@@ -394,6 +394,8 @@ public class TerraBlocks{
             researchCostMultiplier = 0.25f;
             lightLiquid = Liquids.cryofluid;
         }
+            public TextureRegion fullRegion;
+                                                                                 
             @Override
             public void load() {
                 super.load();
