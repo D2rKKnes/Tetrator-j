@@ -393,7 +393,7 @@ public class TerraBlocks{
             itemCapacity = 24;
             researchCostMultiplier = 0.25f;
             lightLiquid = Liquids.cryofluid;
-        },
+        }
             @Override
             public void load() {
                 super.load();
