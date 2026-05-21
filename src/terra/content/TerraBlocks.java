@@ -624,6 +624,7 @@ public class TerraBlocks{
             shootCone = 15f;
             health = 200;
             rotateSpeed = 10f;
+            maxAmmo = 6;
             coolant = consumeCoolant(0.1f);
             coolantMultiplier = 5f;
             researchCostMultiplier = 0.05f;
@@ -635,44 +636,47 @@ public class TerraBlocks{
         fracture = new ItemTurret("fracture"){{
             requirements(Category.turret, with(Items.lead, 100, Items.silicon, 120, TerraItems.titaniumPlate, 85));
             ammo(
-                Items.graphite, new BasicBulletType(3.2f, 25){{
-                    width = 10f;
-                    height = 12f;
-                    frontColor = hitColor = Pal.lightishOrange;
-                    backColor = Pal.lightOrange;
-                    status = StatusEffects.burning;
-                    hitEffect = new MultiEffect(Fx.hitBulletColor, Fx.fireHit);
+                Items.graphite, new BasicBulletType(3.5f, 22){{
+                    width = 7f;
+                    height = 9f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                    frontColor = Pal.graphiteAmmoFront;
 
                     ammoMultiplier = 5;
+                    armorMultiplier = 0.8f;
 
                     splashDamage = 15f;
                     splashDamageRadius = 22f;
-
-                    makeFire = true;
-                    lifetime = 60f;
+                    lifetime = 70f;
                 }},
-                Items.silicon, new BasicBulletType(3f, 23, "bullet"){{
-                    width = 8f;
-                    height = 10f;
-                    homingPower = 0.2f;
-                    reloadMultiplier = 1.5f;
+                Items.titanium, new BasicBulletType(3f, 31, "bullet"){{
+                    width = 10f;
+                    height = 14f;
+                    shootEffect = Fx.shootBig;
+                    smokeEffect = Fx.shootBigSmoke;
+                    reloadMultiplier = 0.6f;
                     ammoMultiplier = 5;
-                    lifetime = 60f;
+                    splashDamage = 20f;
+                    splashDamageRadius = 33f;
+                    lifetime = 70f;
+                    armorMultiplier = 0.6f;
 
-                    trailLength = 5;
-                    trailWidth = 1.5f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
-                    hitColor = backColor = trailColor = Pal.siliconAmmoBack;
-                    frontColor = Pal.siliconAmmoFront;
+                    hitColor = backColor = trailColor = Color.white;
+                    frontColor = Pal.lancerLaser;
                 }},
                 Items.thorium, new BasicBulletType(4f, 28, "bullet"){{
                     width = 8f;
                     height = 13f;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke;
+                    reloadMultiplier = 1.1f;
                     ammoMultiplier = 4;
-                    lifetime = 60f;
-                    armorMultiplier = 0.8f;
+                    splashDamage = 17f;
+                    splashDamageRadius = 27f;
+                    lifetime = 70f;
+                    armorMultiplier = 0.65f;
 
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     backColor = hitColor = trailColor = Pal.thoriumAmmoBack;
@@ -688,27 +692,26 @@ public class TerraBlocks{
                         progress = PartProgress.recoil;
                         recoilIndex = f;
                         moveY = -1.5f;
-                        //layerOffset = 0.001f;
                     }});
                 }
                 parts.add(new RegionPart("-side"){{
-                    progress = PartProgress.recoil;
+                    progress = PartProgress.reload;
                     moveY = 0.5f;
                     mirror = under = true;
                 }});
             }};
 
             size = 2;
-            range = 190f;
+            range = 210f;
             reload = 33f;
             consumeAmmoOnce = false;
             ammoEjectBack = 2f;
             recoil = 0.5f;
             shake = 1f;
-            shoot = new ShootMulti(new ShootAlternate(3.5f), new ShootPattern() {{
-                    shots = 2;
-                    shotDelay = 4.5f;
-                }});
+            shoot = new ShootMulti(new ShootAlternate(4.5f), new ShootPattern() {{
+                shots = 2;
+                shotDelay = 4.5f;
+            }});
 
             ammoUseEffect = Fx.casing2;
             scaledHealth = 240;
