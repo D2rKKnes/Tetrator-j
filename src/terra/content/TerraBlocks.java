@@ -240,7 +240,7 @@ public class TerraBlocks{
             requirements(Category.crafting, with(Items.graphite, 20, Items.titanium, 35));
             outputItem = new ItemStack(Items.sand, 2);
             size = 2;
-            hasPower = true;
+            hasPower = false;
             hasItems = true;
             envEnabled = Env.any;
             drawer = new DrawMulti(
@@ -268,6 +268,7 @@ public class TerraBlocks{
         iceMelter = new AttributeCrafter("ice-melter"){{
             requirements(Category.crafting, with(Items.graphite, 25, Items.titanium, 30, Items.silicon, 45));
             outputLiquid = new LiquidStack(Liquids.water, 0.2f);
+            consumePower(0.4f);
             size = 2;
             hasPower = true;
             hasLiquids = true;
@@ -392,7 +393,23 @@ public class TerraBlocks{
             itemCapacity = 24;
             researchCostMultiplier = 0.25f;
             lightLiquid = Liquids.cryofluid;
-        }};
+        },
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
 
         titaniumPress = new GenericCrafter("titanium-press"){{
             requirements(Category.crafting, with(Items.titanium, 180, Items.silicon, 45, Items.lead, 100, Items.graphite, 50));
@@ -405,6 +422,7 @@ public class TerraBlocks{
             hasItems = true;
             hasLiquids = true;
             hasPower = true;
+            squareSprite = false;
 
             consumePower(2.1f);
             consumeItems(with(Items.silicon, 1, Items.titanium, 3));
