@@ -68,7 +68,7 @@ public class TerraBlocks{
     mechanicalWell, electricalWell,
     plasmaDrill, beamMiningFacility,
     //turrets
-    
+    flight,
     //units
     droneCentre;
     //other
@@ -453,7 +453,184 @@ public class TerraBlocks{
         }};
 
         //turrets
+        flight = new ItemTurret("flight"){{
+            requirements(Category.turret, with(Items.lead, 35, Items.graphite, 10));
+            ammo(
+                Items.lead,  new BulletType(){{
+                    damage = speed = 0f;
+                    ammoMultiplier = 2;
+                    shootEffect = smokeEffect = Fx.none;
+                    spawnUnit = new MissileUnitType("flight-lead-missile"){{
+                        speed = 3f;
+                        maxRange = 4f;
+                        lifetime = 60f;
+                        hitSize = 4f;
+                        outlineColor = Pal.darkerMetal;
+                        engineColor = trailColor = Pal.stat;
+                        engineLayer = Layer.effect;
+                        engineSize = 1.4f;
+                        engineOffset = 3.5f;
+                        rotateSpeed = 5f;
+                        trailLength = 6;
+                        //missileAccelTime = 50f;
+                        lowAltitude = true;
+                        loopSound = Sounds.loopMissileTrail;
+                        loopSoundVolume = 0.1f;
+                        //deathSound = Sounds.explosionMissile;
+                        targetAir = true;
+                        targetUnderBlocks = false;
+    
+                        fogRadius = 3f;
+    
+                        health = 45;
+    
+                        weapons.add(new Weapon(){{
+                            shootCone = 360f;
+                            mirror = false;
+                            reload = 1f;
+                            //deathExplosionEffect = Fx.massiveExplosion;
+                            shootOnDeath = true;
+                            shake = 1.5f;
+                            bullet = new ExplosionBulletType(18f, 24f){{
+                                hitColor = Pal.stat;
+                                collidesAir = true;
+                                buildingDamageMultiplier = 0.4f;
+                                reloadMultiplier = 1f;
+                                ammoMultiplier = 2f;
+                            }};
+                        }});
+                    }};
+                }},
+                Items.titanium, new BulletType(){{
+                    damage = speed = 0f;
+                    ammoMultiplier = 1;
+                    reloadMultiplier = 0.4f;
+                    shootEffect = smokeEffect = Fx.none;
+                    spawnUnit = new MissileUnitType("flight-titanium-missile"){{
+                        speed = 3f;
+                        maxRange = 4f;
+                        lifetime = 60f;
+                        hitSize = 4f;
+                        outlineColor = Pal.darkerMetal;
+                        engineColor = trailColor = Pal.stat;
+                        engineLayer = Layer.effect;
+                        engineSize = 1.4f;
+                        engineOffset = 3.5f;
+                        rotateSpeed = 5f;
+                        trailLength = 6;
+                        //missileAccelTime = 50f;
+                        lowAltitude = true;
+                        loopSound = Sounds.loopMissileTrail;
+                        loopSoundVolume = 0.1f;
+                        //deathSound = Sounds.explosionMissile;
+                        targetAir = true;
+                        targetUnderBlocks = false;
+    
+                        fogRadius = 3f;
+    
+                        health = 85;
+    
+                        weapons.add(new Weapon(){{
+                            shootCone = 360f;
+                            mirror = false;
+                            reload = 1f;
+                            //deathExplosionEffect = Fx.massiveExplosion;
+                            shootOnDeath = true;
+                            shake = 1.5f;
+                            bullet = new ExplosionBulletType(53f, 19f){{
+                                hitColor = Pal.stat;
+                                collidesAir = true;
+                                buildingDamageMultiplier = 0.4f;
+                                reloadMultiplier = 1f;
+                                ammoMultiplier = 0.4f;
+                            }};
+                        }});
+                    }};
+                }},
+                Items.metaglass, new BulletType(){{
+                    damage = speed = 0f;
+                    ammoMultiplier = 1;
+                    reloadMultiplier = 0.85f;
+                    shootEffect = smokeEffect = Fx.none;
+                    spawnUnit = new MissileUnitType("flight-metaglass-missile"){{
+                        speed = 3f;
+                        maxRange = 4f;
+                        lifetime = 60f;
+                        hitSize = 4f;
+                        outlineColor = Pal.darkerMetal;
+                        engineColor = trailColor = Pal.stat;
+                        engineLayer = Layer.effect;
+                        engineSize = 1.4f;
+                        engineOffset = 3.5f;
+                        rotateSpeed = 5f;
+                        trailLength = 6;
+                        //missileAccelTime = 50f;
+                        lowAltitude = true;
+                        loopSound = Sounds.loopMissileTrail;
+                        loopSoundVolume = 0.1f;
+                        //deathSound = Sounds.explosionMissile;
+                        targetAir = true;
+                        targetUnderBlocks = false;
+    
+                        fogRadius = 3f;
+    
+                        health = 60;
+    
+                        weapons.add(new Weapon(){{
+                            shootCone = 360f;
+                            mirror = false;
+                            reload = 1f;
+                            //deathExplosionEffect = Fx.massiveExplosion;
+                            shootOnDeath = true;
+                            shake = 1.5f;
+                            bullet = new ExplosionBulletType(26f, 36f){{
+                                hitColor = Pal.glassAmmoBack;
+                                collidesAir = true;
+                                buildingDamageMultiplier = 0.4f;
+                                reloadMultiplier = 1f;
+                                ammoMultiplier = 0.85f;
+                                fragBullets = 6;
+                                fragBullet = new BasicBulletType(){{
+                                    speed = 3f;
+                                    damage = 5f;
+                                    width = 5f;
+                                    height = 12f;
+                                    shrinkY = 1f;
+                                    lifetime = 20f;
+                                    backColor = trailColor = Pal.glassAmmoBack;
+                                    hitColor = frontColor = Pal.glassAmmoFront;
+                                    despawnEffect = Fx.none;
+                                }};
+                            }};
+                        }});
+                    }};t;
+                }}
+            );
 
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-missile")){{
+                    progress = PartProgress.reload;
+                    colorTo = mixColor = Color.valueOf("ffffff00");
+                    color = Color.valueOf("ffffffff");
+                    mixColorTo = Pal.stat;
+                    outline = false;
+                }});
+            }};
+
+            shootSound = Sounds.shootMissileSmall;
+            shootY = 0f;
+            reload = 50f;
+            range = 160;
+            shootCone = 15f;
+            health = 200;
+            rotateSpeed = 10f;
+            coolant = consumeCoolant(0.1f);
+            coolantMultiplier = 5f;
+            researchCostMultiplier = 0.05f;
+            depositCooldown = 2.0f;
+
+            limitRange(5f);
+        }};
         
         //units
         /*droneCentre = new DroneCentre("drone-centre"){{
