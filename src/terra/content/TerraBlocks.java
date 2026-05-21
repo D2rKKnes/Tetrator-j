@@ -687,17 +687,13 @@ public class TerraBlocks{
                     parts.add(new RegionPart("-barrel-" + (i == 0 ? "l" : "r")){{
                         progress = PartProgress.recoil;
                         recoilIndex = f;
-                        under = true;
                         moveY = -1.5f;
                     }});
                 }
                 parts.add(new RegionPart("-side"){{
-                    progress = PartProgress.warmup;
-                    moveX = 0.6f;
-                    moveRot = -15f;
-                    mirror = true;
-                    layerOffset = 0.001f;
-                    moves.add(new PartMove(PartProgress.recoil, 0.5f, -0.5f, -8f));
+                    progress = PartProgress.recoil;
+                    moveX = 0.5f;
+                    mirror = under = true;
                 }});
             }};
 
