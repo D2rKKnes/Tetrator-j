@@ -68,7 +68,7 @@ public class TerraBlocks{
     mechanicalWell, electricalWell,
     plasmaDrill, beamMiningFacility,
     //turrets
-    flight,
+    flight, fracture,
     //units
     droneCentre;
     //other
@@ -630,6 +630,96 @@ public class TerraBlocks{
             depositCooldown = 2.0f;
 
             limitRange(5f);
+        }};
+
+        fracture = new ItemTurret("fracture"){{
+            requirements(Category.turret, with(Items.lead, 100, Items.silicon, 120, TerraItems.titaniumPlate, 85));
+            ammo(
+                Items.graphite, new BasicBulletType(3.2f, 25){{
+                    width = 10f;
+                    height = 12f;
+                    frontColor = hitColor = Pal.lightishOrange;
+                    backColor = Pal.lightOrange;
+                    status = StatusEffects.burning;
+                    hitEffect = new MultiEffect(Fx.hitBulletColor, Fx.fireHit);
+
+                    ammoMultiplier = 5;
+
+                    splashDamage = 15f;
+                    splashDamageRadius = 22f;
+
+                    makeFire = true;
+                    lifetime = 60f;
+                }},
+                Items.silicon, new BasicBulletType(3f, 23, "bullet"){{
+                    width = 8f;
+                    height = 10f;
+                    homingPower = 0.2f;
+                    reloadMultiplier = 1.5f;
+                    ammoMultiplier = 5;
+                    lifetime = 60f;
+
+                    trailLength = 5;
+                    trailWidth = 1.5f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    hitColor = backColor = trailColor = Pal.siliconAmmoBack;
+                    frontColor = Pal.siliconAmmoFront;
+                }},
+                Items.thorium, new BasicBulletType(4f, 28, "bullet"){{
+                    width = 8f;
+                    height = 13f;
+                    shootEffect = Fx.shootBig;
+                    smokeEffect = Fx.shootBigSmoke;
+                    ammoMultiplier = 4;
+                    lifetime = 60f;
+                    armorMultiplier = 0.8f;
+
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    backColor = hitColor = trailColor = Pal.thoriumAmmoBack;
+                    frontColor = Pal.thoriumAmmoFront;
+                }}
+            );
+
+            recoils = 2;
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-side"){{
+                    progress = PartProgress.warmup;
+                    moveX = 0.6f;
+                    moveRot = -15f;
+                    mirror = true;
+                    layerOffset = 0.001f;
+                    moves.add(new PartMove(PartProgress.recoil, 0.5f, -0.5f, -8f));
+                }},
+                for(int i = 0; i < 2; i ++){
+                    int f = i;
+                    parts.add(new RegionPart("-barrel-" + (i == 0 ? "l" : "r")){{
+                        progress = PartProgress.recoil;
+                        recoilIndex = f;
+                        under = true;
+                        moveY = -1.5f;
+                    }});
+                }
+            }};
+
+            size = 2;
+            range = 190f;
+            reload = 40f;
+            consumeAmmoOnce = false;
+            ammoEjectBack = 3f;
+            recoil = 0.5f;
+            shake = 1f;
+            shoot = new ShootMulti(new ShootAlternate(3.5f), new ShootPattern() {{
+                    shots = 2;
+                    shotDelay = 4.5f;
+                }});
+
+            ammoUseEffect = Fx.casing2;
+            scaledHealth = 240;
+            shootSound = Sounds.shootSalvo;
+
+            limitRange();
+            coolant = consumeCoolant(0.2f);
+            depositCooldown = 2.0f;
         }};
         
         //units
