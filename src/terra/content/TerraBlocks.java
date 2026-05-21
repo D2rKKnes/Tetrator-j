@@ -261,7 +261,7 @@ public class TerraBlocks{
             itemCapacity = 20;
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.03f;
-            attribute = Attributes.sand;
+            attribute = Attribute.sand;
             minEfficiency = 0.1f;
             baseEfficiency = 0f;
         }};
@@ -418,7 +418,7 @@ public class TerraBlocks{
             size = 2;
             envEnabled = Env.any;
             drillTime = 270f;
-            fogRadius = 2f;
+            fogRadius = 2;
             ambientSound = Sounds.loopDrill;
             ambientSoundVolume = 0.04f;
             itemCapacity = 20;
