@@ -698,7 +698,7 @@ public class TerraBlocks{
                     mirror = true;
                     layerOffset = 0.001f;
                     moves.add(new PartMove(PartProgress.recoil, 0.5f, -0.5f, -8f));
-                }})
+                }});
             }};
 
             size = 2;
