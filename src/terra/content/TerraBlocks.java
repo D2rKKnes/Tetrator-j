@@ -63,11 +63,12 @@ public class TerraBlocks{
     //power
     photonPanel, photonPanelLarge,
     //crafters
-    sandExtractor, iceMelter, bisiliconOven, darkSteelWorkshop, titaniumPress,
+    sandExtractor, iceMelter, 
+    bisiliconOven, darkSteelWorkshop, titaniumPress,
     //production
     graphiteMiner,
     mechanicalWell, electricalWell,
-    plasmaDrill, beamMiningFacility,
+    pulseDrill, plasmaDrill, beamMiningFacility,
     //turrets
     flight, fracture,
     //units
@@ -541,6 +542,55 @@ public class TerraBlocks{
                 Items.thorium, 3
             );
         }};
+
+        pulseDrill = new BurstDrill("pulse-drill"){{
+            requirements(Category.production, with(Items.graphite, 22, Items.lead, 18));
+            size = 2;
+            tier = 3;
+            itemCapacity = 20;
+            liquidBoostIntensity = 1.75f;
+            consumeLiquid(Liquids.water, 0.075f).boost();
+            drillTime = 320f;
+            drillMultipliers.put(Items.titanium, 0.7);
+            drillEffect = new MultiEffect(Fx.mine, Fx.drillSteam, new WaveEffect(){{
+                sizeFrom = strokeTo = 0f;
+                sizeTo = 40f;
+                strokeFrom = 3f;
+                lifetime = 20f;
+                colorFrom = Color.valueOf("ffffff");
+                colorTo = Color.valueOf("ffffff00");
+            }});
+        }
+            public TextureRegion itemTopRegion;
+            @Override
+            public void load() {
+                super.load();
+                itemTopRegion = Core.atlas.find(name + "-top-item");
+            }
+
+            @Override
+            public void draw() {
+                float dTime = getDrillTime(dominantItem);
+                float p = Mathf.clamp(progress / dTime);
+                float s = Math.max(1.0f, 1.0f + (p * 0.3f));
+    
+                Draw.z(Layer.block - 0.02f);
+                Draw.rect(region, x, y);
+                drawDefaultCracks();
+    
+                Draw.z(Layer.block - 0.01f);
+                if (topRegion.found()) {
+                    Draw.rect(topRegion, x, y, topRegion.width * s * Draw.scl, topRegion.height * s * Draw.scl);
+                }
+    
+                if (dominantItem != null && itemTopRegion.found()) {
+                    Draw.z(Layer.block + 0.01f);
+                    Draw.color(dominantItem.color);
+                    Draw.rect(itemTopRegion, x, y, itemTopRegion.width * s * Draw.scl, itemTopRegion.height * s * Draw.scl);
+                    Draw.color();
+                }
+            }
+        };
 
         plasmaDrill = new SmartDrill("plasma-drill"){{
             requirements(Category.production, with(Items.graphite, 65, Items.titanium, 80, Items.silicon, 65, Items.metaglass, 32));
