@@ -551,7 +551,7 @@ public class TerraBlocks{
             liquidBoostIntensity = 1.75f;
             consumeLiquid(Liquids.water, 0.075f).boost();
             drillTime = 320f;
-            drillMultipliers.put(Items.titanium, 0.7);
+            drillMultipliers.put(Items.titanium, 0.7f);
             drillEffect = new MultiEffect(Fx.mine, Fx.drillSteam, new WaveEffect(){{
                 sizeFrom = strokeTo = 0f;
                 sizeTo = 40f;
@@ -561,29 +561,29 @@ public class TerraBlocks{
                 colorTo = Color.valueOf("ffffff00");
             }});
             buildType = () -> new BurstDrillBuild() {
-                    @Override
-                    public void draw() {
-                        float dTime = getDrillTime(this.dominantItem);
-                        float p = Mathf.clamp(this.progress / dTime);
-                        float s = Math.max(1.0f, 1.0f + (p * 0.3f));
+                @Override
+                public void draw() {
+                    float dTime = getDrillTime(this.dominantItem);
+                    float p = Mathf.clamp(this.progress / dTime);
+                    float s = Math.max(1.0f, 1.0f + (p * 0.3f));
+        
+                    Draw.z(Layer.block - 0.02f);
+                    Draw.rect(region, this.x, this.y);
+                    this.drawDefaultCracks();
             
-                        Draw.z(Layer.block - 0.02f);
-                        Draw.rect(region, this.x, this.y);
-                        this.drawDefaultCracks();
-            
-                        Draw.z(Layer.block - 0.01f);
-                        if (topRegion.found()) {
-                            Draw.rect(topRegion, this.x, this.y, topRegion.width * s * Draw.scl, topRegion.height * s * Draw.scl);
-                        }
-            
-                        if (this.dominantItem != null && itemTopRegion.found()) {
-                            Draw.z(Layer.block + 0.01f);
-                            Draw.color(this.dominantItem.color);
-                            Draw.rect(itemTopRegion, this.x, this.y, itemTopRegion.width * s * Draw.scl, itemTopRegion.height * s * Draw.scl);
-                            Draw.color();
-                        }
+                    Draw.z(Layer.block - 0.01f);
+                    if (topRegion.found()) {
+                        Draw.rect(topRegion, this.x, this.y, topRegion.width * s * Draw.scl, topRegion.height * s * Draw.scl);
                     }
-                };
+            
+                    if (this.dominantItem != null && itemTopRegion.found()) {
+                        Draw.z(Layer.block + 0.01f);
+                        Draw.color(this.dominantItem.color);
+                        Draw.rect(itemTopRegion, this.x, this.y, itemTopRegion.width * s * Draw.scl, itemTopRegion.height * s * Draw.scl);
+                        Draw.color();
+                    }
+                }
+            };
         }
             public TextureRegion itemTopRegion;
             @Override
