@@ -505,10 +505,15 @@ public class TerraBlocks{
             lightLiquid = Liquids.cryofluid;
 
             drawer = new DrawMulti(
-                new DrawRotation(){{suffix = "-bottom";}},
+                new DrawRotation(){{
+                    suffix = "-bottom";
+                    xOffset = 4f;
+                    layer = Layer.block - 1f;
+                }},
                 new DrawLiquidAnimatedOffset(),
                 new DrawRotation() {{
                     suffix = "-top-rot";
+                    xOffset = 4f;
                     drawType = DRAW_FULL;
                 }}
             );
