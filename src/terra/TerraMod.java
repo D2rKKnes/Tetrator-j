@@ -6,6 +6,7 @@ import arc.Events;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
+import mindustry.ui.Links;
 import mindustry.content.Planets;
 import terra.content.*;
 import terra.type.units.EntityRegister;
