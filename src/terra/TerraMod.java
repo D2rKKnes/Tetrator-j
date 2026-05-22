@@ -13,6 +13,7 @@ import terra.maps.planets.*;
 import terra.util.*;
 
 public class TerraMod extends Mod{
+    public static Links.LinkEntry[] links;
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
