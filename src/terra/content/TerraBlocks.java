@@ -263,6 +263,7 @@ public class TerraBlocks{
             updateEffect = Fx.pulverizeSmall;
             updateEffectChance = 0.03f;
             attribute = Attribute.sand;
+            maxBoost = 4f;
             minEfficiency = 0.1f;
             baseEfficiency = 0f;
         }
@@ -567,8 +568,14 @@ public class TerraBlocks{
                     float p = Mathf.clamp(this.progress / dTime);
                     float s = Math.max(1.0f, 1.0f + (p * 0.3f));
         
-                    Draw.z(Layer.block - 0.02f);
+                    Draw.z(Layer.block - 0.03f);
                     Draw.rect(region, this.x, this.y);
+                    if (this.dominantItem != null && itemRegion.found()) {
+                        Draw.z(Layer.block - 0.02f);
+                        Draw.color(this.dominantItem.color);
+                        Draw.rect(itemRegion, this.x, this.y);
+                        Draw.color();
+                    }
                     this.drawDefaultCracks();
             
                     Draw.z(Layer.block - 0.01f);
