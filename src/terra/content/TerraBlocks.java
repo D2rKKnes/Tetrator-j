@@ -59,7 +59,8 @@ public class TerraBlocks{
     metaglassWall, metaglassWallLarge, metaglassWallHuge,
     darkSteelWall, darkSteelWallLarge,
     //distrubution
-    
+    graphiteConveyor, 
+    graphiteJunction,
     //power
     photonPanel, photonPanelLarge,
     //crafters
@@ -212,7 +213,23 @@ public class TerraBlocks{
         }};
 
         //distrubution
-
+        graphiteConveyor = new CappedConveyor("graphite-conveyor"){{
+            requirements(Category.distribution, with(Items.lead, 1, Items.graphite, 1));
+            health = 85;
+            speed = 0.042f;
+            displayedSpeed = 6f;
+            buildCostMultiplier = 2f;
+            pushUnits = false;
+            researchCost = with(Items.lead, 20, Items.graphite, 20);
+        }};
+        graphiteJunction = new Junction("graphite-junction"){{
+            requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
+            speed = 26;
+            capacity = 6;
+            health = 70;
+            buildCostMultiplier = 6f;
+            graphiteConveyor.junctionReplacement = this;
+        }};
         
         //power
         photonPanel = new SolarGenerator("photon-solar-panel"){{
