@@ -26,7 +26,7 @@ public class TerraMod extends Mod{
     public void loadContent(){
         Utils.init();
         EntityRegister.load();
-        InnerBlock.loadBeforeContentLoad();
+        InnerBlock.load();
         TerraSounds.load();
         //TerraFx.load();
         TerraStatusEffects.load();
