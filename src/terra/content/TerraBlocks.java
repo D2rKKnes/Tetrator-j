@@ -228,7 +228,6 @@ public class TerraBlocks{
             capacity = 6;
             health = 70;
             buildCostMultiplier = 6f;
-            graphiteConveyor.junctionReplacement = this;
         }};
         
         //power
