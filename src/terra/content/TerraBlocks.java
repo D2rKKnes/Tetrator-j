@@ -560,35 +560,36 @@ public class TerraBlocks{
                 colorFrom = Color.valueOf("ffffff");
                 colorTo = Color.valueOf("ffffff00");
             }});
+            buildType = () -> new BurstDrillBuild() {
+                    @Override
+                    public void draw() {
+                        float dTime = getDrillTime(this.dominantItem);
+                        float p = Mathf.clamp(this.progress / dTime);
+                        float s = Math.max(1.0f, 1.0f + (p * 0.3f));
+            
+                        Draw.z(Layer.block - 0.02f);
+                        Draw.rect(region, this.x, this.y);
+                        this.drawDefaultCracks();
+            
+                        Draw.z(Layer.block - 0.01f);
+                        if (topRegion.found()) {
+                            Draw.rect(topRegion, this.x, this.y, topRegion.width * s * Draw.scl, topRegion.height * s * Draw.scl);
+                        }
+            
+                        if (this.dominantItem != null && itemTopRegion.found()) {
+                            Draw.z(Layer.block + 0.01f);
+                            Draw.color(this.dominantItem.color);
+                            Draw.rect(itemTopRegion, this.x, this.y, itemTopRegion.width * s * Draw.scl, itemTopRegion.height * s * Draw.scl);
+                            Draw.color();
+                        }
+                    }
+                };
         }
             public TextureRegion itemTopRegion;
             @Override
             public void load() {
                 super.load();
                 itemTopRegion = Core.atlas.find(name + "-top-item");
-            }
-
-            @Override
-            public void draw() {
-                float dTime = getDrillTime(dominantItem);
-                float p = Mathf.clamp(progress / dTime);
-                float s = Math.max(1.0f, 1.0f + (p * 0.3f));
-    
-                Draw.z(Layer.block - 0.02f);
-                Draw.rect(region, x, y);
-                drawDefaultCracks();
-    
-                Draw.z(Layer.block - 0.01f);
-                if (topRegion.found()) {
-                    Draw.rect(topRegion, x, y, topRegion.width * s * Draw.scl, topRegion.height * s * Draw.scl);
-                }
-    
-                if (dominantItem != null && itemTopRegion.found()) {
-                    Draw.z(Layer.block + 0.01f);
-                    Draw.color(dominantItem.color);
-                    Draw.rect(itemTopRegion, x, y, itemTopRegion.width * s * Draw.scl, itemTopRegion.height * s * Draw.scl);
-                    Draw.color();
-                }
             }
         };
 
