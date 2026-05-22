@@ -3,7 +3,6 @@ package terra.world.blocks;
 import arc.Core;
 import arc.graphics.g2d.*;
 import arc.util.Eachable;
-import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.entities.*;
@@ -28,7 +27,7 @@ public class CappedConveyor extends Conveyor {
         update = true;
         group = BlockGroup.transportation;
         hasItems = true;
-        itemCapacity = capacity;
+        itemCapacity = 3;
         priority = TargetPriority.transport;
         conveyorPlacement = true;
         underBullets = true;
