@@ -114,7 +114,7 @@ public class DrawRotation extends DrawBlock {
             }
             case DRAW_FULL -> {
                 for (int i = 0; i < 4; i++) {
-                    rotRegions[i] = Core.atlas.find(block.name + suffix + "-i");
+                    rotRegions[i] = Core.atlas.find(block.name + suffix + "-" + i);
                 }
             }
             case DRAW_CENTRAL_SYMMETRY -> {
