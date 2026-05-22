@@ -16,6 +16,7 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.*;
 import mindustry.world.meta.*;
+import mindustry.world.blocks.distribution.Conveyor;
 
 public class CappedConveyor extends Conveyor {
     public TextureRegion[] topRegions = new TextureRegion[5];
