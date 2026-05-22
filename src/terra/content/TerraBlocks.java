@@ -2,6 +2,7 @@ package terra.content;
 
 import terra.type.bullet.*;
 import terra.world.blocks.*;
+import terra.world.blocks.multiblock.*;
 import terra.world.drawer.*;
 import terra.world.meta.*;
 import arc.*;
@@ -65,7 +66,7 @@ public class TerraBlocks{
     photonPanel, photonPanelLarge,
     //crafters
     sandExtractor, iceMelter, 
-    bisiliconOven, darkSteelWorkshop, titaniumPress,
+    bisiliconOven, darkSteelWorkshop, titaniumPress, multiMixer,
     //production
     graphiteMiner,
     mechanicalWell, electricalWell,
@@ -304,6 +305,7 @@ public class TerraBlocks{
         iceMelter = new AttributeCrafter("ice-melter"){{
             requirements(Category.crafting, with(Items.graphite, 25, Items.titanium, 30, Items.silicon, 45));
             outputLiquid = new LiquidStack(Liquids.water, 0.2f);
+            liquidCapacity = 36;
             consumePower(0.4f);
             size = 2;
             hasPower = true;
@@ -483,6 +485,38 @@ public class TerraBlocks{
             consumePower(2.1f);
             consumeItems(with(Items.silicon, 1, Items.titanium, 3));
             consumeLiquid(Liquids.water, 0.3f);
+        }};
+        multiMixer = new MultiBlockCrafter("multi-mixer") {{
+            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 75, TerraItems.titaniumPlate, 180, Items.metaglass, 225));
+            addLink(2, 0, 1, 2, 1, 1);
+
+            size = 2;
+            hasLiquids = true;
+            hasItems = true;
+            scaledHealth = 100f;
+            itemCapacity = 20;
+            liquidCapacity = 200;
+            craftTime = 60f;
+
+
+            consumePower(3.4f);
+            consumeItems(ItemStack.with(Items.titanium, 4, TerraItems.diamondDust, 1)); consumeLiquids(LiquidStack.with(Liquids.water, 80 / 60f));
+            outputLiquid = new LiquidStack(Liquids.cryofluid, 80 / 60f);
+            lightLiquid = Liquids.cryofluid;
+
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawLiquidTile(Liquids.water), 
+                new DrawLiquidTile(Liquids.cryofluid){{
+                    drawLiquidLight = true;
+                }},
+                new DrawRotation() {{
+                    suffix = "-top-rot";
+                    drawType = DRAW_FULL;
+                }}
+            );
+
+            enableRotate();
         }};
 
         //production
