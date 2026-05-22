@@ -1,4 +1,4 @@
-package terra.utils;
+package terra.util;
 
 import arc.struct.Seq;
 import mindustry.ctype.UnlockableContent;
