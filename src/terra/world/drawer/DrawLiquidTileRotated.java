@@ -4,6 +4,7 @@ import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.liquid.*;
+import mindustry.world.draw.DrawBlock;
 
 public class DrawLiquidTileRotated extends DrawBlock {
     public Liquid drawLiquid;
