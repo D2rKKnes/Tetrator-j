@@ -12,22 +12,22 @@ public class DrawLiquidTileRotated extends DrawBlock {
     public float alpha = 1f;
     public float xOffset = 0, yOffset = 0;
 
-    public DrawLiquidTile(Liquid drawLiquid, float padding){
+    public DrawLiquidTileRotated(Liquid drawLiquid, float padding){
         this.drawLiquid = drawLiquid;
         this.padding = padding;
     }
 
-    public DrawLiquidTile(Liquid drawLiquid, float xOffset, float yOffset){
+    public DrawLiquidTileRotated(Liquid drawLiquid, float xOffset, float yOffset){
         this.drawLiquid = drawLiquid;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
     }
 
-    public DrawLiquidTile(Liquid drawLiquid){
+    public DrawLiquidTileRotated(Liquid drawLiquid){
         this.drawLiquid = drawLiquid;
     }
 
-    public DrawLiquidTile(){
+    public DrawLiquidTileRotated(){
     }
 
     @Override
