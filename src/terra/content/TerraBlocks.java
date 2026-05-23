@@ -924,10 +924,10 @@ public class TerraBlocks{
             );
 
             shootSound = TerraSounds.shootHeavy;
-            shootSoundVolume = 0.4f;
+            shootSoundVolume = 0.3f;
             shoot = new ShootSpread(2, 12f);
             reload = 80f;
-            minFiringSpeed = 0f;
+            minFiringSpeed = 0.3f;
             windupSpeed = 0.0017f;
             windDownSpeed = 0.0042f;
             logicSpeedScl = 0.4f;
