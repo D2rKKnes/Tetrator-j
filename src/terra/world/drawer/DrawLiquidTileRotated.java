@@ -43,18 +43,18 @@ public class DrawLiquidTileRotated extends DrawBlock {
         switch(build.rotation) {
             case 1:
                 realRight = pb; realTop = pr; realLeft = pt; realBottom = pl;
-                rx = -yOffset;
-                ry = xOffset;
+                rx = xOffset;
+                ry = -yOffset;
                 break;
             case 2:
                 realRight = pl; realTop = pb; realLeft = pr; realBottom = pt;
-                rx = -yOffset;
-                ry = -xOffset;
+                rx = -xOffset;
+                ry = -yOffset;
                 break;
             case 3:
                 realRight = pt; realTop = pl; realLeft = pb; realBottom = pr;
-                rx = yOffset;
-                ry = -xOffset;
+                rx = -xOffset;
+                ry = yOffset;
                 break;
             default:
                 break;
