@@ -892,14 +892,14 @@ public class TerraBlocks{
         dynamics = new SpeedupTurret("dynamics"){{
             requirements(Category.turret, with(Items.titanium, 55, Items.graphite, 22));
             ammo(
-                Items.lead,  new ShrapnelBulletType(){{
+                Items.lead, new ShrapnelBulletType(){{
                     length = 70;
                     damage = 17f;
                     ammoMultiplier = 5f;
                     armorMultiplier = 1.2f;
                     width = 9f;
                     reloadMultiplier = 1f;
-                    toColor = Color.valueOf("ab99d3");
+                    toColor = hitColor = Color.valueOf("ab99d3");
                     shootEffect = smokeEffect = Fx.thoriumShoot;
                 }},
                 Items.titanium, new ShrapnelBulletType(){{
@@ -910,7 +910,7 @@ public class TerraBlocks{
                     width = 9f;
                     reloadMultiplier = 0.8f;
                 }},
-                TerraItems.thermoxite, new ShrapnelBulletType(){{
+                TerraItems.rawThermoxite, new ShrapnelBulletType(){{
                     rangeChange = 12;
                     length = 70 + rangeChange;
                     damage = 41f;
@@ -918,6 +918,8 @@ public class TerraBlocks{
                     armorMultiplier = 0.5f;
                     width = 9f;
                     reloadMultiplier = 0.6f;
+                    toColor = hitColor = Color.valueOf("ff7163");
+                    shootEffect = smokeEffect = Fx.thoriumShoot;
                 }}
             );
 
@@ -926,9 +928,10 @@ public class TerraBlocks{
             shoot = new ShootSpread(2, 12f);
             reload = 80f;
             minFiringSpeed = 0f;
-            windupSpeed = 0.008f;
+            windupSpeed = 0.0017f;
+            windDownSpeed = 0.0042f;
             logicSpeedScl = 0.4f;
-            maxSpeed = reload / 2f;
+            maxSpeed = 2.25f;
             range = 60;
             shootCone = 15f;
             health = 400;
