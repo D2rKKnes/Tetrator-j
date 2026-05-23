@@ -900,7 +900,7 @@ public class TerraBlocks{
                     width = 9f;
                     reloadMultiplier = 1f;
                     toColor = hitColor = Color.valueOf("ab99d3");
-                    shootEffect = smokeEffect = Fx.thoriumShoot;
+                    shootEffect = smokeEffect = TerraFx.fuseShoot;
                 }},
                 Items.titanium, new ShrapnelBulletType(){{
                     length = 70;
@@ -919,7 +919,7 @@ public class TerraBlocks{
                     width = 9f;
                     reloadMultiplier = 0.6f;
                     toColor = hitColor = Color.valueOf("ff7163");
-                    shootEffect = smokeEffect = Fx.thoriumShoot;
+                    shootEffect = smokeEffect = TerraFx.fuseShoot;
                 }}
             );
 
