@@ -9,7 +9,8 @@ import mindustry.world.draw.DrawBlock;
 public class DrawLiquidTileRotated extends DrawBlock {
     public Liquid drawLiquid;
     public float padding;
-    public float padLeft = -1, padRight = -1, padTop = -1, padBottom = -1;
+    private float auto = -129;
+    public float padLeft = auto, padRight = auto, padTop = auto, padBottom = auto;
     public float alpha = 1f;
     public float xOffset = 0, yOffset = 0;
 
@@ -36,23 +37,31 @@ public class DrawLiquidTileRotated extends DrawBlock {
         Liquid drawn = drawLiquid != null ? drawLiquid : build.liquids.current();
         float pl = padLeft, pr = padRight, pt = padTop, pb = padBottom;
         float realLeft = pl, realRight = pr, realTop = pt, realBottom = pb;
+        float rx = xOffset;
+        float ry = yOffset;
         
         switch(build.rotation) {
             case 1:
                 realRight = pb; realTop = pr; realLeft = pt; realBottom = pl;
+                rx = -yOffset;
+                ry = xOffset;
                 break;
             case 2:
                 realRight = pl; realTop = pb; realLeft = pr; realBottom = pt;
+                rx = -yOffset;
+                ry = -xOffset;
                 break;
             case 3:
                 realRight = pt; realTop = pl; realLeft = pb; realBottom = pr;
+                rx = yOffset;
+                ry = -xOffset;
                 break;
             default:
                 break;
         }
 
         LiquidBlock.drawTiledFrames(
-            build.block.size, build.x + xOffset, build.y + yOffset, 
+            build.block.size, build.x + rx, build.y + ry, 
             realLeft, realRight, realTop, realBottom, 
             drawn, build.liquids.get(drawn) / build.block.liquidCapacity * alpha
         );
@@ -60,9 +69,9 @@ public class DrawLiquidTileRotated extends DrawBlock {
 
     @Override
     public void load(Block block) {
-        if(padLeft < 0) padLeft = padding;
-        if(padRight < 0) padRight = padding;
-        if(padTop < 0) padTop = padding;
-        if(padBottom < 0) padBottom = padding;
+        if(padLeft <= auto) padLeft = padding;
+        if(padRight <= auto) padRight = padding;
+        if(padTop <= auto) padTop = padding;
+        if(padBottom <= auto) padBottom = padding;
     }
 }
