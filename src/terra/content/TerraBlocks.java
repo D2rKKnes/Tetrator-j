@@ -972,7 +972,7 @@ public class TerraBlocks{
                 fragBullet = new LightningBulletType(){{
                     damage = 20;
                     lightningLength = 11;
-                    lightningLengthRand: 2;
+                    lightningLengthRand = 2;
                     collidesAir = false;
                     ammoMultiplier = 1f;
     
