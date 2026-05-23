@@ -893,22 +893,31 @@ public class TerraBlocks{
             requirements(Category.turret, with(Items.titanium, 55, Items.graphite, 22));
             ammo(
                 Items.lead,  new ShrapnelBulletType(){{
-                    length = 100;
-                    damage = 14f;
+                    length = 70;
+                    damage = 17f;
                     ammoMultiplier = 5f;
                     armorMultiplier = 1.2f;
-                    width = 11f;
+                    width = 9f;
                     reloadMultiplier = 1f;
                     toColor = Color.valueOf("ab99d3");
                     shootEffect = smokeEffect = Fx.thoriumShoot;
                 }},
                 Items.titanium, new ShrapnelBulletType(){{
-                    length = 100;
+                    length = 70;
                     damage = 24f;
                     ammoMultiplier = 3f;
                     armorMultiplier = 0.8f;
-                    width = 11f;
+                    width = 9f;
                     reloadMultiplier = 0.8f;
+                }},
+                TerraItems.thermoxite, new ShrapnelBulletType(){{
+                    rangeChange = 12;
+                    length = 70 + rangeChange;
+                    damage = 41f;
+                    ammoMultiplier = 2f;
+                    armorMultiplier = 0.5f;
+                    width = 9f;
+                    reloadMultiplier = 0.6f;
                 }}
             );
 
@@ -916,20 +925,22 @@ public class TerraBlocks{
             shootSoundVolume = 0.4f;
             shoot = new ShootSpread(2, 12f);
             reload = 80f;
-            minFiringSpeed = 20f;
-            range = 85;
+            minFiringSpeed = 0f;
+            windupSpeed = 0.008f;
+            logicSpeedScl = 0.4f;
+            maxSpeed = reload / 2f;
+            range = 60;
             shootCone = 15f;
             health = 400;
             rotateSpeed = 10f;
             maxAmmo = 10;
             coolant = consumeCoolant(0.15f);
             coolantMultiplier = 2.5f;
-            researchCostMultiplier = 0.05f;
             depositCooldown = 2.0f;
         }};
 
         electricShock = new PowerTurret("electric-shock"){{
-            requirements(Category.turret, with(Items.lead, 50, Items.silicon, 40, Items.titanium, 30));
+            requirements(Category.turret, with(Items.lead, 50, Items.metaglass, 40, Items.titanium, 30));
             range = 95f;
             shootY = 2f;
             recoil = 2f;
@@ -942,7 +953,7 @@ public class TerraBlocks{
             scaledHealth = 250;
             coolant = consumeCoolant(0.2f);
 
-            consumePower(2.7f);
+            consumePower(3.7f);
 
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-part"){{
