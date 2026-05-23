@@ -912,7 +912,8 @@ public class TerraBlocks{
                 }}
             );
 
-            shootSound = Sounds.shootHeavy;
+            shootSound = TerraSounds.shootHeavy;
+            shootSoundVolume = 0.4f;
             shoot = new ShootSpread(2, 12f);
             reload = 80f;
             minFiringSpeed = 20f;
