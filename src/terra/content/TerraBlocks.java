@@ -510,7 +510,8 @@ public class TerraBlocks{
                     xOffset = 4f;
                     layer = Layer.block - 1f;
                 }},
-                new DrawLiquidAnimatedOffset(),
+                new DrawLiquidTileRotated(Liquids.water){{padRight = -8f;}},
+                new DrawLiquidTileRotated(Liquids.cryofluid){{padRight = -8f; drawLiquidLight = true;}},
                 new DrawRotation() {{
                     suffix = "-top-rot";
                     xOffset = 4f;
