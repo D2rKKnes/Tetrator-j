@@ -72,7 +72,7 @@ public class TerraBlocks{
     mechanicalWell, electricalWell,
     pulseDrill, plasmaDrill, beamMiningFacility,
     //turrets
-    flight, fracture,
+    flight, dynamics, electricShock, fracture,
     //units
     droneCentre;
     //other
@@ -885,6 +885,69 @@ public class TerraBlocks{
             depositCooldown = 2.0f;
 
             limitRange(5f);
+        }};
+
+        electricShock = new PowerTurret("electric-shock"){{
+            requirements(Category.turret, with(Items.lead, 50, Items.silicon, 40, Items.titanium, 30));
+            range = 95f;
+
+            recoil = 2f;
+            reload = 52f;
+            shake = 1.4f;
+            shootEffect = Fx.lancerLaserShoot;
+            smokeEffect = Fx.none;
+            heatColor = Color.red;
+            size = 1;
+            scaledHealth = 200;
+            coolant = consumeCoolant(0.2f);
+
+            consumePower(1.7f);
+
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-part"){{
+                    progress = PartProgress.reload;
+                    moveX = 1f;
+                    moves.add(new PartMove(PartProgress.warmup, 0f, -0.5f, 0f));
+                }});
+            }};
+
+            shootType = new LaserBulletType(78){{
+                colors = new Color[]{Pal.lancerLaser.cpy().a(0.4f), Pal.lancerLaser, Color.white};
+
+                buildingDamageMultiplier = 0.25f;
+                armorMultiplier = 4f;
+                hitEffect = Fx.hitLancer;
+                hitSize = 3;
+                lifetime = 16f;
+                drawSize = 400f;
+                collidesAir = false;
+                length = 103f;
+                ammoMultiplier = 1f;
+                pierceCap = 4;
+                fragBullets = 2;
+                fragOnHit = false;
+                fragBullet = new LightningBulletType(){{
+                    damage = 20;
+                    lightningLength = 16;
+                    collidesAir = false;
+                    ammoMultiplier = 1f;
+    
+                    //for visual stats only.
+                    buildingDamageMultiplier = 0.25f;
+    
+                    lightningType = new BulletType(0.0001f, 0f){{
+                        lifetime = Fx.lightning.lifetime;
+                        hitEffect = Fx.hitLancer;
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.shocked;
+                        hittable = false;
+                        lightColor = Color.white;
+                        collidesAir = false;
+                        buildingDamageMultiplier = 0.25f;
+                        shieldDamageMultiplier = 0.2f;
+                    }};
+                }};
+            }};
         }};
 
         fracture = new ItemTurret("fracture"){{
