@@ -38,7 +38,7 @@ public class SpeedupTurret extends ItemTurret{
     @Override
     public void setBars(){
         super.setBars();
-        addBar("gun-speed", (SpeedupBuild entity) -> new Bar(
+        addBar("gun-speed", (SpeedupTurretBuild entity) -> new Bar(
             () -> Core.bundle.format("bar.gun-speed", Strings.fixed(entity.speedf() * 100f, 2)),
             entity::barColor,
             entity::speedf
