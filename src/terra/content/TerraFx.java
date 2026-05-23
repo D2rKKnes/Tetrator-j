@@ -47,6 +47,15 @@ public class TerraFx {
         float len = e.fin(Interp.pow2Out) * 40f * rand.random(0.8f, 1.3f);
         Fill.circle(e.x + Angles.trnsx(angle, len), e.y + Angles.trnsy(angle, len), (1.5f + e.fin(Interp.sineIn) * 5f) * rand.random(0.8f, 1.3f));
     }).layer(111f),
+
+    fuseShoot = new Effect(12f, e -> {
+        color(Color.white, e.color, e.fin());
+        stroke(e.fout() * 1.2f + 0.5f);
+
+        randLenVectors(e.id, 7, 25f * e.finpow(), e.rotation, 50f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fin() * 5f + 2f);
+        });
+    }),
     
     hitSpark = new Effect(45, e -> {
         color(e.color, Color.white, e.fout() * 0.3f);
