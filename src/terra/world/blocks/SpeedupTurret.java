@@ -15,6 +15,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
+import mindustry.world.meta.*;
 
 import static mindustry.Vars.*;
 
@@ -37,7 +38,7 @@ public class SpeedupTurret extends ItemTurret{
     @Override
     public void setBars(){
         super.setBars();
-        addBar("gun-speed", (MinigunTurretBuild entity) -> new Bar(
+        addBar("gun-speed", (SpeedupBuild entity) -> new Bar(
             () -> Core.bundle.format("bar.gun-speed", Strings.fixed(entity.speedf() * 100f, 2)),
             entity::barColor,
             entity::speedf
