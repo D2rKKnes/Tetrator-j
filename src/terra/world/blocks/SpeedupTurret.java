@@ -75,7 +75,7 @@ public class SpeedupTurret extends ItemTurret{
             if(reloadCounter >= 90 && spinSpeed > minFiringSpeed){
                 BulletType type = peekAmmo();
                 shoot(type);
-                reloadCounter = spin % 90;
+                reloadCounter = 0;
             }
         }
 
