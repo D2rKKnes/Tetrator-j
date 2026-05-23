@@ -510,8 +510,10 @@ public class TerraBlocks{
                     xOffset = 4f;
                     layer = Layer.block - 1f;
                 }},
-                new DrawLiquidTileRotated(Liquids.water){{padRight = -8f;}},
-                new DrawLiquidTileRotated(Liquids.cryofluid){{padRight = -8f; drawLiquidLight = true;}},
+                new DrawLiquidTileRotated(Liquids.water),
+                new DrawLiquidTileRotated(Liquids.water, 16f, 0f){{padRight = 8f;}},
+                new DrawLiquidTileRotated(Liquids.cryofluid){{drawLiquidLight = true;}},
+                new DrawLiquidTileRotated(Liquids.cryofluid, 16f, 0f){{padRight = 8f; drawLiquidLight = true;}},
                 new DrawRotation() {{
                     suffix = "-top-rot";
                     xOffset = 4f;
@@ -890,7 +892,7 @@ public class TerraBlocks{
         electricShock = new PowerTurret("electric-shock"){{
             requirements(Category.turret, with(Items.lead, 50, Items.silicon, 40, Items.titanium, 30));
             range = 95f;
-
+            shootY = 2f;
             recoil = 2f;
             reload = 52f;
             shake = 1.4f;
@@ -898,15 +900,16 @@ public class TerraBlocks{
             smokeEffect = Fx.none;
             heatColor = Color.red;
             size = 1;
-            scaledHealth = 200;
+            scaledHealth = 250;
             coolant = consumeCoolant(0.2f);
 
-            consumePower(1.7f);
+            consumePower(2.7f);
 
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-part"){{
                     progress = PartProgress.reload;
-                    moveX = 1f;
+                    moveX = 0.5f;
+                    mirror = true;
                     moves.add(new PartMove(PartProgress.warmup, 0f, -0.5f, 0f));
                 }});
             }};
@@ -915,20 +918,22 @@ public class TerraBlocks{
                 colors = new Color[]{Pal.lancerLaser.cpy().a(0.4f), Pal.lancerLaser, Color.white};
 
                 buildingDamageMultiplier = 0.25f;
-                armorMultiplier = 4f;
+                armorMultiplier = 3f;
                 hitEffect = Fx.hitLancer;
                 hitSize = 3;
                 lifetime = 16f;
-                drawSize = 400f;
+                drawSize = 300f;
                 collidesAir = false;
                 length = 103f;
                 ammoMultiplier = 1f;
                 pierceCap = 4;
+                despawnSound = Sounds.shootArc;
                 fragBullets = 2;
+                fragRandomSpread = 0f;
                 fragOnHit = false;
                 fragBullet = new LightningBulletType(){{
                     damage = 20;
-                    lightningLength = 16;
+                    lightningLength = 11;
                     collidesAir = false;
                     ammoMultiplier = 1f;
     
