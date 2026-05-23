@@ -889,6 +889,44 @@ public class TerraBlocks{
             limitRange(5f);
         }};
 
+        dynamics = new SpeedupTurret("dynamics"){{
+            requirements(Category.turret, with(Items.titanium, 55, Items.graphite, 22));
+            ammo(
+                Items.lead,  new ShrapnelBulletType(){{
+                    length = 100;
+                    damage = 14f;
+                    ammoMultiplier = 5f;
+                    armorMultiplier = 1.2f;
+                    width = 11f;
+                    reloadMultiplier = 1f;
+                    toColor = Color.valueOf("ab99d3");
+                    shootEffect = smokeEffect = Fx.thoriumShoot;
+                }},
+                Items.titanium, new ShrapnelBulletType(){{
+                    length = 100;
+                    damage = 24f;
+                    ammoMultiplier = 3f;
+                    armorMultiplier = 0.8f;
+                    width = 11f;
+                    reloadMultiplier = 0.8f;
+                }}
+            );
+
+            shootSound = Sounds.shootHeavy;
+            shoot = new ShootSpread(2, 12f);
+            reload = 80f;
+            minFiringSpeed = 20f;
+            range = 85;
+            shootCone = 15f;
+            health = 400;
+            rotateSpeed = 10f;
+            maxAmmo = 10;
+            coolant = consumeCoolant(0.15f);
+            coolantMultiplier = 2.5f;
+            researchCostMultiplier = 0.05f;
+            depositCooldown = 2.0f;
+        }};
+
         electricShock = new PowerTurret("electric-shock"){{
             requirements(Category.turret, with(Items.lead, 50, Items.silicon, 40, Items.titanium, 30));
             range = 95f;
@@ -934,6 +972,7 @@ public class TerraBlocks{
                 fragBullet = new LightningBulletType(){{
                     damage = 20;
                     lightningLength = 11;
+                    lightningLengthRand: 2;
                     collidesAir = false;
                     ammoMultiplier = 1f;
     
