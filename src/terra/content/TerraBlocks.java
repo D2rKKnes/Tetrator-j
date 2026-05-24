@@ -499,7 +499,7 @@ public class TerraBlocks{
             hasLiquids = true;
             hasPower = true;
 
-            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidRegion(Liquids.water), new DrawDefault());
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.water), new DrawDefault());
 
             consumePower(1.3f);
             consumeItems(with(Items.metaglass, 1, TerraItems.diamondDust, 3));
@@ -885,21 +885,21 @@ public class TerraBlocks{
 
             drawer = new DrawTurret(){{
                 setAmmoParts(
-                    Items.lead, Seq.with(new RegionPart("-lead-missile"){{
+                    Items.lead, Seq.with(new RegionPart("-lead-missile-part"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
                         mixColorTo = Pal.accent;
                         mixColor = new Color(1f, 1f, 1f, 0f);
                     }}),
-                    Items.titanium, Seq.with(new RegionPart("-titanium-missile"){{
+                    Items.titanium, Seq.with(new RegionPart("-titanium-missile-part"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
                         mixColorTo = Pal.accent;
                         mixColor = new Color(1f, 1f, 1f, 0f);
                     }}),
-                    Items.metaglass, Seq.with(new RegionPart("-metaglass-missile"){{
+                    Items.metaglass, Seq.with(new RegionPart("-metaglass-missile-part"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
@@ -974,8 +974,7 @@ public class TerraBlocks{
             rotateSpeed = 10f;
             maxAmmo = 10;
             coolant = consumeCoolant(0.25f);
-            coolantMultiplier = 12.5f;
-            depositCooldown = 2.0f;
+            depositCooldown = 1.0f;
         }};
 
         electricShock = new PowerTurret("electric-shock"){{
