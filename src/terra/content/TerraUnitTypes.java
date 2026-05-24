@@ -62,7 +62,7 @@ public class TerraUnitTypes {
             engineOffset = 5.25f;
             range = 40f;
             itemCapacity = 10;
-            ammoType = new ItemAmmoType(TerraItems.carbon);
+            //ammoType = new ItemAmmoType(TerraItems.carbon);
             createWreck = false;
             constructor = UnitEntity::create;
             healColor = Pal.suppress;
@@ -109,7 +109,6 @@ public class TerraUnitTypes {
             engineOffset = 5.25f;
             range = 40f;
             itemCapacity = 0;
-            ammoType = new ItemAmmoType(TerraItems.carbon);
             createWreck = false;
             useUnitCap = false;
             hidden = true;
@@ -157,7 +156,6 @@ public class TerraUnitTypes {
             engineOffset = 7.7f;
             //range = 90f;
             itemCapacity = 15;
-            ammoType = new PowerAmmoType(1000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Pal.suppress;
@@ -221,7 +219,6 @@ public class TerraUnitTypes {
             engineOffset = 7f;
             range = 70f;
             itemCapacity = 40;
-            ammoType = new PowerAmmoType(2000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
@@ -397,7 +394,6 @@ public class TerraUnitTypes {
             engineOffset = 14f;
             //range = 120f;
             itemCapacity = 60;
-            ammoType = new PowerAmmoType(4000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped);
@@ -490,7 +486,6 @@ public class TerraUnitTypes {
             engineOffset = 0f;
             range = 80f;
             itemCapacity = 0;
-            ammoType = new PowerAmmoType(50000);
             //useUnitCap = false;
             hidden = false;
             constructor = TimedKillUnit::create;
@@ -559,7 +554,6 @@ public class TerraUnitTypes {
             );
             //range = 120f;
             itemCapacity = 90;
-            ammoType = new PowerAmmoType(6000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.impactStun);
@@ -832,7 +826,6 @@ public class TerraUnitTypes {
             );
             range = 210f;
             itemCapacity = 200;
-            ammoType = new PowerAmmoType(9000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(
@@ -1053,7 +1046,6 @@ public class TerraUnitTypes {
             engineOffset = 70f / 4;
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
-            ammoType = new PowerAmmoType(5000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Color.valueOf("e13131");
@@ -1248,7 +1240,6 @@ public class TerraUnitTypes {
             );
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
-            ammoType = new PowerAmmoType(20000);
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Color.valueOf("e13131");
@@ -1505,7 +1496,6 @@ public class TerraUnitTypes {
             faceTarget = false;
             range = 380f;
             itemCapacity = 1000;
-            ammoType = new PowerAmmoType(80000);
             lowAltitude = true;
             constructor = EndEntity::new;
             healColor = Color.valueOf("e13131");
