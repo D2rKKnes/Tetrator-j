@@ -18,11 +18,12 @@ import static mindustry.content.Items.*;
 public class TerraItems{
     public static Item
 
-            carbon, diamondDust, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, cesium, tesseract;
+            carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, cesium, tesseract;
 
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
             flammability = 1.25f;
+            radioactivity = 0.2f;
             hardness = 2;
         }};
         diamondDust = new Item("diamond-dust", Color.valueOf("ffffff")){{
@@ -30,10 +31,15 @@ public class TerraItems{
             hardness = 4;
             healthScaling = 2f;
         }};
+        diamondGlass = new Item("diamond-glass", Color.valueOf("e1e9f0")){{
+            cost = 1.5f;
+            hardness = 4;
+            healthScaling = 1.3f;
+        }};
         /*cryotite = new Item("cryotite", Color.valueOf("b1f6fa")){{
             flammability = -1f;
             explosiveness = 1f;
-            healthScaling = 0.5f;
+            healthScaling = -0.1f;
         }};*/
         titaniumPlate = new Item("titanium-plate", Color.valueOf("787ac9")){{
             cost = 1.2f;
@@ -73,6 +79,7 @@ public class TerraItems{
             healthScaling = -0.1f;
             radioactivity = 900f;
             explosiveness = 1.2f;
+            charge = 1f;
             threat = 0.46f;
             frames = 2;
             transitionFrames = 10;
@@ -84,11 +91,12 @@ public class TerraItems{
             healthScaling = -0.3f;
             radioactivity = 7850f;
             threat = 1f;
-            //hidden = true;
+            hidden = true;
         }};
         darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
             hardness = 5;
+            healthScaling = 0.5f;
         }};
         tesseract = new AdvancedItem("tesseract"){{
             color = Color.valueOf("010101");
