@@ -22,7 +22,7 @@ public class TerraItems{
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
             flammability = 1.25f;
-            radioactivity = 0.2f;
+            explosiveness = 0.2f;
             hardness = 2;
         }};
         diamondDust = new Item("diamond-dust", Color.valueOf("ffffff")){{
