@@ -730,6 +730,7 @@ public class TerraBlocks{
         //turrets
         flight = new ItemTurret("flight"){{
             requirements(Category.turret, with(Items.lead, 35, Items.graphite, 10));
+            predictTarget = false;
             ammo(
                 Items.lead,  new BulletType(){{
                     damage = speed = 0f;
