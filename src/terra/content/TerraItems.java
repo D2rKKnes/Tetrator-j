@@ -7,7 +7,6 @@ import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.entities.bullet.*;
 import mindustry.graphics.*;
-import mindustry.type.ammo.*;
 import mindustry.type.unit.*;
 import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
