@@ -28,7 +28,6 @@ import mindustry.entities.pattern.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
-import mindustry.type.ammo.*;
 import mindustry.type.unit.*;
 import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
@@ -1176,6 +1175,7 @@ public class TerraUnitTypes {
                     width = 9f;
                     fromColor = Color.valueOf("ffb59f");
                     hitColor = lightColor = lightningColor = toColor = Color.valueOf("e13131");
+                    shootEffect = smokeEffect = TerraFx.fuseShoot;
                 }};
 
                 shoot = new ShootSpread(){{
@@ -1257,14 +1257,18 @@ public class TerraUnitTypes {
                 continuous = true;
                 parentizeEffects = true;
                 shootSound = Sounds.beamLustre;
-                bullet = new PointLaserBulletType(){{
-                    lifetime = 168f;
-                    speed = 3f;
-                    damage = 64f;
-                    buildingDamageMultiplier = 0.6f;
-                    color = hitColor = Color.valueOf("ffb59f");
-                    status = StatusEffects.melting;
-                    statusDuration = 20f;
+                bullet = new DelayedPointBulletType(){{
+                    width = 10f;
+                    damage = 340;
+                    buildingDamageMultiplier = 0.8f;
+                    rangeOverride = 330;
+                    trailEffect = Fx.none;
+                    lightColor = lightningColor = trailColor = hitColor = Color.valueOf("e13131");
+                    status = TerraStatusEffects.extinction;
+                    statusDuration = 100f;
+                    despawnShake = hitShake = 2f;
+                    collidesAir = collidesGround = true;
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                 }};
             }};
             Weapon staticCannon = new Weapon("terra-end-cannon"){{
