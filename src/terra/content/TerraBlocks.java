@@ -887,21 +887,24 @@ public class TerraBlocks{
                 setAmmoParts(
                     Items.lead, Seq.with(new RegionPart("-lead-missile"){{
                         progress = PartProgress.reload;
-                        colorTo = mixColor = Color.valueOf("ffffff00");
-                        color = Color.valueOf("ffffffff");
-                        mixColorTo = Pal.stat;
+                        colorTo = new Color(1f, 1f, 1f, 0f);
+                        color = Color.white;
+                        mixColorTo = Pal.accent;
+                        mixColor = new Color(1f, 1f, 1f, 0f);
                     }}),
                     Items.titanium, Seq.with(new RegionPart("-titanium-missile"){{
                         progress = PartProgress.reload;
-                        colorTo = mixColor = Color.valueOf("ffffff00");
-                        color = Color.valueOf("ffffffff");
-                        mixColorTo = Pal.stat;
+                        colorTo = new Color(1f, 1f, 1f, 0f);
+                        color = Color.white;
+                        mixColorTo = Pal.accent;
+                        mixColor = new Color(1f, 1f, 1f, 0f);
                     }}),
                     Items.metaglass, Seq.with(new RegionPart("-metaglass-missile"){{
                         progress = PartProgress.reload;
-                        colorTo = mixColor = Color.valueOf("ffffff00");
-                        color = Color.valueOf("ffffffff");
-                        mixColorTo = Pal.stat;
+                        colorTo = new Color(1f, 1f, 1f, 0f);
+                        color = Color.white;
+                        mixColorTo = Pal.accent;
+                        mixColor = new Color(1f, 1f, 1f, 0f);
                     }})
                 );
             }};
