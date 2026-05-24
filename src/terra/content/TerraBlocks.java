@@ -864,13 +864,26 @@ public class TerraBlocks{
             );
 
             drawer = new DrawTurret(){{
-                parts.add(new RegionPart("-missile"){{
-                    progress = PartProgress.reload;
-                    colorTo = mixColor = Color.valueOf("ffffff00");
-                    color = Color.valueOf("ffffffff");
-                    mixColorTo = Pal.stat;
-                    outline = false;
-                }});
+                setAmmoParts(
+                    Items.lead, Seq.with(new RegionPart("-lead-missile"){{
+                        progress = PartProgress.reload;
+                        colorTo = mixColor = Color.valueOf("ffffff00");
+                        color = Color.valueOf("ffffffff");
+                        mixColorTo = Pal.stat;
+                    }}),
+                    Items.titanium, Seq.with(new RegionPart("-titanium-missile"){{
+                        progress = PartProgress.reload;
+                        colorTo = mixColor = Color.valueOf("ffffff00");
+                        color = Color.valueOf("ffffffff");
+                        mixColorTo = Pal.stat;
+                    }}),
+                    Items.metaglass, Seq.with(new RegionPart("-metaglass-missile"){{
+                        progress = PartProgress.reload;
+                        colorTo = mixColor = Color.valueOf("ffffff00");
+                        color = Color.valueOf("ffffffff");
+                        mixColorTo = Pal.stat;
+                    }})
+                );
             }};
 
             shootSound = Sounds.shootMissileSmall;
@@ -889,7 +902,7 @@ public class TerraBlocks{
             limitRange(5f);
         }};
 
-        dynamics = new SpeedupTurret("dynamics"){{
+        dynamics = new ItemTurret("dynamics"){{
             requirements(Category.turret, with(Items.titanium, 55, Items.graphite, 22));
             ammo(
                 Items.lead, new ShrapnelBulletType(){{
@@ -908,7 +921,7 @@ public class TerraBlocks{
                     ammoMultiplier = 3f;
                     armorMultiplier = 0.8f;
                     width = 9f;
-                    reloadMultiplier = 0.8f;
+                    reloadMultiplier = 0.85f;
                 }},
                 TerraItems.rawThermoxite, new ShrapnelBulletType(){{
                     rangeChange = 12;
@@ -917,7 +930,7 @@ public class TerraBlocks{
                     ammoMultiplier = 2f;
                     armorMultiplier = 0.5f;
                     width = 9f;
-                    reloadMultiplier = 0.6f;
+                    reloadMultiplier = 0.7f;
                     toColor = hitColor = Color.valueOf("ff7163");
                     shootEffect = smokeEffect = TerraFx.fuseShoot;
                 }}
@@ -926,19 +939,19 @@ public class TerraBlocks{
             shootSound = TerraSounds.shootHeavy;
             shootSoundVolume = 0.3f;
             shoot = new ShootSpread(2, 12f);
-            reload = 80f;
-            minFiringSpeed = 0.3f;
+            reload = 72f;
+            /*minFiringSpeed = 0.3f;
             windupSpeed = 0.0017f;
             windDownSpeed = 0.0042f;
             logicSpeedScl = 0.4f;
-            maxSpeed = 2.25f;
+            maxSpeed = 2.25f;*/
             range = 60;
             shootCone = 15f;
             health = 400;
             rotateSpeed = 10f;
             maxAmmo = 10;
-            coolant = consumeCoolant(0.15f);
-            coolantMultiplier = 2.5f;
+            coolant = consumeCoolant(0.25f);
+            coolantMultiplier = 12.5f;
             depositCooldown = 2.0f;
         }};
 
@@ -948,12 +961,13 @@ public class TerraBlocks{
             shootY = 2f;
             recoil = 2f;
             reload = 52f;
+            cooldownTime = reload * 0.8f;
             shake = 1.4f;
             shootEffect = Fx.lancerLaserShoot;
             smokeEffect = Fx.none;
             heatColor = Color.red;
             size = 1;
-            scaledHealth = 250;
+            scaledHealth = 240;
             coolant = consumeCoolant(0.2f);
 
             consumePower(3.7f);
@@ -976,7 +990,7 @@ public class TerraBlocks{
                 hitSize = 3;
                 lifetime = 16f;
                 drawSize = 300f;
-                collidesAir = false;
+                collidesAir = true;
                 length = 103f;
                 ammoMultiplier = 1f;
                 pierceCap = 4;
@@ -988,7 +1002,7 @@ public class TerraBlocks{
                     damage = 20;
                     lightningLength = 11;
                     lightningLengthRand = 2;
-                    collidesAir = false;
+                    collidesAir = true;
                     ammoMultiplier = 1f;
     
                     //for visual stats only.
@@ -1001,7 +1015,7 @@ public class TerraBlocks{
                         status = StatusEffects.shocked;
                         hittable = false;
                         lightColor = Color.white;
-                        collidesAir = false;
+                        collidesAir = true;
                         buildingDamageMultiplier = 0.25f;
                         shieldDamageMultiplier = 0.2f;
                     }};
@@ -1013,8 +1027,8 @@ public class TerraBlocks{
             requirements(Category.turret, with(Items.lead, 100, Items.silicon, 120, TerraItems.titaniumPlate, 85));
             ammo(
                 Items.graphite, new BasicBulletType(3.5f, 22){{
-                    width = 7f;
-                    height = 9f;
+                    width = 7.5f;
+                    height = 11f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                     frontColor = Pal.graphiteAmmoFront;
@@ -1025,22 +1039,6 @@ public class TerraBlocks{
                     splashDamage = 15f;
                     splashDamageRadius = 22f;
                     lifetime = 70f;
-                }},
-                Items.titanium, new BasicBulletType(3f, 31, "bullet"){{
-                    width = 10f;
-                    height = 14f;
-                    shootEffect = Fx.shootBig;
-                    smokeEffect = Fx.shootBigSmoke;
-                    reloadMultiplier = 0.6f;
-                    ammoMultiplier = 5;
-                    splashDamage = 20f;
-                    splashDamageRadius = 33f;
-                    lifetime = 70f;
-                    armorMultiplier = 0.6f;
-
-                    hitEffect = despawnEffect = Fx.hitBulletColor;
-                    hitColor = backColor = trailColor = Pal.lancerLaser;
-                    frontColor = Color.white;
                 }},
                 Items.thorium, new BasicBulletType(4f, 28, "bullet"){{
                     width = 8f;
@@ -1057,6 +1055,22 @@ public class TerraBlocks{
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     backColor = hitColor = trailColor = Pal.thoriumAmmoBack;
                     frontColor = Pal.thoriumAmmoFront;
+                }},
+                TerraItems.darkSteel, new BasicBulletType(3.8f, 47, "bullet"){{
+                    width = 8.5f;
+                    height = 15f;
+                    shootEffect = Fx.shootBig;
+                    smokeEffect = Fx.shootBigSmoke;
+                    reloadMultiplier = 0.8f;
+                    ammoMultiplier = 3;
+                    splashDamage = 26f;
+                    splashDamageRadius = 24f;
+                    lifetime = 70f;
+                    armorMultiplier = 0.3f;
+
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    backColor = hitColor = trailColor = Pal.darkMetal;
+                    frontColor = Color.white;
                 }}
             );
 
@@ -1072,7 +1086,7 @@ public class TerraBlocks{
                 }
                 parts.add(new RegionPart("-side"){{
                     progress = PartProgress.recoil;
-                    moveY = 0.5f;
+                    moveY = 0.6f;
                     mirror = under = true;
                 }});
             }};
