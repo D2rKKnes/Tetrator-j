@@ -891,14 +891,16 @@ public class TerraBlocks{
                         color = Color.white;
                         mixColorTo = Pal.accent;
                         mixColor = new Color(1f, 1f, 1f, 0f);
-                    }}),
+                    }}));
+                setAmmoParts(
                     Items.titanium, Seq.with(new RegionPart("-titanium-missile"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
                         mixColorTo = Pal.accent;
                         mixColor = new Color(1f, 1f, 1f, 0f);
-                    }}),
+                    }}));
+                setAmmoParts(
                     Items.metaglass, Seq.with(new RegionPart("-metaglass-missile"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
