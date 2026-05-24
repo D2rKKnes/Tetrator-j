@@ -7,6 +7,7 @@ import terra.world.drawer.*;
 import terra.world.meta.*;
 import arc.*;
 import arc.util.*;
+import arc.struct.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
 import arc.graphics.*;
@@ -66,7 +67,8 @@ public class TerraBlocks{
     photonPanel, photonPanelLarge,
     //crafters
     sandExtractor, iceMelter, 
-    bisiliconOven, darkSteelWorkshop, titaniumPress, multiMixer,
+    bisiliconOven, darkSteelWorkshop, titaniumPress, diamondCoverer,
+    multiMixer,
     //production
     graphiteMiner,
     mechanicalWell, electricalWell,
@@ -485,6 +487,23 @@ public class TerraBlocks{
             consumePower(2.1f);
             consumeItems(with(Items.silicon, 1, Items.titanium, 3));
             consumeLiquid(Liquids.water, 0.3f);
+        }};
+        diamondCoverer = new GenericCrafter("diamond-coverer"){{
+            requirements(Category.crafting, with(TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
+
+            outputItem = new ItemStack(TerraItems.diamondGlass, 1);
+            craftTime = 35f;
+            itemCapacity = 15;
+            size = 2;
+            hasItems = true;
+            hasLiquids = true;
+            hasPower = true;
+
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidRegion(Liquids.water), new DrawDefault());
+
+            consumePower(1.3f);
+            consumeItems(with(Items.metaglass, 1, TerraItems.diamondDust, 3));
+            consumeLiquid(Liquids.water, 0.2f);
         }};
         multiMixer = new MultiBlockCrafter("multi-mixer") {{
             requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 75, TerraItems.titaniumPlate, 180, Items.metaglass, 225));
