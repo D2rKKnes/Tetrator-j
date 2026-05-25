@@ -46,7 +46,7 @@ public class TerraVanilaTree{
             });
         });
         // Erekir
-        vanillaNode(blastDoor, () -> {
+        vanillaNode(erekir, blastDoor, () -> {
             node(blastGate, () -> {
             });
             node(blastDoorLarge, () -> {
@@ -54,11 +54,11 @@ public class TerraVanilaTree{
                 });
             });
         });
-        vanillaNode(beamTower, () -> {
+        vanillaNode(erekir, beamTower, () -> {
             node(beamBeacon, () -> {
             });
         });
-        vanillaNode(turbineCondenser, () -> {
+        vanillaNode(erekir, turbineCondenser, () -> {
             node(reinforcedPanel, () -> {
             });
         });
