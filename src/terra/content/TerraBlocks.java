@@ -90,6 +90,8 @@ public class TerraBlocks{
     public static void load(){
         //VERILUS & SERPULO =---
         //walls
+        int wallHealthMultiplier = 4;
+        
         scrapWallColossol = new Wall("scrap-wall-colossol"){{
             requirements(Category.defense, with(Items.scrap, 6 * 25));
             health = 60 * 25 * 4;
@@ -1220,7 +1222,7 @@ public class TerraBlocks{
 
         //power
         beamBeacon = new BeamNode("beam-beacon"){{
-            requirements(Category.power, with(Items.beryllium, 200, Items.oxide, 80, Items.silicon, 150, surgeAlloy, 135, fissileMatter, 120));
+            requirements(Category.power, with(Items.beryllium, 200, Items.oxide, 80, Items.silicon, 150, Items.surgeAlloy, 135, Items.fissileMatter, 120));
             size = 5;
             consumesPower = outputsPower = true;
             baseExplosiveness = 8;
