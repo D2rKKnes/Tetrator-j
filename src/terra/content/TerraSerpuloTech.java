@@ -26,8 +26,8 @@ public class TerraSerpuloTech{
                 });
             });
         });
-        vanillaNode(plastanumWallLarge, () -> {
-            node(plastanumWallHuge, () -> {
+        vanillaNode(plastaniumWallLarge, () -> {
+            node(plastaniumWallHuge, () -> {
             });
         });
         vanillaNode(phaseWallLarge, () -> {
@@ -61,5 +61,15 @@ public class TerraSerpuloTech{
             if(search != null) return search;
         }
         return null;
+    }
+
+    private static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives, Runnable children){
+        TechNode node = new TechNode(context, content, requirements);
+        if(objectives != null) node.objectives = objectives;
+
+        TechNode prev = context;
+        context = node;
+        children.run();
+        context = prev;
     }
 }
