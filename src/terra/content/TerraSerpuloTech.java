@@ -7,12 +7,13 @@ import mindustry.ctype.*;
 import mindustry.game.Objectives.*;
 import mindustry.type.*;
 
+import static terra.content.TerraBlocks.*;
+
 import static mindustry.content.Blocks.*;
 import static mindustry.content.Items.*;
+import static mindustry.content.SectorPresets.*;
 import static mindustry.content.TechTree.*;
-import static mindustry.content.TechTree.nodeProduce;
 import static mindustry.content.UnitTypes.*;
-import static terra.content.*;
 
 public class TerraSerpuloTech{
     public static void load(){
@@ -51,5 +52,14 @@ public class TerraSerpuloTech{
     private static void vanillaNode(String tree, UnlockableContent parent, Runnable children){
         context = findNode(TechTree.roots.find(r -> r.name.equals(tree)), n -> n.content == parent);
         children.run();
+    }
+
+    private static TechNode findNode(TechNode root, Boolf<TechNode> filter){
+        if(filter.get(root)) return root;
+        for(TechNode node : root.children){
+            TechNode search = findNode(node, filter);
+            if(search != null) return search;
+        }
+        return null;
     }
 }
