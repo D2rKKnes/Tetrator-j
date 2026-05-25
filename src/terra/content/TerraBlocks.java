@@ -112,7 +112,7 @@ public class TerraBlocks{
             health = 100 * 16 * wallHealthMultiplier;
             size = 4;
         }};
-        plastaniumWallHuge = new Wall("plastanium-wall-Huge"){{
+        plastaniumWallHuge = new Wall("plastanium-wall-huge"){{
             requirements(Category.defense, with(Items.plastanium, 5 * 9, Items.metaglass, 2 * 9));
             health = 125 * wallHealthMultiplier * 9;
             size = 3;
