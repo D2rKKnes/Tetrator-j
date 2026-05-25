@@ -1,10 +1,9 @@
 package terra.content;
 
 import mindustry.Vars;
-import mindustry.game.WorldParams;
 import mindustry.maps.generators.FileMapGenerator;
 import mindustry.type.*;
-import mindustry.world.Tiles;
+import mindustry.world.*;
 import mindustry.content.Planets;
 
 public class TerraSectorPresets {
