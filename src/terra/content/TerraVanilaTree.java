@@ -49,7 +49,7 @@ public class TerraVanilaTree{
         vanillaNode(blastDoor, () -> {
             node(blastGate, () -> {
             });
-            node(blasrDoorLarge, () -> {
+            node(blastDoorLarge, () -> {
                 node(blastDoorHuge, () -> {
                 });
             });
@@ -58,7 +58,7 @@ public class TerraVanilaTree{
             node(beamBeacon, () -> {
             });
         });
-        vanillaNode(turbineCondencer, () -> {
+        vanillaNode(turbineCondenser, () -> {
             node(reinforcedPanel, () -> {
             });
         });
