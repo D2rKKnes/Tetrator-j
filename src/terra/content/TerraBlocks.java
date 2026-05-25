@@ -1206,13 +1206,13 @@ public class TerraBlocks{
             armor = 14f;
         }};
         blastDoorLarge = new AutoDoor("blast-door-large"){{
-            requirements(Category.defense, with(Items.tungsten, 6 * 9, Items.silicon, * 9));
+            requirements(Category.defense, with(Items.tungsten, 6 * 9, Items.silicon, 6 * 9));
             health = 175 * wallHealthMultiplier * 9;
             armor = 14f;
             size = 3;
         }};
         blastDoorHuge = new AutoDoor("blast-door-huge"){{
-            requirements(Category.defense, with(Items.tungsten, 6 * 16, Items.silicon, * 16));
+            requirements(Category.defense, with(Items.tungsten, 6 * 16, Items.silicon, 6 * 16));
             health = 175 * wallHealthMultiplier * 16;
             armor = 14f;
             size = 4;
