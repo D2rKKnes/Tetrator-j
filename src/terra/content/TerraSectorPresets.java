@@ -1,6 +1,7 @@
 package terra.content;
 
 import mindustry.Vars;
+import mindustry.game.Rules;
 import mindustry.maps.generators.FileMapGenerator;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -26,10 +27,34 @@ public class TerraSectorPresets {
                     }
                 }
             }
-            if (planet.generator != null) {
-                planet.generator.generate(tiles, params);
-            } else {
-                throw new RuntimeException("Planet has no generator");
+
+            Sector sector = params.getSector();
+            if (sector == null && preset != null && preset.sector != null) {
+                sector = preset.sector;
+            }
+            if (sector == null) {
+                throw new RuntimeException("No sector available for generation");
+            }
+
+            Rules rules = Vars.state.rules;
+            Sector oldSector = rules != null ? rules.sector : null;
+            try {
+                if (rules == null) {
+                    Vars.state.rules = new Rules();
+                }
+                Vars.state.rules.sector = sector;
+
+                if (planet.generator != null) {
+                    planet.generator.generate(tiles, params);
+                } else {
+                    throw new RuntimeException("Planet has no generator");
+                }
+            } finally {
+                if (rules != null) {
+                    Vars.state.rules.sector = oldSector;
+                } else {
+                    Vars.state.rules = null;
+                }
             }
         }
     }
@@ -41,6 +66,7 @@ public class TerraSectorPresets {
             initialize(planet, sectorId);
         }
     }
+
     public static void load(){
         //region Serpulo & Verilus
 
