@@ -12,6 +12,7 @@ public class TerraSectorPresets {
 
     private static class PlanetFileMapGenerator extends FileMapGenerator {
         private final Planet planet;
+        private final SectorPreset preset;
 
         public PlanetFileMapGenerator(Planet planet, SectorPreset preset) {
             super(preset);
@@ -28,7 +29,7 @@ public class TerraSectorPresets {
                 }
             }
 
-            Sector sector = params.getSector();
+            Sector sector = params.sector;
             if (sector == null && preset != null && preset.sector != null) {
                 sector = preset.sector;
             }
