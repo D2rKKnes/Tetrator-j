@@ -884,6 +884,11 @@ public class TerraBlocks{
             );
 
             drawer = new DrawTurret(){{
+                parts.add(new RegionPart("костыль"){{
+                    progress = PartProgress.constant(0f);
+                    color = colorTo = new Color(1f, 1f, 1f, 0f);
+                    layerOffset = -20f;
+                }});
                 setAmmoParts(
                     Items.lead, Seq.with(new RegionPart("-lead-missile-part"){{
                         progress = PartProgress.reload;
