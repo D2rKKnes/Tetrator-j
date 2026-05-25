@@ -46,6 +46,7 @@ public class TerraVanilaTree{
             });
         });
         // Erekir
+        String erekir = "erekir";
         vanillaNode(erekir, blastDoor, () -> {
             node(blastGate, () -> {
             });
