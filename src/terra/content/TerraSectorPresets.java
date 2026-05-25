@@ -5,8 +5,7 @@ import mindustry.game.WorldParams;
 import mindustry.maps.generators.FileMapGenerator;
 import mindustry.type.*;
 import mindustry.world.Tiles;
-
-import static mindustry.content.Planets.*;
+import mindustry.content.Planets;
 
 public class TerraSectorPresets {
     public static SectorPreset verilus;
