@@ -57,7 +57,7 @@ public class TerraBlocks{
     public static Block
     //VERILUS & SERPULO =---
     //walls
-    scrapWallColossol,
+    scrapWallColossol, doorHuge, doorGigantic, plastaniumWallHuge, phaseWallHuge,
     metaglassWall, metaglassWallLarge, metaglassWallHuge,
     darkSteelWall, darkSteelWallLarge,
     //distrubution
@@ -76,12 +76,16 @@ public class TerraBlocks{
     //turrets
     flight, dynamics, electricShock, fracture,
     //units
-    droneCentre;
+    droneCentre,
     //other
     //NOTVA =---
     //GIER =---
     //TATNTROS =---
     //EREKIR & COPIS =---
+    //walls
+    blastGate, blastDoorLarge, blastDoorHuge,
+    //power
+    beamBeacon, reinforcedPanel;
     //OTHER =---
     public static void load(){
         //VERILUS & SERPULO =---
@@ -91,6 +95,35 @@ public class TerraBlocks{
             health = 60 * 25 * 4;
             size = 5;
             buildCostMultiplier = 4f;
+        }};
+        doorHuge = new Door("door-huge"){{
+            requirements(Category.defense, ItemStack.mult(Items.titanium, 6 * 9, Items.silicon, 4 * 9));
+            openfx = Fx.dooropenlarge;
+            closefx = Fx.doorcloselarge;
+            health = 100 * 9 * wallHealthMultiplier;
+            size = 3;
+        }};
+        doorGigantic = new Door("door-gigantic"){{
+            requirements(Category.defense, ItemStack.mult(Items.titanium, 6 * 16, Items.silicon, 4 * 16));
+            openfx = Fx.dooropenlarge;
+            closefx = Fx.doorcloselarge;
+            health = 100 * 16 * wallHealthMultiplier;
+            size = 4;
+        }};
+        plastaniumWallHuge = new Wall("plastanium-wall-Huge"){{
+            requirements(Category.defense, ItemStack.mult(Items.plastanium, 5 * 9, Items.metaglass, 2 * 9));
+            health = 125 * wallHealthMultiplier * 9;
+            size = 3;
+            insulated = true;
+            absorbLasers = true;
+            schematicPriority = 10;
+        }};
+        phaseWallHuge = new Wall("phase-wall-huge"){{
+            requirements(Category.defense, ItemStack.mult(Items.phaseFabric, 6 * 9));
+            health = 150 * 9 * wallHealthMultiplier;
+            size = 3;
+            chanceDeflect = 10f;
+            flashHit = true;
         }};
         metaglassWall = new AdvancedWall("metaglass-wall"){{
             requirements(Category.defense, with(Items.metaglass, 6));
@@ -1166,8 +1199,44 @@ public class TerraBlocks{
 
         
         //EREKIR & COPIS =---
+        //walls
+        blastGate = new AutoDoor("blast-gate"){{
+            requirements(Category.defense, with(Items.tungsten, 6, Items.silicon, 6));
+            health = 175 * wallHealthMultiplier;
+            armor = 14f;
+        }};
+        blastDoorLarge = new AutoDoor("blast-door-large"){{
+            requirements(Category.defense, with(Items.tungsten, 6 * 9, Items.silicon, * 9));
+            health = 175 * wallHealthMultiplier * 9;
+            armor = 14f;
+            size = 3;
+        }};
+        blastDoorHuge = new AutoDoor("blast-door-huge"){{
+            requirements(Category.defense, with(Items.tungsten, 6 * 16, Items.silicon, * 16));
+            health = 175 * wallHealthMultiplier * 16;
+            armor = 14f;
+            size = 4;
+        }};
 
+        //power
+        beamBeacon = new BeamNode("beam-beacon"){{
+            requirements(Category.power, with(Items.beryllium, 200, Items.oxide, 80, Items.silicon, 150, surgeAlloy, 135, fissileMatter, 120));
+            size = 5;
+            consumesPower = outputsPower = true;
+            baseExplosiveness = 8;
+            range = 68;
+            scaledHealth = 35;
+            fogRadius = 3;
 
+            consumePowerBuffered(125000f);
+        }};
+        reinforcedPanel = new SolarGenerator("reinforced-solar-panel"){{
+            requirements(Category.power, with(Items.graphite, 85, Items.silicon, 65, Items.tungsten, 20));
+            size = 2;
+            armor = 8;
+            health = 450f;
+            powerProduction = 0.72f;
+        }};
         
         //OTHER =---
 
