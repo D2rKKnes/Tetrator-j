@@ -99,21 +99,21 @@ public class TerraBlocks{
             buildCostMultiplier = 4f;
         }};
         doorHuge = new Door("door-huge"){{
-            requirements(Category.defense, ItemStack.mult(Items.titanium, 6 * 9, Items.silicon, 4 * 9));
+            requirements(Category.defense, with(Items.titanium, 6 * 9, Items.silicon, 4 * 9));
             openfx = Fx.dooropenlarge;
             closefx = Fx.doorcloselarge;
             health = 100 * 9 * wallHealthMultiplier;
             size = 3;
         }};
         doorGigantic = new Door("door-gigantic"){{
-            requirements(Category.defense, ItemStack.mult(Items.titanium, 6 * 16, Items.silicon, 4 * 16));
+            requirements(Category.defense, with(Items.titanium, 6 * 16, Items.silicon, 4 * 16));
             openfx = Fx.dooropenlarge;
             closefx = Fx.doorcloselarge;
             health = 100 * 16 * wallHealthMultiplier;
             size = 4;
         }};
         plastaniumWallHuge = new Wall("plastanium-wall-Huge"){{
-            requirements(Category.defense, ItemStack.mult(Items.plastanium, 5 * 9, Items.metaglass, 2 * 9));
+            requirements(Category.defense, with(Items.plastanium, 5 * 9, Items.metaglass, 2 * 9));
             health = 125 * wallHealthMultiplier * 9;
             size = 3;
             insulated = true;
@@ -121,7 +121,7 @@ public class TerraBlocks{
             schematicPriority = 10;
         }};
         phaseWallHuge = new Wall("phase-wall-huge"){{
-            requirements(Category.defense, ItemStack.mult(Items.phaseFabric, 6 * 9));
+            requirements(Category.defense, with(Items.phaseFabric, 6 * 9));
             health = 150 * 9 * wallHealthMultiplier;
             size = 3;
             chanceDeflect = 10f;
