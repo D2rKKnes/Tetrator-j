@@ -1236,7 +1236,7 @@ public class TerraBlocks{
             requirements(Category.power, with(Items.graphite, 85, Items.silicon, 65, Items.tungsten, 20));
             size = 2;
             armor = 8;
-            health = 450f;
+            health = 450;
             powerProduction = 0.72f;
         }};
         
