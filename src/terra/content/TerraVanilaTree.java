@@ -16,6 +16,7 @@ import static mindustry.content.TechTree.*;
 import static mindustry.content.UnitTypes.*;
 
 public class TerraVanilaTree{
+    static TechTree.TechNode context = null;
     public static void load(){
         // Serpulo
         vanillaNode(titaniumWall, () -> {
@@ -62,51 +63,5 @@ public class TerraVanilaTree{
             if(search != null) return search;
         }
         return null;
-    }
-
-    private static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives, Runnable children){
-        TechNode node = new TechNode(context, content, requirements);
-        if(objectives != null) node.objectives = objectives;
-
-        TechNode prev = context;
-        context = node;
-        children.run();
-        context = prev;
-    }
-
-    private static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives){
-        node(content, requirements, objectives, () -> {});
-    }
-
-    private static void node(UnlockableContent content, Seq<Objective> objectives){
-        node(content, content.researchRequirements(), objectives, () -> {});
-    }
-
-    private static void node(UnlockableContent content, ItemStack[] requirements){
-        node(content, requirements, Seq.with(), () -> {});
-    }
-
-    private static void node(UnlockableContent content, ItemStack[] requirements, Runnable children){
-        node(content, requirements, null, children);
-    }
-
-    private static void node(UnlockableContent content, Seq<Objective> objectives, Runnable children){
-        node(content, content.researchRequirements(), objectives, children);
-    }
-
-    private static void node(UnlockableContent content, Runnable children){
-        node(content, content.researchRequirements(), children);
-    }
-
-    private static void node(UnlockableContent block){
-        node(block, () -> {});
-    }
-
-    private static void nodeFree(UnlockableContent content, UnlockableContent source, Runnable children){
-        node(content, ItemStack.empty, Seq.with(new Research(source)), children);
-    }
-
-    private static void nodeFree(UnlockableContent content, UnlockableContent source){
-        node(content, ItemStack.empty, Seq.with(new Research(source)));
     }
 }
