@@ -45,6 +45,23 @@ public class TerraVanilaTree{
                 });
             });
         });
+        // Erekir
+        vanillaNode(blastDoor, () -> {
+            node(blastGate, () -> {
+            });
+            node(blasrDoorLarge, () -> {
+                node(blastDoorHuge, () -> {
+                });
+            });
+        });
+        vanillaNode(beamTower, () -> {
+            node(beamBeacon, () -> {
+            });
+        });
+        vanillaNode(turbineCondencer, () -> {
+            node(reinforcedPanel, () -> {
+            });
+        });
     }
     //from prog-mats
     private static void vanillaNode(UnlockableContent parent, Runnable children){
