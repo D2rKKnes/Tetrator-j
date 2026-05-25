@@ -19,6 +19,13 @@ public class TerraSectorPresets {
 
         @Override
         public void generate(Tiles tiles, WorldParams params) {
+            for (int x = 0; x < tiles.width; x++) {
+                for (int y = 0; y < tiles.height; y++) {
+                    if (tiles.get(x, y) == null) {
+                        tiles.set(x, y, new Tile(x, y));
+                    }
+                }
+            }
             if (planet.generator != null) {
                 planet.generator.generate(tiles, params);
             } else {
