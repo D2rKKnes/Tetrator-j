@@ -884,13 +884,14 @@ public class TerraBlocks{
             );
 
             drawer = new DrawTurret(){{
-                parts.add(new RegionPart("костыль"){{
+                parts.add(new RegionPart(""){{
                     progress = PartProgress.constant(0f);
                     color = colorTo = mixColor = mixColorTo = new Color(1f, 1f, 1f, 0f);
-                    layerOffset = -40f;
+                    outline = false;
+                    layerOffset = -60f;
                 }});
                 setAmmoParts(
-                    Items.lead, Seq.with(new RegionPart("-lead-missile"){{
+                    Items.lead, Seq.with(new RegionPart("-missile"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
@@ -898,7 +899,7 @@ public class TerraBlocks{
                         mixColor = new Color(1f, 1f, 1f, 0f);
                         outline = false;
                     }}),
-                    Items.titanium, Seq.with(new RegionPart("-titanium-missile"){{
+                    Items.titanium, Seq.with(new RegionPart("-missile-titanium"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
@@ -906,7 +907,7 @@ public class TerraBlocks{
                         mixColor = new Color(1f, 1f, 1f, 0f);
                         outline = false;
                     }}),
-                    Items.metaglass, Seq.with(new RegionPart("-metaglass-missile"){{
+                    Items.metaglass, Seq.with(new RegionPart("-missile-metaglass"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
