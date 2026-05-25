@@ -64,4 +64,42 @@ public class TerraVanilaTree{
         }
         return null;
     }
+
+    private static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives, Runnable children){
+        TechNode node = new TechNode(context, content, requirements);
+        if(objectives != null) node.objectives = objectives;
+
+        TechNode prev = context;
+        context = node;
+        children.run();
+        context = prev;
+    }
+
+    private static void node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives){
+        node(content, requirements, objectives, () -> {});
+    }
+
+    private static void node(UnlockableContent content, Seq<Objective> objectives){
+        node(content, content.researchRequirements(), objectives, () -> {});
+    }
+
+    private static void node(UnlockableContent content, ItemStack[] requirements){
+        node(content, requirements, Seq.with(), () -> {});
+    }
+
+    private static void node(UnlockableContent content, ItemStack[] requirements, Runnable children){
+        node(content, requirements, null, children);
+    }
+
+    private static void node(UnlockableContent content, Seq<Objective> objectives, Runnable children){
+        node(content, content.researchRequirements(), objectives, children);
+    }
+
+    private static void node(UnlockableContent content, Runnable children){
+        node(content, content.researchRequirements(), children);
+    }
+
+    private static void node(UnlockableContent block){
+        node(block, () -> {});
+    }
 }
