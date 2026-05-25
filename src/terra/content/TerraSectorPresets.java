@@ -17,6 +17,7 @@ public class TerraSectorPresets {
         public PlanetFileMapGenerator(Planet planet, SectorPreset preset) {
             super(preset);
             this.planet = planet;
+            this.preset = preset;
         }
 
         @Override
