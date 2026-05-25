@@ -29,7 +29,7 @@ public class TerraSectorPresets {
                 }
             }
 
-            Sector sector = params.sector;
+            Sector sector = preset.sector;
             if (sector == null && preset != null && preset.sector != null) {
                 sector = preset.sector;
             }
