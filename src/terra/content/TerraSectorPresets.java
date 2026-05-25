@@ -2,6 +2,7 @@ package terra.content;
 
 
 import mindustry.type.*;
+import mindustry.content.Planets;
 
 import static mindustry.content.Planets.*;
 
