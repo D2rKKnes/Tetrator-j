@@ -21,7 +21,7 @@ public class TerraSectorPresets {
     private static class NoFileSectorPreset extends SectorPreset {
         public NoFileSectorPreset(String name, Planet planet, int sectorId) {
             super(name, (mindustry.mod.Mods.LoadedMod) null);
-)
+
             this.planet = planet;
             this.originalPosition = sectorId;
             sectorId %= planet.sectors.size;
