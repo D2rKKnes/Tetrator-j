@@ -13,6 +13,7 @@ public class TerraSectorPresets {
             addStartingItems = true;
             difficulty = 8;
             overrideLaunchDefaults = true;
+            allowLaunchLoadout = true;
         }};
     }
 
