@@ -268,6 +268,11 @@ public class TerraBlocks{
             health = 70;
             buildCostMultiplier = 6f;
         }};
+        graphiteRouter = new Router("graphite-router"){{
+            requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
+            buildCostMultiplier = 4f;
+            health = 85;
+        }};
         graphiteBridge = new BufferedItemBridge("graphite-conveyor"){{
             requirements(Category.distribution, with(Items.lead, 6, Items.graphite, 8, Items.titanium, 3));
             fadeIn = moveArrows = false;
