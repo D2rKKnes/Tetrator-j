@@ -36,11 +36,11 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(scrapWallGigantic, () -> {
-            node(scrapWallColossol, () -> {
+            node(scrapWallColossol, Seq.with(new SectorComplete(facility32m)), () -> {
             });
         });
         vanillaNode(doorLarge, () -> {
-            node(doorHuge, () -> {
+            node(doorHuge, Seq.with(new SectorComplete(overgrowth)), () -> {
                 node(doorGigantic, () -> {
                 });
             });
@@ -48,10 +48,10 @@ public class TerraVanilaTree{
         // Erekir
         String erekir = "erekir";
         vanillaNode(erekir, blastDoor, () -> {
-            node(blastGate, () -> {
+            node(blastGate, Seq.with(new SectorComplete(intersect)), () -> {
             });
             node(blastDoorLarge, () -> {
-                node(blastDoorHuge, () -> {
+                node(blastDoorHuge, Seq.with(new SectorComplete(atlas)), () -> {
                 });
             });
         });
@@ -60,7 +60,7 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(erekir, turbineCondenser, () -> {
-            node(reinforcedPanel, () -> {
+            node(reinforcedPanel, Seq.with(new SectorComplete(lake)), () -> {
             });
         });
     }
