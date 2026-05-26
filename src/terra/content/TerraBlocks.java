@@ -62,7 +62,8 @@ public class TerraBlocks{
     darkSteelWall, darkSteelWallLarge,
     //distrubution
     graphiteConveyor, 
-    graphiteJunction,
+    graphiteJunction, graphiteRouter,
+    graphiteBridge, smallDriver,
     //power
     photonPanel, photonPanelLarge,
     //crafters
@@ -266,6 +267,24 @@ public class TerraBlocks{
             capacity = 6;
             health = 70;
             buildCostMultiplier = 6f;
+        }};
+        graphiteBridge = new BufferedItemBridge("graphite-conveyor"){{
+            requirements(Category.distribution, with(Items.lead, 6, Items.graphite, 8, Items.titanium, 3));
+            fadeIn = moveArrows = false;
+            range = 6;
+            speed = 74f;
+            arrowSpacing = 6f;
+            bufferCapacity = 16;
+            crushFragile = true;
+        }};
+        smallDriver = new MassDriver("small-driver"){{
+            requirements(Category.distribution, with(Items.titanium, 50, Items.graphite, 85, Items.lead, 100));
+            size = 2;
+            itemCapacity = 65;
+            reload = 340f;
+            range = 260f;
+            hasPower = false;
+            health = 485;
         }};
         
         //power
