@@ -268,7 +268,7 @@ public class TerraBlocks{
             health = 70;
             buildCostMultiplier = 6f;
         }};
-        graphiteRouter = new Router("graphite-router"){{
+        graphiteRouter = new RouterSorter("graphite-router"){{
             requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
             buildCostMultiplier = 4f;
             health = 85;
