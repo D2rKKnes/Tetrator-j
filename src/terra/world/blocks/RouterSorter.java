@@ -1,12 +1,14 @@
 package terra.world.blocks;
 
+import arc.Core;
+import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import mindustry.Vars;
 import mindustry.gen.Building;
 import mindustry.type.Item;
 import mindustry.world.Block;
+import mindustry.world.Tile;
 import mindustry.world.blocks.distribution.Router;
-import mindustry.world.blocks.distribution.Sorter;
-import mindustry.world.consumers.Consume;
 import mindustry.world.meta.BlockGroup;
 
 public class RouterSorter extends Block {
@@ -21,14 +23,14 @@ public class RouterSorter extends Block {
         configurable = true;
         saveConfig = true;
         copyConfig = true;
-        itemCapacity = 1; 
+        itemCapacity = 1;
         group = BlockGroup.transportation;
     }
-    
+
     @Override
     public void load() {
         super.load();
-        topRegion = Core.atlas.find(name + "-top");
+        topRegion = Core.atlas.find(name + "-top", Core.atlas.find("clear"));
     }
 
     public class RouterSorterBuild extends Building {
@@ -40,18 +42,17 @@ public class RouterSorter extends Block {
         @Override
         public void updateTile() {
             if (currentItem != null) {
-                progress += getProgressIncrease();
+                progress += delta() * speed;
                 if (progress >= 1f) {
                     attemptOutput();
                     currentItem = null;
                     progress = 0f;
                 }
-            }
-            else if (canPickup()) {
+            } else if (canPickup()) {
                 Building input = getInputBuilding();
                 if (input != null && input.items != null && input.items.total() > 0) {
-                    for (Item item : content.items()) {
-                        if (input.items.get(item) > 0 && acceptItem(item)) {
+                    for (Item item : Vars.content.items()) {
+                        if (input.items.get(item) > 0 && acceptItem(input, item)) {
                             input.items.remove(item, 1);
                             this.currentItem = item;
                             break;
@@ -59,10 +60,6 @@ public class RouterSorter extends Block {
                     }
                 }
             }
-        }
-        
-        public float getProgressIncrease() {
-            return delta() * speed;
         }
 
         public boolean canPickup() {
@@ -72,7 +69,7 @@ public class RouterSorter extends Block {
         public Building getInputBuilding() {
             if (lastInputDirection == -1) {
                 for (int i = 0; i < 4; i++) {
-                    Building build = nearbyBuild(i);
+                    Building build = tile.nearbyBuild(i);
                     if (build != null && build.items != null && build.items.total() > 0) {
                         return build;
                     }
@@ -81,7 +78,7 @@ public class RouterSorter extends Block {
             } else {
                 for (int i = 0; i < 4; i++) {
                     if (i == lastInputDirection) continue;
-                    Building build = nearbyBuild(i);
+                    Building build = tile.nearbyBuild(i);
                     if (build != null && build.items != null && build.items.total() > 0) {
                         return build;
                     }
@@ -93,11 +90,10 @@ public class RouterSorter extends Block {
         public void attemptOutput() {
             if (currentItem == null) return;
             boolean outputted = false;
-            
             int forwardDir = rotation;
-            
+
             if (sortItem != null && currentItem == sortItem) {
-                Building target = nearbyBuild(forwardDir);
+                Building target = tile.nearbyBuild(forwardDir);
                 if (target != null && target.acceptItem(this, currentItem)) {
                     target.handleItem(this, currentItem);
                     outputted = true;
@@ -105,7 +101,7 @@ public class RouterSorter extends Block {
             } else {
                 for (int i = 0; i < 4; i++) {
                     if (i == lastInputDirection) continue;
-                    Building target = nearbyBuild(i);
+                    Building target = tile.nearbyBuild(i);
                     if (target != null && target.acceptItem(this, currentItem)) {
                         target.handleItem(this, currentItem);
                         outputted = true;
@@ -113,7 +109,7 @@ public class RouterSorter extends Block {
                     }
                 }
             }
-            
+
             if (outputted) {
                 lastInputDirection = -1;
             } else {
@@ -124,10 +120,8 @@ public class RouterSorter extends Block {
         @Override
         public void handleItem(Building source, Item item) {
             if (currentItem != null || !enabled) return;
-            
-            int dir = source.relativeTo(tile.x, tile.y);
+            int dir = source.tile.relativeTo(tile.x, tile.y);
             lastInputDirection = dir;
-            
             this.currentItem = item;
             this.progress = 0.01f;
         }
@@ -136,7 +130,7 @@ public class RouterSorter extends Block {
         public boolean acceptItem(Building source, Item item) {
             return currentItem == null && enabled;
         }
-        
+
         @Override
         public void configured(Object value) {
             if (value instanceof Item) {
@@ -144,10 +138,8 @@ public class RouterSorter extends Block {
             } else {
                 this.sortItem = null;
             }
-            if (topRegion != Core.atlas.find("error")) {
-            }
         }
-        
+
         @Override
         public void draw() {
             super.draw();
