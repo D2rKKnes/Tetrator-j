@@ -273,7 +273,7 @@ public class TerraBlocks{
             buildCostMultiplier = 4f;
             health = 85;
         }};
-        graphiteBridge = new BufferedItemBridge("graphite-conveyor"){{
+        graphiteBridge = new BufferedItemBridge("graphite-bridge"){{
             requirements(Category.distribution, with(Items.lead, 6, Items.graphite, 8, Items.titanium, 3));
             fadeIn = moveArrows = false;
             range = 6;
