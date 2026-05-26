@@ -14,14 +14,15 @@ public class TerraSectorPresets {
     public static void load(){
         //region Serpulo & Verilus
 
-        /*verilus = new PlanetSectorPreset("verilus", Planets.verilus, 0){{
+        verilus = new PlanetSectorPreset("verilus", Planets.verilus, 0){{
             alwaysUnlocked = true;
             addStartingItems = true;
             //captureWave = 180;
             difficulty = 8;
             allowLaunchSchematics = true;
             overrideLaunchDefaults = true;
-        }};*/
+            generator = null;
+        }};
         //endregion
     }
 }
