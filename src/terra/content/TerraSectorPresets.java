@@ -14,7 +14,7 @@ public class TerraSectorPresets {
     public static void load(){
         //region Serpulo & Verilus
 
-        verilus = new PlanetSectorPreset("verilus", Planets.verilus, 0){{
+        verilus = new SectorPreset("verilus", Planets.verilus, 0){{
             alwaysUnlocked = true;
             addStartingItems = true;
             //captureWave = 180;
