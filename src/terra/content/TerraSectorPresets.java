@@ -1,32 +1,36 @@
 package terra.content;
 
 import mindustry.content.Planets;
-import mindustry.mod.Mods.LoadedMod;
+import mindustry.maps.generators.FileMapGenerator;
 import mindustry.type.*;
+import mindustry.world.*;
 
 public class TerraSectorPresets {
     public static SectorPreset verilus;
 
     public static void load() {
-        verilus = new NoFileSectorPreset("verilus", Planets.verilus, 0) {{
+        verilus = new SectorPreset("verilus", Planets.verilus, 0) {{
             alwaysUnlocked = true;
             addStartingItems = true;
             difficulty = 8;
+            allowLaunchSchematics = true;
             overrideLaunchDefaults = true;
             allowLaunchLoadout = true;
+            
+            generator = new PlanetMapGenerator(this);
         }};
     }
 
-    private static class NoFileSectorPreset extends SectorPreset {
-        public NoFileSectorPreset(String name, Planet planet, int sector) {
-            super(name, (LoadedMod) null);
+    private static class PlanetMapGenerator extends FileMapGenerator {
+        public PlanetMapGenerator(SectorPreset preset) {
+            super("serpulo/groundZero", preset);
+        }
 
-            this.generator = null;
-            this.planet = planet;
-            this.originalPosition = sector;
-            sector %= planet.sectors.size;
-            this.sector = planet.sectors.get(sector == -1 ? 0 : sector);
-            planet.preset(sector, this);
+        @Override
+        public void generate(Tiles tiles, WorldParams params) {
+            if (preset != null && preset.planet != null && preset.planet.generator != null) {
+                preset.planet.generator.generate(tiles, preset.sector, params);
+            }
         }
     }
 }
