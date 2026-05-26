@@ -7,8 +7,6 @@ import mindustry.Vars;
 import mindustry.gen.Building;
 import mindustry.type.Item;
 import mindustry.world.Block;
-import mindustry.world.Tile;
-import mindustry.world.blocks.distribution.Router;
 import mindustry.world.meta.BlockGroup;
 
 public class RouterSorter extends Block {
@@ -131,7 +129,6 @@ public class RouterSorter extends Block {
             return currentItem == null && enabled;
         }
 
-        @Override
         public void configured(Object value) {
             if (value instanceof Item) {
                 this.sortItem = (Item) value;
