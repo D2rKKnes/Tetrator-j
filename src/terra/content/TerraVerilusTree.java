@@ -12,6 +12,8 @@ import static terra.content.TerraUnitTypes.*;
 import static terra.content.TerraBlocks.*;
 import static terra.content.TerraItems.*;
 import static mindustry.content.Blocks.*;
+import static mindustry.content.Items.*;
+import static mindustry.content.Liquids.*;
 import static mindustry.content.SectorPresets.*;
 import static mindustry.content.TechTree.*;
 import static mindustry.content.TechTree.nodeProduce;
