@@ -36,5 +36,6 @@ public class TerraMod extends Mod{
         TerraBlocks.load();
         TerraSectorPresets.load();
         TerraVanilaTree.load();
+        TerraVerilusTree.load();
     }
 }
