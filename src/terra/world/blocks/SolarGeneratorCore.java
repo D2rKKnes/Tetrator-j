@@ -20,7 +20,7 @@ public class SolarGeneratorCore extends CoreBlock {
         hasPower = true;
         outputsPower = true;
         consumesPower = false;
-        consPower = new ConsumePower(0f, 0f, true);
+        consPower = new ConsumePower(0f, 0f, false);
         envEnabled = Env.any;
     }
 
@@ -42,6 +42,11 @@ public class SolarGeneratorCore extends CoreBlock {
 
     public class SolarGeneratorCoreBuild extends CoreBuild {
         public float productionEfficiency = 0f;
+
+        @Override
+        public float getPowerProduction() {
+            return powerProduction * productionEfficiency;
+        }
 
         @Override
         public void updateTile() {
