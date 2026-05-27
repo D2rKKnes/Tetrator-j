@@ -7,6 +7,7 @@ import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.power.PowerGraph;
 import mindustry.world.blocks.storage.CoreBlock;
+import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 
 import static mindustry.Vars.*;
@@ -18,7 +19,7 @@ public class SolarGeneratorCore extends CoreBlock {
         super(name);
         hasPower = true;
         outputsPower = true;
-        consumePower = false;
+        consumesPower = false;
         consPower = new ConsumePower(0f, 0f, true);
         envEnabled = Env.any;
     }
