@@ -74,6 +74,8 @@ public class TerraBlocks{
     graphiteMiner,
     mechanicalWell, electricalWell,
     pulseDrill, plasmaDrill, beamMiningFacility,
+    //storage
+    coreSolaris,
     //turrets
     flight, dynamics, electricShock, fracture,
     //units
@@ -790,6 +792,41 @@ public class TerraBlocks{
                 //new DrawDrillOreTop()
             );
         }};
+
+        //storage
+        coreSolaris = new SolarGeneratorCore("core-solaris"){{
+            requirements(Category.effect, with(Items.copper, 3500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
+
+            unitType = UnitTypes.beta;
+            health = 3800;
+            itemCapacity = 7500;
+            size = 4;
+            thrusterLength = 34/4f;
+
+            unitCapModifier = 20;
+            researchCostMultiplier = 0.07f;
+
+            baseExplosiveness = 10;
+            powerProduction = 2.8f;
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
 
         //turrets
         flight = new ItemTurret("flight"){{
