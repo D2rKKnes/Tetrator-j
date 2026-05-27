@@ -18,12 +18,15 @@ public class SolarGeneratorCore extends CoreBlock {
         super(name);
         hasPower = true;
         outputsPower = true;
+        consumePower = false;
+        consPower = new ConsumePower(0f, 0f, true);
         envEnabled = Env.any;
     }
 
    @Override
     public void setStats() {
         super.setStats();
+        stats.add(Stat.basePowerGeneration, powerProduction * 60.0f, StatUnit.powerSecond);
     }
 
     @Override
@@ -43,19 +46,12 @@ public class SolarGeneratorCore extends CoreBlock {
         public void updateTile() {
             super.updateTile();
 
-            productionEfficiency = enabled
-                ? state.rules.solarMultiplier * Mathf.maxZero(Attribute.light.env() +
-                    (state.rules.lighting ? 1f - state.rules.ambientLight.a : 1f))
-                : 0f;
-
-            if (productionEfficiency > 0.001f && power != null) {
-                try {
-                    java.lang.reflect.Method method = power.graph.getClass()
-                        .getMethod("addProduction", float.class);
-                    method.invoke(power.graph, productionEfficiency * powerProduction);
-                } catch (Exception ignored) {
-                }
-            }
+            productionEfficiency = enabled ?
+                state.rules.solarMultiplier * Mathf.maxZero(Attribute.light.env() +
+                    (state.rules.lighting ?
+                        1f - state.rules.ambientLight.a :
+                        1f
+                    )) : 0f;
         }
     }
 }
