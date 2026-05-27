@@ -152,12 +152,12 @@ public class TerraVerilusTree {
             });
             nodeProduce(lead, () -> {
                 nodeProduce(graphite, () -> {
-                    nodeProduce(sand, () -> {});
+                    nodeProduce(Items.sand, () -> {});
                     nodeProduce(silicon, () -> {
                         nodeProduce(titaniumPlate, () -> {});
                     });
                     nodeProduce(metaglass, () -> {
-                        nodeProduce(water, () -> {});
+                        nodeProduce(Liquids.water, () -> {});
                     });
                 });
                 nodeProduce(carbon, () -> {
@@ -182,7 +182,7 @@ public class TerraVerilusTree {
                             nodeProduce(tesseract, () -> {});
                         });
                     });
-                    nodeProduce(cryofluid, () -> {});
+                    nodeProduce(Liquids.cryofluid, () -> {});
                 });
             });
             node(verilus, () -> {});
