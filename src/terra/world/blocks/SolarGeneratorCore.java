@@ -3,7 +3,6 @@ package terra.world.blocks;
 import arc.Core;
 import arc.math.Mathf;
 import arc.util.Strings;
-import mindustry.content.Attribute;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.power.PowerGraph;
@@ -25,7 +24,10 @@ public class SolarGeneratorCore extends CoreBlock {
     @Override
     public void setStats() {
         super.setStats();
-        stats.add(Stat.generationType, powerProduction * 60f, StatUnit.powerSecond);
+        try {
+            stats.add(Stat.generationType, powerProduction * 60f, StatUnit.powerSecond);
+        } catch (NoSuchFieldError | NoClassDefFoundError ignored) {
+        }
     }
 
     @Override
@@ -44,13 +46,18 @@ public class SolarGeneratorCore extends CoreBlock {
         @Override
         public void updateTile() {
             super.updateTile();
+
             productionEfficiency = enabled
                 ? state.rules.solarMultiplier * Mathf.maxZero(Attribute.light.env() +
                     (state.rules.lighting ? 1f - state.rules.ambientLight.a : 1f))
                 : 0f;
 
             if (productionEfficiency > 0.001f && power != null) {
-                power.graph.addProduction(productionEfficiency * powerProduction);
+                try {
+                    power.graph.addProduction(new PowerGraph.Generator(productionEfficiency * powerProduction));
+                } catch (NoSuchMethodError e) {
+                    power.graph.addProduction(productionEfficiency * powerProduction);
+                }
             }
         }
     }
