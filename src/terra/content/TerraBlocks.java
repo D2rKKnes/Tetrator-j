@@ -556,7 +556,7 @@ public class TerraBlocks{
             consumeLiquid(Liquids.water, 0.3f);
         }};
         diamondCoverer = new GenericCrafter("diamond-coverer"){{
-            requirements(Category.crafting, with(TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
+            requirements(Category.crafting, with(Items.silicon, 80, TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
 
             outputItem = new ItemStack(TerraItems.diamondGlass, 1);
             craftTime = 35f;
@@ -767,7 +767,7 @@ public class TerraBlocks{
         }};
 
         beamMiningFacility = new SmartDrill("beam-mining-facility"){{
-            requirements(Category.production, with(Items.phaseFabric, 65, TerraItems.darkSteel, 185, TerraItems.diamondDust, 110));
+            requirements(Category.production, with(Items.phaseFabric, 65, TerraItems.darkSteel, 185, TerraItems.diamondGlass, 110));
             size = 4;
             tier = 5;
             itemCapacity = 75;
@@ -1246,7 +1246,7 @@ public class TerraBlocks{
         }};
         
         //units
-        basciAssembler = new UnitCrafter("basic-assembler"){{
+        basicAssembler = new UnitCrafter("basic-assembler"){{
             requirements(Category.units, with(Items.lead, 280, Items.silicon, 420, Items.titanium, 380, TerraItems.titaniumPlate, 165));
             size = 4;
             //t1
@@ -1276,7 +1276,7 @@ public class TerraBlocks{
             //t4
             addPlan(UnitTypes.antumbra, 60f * 140f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 635, TerraItems.titaniumPlate, 420, TerraItems.diamondDust, 220)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
             addPlan(UnitTypes.quad, 60f * 155f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 580, TerraItems.rawThermoxite, 385, TerraItems.diamondGlass, 260)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
-            addPlan(TerraUnitTypes.catastrophe, 60f * 160f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 700, TerraItems.phaseFabric, 215, TerraItems.diamondGlass, 355)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
+            addPlan(TerraUnitTypes.catastrophe, 60f * 160f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
             //t5
             addPlan(UnitTypes.eclipse, 60f * 280f).item(ItemStack.with(Items.silicon, 1600, Items.phaseFabric, 840, TerraItems.darkSteel, 1150, TerraItems.diamondGlass, 740)).liquid(LiquidStack.with(Liquids.cryofluid, 3f));
             addPlan(UnitTypes.oct, 60f * 320f).item(ItemStack.with(Items.silicon, 2100, Items.phaseFabric, 1300, TerraItems.darkSteel, 1150, TerraItems.thermoxite, 320)).liquid(LiquidStack.with(Liquids.cryofluid, 3f));
@@ -1292,10 +1292,10 @@ public class TerraBlocks{
             requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.darkSteel, 50000, TerraItems.diamondGlass, 10000, TerraItems.tesseract, 10));
             size = 2;
             //t4
-            addPlan(TerraUnitTypes.eternity, 60f * 1000f).item(ItemStack.with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 6780)).liquid(LiquidStack.with(Liquids.cryofluid, 8f));
+            addPlan(TerraUnitTypes.eternity, 60f * 1000f).item(ItemStack.with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 2780)).liquid(LiquidStack.with(Liquids.cryofluid, 8f));
             
             liquidCapacity = 8 * 600;
-            areaSize = 4;
+            areaSize = 25;
             consumePower(42f);
         }};
         /*droneCentre = new DroneCentre("drone-centre"){{
