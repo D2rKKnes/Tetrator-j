@@ -21,13 +21,9 @@ public class SolarGeneratorCore extends CoreBlock {
         envEnabled = Env.any;
     }
 
-    @Override
+   @Override
     public void setStats() {
         super.setStats();
-        try {
-            stats.add(Stat.generationType, powerProduction * 60f, StatUnit.powerSecond);
-        } catch (NoSuchFieldError | NoClassDefFoundError ignored) {
-        }
     }
 
     @Override
@@ -54,9 +50,10 @@ public class SolarGeneratorCore extends CoreBlock {
 
             if (productionEfficiency > 0.001f && power != null) {
                 try {
-                    power.graph.addProduction(new PowerGraph.Generator(productionEfficiency * powerProduction));
-                } catch (NoSuchMethodError e) {
-                    power.graph.addProduction(productionEfficiency * powerProduction);
+                    java.lang.reflect.Method method = power.graph.getClass()
+                        .getMethod("addProduction", float.class);
+                    method.invoke(power.graph, productionEfficiency * powerProduction);
+                } catch (Exception ignored) {
                 }
             }
         }
