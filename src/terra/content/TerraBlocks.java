@@ -1290,15 +1290,19 @@ public class TerraBlocks{
             droneType = TerraUnitTypes.basicAssemblyDrone;
             consumePower(8.7f);
         }};
-        debugAssembler = new UnitCrafter("debug-assembler"){{
+        //using only for cost param in units
+        debugAssembler = new UnitFactory("debug-assembler"){{
             requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.darkSteel, 50000, TerraItems.diamondGlass, 10000, TerraItems.tesseract, 10));
             size = 2;
-            //t4
-            addPlan(TerraUnitTypes.eternity, 60f * 1000f).item(ItemStack.with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 2780)).liquid(LiquidStack.with(Liquids.cryofluid, 8f));
-            
-            liquidCapacity = 8 * 600;
-            areaSize = 25;
-            consumePower(42f);
+            plans = Seq.with(
+                new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
+                new UnitPlan(TerraUnitTypes.dynamite, 60f * 30f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55)),
+                new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
+                new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
+                new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
+                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 2780))
+            );
+            consumePower(0.1f);
         }};
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
