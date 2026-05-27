@@ -44,7 +44,7 @@ public class TerraUnitTypes {
     //flying special units
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones
-    healDrone,
+    healDrone, basicAssemblyDrone,
     //lost NH
     endSpawn, endGuard, end;
 
@@ -1029,6 +1029,31 @@ public class TerraUnitTypes {
                     maxRange = 7.5f * 8;
                 }};
             }});
+        }};
+        basicAssemblyDrone = new UnitType("basic-assembly-drone"){{
+            controller = u -> new AssemblerAI();
+
+            flying = true;
+            drag = 0.06f;
+            accel = 0.11f;
+            speed = 1.5f;
+            health = 75;
+            engineSize = 2f;
+            engineOffset = 4.5f;
+            payloadCapacity = 0f;
+            targetable = false;
+            bounded = false;
+
+            outlineColor = Pal.darkerMetal;
+            isEnemy = false;
+            hidden = true;
+            useUnitCap = false;
+            logicControllable = false;
+            playerControllable = false;
+            allowedInPayloads = false;
+            createWreck = false;
+            envEnabled = Env.any;
+            envDisabled = Env.none;
         }};
 
         endSpawn = new ErekirUnitType("end-spawn"){{
