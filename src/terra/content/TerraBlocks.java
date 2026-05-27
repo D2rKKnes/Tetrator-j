@@ -797,7 +797,7 @@ public class TerraBlocks{
         //storage
         coreSolaris = new SolarGeneratorCore("core-solaris"){{
             requirements(Category.effect, with(Items.copper, 3500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
-
+            alwaysUnlocked = true;
             unitType = UnitTypes.beta;
             health = 3800;
             itemCapacity = 7500;
@@ -1357,6 +1357,7 @@ public class TerraBlocks{
             chanceDeflect = 8f;
 
             health = 260 * wallHealthMultiplier * 9;
+            shieldHealth = (900f / 4f) * 9;
             armor = 15f;
             size = 3;
         }};
