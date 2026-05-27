@@ -128,7 +128,9 @@ public class TerraStatusEffects{
             speedMultiplier = 0.3f;
             reloadMultiplier = 0.3f;
             buildSpeedMultiplier = 0.5f;
-            damage = 28.2f;
+            intervalDamage = 386.4f;
+            intervalDamageTime = 95f;
+            //damage = 28.2f;
             permanent = true;
             init(() -> opposite(deltaImmunized));
         }};
