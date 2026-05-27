@@ -79,7 +79,7 @@ public class TerraBlocks{
     //turrets
     flight, dynamics, electricShock, fracture,
     //units
-    droneCentre,
+    basicAssembler, advancedAssembler, droneCentre, debugAssembler,
     //other
     //NOTVA =---
     //GIER =---
@@ -1246,6 +1246,58 @@ public class TerraBlocks{
         }};
         
         //units
+        basciAssembler = new UnitCrafter("basic-assembler"){{
+            requirements(Category.units, with(Items.lead, 280, Items.silicon, 420, Items.titanium, 380, TerraItems.titaniumPlate, 165));
+            size = 4;
+            //t1
+            addPlan(UnitTypes.beta, 60f * 20f).item(ItemStack.with(Items.silicon, 40, TerraItems.titaniumPlate, 20));
+            addPlan(UnitTypes.flare, 60f * 15f).item(ItemStack.with(Items.silicon, 20));
+            addPlan(UnitTypes.mono, 60f * 25f).item(ItemStack.with(Items.silicon, 35, Items.lead, 20));
+            addPlan(TerraUnitTypes.wick, 60f * 15f).item(ItemStack.with(Items.silicon, 30, TerraItems.carbon, 20));
+            //t2
+            addPlan(UnitTypes.horizon, 60f * 25f).item(ItemStack.with(Items.silicon, 85, Items.graphite, 40));
+            addPlan(UnitTypes.poly, 60f * 35f).item(ItemStack.with(Items.silicon, 110, Items.metaglass, 50));
+            addPlan(TerraUnitTypes.dynamite, 60f * 30f).item(ItemStack.with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55));
+            //t3
+            addPlan(UnitTypes.zenith, 60f * 50f).item(ItemStack.with(Items.silicon, 210, Items.titanium, 135, TerraItems.titaniumPlate, 80)).liquid(LiquidStack.with(Liquids.water, 20/60f));
+            addPlan(UnitTypes.mega, 60f * 70f).item(ItemStack.with(Items.silicon, 240, Items.titanium, 110, Items.metaglass, 125)).liquid(LiquidStack.with(Liquids.water, 20/60f));
+            addPlan(TerraUnitTypes.incident, 60f * 60f).item(ItemStack.with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)).liquid(LiquidStack.with(Liquids.water, 20/60f));
+            
+            researchCostMultiplier = 0.5f;
+            liquidCapacity = 200;
+            createSound = Sounds.unitCreate;
+            areaSize = 6;
+            droneType = TerraUnitTypes.basicAssemblyDrone;
+            consumePower(3.4f);
+        }};
+        advancedAssembler = new UnitCrafter("advanced-assembler"){{
+            requirements(Category.units, with(Items.thorium, 780, Items.silicon, 1420, Items.phaseFabric, 400, TerraItems.diamondGlass, 540));
+            size = 6;
+            //t4
+            addPlan(UnitTypes.antumbra, 60f * 140f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 635, TerraItems.titaniumPlate, 420, TerraItems.diamondDust, 220)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
+            addPlan(UnitTypes.quad, 60f * 155f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 580, TerraItems.rawThermoxite, 385, TerraItems.diamondGlass, 260)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
+            addPlan(TerraUnitTypes.catastrophe, 60f * 160f).item(ItemStack.with(Items.silicon, 850, Items.thorium, 700, TerraItems.phaseFabric, 215, TerraItems.diamondGlass, 355)).liquid(LiquidStack.with(Liquids.cryofluid, 1f));
+            //t5
+            addPlan(UnitTypes.eclipse, 60f * 280f).item(ItemStack.with(Items.silicon, 1600, Items.phaseFabric, 840, TerraItems.darkSteel, 1150, TerraItems.diamondGlass, 740)).liquid(LiquidStack.with(Liquids.cryofluid, 3f));
+            addPlan(UnitTypes.oct, 60f * 320f).item(ItemStack.with(Items.silicon, 2100, Items.phaseFabric, 1300, TerraItems.darkSteel, 1150, TerraItems.thermoxite, 320)).liquid(LiquidStack.with(Liquids.cryofluid, 3f));
+            addPlan(TerraUnitTypes.inevitability, 60f * 300f).item(ItemStack.with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)).liquid(LiquidStack.with(Liquids.cryofluid, 3f));
+            
+            researchCostMultiplier = 0.65f;
+            liquidCapacity = 1800;
+            areaSize = 15;
+            droneType = TerraUnitTypes.basicAssemblyDrone;
+            consumePower(8.7f);
+        }};
+        debugAssembler = new UnitCrafter("debug-assembler"){{
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.darkSteel, 50000, TerraItems.diamondGlass, 10000, TerraItems.tesseract, 10));
+            size = 2;
+            //t4
+            addPlan(TerraUnitTypes.eternity, 60f * 1000f).item(ItemStack.with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 6780)).liquid(LiquidStack.with(Liquids.cryofluid, 8f));
+            
+            liquidCapacity = 8 * 600;
+            areaSize = 4;
+            consumePower(42f);
+        }};
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             health = 480;
