@@ -1,4 +1,4 @@
-package terrra.world.blocks;
+package terra.world.blocks;
 
 import arc.Core;
 import arc.math.Mathf;
