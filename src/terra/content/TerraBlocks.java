@@ -87,6 +87,7 @@ public class TerraBlocks{
     //EREKIR & COPIS =---
     //walls
     blastGate, blastDoorLarge, blastDoorHuge,
+    shieldedWallLarge,
     //power
     beamBeacon, reinforcedPanel;
     //OTHER =---
@@ -1284,6 +1285,22 @@ public class TerraBlocks{
             health = 175 * wallHealthMultiplier * 16;
             armor = 14f;
             size = 4;
+        }};
+
+        shieldedWallLarge = new ShieldWall("shielded-wall-large"){{
+            requirements(Category.defense, ItemStack.with(Items.phaseFabric, 5 * 9, Items.surgeAlloy, 3 * 9, Items.beryllium, 3 * 9));
+            consumePower(((3f / 4f) * 9f) / 60f);
+
+            outputsPower = false;
+            hasPower = true;
+            consumesPower = true;
+            conductivePower = true;
+
+            chanceDeflect = 8f;
+
+            health = 260 * wallHealthMultiplier * 9;
+            armor = 15f;
+            size = 3;
         }};
 
         //power
