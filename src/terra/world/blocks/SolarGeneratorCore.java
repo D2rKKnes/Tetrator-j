@@ -1,19 +1,14 @@
 package terrra.world.blocks;
 
-import arc.math.*;
-import arc.struct.*;
-import arc.util.*;
-import mindustry.*;
-import mindustry.content.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.type.*;
-import mindustry.ui.*;
-import mindustry.world.*;
-import mindustry.world.blocks.*;
-import mindustry.world.blocks.power.*;
+import arc.Core;
+import arc.math.Mathf;
+import arc.util.Strings;
+import mindustry.content.Attribute;
+import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
+import mindustry.world.blocks.power.PowerGraph;
+import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.*;
-import mindustry.world.modules.*;
 
 import static mindustry.Vars.*;
 
@@ -51,13 +46,11 @@ public class SolarGeneratorCore extends CoreBlock {
             super.updateTile();
             productionEfficiency = enabled
                 ? state.rules.solarMultiplier * Mathf.maxZero(Attribute.light.env() +
-                    (state.rules.lighting
-                        ? 1f - state.rules.ambientLight.a
-                        : 1f))
+                    (state.rules.lighting ? 1f - state.rules.ambientLight.a : 1f))
                 : 0f;
 
-            if (productionEfficiency > 0.1f && power != null) {
-                power.graph.addProduction(new PowerGraph.Generator(productionEfficiency * powerProduction));
+            if (productionEfficiency > 0.001f && power != null) {
+                power.graph.addProduction(productionEfficiency * powerProduction);
             }
         }
     }
