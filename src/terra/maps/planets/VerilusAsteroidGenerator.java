@@ -32,7 +32,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     int seed;
 
     {
-        defaultLoadout = Loadouts.basicNucleus;
+        defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
     }
 
     void asteroid(int ax, int ay, int radius){
