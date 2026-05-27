@@ -1054,6 +1054,7 @@ public class TerraUnitTypes {
             createWreck = false;
             envEnabled = Env.any;
             envDisabled = Env.none;
+            constructor = BuildingTetherPayloadUnit::create;
         }};
 
         endSpawn = new ErekirUnitType("end-spawn"){{
@@ -1273,7 +1274,7 @@ public class TerraUnitTypes {
             abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; hitBuildings = false; healPercent = 0.003f;}});
 
             Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
-                shootY = 0f;
+                shootY = 3f;
                 reload = 90f;
                 rotate = true;
                 rotateSpeed = 5f;
