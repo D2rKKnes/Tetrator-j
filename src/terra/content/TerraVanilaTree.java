@@ -55,6 +55,10 @@ public class TerraVanilaTree{
                 });
             });
         });
+        vanillaNode(erekir, shieldedWall, () -> {
+            node(shieldedWallLarge, () -> {
+            });
+        });
         vanillaNode(erekir, beamTower, () -> {
             node(beamBeacon, () -> {
             });
