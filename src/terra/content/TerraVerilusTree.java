@@ -77,7 +77,9 @@ public class TerraVerilusTree {
                         node(mechanicalWell, () -> {
                             node(bisiliconOven, () -> {
                                 node(titaniumPress, () -> {
-                                    node(diamondCoverer, () -> {});
+                                    node(diamondCrusher, () -> {
+                                        node(diamondCoverer, () -> {});
+                                    });
                                     node(phaseWeaver, () -> {});
                                 });
                                 node(darkSteelWorkshop, () -> {});
