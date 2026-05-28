@@ -104,15 +104,15 @@ public class TerraBlocks{
         }};
         doorHuge = new Door("door-huge"){{
             requirements(Category.defense, with(Items.titanium, 6 * 9, Items.silicon, 4 * 9));
-            openfx = Fx.dooropenlarge;
-            closefx = Fx.doorcloselarge;
+            openfx = TerraFx.dooropenHuge;
+            closefx = TerraFx.doorcloseHuge;
             health = 100 * 9 * wallHealthMultiplier;
             size = 3;
         }};
         doorGigantic = new Door("door-gigantic"){{
             requirements(Category.defense, with(Items.titanium, 6 * 16, Items.silicon, 4 * 16));
-            openfx = Fx.dooropenlarge;
-            closefx = Fx.doorcloselarge;
+            openfx = TerraFx.dooropenGiga;
+            closefx = TerraFx.doorcloseGiga;
             health = 100 * 16 * wallHealthMultiplier;
             size = 4;
         }};
