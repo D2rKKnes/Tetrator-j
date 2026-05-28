@@ -68,7 +68,8 @@ public class TerraBlocks{
     photonPanel, photonPanelLarge,
     //crafters
     sandExtractor, iceMelter, 
-    bisiliconOven, darkSteelWorkshop, titaniumPress, diamondCoverer,
+    bisiliconOven, darkSteelWorkshop, titaniumPress, 
+    diamondCrusher, diamondCoverer,
     multiMixer,
     //production
     graphiteMiner,
@@ -551,9 +552,38 @@ public class TerraBlocks{
             hasPower = true;
             squareSprite = false;
 
-            consumePower(2.1f);
+            consumePower(2.2f);
             consumeItems(with(Items.silicon, 1, Items.titanium, 3));
             consumeLiquid(Liquids.water, 0.3f);
+        }};
+        diamondCrusher = new RecipeGenericCrafter("diamond-crusher") {{
+            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 75, TerraItems.titaniumPlate, 180, Items.metaglass, 225));
+            addLink(2, 0, 1, 2, 1, 1, 0, 2, 1, 1, 2, 1, -1, 0, 1, -1, 1, 1, 0, -1, 1, 1, -1, 1);
+
+            size = 2;
+            hasLiquids = true;
+            hasItems = true;
+            hasPower = true;
+            scaledHealth = 100f;
+            itemCapacity = 20;
+            liquidCapacity = 50;
+            craftTime = 60f;
+
+            consumePower(2.6f);
+            recipes.addAll(
+                new Recipe() {{
+                    inputItem = ItemStack.list(TerraItems.carbon, 6);
+                    inputLiquid = LiquidStack.list(Liquids.water, 60/16f);
+                    outputItem = ItemStack.list(TerraItems.diamondDust, 1);
+                    craftTime = 40f;
+                }},
+                new Recipe() {{
+                    inputItem = ItemStack.list(Items.graphite, 6);
+                    inputLiquid = LiquidStack.list(Liquids.water, 60/12f);
+                    outputItem = ItemStack.list(TerraItems.diamondDust, 3);
+                    craftTime = 90f;
+                }}
+            );
         }};
         diamondCoverer = new GenericCrafter("diamond-coverer"){{
             requirements(Category.crafting, with(Items.silicon, 80, TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
@@ -609,6 +639,7 @@ public class TerraBlocks{
 
             enableRotate();
         }};
+        
 
         //production
         graphiteMiner = new WallCrafter("graphite-miner"){{
