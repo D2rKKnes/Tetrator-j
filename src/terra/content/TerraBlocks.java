@@ -572,15 +572,15 @@ public class TerraBlocks{
             consumePower(2.6f);
             recipes.addAll(
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 6);
-                    inputLiquid = LiquidStack.list(Liquids.water, 60/16f);
-                    outputItem = ItemStack.list(TerraItems.diamondDust, 1);
+                    inputItem.add(new ItemStack(TerraItems.carbon, 6));
+                    inputLiquid.add(new LiquidStack(Liquids.water, 60f / 16f));
+                    outputItem.add(new ItemStack(TerraItems.diamondDust, 1));
                     craftTime = 40f;
                 }},
                 new Recipe() {{
-                    inputItem = ItemStack.list(Items.graphite, 6);
-                    inputLiquid = LiquidStack.list(Liquids.water, 60/12f);
-                    outputItem = ItemStack.list(TerraItems.diamondDust, 3);
+                    inputItem.add(new ItemStack(Items.graphite, 6));
+                    inputLiquid.add(new LiquidStack(Liquids.water, 60f / 12f));
+                    outputItem.add(new ItemStack(TerraItems.diamondDust, 3));
                     craftTime = 90f;
                 }}
             );
@@ -639,7 +639,6 @@ public class TerraBlocks{
 
             enableRotate();
         }};
-        
 
         //production
         graphiteMiner = new WallCrafter("graphite-miner"){{
