@@ -51,7 +51,7 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(impact0078, () -> {
-            node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
+            node(TerraSectorPresets.verilus, Seq.with(new Research(coreSolaris)), () -> {});
         });
         // Erekir
         String erekir = "erekir";
