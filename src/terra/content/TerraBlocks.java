@@ -304,7 +304,7 @@ public class TerraBlocks{
         
         //power
         photonPanel = new SolarGenerator("photon-solar-panel"){{
-            requirements(Category.power, with(Items.lead, 35, Items.silicon, 40, TerraItems.diamondDust, 15));
+            requirements(Category.power, with(Items.lead, 35, Items.silicon, 40, TerraItems.diamondGlass, 15));
             size = 2;
             powerProduction = 0.88f;
             drawer = new DrawMulti(
@@ -314,7 +314,7 @@ public class TerraBlocks{
             );
         }};
         photonPanelLarge = new SolarGenerator("photon-solar-panel-large"){{
-            requirements(Category.power, with(TerraItems.titaniumPlate, 80, TerraItems.darkSteel, 65, TerraItems.diamondDust, 40));
+            requirements(Category.power, with(TerraItems.titaniumPlate, 80, TerraItems.darkSteel, 65, TerraItems.diamondGlass, 50));
             size = 4;
             powerProduction = 5.6f;
             drawer = new DrawMulti(
@@ -583,6 +583,15 @@ public class TerraBlocks{
                     inputLiquid = LiquidStack.list(Liquids.water, 60f / 12f);
                     outputItem = ItemStack.list(TerraItems.diamondDust, 3);
                     craftTime = 90f;
+                }}
+            );
+            drawer = new DrawMulti(
+                new DrawRotation(){{
+                    suffix = "-bottom";
+                    layer = Layer.block - 1f;
+                }},
+                new DrawRotation() {{
+                    suffix = "-top";
                 }}
             );
         }};
