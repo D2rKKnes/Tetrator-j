@@ -6,6 +6,7 @@ import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.Objectives.*;
 import mindustry.type.*;
+import terra.content.*;
 
 import static terra.content.TerraBlocks.*;
 
@@ -48,6 +49,9 @@ public class TerraVanilaTree{
                 node(doorGigantic, () -> {
                 });
             });
+        });
+        vanillaNode(impact0078, () -> {
+            node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
         });
         // Erekir
         String erekir = "erekir";
