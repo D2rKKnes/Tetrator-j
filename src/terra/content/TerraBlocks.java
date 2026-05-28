@@ -797,7 +797,7 @@ public class TerraBlocks{
         //storage
         coreSolaris = new SolarGeneratorCore("core-solaris"){{
             requirements(Category.effect, with(Items.copper, 3500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
-            alwaysUnlocked = true;
+            //alwaysUnlocked = true;
             unitType = UnitTypes.beta;
             health = 3800;
             itemCapacity = 7500;
@@ -1292,7 +1292,7 @@ public class TerraBlocks{
         }};
         //using only for cost param in units
         debugAssembler = new UnitFactory("debug-assembler"){{
-            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.darkSteel, 50000, TerraItems.diamondGlass, 10000, TerraItems.tesseract, 10));
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.tesseract, 1));
             size = 2;
             plans = Seq.with(
                 new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
