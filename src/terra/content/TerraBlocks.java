@@ -236,7 +236,7 @@ public class TerraBlocks{
             hitBulletSpeedRandScl = 0.4f;
         }};
         darkSteelWall = new AdvancedWall("dark-steel-wall"){{
-            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 4, Items.metaglass, (6 * 4) / 2));
+            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 4, TerraItems.diamondGlass, (6 * 4) / 2));
             health = 930 * 4;
             size = 2;
             absorbLasers = true;
@@ -246,7 +246,7 @@ public class TerraBlocks{
             regenDamageStop = true;
         }};
         darkSteelWallLarge = new AdvancedWall("dark-steel-wall-large"){{
-            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 9, Items.metaglass, (6 * 9) / 2));
+            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 9, TerraItems.diamondGlass, (6 * 9) / 2));
             health = 930 * 9;
             size = 3;
             absorbLasers = true;
@@ -485,7 +485,7 @@ public class TerraBlocks{
         };
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
-            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, Items.metaglass, 225));
+            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, Items.metaglass, 225, TerraItems.rawThermoxite, 180));
             consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
             consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
@@ -540,6 +540,39 @@ public class TerraBlocks{
             }
         };
 
+        crystalIncubator = new RecipeGenericCrafter("crystal-incubator") {{
+            requirements(Category.crafting, ItemStack.with(TerraItems.titaniumPlate, 80, TerraItems.thermoxite, 40, TerraItems.darkSteel, 115));
+
+            size = 2;
+            hasLiquids = true;
+            hasItems = true;
+            hasPower = true;
+            scaledHealth = 100f;
+            itemCapacity = 10;
+            liquidCapacity = 100;
+
+            consumePower(1.3f);
+            recipes.addAll(
+                new Recipe() {{
+                    inputItem = ItemStack.list(TerraItems.carbon, 1);
+                    inputLiquid = LiquidStack.list(Liquids.water, 6f / 60f);
+                    outputItem = ItemStack.list(TerraItems.rawThermoxite, 1);
+                    craftTime = 80f;
+                }},
+                new Recipe() {{
+                    inputItem = ItemStack.list(TerraItems.carbon, 2, Items.phaseFabric, 1);
+                    inputLiquid = LiquidStack.list(Liquids.water, 18f / 60f);
+                    outputItem = ItemStack.list(TerraItems.thermoxite, 1);
+                    craftTime = 180f;
+                }}
+            );
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                //TODO: effects
+                new DrawRegion("-top")
+            );
+        }};
+
         titaniumPress = new GenericCrafter("titanium-press"){{
             requirements(Category.crafting, with(Items.titanium, 180, Items.silicon, 45, Items.lead, 100, Items.graphite, 50));
 
@@ -558,7 +591,7 @@ public class TerraBlocks{
             consumeLiquid(Liquids.water, 0.3f);
         }};
         diamondCrusher = new RecipeGenericCrafter("diamond-crusher") {{
-            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 75, TerraItems.titaniumPlate, 180, Items.metaglass, 225));
+            requirements(Category.crafting, ItemStack.with(Items.silicon, 175, TerraItems.titaniumPlate, 90, Items.lead, 225, Items.thorium, 145));
             addLink(2, 0, 1, 2, 1, 1, 0, 2, 1, 1, 2, 1, -1, 0, 1, -1, 1, 1, 0, -1, 1, 1, -1, 1);
 
             size = 2;
@@ -568,9 +601,8 @@ public class TerraBlocks{
             scaledHealth = 100f;
             itemCapacity = 20;
             liquidCapacity = 50;
-            craftTime = 60f;
 
-            consumePower(2.6f);
+            consumePower(3.333f);
             recipes.addAll(
                 new Recipe() {{
                     inputItem = ItemStack.list(TerraItems.carbon, 4);
