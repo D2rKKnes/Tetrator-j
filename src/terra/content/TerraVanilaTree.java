@@ -19,8 +19,8 @@ public class TerraVanilaTree{
     static TechTree.TechNode context = null;
     public static void load(){
         // Serpulo
-        vanillaNode(titaniumWall, () -> {
-            node(metaglassWall, Seq.with(new SectorComplete(ruinousShores)), () -> {
+        vanillaNode(copperWallLarge, () -> {
+            node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
                     node(metaglassWallHuge, () -> {
                     });
