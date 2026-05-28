@@ -5,6 +5,7 @@ import terra.world.blocks.*;
 import terra.world.blocks.multiblock.*;
 import terra.world.drawer.*;
 import terra.world.meta.*;
+import terra.util.*;
 import arc.*;
 import arc.util.*;
 import arc.struct.*;
