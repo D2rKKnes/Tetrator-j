@@ -572,15 +572,15 @@ public class TerraBlocks{
             consumePower(2.6f);
             recipes.addAll(
                 new Recipe() {{
-                    inputItem.add(new ItemStack(TerraItems.carbon, 6));
-                    inputLiquid.add(new LiquidStack(Liquids.water, 60f / 16f));
-                    outputItem.add(new ItemStack(TerraItems.diamondDust, 1));
+                    inputItem = new ItemStack(TerraItems.carbon, 6);
+                    inputLiquid = new LiquidStack(Liquids.water, 60f / 16f);
+                    outputItem = new ItemStack(TerraItems.diamondDust, 1);
                     craftTime = 40f;
                 }},
                 new Recipe() {{
-                    inputItem.add(new ItemStack(Items.graphite, 6));
-                    inputLiquid.add(new LiquidStack(Liquids.water, 60f / 12f));
-                    outputItem.add(new ItemStack(TerraItems.diamondDust, 3));
+                    inputItem = new ItemStack(Items.graphite, 6);
+                    inputLiquid = new LiquidStack(Liquids.water, 60f / 12f);
+                    outputItem = new ItemStack(TerraItems.diamondDust, 3);
                     craftTime = 90f;
                 }}
             );
