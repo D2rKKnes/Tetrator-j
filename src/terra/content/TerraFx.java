@@ -48,6 +48,24 @@ public class TerraFx {
         Fill.circle(e.x + Angles.trnsx(angle, len), e.y + Angles.trnsy(angle, len), (1.5f + e.fin(Interp.sineIn) * 5f) * rand.random(0.8f, 1.3f));
     }).layer(111f),
 
+    dooropenHuge = new Effect(10, e -> {
+        stroke(e.fout() * 1.6f);
+        Lines.square(e.x, e.y, 12 + e.fin() * 2f);
+    }),
+    doorcloseHuge = new Effect(10, e -> {
+        stroke(e.fout() * 1.6f);
+        Lines.square(e.x, e.y, 12 + e.fout() * 2f);
+    }),
+
+    dooropenGiga = new Effect(10, e -> {
+        stroke(e.fout() * 1.6f);
+        Lines.square(e.x, e.y, 16 + e.fin() * 2f);
+    }),
+    doorcloseGiga = new Effect(10, e -> {
+        stroke(e.fout() * 1.6f);
+        Lines.square(e.x, e.y, 16 + e.fout() * 2f);
+    }),
+
     fuseShoot = new Effect(12f, e -> {
         color(Color.white, e.color, e.fin());
         stroke(e.fout() * 1.2f + 0.5f);
