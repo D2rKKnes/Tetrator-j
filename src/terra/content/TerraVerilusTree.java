@@ -2,10 +2,10 @@ package terra.content;
 
 import arc.Core;
 
-import arc.struct.Seq;
+import arc.struct.*;
 import mindustry.content.*;
 import mindustry.game.Objectives;
-import mindustry.type.SectorPreset;
+import mindustry.type.*;
 
 import static terra.content.TerraSectorPresets.*;
 import static terra.content.TerraUnitTypes.*;
@@ -190,7 +190,7 @@ public class TerraVerilusTree {
                     });
                 });
             });
-            node(TerraSectorPresets.verilus, () -> {});
+            node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
             //node(beta, () -> {});
         });
     }
