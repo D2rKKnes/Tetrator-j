@@ -1057,7 +1057,7 @@ public class TerraUnitTypes {
             constructor = BuildingTetherPayloadUnit::create;
         }};
 
-        endSpawn = new ErekirUnitType("end-spawn"){{
+        endSpawn = new UnitType("end-spawn"){{
             flying = true;
             speed = 1.9f;
             rotateSpeed = 4f;
@@ -1071,6 +1071,7 @@ public class TerraUnitTypes {
             engineOffset = 70f / 4;
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
+            envDisabled = Env.none;
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Color.valueOf("e13131");
@@ -1247,7 +1248,7 @@ public class TerraUnitTypes {
             }
         };
 
-        endGuard = new ErekirUnitType("end-guard"){{
+        endGuard = new UnitType("end-guard"){{
             flying = true;
             speed = 1.1f;
             rotateSpeed = 1.7f;
@@ -1266,6 +1267,7 @@ public class TerraUnitTypes {
             );
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
+            envDisabled = Env.none;
             lowAltitude = true;
             constructor = UnitEntity::create;
             healColor = Color.valueOf("e13131");
@@ -1489,7 +1491,7 @@ public class TerraUnitTypes {
             }
         };
 
-        end = new ErekirUnitType("end"){{
+        end = new UnitType("end"){{
             hideDetails = false;
             flying = true;
             speed = 0.22f;
@@ -1516,6 +1518,7 @@ public class TerraUnitTypes {
             }
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
+            envDisabled = Env.none;
             deathExplosionEffect = Fx.none;
             deathSound = TerraSounds.jumpIn;
             crashDamageMultiplier = 0;
