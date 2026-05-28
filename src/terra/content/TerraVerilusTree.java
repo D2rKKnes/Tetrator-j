@@ -48,7 +48,7 @@ public class TerraVerilusTree {
                     node(smallDriver, () -> {
                         node(massDriver, () -> {});
                     });
-                    node(phaseConduit, () -> {});
+                    node(phaseConveyor, () -> {});
                 });
             });
             node(graphiteMiner, () -> {
@@ -89,18 +89,16 @@ public class TerraVerilusTree {
             });
             node(flight, () -> {
                 node(titaniumWall, () -> {
-                    node(titaniumWallLarge, () -> {
-                        node(thoriumWall, () -> {
-                            node(thoriumWallLarge, () -> {
-                                node(phaseWall, () -> {
-                                    node(phaseWallLarge, () -> {
-                                        node(phaseWallHuge, () -> {});
-                                    });
-                                });
+                    node(titaniumWallLarge, () -> {});
+                    node(thoriumWall, () -> {
+                        node(thoriumWallLarge, () -> {});
+                        node(phaseWall, () -> {
+                            node(phaseWallLarge, () -> {
+                                node(phaseWallHuge, () -> {});
                             });
-                            node(darkSteelWall, () -> {
-                                node(darkSteelWallLarge, () -> {});
-                            });
+                        });
+                        node(darkSteelWall, () -> {
+                            node(darkSteelWallLarge, () -> {});
                         });
                     });
                     node(metaglassWall, () -> {
@@ -123,29 +121,32 @@ public class TerraVerilusTree {
                     node(horizon, () -> {
                         node(zenith, Seq.with(new AtWave(verilus, 15)), () -> {});
                     });
-                    node(mono, () -> {
-                        node(poly, () -> {
-                            node(mega, Seq.with(new AtWave(verilus, 15)), () -> {});
-                        });
+                });
+                node(mono, () -> {
+                    node(poly, () -> {
+                        node(mega, Seq.with(new AtWave(verilus, 15)), () -> {});
                     });
-                    node(wick, () -> {
-                        node(dynamite, () -> {
-                            node(incident, Seq.with(new AtWave(verilus, 15)), () -> {});
-                        });
+                });
+                node(wick, () -> {
+                    node(dynamite, () -> {
+                        node(incident, Seq.with(new AtWave(verilus, 15)), () -> {});
                     });
                 });
                 node(advancedAssembler, () -> {
                     node(antumbra, Seq.with(new AtWave(verilus, 33)), () -> {
                         node(eclipse, Seq.with(new AtWave(verilus, 75)), () -> {});
-                        node(quad, Seq.with(new AtWave(verilus, 33)), () -> {
-                            node(oct, Seq.with(new AtWave(verilus, 75)), () -> {});
-                        });
-                        node(catastrophe, Seq.with(new AtWave(verilus, 33)), () -> {
-                            node(inevitability, Seq.with(new AtWave(verilus, 75)), () -> {
-                                node(eternity, Seq.with(new AtWave(verilus, 180)), () -> {});
-                                node(inevitabilityCore, () -> {});
+                    });
+                    node(quad, Seq.with(new AtWave(verilus, 33)), () -> {
+                        node(oct, Seq.with(new AtWave(verilus, 75)), () -> {});
+                    });
+                    node(catastrophe, Seq.with(new AtWave(verilus, 33)), () -> {
+                        node(inevitability, Seq.with(new AtWave(verilus, 75)), () -> {
+                            node(eternity, ItemStack.with(TerraItems.tesseract, 5, TerraItems.darkSteel, 8200, TerraItems.diamondGlass, 5000, TerraItems.thermoxite, 7800), Seq.with(new AtWave(verilus, 180)), () -> {
+                                node(eternityMissile, () -> {});
                             });
+                            node(inevitabilityCore, () -> {});
                         });
+                        node(sapEnergyMissile, () -> {});
                     });
                 });
                 node(basicAssemblyDrone, () -> {});
@@ -175,17 +176,22 @@ public class TerraVerilusTree {
                         });
                         nodeProduce(uranium, () -> {
                             nodeProduce(plutonium, () -> {
-                                nodeProduce(radium, () -> {});
+                                nodeProduce(radium, () -> {
+                                    //nodeProduce(cesium, () -> {});
+                                });
                             });
                         });
                         nodeProduce(darkSteel, () -> {
                             nodeProduce(tesseract, () -> {});
                         });
                     });
-                    nodeProduce(Liquids.cryofluid, () -> {});
+                    nodeProduce(Liquids.cryofluid, () -> {
+                        //nodeProduce(cryotite, () -> {});
+                    });
                 });
             });
-            node(verilus, () -> {});
+            node(TerraSectorPresets.verilus, () -> {});
+            //node(beta, () -> {});
         });
     }
 
