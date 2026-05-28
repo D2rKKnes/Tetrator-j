@@ -573,26 +573,21 @@ public class TerraBlocks{
             consumePower(2.6f);
             recipes.addAll(
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 6);
-                    inputLiquid = LiquidStack.list(Liquids.water, 60f / 16f);
+                    inputItem = ItemStack.list(TerraItems.carbon, 4);
+                    inputLiquid = LiquidStack.list(Liquids.water, 16f / 60f);
                     outputItem = ItemStack.list(TerraItems.diamondDust, 1);
                     craftTime = 40f;
                 }},
                 new Recipe() {{
                     inputItem = ItemStack.list(Items.graphite, 6);
-                    inputLiquid = LiquidStack.list(Liquids.water, 60f / 12f);
+                    inputLiquid = LiquidStack.list(Liquids.water, 12f / 60f);
                     outputItem = ItemStack.list(TerraItems.diamondDust, 3);
                     craftTime = 90f;
                 }}
             );
             drawer = new DrawMulti(
-                new DrawRotation(){{
-                    suffix = "-bottom";
-                    layer = Layer.block - 1f;
-                }},
-                new DrawRotation() {{
-                    suffix = "-top";
-                }}
+                new DrawRegion("-bottom"),
+                new DrawRegion("-top")
             );
         }};
         diamondCoverer = new GenericCrafter("diamond-coverer"){{
@@ -634,7 +629,7 @@ public class TerraBlocks{
                 new DrawRotation(){{
                     suffix = "-bottom";
                     xOffset = 4f;
-                    layer = Layer.block - 1f;
+                    //layer = Layer.block - 0.001f;
                 }},
                 new DrawLiquidTileRotated(Liquids.water),
                 new DrawLiquidTileRotated(Liquids.water, 16f, 0f){{padRight = 8f;}},
