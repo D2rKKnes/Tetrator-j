@@ -82,7 +82,9 @@ public class TerraVerilusTree {
                                     });
                                     node(phaseWeaver, () -> {});
                                 });
-                                node(darkSteelWorkshop, () -> {});
+                                node(darkSteelWorkshop, () -> {
+                                    node(crystalIncubator, () -> {});
+                                });
                                 node(electricalWell, () -> {});
                             });
                         });
