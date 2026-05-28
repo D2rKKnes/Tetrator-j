@@ -68,7 +68,7 @@ public class TerraBlocks{
     //power
     photonPanel, photonPanelLarge,
     //crafters
-    sandExtractor, iceMelter, 
+    sandExtractor, iceMelter, crystalIncubator,
     bisiliconOven, darkSteelWorkshop, titaniumPress, 
     diamondCrusher, diamondCoverer,
     multiMixer,
