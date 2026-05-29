@@ -1,6 +1,6 @@
 package terra.maps.planets;
 
-import terra.content.TerraEnvironmentBlocks;
+import terra.content.*;
 import terra.maps.generators.VerilusWaves;
 import arc.graphics.*;
 import arc.math.*;
@@ -25,7 +25,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 34, octaves = 2, foct = 3;
     public float radMin = 12f, radMax = 68f, persistence = 0.4f, scale = 30f, mag = 0.46f, thresh = 1f;
     public float fmag = 0.5f, fscl = 50f, fper = 0.6f;
-    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.37f;
+    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.57f;
 
     public float thoriumScl = 1f, leadScale = 1f, graphiteScale = 1f;
 
@@ -270,8 +270,9 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             }
         });
 
+        //spawn
         int spawnSide = rand.random(3);
-        int sizeOffset = width / 2 - 1;
+        int sizeOffset = width / 2 - 10;
         tiles.getn(sizeOffset * Geometry.d8edge[spawnSide].x + width/2, sizeOffset * Geometry.d8edge[spawnSide].y + height/2).setOverlay(Blocks.spawn);
 
         //core in the center
@@ -286,11 +287,22 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         state.rules.dragMultiplier = 0.7f; //yes, space actually has 0 drag but true 0% drag is very annoying
         state.rules.borderDarkness = false;
         state.rules.waves = true;
-        state.rules.dropZoneRadius = 150f;
+        state.rules.dropZoneRadius = 200f;
         state.rules.waveSpacing = 3 * Time.toMinutes;
-        state.rules.loadout = ItemStack.list(Items.lead, 100);
 
-        state.rules.showSpawns = true;
+        //progression
+        if(TerraItems.tesseract.unlocked()){
+            state.rules.loadout = ItemStack.list(Items.lead, 1500, Items.graphite, 1500, Items.titanium, 1500, Items.silicon, 500, Items.metaglass, 500, Items.thorium, 200);
+        } else if(TerraItems.darkSteel.unlocked()){
+            state.rules.loadout = ItemStack.list(Items.lead, 1000, Items.graphite, 600, Items.titanium, 500, Items.silicon, 200);
+        } else if(TerraItems.titaniumPlate.unlocked()){
+            state.rules.loadout = ItemStack.list(Items.lead, 500, Items.graphite, 300, Items.titanium, 200);
+        } else {
+            state.rules.loadout = ItemStack.list(Items.lead, 100);
+        }
+
+        //anuke do something again
+        //state.rules.showSpawns = true;
         state.rules.spawns = VerilusWaves.generate(rand);
     }
 
