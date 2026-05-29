@@ -11,6 +11,7 @@ import arc.struct.*;
 import mindustry.ai.*;
 import mindustry.content.*;
 import mindustry.game.*;
+import mindustry.game.Rules;
 import mindustry.graphics.g3d.*;
 import mindustry.maps.generators.*;
 import mindustry.type.*;
@@ -290,11 +291,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         state.rules.airUseSpawns = true;
         state.rules.loadout = ItemStack.list(Items.lead, 100);
 
-        //TODO ???
-        //state.rules.hiddenBuildItems.addAll(Items.plastanium, Items.surgeAlloy);
-        //TODO maybe make this on by default everywhere
+        state.rules.hiddenBuildItems.addAll(Items.plastanium, Items.surgeAlloy);
         state.rules.showSpawns = true;
-        //TODO custom wavegen 
         state.rules.spawns = VerilusWaves.generate(rand);
     }
 
