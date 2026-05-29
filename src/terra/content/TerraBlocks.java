@@ -541,7 +541,7 @@ public class TerraBlocks{
         };
 
         crystalIncubator = new RecipeGenericCrafter("crystal-incubator") {{
-            requirements(Category.crafting, ItemStack.with(TerraItems.titaniumPlate, 80, TerraItems.thermoxite, 40, TerraItems.darkSteel, 115));
+            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 80, TerraItems.rawThermoxite, 40, TerraItems.darkSteel, 115));
 
             size = 2;
             hasLiquids = true;
@@ -557,13 +557,13 @@ public class TerraBlocks{
                     inputItem = ItemStack.list(TerraItems.carbon, 1);
                     inputLiquid = LiquidStack.list(Liquids.water, 6f / 60f);
                     outputItem = ItemStack.list(TerraItems.rawThermoxite, 1);
-                    craftTime = 80f;
+                    craftTime = 40f;
                 }},
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 2, Items.phaseFabric, 1);
-                    inputLiquid = LiquidStack.list(Liquids.water, 18f / 60f);
+                    inputItem = ItemStack.list(TerraItems.carbon, 2);
+                    inputLiquid = LiquidStack.list(Liquids.cryofluid, 6f / 60f);
                     outputItem = ItemStack.list(TerraItems.thermoxite, 1);
-                    craftTime = 180f;
+                    craftTime = 100f;
                 }}
             );
             drawer = new DrawMulti(
@@ -592,7 +592,7 @@ public class TerraBlocks{
         }};
         diamondCrusher = new RecipeGenericCrafter("diamond-crusher") {{
             requirements(Category.crafting, ItemStack.with(Items.silicon, 175, TerraItems.titaniumPlate, 90, Items.lead, 225, Items.thorium, 145));
-            addLink(2, 0, 1, 2, 1, 1, 0, 2, 1, 1, 2, 1, -1, 0, 1, -1, 1, 1, 0, -1, 1, 1, -1, 1);
+            //addLink(2, 0, 1, 2, 1, 1, 0, 2, 1, 1, 2, 1, -1, 0, 1, -1, 1, 1, 0, -1, 1, 1, -1, 1);
 
             size = 2;
             hasLiquids = true;
@@ -601,6 +601,7 @@ public class TerraBlocks{
             scaledHealth = 100f;
             itemCapacity = 20;
             liquidCapacity = 50;
+            squareSprite = false;
 
             consumePower(3.333f);
             recipes.addAll(
@@ -619,9 +620,62 @@ public class TerraBlocks{
             );
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
+                new DrawPistons() {{
+                    suffix = "-piston-1";
+                    sides = 1;
+                    angleOffset = 90f;
+                    sinMag = 4f;
+                    sinScl = 11f;
+                    sinOffset = 0f;
+                    lenOffset = 0f;
+                }},
+                new DrawPistons() {{
+                    suffix = "-piston-2";
+                    sides = 1;
+                    angleOffset = 180f;
+                    sinMag = 4f;
+                    sinScl = 11f;
+                    sinOffset = 0f;
+                    lenOffset = 0f;
+                }},
+                new DrawPistons() {{
+                    suffix = "-piston-3";
+                    sides = 1;
+                    angleOffset = 270f;
+                    sinMag = 4f;
+                    sinScl = 11f;
+                    sinOffset = 0f;
+                    lenOffset = 0f;
+                }},
+                new DrawPistons() {{
+                    suffix = "-piston-4";
+                    sides = 1;
+                    sinMag = 4f;
+                    sinScl = 11f;
+                    sinOffset = 0f;
+                    lenOffset = 0f;
+                }},
                 new DrawRegion("-top")
             );
-        }};
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name);
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
         diamondCoverer = new GenericCrafter("diamond-coverer"){{
             requirements(Category.crafting, with(Items.silicon, 80, TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
 
