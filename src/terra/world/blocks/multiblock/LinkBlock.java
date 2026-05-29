@@ -46,8 +46,6 @@ public class LinkBlock extends Block {
         hasLiquids = true;
         hasPower = false;
 
-        liquidCapacity = 99999f;
-
         buildVisibility = BuildVisibility.hidden;
         inEditor = false;
 
