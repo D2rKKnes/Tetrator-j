@@ -288,10 +288,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         state.rules.waves = true;
         state.rules.dropZoneRadius = 150f;
         state.rules.waveSpacing = 3 * Time.toMinutes;
-        state.rules.airUseSpawns = true;
         state.rules.loadout = ItemStack.list(Items.lead, 100);
 
-        state.rules.hiddenBuildItems.addAll(Items.plastanium, Items.surgeAlloy);
         state.rules.showSpawns = true;
         state.rules.spawns = VerilusWaves.generate(rand);
     }
