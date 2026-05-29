@@ -20,6 +20,10 @@ public class TerraVanilaTree{
     static TechTree.TechNode context = null;
     public static void load(){
         // Serpulo
+        vanillaNode(batteryLarge, () -> {
+            node(multicellBattery, () -> {
+            });
+        });
         vanillaNode(coreFoundation, () -> {
             node(coreSolaris, () -> {
             });
