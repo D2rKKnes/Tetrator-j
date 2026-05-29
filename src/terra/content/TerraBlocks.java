@@ -624,7 +624,7 @@ public class TerraBlocks{
                     suffix = "-piston-1";
                     sides = 1;
                     angleOffset = 90f;
-                    sinMag = 4f;
+                    sinMag = 1f;
                     sinScl = 11f;
                     sinOffset = 0f;
                     lenOffset = 0f;
@@ -633,7 +633,7 @@ public class TerraBlocks{
                     suffix = "-piston-2";
                     sides = 1;
                     angleOffset = 180f;
-                    sinMag = 4f;
+                    sinMag = 1f;
                     sinScl = 11f;
                     sinOffset = 0f;
                     lenOffset = 0f;
@@ -642,7 +642,7 @@ public class TerraBlocks{
                     suffix = "-piston-3";
                     sides = 1;
                     angleOffset = 270f;
-                    sinMag = 4f;
+                    sinMag = 1f;
                     sinScl = 11f;
                     sinOffset = 0f;
                     lenOffset = 0f;
@@ -650,7 +650,7 @@ public class TerraBlocks{
                 new DrawPistons() {{
                     suffix = "-piston-4";
                     sides = 1;
-                    sinMag = 4f;
+                    sinMag = 1f;
                     sinScl = 11f;
                     sinOffset = 0f;
                     lenOffset = 0f;
