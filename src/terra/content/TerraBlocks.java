@@ -67,6 +67,7 @@ public class TerraBlocks{
     graphiteBridge, smallDriver,
     //power
     photonPanel, photonPanelLarge,
+    multicellBattery,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
     bisiliconOven, darkSteelWorkshop, titaniumPress, 
@@ -322,6 +323,12 @@ public class TerraBlocks{
                 new DrawVariantRegion("-shine", 4, 2),
                 new DrawRegion("-top")
             );
+        }};
+        multicellBattery = new Battery("multi-cell-battery"){{
+            requirements(Category.power, with(Items.titanium, 15, Items.lead, 35));
+            size = 2;
+            consumePowerBuffered(20000f);
+            baseExplosiveness = 3f;
         }};
         
         //crafters
