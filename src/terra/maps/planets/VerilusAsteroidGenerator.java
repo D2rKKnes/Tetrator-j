@@ -24,7 +24,7 @@ import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 39, octaves = 1, foct = 3;
-    public float radMin = 21f, radMax = 46f, persistence = 0.28f, scale = 400f, mag = 0.91f, thresh = 1.6f;
+    public float radMin = 18f, radMax = 54f, persistence = 0.28f, scale = 400f, mag = 0.91f, thresh = 1.6f;
     public float fmag = 0.5f, fscl = 36f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.38f, carbonChance = 0.6f;
 
@@ -125,7 +125,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
     @Override
     public void generate(){
-        seed = Mathf.random(30000);
+        seed = Mathf.random(1000000);
         int sx = width/2, sy = height/2;
         rand = new Rand(seed);
 
@@ -308,7 +308,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             if(floor != Blocks.stone) return;
             int i = 4;
 
-            if(Math.abs(0.5f - noise(x, y + i*999 - x*1.5f, 3, 0.6, 66)) > 0.26f * 1f){
+            if(Math.abs(0.5f - noise(x, y + seed - x*1.5f, 3, 0.6, 66)) > 0.26f * 1f){
                 ore = Blocks.oreTitanium;
             }
         });
@@ -331,7 +331,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         int sizeOffset = width / 2 - 10;
         tiles.getn(sizeOffset * Geometry.d8edge[spawnSide].x + width/2, sizeOffset * Geometry.d8edge[spawnSide].y + height/2).setOverlay(Blocks.spawn);
 
-        //core in the center
+        //core
         Schematics.placeLaunchLoadout(sx, sy);
 
         state.rules.planetBackground = new PlanetParams(){{
@@ -346,7 +346,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         state.rules.dropZoneRadius = 200f;
         state.rules.waveSpacing = 3 * Time.toMinutes;
 
-        //progression
+        //loadout progression
         if(TerraItems.tesseract.unlocked()){
             state.rules.loadout = ItemStack.list(Items.lead, 1500, Items.graphite, 1500, Items.titanium, 1500, Items.silicon, 500, Items.metaglass, 500, Items.thorium, 200);
         } else if(TerraItems.darkSteel.unlocked()){
@@ -357,8 +357,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             state.rules.loadout = ItemStack.list(Items.lead, 100);
         }
 
-        //anuke do something again
-        //state.rules.showSpawns = true;
+        state.rules.showSpawns = true;
         state.rules.spawns = VerilusWaves.generate(rand);
     }
 
