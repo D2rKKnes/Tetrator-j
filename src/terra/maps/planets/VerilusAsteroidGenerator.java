@@ -50,7 +50,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
-                if(!tiles.in(x, y)) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(!tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -60,7 +60,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     void asteroid(int ax, int ay, int rad, Floor floor) {
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
-                if(!tiles.in(x, y)) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(!tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
