@@ -50,11 +50,22 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
                 if(!tiles.in(x, y)) continue;
-                float distortion = 0f;
-                distortion += DistortNoise(seed, 95, 21, x, y);
-                distortion += DistortNoise(seed + 1, 16, 11, x, y);
-                distortion += DistortNoise(seed + 2, 7, 4, x, y);
-                if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
+                float dx = x, dy = y;
+
+                float n1x = DistortNoise(seed, 95f, 21f, (int)dx, (int)dy);
+                float n1y = DistortNoise(seed + 1, 95f, 21f, (int)dx, (int)dy);
+                dx += n1x;
+                dy += n1y;
+                float n2x = DistortNoise(seed + 2, 16f, 11f, (int)dx, (int)dy);
+                float n2y = DistortNoise(seed + 3, 16f, 11f, (int)dx, (int)dy);
+                dx += n2x;
+                dy += n2y;
+                float n3x = DistortNoise(seed + 4, 7f, 4f, (int)dx, (int)dy);
+                float n3y = DistortNoise(seed + 5, 7f, 4f, (int)dx, (int)dy);
+                dx += n3x;
+                dy += n3y;
+
+                if (Mathf.dst(dx, dy, ax, ay) < rad * thresh) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -65,11 +76,22 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
                 if(!tiles.in(x, y)) continue;
-                float distortion = 0f;
-                distortion += DistortNoise(seed, 95, 21, x, y);
-                distortion += DistortNoise(seed + 1, 16, 11, x, y);
-                distortion += DistortNoise(seed + 2, 7, 4, x, y);
-                if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
+                float dx = x, dy = y;
+
+                float n1x = DistortNoise(seed, 95f, 21f, (int)dx, (int)dy);
+                float n1y = DistortNoise(seed + 1, 95f, 21f, (int)dx, (int)dy);
+                dx += n1x;
+                dy += n1y;
+                float n2x = DistortNoise(seed + 2, 16f, 11f, (int)dx, (int)dy);
+                float n2y = DistortNoise(seed + 3, 16f, 11f, (int)dx, (int)dy);
+                dx += n2x;
+                dy += n2y;
+                float n3x = DistortNoise(seed + 4, 7f, 4f, (int)dx, (int)dy);
+                float n3y = DistortNoise(seed + 5, 7f, 4f, (int)dx, (int)dy);
+                dx += n3x;
+                dy += n3y;
+
+                if (Mathf.dst(dx, dy, ax, ay) < rad * thresh) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
