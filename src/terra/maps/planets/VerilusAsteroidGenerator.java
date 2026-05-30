@@ -214,7 +214,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         //walls at insides
         pass((x, y) -> {
-            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.35f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
+            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.36f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
 
             int radius = 6;
             for(int dx = x - radius; dx <= x + radius; dx++){
