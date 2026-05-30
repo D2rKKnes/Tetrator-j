@@ -65,7 +65,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 float n2 = Simplex.noise2d(seed + 1, 1, 0.0, 1f / 16f, x + 10, y + 10) * 11f;
                 float n3 = Simplex.noise2d(seed + 2, 1, 0.0, 1f / 7f,  x + 10, y + 10) * 4f;
                 float distortion = (n1 + n2 + n3) / 21f;
-                if(Mathf.dst(x, y, ax, ay) / radius + distortion < thresh){
+                if(Mathf.dst(x, y, ax, ay) / rad + distortion < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
