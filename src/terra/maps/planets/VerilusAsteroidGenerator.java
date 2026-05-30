@@ -24,21 +24,17 @@ import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 34, octaves = 2, foct = 3;
-    public float radMin = 12f, radMax = 61f, persistence = 0.42f, scale = 30f, mag = 0.76f, thresh = 1f;
-    public float fmag = 0.5f, fscl = 30f, fper = 0.6f;
-    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.6f;
+    public float radMin = 12f, radMax = 58f, persistence = 0.42f, scale = 30f, mag = 0.76f, thresh = 1f;
+    public float fmag = 0.5f, fscl = 36f, fper = 0.6f;
+    public float stoneChance = 0f, iceChance = 0.38f, carbonChance = 0.6f;
 
-    public float thoriumScl = 1f, leadScale = 0.8f, graphiteScale = 1f;
+    public float thoriumScl = 1f, leadScale = 0.7f, graphiteScale = 1f;
 
     @Nullable Rand rand;
     int seed;
 
     {
         defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
-    }
-
-    protected float DistortNoise(int seed, float scl, float mag, float x, float y){
-        return Simplex.noise2d(seed, 1f, 0f, 1f / scl, x + 10, y + 10) * mag - mag / 2f;
     }
 
     void asteroid(int ax, int ay, int rad){
@@ -67,6 +63,31 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
     }
 
+    void oreAroundRand(Block ore, Block wall, int radMin, int radMax, float scl, float thresh){
+        for(Tile tile : tiles){
+            int x = tile.x, y = tile.y;
+    
+            if(tile.block() == Blocks.air && tile.floor().hasSurface() && noise(x, y + ore.id*999, scl, 1f) > thresh){
+                int radius = Mathf.random(radMin, radMax);
+    
+                boolean found = false;
+                outer:
+                for(int dx = x - radius; dx <= x + radius; dx++){
+                    for(int dy = y - radius; dy <= y + radius; dy++){
+                        if(Mathf.within(dx, dy, x, y, radius + 0.001f) && tiles.in(dx, dy) && tiles.get(dx, dy).block() == wall){
+                            found = true;
+                            break outer;
+                        }
+                    }
+                }
+    
+                if(found){
+                    tile.setOverlay(ore);
+                }
+            }
+        }
+    }
+
     @Override
     public void generate(){
         seed = Mathf.random(30000);
@@ -78,7 +99,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         tiles.eachTile(t -> t.setFloor(background));
 
         //the center asteroid is always stone
-        asteroid(sx, sy, rand.random(34, 68), Blocks.stone.asFloor());
+        asteroid(sx, sy, rand.random((int)radMax / 2, (int)radMax), Blocks.stone.asFloor());
 
         float radr = 170f + Mathf.random(10f, 50f);
         float anglr = Mathf.random(360f);
@@ -86,20 +107,20 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
         //special asteroid for core zone also is always stone
-        asteroid(xr, yr, rand.random(34, 68), Blocks.stone.asFloor());
+        asteroid(xr, yr, rand.random((int)radMax / 2, (int)radMax), Blocks.stone.asFloor());
 
         //spawn asteroids
         int amount = rand.random(min, max);
         for(int i = 0; i < amount; i++){
-            float radius = rand.random(radMin, radMax), ax = rand.random(radius, width - radius - 20), ay = rand.random(radius, height - radius - 20);
+            float radius = rand.random(radMin, radMax), ax = rand.random(radius + 20, width - radius - 20), ay = rand.random(radius + 20, height - radius - 20);
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
 
         //tiny asteroids
-        int smalls = rand.random(min, max) * 3;
+        int smalls = rand.random(min, max) * 4;
         for(int i = 0; i < smalls; i++){
-            float radius = rand.random(3, 11), ax = rand.random(radius, width - radius - 20), ay = rand.random(radius, height - radius - 20);
+            float radius = rand.random(3, 12), ax = rand.random(radius + 12, width - radius - 12), ay = rand.random(radius + 12, height - radius - 12);
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
@@ -180,7 +201,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         //walls at insides
         pass((x, y) -> {
-            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.45f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
+            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.5f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
 
             int radius = 6;
             for(int dx = x - radius; dx <= x + radius; dx++){
@@ -245,7 +266,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         decoration(0.017f);
 
         //lead generates around stone walls
-        oreAround(Blocks.oreLead, Blocks.stoneWall, (int)rand.random(2, 4), 70f, 0.6f * leadScale);
+        oreAroundRand(Blocks.oreLead, Blocks.stoneWall, 2, 4, 70f, 0.6f * leadScale);
 
         //thorium only generates on beryllic stone and graphitic stone
         ore(Blocks.oreThorium, Blocks.carbonStone, 4f, 0.9f * thoriumScl);
@@ -274,7 +295,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             if(floor != Blocks.stone) return;
             int i = 4;
 
-            if(Math.abs(0.5f - noise(x, y + i*999 - x*1.5f, 2, 0.65, (60 + i * 2))) > 0.26f * 1f){
+            if(Math.abs(0.5f - noise(x, y + i*999 - x*1.5f, 3, 0.6, 66)) > 0.26f * 1f){
                 ore = Blocks.oreTitanium;
             }
         });
