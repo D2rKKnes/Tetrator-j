@@ -24,12 +24,12 @@ import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 34, octaves = 1, foct = 3;
-    public float radMin = 12f, radMax = 58f, persistence = 0.28f, scale = 110f, mag = 0.91f, thresh = 1.2f;
+    public float radMin = 21f, radMax = 58f, persistence = 0.28f, scale = 400f, mag = 0.91f, thresh = 1.6f;
     public float fmag = 0.5f, fscl = 36f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.38f, carbonChance = 0.6f;
 
     //bigger number - less ore
-    public float thoriumScl = 1f, leadScale = 1.2f, graphiteScale = 1f;
+    public float thoriumScl = 1f, leadScale = 1.16f, graphiteScale = 1f;
 
     @Nullable Rand rand;
     int seed;
