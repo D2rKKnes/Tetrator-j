@@ -23,9 +23,9 @@ import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 34, octaves = 2, foct = 3;
-    public float radMin = 12f, radMax = 68f, persistence = 0.4f, scale = 30f, mag = 0.46f, thresh = 1f;
-    public float fmag = 0.5f, fscl = 50f, fper = 0.6f;
-    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.57f;
+    public float radMin = 12f, radMax = 61f, persistence = 0.42f, scale = 8f, mag = 0.76f, thresh = 1f;
+    public float fmag = 0.5f, fscl = 30f, fper = 0.6f;
+    public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.6f;
 
     public float thoriumScl = 1f, leadScale = 1f, graphiteScale = 1f;
 
@@ -158,7 +158,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         //walls at insides
         pass((x, y) -> {
-            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.7f, 1f / 60f) > 0.45f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
+            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.45f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
 
             int radius = 6;
             for(int dx = x - radius; dx <= x + radius; dx++){
