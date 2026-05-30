@@ -28,7 +28,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public float fmag = 0.5f, fscl = 36f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.38f, carbonChance = 0.6f;
 
-    public float thoriumScl = 1f, leadScale = 0.7f, graphiteScale = 1f;
+    //bigger number - less ore
+    public float thoriumScl = 1f, leadScale = 1.2f, graphiteScale = 1f;
 
     @Nullable Rand rand;
     int seed;
@@ -83,6 +84,40 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     
                 if(found){
                     tile.setOverlay(ore);
+                }
+            }
+        }
+    }
+
+    void floorZone(Block zone, Block firstRing, Block secRing, int zoneRad, float damagedChance, float normalChance, int x, int y){
+        //place zone
+        int zoneRadHalf = Mathf.floor(zoneRad / 2f);
+        int offset = 0;
+        if (zoneRad % 2 == 0){
+            offset = 1;
+        }
+        for (int xz = -zoneRadHalf + offset; xz <= zoneRadHalf; xz++) {
+            for (int yz = -zoneRadHalf + offset; yz <= zoneRadHalf; yz++) {
+                Tile tile = world.tile(x + xz, y + yz);
+                if (tile != null) {
+                    tile.setFloor(zone.asFloor());
+                }
+            }
+        }
+        //ring around zone
+        int ringRad = zoneRadHalf + 1;
+        for (int xr = -ringRad + offset; xr <= ringRad; xr++) {
+            for (int yr = -ringRad + offset; yr <= ringRad; yr++) {
+                if (xr >= -zoneRadHalf + offset && xr <= zoneRadHalf && yr >= -zoneRadHalf + offset && yr <= zoneRadHalf) {
+                    continue;
+                }
+                Tile tile = world.tile(x + xr, y + yr);
+                if (tile != null) {
+                    if (Mathf.random() < damagedChance) {
+                        tile.setFloor(firstRing.asFloor());
+                    }else if (Mathf.random() < normalChance) {
+                        tile.setFloor(secRing.asFloor());
+                    }
                 }
             }
         }
@@ -172,36 +207,14 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 floor = Blocks.carbonStone;
             }
         });
-        
-        //place core zone
-        for (int dxr = -1; dxr <= 1; dxr++) {
-            for (int dyr = -1; dyr <= 1; dyr++) {
-                Tile tile = world.tile(xr + dxr, yr + dyr);
-                if (tile != null) {
-                    tile.setFloor(Blocks.coreZone.asFloor());
-                }
-            }
-        }
-        //metal around core zone
-        for (int x = xr - 2; x <= xr + 2; x++) {
-            for (int y = yr - 2; y <= yr + 2; y++) {
-                if (x >= xr - 1 && x <= xr + 1 && y >= yr - 1 && y <= yr + 1) {
-                    continue;
-                }
-                Tile tile = world.tile(x, y);
-                if (tile != null) {
-                    if (Mathf.random() < 0.2f) {
-                        tile.setFloor(Blocks.metalFloorDamaged.asFloor());
-                    }else if (Mathf.random() < 0.5f) {
-                        tile.setFloor(Blocks.metalFloor.asFloor());
-                    }
-                }
-            }
-        }
+
+        //core zones
+        floorZone(Blocks.coreZone, Blocks.metalFloorDamaged, Blocks.metalFloor, 3, 0.2f, 0.5f, xr, yr);
+        floorZone(Blocks.coreZone, Blocks.metalFloorDamaged, Blocks.metalFloor, 4, 0.2f, 0.5f, sx, sy);
 
         //walls at insides
         pass((x, y) -> {
-            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.5f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
+            if(floor == background || Ridged.noise2d(seed + 1, x, y, 4, 0.73f, 1.3f / 60f) > 0.64f || Mathf.within(x, y, sx, sy, 20 + Ridged.noise2d(seed, x, y, 3, 0.6f, 1f / 30f) * 6f) || Mathf.within(x, y, xr, yr, 20 + Ridged.noise2d(seed, x, y, 3, 0.5f, 1f / 30f) * 6f)) return;
 
             int radius = 6;
             for(int dx = x - radius; dx <= x + radius; dx++){
