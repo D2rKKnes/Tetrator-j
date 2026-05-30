@@ -50,7 +50,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
-                if(!tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -60,7 +60,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     void asteroid(int ax, int ay, int rad, Floor floor) {
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
-                if(!tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -105,27 +105,22 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
 
         //distort noise
-        /*GenerateFilter.GenerateInput genIn = new GenerateFilter.GenerateInput();
-        genIn.begin(width, height, (x, y) -> tiles.get(x, y));
+        GenerateFilter.GenerateInput in = new GenerateFilter.GenerateInput();
         
-        DistortFilter distort1 = new DistortFilter();
-        distort1.seed = seed;
-        distort1.scl = 95f;
-        distort1.mag = 21f;
-        distort1.apply(tiles, genIn);
+        DistortFilter d1 = new DistortFilter();
+        d1.scl = 95; d1.mag = 21; d1.seed = seed + 1;
+        DistortFilter d2 = new DistortFilter();
+        d2.scl = 16; d2.mag = 11; d2.seed = seed + 2;
+        DistortFilter d3 = new DistortFilter();
+        d3.scl = 7;  d3.mag = 4;  d3.seed = seed + 3;
         
-        DistortFilter distort2 = new DistortFilter();
-        distort2.seed = seed + 1;
-        distort2.scl = 16f;
-        distort2.mag = 11f;
-        distort2.apply(tiles, genIn);
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d1.apply(tiles, in);
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d2.apply(tiles, in);
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d3.apply(tiles, in);
         
-        DistortFilter distort3 = new DistortFilter();
-        distort3.seed = seed + 2;
-        distort3.scl = 7f;
-        distort3.mag = 4f;
-        distort3.apply(tiles, genIn);*/
-
         //random noise stone
         pass((x, y) -> {
             if(floor != background){
