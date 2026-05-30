@@ -105,29 +105,26 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
 
         //distort noise
-        GenerateFilter.GenerateInput genIn = new GenerateFilter.GenerateInput();
+        /*GenerateFilter.GenerateInput genIn = new GenerateFilter.GenerateInput();
         genIn.begin(width, height, (x, y) -> tiles.get(x, y));
         
-        // Проход 1: крупные искажения
         DistortFilter distort1 = new DistortFilter();
-        distort1.seed = seed;          // или Mathf.random(999999999)
+        distort1.seed = seed;
         distort1.scl = 95f;
         distort1.mag = 21f;
         distort1.apply(tiles, genIn);
         
-        // Проход 2: средние детали
         DistortFilter distort2 = new DistortFilter();
-        distort2.seed = seed + 1;      // важно: разные seed для X/Y смещений
+        distort2.seed = seed + 1;
         distort2.scl = 16f;
         distort2.mag = 11f;
         distort2.apply(tiles, genIn);
         
-        // Проход 3: мелкие детали
         DistortFilter distort3 = new DistortFilter();
         distort3.seed = seed + 2;
         distort3.scl = 7f;
         distort3.mag = 4f;
-        distort3.apply(tiles, genIn);
+        distort3.apply(tiles, genIn);*/
 
         //random noise stone
         pass((x, y) -> {
