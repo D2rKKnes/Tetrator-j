@@ -50,7 +50,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
                 if(!tiles.in(x, y)) continue;
-                float distortion;
+                float distortion = 0f;
                 distortion += DistortNoise(seed, 95, 21, x, y);
                 distortion += DistortNoise(seed + 1, 16, 11, x, y);
                 distortion += DistortNoise(seed + 2, 7, 4, x, y);
@@ -65,7 +65,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
                 if(!tiles.in(x, y)) continue;
-                float distortion;
+                float distortion = 0f;
                 distortion += DistortNoise(seed, 95, 21, x, y);
                 distortion += DistortNoise(seed + 1, 16, 11, x, y);
                 distortion += DistortNoise(seed + 2, 7, 4, x, y);
