@@ -105,20 +105,29 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
 
         //distort noise
-        GenerateFilter.GenerateInput in = new GenerateFilter.GenerateInput();
-        DistortFilter d1 = new DistortFilter();
-        d1.scl = 95; d1.mag = 21; d1.seed = seed + 1;
-        DistortFilter d2 = new DistortFilter();
-        d2.scl = 16; d2.mag = 11; d2.seed = seed + 2;
-        DistortFilter d3 = new DistortFilter();
-        d3.scl = 7;  d3.mag = 4;  d3.seed = seed + 3;
+        GenerateFilter.GenerateInput genIn = new GenerateInput();
+        genIn.begin(width, height, (x, y) -> tiles.get(x, y));
         
-        in.begin(width, height, (x, y) -> tiles.getn(x, y));
-        d1.apply(tiles, in);
-        in.begin(width, height, (x, y) -> tiles.getn(x, y));
-        d2.apply(tiles, in);
-        in.begin(width, height, (x, y) -> tiles.getn(x, y));
-        d3.apply(tiles, in);
+        // Проход 1: крупные искажения
+        DistortFilter distort1 = new DistortFilter();
+        distort1.seed = seed;          // или Mathf.random(999999999)
+        distort1.scl = 95f;
+        distort1.mag = 21f;
+        distort1.apply(tiles, genIn);
+        
+        // Проход 2: средние детали
+        DistortFilter distort2 = new DistortFilter();
+        distort2.seed = seed + 1;      // важно: разные seed для X/Y смещений
+        distort2.scl = 16f;
+        distort2.mag = 11f;
+        distort2.apply(tiles, genIn);
+        
+        // Проход 3: мелкие детали
+        DistortFilter distort3 = new DistortFilter();
+        distort3.seed = seed + 2;
+        distort3.scl = 7f;
+        distort3.mag = 4f;
+        distort3.apply(tiles, genIn);
 
         //random noise stone
         pass((x, y) -> {
