@@ -105,7 +105,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
 
         //distort noise
-        GenerateFilter.GenerateInput genIn = new GenerateInput();
+        GenerateFilter.GenerateInput genIn = new GenerateFilter.GenerateInput();
         genIn.begin(width, height, (x, y) -> tiles.get(x, y));
         
         // Проход 1: крупные искажения
