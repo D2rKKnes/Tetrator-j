@@ -36,21 +36,25 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
     }
 
-    void asteroid(int ax, int ay, int radius){
+    protected float DistortNoise(float seed, float scl, float mag, int x, int y){
+        return Simplex.noise2d(seed, 1f, 0f, 1f / scl, x + 10, y + 10) * mag - mag / 2f;
+    }
+
+    void asteroid(int ax, int ay, int rad){
         Floor floor = (
             rand.chance(iceChance) ? Blocks.ice :
             rand.chance(carbonChance) ? Blocks.carbonStone :
             Blocks.stone
         ).asFloor();
 
-        for(int x = ax - radius; x <= ax + radius; x++){
-            for(int y = ay - radius; y <= ay + radius; y++){
+        for(int x = ax - rad; x <= ax + rad; x++){
+            for(int y = ay - rad; y <= ay + rad; y++){
                 if(!tiles.in(x, y)) continue;
-                float n1 = Simplex.noise2d(seed, 1, 0.0, 1f / 95f, x + 10, y + 10) * 21f;
-                float n2 = Simplex.noise2d(seed + 1, 1, 0.0, 1f / 16f, x + 10, y + 10) * 11f;
-                float n3 = Simplex.noise2d(seed + 2, 1, 0.0, 1f / 7f,  x + 10, y + 10) * 4f;
-                float distortion = (n1 + n2 + n3) / 21f;
-                if(Mathf.dst(x, y, ax, ay) / radius + distortion < thresh){
+                float distortion;
+                distortion += DistortNoise(seed, 95, 21, x, y);
+                distortion += DistortNoise(seed, 16, 11, x, y);
+                distortion += DistortNoise(seed, 7, 4, x, y);
+                if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -61,11 +65,11 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
                 if(!tiles.in(x, y)) continue;
-                float n1 = Simplex.noise2d(seed, 1, 0.0, 1f / 95f, x + 10, y + 10) * 21f;
-                float n2 = Simplex.noise2d(seed + 1, 1, 0.0, 1f / 16f, x + 10, y + 10) * 11f;
-                float n3 = Simplex.noise2d(seed + 2, 1, 0.0, 1f / 7f,  x + 10, y + 10) * 4f;
-                float distortion = (n1 + n2 + n3) / 21f;
-                if(Mathf.dst(x, y, ax, ay) / rad + distortion < thresh){
+                float distortion;
+                distortion += DistortNoise(seed, 95, 21, x, y);
+                distortion += DistortNoise(seed, 16, 11, x, y);
+                distortion += DistortNoise(seed, 7, 4, x, y);
+                if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
