@@ -27,7 +27,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public float fmag = 0.5f, fscl = 30f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.6f;
 
-    public float thoriumScl = 1f, leadScale = 1f, graphiteScale = 1f;
+    public float thoriumScl = 1f, leadScale = 0.8f, graphiteScale = 1f;
 
     @Nullable Rand rand;
     int seed;
@@ -36,7 +36,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
     }
 
-    protected float DistortNoise(int seed, float scl, float mag, int x, int y){
+    protected float DistortNoise(int seed, float scl, float mag, float x, float y){
         return Simplex.noise2d(seed, 1f, 0f, 1f / scl, x + 10, y + 10) * mag - mag / 2f;
     }
 
@@ -52,16 +52,16 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 if(!tiles.in(x, y)) continue;
                 float dx = x, dy = y;
 
-                float n1x = DistortNoise(seed, 95f, 21f, (int)dx, (int)dy);
-                float n1y = DistortNoise(seed + 1, 95f, 21f, (int)dx, (int)dy);
+                float n1x = DistortNoise(seed, 95f, 21f, dx, dy);
+                float n1y = DistortNoise(seed + 1, 95f, 21f, dx, dy);
                 dx += n1x;
                 dy += n1y;
-                float n2x = DistortNoise(seed + 2, 16f, 11f, (int)dx, (int)dy);
-                float n2y = DistortNoise(seed + 3, 16f, 11f, (int)dx, (int)dy);
+                float n2x = DistortNoise(seed + 2, 16f, 11f, dx, dy);
+                float n2y = DistortNoise(seed + 3, 16f, 11f, dx, dy);
                 dx += n2x;
                 dy += n2y;
-                float n3x = DistortNoise(seed + 4, 7f, 4f, (int)dx, (int)dy);
-                float n3y = DistortNoise(seed + 5, 7f, 4f, (int)dx, (int)dy);
+                float n3x = DistortNoise(seed + 4, 7f, 4f, dx, dy);
+                float n3y = DistortNoise(seed + 5, 7f, 4f, dx, dy);
                 dx += n3x;
                 dy += n3y;
 
@@ -78,16 +78,16 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 if(!tiles.in(x, y)) continue;
                 float dx = x, dy = y;
 
-                float n1x = DistortNoise(seed, 95f, 21f, (int)dx, (int)dy);
-                float n1y = DistortNoise(seed + 1, 95f, 21f, (int)dx, (int)dy);
+                float n1x = DistortNoise(seed, 95f, 21f, dx, dy);
+                float n1y = DistortNoise(seed + 1, 95f, 21f, dx, dy);
                 dx += n1x;
                 dy += n1y;
-                float n2x = DistortNoise(seed + 2, 16f, 11f, (int)dx, (int)dy);
-                float n2y = DistortNoise(seed + 3, 16f, 11f, (int)dx, (int)dy);
+                float n2x = DistortNoise(seed + 2, 16f, 11f, dx, dy);
+                float n2y = DistortNoise(seed + 3, 16f, 11f, dx, dy);
                 dx += n2x;
                 dy += n2y;
-                float n3x = DistortNoise(seed + 4, 7f, 4f, (int)dx, (int)dy);
-                float n3y = DistortNoise(seed + 5, 7f, 4f, (int)dx, (int)dy);
+                float n3x = DistortNoise(seed + 4, 7f, 4f, dx, dy);
+                float n3y = DistortNoise(seed + 5, 7f, 4f, dx, dy);
                 dx += n3x;
                 dy += n3y;
 
@@ -122,7 +122,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //spawn asteroids
         int amount = rand.random(min, max);
         for(int i = 0; i < amount; i++){
-            float radius = rand.random(radMin, radMax), ax = rand.random(radius, width - radius), ay = rand.random(radius, height - radius);
+            float radius = rand.random(radMin, radMax), ax = rand.random(radius, width - radius - 20), ay = rand.random(radius, height - radius - 20);
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
@@ -130,7 +130,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //tiny asteroids
         int smalls = rand.random(min, max) * 3;
         for(int i = 0; i < smalls; i++){
-            float radius = rand.random(6, 16), ax = rand.random(radius, width - radius), ay = rand.random(radius, height - radius);
+            float radius = rand.random(3, 11), ax = rand.random(radius, width - radius - 20), ay = rand.random(radius, height - radius - 20);
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
@@ -259,7 +259,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         decoration(0.017f);
 
         //lead generates around stone walls
-        oreAround(Blocks.oreLead, Blocks.stoneWall, 3, 70f, 0.6f * leadScale);
+        oreAround(Blocks.oreLead, Blocks.stoneWall, (int)rand.random(2, 4), 70f, 0.6f * leadScale);
 
         //thorium only generates on beryllic stone and graphitic stone
         ore(Blocks.oreThorium, Blocks.carbonStone, 4f, 0.9f * thoriumScl);
