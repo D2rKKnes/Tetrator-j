@@ -23,7 +23,7 @@ import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     public int min = 26, max = 34, octaves = 2, foct = 3;
-    public float radMin = 12f, radMax = 61f, persistence = 0.42f, scale = 8f, mag = 0.76f, thresh = 1f;
+    public float radMin = 12f, radMax = 61f, persistence = 0.42f, scale = 30f, mag = 0.76f, thresh = 1f;
     public float fmag = 0.5f, fscl = 30f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.4f, carbonChance = 0.6f;
 
@@ -45,7 +45,12 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         for(int x = ax - radius; x <= ax + radius; x++){
             for(int y = ay - radius; y <= ay + radius; y++){
-                if(tiles.in(x, y) &&  Mathf.dst(x, y, ax, ay) / radius + Simplex.noise2d(seed, octaves, persistence, 1f / scale, x, y) * mag < thresh){
+                if(!tiles.in(x, y)) continue;
+                float n1 = Simplex.noise2d(seed, 1, 0.0, 1f / 95f, x + 10, y + 10) * 21f;
+                float n2 = Simplex.noise2d(seed + 1, 1, 0.0, 1f / 16f, x + 10, y + 10) * 11f;
+                float n3 = Simplex.noise2d(seed + 2, 1, 0.0, 1f / 7f,  x + 10, y + 10) * 4f;
+                float distortion = (n1 + n2 + n3) / 21f;
+                if(Mathf.dst(x, y, ax, ay) / radius + distortion < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -55,7 +60,12 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     void asteroid(int ax, int ay, int rad, Floor floor) {
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
-                if (tiles.in(x, y) && Mathf.dst(x, y, ax, ay) / rad + Simplex.noise2d(seed, octaves, persistence, 1f / scale, x, y) * mag < thresh) {
+                if(!tiles.in(x, y)) continue;
+                float n1 = Simplex.noise2d(seed, 1, 0.0, 1f / 95f, x + 10, y + 10) * 21f;
+                float n2 = Simplex.noise2d(seed + 1, 1, 0.0, 1f / 16f, x + 10, y + 10) * 11f;
+                float n3 = Simplex.noise2d(seed + 2, 1, 0.0, 1f / 7f,  x + 10, y + 10) * 4f;
+                float distortion = (n1 + n2 + n3) / 21f;
+                if(Mathf.dst(x, y, ax, ay) / radius + distortion < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -94,7 +104,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //tiny asteroids
         int smalls = rand.random(min, max) * 3;
         for(int i = 0; i < smalls; i++){
-            float radius = rand.random(1, 8), ax = rand.random(radius, width - radius), ay = rand.random(radius, height - radius);
+            float radius = rand.random(6, 16), ax = rand.random(radius, width - radius), ay = rand.random(radius, height - radius);
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
