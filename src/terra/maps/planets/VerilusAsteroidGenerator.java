@@ -14,6 +14,7 @@ import mindustry.game.*;
 import mindustry.game.Rules;
 import mindustry.graphics.g3d.*;
 import mindustry.maps.generators.*;
+import mindustry.maps.filters.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
@@ -49,23 +50,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
-                if(!tiles.in(x, y)) continue;
-                float dx = x, dy = y;
-
-                float n1x = DistortNoise(seed, 95f, 21f, dx, dy);
-                float n1y = DistortNoise(seed + 1, 95f, 21f, dx, dy);
-                dx += n1x;
-                dy += n1y;
-                float n2x = DistortNoise(seed + 2, 16f, 11f, dx, dy);
-                float n2y = DistortNoise(seed + 3, 16f, 11f, dx, dy);
-                dx += n2x;
-                dy += n2y;
-                float n3x = DistortNoise(seed + 4, 7f, 4f, dx, dy);
-                float n3y = DistortNoise(seed + 5, 7f, 4f, dx, dy);
-                dx += n3x;
-                dy += n3y;
-
-                if (Mathf.dst(dx, dy, ax, ay) < rad * thresh) {
+                if(!tiles.in(x, y)) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -75,23 +60,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     void asteroid(int ax, int ay, int rad, Floor floor) {
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
-                if(!tiles.in(x, y)) continue;
-                float dx = x, dy = y;
-
-                float n1x = DistortNoise(seed, 95f, 21f, dx, dy);
-                float n1y = DistortNoise(seed + 1, 95f, 21f, dx, dy);
-                dx += n1x;
-                dy += n1y;
-                float n2x = DistortNoise(seed + 2, 16f, 11f, dx, dy);
-                float n2y = DistortNoise(seed + 3, 16f, 11f, dx, dy);
-                dx += n2x;
-                dy += n2y;
-                float n3x = DistortNoise(seed + 4, 7f, 4f, dx, dy);
-                float n3y = DistortNoise(seed + 5, 7f, 4f, dx, dy);
-                dx += n3x;
-                dy += n3y;
-
-                if (Mathf.dst(dx, dy, ax, ay) < rad * thresh) {
+                if(!tiles.in(x, y)) && Mathf.dst(x, y, ax, ay) < rad) {
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -134,6 +103,22 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
             asteroid((int)ax, (int)ay, (int)radius);
         }
+
+        //distort noise
+        GenerateInput in = new GenerateInput();
+        DistortFilter d1 = new DistortFilter();
+        d1.scl = 95; d1.mag = 21; d1.seed = seed + 1;
+        DistortFilter d2 = new DistortFilter();
+        d2.scl = 16; d2.mag = 11; d2.seed = seed + 2;
+        DistortFilter d3 = new DistortFilter();
+        d3.scl = 7;  d3.mag = 4;  d3.seed = seed + 3;
+        
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d1.apply(tiles, in);
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d2.apply(tiles, in);
+        in.begin(width, height, (x, y) -> tiles.getn(x, y));
+        d3.apply(tiles, in);
 
         //random noise stone
         pass((x, y) -> {
