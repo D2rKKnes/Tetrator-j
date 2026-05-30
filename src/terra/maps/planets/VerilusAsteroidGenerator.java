@@ -36,7 +36,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
     }
 
-    protected float DistortNoise(float seed, float scl, float mag, int x, int y){
+    protected float DistortNoise(int seed, float scl, float mag, int x, int y){
         return Simplex.noise2d(seed, 1f, 0f, 1f / scl, x + 10, y + 10) * mag - mag / 2f;
     }
 
@@ -52,8 +52,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 if(!tiles.in(x, y)) continue;
                 float distortion;
                 distortion += DistortNoise(seed, 95, 21, x, y);
-                distortion += DistortNoise(seed, 16, 11, x, y);
-                distortion += DistortNoise(seed, 7, 4, x, y);
+                distortion += DistortNoise(seed + 1, 16, 11, x, y);
+                distortion += DistortNoise(seed + 2, 7, 4, x, y);
                 if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
@@ -67,8 +67,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
                 if(!tiles.in(x, y)) continue;
                 float distortion;
                 distortion += DistortNoise(seed, 95, 21, x, y);
-                distortion += DistortNoise(seed, 16, 11, x, y);
-                distortion += DistortNoise(seed, 7, 4, x, y);
+                distortion += DistortNoise(seed + 1, 16, 11, x, y);
+                distortion += DistortNoise(seed + 2, 7, 4, x, y);
                 if((Mathf.dst(x, y, ax, ay) + distortion) / rad < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
