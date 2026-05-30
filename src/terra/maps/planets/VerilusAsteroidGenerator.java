@@ -23,8 +23,8 @@ import mindustry.world.meta.*;
 import static mindustry.Vars.*;
 
 public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
-    public int min = 26, max = 34, octaves = 2, foct = 3;
-    public float radMin = 12f, radMax = 58f, persistence = 0.42f, scale = 30f, mag = 0.76f, thresh = 1f;
+    public int min = 26, max = 34, octaves = 1, foct = 3;
+    public float radMin = 12f, radMax = 58f, persistence = 0.32f, scale = 80f, mag = 0.86f, thresh = 1f;
     public float fmag = 0.5f, fscl = 36f, fper = 0.6f;
     public float stoneChance = 0f, iceChance = 0.38f, carbonChance = 0.6f;
 
@@ -47,7 +47,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         for(int x = ax - rad; x <= ax + rad; x++){
             for(int y = ay - rad; y <= ay + rad; y++){
-                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) / rad + Simplex.noise2d(seed, octaves, persistence, 1f / scale, x, y) * mag < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
@@ -57,7 +57,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     void asteroid(int ax, int ay, int rad, Floor floor) {
         for (int x = ax - rad; x <= ax + rad; x++) {
             for (int y = ay - rad; y <= ay + rad; y++) {
-                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) < rad) {
+                if(tiles.in(x, y) && Mathf.dst(x, y, ax, ay) / rad + Simplex.noise2d(seed, octaves, persistence, 1f / scale, x, y) * mag < thresh){
                     tiles.getn(x, y).setFloor(floor);
                 }
             }
