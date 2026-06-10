@@ -15,6 +15,8 @@ import mindustry.ui.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import mindustry.world.consumers.*;
+import mindustry.world.blocks.power.*;
+import mindustry.world.consumers.*;
 
 public class ImpactCollider extends ConsumeGenerator {
     public final int timerUse = timers++;
@@ -42,12 +44,6 @@ public class ImpactCollider extends ConsumeGenerator {
         explodeEffect = Fx.impactReactorExplosion;
         explodeSound = Sounds.explosionReactor2;
 
-        consumes.add(new ConsumeItemFilter(new ItemStack(Items.thorium, 1)) {
-            @Override
-            public float efficiencyMultiplier(Building entity) {
-                return 1f;
-            }
-        });
         consumesPower = true;
     }
 
