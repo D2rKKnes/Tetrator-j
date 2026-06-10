@@ -1,11 +1,14 @@
 package terra.world.blocks;
 
 import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.content.*;
+import mindustry.entities.Effect;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
@@ -16,15 +19,24 @@ import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import mindustry.world.consumers.*;
 import mindustry.world.blocks.power.*;
-import mindustry.world.consumers.*;
+
+import static mindustry.Vars.state;
 
 public class ImpactCollider extends ConsumeGenerator {
     public final int timerUse = timers++;
     public float warmupSpeed = 0.001f;
     public float itemDuration = 60f;
 
+    public @Load("@-lights") TextureRegion lightsRegion;
+    public float flashThreshold = 0.01f;
+    public float flashAlpha = 0.4f;
+    public float flashSpeed = 7f;
+    public Color flashColor1 = Color.red;
+    public Color flashColor2 = Color.valueOf("89e8b6");
+
     public ImpactCollider(String name){
         super(name);
+
         hasPower = true;
         hasLiquids = true;
         liquidCapacity = 30f;
@@ -44,7 +56,10 @@ public class ImpactCollider extends ConsumeGenerator {
         explodeEffect = Fx.impactReactorExplosion;
         explodeSound = Sounds.explosionReactor2;
 
-        consumesPower = true;
+        outputLiquid = new LiquidStack(Liquids.slag, 0.2f);
+        explodeOnFull = true;
+
+        consumes.add(ConsumeItems.items(new ItemStack(Items.thorium, 1)));
     }
 
     @Override
@@ -62,10 +77,6 @@ public class ImpactCollider extends ConsumeGenerator {
     public void setStats(){
         super.setStats();
 
-        if(hasItems){
-            stats.add(Stat.productionTime, itemDuration / 60f, StatUnit.seconds);
-        }
-
         if(consPower != null){
             float max = -(float)Math.log(0.001f) / warmupSpeed / 60f;
             float equal = -(float)Math.log(1f - Mathf.pow(consPower.usage / powerProduction, 1f / 5f)) / warmupSpeed / 60f;
@@ -78,6 +89,7 @@ public class ImpactCollider extends ConsumeGenerator {
 
     public class ImpactColliderBuild extends ConsumeGeneratorBuild {
         public float warmup, totalProgress;
+        public float flash;
 
         @Override
         public void updateTile(){
@@ -102,6 +114,37 @@ public class ImpactCollider extends ConsumeGenerator {
 
             totalProgress += warmup * Time.delta;
             productionEfficiency = Mathf.pow(warmup, 5f);
+
+            if(outputLiquid != null){
+                float added = Math.min(productionEfficiency * delta() * outputLiquid.amount,
+                                        liquidCapacity - liquids.get(outputLiquid.liquid));
+                liquids.add(outputLiquid.liquid, added);
+                dumpLiquid(outputLiquid.liquid);
+
+                if(explodeOnFull && liquids.get(outputLiquid.liquid) >= liquidCapacity - 0.01f){
+                    kill();
+                    Events.fire(new GeneratorPressureExplodeEvent(this));
+                }
+            }
+        }
+
+        @Override
+        public void draw(){
+            super.draw();
+
+            if(explodeOnFull && outputLiquid != null && lightsRegion != null){
+                float fill = liquids.get(outputLiquid.liquid) / liquidCapacity;
+                if(fill > flashThreshold){
+                    if(!state.isPaused()) flash += (1f + ((fill - flashThreshold) / (1f - flashThreshold)) * flashSpeed) * Time.delta;
+                    Draw.z(Layer.blockAdditive);
+                    Draw.blend(Blending.additive);
+                    Draw.color(flashColor1, flashColor2, Mathf.absin(flash, 8f, 1f));
+                    float alpha = flashAlpha * Mathf.clamp((fill - flashThreshold) / (1f - flashThreshold) * 4f);
+                    Draw.alpha(alpha);
+                    Draw.rect(lightsRegion, x, y);
+                    Draw.blend();
+                }
+            }
         }
 
         @Override
