@@ -1552,8 +1552,15 @@ public class TerraBlocks{
             consumeLiquid(Liquids.nitrogen, 0.1f);
             hasLiquids = true;
 
-            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
-
+            buildType = () -> new AttributeCrafterBuild() {
+                private DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
+                
+                @Override
+                public void draw(){
+                    drawer.draw(this);
+                }
+            };
+            
             instructionsPerTick = 12;
             range = 8 * 28;
             size = 2;
