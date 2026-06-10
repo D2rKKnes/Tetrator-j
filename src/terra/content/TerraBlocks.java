@@ -331,7 +331,7 @@ public class TerraBlocks{
             consumePowerBuffered(20000f);
             baseExplosiveness = 3f;
         }};
-        antimatterCollider = new ImpactReactor("antimatter-collider"){{
+        antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 5000));
             size = 7;
             health = 7850;
@@ -339,12 +339,17 @@ public class TerraBlocks{
             itemDuration = 140f;
             ambientSound = Sounds.loopPulse;
             ambientSoundVolume = 0.08f;
-            liquidCapacity = 80f;
+            liquidCapacity = 8000f;
+            outputLiquid = new LiquidStack(Liquids.slag, 20f);
+            explodeOnFull = true;
             explosionShake = 26f;
+            explosionShakeDuration = 20f;
+            explosionRadius = 14;
+            explosionDamage = 7000;
 
             consumePower(20f);
-            consumeItem(Items.blastCompound);
-            consumeLiquid(Liquids.cryofluid, 0.25f);
+            consumeItem(Items.thorium);
+            consumeLiquid(Liquids.cryofluid, 14f);
         }};
         
         //crafters
