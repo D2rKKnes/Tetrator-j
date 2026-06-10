@@ -7,6 +7,7 @@ import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
+import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.game.EventType.*;
@@ -55,11 +56,6 @@ public class ImpactCollider extends ConsumeGenerator {
         explosionMinWarmup = 0.3f;
         explodeEffect = Fx.impactReactorExplosion;
         explodeSound = Sounds.explosionReactor2;
-
-        outputLiquid = new LiquidStack(Liquids.slag, 0.2f);
-        explodeOnFull = true;
-
-        consumes.add(ConsumeItems.items(new ItemStack(Items.thorium, 1)));
     }
 
     @Override
