@@ -68,6 +68,7 @@ public class TerraBlocks{
     //power
     photonPanel, photonPanelLarge,
     multicellBattery,
+    antimatterCollider,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
     bisiliconOven, darkSteelWorkshop, titaniumPress, 
@@ -329,6 +330,21 @@ public class TerraBlocks{
             size = 2;
             consumePowerBuffered(20000f);
             baseExplosiveness = 3f;
+        }};
+        antimatterCollider = new ImpactReactor("antimatter-collider"){{
+            requirements(Category.power, with(Items.lead, 5000));
+            size = 7;
+            health = 7850;
+            powerProduction = 280f;
+            itemDuration = 140f;
+            ambientSound = Sounds.loopPulse;
+            ambientSoundVolume = 0.08f;
+            liquidCapacity = 80f;
+            explosionShake = 26f;
+
+            consumePower(20f);
+            consumeItem(Items.blastCompound);
+            consumeLiquid(Liquids.cryofluid, 0.25f);
         }};
         
         //crafters
