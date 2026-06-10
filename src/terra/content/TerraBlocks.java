@@ -345,15 +345,21 @@ public class TerraBlocks{
             outputLiquid = new LiquidStack(Liquids.slag, 20f);
             explodeOnFull = true;
             explosionShake = 26f;
-            explosionShakeDuration = 120f;
-            explosionRadius = 144;
-            explosionDamage = 7000;
+            explosionShakeDuration = 240f;
+            explosionRadius = 23;
+            explosionDamage = 8400;
 
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawPlasma(),
                 new DrawLiquidTile(Liquids.cryofluid, 18),
-                new DrawRegion("-rot", 9f),
+                new DrawGlowRegion(-1f){{
+                    suffix = "-rot";
+                    glowIntensity = 0.3f;
+                    rotateSpeed = 9f;
+                    alpha = 0.4f;
+                    color = new Color(0.8f, 0.8f, 1f, 1f);
+                }});
                 new DrawDefault(),
                 new DrawGlowRegion("-glow"){{
                     color = Color.valueOf("70170b");
@@ -1552,14 +1558,14 @@ public class TerraBlocks{
             consumeLiquid(Liquids.nitrogen, 0.1f);
             hasLiquids = true;
 
-            buildType = () -> new LogicBuild() {
+            /*buildType = () -> new LogicBuild() {
                 private DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
                 
                 @Override
                 public void draw(){
                     drawer.draw(this);
                 }
-            };
+            };*/
             
             instructionsPerTick = 12;
             range = 8 * 28;
