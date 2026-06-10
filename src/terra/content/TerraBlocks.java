@@ -1552,7 +1552,7 @@ public class TerraBlocks{
             consumeLiquid(Liquids.nitrogen, 0.1f);
             hasLiquids = true;
 
-            buildType = () -> new AttributeCrafterBuild() {
+            buildType = () -> new LogicBuild() {
                 private DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
                 
                 @Override
