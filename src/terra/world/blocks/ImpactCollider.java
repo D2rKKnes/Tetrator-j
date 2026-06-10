@@ -7,7 +7,7 @@ import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
-import mindustry.annotations.Annotations.*;
+
 import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.game.EventType.*;
@@ -28,7 +28,7 @@ public class ImpactCollider extends ConsumeGenerator {
     public float warmupSpeed = 0.001f;
     public float itemDuration = 60f;
 
-    public @Load("@-lights") TextureRegion lightsRegion;
+    public TextureRegion lightsRegion;
     public float flashThreshold = 0.01f;
     public float flashAlpha = 0.4f;
     public float flashSpeed = 7f;
@@ -56,6 +56,8 @@ public class ImpactCollider extends ConsumeGenerator {
         explosionMinWarmup = 0.3f;
         explodeEffect = Fx.impactReactorExplosion;
         explodeSound = Sounds.explosionReactor2;
+
+        lightsRegion = Core.atlas.find(name + "-lights");
     }
 
     @Override
