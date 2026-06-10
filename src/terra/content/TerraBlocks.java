@@ -359,7 +359,7 @@ public class TerraBlocks{
                     rotateSpeed = 9f;
                     alpha = 0.4f;
                     color = new Color(0.8f, 0.8f, 1f, 1f);
-                }});
+                }},
                 new DrawDefault(),
                 new DrawGlowRegion("-glow"){{
                     color = Color.valueOf("70170b");
