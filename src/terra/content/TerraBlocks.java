@@ -93,7 +93,9 @@ public class TerraBlocks{
     blastGate, blastDoorLarge, blastDoorHuge,
     shieldedWallLarge,
     //power
-    beamBeacon, reinforcedPanel;
+    beamBeacon, reinforcedPanel,
+    //logic
+    primeProcessor;
     //OTHER =---
     public static void load(){
         //VERILUS & SERPULO =---
@@ -332,22 +334,34 @@ public class TerraBlocks{
             baseExplosiveness = 3f;
         }};
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
-            requirements(Category.power, with(Items.lead, 5000));
+            requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
             size = 7;
             health = 7850;
-            powerProduction = 280f;
-            itemDuration = 140f;
+            powerProduction = 325f;
+            itemDuration = 170f;
             ambientSound = Sounds.loopPulse;
-            ambientSoundVolume = 0.08f;
+            ambientSoundVolume = 0.17f;
             liquidCapacity = 8000f;
             outputLiquid = new LiquidStack(Liquids.slag, 20f);
             explodeOnFull = true;
             explosionShake = 26f;
-            explosionShakeDuration = 20f;
-            explosionRadius = 14;
+            explosionShakeDuration = 120f;
+            explosionRadius = 144;
             explosionDamage = 7000;
 
-            consumePower(20f);
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawPlasma(),
+                new DrawLiquidTile(Liquids.cryofluid, 18),
+                new DrawRegion("-rot", 9f),
+                new DrawDefault(),
+                new DrawGlowRegion("-glow"){{
+                    color = Color.valueOf("70170b");
+                    alpha = 0.7f;
+                }}
+            );
+
+            consumePower(38f);
             consumeItem(Items.thorium);
             consumeLiquid(Liquids.cryofluid, 14f);
         }};
@@ -1529,6 +1543,20 @@ public class TerraBlocks{
             armor = 8;
             health = 450;
             powerProduction = 0.72f;
+        }};
+
+        //logic
+        primeProcessor = new LogicBlock("prime-processor"){{
+            requirements(Category.logic, with(Items.oxide, 80, Items.silicon, 100, Items.thorium, 25));
+
+            consumeLiquid(Liquids.nitrogen, 0.1f);
+            hasLiquids = true;
+
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
+
+            instructionsPerTick = 12;
+            range = 8 * 28;
+            size = 2;
         }};
         
         //OTHER =---
