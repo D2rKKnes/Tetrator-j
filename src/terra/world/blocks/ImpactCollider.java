@@ -33,7 +33,7 @@ public class ImpactCollider extends ConsumeGenerator {
     public float flashAlpha = 0.4f;
     public float flashSpeed = 7f;
     public Color flashColor1 = Color.red;
-    public Color flashColor2 = Color.valueOf("89e8b6");
+    public Color flashColor2 = Color.valueOf("bf92f9");
 
     public ImpactCollider(String name){
         super(name);
