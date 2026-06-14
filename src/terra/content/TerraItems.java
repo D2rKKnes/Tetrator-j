@@ -17,7 +17,8 @@ import static mindustry.content.Items.*;
 public class TerraItems{
     public static Item
 
-            carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, cesium, tesseract;
+            carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, radium, cesium, tesseract,
+            silver;
 
     public static void load(){
         carbon = new Item("carbon", Color.valueOf("3c4448")){{
@@ -137,6 +138,12 @@ public class TerraItems{
             damageRand = 6.7f;
             damagePercent = false;
             damageEffect = Fx.circleColorSpark;
+        }};
+
+        silver = new Item("silver", Color.valueOf("b1b4cc")){{
+            cost = 1.4f;
+            hardness = 3;
+            healthScaling = 1.1f;
         }};
     }
 }
