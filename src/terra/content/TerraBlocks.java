@@ -1480,7 +1480,7 @@ public class TerraBlocks{
                     damage = speed = 0f;
                     ammoMultiplier = 2;
                     shootEffect = smokeEffect = Fx.none;
-                    spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
+                    spawnUnit = new MissileUnitType("aircraft-thermoxite-missile"){{
                         speed = 3f;
                         maxRange = 6f;
                         lifetime = 200f;
