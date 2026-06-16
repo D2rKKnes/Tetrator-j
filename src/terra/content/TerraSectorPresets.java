@@ -10,7 +10,7 @@ public class TerraSectorPresets {
 
     public static void load() {
         verilus = new NoFileSectorPreset("verilus", Planets.verilus, 0); 
-        verilus.alwaysUnlocked = true;
+        verilus.alwaysUnlocked = false;
         verilus.addStartingItems = true;
         verilus.difficulty = 8;
         verilus.allowLaunchSchematics = true;
