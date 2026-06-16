@@ -68,16 +68,22 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(erekir, shieldedWall, () -> {
-            node(shieldedWallLarge, () -> {
-            });
+            node(shieldedWallLarge, () -> {});
         });
         vanillaNode(erekir, beamTower, () -> {
-            node(beamBeacon, () -> {
-            });
+            node(beamBeacon, () -> {});
         });
         vanillaNode(erekir, turbineCondenser, () -> {
-            node(reinforcedPanel, Seq.with(new SectorComplete(lake)), () -> {
-            });
+            node(reinforcedPanel, Seq.with(new SectorComplete(lake)), () -> {});
+        });
+        vanillaNode(erekir, oxide, () -> {
+            nodeProduce(fissileMatter, () -> {});
+        });
+        vanillaNode(erekir, neoplasm, () -> {
+            nodeProduce(dormantCyst, () -> {});
+        });
+        vanillaNode(erekir, carbide, () -> {
+            nodeProduce(gallium, () -> {});
         });
     }
     //from prog-mats
