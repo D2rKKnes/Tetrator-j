@@ -339,7 +339,7 @@ public class TerraBlocks{
             size = 7;
             health = 7850;
             powerProduction = 325f;
-            itemDuration = 30f;
+            itemDuration = 20f;
             ambientSound = Sounds.loopPulse;
             ambientSoundVolume = 0.17f;
             liquidCapacity = 10000f;
@@ -378,7 +378,7 @@ public class TerraBlocks{
                 fuelMap.put(Items.fissileMatter, 1f);
                 fuelMap.put(TerraItems.gammaCell, 1.5f);
             consume(new ConsumeItemEfficiencyList(fuelMap));
-            consumeLiquid(Liquids.cryofluid, 500f / 60);
+            consumeLiquid(Liquids.cryofluid, 500.0001f / 60);
         }};
         
         //crafters
@@ -1433,18 +1433,19 @@ public class TerraBlocks{
                 Items.thorium,  new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 3;
-                    shootEffect = smokeEffect = Fx.none;
+                    shootEffect = Fx.shootBig;
+                    smokeEffect = Fx.shootBigSmoke2;
                     spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
                         speed = 5f;
                         maxRange = 6f;
-                        lifetime = 200f;
-                        hitSize = 5.75f;
+                        lifetime = 70f;
+                        hitSize = 6f;
                         outlineColor = Pal.darkerMetal;
                         engineColor = trailColor = Pal.stat;
                         engineLayer = Layer.effect;
                         engineSize = 1.4f;
-                        engineOffset = 3.5f;
-                        rotateSpeed = 2f;
+                        engineOffset = 7f;
+                        rotateSpeed = 2.3f;
                         trailLength = 9;
                         missileAccelTime = 20f;
                         lowAltitude = true;
@@ -1479,17 +1480,19 @@ public class TerraBlocks{
                 TerraItems.thermoxite,  new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 2;
-                    shootEffect = smokeEffect = Fx.none;
+                    reloadMultiplier = 0.25f;
+                    shootEffect = Fx.shootBig;
+                    smokeEffect = Fx.shootBigSmoke2;
                     spawnUnit = new MissileUnitType("aircraft-thermoxite-missile"){{
                         speed = 3f;
                         maxRange = 6f;
-                        lifetime = 200f;
-                        hitSize = 5.75f;
+                        lifetime = 130f;
+                        hitSize = 6f;
                         outlineColor = Pal.darkerMetal;
                         engineColor = trailColor = TerraItems.thermoxite.color;
                         engineLayer = Layer.effect;
                         engineSize = 1.4f;
-                        engineOffset = 3.5f;
+                        engineOffset = 7f;
                         rotateSpeed = 3f;
                         trailLength = 9;
                         missileAccelTime = 20f;
@@ -1514,10 +1517,12 @@ public class TerraBlocks{
                             shake = 3f;
                             bullet = new ExplosionBulletType(88f, 7f * 8){{
                                 hitColor = TerraItems.thermoxite.color;
+                                shootEffect = new WrapEffect(Fx.shootQuellPulse, Pal.suppress);
                                 collidesAir = true;
                                 buildingDamageMultiplier = 0.2f;
                                 reloadMultiplier = 1f;
                                 ammoMultiplier = 2f;
+                                reloadMultiplier = 0.25f;
                                 status = TerraStatusEffects.extinction;
                                 statusDuration = 30f;
                             }};
@@ -1531,13 +1536,13 @@ public class TerraBlocks{
                     progress = PartProgress.warmup;
                     heatProgress = PartProgress.warmup;
                     heatColor = Color.red;
-                    moveRot = -22f;
+                    moveRot = -16f;
                     moveX = 0f;
-                    moveY = -5f;
+                    moveY = -3f;
                     mirror = true;
                 }});
                 setAmmoParts(
-                    Items.lead, Seq.with(new RegionPart("-thorium-missile"){{
+                    Items.thorium, Seq.with(new RegionPart("-thorium-missile"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
@@ -1547,9 +1552,9 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -4f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -1f, 0f));
                     }}),
-                    Items.titanium, Seq.with(new RegionPart("-thermoxite-missile"){{
+                    TerraItems.thermoxite, Seq.with(new RegionPart("-thermoxite-missile"){{
                         progress = PartProgress.reload;
                         colorTo = new Color(1f, 1f, 1f, 0f);
                         color = Color.white;
@@ -1559,17 +1564,20 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -4f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -1f, 0f));
                     }})
                 );
             }};
 
             size = 3;
-            shootSound = Sounds.shootMissile;
+            shootSound = Sounds.shootScathe;
+            shootSoundVolume = 0.5f;
             shootY = 0f;
             reload = 90f;
+            minWarmup = 0.92f;
             range = 340;
             shootCone = 15f;
+            newTargetInterval = 20f;
             rotateSpeed = 4f;
             maxAmmo = 10;
             coolant = consumeCoolant(0.1f);
