@@ -15,7 +15,7 @@ public class TerraLiquids{
 
         fissilePlasma = new Liquid("fissile-plasma", Color.valueOf("bcff73")){{
             gas = true;
-            temperature = 1f;
+            temperature = 3f;
             lightColor = Color.valueOf("bcff73").a(0.4f);
         }};
     }
