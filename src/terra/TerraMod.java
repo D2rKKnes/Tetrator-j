@@ -31,6 +31,7 @@ public class TerraMod extends Mod{
         //TerraFx.load();
         TerraStatusEffects.load();
         TerraItems.load();
+        TerraLiquids.load();
         TerraEnvironmentBlocks.load();
         TerraUnitTypes.load();
         TerraBlocks.load();
