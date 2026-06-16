@@ -183,11 +183,11 @@ public class TerraVerilusTree {
                 nodeProduce(titanium, () -> {
                     nodeProduce(thorium, () -> {
                         nodeProduce(phaseFabric, () -> {
-                            nodeProduce(fissileMatter, () -> {
-                                nodeProduce(fissilePlasma, () -> {});
-                                nodeProduce(fissileCrystals, () -> {
-                                    nodeProduce(gammaCell, () -> {});
-                                });
+                            nodeProduce(fissileMatter, () -> {});
+                        });
+                        nodeProduce(fissilePlasma, () -> {
+                            nodeProduce(fissileCrystals, () -> {
+                                nodeProduce(gammaCell, () -> {});
                             });
                         });
                         nodeProduce(darkSteel, () -> {
