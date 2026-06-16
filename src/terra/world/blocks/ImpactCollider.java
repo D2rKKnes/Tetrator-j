@@ -25,10 +25,10 @@ import static mindustry.Vars.state;
 
 public class ImpactCollider extends ConsumeGenerator {
     public final int timerUse = timers++;
-    public float warmupSpeed = 0.001f;
+    public float warmupSpeed = 0.0013f;
 
     public TextureRegion lightsRegion;
-    public float flashThreshold = 0.01f;
+    public float flashThreshold = 0.3f;
     public float flashAlpha = 0.4f;
     public float flashSpeed = 7f;
     public Color flashColor1 = Color.red;
@@ -56,7 +56,11 @@ public class ImpactCollider extends ConsumeGenerator {
         explosionMinWarmup = 0.3f;
         explodeEffect = Fx.impactReactorExplosion;
         explodeSound = Sounds.explosionReactor2;
+    }
 
+    @Override
+    public void load(){
+        super.load();
         lightsRegion = Core.atlas.find(name + "-lights");
     }
 
