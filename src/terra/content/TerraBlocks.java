@@ -1493,7 +1493,7 @@ public class TerraBlocks{
                         lifetime = 140f;
                         hitSize = 6f;
                         outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = TerraItems.thermoxite.color;
+                        engineColor = trailColor = TerraItems.rawThermoxite.color;
                         engineLayer = Layer.effect;
                         engineSize = 1.4f;
                         engineOffset = 7f;
@@ -1520,7 +1520,7 @@ public class TerraBlocks{
                             shootOnDeath = true;
                             shake = 3f;
                             bullet = new ExplosionBulletType(88f, 7f * 8){{
-                                hitColor = TerraItems.thermoxite.color;
+                                hitColor = TerraItems.rawThermoxite.color;
                                 shootEffect = new WrapEffect(Fx.shootQuellPulse, TerraItems.rawThermoxite.color);
                                 collidesAir = true;
                                 buildingDamageMultiplier = 0.2f;
