@@ -1584,7 +1584,7 @@ public class TerraBlocks{
                                 ammoMultiplier = 1f;
                                 reloadMultiplier = 0.1f;
                                 status = StatusEffects.corroded;
-                                statusDuration = 150f;
+                                statusDuration = 250f;
                             }};
                         }});
                     }};
