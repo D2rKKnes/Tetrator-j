@@ -354,7 +354,10 @@ public class TerraBlocks{
 
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
-                new DrawPlasma(),
+                new DrawPlasma(){{
+                    plasma1 = Color.valueOf("bfb1ff");
+                    plasma2 = Color.valueOf("836cf4");
+                }},
                 new DrawRegion("-mid"),
                 new DrawLiquidTile(Liquids.cryofluid, 18),
                 new DrawGlowRegion(-1f){{
