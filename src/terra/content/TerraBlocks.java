@@ -1469,7 +1469,7 @@ public class TerraBlocks{
                 new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
                 new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
                 new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
-                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.radium, 100, TerraItems.titaniumPlate, 2780))
+                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780))
             );
             consumePower(0.1f);
         }};
