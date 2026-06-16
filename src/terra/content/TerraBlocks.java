@@ -1529,7 +1529,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.2f;
                                 ammoMultiplier = 2f;
                                 reloadMultiplier = 0.2f;
-                                status = TerraStatusEffects.melting;
+                                status = StatusEffects.melting;
                                 statusDuration = 90f;
                             }};
                         }});
@@ -1582,7 +1582,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.2f;
                                 ammoMultiplier = 1f;
                                 reloadMultiplier = 0.1f;
-                                status = TerraStatusEffects.corroded;
+                                status = StatusEffects.corroded;
                                 statusDuration = 150f;
                             }};
                         }});
