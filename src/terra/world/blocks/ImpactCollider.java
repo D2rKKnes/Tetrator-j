@@ -29,10 +29,10 @@ public class ImpactCollider extends ConsumeGenerator {
 
     public TextureRegion lightsRegion;
     public float flashThreshold = 0.3f;
-    public float flashAlpha = 0.4f;
+    public float flashAlpha = 0.5f;
     public float flashSpeed = 7f;
     public Color flashColor1 = Color.red;
-    public Color flashColor2 = Color.valueOf("bf92f9");
+    public Color flashColor2 = Color.valueOf("989aa4");
 
     public ImpactCollider(String name){
         super(name);
