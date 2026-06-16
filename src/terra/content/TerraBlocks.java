@@ -369,16 +369,14 @@ public class TerraBlocks{
             );
 
             consumePower(38f);
-            ConsumeItemList fuel = new ConsumeItemList();
-            fuel.setMultipliers(
-                Items.thorium, 0.75f,
-                Items.phaseFabric, 0.75f,
-                TerraItems.rawThermoxite, 0.75f,
-                TerraItems.thermoxite, 1f,
-                Items.fissileMatter, 1f,
-                TerraItems.gammaCell, 1.5f
-            );
-            consume(fuel);
+            ObjectFloatMap<Item> fuelMap = new ObjectFloatMap<>();
+                fuelMap.put(Items.thorium, 0.75f);
+                fuelMap.put(Items.phaseFabric, 0.75f);
+                fuelMap.put(TerraItems.rawThermoxite, 0.75f);
+                fuelMap.put(TerraItems.thermoxite, 1f);
+                fuelMap.put(Items.fissileMatter, 1f);
+                fuelMap.put(TerraItems.gammaCell, 1.5f);
+            consume(new ConsumeItemEfficiencyList(fuelMap));
             consumeLiquid(Liquids.cryofluid, 500f / 60);
         }};
         
@@ -1040,6 +1038,7 @@ public class TerraBlocks{
                         fogRadius = 3f;
     
                         health = 45;
+                        hidden = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
@@ -1086,6 +1085,7 @@ public class TerraBlocks{
                         fogRadius = 3f;
     
                         health = 85;
+                        hidden = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
@@ -1132,6 +1132,7 @@ public class TerraBlocks{
                         fogRadius = 3f;
     
                         health = 60;
+                        hidden = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
@@ -1422,6 +1423,160 @@ public class TerraBlocks{
             limitRange();
             coolant = consumeCoolant(0.2f);
             depositCooldown = 2.0f;
+        }};
+
+        aircraft = new ItemTurret("aircraft"){{
+            requirements(Category.turret, with(Items.thorium, 135, Items.graphite, 100, TerraItems.titaniumPlate, 180, TerraItems.diamondDust, 20));
+            predictTarget = false;
+            ammo(
+                Items.thorium,  new BulletType(){{
+                    damage = speed = 0f;
+                    ammoMultiplier = 3;
+                    shootEffect = smokeEffect = Fx.none;
+                    spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
+                        speed = 5f;
+                        maxRange = 6f;
+                        lifetime = 200f;
+                        hitSize = 5.75f;
+                        outlineColor = Pal.darkerMetal;
+                        engineColor = trailColor = Pal.stat;
+                        engineLayer = Layer.effect;
+                        engineSize = 1.4f;
+                        engineOffset = 3.5f;
+                        rotateSpeed = 2f;
+                        trailLength = 9;
+                        missileAccelTime = 20f;
+                        lowAltitude = true;
+                        loopSound = Sounds.loopMissileTrail;
+                        loopSoundVolume = 0.2f;
+                        deathSound = Sounds.explosionMissile;
+                        targetAir = true;
+                        targetUnderBlocks = false;
+    
+                        fogRadius = 6f;
+    
+                        health = 160;
+                        hidden = false;
+    
+                        weapons.add(new Weapon(){{
+                            shootCone = 360f;
+                            mirror = false;
+                            reload = 1f;
+                            deathExplosionEffect = Fx.massiveExplosion;
+                            shootOnDeath = true;
+                            shake = 2.5f;
+                            bullet = new ExplosionBulletType(112f, 5f * 8){{
+                                hitColor = Items.thorium.color;
+                                collidesAir = true;
+                                buildingDamageMultiplier = 0.3f;
+                                reloadMultiplier = 1f;
+                                ammoMultiplier = 3f;
+                            }};
+                        }});
+                    }};
+                }},
+                TerraItems.thermoxite,  new BulletType(){{
+                    damage = speed = 0f;
+                    ammoMultiplier = 2;
+                    shootEffect = smokeEffect = Fx.none;
+                    spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
+                        speed = 3f;
+                        maxRange = 6f;
+                        lifetime = 200f;
+                        hitSize = 5.75f;
+                        outlineColor = Pal.darkerMetal;
+                        engineColor = trailColor = TerraItems.thermoxite.color;
+                        engineLayer = Layer.effect;
+                        engineSize = 1.4f;
+                        engineOffset = 3.5f;
+                        rotateSpeed = 3f;
+                        trailLength = 9;
+                        missileAccelTime = 20f;
+                        lowAltitude = true;
+                        loopSound = Sounds.loopMissileTrail;
+                        loopSoundVolume = 0.2f;
+                        deathSound = Sounds.explosionMissile;
+                        targetAir = true;
+                        targetUnderBlocks = false;
+    
+                        fogRadius = 6f;
+    
+                        health = 300;
+                        hidden = false;
+    
+                        weapons.add(new Weapon(){{
+                            shootCone = 360f;
+                            mirror = false;
+                            reload = 1f;
+                            deathExplosionEffect = Fx.massiveExplosion;
+                            shootOnDeath = true;
+                            shake = 3f;
+                            bullet = new ExplosionBulletType(88f, 7f * 8){{
+                                hitColor = TerraItems.thermoxite.color;
+                                collidesAir = true;
+                                buildingDamageMultiplier = 0.2f;
+                                reloadMultiplier = 1f;
+                                ammoMultiplier = 2f;
+                                status = TerraStatusEffects.extinction;
+                                statusDuration = 30f;
+                            }};
+                        }});
+                    }};
+                }}
+            );
+
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-blade"){{
+                    progress = PartProgress.warmup;
+                    heatProgress = PartProgress.warmup;
+                    heatColor = Color.red;
+                    moveRot = -22f;
+                    moveX = 0f;
+                    moveY = -5f;
+                    mirror = true;
+                }});
+                setAmmoParts(
+                    Items.lead, Seq.with(new RegionPart("-thorium-missile"){{
+                        progress = PartProgress.reload;
+                        colorTo = new Color(1f, 1f, 1f, 0f);
+                        color = Color.white;
+                        mixColorTo = Pal.accent;
+                        mixColor = new Color(1f, 1f, 1f, 0f);
+                        outline = false;
+                        under = true;
+                        layerOffset = -0.01f;
+
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -4f, 0f));
+                    }}),
+                    Items.titanium, Seq.with(new RegionPart("-thermoxite-missile"){{
+                        progress = PartProgress.reload;
+                        colorTo = new Color(1f, 1f, 1f, 0f);
+                        color = Color.white;
+                        mixColorTo = Pal.accent;
+                        mixColor = new Color(1f, 1f, 1f, 0f);
+                        outline = false;
+                        under = true;
+                        layerOffset = -0.01f;
+
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -4f, 0f));
+                    }})
+                );
+            }};
+
+            size = 3;
+            shootSound = Sounds.shootMissile;
+            shootY = 0f;
+            reload = 90f;
+            range = 340;
+            shootCone = 15f;
+            rotateSpeed = 4f;
+            maxAmmo = 10;
+            coolant = consumeCoolant(0.1f);
+            coolantMultiplier = 5f;
+            researchCostMultiplier = 0.5f;
+            depositCooldown = 2.0f;
+
+            limitRange(5f);
         }};
         
         //units
