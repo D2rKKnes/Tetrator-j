@@ -338,11 +338,11 @@ public class TerraBlocks{
             size = 7;
             health = 7850;
             powerProduction = 325f;
-            itemDuration = 170f;
+            itemDuration = 30f;
             ambientSound = Sounds.loopPulse;
             ambientSoundVolume = 0.17f;
-            liquidCapacity = 8000f;
-            outputLiquid = new LiquidStack(Liquids.slag, 20f);
+            liquidCapacity = 10000f;
+            outputLiquid = new LiquidStack(TerraLiquids.fissilePlasma, 1150f / 60);
             explodeOnFull = true;
             explosionShake = 26f;
             explosionShakeDuration = 240f;
@@ -369,7 +369,7 @@ public class TerraBlocks{
 
             consumePower(38f);
             consumeItem(Items.thorium);
-            consumeLiquid(Liquids.cryofluid, 14f);
+            consumeLiquid(Liquids.cryofluid, 500f / 60);
         }};
         
         //crafters
@@ -456,9 +456,12 @@ public class TerraBlocks{
             consumeItems(with(Items.lead, 15, Items.sand, 23, TerraItems.carbon, 18));
             consumePower(8.25f);
             outputItems = with(Items.silicon, 10, Items.metaglass, 7);
+            outputLiquid = new LiquidStack(TerraLiquids.carbonDioxide, 18 / 60f);
             size = 4;
             hasPower = true;
             hasItems = true;
+            hasLiquids = true;
+            ignoreLiquidFullness = true;
             envEnabled = Env.any;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"), 
@@ -481,6 +484,7 @@ public class TerraBlocks{
                     y = -10.75f;
                 }},
                 new DrawDefault(),
+                new DrawLiquidRegion(TerraLiquids.carbonDioxide),
                 new DrawTeamTop(),
                 new DrawPistons() {{
                     suffix = "-part1";
@@ -494,6 +498,7 @@ public class TerraBlocks{
             );
             craftTime = 120;
             itemCapacity = 50;
+            liquidCapacity = 80;
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 1.3f;
             researchCostMultiplier = 0.25f;
@@ -505,7 +510,7 @@ public class TerraBlocks{
                 @Override
                 public void updateTile() {
                     super.updateTile();
-                    if (this.efficiency > 0 && Mathf.chanceDelta(0.8f * this.efficiency * warmup)) {
+                    if (this.liquids.get(TerraLiquids.carbonDioxide) >= this.liquidCapacity - 0.001f && this.efficiency > 0 && Mathf.chanceDelta(0.8f * this.efficiency * warmup)) {
                         float rand1 = Mathf.range(2f), rand2 = Mathf.range(2f);
                         TerraFx.arcSmoke.at(x - 7.5f - rand1, y + 0.5f + rand1);
                         TerraFx.arcSmoke.at(x - 8.5f - rand2, y - 8.5f + rand2);
