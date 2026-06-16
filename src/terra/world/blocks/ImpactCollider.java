@@ -39,6 +39,7 @@ public class ImpactCollider extends ConsumeGenerator {
 
         hasPower = true;
         hasLiquids = true;
+        rebuildable = false;
         liquidCapacity = 30f;
         hasItems = true;
         outputsPower = consumesPower = true;
@@ -136,8 +137,7 @@ public class ImpactCollider extends ConsumeGenerator {
                     Draw.z(Layer.blockAdditive);
                     Draw.blend(Blending.additive);
                     Draw.color(flashColor1, flashColor2, Mathf.absin(flash, 8f, 1f));
-                    float alpha = flashAlpha * Mathf.clamp((fill - flashThreshold) / (1f - flashThreshold) * 4f);
-                    Draw.alpha(alpha);
+                    Draw.alpha(flashAlpha * Mathf.clamp((fill - flashThreshold) / (1f - flashThreshold) * 4f));
                     Draw.rect(lightsRegion, x, y);
                     Draw.blend();
                 }
