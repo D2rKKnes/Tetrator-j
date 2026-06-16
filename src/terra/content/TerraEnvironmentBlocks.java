@@ -16,7 +16,7 @@ public class TerraEnvironmentBlocks {
 
         largeTree, iceBoulder, iceRift, 
         carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster, oreRawThermoxite, oreThermoxite,
-        metalTilesSpace, metalWall4;
+        metalTilesSpace, metalWall4, silver;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
@@ -101,6 +101,9 @@ public class TerraEnvironmentBlocks {
         }};
         metalWall4 = new StaticWall("metal-wall-4"){{
             autotile = true;
+        }};
+        silver = new OreBlock(TerraItems.silver) {{
+            variants = 3;
         }};
     }
 }
