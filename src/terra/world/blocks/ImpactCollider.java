@@ -32,7 +32,7 @@ public class ImpactCollider extends ConsumeGenerator {
     public float flashAlpha = 0.5f;
     public float flashSpeed = 7f;
     public Color flashColor1 = Color.red;
-    public Color flashColor2 = Color.valueOf("989aa4");
+    public Color flashColor2 = Color.valueOf("000000");
 
     public ImpactCollider(String name){
         super(name);
@@ -95,6 +95,7 @@ public class ImpactCollider extends ConsumeGenerator {
 
         @Override
         public void updateTile(){
+            updateEfficiencyMultiplier();
             if(efficiency >= 0.9999f && power.status >= 0.99f){
                 boolean prevOut = consPower != null && getPowerProduction() <= consPower.requestedPower(this);
 
@@ -115,7 +116,7 @@ public class ImpactCollider extends ConsumeGenerator {
             }
 
             totalProgress += warmup * Time.delta;
-            productionEfficiency = Mathf.pow(warmup, 5f);
+            productionEfficiency = Mathf.pow(warmup, 5f) * efficiencyMultiplier;
 
             if(outputLiquid != null){
                 float added = Math.min(productionEfficiency * delta() * outputLiquid.amount,
