@@ -1523,7 +1523,7 @@ public class TerraBlocks{
                             deathExplosionEffect = Fx.massiveExplosion;
                             shootOnDeath = true;
                             shake = 3f;
-                            bullet = new ExplosionBulletType(88f, 7f * 8){{
+                            bullet = new ExplosionBulletType(188f, 7f * 8){{
                                 hitColor = TerraItems.rawThermoxite.color;
                                 shootEffect = new WrapEffect(Fx.shootQuellPulse, TerraItems.rawThermoxite.color);
                                 collidesAir = true;
