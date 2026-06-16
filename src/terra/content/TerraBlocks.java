@@ -1539,7 +1539,7 @@ public class TerraBlocks{
                 TerraItems.fissileCrystals,  new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 1;
-                    reloadMultiplier = 0.1f;
+                    reloadMultiplier = 0.33f;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
                     spawnUnit = new MissileUnitType("aircraft-fissile-missile"){{
@@ -1578,8 +1578,8 @@ public class TerraBlocks{
                             shake = 3f;
                             bullet = new ExplosionBulletType(88f, 14f * 8){{
                                 hitColor = TerraItems.rawThermoxite.color;
-                                shootEffect = new WrapEffect(Fx.titanExplosionSmall, Items.oxide.color);
-                                smokeEffect = new WrapEffect(Fx.titanSmokeSmall, Items.oxide.color);
+                                shootEffect = new WrapEffect(Fx.titanExplosionSmall, TerraItems.gammaCell.color);
+                                smokeEffect = new WrapEffect(Fx.titanSmokeSmall, TerraItems.gammaCell.color);
                                 collidesAir = true;
                                 buildingDamageMultiplier = 0.25f;
                                 ammoMultiplier = 1f;
