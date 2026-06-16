@@ -1478,6 +1478,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.3f;
                                 ammoMultiplier = 3f;
                                 rangeChange = 24;
+                                status = StatusEffects.blasted;
                             }};
                         }});
                     }};
