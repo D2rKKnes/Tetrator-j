@@ -368,7 +368,16 @@ public class TerraBlocks{
             );
 
             consumePower(38f);
-            consumeItem(Items.thorium);
+            ConsumeItemList fuel = new ConsumeItemList();
+            fuel.setMultipliers(
+                Items.thorium, 0.75f,
+                Items.phaseFabric, 0.75f,
+                TerraItems.rawThermoxite, 0.75f,
+                TerraItems.thermoxite, 1f,
+                Items.fissileMatter, 1f,
+                TerraItems.gammaCell, 1.5f
+            );
+            consume(fuel);
             consumeLiquid(Liquids.cryofluid, 500f / 60);
         }};
         
@@ -970,7 +979,7 @@ public class TerraBlocks{
 
         //storage
         coreSolaris = new SolarGeneratorCore("core-solaris"){{
-            requirements(Category.effect, with(Items.copper, 3500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
+            requirements(Category.effect, with(Items.metaglass, 2500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
             //alwaysUnlocked = true;
             unitType = UnitTypes.beta;
             health = 3800;
@@ -995,11 +1004,6 @@ public class TerraBlocks{
             @Override
             public TextureRegion[] icons() {
                 return new TextureRegion[]{this.fullRegion};
-            }
-        
-            @Override
-            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
-                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
             }
         };
 
