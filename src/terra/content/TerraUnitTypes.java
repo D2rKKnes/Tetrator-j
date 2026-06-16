@@ -763,6 +763,7 @@ public class TerraUnitTypes {
             deathExplosionEffect = Fx.none;
             loopSoundVolume = 0.1f;
             hidden = false;
+            targetable = false;
             softShadowScl = 0.8f;
 
             parts.add(new ShapePart(){{
