@@ -11,6 +11,7 @@ import static terra.content.TerraSectorPresets.*;
 import static terra.content.TerraUnitTypes.*;
 import static terra.content.TerraBlocks.*;
 import static terra.content.TerraItems.*;
+import static terra.content.TerraLiquids.*;
 import static mindustry.content.Blocks.*;
 import static mindustry.content.Items.*;
 import static mindustry.content.Liquids.*;
@@ -178,12 +179,10 @@ public class TerraVerilusTree {
                 nodeProduce(titanium, () -> {
                     nodeProduce(thorium, () -> {
                         nodeProduce(phaseFabric, () -> {
-                            nodeProduce(fissileMatter, () -> {});
-                        });
-                        nodeProduce(uranium, () -> {
-                            nodeProduce(plutonium, () -> {
-                                nodeProduce(radium, () -> {
-                                    //nodeProduce(cesium, () -> {});
+                            nodeProduce(fissileMatter, () -> {
+                                nodeProduce(fissilePlasma, () -> {});
+                                nodeProduce(fissileCrystals, () -> {
+                                    nodeProduce(gammaCell, () -> {});
                                 });
                             });
                         });
