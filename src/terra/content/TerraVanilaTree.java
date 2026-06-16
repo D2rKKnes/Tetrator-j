@@ -12,6 +12,7 @@ import static terra.content.TerraBlocks.*;
 
 import static mindustry.content.Blocks.*;
 import static mindustry.content.Items.*;
+import static mindustry.content.Liquids.*;
 import static mindustry.content.SectorPresets.*;
 import static mindustry.content.TechTree.*;
 import static mindustry.content.UnitTypes.*;
