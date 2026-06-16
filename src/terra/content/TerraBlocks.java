@@ -337,12 +337,14 @@ public class TerraBlocks{
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
             size = 7;
+            squareSprite = false;
             health = 7850;
             powerProduction = 325f;
             itemDuration = 20f;
             ambientSound = Sounds.loopPulse;
             ambientSoundVolume = 0.17f;
             liquidCapacity = 10000f;
+            itemCapacity = 40;
             outputLiquid = new LiquidStack(TerraLiquids.fissilePlasma, 1150f / 60);
             explodeOnFull = true;
             explosionShake = 26f;
@@ -370,15 +372,17 @@ public class TerraBlocks{
             );
 
             consumePower(38f);
+            consumeLiquid(Liquids.cryofluid, 500.0001f / 60);
             ObjectFloatMap<Item> fuelMap = new ObjectFloatMap<>();
                 fuelMap.put(Items.thorium, 0.75f);
-                fuelMap.put(Items.phaseFabric, 0.75f);
+                fuelMap.put(Items.phaseFabric, 0.85f);
                 fuelMap.put(TerraItems.rawThermoxite, 0.75f);
                 fuelMap.put(TerraItems.thermoxite, 1f);
                 fuelMap.put(Items.fissileMatter, 1f);
                 fuelMap.put(TerraItems.gammaCell, 1.5f);
             consume(new ConsumeItemEfficiencyList(fuelMap));
-            consumeLiquid(Liquids.cryofluid, 500.0001f / 60);
+            itemDurationMultipliers.put(Items.thorium, 0.5f);
+            itemDurationMultipliers.put(TerraItems.gammaCell, 2f);
         }};
         
         //crafters
@@ -1427,25 +1431,26 @@ public class TerraBlocks{
         }};
 
         aircraft = new ItemTurret("aircraft"){{
-            requirements(Category.turret, with(Items.thorium, 135, Items.graphite, 100, TerraItems.titaniumPlate, 180, TerraItems.diamondDust, 20));
+            requirements(Category.turret, with(Items.thorium, 165, Items.graphite, 300, TerraItems.titaniumPlate, 280, TerraItems.diamondDust, 50));
             predictTarget = false;
             ammo(
                 Items.thorium,  new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 3;
+                    rangeChange = 24;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
                     spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
                         speed = 5f;
                         maxRange = 6f;
-                        lifetime = 70f;
+                        lifetime = 105f;
                         hitSize = 6f;
                         outlineColor = Pal.darkerMetal;
                         engineColor = trailColor = Pal.stat;
                         engineLayer = Layer.effect;
                         engineSize = 1.4f;
                         engineOffset = 7f;
-                        rotateSpeed = 2.3f;
+                        rotateSpeed = 2.5f;
                         trailLength = 9;
                         missileAccelTime = 20f;
                         lowAltitude = true;
@@ -1473,6 +1478,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.3f;
                                 reloadMultiplier = 1f;
                                 ammoMultiplier = 3f;
+                                rangeChange = 24;
                             }};
                         }});
                     }};
@@ -1480,13 +1486,13 @@ public class TerraBlocks{
                 TerraItems.thermoxite,  new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 2;
-                    reloadMultiplier = 0.25f;
+                    reloadMultiplier = 0.2f;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
                     spawnUnit = new MissileUnitType("aircraft-thermoxite-missile"){{
                         speed = 3f;
                         maxRange = 6f;
-                        lifetime = 130f;
+                        lifetime = 140f;
                         hitSize = 6f;
                         outlineColor = Pal.darkerMetal;
                         engineColor = trailColor = TerraItems.thermoxite.color;
@@ -1517,12 +1523,12 @@ public class TerraBlocks{
                             shake = 3f;
                             bullet = new ExplosionBulletType(88f, 7f * 8){{
                                 hitColor = TerraItems.thermoxite.color;
-                                shootEffect = new WrapEffect(Fx.shootQuellPulse, Pal.suppress);
+                                shootEffect = new WrapEffect(Fx.shootQuellPulse, TerraItems.rawThermoxite.color);
                                 collidesAir = true;
                                 buildingDamageMultiplier = 0.2f;
                                 reloadMultiplier = 1f;
                                 ammoMultiplier = 2f;
-                                reloadMultiplier = 0.25f;
+                                reloadMultiplier = 0.2f;
                                 status = TerraStatusEffects.extinction;
                                 statusDuration = 30f;
                             }};
@@ -1552,7 +1558,7 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -1f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -2.6f, 0f));
                     }}),
                     TerraItems.thermoxite, Seq.with(new RegionPart("-thermoxite-missile"){{
                         progress = PartProgress.reload;
@@ -1564,7 +1570,7 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -1f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -2.6f, 0f));
                     }})
                 );
             }};
@@ -1612,7 +1618,7 @@ public class TerraBlocks{
             createSound = Sounds.unitCreate;
             areaSize = 6;
             droneType = TerraUnitTypes.basicAssemblyDrone;
-            consumePower(3.4f);
+            consumePower(200f / 60);
         }};
         advancedAssembler = new UnitCrafter("advanced-assembler"){{
             requirements(Category.units, with(Items.thorium, 780, Items.silicon, 1420, Items.phaseFabric, 400, TerraItems.diamondGlass, 540));
@@ -1631,7 +1637,7 @@ public class TerraBlocks{
             liquidCapacity = 1800;
             areaSize = 15;
             droneType = TerraUnitTypes.basicAssemblyDrone;
-            consumePower(8.7f);
+            consumePower(2000f / 60);
         }};
         //using only for cost param in units
         debugAssembler = new UnitFactory("debug-assembler"){{
@@ -1645,7 +1651,7 @@ public class TerraBlocks{
                 new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
                 new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780))
             );
-            consumePower(0.1f);
+            consumePower(20f / 60);
         }};
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
@@ -1731,6 +1737,7 @@ public class TerraBlocks{
 
             consumeLiquid(Liquids.nitrogen, 0.1f);
             hasLiquids = true;
+            squareSprite = false;
 
             /*buildType = () -> new LogicBuild() {
                 private DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.nitrogen), new DrawDefault());
