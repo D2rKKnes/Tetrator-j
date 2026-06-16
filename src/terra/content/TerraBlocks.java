@@ -375,14 +375,12 @@ public class TerraBlocks{
             consumeLiquid(Liquids.cryofluid, 500.0001f / 60);
             ObjectFloatMap<Item> fuelMap = new ObjectFloatMap<>();
                 fuelMap.put(Items.thorium, 0.75f);
-                fuelMap.put(Items.phaseFabric, 0.85f);
                 fuelMap.put(TerraItems.rawThermoxite, 0.75f);
+                fuelMap.put(Items.phaseFabric, 0.85f);
                 fuelMap.put(TerraItems.thermoxite, 1f);
                 fuelMap.put(Items.fissileMatter, 1f);
                 fuelMap.put(TerraItems.gammaCell, 1.5f);
             consume(new ConsumeItemEfficiencyList(fuelMap));
-            itemDurationMultipliers.put(Items.thorium, 0.5f);
-            itemDurationMultipliers.put(TerraItems.gammaCell, 2f);
         }};
         
         //crafters
@@ -1558,7 +1556,7 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -2.6f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup, 0f, 2f, 0f));
                     }}),
                     TerraItems.thermoxite, Seq.with(new RegionPart("-thermoxite-missile"){{
                         progress = PartProgress.reload;
@@ -1570,7 +1568,7 @@ public class TerraBlocks{
                         under = true;
                         layerOffset = -0.01f;
 
-                        moves.add(new PartMove(PartProgress.warmup.inv(), 0f, -2.6f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup, 0f, 2f, 0f));
                     }})
                 );
             }};
@@ -1580,7 +1578,7 @@ public class TerraBlocks{
             shootSoundVolume = 0.5f;
             shootY = 0f;
             reload = 90f;
-            minWarmup = 0.92f;
+            minWarmup = 0.96f;
             range = 340;
             shootCone = 15f;
             newTargetInterval = 20f;
