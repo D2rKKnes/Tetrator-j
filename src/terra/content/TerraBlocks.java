@@ -352,6 +352,7 @@ public class TerraBlocks{
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawPlasma(),
+                new DrawRegion("-mid"),
                 new DrawLiquidTile(Liquids.cryofluid, 18),
                 new DrawGlowRegion(-1f){{
                     suffix = "-rot";
