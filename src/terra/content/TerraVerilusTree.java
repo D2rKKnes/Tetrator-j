@@ -74,7 +74,9 @@ public class TerraVerilusTree {
                                 node(photonPanel, () -> {
                                     node(photonPanelLarge, () -> {});
                                 });
-                                node(thoriumReactor, () -> {});
+                                node(thoriumReactor, () -> {
+                                    node(antimatterCollider, () -> {});
+                                });
                             });
                         });
                         node(mechanicalWell, () -> {
@@ -172,6 +174,7 @@ public class TerraVerilusTree {
                     nodeProduce(diamondDust, () -> {
                         nodeProduce(diamondGlass, () -> {});
                     });
+                    nodeProduce(carbonDioxide, () -> {});
                     nodeProduce(rawThermoxite, () -> {
                         nodeProduce(thermoxite, () -> {});
                     });
