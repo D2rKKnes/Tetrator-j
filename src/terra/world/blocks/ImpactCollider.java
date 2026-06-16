@@ -26,7 +26,6 @@ import static mindustry.Vars.state;
 public class ImpactCollider extends ConsumeGenerator {
     public final int timerUse = timers++;
     public float warmupSpeed = 0.001f;
-    public float itemDuration = 60f;
 
     public TextureRegion lightsRegion;
     public float flashThreshold = 0.01f;
