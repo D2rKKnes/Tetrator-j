@@ -1577,7 +1577,7 @@ public class TerraBlocks{
                             shake = 3f;
                             bullet = new ExplosionBulletType(88f, 14f * 8){{
                                 hitColor = TerraItems.rawThermoxite.color;
-                                shootEffect = new WrapEffect(Fx.shootQuellPulse, Items.oxide.color);
+                                shootEffect = new WrapEffect(Fx.titanExplosionSmall, Items.oxide.color);
                                 collidesAir = true;
                                 buildingDamageMultiplier = 0.2f;
                                 ammoMultiplier = 1f;
