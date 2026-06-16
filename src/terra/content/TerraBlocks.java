@@ -82,7 +82,7 @@ public class TerraBlocks{
     //storage
     coreSolaris,
     //turrets
-    flight, dynamics, electricShock, fracture,
+    flight, dynamics, electricShock, fracture, aircraft,
     //units
     basicAssembler, advancedAssembler, droneCentre, debugAssembler,
     //other
