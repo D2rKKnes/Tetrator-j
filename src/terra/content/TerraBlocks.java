@@ -510,7 +510,7 @@ public class TerraBlocks{
                 @Override
                 public void updateTile() {
                     super.updateTile();
-                    if (this.liquids.get(TerraLiquids.carbonDioxide) >= this.liquidCapacity - 0.001f && this.efficiency > 0 && Mathf.chanceDelta(0.8f * this.efficiency * warmup)) {
+                    if (this.liquids.get(TerraLiquids.carbonDioxide) >= this.block.liquidCapacity - 0.001f && this.efficiency > 0 && Mathf.chanceDelta(0.8f * this.efficiency * warmup)) {
                         float rand1 = Mathf.range(2f), rand2 = Mathf.range(2f);
                         TerraFx.arcSmoke.at(x - 7.5f - rand1, y + 0.5f + rand1);
                         TerraFx.arcSmoke.at(x - 8.5f - rand2, y - 8.5f + rand2);
