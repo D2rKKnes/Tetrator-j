@@ -1579,12 +1579,13 @@ public class TerraBlocks{
                             bullet = new ExplosionBulletType(88f, 14f * 8){{
                                 hitColor = TerraItems.rawThermoxite.color;
                                 shootEffect = new WrapEffect(Fx.titanExplosionSmall, Items.oxide.color);
+                                smokeEffect = new WrapEffect(Fx.titanSmokeSmall, Items.oxide.color);
                                 collidesAir = true;
-                                buildingDamageMultiplier = 0.2f;
+                                buildingDamageMultiplier = 0.25f;
                                 ammoMultiplier = 1f;
-                                reloadMultiplier = 0.1f;
+                                reloadMultiplier = 0.33f;
                                 status = StatusEffects.corroded;
-                                statusDuration = 250f;
+                                statusDuration = 200f;
                             }};
                         }});
                     }};
