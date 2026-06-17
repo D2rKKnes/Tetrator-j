@@ -1045,6 +1045,7 @@ public class TerraBlocks{
     
                         health = 45;
                         hidden = false;
+                        targetable = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
@@ -1092,6 +1093,7 @@ public class TerraBlocks{
     
                         health = 85;
                         hidden = false;
+                        targetable = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
@@ -1139,6 +1141,7 @@ public class TerraBlocks{
     
                         health = 60;
                         hidden = false;
+                        targetable = false;
     
                         weapons.add(new Weapon(){{
                             shootCone = 360f;
