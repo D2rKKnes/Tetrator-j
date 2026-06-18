@@ -153,7 +153,7 @@ public class TerraUnitTypes {
             health = 420;
             engineSize = 2.75f;
             engineOffset = 7.7f;
-            //range = 90f;
+            range = 90f;
             itemCapacity = 15;
             lowAltitude = true;
             constructor = UnitEntity::create;
@@ -1570,6 +1570,8 @@ public class TerraUnitTypes {
                     despawnShake = hitShake = 2f;
                     collidesAir = collidesGround = true;
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
+                    shootEffect = TerraFx.shootRing;
+                    smokeEffect = none;
                 }};
             }};
             Weapon smallMount = new SpeedUpWeapon("terra-end-small-mount"){{
