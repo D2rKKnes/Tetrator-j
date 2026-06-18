@@ -49,7 +49,7 @@ public class SpeedUpWeapon extends Weapon{
         AcceleratingMount aMount = (AcceleratingMount)mount;
         aMount.accel = Mathf.clamp(aMount.accel + accelPerShot, 0f, minReload);
         aMount.waitTime = accelCooldownWaitTime;
-        super.shoot(unit, mount, shootX, shootY, aimX, aimY, mountX, mountY, rotation, side);
+        super.shoot(unit, mount, shootX, shootY, aimX);
     }
 
     public static class AcceleratingMount extends WeaponMount{
