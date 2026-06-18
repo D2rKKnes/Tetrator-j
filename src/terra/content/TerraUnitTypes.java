@@ -1571,7 +1571,7 @@ public class TerraUnitTypes {
                     collidesAir = collidesGround = true;
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitSquaresColor, Fx.squareWaveEffect);
                     shootEffect = TerraFx.shootRing;
-                    smokeEffect = none;
+                    smokeEffect = Fx.none;
                 }};
             }};
             Weapon smallMount = new SpeedUpWeapon("terra-end-small-mount"){{
