@@ -858,17 +858,22 @@ public class TerraUnitTypes {
                 shootY = 4.5f;
                 rotate = true;
                 rotateSpeed = 2.5f;
-                shootSound = TerraSounds.shootLaunch;
+                shootSound = Sounds.shootSalvo;
                 ejectEffect = Fx.none;
-                reload = 130f;
+                reload = 92f;
                 shake = 2f;
                 
                 shoot = new ShootAlternate(){{
-                    shots = 9;
-                    shotDelay = 1.5f;
+                    shots = 12;
+                    shotDelay = 1.3f;
                     spread = 4f;
                     barrels = 3;
                 }};
+                parts.add(new RegionPart("-b"){{
+                    under = true;
+                    mirror = false;
+                    x = y = 0f;
+                }});
 
                 bullet = new MissileBulletType(){{
                     homingPower = 0.2f;
@@ -883,6 +888,7 @@ public class TerraUnitTypes {
                     splashDamage = 42f;
                     lifetime = 42f;
                     pierce = true;
+                    pierceBuilding = true;
                     pierceCap = 2;
                     trailColor = backColor = hitColor = Pal.suppress;
                     frontColor = Color.white;
@@ -896,27 +902,30 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootHeavy;
                 ejectEffect = Fx.none;
                 reload = 188f;
+                cooldownTime = 90f;
                 shake = 4f;
+                parentizeEffects = true;
 
                 bullet = new BasicBulletType(){{
-                    sprite = "circle-bullet";
-                    speed = 6.2f;
-                    damage = 86;
+                    sprite = "terra-plasma";
+                    speed = 19.2f;
+                    damage = 226;
                     width = 11f;
                     height = 11f;
-                    shrinkX = shrinkY = 0.2f;
+                    shrinkX = shrinkY = -2f;
+                    shrinkInterp = Interp.smooth2;
                     hitSound = Sounds.explosionTitan;
                     despawnHit = true;
                     hittable = false;
                     reflectable = false;
-                    drag = 0.008f;
+                    drag = 0.05f;
                     keepVelocity = false;
-                    splashDamageRadius = 35f;
-                    splashDamage = 42f;
+                    splashDamageRadius = 50f;
+                    splashDamage = 99f;
                     lifetime = 142f;
                     trailColor = backColor = hitColor = Pal.suppress;
                     frontColor = Color.white;
-                    hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                    hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, Pal.suppress));
                     shootEffect = new Effect(26f, e -> {
                         color(Pal.suppress);
                         Drawf.tri(e.x, e.y, 9f * e.fout(), 80f - (20f * e.fin()), e.rotation);
@@ -924,12 +933,14 @@ public class TerraUnitTypes {
                             Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
                         }
                     });
-                    intervalBullets = 3;
-                    bulletInterval = 3;
+                    status = TerraStatusEffects.energyOverload;
+                    statusDuration = 90f;
+                    intervalBullets = 2;
+                    bulletInterval = 10;
                     intervalDelay = 30f;
                     intervalBullet = new LaserBoltBulletType(5.2f, 26){{
-                        circleShooter = true;
                         lifetime = 45f;
+                        rotateSpeed = 0.3f;
                         backColor = lightColor = trailColor = Pal.suppress;
                         frontColor = Color.white;
                         hitEffect = despawnEffect = smokeEffect = trailEffect = new Effect(8, e -> {
@@ -937,20 +948,97 @@ public class TerraUnitTypes {
                             stroke(0.5f + e.fout());
                             Lines.circle(e.x, e.y, e.fin() * 5f);
                     
-                            Drawf.light(e.x, e.y, 23f, Pal.heal, e.fout() * 0.7f);
+                            Drawf.light(e.x, e.y, 23f, Pal.suppress, e.fout() * 0.7f);
                         });
                         trailInterval = lifetime / 4 + 0.01f;
+                        status = TerraStatusEffects.energyOverload;
+                        statusDuration = 20f;
                     }};
+                }};
+            }};
+            Weapon sapLasers = new Weapon("terra-dual-mount-purple"){{
+                shootY = 5f;
+                rotate = true;
+                rotateSpeed = 1.75f;
+                shootSound = TerraSounds.shootFastLaser;
+                ejectEffect = Fx.none;
+                reload = 200f;
+                recoilTime = 90f;
+                shake = 1.2f;
+
+                shoot = new ShootMulti(
+                    new ShootAlternate() {{
+                        spread = 5.5;
+                        shots = 2;
+                        barrels = 2;
+                    }}, new ShootPattern(), 
+                    new ShootPattern() {{
+                        shots = 8;
+                        shotDelay = 3f;
+                        firstShotDelay = 20f;
+                    }}, new ShootPattern() {{
+                        shots = 3;
+                        shotDelay = 20f;
+                        firstShotDelay = 40f + 8 * 3;
+                    }}
+                );
+                parts.add(
+                    new RegionPart("-barrels") {{
+                        mirror = false;
+                        recoilIndex = 1;
+                        progress = PartProgress.recoil;
+                        moveY = -2f;
+                    }}
+                );
+
+                bullet = new RailBulletType() {{
+                    length = 333f;
+                    damage = 99f;
+                    hitColor = Pal.suppress;
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
+                    smokeEffect = TerraFx.shootRing2;
+                    hitEffect = Fx.hitBulletColor;
+                    pierceDamageFactor = 0.8f;
+                    endEffect = new Effect(14f, e -> {
+                        color(e.color);
+                        Drawf.tri(e.x, e.y, e.fout() * 3f, 5f, e.rotation);
+                        color(Color.white);
+                        Drawf.tri(e.x, e.y, e.fout() * 3f, 5f, e.rotation);
+                    });
+                    lineEffect = new Effect(20f, e -> {
+                        if (!(e.data instanceof Vec2 v)) return;
+
+                        color(e.color);
+                        stroke(e.fout() * 1.1f + 0.6f);
+
+                        Fx.rand.setSeed(e.id);
+                        for (int i = 0; i < 7; i++) {
+                            Fx.v.trns(e.rotation, Fx.rand.random(8f, v.dst(e.x, e.y) - 8f));
+                            Lines.lineAngleCenter(e.x + Fx.v.x, e.y + Fx.v.y, e.rotation + e.finpow(), e.foutpowdown() * 20f * Fx.rand.random(0.5f, 1f) + 0.3f);
+                        }
+
+                        e.scaled(14f, b -> {
+                            stroke(b.fout() * 3f);
+                            color(e.color);
+                            Lines.line(e.x, e.y, v.x, v.y);
+                        });
+                        e.scaled(14f, b -> {
+                            stroke(b.fout() * 1.5f);
+                            color(Color.white);
+                            Lines.line(e.x, e.y, v.x, v.y);
+                        });
+                    });
                 }};
             }};
 
             weapons.add(copyAndMove(sapLauncher, 67f / 4f, -8f / 4f));
             weapons.add(copyAndMove(sapPlasma, 136f / 4f, -17f / 4f));
             weapons.add(copyAndMoveAnd(sapPlasma, 218f / 4f, 26f / 4f, w -> {w.reload = 222f;}));
+            weapons.add(copyAndMove(sapLasers, 0f, -70f / 4f));
             weapons.add(
             new Weapon("terra-eternity-mount"){{
-                x = 128.5f / 4f;
-                y = 94.5f / 4f;
+                x = 128f / 4f;
+                y = 94f / 4f;
                 shootY = 8f;
                 rotate = true;
                 rotateSpeed = 1.8f;
