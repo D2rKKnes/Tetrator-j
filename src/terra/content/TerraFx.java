@@ -91,6 +91,22 @@ public class TerraFx {
         Lines.ellipse(Tmp.v2.x + e.x, Tmp.v2.y + e.y, 0.3f * e.fin() + 0.1f, 8f * 0.75f, 12, e.rotation);
         Lines.stroke(2f * e.fout());
     }),
+
+    circleFadeSmall = new Effect(30f, 100f, e -> {
+        float circleRad = 5f + e.finpow() * 17f;
+        color(e.color, e.foutpow());
+        Fill.circle(e.x, e.y, circleRad);
+    }).layer(Layer.bullet + 2f),
+    circleFade = new Effect(40f, 100f, e -> {
+        float circleRad = 10f + e.finpow() * 20f;
+        color(e.color, e.foutpow());
+        Fill.circle(e.x, e.y, circleRad);
+    }).layer(Layer.bullet + 2f),
+    circleFadeBig = new Effect(50f, 100f, e -> {
+        float circleRad = 15f + e.finpow() * 23f;
+        color(e.color, e.foutpow());
+        Fill.circle(e.x, e.y, circleRad);
+    }).layer(Layer.bullet + 2f),
     
     hitSpark = new Effect(45, e -> {
         color(e.color, Color.white, e.fout() * 0.3f);
