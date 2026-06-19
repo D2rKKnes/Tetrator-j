@@ -904,7 +904,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(){{
                     sprite = "terra-plasma";
                     speed = 19.2f;
-                    velocityScaleRandMin = 0.7f;
+                    velocityScaleRandMin = 0.4f;
                     damage = 226;
                     buildingDamageMultiplier = 0.9f;
                     shieldDamageMultiplier = 1.8f;
@@ -998,14 +998,18 @@ public class TerraUnitTypes {
 
                 bullet = new RailBulletType() {{
                     length = 333f;
-                    damage = 99f;
+                    damage = 168f;
                     buildingDamageMultiplier = 1.4f;
                     shieldDamageMultiplier = 1.2f;
+                    armorMultiplier = 0.2f;
                     hitColor = Pal.suppress;
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
                     smokeEffect = TerraFx.shootRing2;
                     hitEffect = Fx.hitBulletColor;
                     pierceDamageFactor = 0.85f;
+                    pierce = true;
+                    status = StatusEffects.sapped;
+                    statusDuration = 75f;
                     endEffect = new Effect(14f, e -> {
                         color(e.color);
                         Drawf.tri(e.x, e.y, e.fout() * 3f, 5f, e.rotation);
@@ -1136,6 +1140,7 @@ public class TerraUnitTypes {
                 bullet = new BlackHoleBulletType(1.1f, 168f){{
                     lifetime = 300f;
                     shieldDamageMultiplier = 4f;
+                    armorMultiplier = 0f;
                     color = Pal.suppress;
                     damageRadius = 14f * 1.2f;
                     growTime = 0f;
@@ -1172,6 +1177,7 @@ public class TerraUnitTypes {
                 bullet = new BlackHoleBulletType(0f, 142f){{
                     lifetime = 500f;
                     shieldDamageMultiplier = 4f;
+                    armorMultiplier = 0f;
                     color = Pal.suppress;
                     damageRadius = 30f;
                     suctionRadius = 300f;
@@ -1869,6 +1875,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(26.8f, 955f){{
                     lifetime = 26f;
                     shieldDamageMultiplier = 4f;
+                    armorMultiplier = 0f;
                     width = 19f;
                     height = 19f;
                     shrinkY = 0f;
@@ -1884,6 +1891,7 @@ public class TerraUnitTypes {
                     fragBullet = new BlackHoleBulletType(0f, 376f){{
                         lifetime = 200f;
                         shieldDamageMultiplier = 4f;
+                        armorMultiplier = 0f;
                         color = Color.valueOf("e13131");
                         damageRadius = 33f;
                         suctionRadius = 240f;
