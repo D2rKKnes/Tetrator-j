@@ -940,7 +940,7 @@ public class TerraUnitTypes {
                     
                             Drawf.light(e.x, e.y, 23f, Pal.heal, e.fout() * 0.7f);
                         });
-                        trailInterval = 15.1f
+                        trailInterval = lifetime / 4 + 0.01f;
                     }};
                 }};
             }};
