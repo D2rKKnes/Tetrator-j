@@ -765,6 +765,10 @@ public class TerraUnitTypes {
             hidden = false;
             targetable = false;
             softShadowScl = 0.8f;
+            immunities = ObjectSet.with(
+                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, 
+                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation
+            );
 
             parts.add(new ShapePart(){{
                 layer = Layer.effect;
@@ -850,6 +854,100 @@ public class TerraUnitTypes {
                 }}
             );
 
+            Weapon sapLauncher = new Weapon("terra-sap-launcher"){{
+                shootY = 4.5f;
+                rotate = true;
+                rotateSpeed = 2.5f;
+                shootSound = TerraSounds.shootLaunch;
+                ejectEffect = Fx.none;
+                reload = 130f;
+                shake = 2f;
+                
+                shoot = new ShootAlternate(){{
+                    shots = 9;
+                    shotDelay = 1.5f;
+                    spread = 4f;
+                    barrels = 3;
+                }};
+
+                bullet = new MissileBulletType(){{
+                    homingPower = 0.2;
+                    speed = 8.2f;
+                    damage = 33;
+                    width = 7f;
+                    height = 15f;
+                    shrinkX = shrinkY = 0f;
+                    drag = -0.003f;
+                    keepVelocity = false;
+                    splashDamageRadius = 35f;
+                    splashDamage = 42f;
+                    lifetime = 42f;
+                    pierce = true;
+                    pierceCap = 2;
+                    trailColor = backColor = hitColor = Pal.suppres;
+                    frontColor = Color.white;
+                    hitEffect = despawnEffect = Fx.blastExplosion;
+                }};
+            }};
+            Weapon sapPlasma = new Weapon("terra-eternity-plasma-gun"){{
+                shootY = 4f;
+                rotate = true;
+                rotateSpeed = 3.3f;
+                shootSound = TerraSounds.shootHeavy;
+                ejectEffect = Fx.none;
+                reload = 188f;
+                shake = 4f;
+
+                bullet = new BasicBulletType(){{
+                    sprite = "circle-bullet";
+                    speed = 6.2f;
+                    rotationSpeed = 200;
+                    damage = 86;
+                    width = 11f;
+                    height = 11f;
+                    shrinkX = shrinkY = 0.2f;
+                    hitSound = Sounds.explosionTitan;
+                    despawnHit = true;
+                    hittable = false;
+                    reflectable = false;
+                    drag = 0.008f;
+                    keepVelocity = false;
+                    splashDamageRadius = 35f;
+                    splashDamage = 42f;
+                    lifetime = 142f;
+                    trailColor = backColor = hitColor = Pal.suppres;
+                    frontColor = Color.white;
+                    hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                    shootEffect = new Effect(26f, e -> {
+                        color(Pal.suppres);
+                        Drawf.tri(e.x, e.y, 9f * e.fout(), 80f - (20f * e.fin()), e.rotation);
+                        for (int i = 0; i < 2; i++) {
+                            Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
+                        }
+                    });
+                    intervalBullets = 3;
+                    bulletInterval = 3;
+                    intervalDelay = 30f;
+                    intervalBullet = new LaserBoltBulletType(5.2f, 26){{
+                        circleShooter = true;
+                        lifetime = 45f;
+                        backColor = lightColor = trailColor = Pal.suppres;
+                        frontColor = Color.white;
+                        hitEffect = despawnEffect = smokeEffect = trailEffect = new Effect(8, e -> {
+                            color(Color.white, Pal.suppres, e.fin());
+                            stroke(0.5f + e.fout());
+                            Lines.circle(e.x, e.y, e.fin() * 5f);
+                    
+                            Drawf.light(e.x, e.y, 23f, Pal.heal, e.fout() * 0.7f);
+                        });
+                        trailInterval = 15.1f
+                    }};
+                }};
+            }};
+
+            weapons.add(copyAndMove(sapLauncher, 67f / 4f, -8f / 4f));
+            weapons.add(copyAndMove(sapPlasma, 136f / 4f, -17f / 4f));
+            weapons.add(copyAndMoveAnd(sapPlasma, 218f / 4f, 26f / 4f, w -> {w.reload = 222f;}));
             weapons.add(
             new Weapon("terra-eternity-mount"){{
                 x = 128.5f / 4f;
@@ -858,7 +956,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.8f;
                 shootSound = TerraSounds.acceleratinglaserloop;
-                shootSoundVolume = 0.6f;
+                shootSoundVolume = activeSoundVolume = 0.6f;
                 reload = 126f;
                 continuous = true;
                 parentizeEffects = true;
@@ -1276,7 +1374,7 @@ public class TerraUnitTypes {
             abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
             abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; hitBuildings = false; healPercent = 0.003f;}});
 
-            Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
+            new Weapon("terra-end-smaller-II-mount"){{
                 shootY = 3f;
                 reload = 90f;
                 rotate = true;
