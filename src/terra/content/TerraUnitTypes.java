@@ -973,7 +973,7 @@ public class TerraUnitTypes {
 
                 shoot = new ShootMulti(
                     new ShootAlternate() {{
-                        spread = 9.5f;
+                        spread = 10f;
                         shots = 2;
                         barrels = 2;
                     }}, new ShootPattern(), 
