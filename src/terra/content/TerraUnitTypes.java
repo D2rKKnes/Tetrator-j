@@ -1373,7 +1373,7 @@ public class TerraUnitTypes {
             abilities.add(new AdaptedHealAbility(200f, 90f, hitSize * 2f, healColor){{selfHealReloadTime = 400f;}});
             abilities.add(new EnergyFieldAbility(75f, 45f, hitSize * 2.75f){{color = healColor; status = StatusEffects.melting; statusDuration = 60f; y = -81f / 4f; hitBuildings = false; healPercent = 0.003f;}});
 
-            new Weapon("terra-end-smaller-II-mount"){{
+            Weapon smallerIIMount = new Weapon("terra-end-smaller-II-mount"){{
                 shootY = 3f;
                 reload = 90f;
                 rotate = true;
