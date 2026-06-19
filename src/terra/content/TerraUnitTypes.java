@@ -871,7 +871,7 @@ public class TerraUnitTypes {
                 }};
 
                 bullet = new MissileBulletType(){{
-                    homingPower = 0.2;
+                    homingPower = 0.2f;
                     speed = 8.2f;
                     damage = 33;
                     width = 7f;
@@ -884,7 +884,7 @@ public class TerraUnitTypes {
                     lifetime = 42f;
                     pierce = true;
                     pierceCap = 2;
-                    trailColor = backColor = hitColor = Pal.suppres;
+                    trailColor = backColor = hitColor = Pal.suppress;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = Fx.blastExplosion;
                 }};
@@ -901,7 +901,6 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(){{
                     sprite = "circle-bullet";
                     speed = 6.2f;
-                    rotationSpeed = 200;
                     damage = 86;
                     width = 11f;
                     height = 11f;
@@ -915,11 +914,11 @@ public class TerraUnitTypes {
                     splashDamageRadius = 35f;
                     splashDamage = 42f;
                     lifetime = 142f;
-                    trailColor = backColor = hitColor = Pal.suppres;
+                    trailColor = backColor = hitColor = Pal.suppress;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = TerraFx.circleFadeBig;
                     shootEffect = new Effect(26f, e -> {
-                        color(Pal.suppres);
+                        color(Pal.suppress);
                         Drawf.tri(e.x, e.y, 9f * e.fout(), 80f - (20f * e.fin()), e.rotation);
                         for (int i = 0; i < 2; i++) {
                             Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
@@ -931,10 +930,10 @@ public class TerraUnitTypes {
                     intervalBullet = new LaserBoltBulletType(5.2f, 26){{
                         circleShooter = true;
                         lifetime = 45f;
-                        backColor = lightColor = trailColor = Pal.suppres;
+                        backColor = lightColor = trailColor = Pal.suppress;
                         frontColor = Color.white;
                         hitEffect = despawnEffect = smokeEffect = trailEffect = new Effect(8, e -> {
-                            color(Color.white, Pal.suppres, e.fin());
+                            color(Color.white, Pal.suppress, e.fin());
                             stroke(0.5f + e.fout());
                             Lines.circle(e.x, e.y, e.fin() * 5f);
                     
