@@ -854,7 +854,7 @@ public class TerraUnitTypes {
                 }}
             );
 
-            Weapon sapLauncher = new Weapon("terra-sap-launcher"){{
+            Weapon sapLauncher = new Weapon("terra-sap-launcher-2"){{
                 shootY = 4.5f;
                 rotate = true;
                 rotateSpeed = 2.5f;
@@ -869,12 +869,6 @@ public class TerraUnitTypes {
                     spread = 4f;
                     barrels = 3;
                 }};
-                parts.add(new RegionPart("-b"){{
-                    under = true;
-                    mirror = false;
-                    outline = false;
-                    x = y = 0f;
-                }});
 
                 bullet = new MissileBulletType(){{
                     homingPower = 0.2f;
@@ -910,7 +904,10 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(){{
                     sprite = "terra-plasma";
                     speed = 19.2f;
+                    velocityScaleRandMin = 0.7f;
                     damage = 226;
+                    buildingDamageMultiplier = 0.9f;
+                    shieldDamageMultiplier = 1.8f;
                     width = 11f;
                     height = 11f;
                     shrinkX = shrinkY = -2f;
@@ -939,9 +936,10 @@ public class TerraUnitTypes {
                     status = TerraStatusEffects.energyOverload;
                     statusDuration = 90f;
                     intervalBullets = 3;
-                    bulletInterval = 10;
+                    bulletInterval = 7.5f;
                     intervalDelay = 30f;
-                    intervalBullet = new LaserBoltBulletType(5.2f, 26){{
+                    fragBullets = 12;
+                    intervalBullet = fragBullet = new LaserBoltBulletType(5.2f, 26){{
                         lifetime = 45f;
                         rotateSpeed = 6f;
                         backColor = lightColor = trailColor = Pal.suppress;
@@ -953,6 +951,7 @@ public class TerraUnitTypes {
                     
                             Drawf.light(e.x, e.y, 23f, Pal.suppress, e.fout() * 0.7f);
                         });
+                        despawnSound = Sounds.shootElude;
                         trailInterval = lifetime / 4 + 0.01f;
                         status = TerraStatusEffects.energyOverload;
                         statusDuration = 20f;
@@ -960,7 +959,7 @@ public class TerraUnitTypes {
                 }};
             }};
             Weapon sapLasers = new Weapon("terra-dual-mount-purple"){{
-                shootY = 7f;
+                shootY = 8f;
                 rotate = true;
                 mirror = false;
                 layerOffset = 0.001f;
@@ -968,12 +967,13 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootFastLaser;
                 ejectEffect = Fx.none;
                 reload = 200f;
+                recoil = 0.4f;
                 recoilTime = 90f;
                 shake = 1.2f;
 
                 shoot = new ShootMulti(
                     new ShootAlternate() {{
-                        spread = 6.5f;
+                        spread = 8.5f;
                         shots = 2;
                         barrels = 2;
                     }}, new ShootPattern(), 
@@ -1135,6 +1135,7 @@ public class TerraUnitTypes {
                 }});
                 bullet = new BlackHoleBulletType(1.1f, 168f){{
                     lifetime = 300f;
+                    shieldDamageMultiplier = 4f;
                     color = Pal.suppress;
                     damageRadius = 14f * 1.2f;
                     growTime = 0f;
@@ -1170,6 +1171,7 @@ public class TerraUnitTypes {
                 recoil = 0;
                 bullet = new BlackHoleBulletType(0f, 142f){{
                     lifetime = 500f;
+                    shieldDamageMultiplier = 4f;
                     color = Pal.suppress;
                     damageRadius = 30f;
                     suctionRadius = 300f;
@@ -1866,6 +1868,7 @@ public class TerraUnitTypes {
                 shake = 2f;
                 bullet = new BasicBulletType(26.8f, 955f){{
                     lifetime = 26f;
+                    shieldDamageMultiplier = 4f;
                     width = 19f;
                     height = 19f;
                     shrinkY = 0f;
@@ -1880,6 +1883,7 @@ public class TerraUnitTypes {
                     targetMissiles = absorbable = reflectable = false;
                     fragBullet = new BlackHoleBulletType(0f, 376f){{
                         lifetime = 200f;
+                        shieldDamageMultiplier = 4f;
                         color = Color.valueOf("e13131");
                         damageRadius = 33f;
                         suctionRadius = 240f;
