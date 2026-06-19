@@ -959,7 +959,7 @@ public class TerraUnitTypes {
                 }};
             }};
             Weapon sapLasers = new Weapon("terra-dual-mount-purple"){{
-                shootY = 8f;
+                shootY = 10f;
                 rotate = true;
                 mirror = false;
                 layerOffset = 0.001f;
@@ -973,7 +973,7 @@ public class TerraUnitTypes {
 
                 shoot = new ShootMulti(
                     new ShootAlternate() {{
-                        spread = 8.5f;
+                        spread = 9.5f;
                         shots = 2;
                         barrels = 2;
                     }}, new ShootPattern(), 
