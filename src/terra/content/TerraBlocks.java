@@ -1510,7 +1510,7 @@ public class TerraBlocks{
                     color(Color.white);
                     Fill.circle(e.x, e.y, e.fin() * 6f);
                 });
-                status = StatusEffects.shock;
+                status = StatusEffects.shocked;
                 intervalBullets = 2;
                 bulletInterval = 8f;
                 intervalDelay = 20f;
@@ -1529,7 +1529,7 @@ public class TerraBlocks{
                     });
                     despawnSound = Sounds.shootElude;
                     trailInterval = lifetime / 3 + 0.01f;
-                    status = StatusEffects.shock;
+                    status = StatusEffects.shocked;
                 }};
             }};
         }};
