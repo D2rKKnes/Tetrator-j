@@ -1457,6 +1457,7 @@ public class TerraBlocks{
             targetUnderBlocks = false;
             chargeSound = Sounds.chargeLancer;
             moveWhileCharging = false;
+            canOverdrive = false;
 
             consumePower(7f);
 
@@ -1507,11 +1508,11 @@ public class TerraBlocks{
                         Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
                     }
                 });
-                chargeEffect = TerraFx.smallCharge;
+                chargeEffect = new WrapEffect(TerraFx.smallCharge, Color.valueOf("8db0ff"));
                 status = StatusEffects.shocked;
                 intervalBullets = 2;
                 bulletInterval = 9f;
-                intervalDelay = 30f;
+                intervalDelay = 40f;
                 fragBullets = 9;
                 intervalBullet = fragBullet = new LaserBoltBulletType(5.2f, 19){{
                     lifetime = 40f;
