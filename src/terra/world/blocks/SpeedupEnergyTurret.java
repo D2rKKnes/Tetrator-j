@@ -6,7 +6,6 @@ import arc.struct.ObjectMap;
 import arc.util.Strings;
 import arc.util.Time;
 import arc.graphics.*;
-import exogenesis.content.ExoStatValues;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
