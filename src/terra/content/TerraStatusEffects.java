@@ -73,10 +73,13 @@ public class TerraStatusEffects{
             reloadMultiplier = 0.8f;
             intervalDamage = 19.4f;
             intervalDamageTime = 15f;
+            transitionDamage = 20f;
             damage = 0.4f;
+            effectChance = 0.1f;
+            effect = Fx.corrosionVapor;
             init(() -> {
-                affinity(corroded, (unit, result, time) -> {
-                    unit.damagePierce(20);
+                affinity(StatusEffects.corroded, (unit, result, time) -> {
+                    unit.damagePierce(transitionDamage);
                     Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f));
                     result.set(burning, Math.min(time + result.time, 300f));
                 });
