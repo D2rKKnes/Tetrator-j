@@ -41,7 +41,7 @@ public class SpeedupEnergyTurret extends PowerTurret{
 	@Override
 	public void setBars(){
 		super.setBars();
-		addBar("liquid",
+		addBar("speedup",
 				(SpeedupEnergyTurretBuild entity) -> new Bar(
 						() -> Core.bundle.format("terra.bar.speed-up", Strings.autoFixed((entity.speedupScl) * 100, 0)),
 						() -> lightSkyBack,
