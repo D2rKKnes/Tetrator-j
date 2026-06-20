@@ -75,6 +75,16 @@ public class TerraFx {
         });
     }),
 
+    smallCharge = new Effect(30, e -> {
+        color(e.color);
+        randLenVectors(e.id, 10, 30f * e.fout(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fin() * 2f);
+            Drawf.light(e.x + x, e.y + y, e.fin() * 10f, e.color, 0.7f);
+        });
+        Fill.circle(e.x, e.y, e.fin() * 4f);
+        Drawf.light(e.x, e.y, e.fin() * 40f, e.color, 0.7f);
+    }),
+
     shootRing = new Effect(30, e -> {
         Draw.z(Layer.effect);
         Draw.color(e.color, e.fout());
