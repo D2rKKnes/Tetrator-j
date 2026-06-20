@@ -1689,7 +1689,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.25f;
                                 ammoMultiplier = 1f;
                                 reloadMultiplier = 0.33f;
-                                status = StatusEffects.corroded;
+                                status = TerraStatusEffects.radited;
                                 statusDuration = 200f;
                             }};
                         }});
