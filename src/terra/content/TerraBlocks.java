@@ -1437,20 +1437,23 @@ public class TerraBlocks{
 
         ejection = new SpeedupEnergyTurret("ejection"){{
             requirements(Category.turret, with(Items.titanium, 280, TerraItems.diamondGlass, 115, Items.silicon, 300));
-            range = 145f;
-            shootY = 2f;
+            range = 195f;
+            shootY = 3.3f;
+            //rotateSpeed = 4f;
             recoil = 2f;
-            recoilTime = 45f;
-            reload = 152f;
+            recoilTime = 35f;
+            reload = 170f;
             cooldownTime = reload * 0.8f;
+            speedupPerShoot = 0.02f;
             shake = 4f;
-            shootEffect = Fx.lancerLaserShoot;
-            smokeEffect = Fx.none;
+            smokeEffect = shootEffect = Fx.none;
             heatColor = Color.red;
             size = 3;
             shoot.firstShotDelay = 30f;
-            coolant = consumeCoolant(0.5f);
+            minWarmup = 0.8f;
+            coolant = consumeCoolant(0.4f);
             targetUnderBlocks = false;
+            chargeSound = Sounds.chargeLancer;
 
             consumePower(7f);
 
@@ -1458,56 +1461,77 @@ public class TerraBlocks{
                 parts.add(new RegionPart("-side"){{
                     progress = PartProgress.warmup.inv();
                     moveX = -1.5f;
-                    moveY = -1.5f;
+                    moveY = 1.5f;
                     mirror = under = true;
+                    moves.add(new PartMove(PartProgress.recoil, 0.5, -0.5, 0));
                 }},
                 new RegionPart("-blade"){{
-                    moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -50));
-                    moves.add(new PartMove(PartProgress.recoil.curve(Interp.pow2In), 0, 0, -50));
+                    moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -40));
+                    moves.add(new PartMove(PartProgress.recoil.curve(Interp.pow2In), 0, 0, -40));
                     mirror = under = true;
                 }});
             }};
 
-            shootType = new LaserBulletType(78){{
-                colors = new Color[]{Pal.lancerLaser.cpy().a(0.4f), Pal.lancerLaser, Color.white};
-
-                buildingDamageMultiplier = 0.25f;
-                armorMultiplier = 3f;
-                hitEffect = Fx.hitLancer;
-                hitSize = 3;
-                lifetime = 16f;
-                drawSize = 300f;
-                collidesAir = true;
-                length = 103f;
-                ammoMultiplier = 1f;
-                pierceCap = 4;
-                despawnSound = Sounds.shootArc;
-                fragBullets = 2;
-                fragRandomSpread = 0f;
-                fragOnHit = false;
-                fragBullet = new LightningBulletType(){{
-                    damage = 20;
-                    lightningLength = 11;
-                    lightningLengthRand = 2;
-                    collidesAir = true;
-                    ammoMultiplier = 1f;
-    
-                    //for visual stats only.
-                    buildingDamageMultiplier = 0.25f;
-    
-                    lightningType = new BulletType(0.0001f, 0f){{
-                        lifetime = Fx.lightning.lifetime;
-                        hitEffect = Fx.hitLancer;
-                        despawnEffect = Fx.none;
-                        status = StatusEffects.shocked;
-                        hittable = false;
-                        lightColor = Color.white;
-                        collidesAir = true;
-                        buildingDamageMultiplier = 0.25f;
-                        shieldDamageMultiplier = 0.2f;
-                    }};
+            shootType = new BasicBulletType(){{
+                sprite = "terra-plasma";
+                speed = 4f;
+                damage = 139;
+                buildingDamageMultiplier = 0.6f;
+                shieldDamageMultiplier = 1.1f;
+                width = 11f;
+                height = 11f;
+                shrinkX = shrinkY = -1.4f;
+                shrinkInterp = Interp.smooth2;
+                hitSound = Sounds.explosionTitan;
+                shootSound = Sounds.shootAfflict;
+                despawnHit = true;
+                hittable = false;
+                reflectable = false;
+                keepVelocity = false;
+                splashDamageRadius = 50f;
+                splashDamage = 99f;
+                lifetime = 142f;
+                lightRadius = 55f;
+                lightOpacity = 0.5f;
+                trailColor = backColor = hitColor = lightColor = Color.valueOf("8db0ff");
+                frontColor = Color.white;
+                hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, Color.valueOf("8db0ff")));
+                shootEffect = new Effect(26f, e -> {
+                    color(Pal.suppress);
+                    Drawf.tri(e.x, e.y, 9f * e.fout(), 80f - (20f * e.fin()), e.rotation);
+                    for (int i = 0; i < 2; i++) {
+                        Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
+                    }
+                });
+                chargeEffect = new Effect(30, e -> {
+                    color(Color.valueOf("8db0ff"));
+                    Fill.circle(e.x, e.y, e.fin() * 11f);
+                    color(Color.white);
+                    Fill.circle(e.x, e.y, e.fin() * 6f);
+                });
+                status = StatusEffects.shock;
+                intervalBullets = 2;
+                bulletInterval = 8f;
+                intervalDelay = 20f;
+                fragBullets = 9;
+                intervalBullet = fragBullet = new LaserBoltBulletType(5.2f, 19){{
+                    lifetime = 40f;
+                    rotateSpeed = 6.5f;
+                    backColor = lightColor = trailColor = Color.valueOf("8db0ff");
+                    frontColor = Color.white;
+                    hitEffect = despawnEffect = smokeEffect = trailEffect = new Effect(8, e -> {
+                        color(Color.white, Color.valueOf("8db0ff"), e.fin());
+                        stroke(0.5f + e.fout());
+                        Lines.circle(e.x, e.y, e.fin() * 5f);
+                
+                        Drawf.light(e.x, e.y, 23f, Color.valueOf("8db0ff"), e.fout() * 0.7f);
+                    });
+                    despawnSound = Sounds.shootElude;
+                    trailInterval = lifetime / 3 + 0.01f;
+                    status = StatusEffects.shock;
                 }};
             }};
+            limitRange();
         }};
 
         aircraft = new ItemTurret("aircraft"){{
