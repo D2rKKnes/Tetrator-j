@@ -1443,8 +1443,10 @@ public class TerraBlocks{
             recoil = 2f;
             recoilTime = 35f;
             reload = 170f;
+            maxSpeedupScl = 0.35f;
+            overheatTime = 480f;
             cooldownTime = reload * 0.8f;
-            speedupPerShoot = 0.02f;
+            speedupPerShoot = 0.05f;
             shake = 4f;
             smokeEffect = shootEffect = Fx.none;
             heatColor = Color.red;
@@ -1475,7 +1477,7 @@ public class TerraBlocks{
             shootType = new BasicBulletType(){{
                 sprite = "terra-plasma";
                 speed = 4.8f;
-                drag = 0.005f;
+                drag = 0.03f;
                 damage = 139;
                 buildingDamageMultiplier = 0.6f;
                 shieldDamageMultiplier = 1.1f;
@@ -1489,14 +1491,14 @@ public class TerraBlocks{
                 hittable = false;
                 reflectable = false;
                 keepVelocity = false;
-                splashDamageRadius = 50f;
+                splashDamageRadius = 40f;
                 splashDamage = 99f;
                 lifetime = 142f;
                 lightRadius = 55f;
                 lightOpacity = 0.5f;
                 trailColor = backColor = hitColor = lightColor = Color.valueOf("8db0ff");
                 frontColor = Color.white;
-                hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, Color.valueOf("8db0ff")));
+                hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, TerraFx.circleFade);
                 shootEffect = new Effect(26f, e -> {
                     color(Pal.suppress);
                     Drawf.tri(e.x, e.y, 9f * e.fout(), 80f - (20f * e.fin()), e.rotation);
@@ -1506,14 +1508,14 @@ public class TerraBlocks{
                 });
                 chargeEffect = new Effect(30, e -> {
                     color(Color.valueOf("8db0ff"));
-                    Fill.circle(e.x, e.y, e.fin() * 11f);
+                    Fill.circle(e.x, e.y, e.fin() * 4f);
                     color(Color.white);
-                    Fill.circle(e.x, e.y, e.fin() * 6f);
+                    Fill.circle(e.x, e.y, e.fin() * 2f);
                 });
                 status = StatusEffects.shocked;
                 intervalBullets = 2;
-                bulletInterval = 8f;
-                intervalDelay = 20f;
+                bulletInterval = 9f;
+                intervalDelay = 30f;
                 fragBullets = 9;
                 intervalBullet = fragBullet = new LaserBoltBulletType(5.2f, 19){{
                     lifetime = 40f;
