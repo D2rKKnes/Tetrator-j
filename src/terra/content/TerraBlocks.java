@@ -1463,7 +1463,7 @@ public class TerraBlocks{
                     moveX = -1.5f;
                     moveY = 1.5f;
                     mirror = under = true;
-                    moves.add(new PartMove(PartProgress.recoil, 0.5, -0.5, 0));
+                    moves.add(new PartMove(PartProgress.recoil, -0.5f, 0.5f, 0));
                 }},
                 new RegionPart("-blade"){{
                     moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -40));
