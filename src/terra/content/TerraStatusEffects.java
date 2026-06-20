@@ -37,7 +37,7 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, extinction, warped, warpPower, shockwaveImpact, delta32, deltaImmunized;
+    energyOverload, singularEvaporation, impactStun, radited, extinction, warped, warpPower, shockwaveImpact, delta32, deltaImmunized;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -63,6 +63,24 @@ public class TerraStatusEffects{
             speedMultiplier = 0.3f;
             buildSpeedMultiplier = 0f;
             disarm = true;
+        }};
+
+        radited = new StatusEffect("radited"){{
+            color = Color.valueOf("bcff73");
+            healthMultiplier = 0.9f;
+            damageMultiplier = 0.8f;
+            speedMultiplier = 0.8f;
+            reloadMultiplier = 0.8f;
+            intervalDamage = 19.4f;
+            intervalDamageTime = 15f;
+            damage = 0.4f;
+            init(() -> {
+                affinity(corroded, (unit, result, time) -> {
+                    unit.damagePierce(20);
+                    Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f));
+                    result.set(burning, Math.min(time + result.time, 300f));
+                });
+            });
         }};
 
         singularEvaporation = new StatusEffect("singular-evaporation"){{
