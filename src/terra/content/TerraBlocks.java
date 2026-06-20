@@ -82,7 +82,7 @@ public class TerraBlocks{
     //storage
     coreSolaris,
     //turrets
-    flight, dynamics, electricShock, fracture, aircraft,
+    flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
     basicAssembler, advancedAssembler, droneCentre, debugAssembler,
     //other
@@ -337,6 +337,7 @@ public class TerraBlocks{
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
             size = 7;
+            researchCostMultiplier = 0.1f;
             squareSprite = false;
             health = 7850;
             powerProduction = 325f;
@@ -1432,6 +1433,81 @@ public class TerraBlocks{
             limitRange();
             coolant = consumeCoolant(0.2f);
             depositCooldown = 2.0f;
+        }};
+
+        ejection = new SpeedupEnergyTurret("ejection"){{
+            requirements(Category.turret, with(Items.titanium, 280, TerraItems.diamondGlass, 115, Items.silicon, 300));
+            range = 145f;
+            shootY = 2f;
+            recoil = 2f;
+            recoilTime = 45f;
+            reload = 152f;
+            cooldownTime = reload * 0.8f;
+            shake = 4f;
+            shootEffect = Fx.lancerLaserShoot;
+            smokeEffect = Fx.none;
+            heatColor = Color.red;
+            size = 3;
+            shoot.firstShotDelay = 30f;
+            coolant = consumeCoolant(0.5f);
+            targetUnderBlocks = false;
+
+            consumePower(7f);
+
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-side"){{
+                    progress = PartProgress.warmup.inv();
+                    moveX = -1.5f;
+                    moveY = -1.5f;
+                    mirror = under = true;
+                }},
+                parts.add(new RegionPart("-side"){{
+                    moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -50));
+                    moves.add(new PartMove(PartProgress.recoil.curve(Interp.pow2In), 0, 0, -50));
+                    mirror = under = true;
+                }});
+            }};
+
+            shootType = new LaserBulletType(78){{
+                colors = new Color[]{Pal.lancerLaser.cpy().a(0.4f), Pal.lancerLaser, Color.white};
+
+                buildingDamageMultiplier = 0.25f;
+                armorMultiplier = 3f;
+                hitEffect = Fx.hitLancer;
+                hitSize = 3;
+                lifetime = 16f;
+                drawSize = 300f;
+                collidesAir = true;
+                length = 103f;
+                ammoMultiplier = 1f;
+                pierceCap = 4;
+                despawnSound = Sounds.shootArc;
+                fragBullets = 2;
+                fragRandomSpread = 0f;
+                fragOnHit = false;
+                fragBullet = new LightningBulletType(){{
+                    damage = 20;
+                    lightningLength = 11;
+                    lightningLengthRand = 2;
+                    collidesAir = true;
+                    ammoMultiplier = 1f;
+    
+                    //for visual stats only.
+                    buildingDamageMultiplier = 0.25f;
+    
+                    lightningType = new BulletType(0.0001f, 0f){{
+                        lifetime = Fx.lightning.lifetime;
+                        hitEffect = Fx.hitLancer;
+                        despawnEffect = Fx.none;
+                        status = StatusEffects.shocked;
+                        hittable = false;
+                        lightColor = Color.white;
+                        collidesAir = true;
+                        buildingDamageMultiplier = 0.25f;
+                        shieldDamageMultiplier = 0.2f;
+                    }};
+                }};
+            }};
         }};
 
         aircraft = new ItemTurret("aircraft"){{
