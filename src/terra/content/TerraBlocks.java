@@ -1474,7 +1474,8 @@ public class TerraBlocks{
 
             shootType = new BasicBulletType(){{
                 sprite = "terra-plasma";
-                speed = 4f;
+                speed = 4.8f;
+                drag = 0.005f;
                 damage = 139;
                 buildingDamageMultiplier = 0.6f;
                 shieldDamageMultiplier = 1.1f;
@@ -1531,7 +1532,6 @@ public class TerraBlocks{
                     status = StatusEffects.shock;
                 }};
             }};
-            limitRange();
         }};
 
         aircraft = new ItemTurret("aircraft"){{
