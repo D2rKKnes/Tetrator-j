@@ -1438,13 +1438,13 @@ public class TerraBlocks{
         ejection = new SpeedupEnergyTurret("ejection"){{
             requirements(Category.turret, with(Items.titanium, 280, TerraItems.diamondGlass, 115, Items.silicon, 300));
             range = 195f;
-            shootY = 3.3f;
+            shootY = 3.5f;
             //rotateSpeed = 4f;
             recoil = 2f;
             recoilTime = 35f;
             reload = 170f;
-            maxSpeedupScl = 0.35f;
-            overheatTime = 480f;
+            maxSpeedupScl = 0.85f;
+            overheatTime = 500f;
             cooldownTime = reload * 0.8f;
             speedupPerShoot = 0.05f;
             shake = 4f;
@@ -1456,6 +1456,7 @@ public class TerraBlocks{
             coolant = consumeCoolant(0.4f);
             targetUnderBlocks = false;
             chargeSound = Sounds.chargeLancer;
+            moveWhileCharging = false;
 
             consumePower(7f);
 
@@ -1476,7 +1477,7 @@ public class TerraBlocks{
 
             shootType = new BasicBulletType(){{
                 sprite = "terra-plasma";
-                speed = 4.8f;
+                speed = 5.6f;
                 drag = 0.03f;
                 damage = 139;
                 buildingDamageMultiplier = 0.6f;
@@ -1493,9 +1494,9 @@ public class TerraBlocks{
                 keepVelocity = false;
                 splashDamageRadius = 40f;
                 splashDamage = 99f;
-                lifetime = 142f;
-                lightRadius = 55f;
-                lightOpacity = 0.5f;
+                lifetime = 120f;
+                lightRadius = 40f;
+                lightOpacity = 0.7f;
                 trailColor = backColor = hitColor = lightColor = Color.valueOf("8db0ff");
                 frontColor = Color.white;
                 hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, TerraFx.circleFade);
@@ -1508,9 +1509,12 @@ public class TerraBlocks{
                 });
                 chargeEffect = new Effect(30, e -> {
                     color(Color.valueOf("8db0ff"));
+                    randLenVectors(e.id, 10, 30f * e.fout(), (x, y) -> {
+                        Fill.circle(e.x + x, e.y + y, e.fin() * 2f);
+                        Drawf.light(e.x + x, e.y + y, e.fin() * 10f, Color.valueOf("8db0ff"), 0.7f);
+                    });
                     Fill.circle(e.x, e.y, e.fin() * 4f);
-                    color(Color.white);
-                    Fill.circle(e.x, e.y, e.fin() * 2f);
+                    Drawf.light(e.x, e.y, e.fin() * 40f, Color.valueOf("8db0ff"), 0.7f);
                 });
                 status = StatusEffects.shocked;
                 intervalBullets = 2;
