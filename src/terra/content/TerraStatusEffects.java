@@ -80,8 +80,7 @@ public class TerraStatusEffects{
             init(() -> {
                 affinity(StatusEffects.corroded, (unit, result, time) -> {
                     unit.damagePierce(transitionDamage);
-                    Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f));
-                    result.set(burning, Math.min(time + result.time, 300f));
+                    result.set(radited, Math.min(time + result.time, 300f));
                 });
             });
         }};
