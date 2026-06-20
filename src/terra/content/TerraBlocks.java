@@ -1460,8 +1460,8 @@ public class TerraBlocks{
                     moveX = -1.5f;
                     moveY = -1.5f;
                     mirror = under = true;
-                }},
-                parts.add(new RegionPart("-side"){{
+                }}),
+                parts.add(new RegionPart("-blade"){{
                     moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -50));
                     moves.add(new PartMove(PartProgress.recoil.curve(Interp.pow2In), 0, 0, -50));
                     mirror = under = true;
