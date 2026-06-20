@@ -1466,7 +1466,7 @@ public class TerraBlocks{
                     moveX = -1.5f;
                     moveY = 1.5f;
                     mirror = under = true;
-                    moves.add(new PartMove(PartProgress.recoil, -0.5f, 0.5f, 0));
+                    moves.add(new PartMove(PartProgress.recoil, -1f, 1f, 0));
                 }},
                 new RegionPart("-blade"){{
                     moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -40));
@@ -1507,15 +1507,7 @@ public class TerraBlocks{
                         Drawf.tri(e.x, e.y, 3f * e.fout(), 25f, e.rotation + (5f + (e.fin(Interp.circleOut) * 30f)) * Mathf.signs[i]);
                     }
                 });
-                chargeEffect = new Effect(30, e -> {
-                    color(Color.valueOf("8db0ff"));
-                    randLenVectors(e.id, 10, 30f * e.fout(), (x, y) -> {
-                        Fill.circle(e.x + x, e.y + y, e.fin() * 2f);
-                        Drawf.light(e.x + x, e.y + y, e.fin() * 10f, Color.valueOf("8db0ff"), 0.7f);
-                    });
-                    Fill.circle(e.x, e.y, e.fin() * 4f);
-                    Drawf.light(e.x, e.y, e.fin() * 40f, Color.valueOf("8db0ff"), 0.7f);
-                });
+                chargeEffect = TerraFx.smallCharge;
                 status = StatusEffects.shocked;
                 intervalBullets = 2;
                 bulletInterval = 9f;
