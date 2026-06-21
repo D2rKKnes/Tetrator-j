@@ -68,13 +68,11 @@ public class TerraStatusEffects{
         radited = new StatusEffect("radited"){{
             color = Color.valueOf("bcff73");
             healthMultiplier = 0.9f;
-            damageMultiplier = 0.8f;
-            speedMultiplier = 0.8f;
+            damageMultiplier = 0.7f;
             reloadMultiplier = 0.8f;
-            intervalDamage = 19.4f;
+            intervalDamage = 36.4f;
             intervalDamageTime = 15f;
             transitionDamage = 20f;
-            damage = 0.4f;
             effectChance = 0.1f;
             effect = Fx.corrosionVapor;
             init(() -> {
