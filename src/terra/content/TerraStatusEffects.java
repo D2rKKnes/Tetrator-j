@@ -37,7 +37,7 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, radited, extinction, warped, warpPower, shockwaveImpact, delta32, deltaImmunized;
+    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, warped, warpPower, shockwaveImpact, delta32, deltaImmunized;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -95,6 +95,15 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
             });
+        }};
+
+        crystalization = new StatusEffect("crystalization"){{
+            color = Color.valueOf("ff7163");
+            healthMultiplier = 1.15f;
+            speedMultiplier = 0.6f;
+            reloadMultiplier = 0.5f;
+            intervalDamage = 88f;
+            intervalDamageTime = 90f;
         }};
 
         extinction = new StatusEffect("extinction"){{
