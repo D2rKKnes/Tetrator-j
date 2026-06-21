@@ -1635,7 +1635,7 @@ public class TerraBlocks{
                                 buildingDamageMultiplier = 0.2f;
                                 ammoMultiplier = 2f;
                                 reloadMultiplier = 0.2f;
-                                status = StatusEffects.melting;
+                                status = TerraStatusEffects.crystalization;
                                 statusDuration = 90f;
                             }};
                         }});
