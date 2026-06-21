@@ -1463,11 +1463,10 @@ public class TerraBlocks{
 
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-side"){{
-                    progress = PartProgress.warmup.inv();
+                    progress = PartProgress.recoil;
                     moveX = -1.5f;
                     moveY = 1.5f;
                     mirror = under = true;
-                    moves.add(new PartMove(PartProgress.recoil, -1f, 1f, 0));
                 }},
                 new RegionPart("-blade"){{
                     moves.add(new PartMove(PartProgress.charge.curve(Interp.circleIn), 0, 0, -40));
