@@ -1267,11 +1267,12 @@ public class TerraUnitTypes {
             speed = 3.67f;
             rotateSpeed = 12f;
             drag = 0.025f;
-            accel = 0.1f;
+            accel = 0.06f;
             mineSpeed = 7f;
             mineTier = 2;
             mineWalls = true;
-            hitSize = 10f;
+            buildSpeed = 1f;
+            hitSize = 15f;
             health = 260;
             engineSize = 0f;
             itemCapacity = 60;
@@ -1282,32 +1283,32 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(20.5f / 4f, 25f / 4, 1.5f, 90f),
-                new UnitEngine(20.5f / 4f, -20f / 4f, 1.5f, 90f)
+                new UnitEngine(20.5f / 4f, 25f / 4, 1.2f, 90f),
+                new UnitEngine(20.5f / 4f, -20f / 4f, 1.2f, 90f)
             );
 
             weapons.add(new Weapon("terra-weird-weapon"){{
                 top = false;
-                reload = 36f;
+                reload = 32f;
                 x = 0f;
                 y = 0f;
-                shootY = 2f;
+                shootY = 2.5f;
                 layerOffset = -0.002f;
                 rotate = true;
                 mirror = false;
-                rotateSpeed = 8f;
+                rotateSpeed = 9f;
                 recoil = 1f;
                 shoot.shots = 3;
-                shoot.shotDelay = 8f;
+                shoot.shotDelay = 7f;
                 shootSound = Sounds.shootAlpha;
 
-                bullet = new LaserBoltBulletType(4f, 11){{
+                bullet = new LaserBoltBulletType(4f, 19){{
                     scaleKeepVelocity = true;
                     width = 1.5f;
-                    height = 5.5f;
+                    height = 6.5f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     trailWidth = 1.2f;
-                    trailLength = 3;
+                    trailLength = 4;
                     shootEffect = Fx.shootSmallColor;
                     smokeEffect = Fx.hitLaserColor;
                     backColor = trailColor = Pal.yellowBoltFront;
@@ -1317,7 +1318,8 @@ public class TerraUnitTypes {
 
                     lifetime = 60f;
                     buildingDamageMultiplier = 0.01f;
-                    homingPower = 0.014f;
+                    homingPower = 0.02f;
+                    armorMultiplier = 0.9f;
                     healPercent = 1.6f;
                     collidesTeam = true;
                 }};
