@@ -1335,13 +1335,14 @@ public class TerraUnitTypes {
             hidden = true;
             crushDamage = 2f;
             aiController = HugAI::new;
+            constructor = CrawlUnit::create;
             targetAir = false;
 
             segmentScl = 4f;
             segmentPhase = 5f;
             speed = 1f;
 
-            abilities.add(new SpawnDeathAbility(renale, 5, 11f));
+            abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
         }};
 
         endSpawn = new UnitType("end-spawn"){{
