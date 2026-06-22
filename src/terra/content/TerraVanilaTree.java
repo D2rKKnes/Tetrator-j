@@ -61,7 +61,7 @@ public class TerraVanilaTree{
         vanillaNode(coreShard, () -> {
             node(alpha, () -> {
                 node(beta, Seq.with(new Research(coreFoundation)), () -> {
-                    node(gamma, Seq.with(new Research(coreNulceus)), () -> {});
+                    node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
                     node(TerraUnitTypes.tau, Seq.with(new Research(coreSolaris)), () -> {});
                 });
             });
