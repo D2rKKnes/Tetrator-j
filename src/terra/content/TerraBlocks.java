@@ -987,7 +987,7 @@ public class TerraBlocks{
         coreSolaris = new SolarGeneratorCore("core-solaris"){{
             requirements(Category.effect, with(Items.metaglass, 2500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
             //alwaysUnlocked = true;
-            unitType = UnitTypes.beta;
+            unitType = TerraUnitTypes.tau;
             health = 3800;
             itemCapacity = 7500;
             size = 4;
