@@ -1770,7 +1770,7 @@ public class TerraBlocks{
             requirements(Category.units, with(Items.lead, 280, Items.silicon, 420, Items.titanium, 380, TerraItems.titaniumPlate, 165));
             size = 4;
             //core
-            addPlan(UnitTypes.beta, 60f * 20f).item(ItemStack.with(Items.silicon, 40, TerraItems.titaniumPlate, 20));
+            addPlan(TerraUnitTypes.tau, 60f * 20f).item(ItemStack.with(Items.silicon, 60, Items.graphite, 35, TerraItems.titaniumPlate, 20));
             //attack
             addPlan(UnitTypes.flare, 60f * 15f).item(ItemStack.with(Items.silicon, 20));
             addPlan(UnitTypes.horizon, 60f * 25f).item(ItemStack.with(Items.silicon, 85, Items.graphite, 40));
