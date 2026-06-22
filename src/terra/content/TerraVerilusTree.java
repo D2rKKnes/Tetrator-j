@@ -208,7 +208,7 @@ public class TerraVerilusTree {
                 });
             });
             node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
-            //node(beta, () -> {});
+            node(tau, () -> {});
         });
     }
 
