@@ -1278,6 +1278,7 @@ public class TerraUnitTypes {
             itemCapacity = 60;
             fogRadius = 0f;
             lowAltitude = false;
+            researchCostMultiplier = 0f;
             
             constructor = UnitEntity::create;
             outlineColor = Pal.darkerMetal;
