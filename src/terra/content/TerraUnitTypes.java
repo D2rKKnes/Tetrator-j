@@ -46,7 +46,9 @@ public class TerraUnitTypes {
     //drones & core units
     healDrone, basicAssemblyDrone, tau,
     //lost NH
-    endSpawn, endGuard, end;
+    endSpawn, endGuard, end,
+    //other
+    latumFAKE;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -1265,9 +1267,10 @@ public class TerraUnitTypes {
             speed = 3.67f;
             rotateSpeed = 12f;
             drag = 0.025f;
-            accel = 0.015f;
+            accel = 0.1f;
             mineSpeed = 7f;
             mineTier = 2;
+            mineWalls = true;
             hitSize = 10f;
             health = 260;
             engineSize = 0f;
@@ -1279,8 +1282,8 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(20.5f / 4f, 25f / 4, 3f, 180f),
-                new UnitEngine(20.5f / 4f, -20f / 4f, 3f, 180f)
+                new UnitEngine(20.5f / 4f, 25f / 4, 1.5f, 90f),
+                new UnitEngine(20.5f / 4f, -20f / 4f, 1.5f, 90f)
             );
 
             weapons.add(new Weapon("terra-weird-weapon"){{
@@ -1288,7 +1291,10 @@ public class TerraUnitTypes {
                 reload = 36f;
                 x = 0f;
                 y = 0f;
+                shootY = 2f;
                 layerOffset = -0.002f;
+                rotate = true;
+                mirror = false;
                 rotateSpeed = 8f;
                 recoil = 1f;
                 shoot.shots = 3;
@@ -1316,6 +1322,26 @@ public class TerraUnitTypes {
                     collidesTeam = true;
                 }};
             }});
+        }};
+
+        latumFAKE = new NeoplasmUnitType("latum"){{
+            health = 20000;
+            armor = 12;
+            hitSize = 48f;
+            omniMovement = false;
+            rotateSpeed = 1.7f;
+            segments = 4;
+            drawBody = false;
+            hidden = true;
+            crushDamage = 2f;
+            aiController = HugAI::new;
+            targetAir = false;
+
+            segmentScl = 4f;
+            segmentPhase = 5f;
+            speed = 1f;
+
+            abilities.add(new SpawnDeathAbility(renale, 5, 11f));
         }};
 
         endSpawn = new UnitType("end-spawn"){{
