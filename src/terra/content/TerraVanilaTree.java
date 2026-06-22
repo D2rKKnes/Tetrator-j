@@ -58,6 +58,14 @@ public class TerraVanilaTree{
         vanillaNode(impact0078, () -> {
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreSolaris)), () -> {});
         });
+        vanillaNode(coreShard, () -> {
+            node(alpha, () -> {
+                node(beta, Seq.with(new Research(coreFoundation)), () -> {
+                    node(gamma, Seq.with(new Research(coreNulceus)), () -> {});
+                    node(TerraUnitTypes.tau, Seq.with(new Research(coreSolaris)), () -> {});
+                });
+            });
+        });
         // Erekir
         String erekir = "erekir";
         vanillaNode(erekir, blastDoor, () -> {
