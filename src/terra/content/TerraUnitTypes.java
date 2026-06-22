@@ -43,8 +43,8 @@ public class TerraUnitTypes {
     public static UnitType
     //flying special units
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
-    //drones
-    healDrone, basicAssemblyDrone,
+    //drones & core units
+    healDrone, basicAssemblyDrone, tau,
     //lost NH
     endSpawn, endGuard, end;
 
@@ -766,8 +766,8 @@ public class TerraUnitTypes {
             targetable = false;
             softShadowScl = 0.8f;
             immunities = ObjectSet.with(
-                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, 
-                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation
+                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, StatusEffects.unmoving, 
+                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation, TerraStatusEffects.crystalization
             );
 
             parts.add(new ShapePart(){{
@@ -833,8 +833,8 @@ public class TerraUnitTypes {
             lowAltitude = true;
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(
-                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, 
-                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation
+                StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, StatusEffects.unmoving, 
+                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation, TerraStatusEffects.crystalization
             );
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
@@ -1256,6 +1256,66 @@ public class TerraUnitTypes {
             envEnabled = Env.any;
             envDisabled = Env.none;
             constructor = BuildingTetherPayloadUnit::create;
+        }};
+        tau = new UnitType("tau"){{
+            controller = u -> u.team.isAI() ? new BuilderAI(true, 400f) : new CommandAI();
+            flying = true;
+            targetBuildingsMobile = false;
+            isEnemy = false;
+            speed = 3.67f;
+            rotateSpeed = 12f;
+            drag = 0.025f;
+            accel = 0.015f;
+            mineSpeed = 7f;
+            mineTier = 2;
+            hitSize = 10f;
+            health = 260;
+            engineSize = 0f;
+            itemCapacity = 60;
+            fogRadius = 0f;
+            lowAltitude = false;
+            
+            constructor = UnitEntity::create;
+            outlineColor = Pal.darkerMetal;
+            faceTarget = false;
+            setEnginesMirror(
+                new UnitEngine(20.5f / 4f, 25f / 4, 3f, 180f),
+                new UnitEngine(20.5f / 4f, -20f / 4f, 3f, 180f)
+            );
+
+            weapons.add(new Weapon("terra-weird-weapon"){{
+                top = false;
+                reload = 36f;
+                x = 0f;
+                y = 0f;
+                layerOffset = -0.002f;
+                rotateSpeed = 8f;
+                recoil = 1f;
+                shoot.shots = 3;
+                shoot.shotDelay = 8f;
+                shootSound = Sounds.shootAlpha;
+
+                bullet = new LaserBoltBulletType(4f, 11){{
+                    scaleKeepVelocity = true;
+                    width = 1.5f;
+                    height = 5.5f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    trailWidth = 1.2f;
+                    trailLength = 3;
+                    shootEffect = Fx.shootSmallColor;
+                    smokeEffect = Fx.hitLaserColor;
+                    backColor = trailColor = Pal.yellowBoltFront;
+                    hitColor = Pal.yellowBoltFront;
+                    frontColor = Color.white;
+                    lightColor = Pal.yellowBoltFront;
+
+                    lifetime = 60f;
+                    buildingDamageMultiplier = 0.01f;
+                    homingPower = 0.014f;
+                    healPercent = 1.6f;
+                    collidesTeam = true;
+                }};
+            }});
         }};
 
         endSpawn = new UnitType("end-spawn"){{
