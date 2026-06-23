@@ -1391,7 +1391,7 @@ public class TerraUnitTypes {
 
             weapons.add(new Weapon(){{
                 top = false;
-                reload = 42f;
+                reload = 1f;
                 x = 0f;
                 y = 0f;
                 shootY = 0f;
@@ -1399,12 +1399,12 @@ public class TerraUnitTypes {
                 rotateSpeed = Float.POSITIVE_INFINITY;
                 mirror = false;
                 recoil = 1f;
-                shoot = new ShootSpread(){{
-                    shots = 20;
-                    shotDelay = 2f;
-                    spread = 1.75f;
+                inaccuracy = 30f;
+                shoot = new ShootPattern(){{
+                    shots = 3;
+                    shotDelay = 0.2f;
                 }};
-                shootCone = 20f * 1.75f + 5f;
+                shootCone = inaccuracy + 5f;
                 shootSound = Sounds.shootAlpha;
 
                 bullet = new BasicBulletType(15f, Float.POSITIVE_INFINITY){{
