@@ -84,7 +84,7 @@ public class TerraBlocks{
     //turrets
     flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
-    basicAssembler, advancedAssembler, droneCentre, debugAssembler,
+    basicAssembler, advancedAssembler, coreFactory, droneCentre, debugAssembler,
     //other
     //NOTVA =---
     //GIER =---
@@ -1834,7 +1834,7 @@ public class TerraBlocks{
                 new UnitPlan(UnitTypes.gamma, 60f * 80f, with(Items.silicon, 150, Items.titanium, 120, Items.plastanium, 60, Items.thorium, 90)),
                 new UnitPlan(TerraUnitTypes.tau, 60f * 25f, with(Items.silicon, 200, Items.titanium, 160, Items.plastanium, 90, Items.phaseFabric, 40))
             );
-            consumePower(20f / 60);
+            consumePower(3.6f);
         }};
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
