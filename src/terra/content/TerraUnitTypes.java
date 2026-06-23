@@ -1355,6 +1355,7 @@ public class TerraUnitTypes {
         myDoom = new UnitType("my-doom"){{
             flying = true;
             isEnemy = false;
+            hidden = true;
             speed = 10f;
             rotateSpeed = 50f;
             drag = 0f;
