@@ -48,7 +48,7 @@ public class TerraUnitTypes {
     //lost NH
     endSpawn, endGuard, end,
     //other
-    latumFAKE;
+    latumFAKE, myDoom;
 
     public static void load() {
         wick = new UnitType("wick"){{
@@ -1210,6 +1210,7 @@ public class TerraUnitTypes {
             playerControllable = false;
             logicControllable = false;
             flying = true;
+            hidden = true; //not done yet
             speed = 3.6f;
             drag = 0.02f;
             accel = 0.03f;
@@ -1249,7 +1250,7 @@ public class TerraUnitTypes {
 
             outlineColor = Pal.darkerMetal;
             isEnemy = false;
-            hidden = true;
+            hidden = false;
             useUnitCap = false;
             logicControllable = false;
             playerControllable = false;
@@ -1266,16 +1267,17 @@ public class TerraUnitTypes {
             isEnemy = false;
             speed = 3.67f;
             rotateSpeed = 12f;
-            drag = 0.025f;
-            accel = 0.06f;
+            drag = 0.035f;
+            accel = 0.045f;
             mineSpeed = 7f;
             mineTier = 2;
             mineWalls = true;
             buildSpeed = 1f;
+            buildBeamOffset = 22f / 4,
             hitSize = 15f;
             health = 260;
             engineSize = 0f;
-            itemCapacity = 60;
+            itemCapacity = 100;
             fogRadius = 0f;
             lowAltitude = false;
             researchCostMultiplier = 0f;
@@ -1284,13 +1286,13 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(20.5f / 4f, 25f / 4, 1.2f, 90f),
-                new UnitEngine(20.5f / 4f, -20f / 4f, 1.2f, 90f)
+                new UnitEngine(20.5f / 4f, 26f / 4, 1.5f, 90f),
+                new UnitEngine(20.5f / 4f, -21f / 4f, 1.5f, 90f)
             );
 
             weapons.add(new Weapon("terra-weird-weapon"){{
                 top = false;
-                reload = 32f;
+                reload = 25f;
                 x = 0f;
                 y = 0f;
                 shootY = 2.5f;
@@ -1299,12 +1301,15 @@ public class TerraUnitTypes {
                 mirror = false;
                 rotateSpeed = 9f;
                 recoil = 1f;
-                shoot.shots = 3;
-                shoot.shotDelay = 7f;
+                shoot = new ShootSpread(){{
+                    shots = 3;
+                    shotDelay = 5f;
+                    spread = 6f;
+                }};
                 shootSound = Sounds.shootAlpha;
 
-                bullet = new LaserBoltBulletType(4f, 19){{
-                    scaleKeepVelocity = true;
+                bullet = new LaserBoltBulletType(4.5f, 19){{
+                    keepVelocity = false;
                     width = 1.5f;
                     height = 6.5f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -1317,7 +1322,7 @@ public class TerraUnitTypes {
                     frontColor = Color.white;
                     lightColor = Pal.yellowBoltFront;
 
-                    lifetime = 60f;
+                    lifetime = 55f;
                     buildingDamageMultiplier = 0.01f;
                     homingPower = 0.02f;
                     armorMultiplier = 0.9f;
@@ -1346,6 +1351,70 @@ public class TerraUnitTypes {
             speed = 1f;
 
             abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
+        }};
+        myDoom = new UnitType("my-doom"){{
+            flying = true;
+            isEnemy = false;
+            speed = 10f;
+            rotateSpeed = 50f;
+            drag = 0f;
+            accel = 1f;
+            mineSpeed = 999f;
+            mineTier = 999;
+            mineWalls = true;
+            buildSpeed = 1000f;
+            hitSize = 1f;
+            health = Float.POSITIVE_INFINITY;
+            engineSize = 0f;
+            itemCapacity = 2147483647;
+            fogRadius = Float.POSITIVE_INFINITY;
+            lowAltitude = false;
+            researchCostMultiplier = 0f;
+            
+            constructor = UnitEntity::create;
+            outlineColor = Pal.darkerMetal;
+            faceTarget = false;
+            setEnginesMirror(
+                new UnitEngine(20.5f / 4f, 26f / 4, 1.5f, 90f),
+                new UnitEngine(20.5f / 4f, -21f / 4f, 1.5f, 90f)
+            );
+
+            weapons.add(new Weapon(){{
+                top = false;
+                reload = 2f;
+                x = 0f;
+                y = 0f;
+                shootY = 0f;
+                rotate = true;
+                mirror = false;
+                recoil = 1f;
+                shoot = new ShootSpread(){{
+                    shots = 45;
+                    shotDelay = 0f;
+                    spread = 1f;
+                }};
+                shootSound = Sounds.shootAlpha;
+
+                bullet = new LaserBoltBulletType(15f, Float.POSITIVE_INFINITY){{
+                    keepVelocity = false;
+                    width = 2f;
+                    height = 6f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    trailWidth = 1.2f;
+                    trailLength = 2;
+                    shootEffect = Fx.shootSmallColor;
+                    smokeEffect = Fx.hitLaserColor;
+                    backColor = trailColor = Pal.yellowBoltFront;
+                    hitColor = Pal.yellowBoltFront;
+                    frontColor = Color.white;
+                    lightColor = Pal.yellowBoltFront;
+
+                    lifetime = 60f;
+                    armorMultiplier = 0f;
+                    healPercent = 100f;
+                    collidesTeam = true;
+                }};
+            }});
         }};
 
         endSpawn = new UnitType("end-spawn"){{
