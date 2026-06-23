@@ -150,6 +150,7 @@ public class TerraVerilusTree {
                         node(incident, Seq.with(new AtWave(verilus, 15)), () -> {});
                     });
                 });
+                node(tau, () -> {});
                 node(advancedAssembler, () -> {
                     node(antumbra, Seq.with(new AtWave(verilus, 33)), () -> {
                         node(eclipse, Seq.with(new AtWave(verilus, 75)), () -> {});
@@ -208,7 +209,6 @@ public class TerraVerilusTree {
                 });
             });
             node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
-            node(tau, () -> {});
         });
     }
 
