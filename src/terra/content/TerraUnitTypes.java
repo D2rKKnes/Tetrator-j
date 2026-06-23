@@ -1387,7 +1387,7 @@ public class TerraUnitTypes {
             outlines = false;
             faceTarget = false;
 
-            abilities.add(new AdaptedHealAbility(float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
+            abilities.add(new AdaptedHealAbility(Float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
 
             weapons.add(new Weapon(){{
                 top = false;
