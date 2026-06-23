@@ -1459,7 +1459,7 @@ public class TerraBlocks{
             moveWhileCharging = false;
             canOverdrive = false;
 
-            consumePower(7f);
+            consumePower(15f);
 
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-side"){{
