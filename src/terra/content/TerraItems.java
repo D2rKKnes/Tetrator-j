@@ -163,5 +163,10 @@ public class TerraItems{
             hardness = 3;
             healthScaling = 1.1f;
         }};
+        fish = new Item("fish", Color.valueOf("807e7f")){{
+            cost = 0.1f;
+            hardness = 0;
+            flammability = 0.03f;
+        }};
     }
 }
