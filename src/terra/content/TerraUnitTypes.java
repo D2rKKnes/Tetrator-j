@@ -1373,7 +1373,7 @@ public class TerraUnitTypes {
             health = armor = Float.POSITIVE_INFINITY;
             engineSize = 3f;
             engineOffset = 0f;
-            trailLength = 4f;
+            trailLength = 4;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
@@ -1423,7 +1423,7 @@ public class TerraUnitTypes {
                     collidesTeam = true;
                     pierce = true;
                     homingPower = 0.07f;
-                    status = TerraStatusEffect.delta32;
+                    status = TerraStatusEffects.delta32;
                 }};
             }});
         }                     
