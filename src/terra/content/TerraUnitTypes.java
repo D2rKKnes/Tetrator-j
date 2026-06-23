@@ -1273,7 +1273,7 @@ public class TerraUnitTypes {
             mineTier = 2;
             mineWalls = true;
             buildSpeed = 1f;
-            buildBeamOffset = 22f / 4,
+            buildBeamOffset = 22f / 4;
             hitSize = 15f;
             health = 260;
             engineSize = 0f;
