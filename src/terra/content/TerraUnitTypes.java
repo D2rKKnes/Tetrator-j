@@ -1352,33 +1352,40 @@ public class TerraUnitTypes {
 
             abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
         }};
-        myDoom = new UnitType("my-doom"){{
+        myDoom = new UnitType("my-doom"){{ //MyDoom.exe Imput command > execute Doomsday.js
             flying = true;
+            drawCell = false;
             isEnemy = false;
+            killable = hittable = targetable = physics = false;
+            logicControllable = false;
             hidden = true;
             speed = 10f;
-            rotateSpeed = 50f;
-            drag = 0f;
+            rotateSpeed = 20f;
+            drag = 1f;
             accel = 1f;
-            mineSpeed = 999f;
-            mineTier = 999;
+            mineSpeed = Float.POSITIVE_INFINITY;
+            mineTier = 1000;
             mineWalls = true;
-            buildSpeed = 1000f;
-            hitSize = 1f;
+            mineHardnessScaling = false;
+            buildSpeed = Float.POSITIVE_INFINITY;
+            hitSize = buildBeamOffset = 7.5f;
+            lightRadius = 20f;
             health = armor = Float.POSITIVE_INFINITY;
-            engineSize = 0f;
+            engineSize = 3f;
+            engineOffset = 0f;
+            trailLength = 4f;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
             researchCostMultiplier = 0f;
+            healColor = engineColor = trailColor = lightColor = Color.valueOf("f53036");
+            deathExplosionEffect = new WrapEffect(TerraFx.circleFade, engineColor);
+            envDisabled = Env.none;
+            envEnabled = Env.any;
             
             constructor = UnitEntity::create;
-            outlineColor = Pal.darkerMetal;
+            outlines = false;
             faceTarget = false;
-            setEnginesMirror(
-                new UnitEngine(20.5f / 4f, 26f / 4, 1.5f, 90f),
-                new UnitEngine(20.5f / 4f, -21f / 4f, 1.5f, 90f)
-            );
 
             weapons.add(new Weapon(){{
                 top = false;
@@ -1387,36 +1394,50 @@ public class TerraUnitTypes {
                 y = 0f;
                 shootY = 0f;
                 rotate = true;
+                rotateSpeed = Float.POSITIVE_INFINITY;
                 mirror = false;
                 recoil = 1f;
                 shoot = new ShootSpread(){{
-                    shots = 45;
+                    shots = 20;
                     shotDelay = 0f;
-                    spread = 1f;
+                    spread = 1.75f;
                 }};
+                shootCone = 20f * 1.75f + 5f;
                 shootSound = Sounds.shootAlpha;
 
-                bullet = new LaserBoltBulletType(15f, Float.POSITIVE_INFINITY){{
+                bullet = new BasicBulletType(15f, Float.POSITIVE_INFINITY){{
+                    sprite = "terra-star";
                     keepVelocity = false;
-                    width = 2f;
-                    height = 6f;
-                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    width = 9f;
+                    height = 9f;
+                    shrinkX = shrinkY = 1f;
                     trailWidth = 1.2f;
                     trailLength = 2;
-                    shootEffect = Fx.shootSmallColor;
-                    smokeEffect = Fx.hitLaserColor;
-                    backColor = trailColor = Pal.yellowBoltFront;
-                    hitColor = Pal.yellowBoltFront;
-                    frontColor = Color.white;
-                    lightColor = Pal.yellowBoltFront;
+                    shootEffect = smokeEffect = hitEffect = despawnEffect = Fx.none;
+                    backColor = trailColor = hitColor = Color.valueOf("f53036");
+                    frontColor = lightColor = Color.valueOf("ff786e");
 
-                    lifetime = 60f;
+                    lifetime = 50f;
                     armorMultiplier = 0f;
                     healPercent = 100f;
                     collidesTeam = true;
+                    pierce = true;
+                    homingPower = 0.07f;
+                    status = TerraStatusEffect.delta32;
                 }};
             }});
-        }};
+        }                     
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null) continue;
+                    immunities.add(effect); //yes ALL effects, including buffs
+                }
+            }
+        };
 
         endSpawn = new UnitType("end-spawn"){{
             flying = true;
