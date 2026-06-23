@@ -1365,7 +1365,7 @@ public class TerraUnitTypes {
             mineWalls = true;
             buildSpeed = 1000f;
             hitSize = 1f;
-            health = Float.POSITIVE_INFINITY;
+            health = armor = Float.POSITIVE_INFINITY;
             engineSize = 0f;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
