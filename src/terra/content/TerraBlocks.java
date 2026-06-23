@@ -1770,7 +1770,7 @@ public class TerraBlocks{
             requirements(Category.units, with(Items.lead, 280, Items.silicon, 420, Items.titanium, 380, TerraItems.titaniumPlate, 165));
             size = 4;
             //core
-            addPlan(TerraUnitTypes.tau, 60f * 20f).item(ItemStack.with(Items.silicon, 60, Items.graphite, 35, TerraItems.titaniumPlate, 20));
+            addPlan(TerraUnitTypes.tau, 60f * 27.5f).item(ItemStack.with(Items.silicon, 90, Items.graphite, 35, TerraItems.titaniumPlate, 50, TerraItems.diamondDust, 30));
             //attack
             addPlan(UnitTypes.flare, 60f * 15f).item(ItemStack.with(Items.silicon, 20));
             addPlan(UnitTypes.horizon, 60f * 25f).item(ItemStack.with(Items.silicon, 85, Items.graphite, 40));
@@ -1815,12 +1815,24 @@ public class TerraBlocks{
             requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.tesseract, 1));
             size = 2;
             plans = Seq.with(
+                //purple
                 new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
                 new UnitPlan(TerraUnitTypes.dynamite, 60f * 30f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55)),
                 new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
                 new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
                 new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
                 new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780))
+            );
+            consumePower(20f / 60);
+        }};
+        coreFactory = new UnitFactory("core-factory"){{
+            requirements(Category.units, with(Items.silicon, 120, Items.copper, 80, Items.lead, 90, Items.titanium, 60));
+            size = 3;
+            plans = Seq.with(
+                new UnitPlan(UnitTypes.alpha, 60f * 25f, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20)),
+                new UnitPlan(UnitTypes.beta, 60f * 50f, with(Items.silicon, 70, Items.copper, 140, Items.graphite, 75, Items.titanium, 80)),
+                new UnitPlan(UnitTypes.gamma, 60f * 80f, with(Items.silicon, 150, Items.titanium, 120, Items.plastanium, 60, Items.thorium, 90)),
+                new UnitPlan(TerraUnitTypes.tau, 60f * 25f, with(Items.silicon, 200, Items.titanium, 160, Items.plastanium, 90, Items.phaseFabric, 40))
             );
             consumePower(20f / 60);
         }};
