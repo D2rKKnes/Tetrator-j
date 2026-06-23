@@ -58,11 +58,13 @@ public class TerraVanilaTree{
         vanillaNode(impact0078, () -> {
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreSolaris)), () -> {});
         });
-        vanillaNode(coreShard, () -> {
-            node(alpha, () -> {
-                node(beta, Seq.with(new Research(coreFoundation)), () -> {
-                    node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
-                    node(TerraUnitTypes.tau, Seq.with(new Research(coreSolaris)), () -> {});
+        vanillaNode(airFactory, () -> {
+            node(coreFactory, Seq.with(new SectorComplete(taintedWoods)), () -> {
+                node(alpha, () -> {
+                    node(beta, Seq.with(new Research(coreFoundation)), () -> {
+                        node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
+                        node(TerraUnitTypes.tau, Seq.with(new Research(coreSolaris)), () -> {});
+                    });
                 });
             });
         });
