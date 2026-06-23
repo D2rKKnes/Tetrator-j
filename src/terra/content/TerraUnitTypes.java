@@ -1286,8 +1286,8 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             faceTarget = false;
             setEnginesMirror(
-                new UnitEngine(20.5f / 4f, 26f / 4, 1.5f, 90f),
-                new UnitEngine(20.5f / 4f, -21f / 4f, 1.5f, 90f)
+                new UnitEngine(20.5f / 4f, 26f / 4, 1.6f, 90f),
+                new UnitEngine(20.5f / 4f, -19f / 4f, 1.6f, 90f)
             );
 
             weapons.add(new Weapon("terra-weird-weapon"){{
@@ -1368,8 +1368,8 @@ public class TerraUnitTypes {
             mineWalls = true;
             mineHardnessScaling = false;
             buildSpeed = Float.POSITIVE_INFINITY;
-            hitSize = buildBeamOffset = 7.5f;
-            lightRadius = 20f;
+            hitSize = buildBeamOffset = 12f;
+            lightRadius = 12f * 3;
             health = armor = Float.POSITIVE_INFINITY;
             engineSize = 3f;
             engineOffset = 0f;
@@ -1387,9 +1387,11 @@ public class TerraUnitTypes {
             outlines = false;
             faceTarget = false;
 
+            abilities.add(new AdaptedHealAbility(loat.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
+
             weapons.add(new Weapon(){{
                 top = false;
-                reload = 2f;
+                reload = 42f;
                 x = 0f;
                 y = 0f;
                 shootY = 0f;
@@ -1399,7 +1401,7 @@ public class TerraUnitTypes {
                 recoil = 1f;
                 shoot = new ShootSpread(){{
                     shots = 20;
-                    shotDelay = 0f;
+                    shotDelay = 2f;
                     spread = 1.75f;
                 }};
                 shootCone = 20f * 1.75f + 5f;
@@ -1420,11 +1422,22 @@ public class TerraUnitTypes {
 
                     lifetime = 50f;
                     armorMultiplier = 0f;
-                    healPercent = 100f;
-                    collidesTeam = true;
                     pierce = true;
                     homingPower = 0.014f;
-                    status = TerraStatusEffects.delta32;
+                    status = StatusEffects.unmoving;
+                    statusDuration = Float.POSITIVE_INFINITY;
+                }};
+            }},
+            new RepairBeamWeapon(){{
+                mirror = false;
+                shootY = x = y = 0f;
+                beamWidth = 1f;
+                repairSpeed = Float.POSITIVE_INFINITY;
+                targetBuildings = true;
+                shootCone = 360f;
+                healColor = laserColor = Color.valueOf("f53036");
+                bullet = new BulletType(){{
+                    maxRange = 30f * 8;
                 }};
             }});
         }                     
