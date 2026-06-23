@@ -1295,7 +1295,7 @@ public class TerraUnitTypes {
                 reload = 25f;
                 x = 0f;
                 y = 0f;
-                shootY = 2.5f;
+                shootY = 4f;
                 layerOffset = -0.002f;
                 rotate = true;
                 mirror = false;
@@ -1373,7 +1373,7 @@ public class TerraUnitTypes {
             health = armor = Float.POSITIVE_INFINITY;
             engineSize = 3f;
             engineOffset = 0f;
-            trailLength = 4;
+            trailLength = 5;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
@@ -1408,12 +1408,13 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(15f, Float.POSITIVE_INFINITY){{
                     sprite = "terra-star";
                     keepVelocity = false;
-                    width = 9f;
-                    height = 9f;
-                    shrinkX = shrinkY = 1f;
+                    width = 16f;
+                    height = 16f;
+                    shrinkX = shrinkY = 0f;
                     trailWidth = 1.2f;
                     trailLength = 2;
-                    shootEffect = smokeEffect = hitEffect = despawnEffect = Fx.none;
+                    shootEffect = smokeEffect = Fx.none;
+                    hitEffect = despawnEffect = TerraFx.circleFadeSmall;
                     backColor = trailColor = hitColor = Color.valueOf("f53036");
                     frontColor = lightColor = Color.valueOf("ff786e");
 
@@ -1422,7 +1423,7 @@ public class TerraUnitTypes {
                     healPercent = 100f;
                     collidesTeam = true;
                     pierce = true;
-                    homingPower = 0.07f;
+                    homingPower = 0.014f;
                     status = TerraStatusEffects.delta32;
                 }};
             }});
