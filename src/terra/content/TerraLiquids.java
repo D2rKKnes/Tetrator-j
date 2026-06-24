@@ -13,7 +13,7 @@ public class TerraLiquids{
             gas = true;
             heatCapacity = 0.8f;
             viscosity = 0f;
-            vaporEffect = TerraFx.arcVarop;
+            vaporEffect = TerraFx.arcVapor;
         }};
 
         fissilePlasma = new Liquid("fissile-plasma", Color.valueOf("bcff73")){{
