@@ -334,12 +334,13 @@ public class TerraBlocks{
             consumePowerBuffered(20000f);
             baseExplosiveness = 3f;
         }};
-        sapt = new ConsumeGenerator("sapt"){{ //A setup for an experiment on extraterrestrial artificial photosynthesis technology
+        sapt = new ConsumeGenerator("sapt"){{ //A setup for an experiment on extraterrestrial artificial photosynthesis technology > S.A.P.T
             requirements(Category.power, with(Items.lead, 90, Items.titanium, 150, Items.silicon, 65, Items.metaglass, 50));
             powerProduction = 8f;
             hasLiquids = true;
             hasItems = false;
             squareSprite = false;
+            consumesPower = true;
             size = 3;
             ambientSound = Sounds.loopDifferential;
             ambientSoundVolume = 0.12f;
