@@ -69,7 +69,7 @@ public class TerraBlocks{
     //power
     photonPanel, photonPanelLarge,
     multicellBattery,
-    antimatterCollider,
+    sapt, antimatterCollider,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
     bisiliconOven, darkSteelWorkshop, titaniumPress, 
@@ -333,6 +333,28 @@ public class TerraBlocks{
             size = 2;
             consumePowerBuffered(20000f);
             baseExplosiveness = 3f;
+        }};
+        sapt = new ConsumeGenerator("sapt"){{ //A setup for an experiment on extraterrestrial artificial photosynthesis technology
+            requirements(Category.power, with(Items.lead, 90, Items.titanium, 150, Items.silicon, 65, Items.metaglass, 50));
+            powerProduction = 8f;
+            hasLiquids = true;
+            hasItems = false;
+            squareSprite = false;
+            size = 3;
+            ambientSound = Sounds.loopDifferential;
+            ambientSoundVolume = 0.12f;
+            liquidCapacity = 30f * 4;
+
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"), 
+                new DrawLiquidTileRotated(Liquids.water){{padRight = 12f; padLeft = 2f;}},
+                new DrawLiquidTileRotated(TerraLiquids.carbonDioxide){{padRight = 2f; padLeft = 12f;}},
+                new DrawRegion("-rot", -5f, true),
+                new DrawDefault()
+            );
+
+            consumePower(1.4f);
+            consumeLiquids(LiquidStack.with(Liquids.water, 15f / 60f, TerraLiquids.carbonDioxide, 30f / 60f));
         }};
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
