@@ -348,9 +348,9 @@ public class TerraBlocks{
 
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"), 
-                new DrawLiquidTileRotated(Liquids.water){{padRight = 12f; padLeft = 2f;}},
-                new DrawLiquidTileRotated(TerraLiquids.carbonDioxide){{padRight = 2f; padLeft = 12f;}},
-                new DrawRegion("-rot", -5f, true),
+                new DrawLiquidTile(Liquids.water){{padRight = 12f; padLeft = 2f;}},
+                new DrawLiquidTile(TerraLiquids.carbonDioxide){{padRight = 2f; padLeft = 12f;}},
+                //new DrawRegion("-rot", 5f, true),
                 new DrawDefault()
             );
 
@@ -580,7 +580,7 @@ public class TerraBlocks{
             consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
             consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
-            outputItem = new ItemStack(TerraItems.darkSteel, 4);
+            outputItem = new ItemStack(TerraItems.darkSteel, 7);
             size = 5;
             hasPower = true;
             hasItems = true;
@@ -588,7 +588,8 @@ public class TerraBlocks{
             envEnabled = Env.any;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
-                new DrawLiquidRegion(Liquids.cryofluid){{drawLiquidLight = true;}},
+                //new DrawLiquidRegion(Liquids.cryofluid){{drawLiquidLight = true;}},
+                new DrawLiquidTile(Liquids.cryofluid){{drawLiquidLight = true; padRight = 2f; padLeft = 24f; padTop = 2f; padBottom = 24f;}},
                 new DrawArcSmelt() {{
                     x = y = -43f / 4f;
                     particleRad = 5.6f;
@@ -1854,8 +1855,8 @@ public class TerraBlocks{
             plans = Seq.with(
                 new UnitPlan(UnitTypes.alpha, 60f * 25f, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20)),
                 new UnitPlan(UnitTypes.beta, 60f * 50f, with(Items.silicon, 70, Items.copper, 140, Items.graphite, 75, Items.titanium, 80)),
-                new UnitPlan(UnitTypes.gamma, 60f * 80f, with(Items.silicon, 150, Items.titanium, 120, Items.plastanium, 60, Items.thorium, 90)),
-                new UnitPlan(TerraUnitTypes.tau, 60f * 25f, with(Items.silicon, 200, Items.titanium, 160, Items.plastanium, 90, Items.phaseFabric, 40))
+                new UnitPlan(UnitTypes.gamma, 60f * 80f, with(Items.silicon, 150, Items.copper, 180, Items.plastanium, 60, Items.thorium, 90)),
+                new UnitPlan(TerraUnitTypes.tau, 60f * 90f, with(Items.silicon, 200, Items.titanium, 160, Items.plastanium, 90, Items.phaseFabric, 40))
             );
             consumePower(3.6f);
         }};
