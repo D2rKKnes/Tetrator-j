@@ -78,6 +78,7 @@ public class TerraVerilusTree {
                                 node(thoriumReactor, () -> {
                                     node(antimatterCollider, Seq.with(new AtWave(verilus, 50)), () -> {});
                                 });
+                                node(sapt, () -> {});
                             });
                         });
                         node(mechanicalWell, () -> {
