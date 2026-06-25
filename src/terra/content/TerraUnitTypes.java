@@ -216,6 +216,7 @@ public class TerraUnitTypes {
             hitSize = 19f;
             health = 1150;
             armor = 6;
+            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.battery, BlockFlag.core, null};
             engineSize = 3.5f;
             engineOffset = 7f;
             range = 70f;
@@ -391,6 +392,7 @@ public class TerraUnitTypes {
             softShadowScl = 0.8f;
             health = 8600;
             armor = 10;
+            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.core, null};
             engineSize = 6f;
             engineOffset = 14f;
             //range = 120f;
@@ -483,6 +485,7 @@ public class TerraUnitTypes {
             accel = 0.08f;
             hitSize = 8f;
             health = 4000f;
+            targetFlags = new BlockFlag[]{BlockFlag.core, BlockFlag.turret, null};
             engineSize = 1f;
             engineOffset = 0f;
             range = 80f;
@@ -548,6 +551,7 @@ public class TerraUnitTypes {
             softShadowScl = 0.7f;
             health = 24000;
             armor = 21;
+            targetFlags = new BlockFlag[]{BlockFlag.core, BlockFlag.turret, null};
             engineSize = 5.75f;
             engineOffset = 14f;
             setEnginesMirror(
@@ -765,7 +769,6 @@ public class TerraUnitTypes {
             deathExplosionEffect = Fx.none;
             loopSoundVolume = 0.1f;
             hidden = false;
-            targetable = false;
             softShadowScl = 0.8f;
             immunities = ObjectSet.with(
                 StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, StatusEffects.unmoving, 
@@ -819,6 +822,7 @@ public class TerraUnitTypes {
             softShadowScl = 1f;
             health = 88000;
             armor = 56;
+            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.core, BlockFlag.turret, null};
             engineSize = 0f;
             engineOffset = 0f;
             outlineRadius = 6;
@@ -1371,6 +1375,7 @@ public class TerraUnitTypes {
             hitSize = buildBeamOffset = 12f;
             lightRadius = 12f * 3;
             health = armor = Float.POSITIVE_INFINITY;
+            targetFlags = new BlockFlag[]{BlockFlag.core, null};
             engineSize = 3f;
             engineOffset = 0f;
             trailLength = 5;
