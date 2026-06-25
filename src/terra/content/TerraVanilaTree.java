@@ -94,7 +94,7 @@ public class TerraVanilaTree{
             node(primeProcessor, () -> {});
         });
         vanillaNode(erekir, diffuse, () -> {
-            node(split, () -> {});
+            node(TerraBlocks.split, () -> {});
         });
         vanillaNode(erekir, oxide, () -> {
             nodeProduce(fissileMatter, () -> {});
