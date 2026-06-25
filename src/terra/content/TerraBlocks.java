@@ -1987,8 +1987,12 @@ public class TerraBlocks{
                     buildingDamageMultiplier = 0.5f;
                     trailWidth = 1.7f;
                     trailLength = 6;
+                    status = StatusEffects.slow;
+                    statusDuration = 90f;
                     fragBullets = 2;
                     fragRandomSpread = 0f;
+                    fragVelocityMin = 0.9f;
+                    fragOffsetMax = 1f;
                     fragSpread = 15f;
                     fragBullet = new BasicBulletType(4.1f, 33){{
                         lifetime = (((178 + cap + 10f) / 4.1f) / 3) * 2;
@@ -2010,13 +2014,13 @@ public class TerraBlocks{
                 Items.thorium, new BasicBulletType(4.3f, 66){{
                     rangeChange = 4f * 8;
                     reloadMultiplier = 0.8f;
-                    lifetime = ((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3;
+                    lifetime = ((178 + cap + rangeChange + 10f) / 4.3f) / 3;
                     width = 9f;
                     height = 13f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                     smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f);
+                    hitColor = backColor = trailColor = Color.valueOf("e89dbd");
                     frontColor = Color.white;
 
                     ammoMultiplier = 2;
@@ -2024,19 +2028,22 @@ public class TerraBlocks{
                     buildingDamageMultiplier = 0.5f;
                     trailWidth = 1.7f;
                     trailLength = 6;
+                    status = StatusEffects.slow;
+                    statusDuration = 60f;
                     fragBullets = 2;
                     fragRandomSpread = 0f;
+                    fragVelocityMin = 0.9f;
+                    fragOffsetMax = 1f;
                     fragSpread = 15f;
                     fragBullet = new BasicBulletType(4.3f, 48){{
                         rangeChange = 4f * 8;
-                        reloadMultiplier = 0.8f;
-                        lifetime = (((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3) * 2;
+                        lifetime = (((178 + cap + rangeChange + 10f) / 4.3f) / 3) * 2;
                         width = 7f;
                         height = 10.5f;
                         hitEffect = despawnEffect = Fx.hitBulletColor;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                         smokeEffect = Fx.shootBigSmoke;
-                        hitColor = backColor = trailColor = Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f);
+                        hitColor = backColor = trailColor = Color.valueOf("e89dbd");
                         frontColor = Color.white;
     
                         ammoMultiplier = 2;
@@ -2046,6 +2053,52 @@ public class TerraBlocks{
                         pierceCap = 2;
                         trailWidth = 1.4f;
                         trailLength = 5;
+                    }};
+                }},
+                Items.surgeAlloy, new BasicBulletType(4f, 53){{
+                    rangeChange = 6f * 8;
+                    reloadMultiplier = 0.6f;
+                    lifetime = ((178 + cap + rangeChange + 10f) / 4f) / 3;
+                    width = 10f;
+                    height = 15f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                    smokeEffect = Fx.shootBigSmoke;
+                    hitColor = backColor = trailColor = Pal.surge;
+                    frontColor = Color.white;
+
+                    ammoMultiplier = 2;
+                    armorMultiplier = 0.75f;
+                    buildingDamageMultiplier = 0.5f;
+                    trailWidth = 1.7f;
+                    trailLength = 6;
+                    status = StatusEffects.slow;
+                    statusDuration = 120f;
+                    fragBullets = 4;
+                    fragRandomSpread = 0f;
+                    fragVelocityMin = 0.85f;
+                    fragOffsetMax = 1f;
+                    fragSpread = 12f;
+                    fragBullet = new BasicBulletType(4.3f, 17){{
+                        rangeChange = 6f * 8;
+                        lifetime = (((178 + cap + rangeChange + 10f) / 4f) / 3) * 2;
+                        width = 6f;
+                        height = 10f;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                        smokeEffect = Fx.shootBigSmoke;
+                        hitColor = backColor = trailColor = Pal.surge;
+                        frontColor = Color.white;
+    
+                        ammoMultiplier = 2;
+                        armorMultiplier = 0.5f;
+                        buildingDamageMultiplier = 0.5f;
+                        trailWidth = 1.3f;
+                        trailLength = 4;
+                        lightning = 1;
+                        lightningLengthRand = 3;
+                        lightningDamage = 12f;
+                        lightningCone = 75f;
                     }};
                 }}
             );
