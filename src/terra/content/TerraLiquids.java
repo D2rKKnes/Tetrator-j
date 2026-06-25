@@ -9,7 +9,7 @@ public class TerraLiquids{
     carbonDioxide, fissilePlasma;
 
     public static void load(){
-        carbonDioxide = new Liquid("carbon-dioxide", Color.valueOf("323232")){{
+        carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
             gas = true;
             heatCapacity = 0.8f;
             viscosity = 0f;
