@@ -2016,7 +2016,7 @@ public class TerraBlocks{
                     hitEffect = despawnEffect = Fx.hitBulletColor;
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                     smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Items.thorium.color.lerp(Pal.redLight, 0.5f);
+                    hitColor = backColor = trailColor = Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f);
                     frontColor = Color.white;
 
                     ammoMultiplier = 2;
@@ -2036,7 +2036,7 @@ public class TerraBlocks{
                         hitEffect = despawnEffect = Fx.hitBulletColor;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                         smokeEffect = Fx.shootBigSmoke;
-                        hitColor = backColor = trailColor = Items.thorium.color.lerp(Pal.redLight, 0.5f);
+                        hitColor = backColor = trailColor = Color.valueOf("ea8878").lerp(Pal.redLight, 0.5f);
                         frontColor = Color.white;
     
                         ammoMultiplier = 2;
