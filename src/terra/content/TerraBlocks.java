@@ -1954,24 +1954,26 @@ public class TerraBlocks{
             hasLiquids = false;
             envEnabled |= Env.underwater;
             envDisabled = Env.none;
-            itemCapacity = 40;
+            itemCapacity = 50;
             liquidCapacity = 80;
             drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.slag, 2f), new DrawArcSmelt(), new DrawDefault());
             fogRadius = 4;
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 0.3f;
+            squareSprite = false;
 
             consumeItems(with(Items.graphite, 3, Items.sand, 9, Items.tungsten, 2));
             consumePower(11f);
         }};
 
         //turrets
-        float marign = 8f;
+        float cap = 8f;
         split = new ItemTurret("split"){{
             requirements(Category.turret, with(Items.silicon, 55, Items.tungsten, 55));
             range = 178f;
             ammo(
                 Items.tungsten, new BasicBulletType(4.1f, 45){{
+                    lifetime = ((178 + cap + 10f) / 4.1f) / 3
                     width = 8f;
                     height = 11f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -1985,50 +1987,69 @@ public class TerraBlocks{
                     buildingDamageMultiplier = 0.5f;
                     trailWidth = 1.7f;
                     trailLength = 6;
-                    spawnBullets.add(
-                        new BasicBulletType(4.1f, 33){{
-                            width = 7f;
-                            height = 10f;
-                            hitEffect = despawnEffect = Fx.hitBulletColor;
-                            shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
-                            smokeEffect = Fx.shootBigSmoke;
-                            hitColor = backColor = trailColor = Pal.tungstenShot;
-                            frontColor = Color.white;
-        
-                            ammoMultiplier = 2;
-                            armorMultiplier = 0.85f;
-                            buildingDamageMultiplier = 0.5f;
-                            trailWidth = 1.5f;
-                            trailLength = 4;
-                            weaveRandom = false;
-                            weaveScale = 0.2f;
-                            weaveMag = 2.8f;
-                            lifetime = 178 + marign + 10f;
-                        }},
-                        new BasicBulletType(4.1f, 33){{
-                            width = 7f;
-                            height = 10f;
-                            hitEffect = despawnEffect = Fx.hitBulletColor;
-                            shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
-                            smokeEffect = Fx.shootBigSmoke;
-                            hitColor = backColor = trailColor = Pal.tungstenShot;
-                            frontColor = Color.white;
-        
-                            ammoMultiplier = 2;
-                            armorMultiplier = 0.85f;
-                            buildingDamageMultiplier = 0.5f;
-                            trailWidth = 1.5f;
-                            trailLength = 4;
-                            weaveRandom = false;
-                            weaveScale = 0.2f;
-                            weaveMag = -2.8f;
-                            lifetime = 178 + marign + 10f;
-                        }}
-                    );
+                    fragBullets = 2;
+                    fragRandomSpread = 0f;
+                    fragSpread = 15f;
+                    fragBullet = new BasicBulletType(4.1f, 33){{
+                        lifetime = (((178 + cap + 10f) / 4.1f) / 3) * 2
+                        width = 6f;
+                        height = 9f;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                        smokeEffect = Fx.shootBigSmoke;
+                        hitColor = backColor = trailColor = Pal.tungstenShot;
+                        frontColor = Color.white;
+    
+                        ammoMultiplier = 2;
+                        armorMultiplier = 0.85f;
+                        buildingDamageMultiplier = 0.5f;
+                        trailWidth = 1.4f;
+                        trailLength = 5;
+                    }};
+                }},
+                Items.thorium, new BasicBulletType(4.3f, 66){{
+                    rangeChange = 4f * 8;
+                    reloadMultiplier = 0.8f;
+                    lifetime = ((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3
+                    width = 9f;
+                    height = 13f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                    smokeEffect = Fx.shootBigSmoke;
+                    hitColor = backColor = trailColor = Items.thorium.color.lerp(Pal.redLight, 0.5f);
+                    frontColor = Color.white;
+
+                    ammoMultiplier = 2;
+                    armorMultiplier = 0.5f;
+                    buildingDamageMultiplier = 0.5f;
+                    trailWidth = 1.7f;
+                    trailLength = 6;
+                    fragBullets = 2;
+                    fragRandomSpread = 0f;
+                    fragSpread = 15f;
+                    fragBullet = new BasicBulletType(4.3f, 48){{
+                        rangeChange = 4f * 8;
+                        reloadMultiplier = 0.8f;
+                        lifetime = (((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3) * 2
+                        width = 7f;
+                        height = 10.5f;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                        smokeEffect = Fx.shootBigSmoke;
+                        hitColor = backColor = trailColor = Items.thorium.color.lerp(Pal.redLight, 0.5f);
+                        frontColor = Color.white;
+    
+                        ammoMultiplier = 2;
+                        armorMultiplier = 0.6f;
+                        buildingDamageMultiplier = 0.5f;
+                        pierce = true;
+                        pierceCap = 2;
+                        trailWidth = 1.4f;
+                        trailLength = 5;
+                    }};
                 }}
             );
 
-            recoils = 2;
             drawer = new DrawTurret("reinforced-"){{
                 parts.add(new RegionPart("-shooter"){{
                     progress = PartProgress.recoil;
@@ -2047,7 +2068,7 @@ public class TerraBlocks{
             outlineColor = Pal.darkOutline;
             heatColor = Liquids.nitrogen.color;
 
-            limitRange(marign);
+            //limitRange(cap);
             coolantMultiplier = 10f;
             coolant = consume(new ConsumeLiquid(Liquids.water, 10f / 60f));
         }};
