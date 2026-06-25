@@ -1943,11 +1943,33 @@ public class TerraBlocks{
         }};
 
         //crafters
+        inductionFurnace = new GenericCrafter("silicon-induction-furnace"){{
+            requirements(Category.crafting, with(Items.beryllium, 130, Items.graphite, 180, Items.tungsten, 200, Items.thorium, 80));
+            craftEffect = Fx.none;
+            outputItem = new ItemStack(Items.silicon, 9);
+            outputLiquid = new LiquidStack(Liquids.slag, 22f / 60f);
+            craftTime = 40f;
+            size = 4;
+            hasPower = true;
+            hasLiquids = false;
+            envEnabled |= Env.underwater;
+            envDisabled = Env.none;
+            itemCapacity = 40;
+            liquidCapacity = 80;
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.slag, 2f), new DrawArcSmelt(), new DrawDefault());
+            fogRadius = 4;
+            ambientSound = Sounds.loopSmelter;
+            ambientSoundVolume = 0.3f;
 
+            consumeItems(with(Items.graphite, 3, Items.sand, 9, Items.tungsten, 2));
+            consumePower(11f);
+        }};
 
         //turrets
+        float marign = 8f;
         split = new ItemTurret("split"){{
             requirements(Category.turret, with(Items.silicon, 55, Items.tungsten, 55));
+            range = 178f;
             ammo(
                 Items.tungsten, new BasicBulletType(4.1f, 45){{
                     width = 8f;
@@ -1979,7 +2001,9 @@ public class TerraBlocks{
                             trailWidth = 1.5f;
                             trailLength = 4;
                             weaveRandom = false;
-                            weaveMag = 1.4f;
+                            weaveScale = 0.2f;
+                            weaveMag = 2.8f;
+                            lifetime = 178 + marign + 10f;
                         }},
                         new BasicBulletType(4.1f, 33){{
                             width = 7f;
@@ -1996,7 +2020,9 @@ public class TerraBlocks{
                             trailWidth = 1.5f;
                             trailLength = 4;
                             weaveRandom = false;
-                            weaveMag = -1.4f;
+                            weaveScale = 0.2f;
+                            weaveMag = -2.8f;
+                            lifetime = 178 + marign + 10f;
                         }}
                     );
                 }}
@@ -2013,17 +2039,16 @@ public class TerraBlocks{
             }};
 
             size = 2;
-            range = 178f;
             reload = 25f;
-            shootY = 5f;
+            shootY = 4.5f;
 
             health = 1200;
             shootSound = Sounds.shootBreach;
             outlineColor = Pal.darkOutline;
             heatColor = Liquids.nitrogen.color;
 
-            limitRange(8f);
-            coolantMultiplier = 15f;
+            limitRange(marign);
+            coolantMultiplier = 10f;
             coolant = consume(new ConsumeLiquid(Liquids.water, 10f / 60f));
         }};
 
