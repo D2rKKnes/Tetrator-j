@@ -95,6 +95,10 @@ public class TerraBlocks{
     shieldedWallLarge,
     //power
     beamBeacon, reinforcedPanel,
+    //crafters
+    inductionFurnace,
+    //turrets
+    split,
     //logic
     primeProcessor;
     //OTHER =---
@@ -1936,6 +1940,91 @@ public class TerraBlocks{
             armor = 8;
             health = 450;
             powerProduction = 0.72f;
+        }};
+
+        //crafters
+
+
+        //turrets
+        split = new ItemTurret("split"){{
+            requirements(Category.turret, with(Items.silicon, 55, Items.tungsten, 55));
+            ammo(
+                Items.tungsten, new BasicBulletType(4.1f, 45){{
+                    width = 8f;
+                    height = 11f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                    smokeEffect = Fx.shootBigSmoke;
+                    hitColor = backColor = trailColor = Pal.tungstenShot;
+                    frontColor = Color.white;
+
+                    ammoMultiplier = 2;
+                    armorMultiplier = 0.75f;
+                    buildingDamageMultiplier = 0.5f;
+                    trailWidth = 1.7f;
+                    trailLength = 6;
+                    spawnBullets.add(
+                        new BasicBulletType(4.1f, 33){{
+                            width = 7f;
+                            height = 10f;
+                            hitEffect = despawnEffect = Fx.hitBulletColor;
+                            shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                            smokeEffect = Fx.shootBigSmoke;
+                            hitColor = backColor = trailColor = Pal.tungstenShot;
+                            frontColor = Color.white;
+        
+                            ammoMultiplier = 2;
+                            armorMultiplier = 0.85f;
+                            buildingDamageMultiplier = 0.5f;
+                            trailWidth = 1.5f;
+                            trailLength = 4;
+                            weaveRandom = false;
+                            weaveMag = 1.4f;
+                        }},
+                        new BasicBulletType(4.1f, 33){{
+                            width = 7f;
+                            height = 10f;
+                            hitEffect = despawnEffect = Fx.hitBulletColor;
+                            shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                            smokeEffect = Fx.shootBigSmoke;
+                            hitColor = backColor = trailColor = Pal.tungstenShot;
+                            frontColor = Color.white;
+        
+                            ammoMultiplier = 2;
+                            armorMultiplier = 0.85f;
+                            buildingDamageMultiplier = 0.5f;
+                            trailWidth = 1.5f;
+                            trailLength = 4;
+                            weaveRandom = false;
+                            weaveMag = -1.4f;
+                        }}
+                    );
+                }}
+            );
+
+            recoils = 2;
+            drawer = new DrawTurret("reinforced-"){{
+                parts.add(new RegionPart("-shooter"){{
+                    progress = PartProgress.recoil;
+                    moveY = -0.75f;
+                    mirror = false;
+                    under = false;
+                }});
+            }};
+
+            size = 2;
+            range = 178f;
+            reload = 25f;
+            shootY = 5f;
+
+            health = 1200;
+            shootSound = Sounds.shootBreach;
+            outlineColor = Pal.darkOutline;
+            heatColor = Liquids.nitrogen.color;
+
+            limitRange(8f);
+            coolantMultiplier = 15f;
+            coolant = consume(new ConsumeLiquid(Liquids.water, 10f / 60f));
         }};
 
         //logic
