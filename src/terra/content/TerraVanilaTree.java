@@ -90,6 +90,9 @@ public class TerraVanilaTree{
         vanillaNode(erekir, tankFabricator, () -> {
             node(primeProcessor, () -> {});
         });
+        vanillaNode(erekir, diffuse, () -> {
+            node(split, () -> {});
+        });
         vanillaNode(erekir, oxide, () -> {
             nodeProduce(fissileMatter, () -> {});
         });
