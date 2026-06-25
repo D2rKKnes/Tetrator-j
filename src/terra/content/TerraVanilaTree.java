@@ -87,6 +87,9 @@ public class TerraVanilaTree{
         vanillaNode(erekir, turbineCondenser, () -> {
             node(reinforcedPanel, Seq.with(new SectorComplete(lake)), () -> {});
         });
+        vanillaNode(erekir, siliconArcFurnace, () -> {
+            node(inductionFurnace, Seq.with(new SectorComplete(siege)), () -> {});
+        });
         vanillaNode(erekir, tankFabricator, () -> {
             node(primeProcessor, () -> {});
         });
