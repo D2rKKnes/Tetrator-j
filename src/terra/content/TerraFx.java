@@ -48,8 +48,8 @@ public class TerraFx {
         Fill.circle(e.x + Angles.trnsx(angle, len), e.y + Angles.trnsy(angle, len), (1.5f + e.fin(Interp.sineIn) * 5f) * rand.random(0.8f, 1.3f));
     }).layer(111f),
     arcVapor = new Effect(110f, e -> {
-        color(e.color);
-        alpha(e.fout());
+        Draw.color(Pal.darkerGray, Pal.darkishGray, e.fin(Interp.sineIn));
+        Draw.alpha(e.fout() * 0.7f);
 
         randLenVectors(e.id, 3, 2f + e.finpow() * 11f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.6f + e.fin() * 5f);
