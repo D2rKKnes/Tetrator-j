@@ -1973,7 +1973,7 @@ public class TerraBlocks{
             range = 178f;
             ammo(
                 Items.tungsten, new BasicBulletType(4.1f, 45){{
-                    lifetime = ((178 + cap + 10f) / 4.1f) / 3
+                    lifetime = ((178 + cap + 10f) / 4.1f) / 3;
                     width = 8f;
                     height = 11f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -1991,7 +1991,7 @@ public class TerraBlocks{
                     fragRandomSpread = 0f;
                     fragSpread = 15f;
                     fragBullet = new BasicBulletType(4.1f, 33){{
-                        lifetime = (((178 + cap + 10f) / 4.1f) / 3) * 2
+                        lifetime = (((178 + cap + 10f) / 4.1f) / 3) * 2;
                         width = 6f;
                         height = 9f;
                         hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -2010,7 +2010,7 @@ public class TerraBlocks{
                 Items.thorium, new BasicBulletType(4.3f, 66){{
                     rangeChange = 4f * 8;
                     reloadMultiplier = 0.8f;
-                    lifetime = ((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3
+                    lifetime = ((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3;
                     width = 9f;
                     height = 13f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -2030,7 +2030,7 @@ public class TerraBlocks{
                     fragBullet = new BasicBulletType(4.3f, 48){{
                         rangeChange = 4f * 8;
                         reloadMultiplier = 0.8f;
-                        lifetime = (((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3) * 2
+                        lifetime = (((178 + cap + rangeChange + 10f) / (4.3f * reloadMultiplier)) / 3) * 2;
                         width = 7f;
                         height = 10.5f;
                         hitEffect = despawnEffect = Fx.hitBulletColor;
