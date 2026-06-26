@@ -9,13 +9,15 @@ public class TerraSectorPresets {
     public static SectorPreset verilus;
 
     public static void load() {
-        verilus = new NoFileSectorPreset("verilus", Planets.verilus, 0); 
-        verilus.alwaysUnlocked = false;
-        verilus.addStartingItems = true;
-        verilus.difficulty = 8;
-        verilus.allowLaunchSchematics = true;
-        verilus.overrideLaunchDefaults = true;
-        verilus.allowLaunchLoadout = true;
+        verilus = new NoFileSectorPreset("verilus", Planets.verilus, 0){{
+            alwaysUnlocked = false;
+            addStartingItems = true;
+            difficulty = 8;
+            allowLaunchSchematics = true;
+            overrideLaunchDefaults = true;
+            allowLaunchLoadout = true;
+            captureWave = 180;
+        }}; 
     }
 
     private static class NoFileSectorPreset extends SectorPreset {
