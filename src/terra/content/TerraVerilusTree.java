@@ -133,7 +133,16 @@ public class TerraVerilusTree {
                 node(dynamics, () -> {
                     node(fracture, () -> {});
                 });
-                node(aircraft, () -> {});
+                node(aircraft, () -> {
+                    node(aircraftThoriumMissile, () -> {
+                        node(aircraftThermoxiteMissile, Seq.with(new Objectives.Research(thermoxite)), () -> {});
+                        node(aircraftFissileMissile, Seq.with(new Objectives.Research(fissileCrystals)), () -> {});
+                    });
+                });
+                node(flightLeadMissile, () -> {
+                    node(flightTitaniumMissile, () -> {});
+                    node(flightMetaglassMissile, Seq.with(new Objectives.Research(metaglass)), () -> {});
+                });
             });
             node(basicAssembler, () -> {
                 node(flare, () -> {
