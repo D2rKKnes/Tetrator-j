@@ -37,7 +37,7 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, warped, warpPower, shockwaveImpact, delta32, deltaImmunized;
+    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -146,6 +146,23 @@ public class TerraStatusEffects{
             buildSpeedMultiplier = 0f;
             dragMultiplier = 0.2f;
             disarm = true;
+        }};
+
+        hyperdrive = new StatusEffect("hyperdrive"){{
+            color = Pal.lancerLaser;
+            healthMultiplier = 0.75f;
+            damageMultiplier = 1.7f;
+            speedMultiplier = 1.3f;
+            reloadMultiplier = 1.2f;
+            buildSpeedMultiplier = 0.5f;
+            damage = -0.03f;
+            permanent = true;
+            effectChance = 0.05f;
+            effect = new Effect(20f, 20f, e -> {
+                Draw.color(Color.white, color, e.fin() + 0.35f);
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
+            });
         }};
 
         delta32 = new StatusEffect("delta32"){{
