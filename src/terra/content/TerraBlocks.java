@@ -1050,156 +1050,21 @@ public class TerraBlocks{
                     damage = speed = 0f;
                     ammoMultiplier = 2;
                     shootEffect = smokeEffect = Fx.none;
-                    spawnUnit = new MissileUnitType("flight-lead-missile"){{
-                        speed = 3f;
-                        maxRange = 4f;
-                        lifetime = 60f;
-                        hitSize = 4f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = Pal.stat;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 3.5f;
-                        rotateSpeed = 5f;
-                        trailLength = 6;
-                        //missileAccelTime = 50f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.1f;
-                        //deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-    
-                        fogRadius = 3f;
-    
-                        health = 45;
-                        hidden = false;
-                        targetable = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            //deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 1.5f;
-                            bullet = new ExplosionBulletType(18f, 24f){{
-                                hitColor = Pal.stat;
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.4f;
-                                reloadMultiplier = 1f;
-                                ammoMultiplier = 2f;
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.flightLeadMissile;
                 }},
                 Items.titanium, new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 1;
                     reloadMultiplier = 0.4f;
                     shootEffect = smokeEffect = Fx.none;
-                    spawnUnit = new MissileUnitType("flight-titanium-missile"){{
-                        speed = 3f;
-                        maxRange = 4f;
-                        lifetime = 60f;
-                        hitSize = 4f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = Pal.stat;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 3.5f;
-                        rotateSpeed = 5f;
-                        trailLength = 6;
-                        //missileAccelTime = 50f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.1f;
-                        //deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-    
-                        fogRadius = 3f;
-    
-                        health = 85;
-                        hidden = false;
-                        targetable = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            //deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 1.5f;
-                            bullet = new ExplosionBulletType(53f, 19f){{
-                                hitColor = Pal.stat;
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.4f;
-                                reloadMultiplier = 1f;
-                                ammoMultiplier = 0.4f;
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.flightTitaniumMissile;
                 }},
                 Items.metaglass, new BulletType(){{
                     damage = speed = 0f;
                     ammoMultiplier = 1;
                     reloadMultiplier = 0.85f;
                     shootEffect = smokeEffect = Fx.none;
-                    spawnUnit = new MissileUnitType("flight-metaglass-missile"){{
-                        speed = 3f;
-                        maxRange = 4f;
-                        lifetime = 60f;
-                        hitSize = 4f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = Pal.stat;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 3.5f;
-                        rotateSpeed = 5f;
-                        trailLength = 6;
-                        //missileAccelTime = 50f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.1f;
-                        //deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-    
-                        fogRadius = 3f;
-    
-                        health = 60;
-                        hidden = false;
-                        targetable = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            //deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 1.5f;
-                            bullet = new ExplosionBulletType(26f, 36f){{
-                                hitColor = Pal.glassAmmoBack;
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.4f;
-                                reloadMultiplier = 1f;
-                                ammoMultiplier = 0.85f;
-                                fragBullets = 6;
-                                fragBullet = new BasicBulletType(){{
-                                    speed = 3f;
-                                    damage = 5f;
-                                    width = 5f;
-                                    height = 12f;
-                                    shrinkY = 1f;
-                                    lifetime = 20f;
-                                    backColor = trailColor = Pal.glassAmmoBack;
-                                    hitColor = frontColor = Pal.glassAmmoFront;
-                                    despawnEffect = Fx.none;
-                                }};
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.flightMetaglassMissile;
                 }}
             );
 
@@ -1570,50 +1435,7 @@ public class TerraBlocks{
                     rangeChange = 24;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
-                    spawnUnit = new MissileUnitType("aircraft-thorium-missile"){{
-                        speed = 5f;
-                        maxRange = 6f;
-                        lifetime = 105f;
-                        hitSize = 6f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = Pal.stat;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 7f;
-                        rotateSpeed = 2.5f;
-                        trailLength = 9;
-                        missileAccelTime = 20f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.2f;
-                        deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-                        targetable = false;
-    
-                        fogRadius = 6f;
-    
-                        health = 160;
-                        armor = 3;
-                        hidden = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 2.5f;
-                            bullet = new ExplosionBulletType(112f, 5f * 8){{
-                                hitColor = Items.thorium.color;
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.3f;
-                                ammoMultiplier = 3f;
-                                rangeChange = 24;
-                                status = StatusEffects.blasted;
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.aircraftThoriumMissile;
                 }},
                 TerraItems.thermoxite,  new BulletType(){{
                     damage = speed = 0f;
@@ -1621,52 +1443,7 @@ public class TerraBlocks{
                     reloadMultiplier = 0.2f;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
-                    spawnUnit = new MissileUnitType("aircraft-thermoxite-missile"){{
-                        speed = 3f;
-                        maxRange = 6f;
-                        lifetime = 140f;
-                        hitSize = 6f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = TerraItems.rawThermoxite.color;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 7f;
-                        rotateSpeed = 3f;
-                        trailLength = 9;
-                        missileAccelTime = 20f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.2f;
-                        deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-                        targetable = false;
-    
-                        fogRadius = 6f;
-    
-                        health = 400;
-                        armor = 3;
-                        hidden = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 3f;
-                            bullet = new ExplosionBulletType(188f, 7f * 8){{
-                                hitColor = TerraItems.rawThermoxite.color;
-                                shootEffect = new WrapEffect(Fx.shootQuellPulse, TerraItems.rawThermoxite.color);
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.2f;
-                                ammoMultiplier = 2f;
-                                reloadMultiplier = 0.2f;
-                                status = TerraStatusEffects.crystalization;
-                                statusDuration = 90f;
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.aircraftThermoxiteMissile;
                 }},
                 TerraItems.fissileCrystals,  new BulletType(){{
                     damage = speed = 0f;
@@ -1674,53 +1451,7 @@ public class TerraBlocks{
                     reloadMultiplier = 0.33f;
                     shootEffect = Fx.shootBig;
                     smokeEffect = Fx.shootBigSmoke2;
-                    spawnUnit = new MissileUnitType("aircraft-fissile-missile"){{
-                        speed = 3.6f;
-                        maxRange = 6f;
-                        lifetime = 120f;
-                        hitSize = 6f;
-                        outlineColor = Pal.darkerMetal;
-                        engineColor = trailColor = TerraItems.gammaCell.color;
-                        engineLayer = Layer.effect;
-                        engineSize = 1.4f;
-                        engineOffset = 7f;
-                        rotateSpeed = 4.5f;
-                        trailLength = 9;
-                        missileAccelTime = 20f;
-                        lowAltitude = true;
-                        loopSound = Sounds.loopMissileTrail;
-                        loopSoundVolume = 0.2f;
-                        deathSound = Sounds.explosionMissile;
-                        targetAir = true;
-                        targetUnderBlocks = false;
-                        targetable = false;
-    
-                        fogRadius = 6f;
-    
-                        health = 300;
-                        armor = 3;
-                        hidden = false;
-    
-                        weapons.add(new Weapon(){{
-                            shootCone = 360f;
-                            mirror = false;
-                            reload = 1f;
-                            deathExplosionEffect = Fx.massiveExplosion;
-                            shootOnDeath = true;
-                            shake = 3f;
-                            bullet = new ExplosionBulletType(88f, 14f * 8){{
-                                hitColor = TerraItems.rawThermoxite.color;
-                                shootEffect = new WrapEffect(Fx.titanExplosionSmall, TerraItems.gammaCell.color);
-                                smokeEffect = new WrapEffect(Fx.titanSmokeSmall, TerraItems.gammaCell.color);
-                                collidesAir = true;
-                                buildingDamageMultiplier = 0.25f;
-                                ammoMultiplier = 1f;
-                                reloadMultiplier = 0.33f;
-                                status = TerraStatusEffects.radited;
-                                statusDuration = 200f;
-                            }};
-                        }});
-                    }};
+                    spawnUnit = TerraUnitTypes.aircraftFissileMissile;
                 }}
             );
 
