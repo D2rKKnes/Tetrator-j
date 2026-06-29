@@ -1638,7 +1638,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.shootArc;
                 bullet = new ChainLightningBulletType() {{
                     lightningColor = hitColor = greenLight;
-                    range = 150;
+                    range = 120;
                     width = 7;
                     shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
                     hitEffect = Fx.hitBulletColor;
@@ -1647,7 +1647,7 @@ public class TerraUnitTypes {
                     damage = 73;
                     distanceDamageFalloff = 0.9f;
                     jumpDamageFactor = 0.9f;
-                    chainLightning = 3;
+                    chainLightning = 3; //It can hit itself, but only for 1 damage... weird.
                     segmentLength = 4;
                 }};
             }},
@@ -1674,10 +1674,10 @@ public class TerraUnitTypes {
                     splashDamageRadius = 55f;
                     scaledSplashDamage = true;
                     sprite = "terra-strike";
-                    drag = -0.007f;
+                    drag = -0.017f;
                     followAimSpeed = 3f;
-                    width = 4f;
-                    height = 6f;
+                    width = 12f;
+                    height = 16f;
                     shrinkY = 0.1f;
                     hitColor = lightColor = trailColor = backColor = greenLight;
                     frontColor = Color.white;
