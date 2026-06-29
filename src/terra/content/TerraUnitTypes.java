@@ -1464,14 +1464,16 @@ public class TerraUnitTypes {
             }
         };
 
+        Color greenLight = Color.valueOf("92dd7e");
+
         flow = new ErekirUnitType("flow"){{
             speed = 1.3f;
             drag = 0.13f;
             hitSize = 8f;
-            health = 900;
+            health = 800;
             armor = 5f;
             accel = 0.4f;
-            rotateSpeed = 3.1f;
+            rotateSpeed = 3.5f;
             faceTarget = false;
 
             trailLength = 16;
@@ -1486,27 +1488,117 @@ public class TerraUnitTypes {
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet
             );
 
-            weapons.add(new Weapon("green-micro-mount"){{
+            weapons.add(new Weapon("terra-green-micro-mount"){{
                 reload = 18f;
                 x = 0f;
                 shootY = 3f;
-                y = 9f / 4;
+                y = -9f / 4;
                 rotate = true;
-                bullet = new BasicBulletType(2.5f, 26){{
+                mirror = false;
+                inaccuracy = 8f;
+                bullet = new BasicBulletType(2.7f, 26){{
                     sprite = "terra-plasma";
-                    velocityScaleRandMin = 0.8f;
+                    velocityScaleRandMin = 0.7f;
                     width = height = 5f;
-                    shrinkX = shrinkY = 0.2f;
+                    shrinkX = shrinkY = -0.3f;
                     despawnHit = true;
                     reflectable = false;
                     drag = 0.01f;
                     splashDamageRadius = 30f;
                     splashDamage = 30f;
-                    lifetime = 42f;
+                    lifetime = 48f;
                     lightOpacity = 0.5f;
-                    trailColor = backColor = hitColor = lightColor = Pal.berylShot;
+                    trailWidth = 1.1f;
+                    trailLength = 3;
+                    trailColor = backColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = TerraFx.circleFadeSmall;
+                }};
+            }});
+        }};
+        greenMissile = new MissileUnitType("green-micro-missile"){{
+            speed = 2.4f;
+            maxRange = 4f;
+            lifetime = 90f;
+            hitSize = 3f;
+            outlineColor = Pal.darkOutline;
+            engineColor = trailColor = lightColor = greenLight;
+            engineLayer = Layer.effect;
+            engineSize = 1.5f;
+            engineOffset = 3f;
+            rotateSpeed = 5f;
+            trailLength = 4;
+            missileAccelTime = 20f;
+            lowAltitude = true;
+            loopSound = Sounds.loopMissileTrail;
+            loopSoundVolume = 0.1f;
+            //deathSound = Sounds.explosionMissile;
+            targetAir = true;
+            targetUnderBlocks = false;
+
+            fogRadius = 3f;
+
+            health = 30;
+            armor = 1;
+            hidden = false;
+
+            weapons.add(new Weapon(){{
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                shootOnDeath = true;
+                shake = 1.5f;
+                bullet = new ExplosionBulletType(48f, 24f){{
+                    hitColor = greenLight;
+                    collidesAir = true;
+                }};
+            }});
+        }};
+        threshold = new ErekirUnitType("threshold"){{
+            speed = 1.1f;
+            drag = 0.13f;
+            hitSize = 8f;
+            health = 1700;
+            armor = 9f;
+            accel = 0.4f;
+            rotateSpeed = 3f;
+            faceTarget = false;
+
+            trailLength = 20;
+            waveTrailX = 11f / 4;
+            trailScl = 1.5f;
+
+            moveSoundVolume = 0.55f;
+            moveSoundPitchMin = moveSoundPitchMax = 0.9f;
+            moveSound = Sounds.shipMove;
+
+            constructor = UnitWaterMove::create;
+            immunities = ObjectSet.with(
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
+            );
+
+            weapons.add(new Weapon("terra-missile-void"){{
+                reload = 88f;
+                x = 17f / 4;
+                shootY = 3f;
+                y = -1f;
+                rotate = true;
+                rotateSpeed = 5f;
+                smokeEffect = shootEffect = Fx.none;
+                shootSound = Sounds.shootMissileLarge;
+                parts.add(new RegionPart("-part"){{
+                    progress = PartProgress.reload;
+                    colorTo = new Color(1f, 1f, 1f, 0f);
+                    color = Color.white;
+                    mixColorTo = Pal.accent;
+                    mixColor = new Color(1f, 1f, 1f, 0f);
+                    outline = false;
+                    under = false;
+                }});
+                bullet = new BulletType(){{
+                    speed = 0f;
+                    keepVelocity = false;
+                    spawnUnit = greenMissile;
                 }};
             }});
         }};
