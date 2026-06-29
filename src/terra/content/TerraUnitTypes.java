@@ -1548,7 +1548,7 @@ public class TerraUnitTypes {
                 reload = 1f;
                 shootOnDeath = true;
                 shake = 1.5f;
-                bullet = new ExplosionBulletType(48f, 86f){{
+                bullet = new ExplosionBulletType(76f, 22f){{ //damage, radius!
                     hitColor = greenLight;
                     collidesAir = true;
                 }};
@@ -1613,7 +1613,7 @@ public class TerraUnitTypes {
             rotateSpeed = 2f;
             faceTarget = false;
 
-            trailLength = 25;
+            trailLength = 45;
             waveTrailX = 44f / 4;
             waveTrailY = -8f;
             trailScl = 2.2f;
@@ -1635,6 +1635,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 9f;
                 mirror = true;
+                cooldownTime = 40f;
                 shootSound = Sounds.shootArc;
                 bullet = new ChainLightningBulletType() {{
                     lightningColor = hitColor = greenLight;
@@ -1645,7 +1646,7 @@ public class TerraUnitTypes {
                     arc = 0.15f;
                     targetRange = 50;
                     damage = 73;
-                    distanceDamageFalloff = 0.9f;
+                    distanceDamageFalloff = 3f;
                     jumpDamageFactor = 0.9f;
                     chainLightning = 3; //It can hit itself, but only for 1 damage... weird.
                     segmentLength = 4;
@@ -1669,12 +1670,12 @@ public class TerraUnitTypes {
                     spread = 3.5f;
                 }};
                 bullet = new BasicBulletType(2.2f, 118){{
-                    lifetime = 80f;
+                    lifetime = 67f;
                     splashDamage = damage * 0.3f;
                     splashDamageRadius = 55f;
                     scaledSplashDamage = true;
                     sprite = "terra-strike";
-                    drag = -0.017f;
+                    drag = -0.015f;
                     followAimSpeed = 3f;
                     width = 12f;
                     height = 16f;
@@ -1684,7 +1685,7 @@ public class TerraUnitTypes {
                     trailWidth = 1.7f;
                     trailLength = 8;
                     despawnHit = true;
-                    despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
+                    despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFade, new WrapEffect(Fx.shootQuellPulse, hitColor));
                     despawnSound = Sounds.unitExplode1;
                 }};
             }});
