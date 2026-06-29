@@ -1629,7 +1629,7 @@ public class TerraUnitTypes {
             weapons.add(new Weapon("terra-green-launcher"){{
                 reload = 18f;
                 shootY = 3f;
-                x = 43f / 4
+                x = 43f / 4;
                 y = -16f / 4;
                 rotate = true;
                 rotateSpeed = 9f;
