@@ -1489,14 +1489,14 @@ public class TerraUnitTypes {
             );
 
             weapons.add(new Weapon("terra-green-micro-mount"){{
-                reload = 40f;
+                reload = 18f;
                 x = 0f;
                 shootY = 3f;
                 y = -9f / 4;
                 rotate = true;
                 mirror = false;
                 inaccuracy = 8f;
-                bullet = new BasicBulletType(2.7f, 8){{
+                bullet = new BasicBulletType(2.7f, 6){{
                     sprite = "terra-plasma";
                     velocityScaleRandMin = 0.7f;
                     width = height = 5f;
@@ -1504,7 +1504,7 @@ public class TerraUnitTypes {
                     despawnHit = true;
                     reflectable = false;
                     drag = 0.01f;
-                    splashDamageRadius = 30f;
+                    splashDamageRadius = 17f;
                     splashDamage = 30f;
                     lifetime = 48f;
                     lightOpacity = 0.5f;
@@ -1635,6 +1635,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 9f;
                 mirror = true;
+                shootSound = Sounds.shootArc;
                 bullet = new ChainLightningBulletType() {{
                     lightningColor = hitColor = greenLight;
                     range = 150;
@@ -1646,7 +1647,7 @@ public class TerraUnitTypes {
                     damage = 73;
                     distanceDamageFalloff = 0.9f;
                     jumpDamageFactor = 0.9f;
-                    chainLightning = 6;
+                    chainLightning = 3;
                     segmentLength = 4;
                 }};
             }},
@@ -1660,6 +1661,7 @@ public class TerraUnitTypes {
                 mirror = false;
                 inaccuracy = 25f;
                 shootSound = TerraSounds.shootLaunch;
+                shootSoundVolume = 0.7f;
                 shoot = new ShootAlternate() {{
                     shots = 3;
                     shotDelay = 4f;
@@ -1672,15 +1674,15 @@ public class TerraUnitTypes {
                     splashDamageRadius = 55f;
                     scaledSplashDamage = true;
                     sprite = "terra-strike";
-                    drag = -0.05f;
+                    drag = -0.007f;
                     followAimSpeed = 3f;
                     width = 4f;
-                    height = 14f;
+                    height = 6f;
                     shrinkY = 0.1f;
                     hitColor = lightColor = trailColor = backColor = greenLight;
                     frontColor = Color.white;
-                    trailWidth = 2f;
-                    trailLength = 12;
+                    trailWidth = 1.7f;
+                    trailLength = 8;
                     despawnHit = true;
                     despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
                     despawnSound = Sounds.unitExplode1;
