@@ -1584,7 +1584,6 @@ public class TerraUnitTypes {
                 y = -1f;
                 rotate = true;
                 rotateSpeed = 5f;
-                smokeEffect = shootEffect = Fx.none;
                 shootSound = Sounds.shootMissileLarge;
                 parts.add(new RegionPart("-preview"){{
                     progress = PartProgress.reload;
@@ -1598,6 +1597,7 @@ public class TerraUnitTypes {
                 bullet = new BulletType(){{
                     speed = 0f;
                     keepVelocity = false;
+                    smokeEffect = shootEffect = Fx.none;
                     spawnUnit = greenMissile;
                 }};
             }});
