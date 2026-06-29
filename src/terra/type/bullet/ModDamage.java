@@ -1,4 +1,4 @@
-package terra.type.bullets;
+package terra.type.bullet;
 
 import arc.Core;
 import arc.audio.Sound;
