@@ -1548,7 +1548,7 @@ public class TerraUnitTypes {
                 reload = 1f;
                 shootOnDeath = true;
                 shake = 1.5f;
-                bullet = new ExplosionBulletType(48f, 44f){{
+                bullet = new ExplosionBulletType(48f, 86f){{
                     hitColor = greenLight;
                     collidesAir = true;
                 }};
@@ -1585,6 +1585,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 5f;
                 shootSound = Sounds.shootMissileLarge;
+                shootSoundVolume = 0.5f;
                 parts.add(new RegionPart("-preview"){{
                     progress = PartProgress.reload;
                     colorTo = new Color(1f, 1f, 1f, 0f);
@@ -1627,30 +1628,62 @@ public class TerraUnitTypes {
             );
 
             weapons.add(new Weapon("terra-green-launcher"){{
-                reload = 18f;
+                reload = 22f;
                 shootY = 3f;
                 x = 43f / 4;
                 y = -16f / 4;
                 rotate = true;
                 rotateSpeed = 9f;
                 mirror = true;
-                bullet = new BasicBulletType(2.7f, 26){{
-                    sprite = "terra-plasma";
-                    velocityScaleRandMin = 0.7f;
-                    width = height = 5f;
-                    shrinkX = shrinkY = -0.3f;
-                    despawnHit = true;
-                    reflectable = false;
-                    drag = 0.01f;
-                    splashDamageRadius = 30f;
-                    splashDamage = 30f;
-                    lifetime = 48f;
-                    lightOpacity = 0.5f;
-                    trailWidth = 1.1f;
-                    trailLength = 7;
-                    trailColor = backColor = hitColor = lightColor = greenLight;
+                bullet = new ChainLightningBulletType() {{
+                    lightningColor = hitColor = greenLight;
+                    range = 150;
+                    width = 7;
+                    shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
+                    hitEffect = Fx.hitBulletColor;
+                    arc = 0.15f;
+                    targetRange = 50;
+                    damage = 73;
+                    distanceDamageFalloff = 0.9f;
+                    jumpDamageFactor = 0.9f;
+                    chainLightning = 6;
+                    segmentLength = 4;
+                }};
+            }},
+            new Weapon("terra-small-green-launcher"){{
+                reload = 115f;
+                shootY = 3f;
+                x = 0;
+                y = -42f / 4;
+                rotate = true;
+                rotateSpeed = 3f;
+                mirror = false;
+                inaccuracy = 25f;
+                shootSound = TerraSounds.shootLaunch;
+                shoot = new ShootAlternate() {{
+                    shots = 3;
+                    shotDelay = 4f;
+                    barrels = 2;
+                    spread = 3.5f;
+                }};
+                bullet = new BasicBulletType(2.2f, 118){{
+                    lifetime = 80f;
+                    splashDamage = damage * 0.3f;
+                    splashDamageRadius = 55f;
+                    scaledSplashDamage = true;
+                    sprite = "terra-strike";
+                    drag = -0.05f;
+                    followAimSpeed = 3f;
+                    width = 4f;
+                    height = 14f;
+                    shrinkY = 0.1f;
+                    hitColor = lightColor = trailColor = backColor = greenLight;
                     frontColor = Color.white;
-                    hitEffect = despawnEffect = TerraFx.circleFadeSmall;
+                    trailWidth = 2f;
+                    trailLength = 12;
+                    despawnHit = true;
+                    despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
+                    despawnSound = Sounds.unitExplode1;
                 }};
             }});
         }};
