@@ -209,19 +209,7 @@ public class TerraFx {
         }
 
         Lines.endLine();
-    });
-
-    public interface VisualLightningHolder{
-        Vec2 start();
-
-        Vec2 end();
-
-        float width();
-
-        float segLength();
-
-        float arc();
-    };
+    }),
 
     crossBlastArrow45 = new Effect(65, 140, e -> {
         color(e.color, Color.white, e.fout() * 0.55f);
@@ -303,6 +291,19 @@ public class TerraFx {
             randLenVectors(e.id + index, 42, 2330, e.rotation + ang - 90, 0f, (x, y) -> lineAngle(e.x + x + Tmp.v1.x, e.y + y + Tmp.v1.y, Mathf.angle(x, y), e.fout() * 60));
         }
     });
+    
+    public interface VisualLightningHolder{
+        Vec2 start();
+
+        Vec2 end();
+
+        float width();
+
+        float segLength();
+
+        float arc();
+    }
+    
     private static void arrow(float x, float y, float width, float length, float backLength, float angle) {
         float wx = Angles.trnsx(angle + 90, width), wy = Angles.trnsy(angle + 90, width);
         float ox = Angles.trnsx(angle, backLength), oy = Angles.trnsy(angle, backLength);
