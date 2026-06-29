@@ -1482,7 +1482,9 @@ public class TerraUnitTypes {
             moveSound = Sounds.shipMove;
 
             constructor = UnitWaterMove::create;
-            immunities.addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.wet);
+            immunities = ObjectSet.with(
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet
+            );
 
             weapons.add(new Weapon("green-micro-mount"){{
                 reload = 18f;
