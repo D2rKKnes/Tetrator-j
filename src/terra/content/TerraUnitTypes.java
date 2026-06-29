@@ -1489,14 +1489,14 @@ public class TerraUnitTypes {
             );
 
             weapons.add(new Weapon("terra-green-micro-mount"){{
-                reload = 18f;
+                reload = 40f;
                 x = 0f;
                 shootY = 3f;
                 y = -9f / 4;
                 rotate = true;
                 mirror = false;
                 inaccuracy = 8f;
-                bullet = new BasicBulletType(2.7f, 26){{
+                bullet = new BasicBulletType(2.7f, 8){{
                     sprite = "terra-plasma";
                     velocityScaleRandMin = 0.7f;
                     width = height = 5f;
@@ -1578,7 +1578,7 @@ public class TerraUnitTypes {
             );
 
             weapons.add(new Weapon("terra-missile-void"){{
-                reload = 40f;
+                reload = 45f;
                 x = 17f / 4;
                 shootY = 0f;
                 y = -1f;
@@ -1613,9 +1613,9 @@ public class TerraUnitTypes {
             faceTarget = false;
 
             trailLength = 25;
-            waveTrailX = 20f / 4;
-            waveTrailY = -5f;
-            trailScl = 1.7f;
+            waveTrailX = 44f / 4;
+            waveTrailY = -8f;
+            trailScl = 2.2f;
 
             moveSoundVolume = 0.7f;
             moveSoundPitchMin = moveSoundPitchMax = 0.75f;
