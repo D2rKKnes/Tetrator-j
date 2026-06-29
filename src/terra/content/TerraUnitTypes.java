@@ -1509,7 +1509,7 @@ public class TerraUnitTypes {
                     lifetime = 48f;
                     lightOpacity = 0.5f;
                     trailWidth = 1.1f;
-                    trailLength = 3;
+                    trailLength = 7;
                     trailColor = backColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = TerraFx.circleFadeSmall;
@@ -1527,7 +1527,7 @@ public class TerraUnitTypes {
             engineSize = 1.5f;
             engineOffset = 3f;
             rotateSpeed = 5f;
-            trailLength = 4;
+            trailLength = 6;
             missileAccelTime = 20f;
             lowAltitude = true;
             loopSound = Sounds.loopMissileTrail;
@@ -1548,7 +1548,7 @@ public class TerraUnitTypes {
                 reload = 1f;
                 shootOnDeath = true;
                 shake = 1.5f;
-                bullet = new ExplosionBulletType(48f, 24f){{
+                bullet = new ExplosionBulletType(48f, 44f){{
                     hitColor = greenLight;
                     collidesAir = true;
                 }};
@@ -1556,11 +1556,11 @@ public class TerraUnitTypes {
         }};
         threshold = new ErekirUnitType("threshold"){{
             speed = 1.1f;
-            drag = 0.13f;
-            hitSize = 8f;
-            health = 1700;
-            armor = 9f;
-            accel = 0.4f;
+            drag = 0.15f;
+            hitSize = 13f;
+            health = 1500;
+            armor = 8f;
+            accel = 0.3f;
             rotateSpeed = 3f;
             faceTarget = false;
 
@@ -1574,13 +1574,13 @@ public class TerraUnitTypes {
 
             constructor = UnitWaterMove::create;
             immunities = ObjectSet.with(
-                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet
             );
 
             weapons.add(new Weapon("terra-missile-void"){{
-                reload = 88f;
+                reload = 40f;
                 x = 17f / 4;
-                shootY = 3f;
+                shootY = 0f;
                 y = -1f;
                 rotate = true;
                 rotateSpeed = 5f;
@@ -1599,6 +1599,58 @@ public class TerraUnitTypes {
                     keepVelocity = false;
                     smokeEffect = shootEffect = Fx.none;
                     spawnUnit = greenMissile;
+                }};
+            }});
+        }};
+        turn = new ErekirUnitType("turn"){{
+            speed = 0.75f;
+            drag = 0.17f;
+            hitSize = 25f;
+            health = 4300;
+            armor = 14f;
+            accel = 0.2f;
+            rotateSpeed = 2f;
+            faceTarget = false;
+
+            trailLength = 25;
+            waveTrailX = 20f / 4;
+            waveTrailY = -5f;
+            trailScl = 1.7f;
+
+            moveSoundVolume = 0.7f;
+            moveSoundPitchMin = moveSoundPitchMax = 0.75f;
+            moveSound = Sounds.shipMove;
+
+            constructor = UnitWaterMove::create;
+            immunities = ObjectSet.with(
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
+            );
+
+            weapons.add(new Weapon("terra-green-launcher"){{
+                reload = 18f;
+                shootY = 3f;
+                x = 43f / 4
+                y = -16f / 4;
+                rotate = true;
+                rotateSpeed = 9f;
+                mirror = true;
+                bullet = new BasicBulletType(2.7f, 26){{
+                    sprite = "terra-plasma";
+                    velocityScaleRandMin = 0.7f;
+                    width = height = 5f;
+                    shrinkX = shrinkY = -0.3f;
+                    despawnHit = true;
+                    reflectable = false;
+                    drag = 0.01f;
+                    splashDamageRadius = 30f;
+                    splashDamage = 30f;
+                    lifetime = 48f;
+                    lightOpacity = 0.5f;
+                    trailWidth = 1.1f;
+                    trailLength = 7;
+                    trailColor = backColor = hitColor = lightColor = greenLight;
+                    frontColor = Color.white;
+                    hitEffect = despawnEffect = TerraFx.circleFadeSmall;
                 }};
             }});
         }};
