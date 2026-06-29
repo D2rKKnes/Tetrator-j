@@ -45,6 +45,8 @@ public class TerraUnitTypes {
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
     //drones & core units
     healDrone, basicAssemblyDrone, tau,
+    //green erekir
+    flow, greenMissile, threshold, turn, movement, consequence,
     //from New Horizon
     endSpawn, endGuard, end,
     //missiles
@@ -1461,6 +1463,51 @@ public class TerraUnitTypes {
                 }
             }
         };
+
+        flow = new ErekirUnitType("flow"){{
+            speed = 1.3f;
+            drag = 0.13f;
+            hitSize = 8f;
+            health = 900;
+            armor = 5f;
+            accel = 0.4f;
+            rotateSpeed = 3.1f;
+            faceTarget = false;
+
+            trailLength = 16;
+            waveTrailX = 2.25f;
+            trailScl = 1.1f;
+
+            moveSoundVolume = 0.3f;
+            moveSound = Sounds.shipMove;
+
+            constructor = UnitWaterMove::create;
+            immunities.addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.wet);
+
+            weapons.add(new Weapon("green-micro-mount"){{
+                reload = 18f;
+                x = 0f;
+                shootY = 3f;
+                y = 9f / 4;
+                rotate = true;
+                bullet = new BasicBulletType(2.5f, 26){{
+                    sprite = "terra-plasma";
+                    velocityScaleRandMin = 0.8f;
+                    width = height = 5f;
+                    shrinkX = shrinkY = 0.2f;
+                    despawnHit = true;
+                    reflectable = false;
+                    drag = 0.01f;
+                    splashDamageRadius = 30f;
+                    splashDamage = 30f;
+                    lifetime = 42f;
+                    lightOpacity = 0.5f;
+                    trailColor = backColor = hitColor = lightColor = Pal.berylShot;
+                    frontColor = Color.white;
+                    hitEffect = despawnEffect = TerraFx.circleFadeSmall;
+                }};
+            }});
+        }};
 
         endSpawn = new UnitType("end-spawn"){{
             flying = true;
