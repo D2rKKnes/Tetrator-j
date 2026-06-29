@@ -1586,7 +1586,7 @@ public class TerraUnitTypes {
                 rotateSpeed = 5f;
                 smokeEffect = shootEffect = Fx.none;
                 shootSound = Sounds.shootMissileLarge;
-                parts.add(new RegionPart("-part"){{
+                parts.add(new RegionPart("-preview"){{
                     progress = PartProgress.reload;
                     colorTo = new Color(1f, 1f, 1f, 0f);
                     color = Color.white;
