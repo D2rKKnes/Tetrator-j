@@ -34,6 +34,14 @@ public class SappingFieldAbility extends Ability{
         this.range = range;
         this.effect = effect;
     }
+    public SappingFieldAbility(StatusEffect effect, float duration, float reload, float range, Color color, Effect activeEffect){
+        this.duration = duration;
+        this.reload = reload;
+        this.range = range;
+        this.effect = effect;
+        this.color = color;
+        this.activeEffect = activeEffect;
+    }
 
     @Override
     public void addStats(Table t){
