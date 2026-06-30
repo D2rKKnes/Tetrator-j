@@ -1700,8 +1700,8 @@ public class TerraUnitTypes {
             faceTarget = false;
 
             trailLength = 50;
-            waveTrailX = 44f / 4;
-            waveTrailY = -14f;
+            waveTrailX = 66f / 4;
+            waveTrailY = -12f;
             trailScl = 3.3f;
 
             moveSoundVolume = 1f;
@@ -1845,6 +1845,30 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow, StatusEffects.corroded
             );
+            parts.add(new HoverPart(){{
+                x = 0f;
+                y = 0f;
+                mirror = false;
+                radius = 15f;
+                phase = 70f;
+                stroke = 2f;
+                circles = 3;
+                sides = 360;
+                layerOffset = -0.001f;
+                color = greenLight;
+            }},
+            new HoverPart(){{
+                x = 0f;
+                y = 0f;
+                mirror = false;
+                radius = 25f;
+                phase = 150f;
+                stroke = 2f;
+                circles = 2;
+                sides = 360;
+                layerOffset = -0.001f;
+                color = greenLight;
+            }});
         }};
 
         endSpawn = new UnitType("end-spawn"){{
