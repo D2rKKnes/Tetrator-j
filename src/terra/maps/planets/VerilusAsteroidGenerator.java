@@ -357,7 +357,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
             state.rules.loadout = ItemStack.list(Items.lead, 100);
         }
 
-        //state.rules.showSpawns = true;
+        state.rules.hideSpawns = false;
         state.rules.spawns = VerilusWaves.generate(rand);
     }
 
