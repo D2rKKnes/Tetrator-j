@@ -26,9 +26,9 @@ public class SappingFieldAbility extends Ability{
 
     protected float timer;
 
-    StatusFieldAbility(){}
+    SappingFieldAbility(){}
 
-    public StatusFieldAbility(StatusEffect effect, float duration, float reload, float range){
+    public SappingFieldAbility(StatusEffect effect, float duration, float reload, float range){
         this.duration = duration;
         this.reload = reload;
         this.range = range;
