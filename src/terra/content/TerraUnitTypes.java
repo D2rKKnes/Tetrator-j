@@ -1925,7 +1925,7 @@ public class TerraUnitTypes {
                     trailWidth = 4f;
                     trailEffect = new Effect(trailLength, e -> {
                         color(trailColor);
-                        Fill.circle(e.x, e.y, e.reverse() * (trailWidth * 2));
+                        Fill.circle(e.x, e.y, e.fout() * (trailWidth * 2));
                     });
                     fragBullet = new BasicBulletType(0f, 0){{
                         lifetime = 120f;
@@ -1977,7 +1977,11 @@ public class TerraUnitTypes {
                             trailInterval = lifetime / 2 + 0.01f;
                             createChance = 0.8f;
                         }};
-                        hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                        hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, greenLight), new Effect(60f, 100f, e -> {
+                            float circleRad = 5f + e.finpow() * 30f;
+                            color(e.color, e.foutpow());
+                            Fill.circle(e.x, e.y, circleRad);
+                        }));
                     }};
                 }};
             }});
