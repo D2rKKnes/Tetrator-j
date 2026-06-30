@@ -1702,7 +1702,7 @@ public class TerraUnitTypes {
 
             trailLength = 50;
             waveTrailX = 44f / 4;
-            waveTrailY = -10f;
+            waveTrailY = -14f;
             trailScl = 3.3f;
 
             moveSoundVolume = 1f;
@@ -1714,19 +1714,45 @@ public class TerraUnitTypes {
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
             );
 
-            weapons.add(new Weapon("terra-green-flak-weapon"){{
+            weapons.add(new Weapon("terra-green-mount"){{
+                reload = 12f;
+                shootY = 3f;
+                x = 64f / 4;
+                y = 36f / 4;
+                rotate = true;
+                rotateSpeed = 5.6f;
+                mirror = true;
+                shootSound = Sounds.shootLancer;
+                shootSoundVolume = 0.4f;
+                inaccuracy = 12f;
+                bullet = new LaserBulletType(){{
+                    damage = 58f;
+                    recoil = 0f;
+                    sideAngle = 30f;
+                    sideWidth = 1f;
+                    sideLength = 70f;
+                    length = 130f;
+                    colors = new Color[]{greenLight.cpy().a(0.4f), greenLight, Color.white};
+                }};
+            }},
+            new Weapon("terra-green-flak-weapon"){{
                 reload = 38f;
-                shootY = 0f;
                 x = 63f / 4;
                 y = -34.5f / 4;
                 rotate = true;
                 rotateSpeed = 2f;
                 shootSound = Sounds.shootSpectre;
-                shootSoundVolume = 0.7f;
+                shootSoundVolume = 1.1f;
                 mirror = true;
                 alternate = false;
                 recoils = 2;
-                recoil = 0f;
+                recoil = 0.2f;
+                layerOffset = 0.001f;
+                cooldownTime = 60f;
+                shootY = 55f / 4;
+                shoot = new ShootAlternate() {{
+                    spread = 8f;
+                }};
                 parts.add(
                     new RegionPart("-barrel-l") {{
                         mirror = false;
@@ -1747,14 +1773,18 @@ public class TerraUnitTypes {
                     width = 13f;
                     height = 21f;
                     speed = 7;
-                    damage = 130;
+                    damage = 60;
                     splashDamage = damage / 2f;
-                    splashDamageRadius = radius = 30;
+                    splashDamageRadius = radius = 40;
                     unitDamageScl = 0.8f;
+                    powerDamageScl = 1.3f;
+                    powerSclDecrease = 0.75f;
+                    timeIncrease = 1.25f;
+                    timeDuration = 60f * 6f;
                     lifetime = 32f;
                     shootEffect = Fx.shootBig;
                     shrinkY = shrinkX = 0;
-                    trailEffect = new Effect(13f, e -> {
+                    trailEffect = new Effect(10f, e -> {
                         color(Pal.heal);
                         for (int s : Mathf.signs) {
                             Drawf.tri(e.x, e.y, 2.5f, 14f * e.fslope(), e.rotation + 90f * s);
@@ -1762,7 +1792,7 @@ public class TerraUnitTypes {
                     });
                     hitEffect = new Effect(20f, 100f, e -> {
                         e.scaled(7f, b -> {
-                            color(Pal.heal, b.fout());
+                            color(greenLight, b.fout());
                             Fill.circle(e.x, e.y, radius);
                         });
 
@@ -1782,25 +1812,21 @@ public class TerraUnitTypes {
                         Fill.circle(e.x, e.y, 12f * e.fout());
                         color();
                         Fill.circle(e.x, e.y, 6f * e.fout());
-                        Drawf.light(e.x, e.y, radius * 1.6f, Pal.heal, e.fout());
+                        Drawf.light(e.x, e.y, radius * 1.6f, greenLight, e.fout());
                     });
                     healAmount = 0;
-                    timeDuration = 60f * 6f;
                     trailRotation = true;
-                    trailInterval = 2f;
+                    trailInterval = 3f;
                     trailLength = 6;
                     trailWidth = 2.3f;
-                    lightning = 2;
-                    lightningLength = 6;
                     lightningColor = backColor = trailColor = hitColor = greenLight;
-                    lightningDamage = 20;
                 }};
             }});
         }};
         consequence = new ErekirUnitType("consequence"){{
             speed = 0.42f;
             drag = 0.18f;
-            hitSize = 75f;
+            hitSize = 65f;
             health = 20000;
             armor = 19f;
             accel = 0.18f;
