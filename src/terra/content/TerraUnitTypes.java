@@ -1670,7 +1670,7 @@ public class TerraUnitTypes {
                     spread = 3.5f;
                 }};
                 bullet = new BasicBulletType(2.2f, 118){{
-                    lifetime = 67f;
+                    lifetime = 55f;
                     splashDamage = damage * 0.3f;
                     splashDamageRadius = 55f;
                     scaledSplashDamage = true;
@@ -1689,6 +1689,54 @@ public class TerraUnitTypes {
                     despawnSound = Sounds.unitExplode1;
                 }};
             }});
+        }};
+        movement = new ErekirUnitType("movement"){{
+            speed = 0.6f;
+            drag = 0.17f;
+            hitSize = 50f;
+            health = 9800;
+            armor = 12f;
+            accel = 0.2f;
+            rotateSpeed = 1.4f;
+            faceTarget = false;
+
+            trailLength = 50;
+            waveTrailX = 44f / 4;
+            waveTrailY = -8f;
+            trailScl = 3.3f;
+
+            moveSoundVolume = 1f;
+            moveSoundPitchMin = moveSoundPitchMax = 0.95f;
+            moveSound = Sounds.shipMove;
+
+            constructor = UnitWaterMove::create;
+            immunities = ObjectSet.with(
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
+            );
+        }};
+        consequence = new ErekirUnitType("consequence"){{
+            speed = 0.42f;
+            drag = 0.18f;
+            hitSize = 100f;
+            health = 20000;
+            armor = 19f;
+            accel = 0.18f;
+            rotateSpeed = 0.9f;
+            faceTarget = false;
+
+            trailLength = 70;
+            waveTrailX = 122f / 4;
+            waveTrailY = -110f / 4;
+            trailScl = 3.6f;
+
+            moveSoundVolume = 1.2f;
+            moveSoundPitchMin = moveSoundPitchMax = 0.9f;
+            moveSound = Sounds.shipMove;
+
+            constructor = UnitWaterMove::create;
+            immunities = ObjectSet.with(
+                StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow, StatusEffects.corroded
+            );
         }};
 
         endSpawn = new UnitType("end-spawn"){{
