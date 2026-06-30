@@ -2023,7 +2023,8 @@ public class TerraUnitTypes {
                     lightOpacity = 0.5f;
                     trailWidth = 1.3f;
                     trailLength = 9;
-                    weaveMag = 3.5f;
+                    weaveMag = 1.5f;
+                    weaveScale = 6f;
                     homingPower = 0.14f;
                     trailColor = backColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
@@ -2100,10 +2101,10 @@ public class TerraUnitTypes {
                     pierceCap = 3;
                     armorMultiplier = 0.3f;
                     blockArmorMultiplier = 1.5f;
-                    lightning = 6;
+                    lightning = 3;
                     lightningLength = 13;
                     lightningLengthRand = 3;
-                    lightningDamage = damage * 0.3f;
+                    lightningDamage = 22f;
                     despawnHit = true;
                     despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
                     smokeEffect = Fx.shootSmokeSquareBig;
