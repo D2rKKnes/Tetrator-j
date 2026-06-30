@@ -1956,10 +1956,12 @@ public class TerraUnitTypes {
                             layerOffset = -0.001f;
                             color = greenLight;
                         }});
-                        intervalBullets = 3;
-                        intervalDelay = 6f;
+                        intervalBullets = 4;
+                        intervalDelay = 3f;
                         intervalBullet = fragBullet = new BasicBulletType(5f, 38){{
                             lifetime = 30f;
+                            lifeScaleRandMax = 1.4f;
+                            armorMultiplier = 0.8f;
                             sprite = "terra-plasma";
                             width = height = 5f;
                             shrinkY = shrinkX = 0.3f;
@@ -1990,6 +1992,8 @@ public class TerraUnitTypes {
                             color(e.color, e.foutpow());
                             Fill.circle(e.x, e.y, circleRad);
                         }));
+                        despawnHit = true;
+                        despawnSound = Sounds.explosionTitan;
                     }};
                 }};
             }},
@@ -2018,6 +2022,7 @@ public class TerraUnitTypes {
                     lightOpacity = 0.5f;
                     trailWidth = 1.3f;
                     trailLength = 9;
+                    weaveMag = 3.5f;
                     homingPower = 0.14f;
                     trailColor = backColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
@@ -2026,12 +2031,11 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-normal-green-launcher"){{
                 reload = 78f;
-                shootY = 3f;
+                shootY = 4f;
                 x = 108f / 4;
                 y = -6f / 4;
                 rotate = true;
                 rotateSpeed = 2.6f;
-                inaccuracy = 8f;
                 shake = 2f;
                 shootSound = Sounds.shootSalvo;
                 
@@ -2053,6 +2057,7 @@ public class TerraUnitTypes {
                     keepVelocity = false;
                     splashDamageRadius = 35f;
                     splashDamage = 38f;
+                    blockArmorMultiplier = 0.7f;
                     lifetime = 37f;
                     trailColor = backColor = hitColor = greenLight;
                     frontColor = Color.white;
@@ -2061,7 +2066,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-big-green-launcher"){{
                 reload = 138f;
-                shootY = 3f;
+                shootY = 4.5f;
                 x = 107f / 4;
                 y = -84f / 4;
                 rotate = true;
@@ -2073,11 +2078,11 @@ public class TerraUnitTypes {
                     shots = 6;
                     shotDelay = 8f;
                     barrels = 4;
-                    spread = 42f / 4;
+                    spread = 42f / 8;
                 }};
                 bullet = new BasicBulletType(5.8f, 138){{
                     lifetime = 75f;
-                    splashDamage = damage * 0.3f;
+                    splashDamage = damage * 0.6f;
                     splashDamageRadius = 45f;
                     scaledSplashDamage = true;
                     sprite = "terra-strike";
@@ -2086,14 +2091,21 @@ public class TerraUnitTypes {
                     width = 16f;
                     height = 21f;
                     shrinkY = 0f;
-                    hitColor = lightColor = trailColor = backColor = greenLight;
+                    hitColor = lightColor = lightningColor = trailColor = backColor = greenLight;
                     frontColor = Color.white;
                     trailWidth = 2f;
                     trailLength = 13;
                     pierce = true;
                     pierceCap = 3;
+                    armorMultiplier = 0.3f;
+                    blockArmorMultiplier = 1.5f;
+                    lightning = 6;
+                    lightningLength = 13;
+                    lightningLengthRand = 3;
+                    lightningDamage = damage * 0.3f;
                     despawnHit = true;
                     despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
+                    smokeEffect = Fx.shootSmokeSquareBig;
                     despawnSound = Sounds.unitExplode1;
                 }};
             }});
