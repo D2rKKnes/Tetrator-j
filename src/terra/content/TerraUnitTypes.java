@@ -193,8 +193,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-dynamite-weapon"){{
-                x = 13.5f / 4f;
-                y = -5.5f / 4f;
+                x = 13f / 4f;
+                y = -5f / 4f;
                 reload = 13f;
                 rotate = true;
                 rotateSpeed = 5f;
@@ -259,8 +259,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-incident-mount"){{
-                x = 24.5f / 4f;
-                y = -1.5f / 4f;
+                x = 24f / 4f;
+                y = -1f / 4f;
                 shootY = 4f;
                 shootSound = Sounds.shootAvert;
                 reload = 28f;
@@ -282,8 +282,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-incident-weapon"){{
-                x = 31.5f / 4f;
-                y = 13.5f / 4f;
+                x = 31f / 4f;
+                y = 13f / 4f;
                 shootY = 1f;
                 shootSound = Sounds.shootAfflict;
                 reload = 135f;
@@ -437,8 +437,8 @@ public class TerraUnitTypes {
 
             weapons.add(
             new Weapon("terra-dynamite-weapon"){{
-                x = 40.5f / 4f;
-                y = -34.5f / 4f;
+                x = 40f / 4f;
+                y = -34f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 16f;
                 rotate = true;
@@ -446,8 +446,8 @@ public class TerraUnitTypes {
                 bullet = sapper;
             }},
             new Weapon("terra-dynamite-weapon"){{
-                x = 49.5f / 4f;
-                y = -3.5f / 4f;
+                x = 49f / 4f;
+                y = -3f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 18f;
                 rotate = true;
@@ -456,7 +456,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-sap-launcher"){{
                 x = 0f;
-                y = -12.5f / 4f;
+                y = -12f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 190f;
@@ -581,8 +581,8 @@ public class TerraUnitTypes {
                 new SpawnDeathAbility(inevitabilityCore, 1, 11f));
             weapons.add(
             new Weapon("terra-inevitability-mount"){{
-                x = 44.5f / 4f;
-                y = 24.5f / 4f;
+                x = 44f / 4f;
+                y = 24f / 4f;
                 shootSound = Sounds.shootAvert;
                 reload = 24f;
                 rotate = true;
@@ -618,8 +618,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-small-sap-launcher"){{
-                x = -62.5f / 4f;
-                y = -15.5f / 4f;
+                x = -62f / 4f;
+                y = -15f / 4f;
                 shootY = 2.5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 87f;
@@ -763,7 +763,7 @@ public class TerraUnitTypes {
         eternityMissile = new MissileUnitType("eternity-missile"){{
             targetAir = true;
             speed = 7.6f;
-            rotateSpeed = 4;
+            rotateSpeed = 6;
             maxRange = 5f;
             health = 70;
             homingDelay = 3f;
@@ -1693,7 +1693,7 @@ public class TerraUnitTypes {
         movement = new ErekirUnitType("movement"){{
             speed = 0.6f;
             drag = 0.17f;
-            hitSize = 50f;
+            hitSize = 40f;
             health = 9800;
             armor = 12f;
             accel = 0.2f;
@@ -1702,7 +1702,7 @@ public class TerraUnitTypes {
 
             trailLength = 50;
             waveTrailX = 44f / 4;
-            waveTrailY = -8f;
+            waveTrailY = -10f;
             trailScl = 3.3f;
 
             moveSoundVolume = 1f;
@@ -1713,11 +1713,94 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow
             );
+
+            weapons.add(new Weapon("terra-green-flak-weapon"){{
+                reload = 38f;
+                shootY = 0f;
+                x = 63f / 4;
+                y = -34.5f / 4;
+                rotate = true;
+                rotateSpeed = 2f;
+                shootSound = Sounds.shootSpectre;
+                shootSoundVolume = 0.7f;
+                mirror = true;
+                alternate = false;
+                recoils = 2;
+                recoil = 0f;
+                parts.add(
+                    new RegionPart("-barrel-l") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 1;
+                        progress = PartProgress.recoil;
+                        moveY = -2f;
+                    }},
+                    new RegionPart("-barrel-r") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 0;
+                        progress = PartProgress.recoil;
+                        moveY = -2f;
+                    }}
+                );
+                bullet = new EmpBulletType() {{
+                    width = 13f;
+                    height = 21f;
+                    speed = 7;
+                    damage = 130;
+                    splashDamage = damage / 2f;
+                    splashDamageRadius = radius = 30;
+                    unitDamageScl = 0.8f;
+                    lifetime = 32f;
+                    shootEffect = Fx.shootBig;
+                    shrinkY = shrinkX = 0;
+                    trailEffect = new Effect(13f, e -> {
+                        color(Pal.heal);
+                        for (int s : Mathf.signs) {
+                            Drawf.tri(e.x, e.y, 2.5f, 14f * e.fslope(), e.rotation + 90f * s);
+                        }
+                    });
+                    hitEffect = new Effect(20f, 100f, e -> {
+                        e.scaled(7f, b -> {
+                            color(Pal.heal, b.fout());
+                            Fill.circle(e.x, e.y, radius);
+                        });
+
+                        color(Pal.heal);
+                        stroke(e.fout() * 3f);
+                        Lines.circle(e.x, e.y, radius);
+
+                        int points = 6;
+                        float offset = Mathf.randomSeed(e.id, 360f);
+                        for(int i = 0; i < points; i++){
+                            float angle = i* 360f / points + offset;
+                            //for(int s : Mathf.zeroOne){
+                                Drawf.tri(e.x + Angles.trnsx(angle, radius), e.y + Angles.trnsy(angle, radius), 6f, 50f * e.fout(), angle/* + s*180f*/);
+                            //}
+                        }
+
+                        Fill.circle(e.x, e.y, 12f * e.fout());
+                        color();
+                        Fill.circle(e.x, e.y, 6f * e.fout());
+                        Drawf.light(e.x, e.y, radius * 1.6f, Pal.heal, e.fout());
+                    });
+                    healAmount = 0;
+                    timeDuration = 60f * 6f;
+                    trailRotation = true;
+                    trailInterval = 2f;
+                    trailLength = 6;
+                    trailWidth = 2.3f;
+                    lightning = 2;
+                    lightningLength = 6;
+                    lightningColor = backColor = trailColor = hitColor = greenLight;
+                    lightningDamage = 20;
+                }};
+            }});
         }};
         consequence = new ErekirUnitType("consequence"){{
             speed = 0.42f;
             drag = 0.18f;
-            hitSize = 100f;
+            hitSize = 75f;
             health = 20000;
             armor = 19f;
             accel = 0.18f;
