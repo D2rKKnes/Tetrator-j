@@ -1784,7 +1784,7 @@ public class TerraUnitTypes {
                     shootEffect = Fx.shootBig;
                     shrinkY = shrinkX = 0;
                     trailEffect = new Effect(10f, e -> {
-                        color(Pal.heal);
+                        color(greenLight);
                         for (int s : Mathf.signs) {
                             Drawf.tri(e.x, e.y, 2.5f, 14f * e.fslope(), e.rotation + 90f * s);
                         }
@@ -1868,6 +1868,66 @@ public class TerraUnitTypes {
                 sides = 360;
                 layerOffset = -0.001f;
                 color = greenLight;
+            }});
+            weapons.add(new Weapon("terra-center"){{
+                reload = 262f;
+                cooldownTime = 240f;
+                minWarmup = 0.99f;
+                shootY = 0f;
+                x = 0;
+                y = 0;
+                rotate = true;
+                rotateSpeed = 20f;
+                mirror = false;
+                shootSound = TerraSounds.shootBlackhole;
+                shootSoundVolume = 0.4f;
+                parts.add(
+                    new RegionPart("-ball") {{
+                        mirror = false;
+                        layerOffset = 50f;
+                        progress = PartProgress.reload;
+                        color = greenLight;
+                        xScl = yScl = 0.4f;
+                        growX = growY = -xScl;
+                    }}
+                );
+                bullet = new BasicBulletType(4.2f, 200){{
+                    lifetime = 90f;
+                    sprite = "terra-plasma";
+                    width = height = 12f;
+                    shrinkY = 0f;
+                    lighthColor = backColor = trailColor = hitColor = lightColor = greenLight;
+                    frontColor = Color.white;
+                    lightOpacity = 0.8f;
+                    splashDamage = 160f;
+                    splashDamageRadius = 80f;
+                    shootEffect = smokeEffect = Fx.none;
+                    buildingDamageMultiplier = 0.75f;
+                    targetMissiles = false;
+                    reflectable = false;
+                    absorbable = false;
+                    armorMultiplier = blockArmorMultiplier = 0.5f;
+                    parts.add(new HoverPart(){{
+                        x = 0f;
+                        y = 0f;
+                        mirror = false;
+                        radius = 8f;
+                        phase = 40f;
+                        stroke = 2f;
+                        circles = 3;
+                        sides = 360;
+                        layerOffset = -0.001f;
+                        color = greenLight;
+                    }});
+                    trailInterval = 4f;
+                    trailLength = 15;
+                    trailWidth = 2f;
+                    trailEffect = new Effect(trailLength * 1.4f, e -> {
+                        color(trailColor);
+                        Fill.circle(e.x, e.y, e.fslope() * width);
+                    });
+                    hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                }};
             }});
         }};
 
