@@ -582,7 +582,7 @@ public class TerraUnitTypes {
             weapons.add(
             new Weapon("terra-inevitability-mount"){{
                 x = 44f / 4f;
-                y = 24f / 4f;
+                y = 24.5f / 4f;
                 shootSound = Sounds.shootAvert;
                 reload = 24f;
                 rotate = true;
@@ -619,7 +619,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-small-sap-launcher"){{
                 x = -62f / 4f;
-                y = -15f / 4f;
+                y = -15.5f / 4f;
                 shootY = 2.5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 87f;
@@ -1644,16 +1644,15 @@ public class TerraUnitTypes {
                     shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
                     hitEffect = Fx.hitBulletColor;
                     arc = 0.15f;
-                    targetRange = 50;
-                    damage = 73;
-                    distanceDamageFalloff = 3f;
+                    targetRange = 20;
+                    damage = 63;
                     jumpDamageFactor = 0.9f;
                     chainLightning = 3; //It can hit itself, but only for 1 damage... weird.
                     segmentLength = 4;
                 }};
             }},
             new Weapon("terra-small-green-launcher"){{
-                reload = 115f;
+                reload = 125f;
                 shootY = 3f;
                 x = 0;
                 y = -42f / 4;
@@ -1669,10 +1668,10 @@ public class TerraUnitTypes {
                     barrels = 2;
                     spread = 3.5f;
                 }};
-                bullet = new BasicBulletType(2.2f, 118){{
+                bullet = new BasicBulletType(2.2f, 98){{
                     lifetime = 55f;
                     splashDamage = damage * 0.3f;
-                    splashDamageRadius = 55f;
+                    splashDamageRadius = 35f;
                     scaledSplashDamage = true;
                     sprite = "terra-strike";
                     drag = -0.015f;
@@ -1716,7 +1715,7 @@ public class TerraUnitTypes {
 
             weapons.add(new Weapon("terra-green-mount"){{
                 reload = 12f;
-                shootY = 3f;
+                shootY = 5f;
                 x = 64f / 4;
                 y = 36f / 4;
                 rotate = true;
@@ -1726,9 +1725,9 @@ public class TerraUnitTypes {
                 shootSoundVolume = 0.4f;
                 inaccuracy = 12f;
                 bullet = new LaserBulletType(){{
-                    damage = 58f;
+                    damage = 68f;
                     recoil = 0f;
-                    sideAngle = 30f;
+                    sideAngle = 15f;
                     sideWidth = 1f;
                     sideLength = 70f;
                     length = 130f;
@@ -1736,7 +1735,7 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-green-flak-weapon"){{
-                reload = 38f;
+                reload = 38f / 2;
                 x = 63f / 4;
                 y = -34.5f / 4;
                 rotate = true;
@@ -1757,15 +1756,15 @@ public class TerraUnitTypes {
                     new RegionPart("-barrel-l") {{
                         mirror = false;
                         under = true;
-                        recoilIndex = 1;
-                        progress = PartProgress.recoil;
+                        recoilIndex = 0;
+                        progress = heatProgress = PartProgress.recoil;
                         moveY = -2f;
                     }},
                     new RegionPart("-barrel-r") {{
                         mirror = false;
                         under = true;
-                        recoilIndex = 0;
-                        progress = PartProgress.recoil;
+                        recoilIndex = 1;
+                        progress = heatProgress = PartProgress.recoil;
                         moveY = -2f;
                     }}
                 );
@@ -1796,7 +1795,7 @@ public class TerraUnitTypes {
                             Fill.circle(e.x, e.y, radius);
                         });
 
-                        color(Pal.heal);
+                        color(greenLight);
                         stroke(e.fout() * 3f);
                         Lines.circle(e.x, e.y, radius);
 
