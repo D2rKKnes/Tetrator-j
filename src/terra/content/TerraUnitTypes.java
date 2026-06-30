@@ -1896,7 +1896,7 @@ public class TerraUnitTypes {
                     sprite = "terra-plasma";
                     width = height = 12f;
                     shrinkY = 0f;
-                    lighthColor = backColor = trailColor = hitColor = lightColor = greenLight;
+                    backColor = trailColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
                     lightOpacity = 0.8f;
                     splashDamage = 160f;
