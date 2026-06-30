@@ -1876,6 +1876,7 @@ public class TerraUnitTypes {
                 shootY = 0f;
                 x = 0;
                 y = 0;
+                recoil = 0f;
                 rotate = true;
                 rotateSpeed = 20f;
                 mirror = false;
@@ -1885,7 +1886,7 @@ public class TerraUnitTypes {
                     new RegionPart("-ball") {{
                         mirror = false;
                         layerOffset = 50f;
-                        progress = PartProgress.reload;
+                        progress = PartProgress.recoil;
                         color = greenLight;
                         xScl = yScl = 0.4f;
                         growX = growY = -xScl;
@@ -1894,14 +1895,14 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType(4.2f, 200){{
                     lifetime = 90f;
                     sprite = "terra-plasma";
-                    width = height = 12f;
+                    width = height = 18f;
                     shrinkY = 0f;
                     backColor = trailColor = hitColor = lightColor = greenLight;
                     frontColor = Color.white;
                     lightOpacity = 0.8f;
                     splashDamage = 160f;
                     splashDamageRadius = 80f;
-                    shootEffect = smokeEffect = Fx.none;
+                    shootEffect = smokeEffect = hitEffect = despawnEffect = Fx.none;
                     buildingDamageMultiplier = 0.75f;
                     targetMissiles = false;
                     reflectable = false;
@@ -1911,7 +1912,7 @@ public class TerraUnitTypes {
                         x = 0f;
                         y = 0f;
                         mirror = false;
-                        radius = 8f;
+                        radius = width * 1.25f;
                         phase = 40f;
                         stroke = 2f;
                         circles = 3;
@@ -1919,14 +1920,65 @@ public class TerraUnitTypes {
                         layerOffset = -0.001f;
                         color = greenLight;
                     }});
-                    trailInterval = 4f;
-                    trailLength = 15;
-                    trailWidth = 2f;
-                    trailEffect = new Effect(trailLength * 1.4f, e -> {
+                    trailInterval = 6f;
+                    trailLength = 22;
+                    trailWidth = 4f;
+                    trailEffect = new Effect(trailLength, e -> {
                         color(trailColor);
-                        Fill.circle(e.x, e.y, e.fslope() * width);
+                        Fill.circle(e.x, e.y, e.reverse() * (trailWidth * 2));
                     });
-                    hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                    fragBullet = new BasicBulletType(0f, 0){{
+                        lifetime = 120f;
+                        sprite = "terra-plasma";
+                        width = height = 18f;
+                        shrinkY = 0f;
+                        backColor = trailColor = hitColor = lightColor = greenLight;
+                        frontColor = Color.white;
+                        lightOpacity = 0.8f;
+                        shootEffect = smokeEffect = Fx.none;
+                        reflectable = false;
+                        absorbable = false;
+                        parts.add(new HoverPart(){{
+                            x = 0f;
+                            y = 0f;
+                            mirror = false;
+                            radius = width * 1.25f;
+                            phase = 40f;
+                            stroke = 2f;
+                            circles = 3;
+                            sides = 360;
+                            layerOffset = -0.001f;
+                            color = greenLight;
+                        }});
+                        intervalBullets = 2;
+                        intervalDelay = 8f;
+                        intervalBullet = new BasicBulletType(0f, 0){{
+                            lifetime = 30f;
+                            sprite = "terra-plasma";
+                            width = height = 5f;
+                            shrinkY = shrinkX = 0.3f;
+                            backColor = trailColor = hitColor = lightColor = greenLight;
+                            frontColor = Color.white;
+                            lightOpacity = 0.3f;
+                            reflectable = false;
+                            rotateSpeed = 6f;
+                            smokeEffect = trailEffect = new Effect(8, e -> {
+                                color(Color.white, hitColor, e.fin());
+                                stroke(0.5f + e.fout());
+                                Lines.circle(e.x, e.y, e.fin() * 5f);
+                        
+                                Drawf.light(e.x, e.y, 23f, hitColor, e.fout() * 0.7f);
+                            });
+                            hitEffect = despawnEffect = new MultiEffect(trailEffect, new Effect(20f, 100f, e -> {
+                                float circleRad = 5f + e.finpow() * 5f;
+                                color(e.color, e.foutpow());
+                                Fill.circle(e.x, e.y, circleRad);
+                            }));
+                            trailInterval = lifetime / 2 + 0.01f;
+                            createChance = 0.8f;
+                        }};
+                        hitEffect = despawnEffect = TerraFx.circleFadeBig;
+                    }};
                 }};
             }});
         }};
