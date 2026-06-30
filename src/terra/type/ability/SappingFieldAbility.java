@@ -61,10 +61,9 @@ public class SappingFieldAbility extends Ability{
             Units.nearbyEnemies(unit.team, unit.x, unit.y, range, other -> {
                 other.apply(effect, duration);
                 applyEffect.at(other, parentizeEffects);
+                float x = unit.x + Angles.trnsx(unit.rotation, effectY, effectX), y = unit.y + Angles.trnsy(unit.rotation, effectY, effectX);
+                activeEffect.at(x, y, effectSizeParam ? range : unit.rotation, color, parentizeEffects ? unit : null);
             });
-
-            float x = unit.x + Angles.trnsx(unit.rotation, effectY, effectX), y = unit.y + Angles.trnsy(unit.rotation, effectY, effectX);
-            activeEffect.at(x, y, effectSizeParam ? range : unit.rotation, color, parentizeEffects ? unit : null);
 
             timer = 0f;
         }
