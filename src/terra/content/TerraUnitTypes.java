@@ -1845,7 +1845,7 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow, StatusEffects.corroded
             );
-            abilities.add(new SappingFieldAbility(StatusEffects.corroded, 3 * 60f, 5 * 60f, hitSize * 2));
+            abilities.add(new SappingFieldAbility(StatusEffects.corroded, 3 * 60f, 5 * 60f, hitSize * 2, greenLight, Fx.overdriveWave));
             parts.add(new HoverPart(){{
                 x = 0f;
                 y = 0f;
