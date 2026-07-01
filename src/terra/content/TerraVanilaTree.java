@@ -31,11 +31,21 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(copperWallLarge, () -> {
+            node(copperWallHuge, Seq.with(new Research(scrapWallGigantic)), () -> {
+                node(copperWallGigantic, Seq.with(new Research(scrapWallColossol)), () -> {});
+            });
             node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
-                    node(metaglassWallHuge, () -> {
-                    });
+                    node(metaglassWallHuge, () -> {});
                 });
+            });
+        });
+        vanillaNode(titaniumWallLarge, () -> {
+            node(titaniumWallHuge, () -> {
+            });
+        });
+        vanillaNode(thoriumWallLarge, () -> {
+            node(thoriumWallHuge, () -> {
             });
         });
         vanillaNode(plastaniumWallLarge, () -> {
@@ -69,6 +79,14 @@ public class TerraVanilaTree{
         });
         // Erekir
         String erekir = "erekir";
+        vanillaNode(erekir, berylliumWallLarge, () -> {
+            node(berylliumWallHuge, Seq.with(new SectorComplete(intersect)), () -> {
+                node(berylliumWallGigantic, Seq.with(new SectorComplete(basin)), () -> {});
+            });
+        });
+        vanillaNode(erekir, tungstenWallLarge, () -> {
+            node(tungstenWallHuge, Seq.with(new SectorComplete(SectorPresets.split)), () -> {});
+        });
         vanillaNode(erekir, blastDoor, () -> {
             node(blastGate, Seq.with(new SectorComplete(intersect)), () -> {
             });
@@ -76,6 +94,9 @@ public class TerraVanilaTree{
                 node(blastDoorHuge, Seq.with(new SectorComplete(atlas)), () -> {
                 });
             });
+        });
+        vanillaNode(erekir, carbideWallLarge, () -> {
+            node(carbideWallHuge, () -> {});
         });
         vanillaNode(erekir, shieldedWall, () -> {
             node(shieldedWallLarge, () -> {});
