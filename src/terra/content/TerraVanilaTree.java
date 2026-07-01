@@ -60,12 +60,10 @@ public class TerraVanilaTree{
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreSolaris)), () -> {});
         });
         vanillaNode(airFactory, () -> {
-            node(coreFactory, Seq.with(new SectorComplete(taintedWoods)), () -> {
-                node(alpha, () -> {
-                    node(beta, Seq.with(new Research(coreFoundation)), () -> {
-                        node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
-                        node(tau, Seq.with(new Research(coreSolaris)), () -> {});
-                    });
+            node(alpha, () -> {
+                node(beta, Seq.with(new Research(coreFoundation)), () -> {
+                    node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
+                    node(tau, Seq.with(new Research(coreSolaris)), () -> {});
                 });
             });
         });
@@ -104,16 +102,25 @@ public class TerraVanilaTree{
                     node(threshold, () -> {
                         node(greenMissile, () -> {});
                     });
-                    node(boatAssembler, () -> {
+                    node(boatAssembler, Seq.with(new Research(mechAssembler), new OnSector(crossroads)), () -> {
                         node(movement, () -> {
-                            node(consequence, () -> {});
+                            node(consequence, Seq.with(new OnSector(karst)), () -> {});
                         });
                     });
                 });
             });
         });
+        vanillaNode(erekir, shipFabricator, () -> {
+            node(basicFabricator, Seq.with(new OnSector(basin)), () -> {
+                node(evoke, () -> {});
+                node(basicRefabricator, Seq.with(new Research(coreCitadel)), () -> {
+                    node(incite, () -> {});
+                });
+            });
+        });
         vanillaNode(erekir, primeRefabricator, () -> {
             node(turn, () -> {});
+            node(emanate, Seq.with(new Research(coreAcropolis)), () -> {});
         });
         vanillaNode(erekir, oxide, () -> {
             nodeProduce(fissileMatter, () -> {});
