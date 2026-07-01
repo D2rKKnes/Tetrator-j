@@ -1886,6 +1886,7 @@ public class TerraBlocks{
             new UnitType[]{TerraUnitTypes.flow, TerraUnitTypes.threshold}
             );
         }};
+        Blocks.primeRefabricator.upgrades.addAll(new UnitType[]{TerraUnitTypes.threshold, TerraUnitTypes.turn});
         boatAssembler = new UnitAssembler("boat-assembler"){{
             requirements(Category.units, with(Items.carbide, 250, Items.thorium, 600, Items.oxide, 300, Items.beryllium, 750, Items.silicon, 1000));
             regionSuffix = "-dark";
