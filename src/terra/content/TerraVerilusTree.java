@@ -111,7 +111,7 @@ public class TerraVerilusTree {
                     });
                     node(thoriumWall, () -> {
                         node(thoriumWallLarge, () -> {
-                            node(thoriumWallHugw, () -> {});
+                            node(thoriumWallHuge, () -> {});
                         });
                         node(phaseWall, () -> {
                             node(phaseWallLarge, () -> {
