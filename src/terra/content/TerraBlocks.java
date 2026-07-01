@@ -1598,7 +1598,7 @@ public class TerraBlocks{
             consumePower(3.6f);
         }};*/
         ((UnitFactory) Blocks.airFactory).plans.addAll(new UnitPlan(UnitTypes.alpha, 60f * 50, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20)));
-        ((Reconstructor) Blocks.additiveReconstructor).upgrades.addAll(new UnitType[]{UnitTypes.alpha, UnitTypes.beta});
+        ((Reconstructor) Blocks.additiveReconstructor).upgrades.addAll(new UnitFactory.UnitType[]{UnitTypes.alpha, UnitTypes.beta});
         ((Reconstructor) Blocks.multiplicativeReconstructor).upgrades.addAll(
             new UnitType[]{UnitTypes.beta, UnitTypes.gamma},
             new UnitType[]{UnitTypes.alpha, TerraUnitTypes.tau}
