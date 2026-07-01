@@ -100,7 +100,7 @@ public class TerraBlocks{
     //turrets
     split,
     //units
-    boatFabricator, boatRefabricator, boatAssembler,
+    boatFabricator, basicFabricator, boatRefabricator, basicRefabricator, boatAssembler,
     //logic
     primeProcessor;
     //OTHER =---
@@ -1586,7 +1586,7 @@ public class TerraBlocks{
             );
             consumePower(20f / 60);
         }};
-        coreFactory = new UnitFactory("core-factory"){{
+        /*coreFactory = new UnitFactory("core-factory"){{
             requirements(Category.units, with(Items.silicon, 120, Items.copper, 80, Items.lead, 90, Items.titanium, 60));
             size = 3;
             plans = Seq.with(
@@ -1596,7 +1596,13 @@ public class TerraBlocks{
                 new UnitPlan(TerraUnitTypes.tau, 60f * 90f, with(Items.silicon, 200, Items.titanium, 160, Items.plastanium, 90, Items.phaseFabric, 40))
             );
             consumePower(3.6f);
-        }};
+        }};*/
+        ((UnitFactory) Blocks.airFactory).plans.addAll(new UnitPlan(UnitTypes.alpha, 60f * 50, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20)));
+        ((Reconstructor) Blocks.additiveReconstructor).upgrades.addAll(new UnitType[]{UnitTypes.alpha, UnitTypes.beta});
+        ((Reconstructor) Blocks.multiplicativeReconstructor).upgrades.addAll(
+            new UnitType[]{UnitTypes.beta, UnitTypes.gamma},
+            new UnitType[]{UnitTypes.alpha, TerraUnitTypes.tau}
+        );
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
             health = 480;
@@ -1870,6 +1876,16 @@ public class TerraBlocks{
             researchCostMultiplier = 0.65f;
             consumePower(1.5f);
         }};
+        basicFabricator = new UnitFactory("basic-fabricator"){{
+            requirements(Category.units, with(Items.silicon, 300, Items.beryllium, 250, Items.graphite, 150, Items.tungsten, 200));
+            size = 3;
+            configurable = false;
+            plans.add(new UnitPlan(UnitTypes.evoke, 60f * 90f, with(Items.beryllium, 170, Items.silicon, 140, Items.tungsten, 100)));
+            regionSuffix = "-dark";
+            fogRadius = 3;
+            researchCostMultiplier = 0.75f;
+            consumePower(3f);
+        }};
         boatRefabricator = new Reconstructor("boat-refabricator"){{
             requirements(Category.units, with(Items.beryllium, 300, Items.tungsten, 175, Items.silicon, 125, Items.oxide, 85));
             regionSuffix = "-dark";
@@ -1886,7 +1902,26 @@ public class TerraBlocks{
             new UnitType[]{TerraUnitTypes.flow, TerraUnitTypes.threshold}
             );
         }};
-        ((Reconstructor) Blocks.primeRefabricator).upgrades.addAll(new UnitType[]{TerraUnitTypes.threshold, TerraUnitTypes.turn});
+        basicRefabricator = new Reconstructor("basic-refabricator"){{
+            requirements(Category.units, with(Items.beryllium, 400, Items.tungsten, 275, Items.graphite, 150, Items.silicon, 425, Items.oxide, 185));
+            regionSuffix = "-dark";
+
+            size = 3;
+            consumePower(5f);
+            consumeLiquid(Liquids.ozone, 6f / 60f);
+            consumeItems(with(Items.silicon, 200, Items.tungsten, 140, Items.oxide, 100));
+
+            constructTime = 60f * 110f;
+            researchCostMultiplier = 0.75f;
+
+            upgrades.addAll(
+            new UnitType[]{UnitTypes.evoke, UnitTypes.incite}
+            );
+        }};
+        ((Reconstructor) Blocks.primeRefabricator).upgrades.addAll(
+            new UnitType[]{TerraUnitTypes.threshold, TerraUnitTypes.turn},
+            new UnitType[]{UnitTypes.incite, UnitTypes.emanate}
+        );
         boatAssembler = new UnitAssembler("boat-assembler"){{
             requirements(Category.units, with(Items.carbide, 250, Items.thorium, 600, Items.oxide, 300, Items.beryllium, 750, Items.silicon, 1000));
             regionSuffix = "-dark";
