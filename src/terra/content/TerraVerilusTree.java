@@ -106,9 +106,13 @@ public class TerraVerilusTree {
             });
             node(flight, () -> {
                 node(titaniumWall, () -> {
-                    node(titaniumWallLarge, () -> {});
+                    node(titaniumWallLarge, () -> {
+                        node(titaniumWallHuge, () -> {});
+                    });
                     node(thoriumWall, () -> {
-                        node(thoriumWallLarge, () -> {});
+                        node(thoriumWallLarge, () -> {
+                            node(thoriumWallHugw, () -> {});
+                        });
                         node(phaseWall, () -> {
                             node(phaseWallLarge, () -> {
                                 node(phaseWallHuge, () -> {});
