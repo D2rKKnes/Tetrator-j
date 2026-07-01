@@ -99,6 +99,8 @@ public class TerraBlocks{
     inductionFurnace,
     //turrets
     split,
+    //units
+    boatFabricator, boatRefabricator, boatAssembler,
     //logic
     primeProcessor;
     //OTHER =---
@@ -1855,6 +1857,47 @@ public class TerraBlocks{
             //limitRange(cap);
             coolantMultiplier = 10f;
             coolant = consume(new ConsumeLiquid(Liquids.water, 10f / 60f));
+        }};
+
+        //units
+        boatFabricator = new UnitFactory("boat-fabricator"){{
+            requirements(Category.units, with(Items.silicon, 200, Items.beryllium, 250, Items.tungsten, 50));
+            size = 3;
+            configurable = false;
+            plans.add(new UnitPlan(TerraUnitTypes.flow, 60f * 45f, with(Items.beryllium, 70, Items.silicon, 60, Items.tungsten, 10)));
+            regionSuffix = "-dark";
+            fogRadius = 3;
+            researchCostMultiplier = 0.65f;
+            consumePower(1.5f);
+        }};
+        boatRefabricator = new Reconstructor("boat-refabricator"){{
+            requirements(Category.units, with(Items.beryllium, 300, Items.tungsten, 175, Items.silicon, 125, Items.oxide, 85));
+            regionSuffix = "-dark";
+
+            size = 3;
+            consumePower(2.5f);
+            consumeLiquid(Liquids.hydrogen, 3f / 60f);
+            consumeItems(with(Items.silicon, 70, Items.tungsten, 40));
+
+            constructTime = 60f * 55f;
+            researchCostMultiplier = 0.75f;
+
+            upgrades.addAll(
+            new UnitType[]{TerraUnitTypes.flow, TerraUnitTypes.threshold}
+            );
+        }};
+        boatAssembler = new UnitAssembler("boat-assembler"){{
+            requirements(Category.units, with(Items.carbide, 250, Items.thorium, 600, Items.oxide, 300, Items.beryllium, 750, Items.silicon, 1000));
+            regionSuffix = "-dark";
+            size = 5;
+            plans.add(
+            new AssemblerUnitPlan(TerraUnitTypes.movement, 60f * 80f, PayloadStack.list(TerraUnitTypes.flow, 5, Blocks.reinforcedSurgeWallLarge, 10)),
+            new AssemblerUnitPlan(TerraUnitTypes.consequence, 60f * 60f * 3f, PayloadStack.list(TerraUnitTypes.threshold, 6, Blocks.carbideWallLarge, 20))
+            );
+            areaSize = 13;
+
+            consumePower(3f);
+            consumeLiquid(Liquids.cyanogen, 12f / 60f);
         }};
 
         //logic
