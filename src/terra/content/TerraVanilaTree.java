@@ -9,6 +9,7 @@ import mindustry.type.*;
 import terra.content.*;
 
 import static terra.content.TerraBlocks.*;
+import static terra.content.TerraUnitTypes.*;
 
 import static mindustry.content.Blocks.*;
 import static mindustry.content.Items.*;
@@ -63,7 +64,7 @@ public class TerraVanilaTree{
                 node(alpha, () -> {
                     node(beta, Seq.with(new Research(coreFoundation)), () -> {
                         node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
-                        node(TerraUnitTypes.tau, Seq.with(new Research(coreSolaris)), () -> {});
+                        node(tau, Seq.with(new Research(coreSolaris)), () -> {});
                     });
                 });
             });
@@ -95,6 +96,24 @@ public class TerraVanilaTree{
         });
         vanillaNode(erekir, diffuse, () -> {
             node(TerraBlocks.split, () -> {});
+        });
+        vanillaNode(erekir, mechFabricator, () -> {
+            node(boatFabricator, () -> {
+                node(flow, () -> {});
+                node(boatRefabricator, () -> {
+                    node(threshold, () -> {
+                        node(greenMissile, () -> {});
+                    });
+                    node(boatAssembler, () -> {
+                        node(movement, () -> {
+                            node(consequence, () -> {});
+                        });
+                    });
+                });
+            });
+        });
+        vanillaNode(erekir, primeRefabricator, () -> {
+            node(turn, () -> {});
         });
         vanillaNode(erekir, oxide, () -> {
             nodeProduce(fissileMatter, () -> {});
