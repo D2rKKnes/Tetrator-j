@@ -205,15 +205,15 @@ public class TerraStatusEffects{
         }};
 
         common = new RarityStatusEffect("quality-common"){{
-            color = Color.valueOf("abb1bf");
+            color = tintColor = Color.valueOf("abb1bf");
             permanent = true;
             //show = false;
-            drawRing = false;
+            drawAura = false;
             alwaysUnlocked = true;
             init(() -> opposite(uncommon, rare, epic, legendary));
         }};
         uncommon = new RarityStatusEffect("quality-uncommon"){{
-            color = Color.valueOf("3eec57");
+            color = tintColor = Color.valueOf("3eec57");
             damageMultiplier = 1.2f;
             healthMultiplier = 1.15f;
             reloadMultiplier = 1.1f;
@@ -223,7 +223,7 @@ public class TerraStatusEffects{
             init(() -> opposite(common, rare, epic, legendary));
         }};
         rare = new RarityStatusEffect("quality-rare"){{
-            color = Color.valueOf("2495ff");
+            color = tintColor = Color.valueOf("2495ff");
             damageMultiplier = 1.5f;
             healthMultiplier = 1.3f;
             reloadMultiplier = 1.25f;
@@ -234,7 +234,7 @@ public class TerraStatusEffects{
             init(() -> opposite(common, uncommon, epic, legendary));
         }};
         epic = new RarityStatusEffect("quality-epic"){{
-            color = Color.valueOf("c400ff");
+            color = tintColor = Color.valueOf("c400ff");
             damageMultiplier = 1.8f;
             healthMultiplier = 1.6f;
             reloadMultiplier = 1.5f;
@@ -246,7 +246,7 @@ public class TerraStatusEffects{
             init(() -> opposite(common, uncommon, rare, legendary));
         }};
         legendary = new RarityStatusEffect("quality-legendary"){{
-            color = Color.valueOf("ff9500");
+            color = tintColor = Color.valueOf("ff9500");
             damageMultiplier = 2.6f;
             healthMultiplier = 2.2f;
             reloadMultiplier = 2f;
