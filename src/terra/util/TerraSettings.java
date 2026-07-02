@@ -19,7 +19,7 @@ import static mindustry.Vars.*;
 
 public class TerraSettings{
     public static void init(){
-        ui.settings.addCategory(bundle.get("setting.tu-title"), "terra-eye-bleeding", t -> {
+        ui.settings.addCategory(bundle.get("setting.terra-title"), "terra-eye-bleeding", t -> {
             //t.pref(new Banner("test-utils-settings-banner", -1));
             //t.pref(new Separator(8));
             t.checkPref("unitsquality", false);
