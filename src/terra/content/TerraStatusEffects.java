@@ -37,7 +37,10 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized;
+    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
+    warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
+    
+    common, uncommon, rare, epic, legendary;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -178,11 +181,75 @@ public class TerraStatusEffects{
             permanent = true;
             init(() -> opposite(deltaImmunized));
         }};
-
         deltaImmunized = new StatusEffect("delta-immunized"){{
             color = Pal.heal;
             permanent = true;
             init(() -> opposite());
+        }};
+
+        purification = new StatusEffect("purification"){{
+            color = Color.valueOf("f8d22d");
+            speedMultiplier = 0.6f;
+            reloadMultiplier = 0.5f;
+            damage = 0.7f;
+            disarm = true;
+            effectChance = 0.2f;
+            effect = new Effect(50f, 20f, e -> {
+                color(e.color, Color.white, e.fin());
+                stroke(e.fout() * 1.3f + 0.7f);
+        
+                randLenVectors(e.id, 8, 41f * e.fin(), 270, 10f, (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
+                });
+            });
+        }};
+
+        common = new StatusEffect("quality-common"){{
+            color = Color.valueOf("abb1bf");
+            permanent = true;
+            show = false;
+            init(() -> opposite(uncommon, rare, epic, legendary));
+        }};
+        uncommon = new StatusEffect("quality-uncommon"){{
+            color = Color.valueOf("3eec57");
+            damageMultiplier = 1.2f;
+            healthMultiplier = 1.15f;
+            reloadMultiplier = 1.1f;
+            permanent = true;
+            show = false;
+            init(() -> opposite(common, rare, epic, legendary));
+        }};
+        rare = new StatusEffect("quality-rare"){{
+            color = Color.valueOf("2495ff");
+            damageMultiplier = 1.5f;
+            healthMultiplier = 1.3f;
+            reloadMultiplier = 1.25f;
+            speedMultiplier = 1.2f;
+            permanent = true;
+            show = false;
+            init(() -> opposite(common, uncommon, epic, legendary));
+        }};
+        epic = new StatusEffect("quality-epic"){{
+            color = Color.valueOf("c400ff");
+            damageMultiplier = 1.8f;
+            healthMultiplier = 1.6f;
+            reloadMultiplier = 1.5f;
+            speedMultiplier = 1.4f;
+            buildSpeedMultiplier = 1.25f;
+            permanent = true;
+            show = false;
+            init(() -> opposite(common, uncommon, rare, legendary));
+        }};
+        legendary = new StatusEffect("quality-legendary"){{
+            color = Color.valueOf("ff9500");
+            damageMultiplier = 2.6f;
+            healthMultiplier = 2.2f;
+            reloadMultiplier = 2f;
+            speedMultiplier = 1.75f;
+            buildSpeedMultiplier = 1.5f;
+            permanent = true;
+            show = false;
+            init(() -> opposite(common, uncommon, rare, epic));
         }};
     }
 }
