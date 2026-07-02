@@ -29,11 +29,14 @@ public class RarityStatusEffect extends StatusEffect {
 
         Draw.z(52f);
         Draw.color(tintColor, alpha);
-        var sprite = unit.type.shadowRegion;
+        /*var sprite = unit.type.shadowRegion;
         float scale = 1.15f;
         float widths = (sprite.width / 4) * scale;
         float heights = (sprite.height / 4) * scale;
-        Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);
+        Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);*/
+        float maxDim = Math.max(unit.type.shadowRegion.width, unit.type.shadowRegion.height);
+        float size = (maxDim / 4) * 1.25f;
+        Draw.rect(Core.atlas.find("terra-rarity-ring"), unit.x, unit.y, size, size);
         Draw.reset();
     }
 }
