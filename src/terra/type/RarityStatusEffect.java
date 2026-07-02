@@ -2,7 +2,8 @@ package terra.type;
 
 import arc.graphics.Color;
 import arc.scene.ui.layout.Scl;
-import mindustry.core.*;
+import mindustry.graphics.Draw;
+import mindustry.core.Core;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
