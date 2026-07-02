@@ -29,14 +29,12 @@ public class RarityStatusEffect extends StatusEffect {
 
         float unitLayer;
         if (!unit.flying) unitLayer = unit.groundLayer;
-        else if (unit.flyingLayer != -1) unitLayer = unit.flyingLayer;
-        else if (!unit.lowAltitude) unitLayer = Layer.flyingUnit;
-        else unitLayer = Layer.flyingUnitLow;
+        else unitLayer = unit.flyingLayer;
 
         Draw.z(unitLayer - 2);
         Draw.color(tintColor, alpha);
         float size = unit.hitSize * 1.15f;
-        Draw.rect(unit.previewRegion, unit.x, unit.y, size, size, unit.rotation);
+        Draw.rect(unit.shadowRegion, unit.x, unit.y, size, size, unit.rotation);
         Draw.reset();
     }
 }
