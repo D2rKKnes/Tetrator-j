@@ -3,8 +3,8 @@ package terra.special;
 import arc.Core;
 import arc.math.Mathf;
 import mindustry.Vars;
-import mindustry.game.EventType;
-import mindustry.gen.Unit;
+import mindustry.game.*;
+import mindustry.gen.*;
 import mindustry.type.StatusEffect;
 import terra.content.TerraStatusEffects;
 
