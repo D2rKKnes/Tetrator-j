@@ -18,6 +18,8 @@ public class RarityStatusEffect extends StatusEffect {
 
     public RarityStatusEffect(String name) {
         super(name);
+        if (!Core.settings.getBool("qualityring", true)){hideDatabase = true;}
+        else hideDatabase = false;
     }
 
     @Override
