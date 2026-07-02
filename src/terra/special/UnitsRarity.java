@@ -16,31 +16,37 @@ public class UnitsRarity {
     private static final StatusEffect rarity4 = TerraStatusEffects.legendary;
     private static final Float Chance4 = 1f / 100, Chance3 = 4f / 100 + Chance4, Chance2 = 12f / 100 + Chance3, Chance1 = 36f / 100 + Chance2;
 
+    private static void applyRandomEffect(Unit unit) {
+        if (!Core.settings.getBool("unitsquality", false)) return;
+        if (unit == null) return;
+
+        float rnd = Mathf.random();
+        StatusEffect chosen = null;
+
+        if (rnd < chance4) {
+            chosen = rarity4;
+        } else if (rnd < chance3) {
+            chosen = rarity3;
+        } else if (rnd < chance2) {
+            chosen = rarity2;
+        } else if (rnd < chance1) {
+            chosen = rarity1;
+        } else {
+            chosen = rarity0;
+        }
+
+        if (chosen != null) {
+            unit.apply(chosen, DURATION);
+        }
+    }
+    
     public static void init() {
         Events.on(EventType.UnitCreateEvent.class, event -> {
-            if (!Core.settings.getBool("unitsquality", false)) return;
+            applyRandomEffect(event.unit);
+        });
 
-            Unit unit = event.unit;
-            if (unit == null) return;
-
-            float rnd = Mathf.random();
-            StatusEffect chosen = null;
-
-            if (rnd < Chance4) {
-                chosen = rarity4;
-            } else if (rnd < Chance3) {
-                chosen = rarity3;
-            } else if (rnd < Chance2) {
-                chosen = rarity2;
-            } else if (rnd < Chance1) {
-                chosen = rarity1;
-            } else {
-                chosen = rarity0;
-            }
-
-            if (chosen != null) {
-                unit.apply(chosen, 60);
-            }
+        Events.on(EventType.UnitSpawnEvent.class, event -> {
+            applyRandomEffect(event.unit);
         });
     }
 }
