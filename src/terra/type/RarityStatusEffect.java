@@ -27,11 +27,13 @@ public class RarityStatusEffect extends StatusEffect {
     public void draw(Unit unit, float time) {
         if (!Core.settings.getBool("qualityring", true) || !drawAura) return;
 
-        float unitLayer = unit.type().flying ? Layer.flyingUnit : Layer.groundUnit;
-        Draw.z(unitLayer - 2);
+        Draw.z(52f);
         Draw.color(tintColor, alpha);
-        float size = unit.hitSize * 1.15f;
-        Draw.rect(unit.type.shadowRegion, unit.x, unit.y, size, size, unit.rotation);
+        var sprite = unit.type.shadowRegion;
+        float scale = 1.15f;
+        float width = sprite.width * scale;
+        float height = sprite.height * scale;
+        Draw.rect(sprite, unit.x, unit.y, width, height, unit.rotation - 90);
         Draw.reset();
     }
 }
