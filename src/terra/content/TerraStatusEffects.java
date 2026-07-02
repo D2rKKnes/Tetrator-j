@@ -192,13 +192,12 @@ public class TerraStatusEffects{
             speedMultiplier = 0.6f;
             reloadMultiplier = 0.5f;
             damage = 0.7f;
-            disarm = true;
-            effectChance = 0.2f;
+            effectChance = 0.14f;
             effect = new Effect(50f, 20f, e -> {
                 color(e.color, Color.white, e.fin());
                 stroke(e.fout() * 1.3f + 0.7f);
         
-                randLenVectors(e.id, 8, 41f * e.fin(), 270, 10f, (x, y) -> {
+                randLenVectors(e.id, 1, 32f * e.fin(), 90, 7.5f, (x, y) -> {
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
                 });
             });
@@ -207,7 +206,7 @@ public class TerraStatusEffects{
         common = new StatusEffect("quality-common"){{
             color = Color.valueOf("abb1bf");
             permanent = true;
-            show = false;
+            //show = false;
             alwaysUnlocked = true;
             init(() -> opposite(uncommon, rare, epic, legendary));
         }};
@@ -217,7 +216,7 @@ public class TerraStatusEffects{
             healthMultiplier = 1.15f;
             reloadMultiplier = 1.1f;
             permanent = true;
-            show = false;
+            //show = false;
             alwaysUnlocked = true;
             init(() -> opposite(common, rare, epic, legendary));
         }};
@@ -228,7 +227,7 @@ public class TerraStatusEffects{
             reloadMultiplier = 1.25f;
             speedMultiplier = 1.2f;
             permanent = true;
-            show = false;
+            //show = false;
             alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, epic, legendary));
         }};
@@ -240,7 +239,7 @@ public class TerraStatusEffects{
             speedMultiplier = 1.4f;
             buildSpeedMultiplier = 1.25f;
             permanent = true;
-            show = false;
+            //show = false;
             alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, rare, legendary));
         }};
@@ -252,7 +251,7 @@ public class TerraStatusEffects{
             speedMultiplier = 1.75f;
             buildSpeedMultiplier = 1.5f;
             permanent = true;
-            show = false;
+            //show = false;
             alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, rare, epic));
         }};
