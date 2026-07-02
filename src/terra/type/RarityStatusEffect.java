@@ -1,11 +1,10 @@
 package terra.type;
 
-import arc.graphics.Color;
+import arc.graphics.*;
 import arc.scene.ui.layout.Scl;
-import mindustry.graphics.Draw;
-import mindustry.core.Core;
+import mindustry.graphics.*;
+import mindustry.core.*;
 import mindustry.entities.*;
-import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.StatusEffect;
