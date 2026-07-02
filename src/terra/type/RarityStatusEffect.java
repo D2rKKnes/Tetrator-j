@@ -1,12 +1,14 @@
 package terra.type;
 
+import arc.*;
 import arc.graphics.*;
+import arc.graphics.g2d.*;
 import arc.scene.ui.layout.Scl;
 import mindustry.graphics.*;
 import mindustry.core.*;
 import mindustry.entities.*;
+import mindustry.entities.bullet.*;
 import mindustry.gen.*;
-import mindustry.graphics.*;
 import mindustry.type.StatusEffect;
 
 public class RarityStatusEffect extends StatusEffect {
