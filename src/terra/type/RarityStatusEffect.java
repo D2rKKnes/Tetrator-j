@@ -31,9 +31,9 @@ public class RarityStatusEffect extends StatusEffect {
         Draw.color(tintColor, alpha);
         var sprite = unit.type.shadowRegion;
         float scale = 1.15f;
-        float width = (sprite.width / 3) * scale;
-        float height = (sprite.height / 3) * scale;
-        Draw.rect(sprite, unit.x, unit.y, width, height, unit.rotation - 90);
+        float widths = (sprite.width / 8) * scale;
+        float heights = (sprite.height / 8) * scale;
+        Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);
         Draw.reset();
     }
 }
