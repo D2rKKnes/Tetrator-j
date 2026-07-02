@@ -17,6 +17,7 @@ import terra.util.*;
 public class TerraMod extends Mod{
     public static Links.LinkEntry[] links;
     public TerraMod(){
+        Core.settings.defaults("unitsquality", false);
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
         });
