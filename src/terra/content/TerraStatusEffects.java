@@ -27,6 +27,7 @@ import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
+import terra.type.*
 
 import static arc.graphics.g2d.Draw.rect;
 import static arc.graphics.g2d.Draw.*;
@@ -203,14 +204,15 @@ public class TerraStatusEffects{
             });
         }};
 
-        common = new StatusEffect("quality-common"){{
+        common = new RarityStatusEffect("quality-common"){{
             color = Color.valueOf("abb1bf");
             permanent = true;
             //show = false;
+            drawRing = false;
             alwaysUnlocked = true;
             init(() -> opposite(uncommon, rare, epic, legendary));
         }};
-        uncommon = new StatusEffect("quality-uncommon"){{
+        uncommon = new RarityStatusEffect("quality-uncommon"){{
             color = Color.valueOf("3eec57");
             damageMultiplier = 1.2f;
             healthMultiplier = 1.15f;
@@ -220,7 +222,7 @@ public class TerraStatusEffects{
             alwaysUnlocked = true;
             init(() -> opposite(common, rare, epic, legendary));
         }};
-        rare = new StatusEffect("quality-rare"){{
+        rare = new RarityStatusEffect("quality-rare"){{
             color = Color.valueOf("2495ff");
             damageMultiplier = 1.5f;
             healthMultiplier = 1.3f;
@@ -231,7 +233,7 @@ public class TerraStatusEffects{
             alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, epic, legendary));
         }};
-        epic = new StatusEffect("quality-epic"){{
+        epic = new RarityStatusEffect("quality-epic"){{
             color = Color.valueOf("c400ff");
             damageMultiplier = 1.8f;
             healthMultiplier = 1.6f;
@@ -243,7 +245,7 @@ public class TerraStatusEffects{
             alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, rare, legendary));
         }};
-        legendary = new StatusEffect("quality-legendary"){{
+        legendary = new RarityStatusEffect("quality-legendary"){{
             color = Color.valueOf("ff9500");
             damageMultiplier = 2.6f;
             healthMultiplier = 2.2f;
