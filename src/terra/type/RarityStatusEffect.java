@@ -14,7 +14,7 @@ import mindustry.type.StatusEffect;
 public class RarityStatusEffect extends StatusEffect {
 
     public Color tintColor = Color.white;
-    public Float alpha = 0.4f;
+    public Float alpha = 0.6f;
     public boolean drawAura = true;
 
     public RarityStatusEffect(String name) {
@@ -31,8 +31,8 @@ public class RarityStatusEffect extends StatusEffect {
         Draw.color(tintColor, alpha);
         var sprite = unit.type.shadowRegion;
         float scale = 1.15f;
-        float widths = (sprite.width / 6) * scale;
-        float heights = (sprite.height / 6) * scale;
+        float widths = (sprite.width / 4) * scale;
+        float heights = (sprite.height / 4) * scale;
         Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);
         Draw.reset();
     }
