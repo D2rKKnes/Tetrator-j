@@ -20,9 +20,10 @@ import static mindustry.Vars.*;
 public class TerraSettings{
     public static void init(){
         ui.settings.addCategory(bundle.get("setting.terra-title"), "terra-eye-bleeding", t -> {
-            //t.pref(new Banner("test-utils-settings-banner", -1));
-            //t.pref(new Separator(8));
+            t.pref(new Banner("terra-black-sun", -1));
+            t.pref(new Separator(8));
             t.checkPref("unitsquality", false);
+            t.checkPref("qualityring", true);
         });
     }
 
