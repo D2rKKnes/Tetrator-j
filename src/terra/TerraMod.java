@@ -25,8 +25,6 @@ public class TerraMod extends Mod{
     @Override
     public void loadContent(){
         Utils.init();
-        TerraIcons.init();
-        TerraSettings.init();
         
         EntityRegister.load();
         InnerBlock.load();
@@ -41,5 +39,11 @@ public class TerraMod extends Mod{
         TerraSectorPresets.load();
         TerraVanilaTree.load();
         TerraVerilusTree.load();
+    }
+
+    @Override
+    public void init(){
+        TerraIcons.init();
+        TerraSettings.init();
     }
 }
