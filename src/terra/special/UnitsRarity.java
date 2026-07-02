@@ -17,7 +17,7 @@ public class UnitsRarity {
     private static final Float Chance4 = 1f / 100, Chance3 = 4f / 100 + Chance4, Chance2 = 12f / 100 + Chance3, Chance1 = 36f / 100 + Chance2;
 
     public static void init() {
-        Vars.events.on(EventType.UnitCreateEvent.class, event -> {
+        Events.on(EventType.UnitCreateEvent.class, event -> {
             if (!Core.settings.getBool("unitsquality", false)) return;
 
             Unit unit = event.unit;
