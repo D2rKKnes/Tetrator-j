@@ -13,6 +13,7 @@ import terra.world.blocks.multiblock.InnerBlock;
 import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
 import terra.util.*;
+import terra.special.*;
 
 public class TerraMod extends Mod{
     public static Links.LinkEntry[] links;
