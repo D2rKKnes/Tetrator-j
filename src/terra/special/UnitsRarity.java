@@ -14,7 +14,7 @@ public class UnitsRarity {
     private static final StatusEffect rarity2 = TerraStatusEffects.rare;
     private static final StatusEffect rarity3 = TerraStatusEffects.epic;
     private static final StatusEffect rarity4 = TerraStatusEffects.legendary;
-    private static final Float Chance4 = 1f / 100, Chance3 = 4f / 100 + Chance4, Chance2 = 12f / 100 + Chance3, Chance1 = 36f / 100 + Chance2;
+    private static final Float chance4 = 1f / 100, chance3 = 4f / 100 + chance4, chance2 = 12f / 100 + chance3, chance1 = 36f / 100 + chance2;
 
     private static void applyRandomEffect(Unit unit) {
         if (!Core.settings.getBool("unitsquality", false)) return;
@@ -36,7 +36,7 @@ public class UnitsRarity {
         }
 
         if (chosen != null) {
-            unit.apply(chosen, DURATION);
+            unit.apply(chosen, 10);
         }
     }
     
