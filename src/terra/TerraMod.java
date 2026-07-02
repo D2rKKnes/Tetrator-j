@@ -45,5 +45,6 @@ public class TerraMod extends Mod{
     public void init(){
         TerraIcons.init();
         TerraSettings.init();
+        UnitsRarity.init();
     }
 }
