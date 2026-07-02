@@ -25,7 +25,9 @@ public class TerraMod extends Mod{
     @Override
     public void loadContent(){
         Utils.init();
+        TerraIcons.init();
         TerraSettings.init();
+        
         EntityRegister.load();
         InnerBlock.load();
         TerraSounds.load();
