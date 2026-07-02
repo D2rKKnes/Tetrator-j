@@ -2,11 +2,11 @@ package terra.type;
 
 import arc.graphics.Color;
 import arc.scene.ui.layout.Scl;
-import mindustry.entities.Units;
-import mindustry.entities.bullet.BulletType;
-import mindustry.gen.Unit;
-import mindustry.graphics.Draw;
-import mindustry.graphics.Layer;
+import mindustry.core.*;
+import mindustry.entities.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.type.StatusEffect;
 
 public class RarityStatusEffect extends StatusEffect {
@@ -14,7 +14,7 @@ public class RarityStatusEffect extends StatusEffect {
     public Color ringColor = color;
     public boolean drawRing = true;
 
-    public RingStatusEffect(String name) {
+    public RarityStatusEffect(String name) {
         super(name);
     }
 
