@@ -1,10 +1,9 @@
 package terra.special;
 
-import arc.Core;
+import arc.*;
 import arc.math.Mathf;
 import mindustry.Vars;
 import mindustry.game.*;
-import mindustry.game.Events;
 import mindustry.gen.*;
 import mindustry.type.StatusEffect;
 import terra.content.TerraStatusEffects;
@@ -18,7 +17,7 @@ public class UnitsRarity {
     private static final Float Chance4 = 1f / 100, Chance3 = 4f / 100 + Chance4, Chance2 = 12f / 100 + Chance3, Chance1 = 36f / 100 + Chance2;
 
     public static void init() {
-        EventType.on(EventType.UnitCreateEvent.class, event -> {
+        Events.on(EventType.UnitCreateEvent.class, event -> {
             if (!Core.settings.getBool("unitsquality", false)) return;
 
             Unit unit = event.unit;
