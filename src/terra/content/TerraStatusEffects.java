@@ -208,6 +208,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("abb1bf");
             permanent = true;
             show = false;
+            alwaysUnlocked = true;
             init(() -> opposite(uncommon, rare, epic, legendary));
         }};
         uncommon = new StatusEffect("quality-uncommon"){{
@@ -217,6 +218,7 @@ public class TerraStatusEffects{
             reloadMultiplier = 1.1f;
             permanent = true;
             show = false;
+            alwaysUnlocked = true;
             init(() -> opposite(common, rare, epic, legendary));
         }};
         rare = new StatusEffect("quality-rare"){{
@@ -227,6 +229,7 @@ public class TerraStatusEffects{
             speedMultiplier = 1.2f;
             permanent = true;
             show = false;
+            alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, epic, legendary));
         }};
         epic = new StatusEffect("quality-epic"){{
@@ -238,6 +241,7 @@ public class TerraStatusEffects{
             buildSpeedMultiplier = 1.25f;
             permanent = true;
             show = false;
+            alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, rare, legendary));
         }};
         legendary = new StatusEffect("quality-legendary"){{
@@ -249,6 +253,7 @@ public class TerraStatusEffects{
             buildSpeedMultiplier = 1.5f;
             permanent = true;
             show = false;
+            alwaysUnlocked = true;
             init(() -> opposite(common, uncommon, rare, epic));
         }};
     }
