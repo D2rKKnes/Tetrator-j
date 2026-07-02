@@ -27,7 +27,7 @@ import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
-import terra.type.*
+import terra.type.*;
 
 import static arc.graphics.g2d.Draw.rect;
 import static arc.graphics.g2d.Draw.*;
