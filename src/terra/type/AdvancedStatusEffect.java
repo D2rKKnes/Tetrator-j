@@ -19,4 +19,14 @@ public class AdvancedStatusEffect extends StatusEffect{
     public float percentDamage;
     public float removeDamage;
 
+    public AdvancedStatusEffect(String name){
+        super(name);
+        allDatabaseTabs = true;
+    }
+
+    @Override
+    public void setStats(){
+        if(percentDamage > 0) stats.add(Stat.damage, percentDamage, StatUnit.perSecond);
+        if(percentDamage < 0) stats.add(Stat.healing, -percentDamage, StatUnit.perSecond);
+    }
 }
