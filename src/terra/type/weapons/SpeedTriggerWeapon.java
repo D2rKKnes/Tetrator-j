@@ -32,7 +32,7 @@ public class SpeedTriggerWeapon extends Weapon {
             speedTimer = 0f;
         }
 
-        boolean shouldShoot = speedTimer >= requiredTime && mount.target != null && unit.canShoot();
+        boolean shouldShoot = speedTimer >= requiredTime && unit.canShoot();
         mount.shoot = shouldShoot;
     }
-                       }
+}
