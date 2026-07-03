@@ -16,7 +16,7 @@ import mindustry.graphics.MultiPacker.*;
 import mindustry.world.meta.*;
 
 public class AdvancedStatusEffect extends StatusEffect{
-    public static final Stat removeDamage = new Stat("removedamage", StatCat.function);
+    public static final Stat removeDamag = new Stat("removedamage", StatCat.function);
     public static final Stat removeHeal = new Stat("removeheal", StatCat.function);
     public float percentDamage;
     public float removeDamage;
@@ -32,7 +32,7 @@ public class AdvancedStatusEffect extends StatusEffect{
         super.setStats();
         if(percentDamage > 0) stats.add(Stat.damage, percentDamage, StatUnit.percent);
         if(percentDamage < 0) stats.add(Stat.healing, -percentDamage, StatUnit.percent);
-        if(removeDamage > 0) stats.add(removeDamage, removeDamage);
+        if(removeDamage > 0) stats.add(removeDamag, removeDamage);
         if(removeDamage < 0) stats.add(removeHeal, -removeDamage);
     }
 
