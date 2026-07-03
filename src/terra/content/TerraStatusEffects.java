@@ -229,6 +229,13 @@ public class TerraStatusEffects{
                     lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
                 });
             });
+            removeEffect = new WaveEffect(){{
+                sizeTo = 200f;
+                colorFrom = Color.white;
+                colorTo = color;
+                strokeFrom = 8f;
+                lifetime = 90f;
+            }};
         }};
 
         common = new RarityStatusEffect("quality-common"){{
