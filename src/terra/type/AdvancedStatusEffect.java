@@ -26,7 +26,28 @@ public class AdvancedStatusEffect extends StatusEffect{
 
     @Override
     public void setStats(){
-        if(percentDamage > 0) stats.add(Stat.damage, percentDamage, StatUnit.perSecond);
-        if(percentDamage < 0) stats.add(Stat.healing, -percentDamage, StatUnit.perSecond);
+        super.setStats();
+        if(percentDamage > 0) stats.add(Stat.damage, percentDamage, StatUnit.percent);
+        if(percentDamage < 0) stats.add(Stat.healing, -percentDamage, StatUnit.percent);
+    }
+
+    @Override
+    public void update(Unit unit, StatusEntry entry){
+        super.update(unit, entry);
+        if(percentDamage > 0){
+            unit.damageContinuousPierce(unit.maxHealth * (percentDamage / 60));
+        }else if(percentDamage < 0){ //heal unit
+            unit.heal(unit.maxHealth * (-1f * (percentDamage / 60)) * Time.delta);
+        }
+    }
+
+    @Override
+    public void onRemoved(Unit unit){
+        super.onRemoved(unit);
+        if(removeDamage > 0){
+            unit.damageContinuousPierce(removeDamage);
+        }else if(removeDamage < 0){ //heal unit
+            unit.heal(-1f * removeDamage);
+        }
     }
 }
