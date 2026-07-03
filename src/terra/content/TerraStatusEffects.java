@@ -40,6 +40,7 @@ public class TerraStatusEffects{
 
     energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
     warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
+    regeneration, superRegeneration,
     
     common, uncommon, rare, epic, legendary;
     
@@ -169,16 +170,41 @@ public class TerraStatusEffects{
             });
         }};
 
-        delta32 = new StatusEffect("delta32"){{
+        regeneration = new AdvancedStatusEffect("regeneration"){{
+            color = Pal.heal;
+            speedMultiplier = 1.1f;
+            percentDamage = -3f;
+            effectChance = 0.075f;
+            effect = new Effect(35f, e -> {
+                Draw.color(color, Color.white, e.fin() - 0.5f);
+                randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
+                    Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
+                });
+            });
+        }};
+        superRegeneration = new AdvancedStatusEffect("super-regeneration"){{
+            color = Pal.heal;
+            speedMultiplier = 0.8f;
+            buildSpeedMultiplier = 0.75f;
+            percentDamage = -9f;
+            effectChance = 0.05f;
+            effect = new Effect(20f, 20f, e -> {
+                Draw.color(Color.white, color, e.fin() + 0.35f);
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
+            });
+        }};
+
+        delta32 = new AdvancedStatusEffect("delta32"){{
             color = Pal.negativeStat;
             healthMultiplier = 0.05f;
             damageMultiplier = 0.1f;
             speedMultiplier = 0.3f;
             reloadMultiplier = 0.3f;
             buildSpeedMultiplier = 0.5f;
-            intervalDamage = 386.4f;
-            intervalDamageTime = 95f;
-            //damage = 28.2f;
+            //intervalDamage = 386.4f;
+            //intervalDamageTime = 95f;
+            percentDamage = 1.5f;
             permanent = true;
             init(() -> opposite(deltaImmunized));
         }};
@@ -188,11 +214,12 @@ public class TerraStatusEffects{
             init(() -> opposite());
         }};
 
-        purification = new StatusEffect("purification"){{
+        purification = new AdvancedStatusEffect("purification"){{
             color = Color.valueOf("f8d22d");
             speedMultiplier = 0.6f;
             reloadMultiplier = 0.5f;
             damage = 0.7f;
+            removeDamage = 500f;
             effectChance = 0.14f;
             effect = new Effect(50f, 20f, e -> {
                 color(e.color, Color.white, e.fin());
