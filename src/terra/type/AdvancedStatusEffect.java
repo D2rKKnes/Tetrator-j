@@ -30,8 +30,8 @@ public class AdvancedStatusEffect extends StatusEffect{
     @Override
     public void setStats(){
         super.setStats();
-        if(percentDamage > 0) stats.add(Stat.damage, percentDamage, StatUnit.percent);
-        if(percentDamage < 0) stats.add(Stat.healing, -percentDamage, StatUnit.percent);
+        if(percentDamage > 0) stats.add(Stat.damage, percentDamage + "%" + StatUnit.perSecond.localized());
+        if(percentDamage < 0) stats.add(Stat.healing, -percentDamage + "%" + StatUnit.perSecond.localized());
         if(removeDamage > 0) stats.add(removeDamag, removeDamage);
         if(removeDamage < 0) stats.add(removeHeal, -removeDamage);
     }
