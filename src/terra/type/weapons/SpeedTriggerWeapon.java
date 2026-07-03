@@ -2,8 +2,8 @@ package terra.type.weapons;
 
 import arc.util.Time;
 import mindustry.gen.Unit;
-import mindustry.type.Weapon;
-import mindustry.type.Weapon.WeaponMount;
+import mindustry.type.*;
+import mindustry.entities.units.*;
 
 public class SpeedTriggerWeapon extends Weapon {
     public float speedThreshold;
