@@ -220,6 +220,7 @@ public class TerraStatusEffects{
             permanent = true;
             //show = false;
             alwaysUnlocked = true;
+            sides = 3;
             init(() -> opposite(common, rare, epic, legendary));
         }};
         rare = new RarityStatusEffect("quality-rare"){{
@@ -231,6 +232,7 @@ public class TerraStatusEffects{
             permanent = true;
             //show = false;
             alwaysUnlocked = true;
+            sides = 4;
             init(() -> opposite(common, uncommon, epic, legendary));
         }};
         epic = new RarityStatusEffect("quality-epic"){{
@@ -243,6 +245,7 @@ public class TerraStatusEffects{
             permanent = true;
             //show = false;
             alwaysUnlocked = true;
+            sides = 6;
             init(() -> opposite(common, uncommon, rare, legendary));
         }};
         legendary = new RarityStatusEffect("quality-legendary"){{
