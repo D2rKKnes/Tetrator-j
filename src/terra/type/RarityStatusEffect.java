@@ -28,15 +28,28 @@ public class RarityStatusEffect extends StatusEffect {
         if (!Core.settings.getBool("qualityring", true) || !drawAura) return;
 
         Draw.z(52f);
-        Draw.color(tintColor, alpha);
-        /*var sprite = unit.type.shadowRegion;
+        Color aColor = tintColor.a(alpha);
+        /*Draw.color(tintColor, alpha);
+        var sprite = unit.type.shadowRegion;
         float scale = 1.15f;
         float widths = (sprite.width / 4) * scale;
         float heights = (sprite.height / 4) * scale;
         Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);*/
+        
         float maxDim = Math.max(unit.type.shadowRegion.width, unit.type.shadowRegion.height);
-        float size = (maxDim / 4) * 1.25f;
-        Draw.rect(Core.atlas.find("terra-rarity-ring"), unit.x, unit.y, size, size);
+        float rad = (maxDim / 4) * 1.35f;
+        //Draw.rect(Core.atlas.find("terra-rarity-ring"), unit.x, unit.y, size, size);
+        Fill.lightInner(unit.x, unit.y, 18,
+            Math.max(0f, rad * 0.8f),
+            rad,
+            0f,
+            Tmp.c3.set(aColor).a(0f),
+            Tmp.c2.set(aColor).a(0.7f / alpha)
+        );
+
+        Lines.stroke(1f);
+        Draw.color(aColor);
+        Lines.poly(unit.x, unit.y, 18, rad + 0.5f);
         Draw.reset();
     }
 }
