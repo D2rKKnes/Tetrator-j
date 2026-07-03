@@ -16,7 +16,7 @@ public class RarityStatusEffect extends StatusEffect {
 
     public Color tintColor = Color.white;
     public Float alpha = 0.8f;
-    public Int sides = 18;
+    public int sides = 18;
     public Float drawLayer = 80f;
     public boolean drawAura = true;
 
