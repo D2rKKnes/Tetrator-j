@@ -55,7 +55,7 @@ public class AdvancedStatusEffect extends StatusEffect{
             unit.heal(-1f * removeDamage);
         }
         if(!Vars.headless && removeEffect != Fx.none && !unit.inFogTo(Vars.player.team())){
-            effect.at(unit.x, unit.y, 0, color, null);
+            effect.at(unit.x, unit.y, 0, color, parentizeEffect ? unit : null);
         }
     }
 }
