@@ -1376,7 +1376,7 @@ public class TerraUnitTypes {
                 rotateSpeed = 11f;
                 mirror = true;
                 bullet = new BasicBulletType();
-            }}
+            }};
 
             weapons.add(copyAndMove(assault, 71f / 4f, 103f / 4f));
             weapons.add(copyAndMoveAnd(assault, 75f / 4f, 24f / 4f, w -> {w.reload = 42f;}));
