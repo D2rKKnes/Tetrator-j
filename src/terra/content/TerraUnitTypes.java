@@ -1412,8 +1412,8 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new Weapon("engine") {{
-                alwaysContinuous = parentizeEffects = continuous = alwaysShooting = true;
+            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 300f) {{
+                alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
                 x = 0;
@@ -1422,6 +1422,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.none;
                 bullet = new ContinuousFlameBulletType() {{
                     damage = 48f;
+                    recoil = 0.04f;
                     width = 9f;
                     layer = Layer.flyingUnitLow - 0.5f;
                     drawFlare = collides = collidesGround = collidesAir = false;
