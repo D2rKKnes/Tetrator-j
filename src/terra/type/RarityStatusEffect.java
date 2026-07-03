@@ -15,7 +15,9 @@ import mindustry.type.StatusEffect;
 public class RarityStatusEffect extends StatusEffect {
 
     public Color tintColor = Color.white;
-    public Float alpha = 0.6f;
+    public Float alpha = 0.8f;
+    public Int sides = 18;
+    public Float drawLayer = 80f;
     public boolean drawAura = true;
 
     public RarityStatusEffect(String name) {
@@ -28,7 +30,7 @@ public class RarityStatusEffect extends StatusEffect {
     public void draw(Unit unit, float time) {
         if (!Core.settings.getBool("qualityring", true) || !drawAura) return;
 
-        Draw.z(52f);
+        Draw.z(drawLayer);
         Color aColor = tintColor.a(alpha);
         /*Draw.color(tintColor, alpha);
         var sprite = unit.type.shadowRegion;
@@ -38,9 +40,9 @@ public class RarityStatusEffect extends StatusEffect {
         Draw.rect(sprite, unit.x, unit.y, widths, heights, unit.rotation - 90);*/
         
         float maxDim = Math.max(unit.type.shadowRegion.width, unit.type.shadowRegion.height);
-        float rad = (maxDim / 4) * 1.35f;
+        float rad = (maxDim / 6) * 1.35f;
         //Draw.rect(Core.atlas.find("terra-rarity-ring"), unit.x, unit.y, size, size);
-        Fill.lightInner(unit.x, unit.y, 18,
+        Fill.lightInner(unit.x, unit.y, sides,
             Math.max(0f, rad * 0.8f),
             rad,
             0f,
@@ -50,7 +52,7 @@ public class RarityStatusEffect extends StatusEffect {
 
         Lines.stroke(1f);
         Draw.color(aColor);
-        Lines.poly(unit.x, unit.y, 18, rad + 0.5f);
+        Lines.poly(unit.x, unit.y, sides, rad + 0.5f);
         Draw.reset();
     }
 }
