@@ -42,9 +42,15 @@ import static mindustry.Vars.*;
 public class TerraUnitTypes {
     public static UnitType
     //flying special units
-    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile, eternity,
+    wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile,
     //drones & core units
     healDrone, basicAssemblyDrone, tau,
+    //titans or t6\t7 (red, green, purple)
+    orb, crane, desis,
+    reaper, eternity, ultra,
+    fin, aplysia, 
+    //purple water serpulo
+    
     //green erekir
     flow, greenMissile, threshold, turn, movement, consequence,
     //from New Horizon
@@ -1338,6 +1344,81 @@ public class TerraUnitTypes {
                     armorMultiplier = 0.9f;
                     healPercent = 1.6f;
                     collidesTeam = true;
+                }};
+            }});
+        }};
+
+        reaper = new UnitType("reaper"){{
+            flying = true;
+            lowAltitude = true;
+            speed = 0.7f;
+            drag = 0.04f;
+            accel = 0.04f;
+            hitSize = 70f;
+            health = 92000;
+            armor = 62;
+            engineSize = 0f;
+            constructor = UnitEntity::create;
+            outlineColor = Pal.darkerMetal;
+            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
+
+            parts.add(new RegionPart("under"){{
+                x = 0f;
+                y = 0f;
+                mirror = false;
+                layerOffset = (Layer.flyingUnit - Layer.effect + 1) * -1f;
+            }});
+
+            weapons.add(new Weapon(""){{
+                reload = 1f;
+                x = 0f;
+                y = 0f;
+                shootY = 0f;
+                rotate = true;
+                rotateSpeed = 9f;
+                mirror = true;
+            }});
+
+            weapons.add(new Weapon("engine") {{
+                alwaysContinuous = parentizeEffects = continuous = alwaysShooting = true;
+                display = rotate = mirror = false;
+                baseRotation = 180;
+                x = 0;
+                y = -112f / 4;
+                shootY = 0;
+                shootSound = Sounds.none;
+                parts.addAll(
+                    new EffectSpawnPart() {{
+                        useProgress = true;
+                        progress = PartProgress.recoil;
+                        effect = new ParticleEffect() {{
+                            particles = 1;
+                            line = true;
+                            layer = 108;
+                            length = 45f;
+                            lifetime = 31f;
+                            baseLength = 8;
+                            cone = 50;
+                            interp = Interp.circleOut;
+                            colorFrom = colorTo = Pal.meltdownHit;
+                            strokeFrom = 2;
+                            lenFrom = 10;
+                            lenTo = 0f;
+                        }};
+                        randomEffectRot = 5f;
+                        effectChance = 0.8f;
+                    }});
+                bullet = new ContinuousFlameBulletType() {{
+                    damage = 48f;
+                    width = 9f;
+                    layer = Layer.effect;
+                    drawFlare = collides = collidesGround = collidesAir = false;
+                    length = 16;
+                    divisions = 20;
+                    intervalBullets = 2;
+                    intervalRandomSpread = 1;
+                    bulletInterval = 2.7f;
+                    colors = new Color[]{Color.valueOf("ec745855"), Color.valueOf("ec7458aa"), Color.valueOf("ff9c5a"), Color.white};
                 }};
             }});
         }};
