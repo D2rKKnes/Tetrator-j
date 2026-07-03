@@ -1387,27 +1387,6 @@ public class TerraUnitTypes {
                 y = -112f / 4;
                 shootY = 0;
                 shootSound = Sounds.none;
-                parts.addAll(
-                    new EffectSpawnPart() {{
-                        useProgress = true;
-                        progress = PartProgress.recoil;
-                        effect = new ParticleEffect() {{
-                            particles = 1;
-                            line = true;
-                            layer = 108;
-                            length = 45f;
-                            lifetime = 31f;
-                            baseLength = 8;
-                            cone = 50;
-                            interp = Interp.circleOut;
-                            colorFrom = colorTo = Pal.meltdownHit;
-                            strokeFrom = 2;
-                            lenFrom = 10;
-                            lenTo = 0f;
-                        }};
-                        randomEffectRot = 5f;
-                        effectChance = 0.8f;
-                    }});
                 bullet = new ContinuousFlameBulletType() {{
                     damage = 48f;
                     width = 9f;
