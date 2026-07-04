@@ -8,7 +8,7 @@ import mindustry.entities.units.*;
 public class SpeedTriggerWeapon extends Weapon {
     public float speedThreshold;
     public float requiredTime;
-    protected float speedTimer = 0f;
+    private static final WeakHashMap<WeaponMount, Float> timers = new WeakHashMap<>();
 
     public SpeedTriggerWeapon(String name, float threshold, float time) {
         super(name);
