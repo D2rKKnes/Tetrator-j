@@ -20,18 +20,21 @@ public class SpeedTriggerWeapon extends Weapon {
 
     @Override
     public void update(Unit unit, WeaponMount mount) {
-
         float velLen = unit.isRemote() ? unit.vel.len() : unit.deltaLen() / Time.delta;
         float maxSpeed = unit.type.speed;
         float speedFrac = maxSpeed > 0 ? velLen / maxSpeed : 0f;
 
+        float timer = mount.data instanceof Float ? (Float) mount.data : 0f;
+
         if (speedFrac >= speedThreshold) {
-            speedTimer += Time.delta;
+            timer += Time.delta;
         } else {
-            speedTimer = 0f;
+            timer = 0f;
         }
 
-        boolean shouldShoot = speedTimer >= requiredTime && unit.canShoot();
+        mount.data = timer;
+
+        boolean shouldShoot = timer >= requiredTime && unit.canShoot();
         this.alwaysShooting = shouldShoot;
 
         super.update(unit, mount);
