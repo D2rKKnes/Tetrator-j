@@ -1440,7 +1440,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.6f, 60f * 3.5) {{
+            weapons.add(new SpeedTriggerWeapon("engine", 0.6f, 60f * 3.5f) {{
                 alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
