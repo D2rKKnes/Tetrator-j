@@ -4,6 +4,7 @@ import arc.util.Time;
 import mindustry.gen.Unit;
 import mindustry.type.*;
 import mindustry.entities.units.*;
+import java.util.WeakHashMap;
 
 public class SpeedTriggerWeapon extends Weapon {
     public float speedThreshold;
