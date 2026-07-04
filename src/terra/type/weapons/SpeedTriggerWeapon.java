@@ -37,6 +37,7 @@ public class SpeedTriggerWeapon extends Weapon {
         timers.put(mount, timer);
 
         this.alwaysShooting = timer >= requiredTime && unit.canShoot();
+        mount.shoot = this.alwaysShooting;
 
         super.update(unit, mount);
     }
