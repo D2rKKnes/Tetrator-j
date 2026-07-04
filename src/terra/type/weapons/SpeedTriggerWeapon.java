@@ -24,7 +24,8 @@ public class SpeedTriggerWeapon extends Weapon {
         float maxSpeed = unit.type.speed;
         float speedFrac = maxSpeed > 0 ? velLen / maxSpeed : 0f;
 
-        float timer = mount.data instanceof Float ? (Float) mount.data : 0f;
+        Float timer = timers.get(mount);
+        if (timer == null) timer = 0f;
 
         if (speedFrac >= speedThreshold) {
             timer += Time.delta;
@@ -32,10 +33,9 @@ public class SpeedTriggerWeapon extends Weapon {
             timer = 0f;
         }
 
-        mount.data = timer;
+        timers.put(mount, timer);
 
-        boolean shouldShoot = timer >= requiredTime && unit.canShoot();
-        this.alwaysShooting = shouldShoot;
+        this.alwaysShooting = timer >= requiredTime && unit.canShoot();
 
         super.update(unit, mount);
     }
