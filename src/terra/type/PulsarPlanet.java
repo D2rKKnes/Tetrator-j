@@ -43,7 +43,7 @@ public class PulsarPlanet extends BetterPlanet {
         Vec3 start = Tmp.v33.set(up).scl(radius * 1.01f);
         Vec3 end = Tmp.v34.set(dir).scl(beamLength).add(start);
 
-        VertexBatch3D batch = new VertexBatch3D(true, false, beamSegments * 6);
+        VertexBatch3D batch = new VertexBatch3D(true, true, beamSegments * 6);
         batch.proj(projection);
         batch.proj().mul(transform); 
 
