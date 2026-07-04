@@ -4,7 +4,7 @@ import arc.graphics.g3d.*;
 import arc.graphics.gl.*;
 import arc.math.geom.*;
 import arc.util.*;
-import exogenesis.type.*;
+import terra.type.*;
 
 import static arc.Core.*;
 import static terra.graphics.shaders.TerraShaders.*;
