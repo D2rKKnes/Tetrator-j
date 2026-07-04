@@ -12,7 +12,7 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
-import exogenesis.*;
+import terra.*;
 
 import static arc.Core.*;
 import static mindustry.Vars.*;
