@@ -1362,12 +1362,15 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             outlineColor = Pal.darkerMetal;
             targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
-
+            setEnginesMirror(
+                new UnitEngine(92f / 4f, -110f / 4f, 10f, 315f),
+                new UnitEngine(142f / 4f, -66f / 4f, 8f, 315f)
+            );
             parts.add(new RegionPart("-under"){{
                 x = 0f;
                 y = 0f;
                 mirror = false;
-                layerOffset = -1f;
+                layerOffset = -0.1f;
             }});
             Weapon assault = new Weapon("terra-medium-red-weapon"){{
                 reload = 38f;
@@ -1379,15 +1382,15 @@ public class TerraUnitTypes {
             }};
 
             weapons.add(copyAndMove(assault, 71f / 4f, 103f / 4f));
-            weapons.add(copyAndMoveAnd(assault, 75f / 4f, 24f / 4f, w -> {w.reload = 42f;}));
-            weapons.add(copyAndMoveAnd(assault, 45f / 4f, -15f / 4f, w -> {w.reload = 46f;}));
+            weapons.add(copyAndMoveAnd(assault, 75f / 4f, 24f / 4f, w -> {w.reload = 44f;}));
+            weapons.add(copyAndMoveAnd(assault, 45f / 4f, -15f / 4f, w -> {w.reload = 50f;}));
             weapons.add(new Weapon("terra-heavy-rockets"){{
                 reload = 86f;
                 x = 130f / 4;
                 y = 0;
                 shootY = 6f;
                 rotate = true;
-                rotateSpeed = 5f;
+                rotateSpeed = 2.6f;
                 mirror = true;
                 bullet = new BasicBulletType();
             }},
@@ -1397,12 +1400,12 @@ public class TerraUnitTypes {
                 y = -70f / 4;
                 shootY = 4f;
                 rotate = true;
-                rotateSpeed = 6.8f;
+                rotateSpeed = 5.8f;
                 mirror = true;
                 bullet = new BasicBulletType();
             }},
             new Weapon("terra-reaper-weapon"){{
-                reload = 600f;
+                reload = 900f;
                 x = 0;
                 y = 0;
                 shootY = 60f / 4;
@@ -1412,7 +1415,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 300f) {{
+            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 60f * 4) {{
                 alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
@@ -1420,12 +1423,15 @@ public class TerraUnitTypes {
                 y = -100f / 4;
                 shootY = 0;
                 shootSound = Sounds.none;
+                shootStatus = StatusEffects.fast;
+                shootStatusDuration = 10f;
                 bullet = new ContinuousFlameBulletType() {{
                     damage = 48f;
-                    recoil = 0.04f;
+                    //recoil = 0.04f;
                     width = 9f;
                     layer = Layer.flyingUnitLow - 0.5f;
                     drawFlare = collides = collidesGround = collidesAir = false;
+                    shootEffect = smokeEffect = Fx.none;
                     length = 32;
                     divisions = 20;
                     intervalBullets = 2;
