@@ -1371,7 +1371,6 @@ public class TerraUnitTypes {
                 y = 0f;
                 mirror = false;
                 layerOffset = -1f;
-                color = colorTo = Color.white;
             }});
             Weapon assault = new Weapon("terra-medium-red-weapon"){{
                 reload = 38f;
@@ -1393,7 +1392,32 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 2.6f;
                 mirror = true;
-                bullet = new BasicBulletType();
+                shoot = new ShootBarrel(){{
+                    shots = 6;
+                    shotDelay = 2f;
+                    barrels = {0f, 20f / 4, 0f, -9f / 4, 25f / 4, 0f, 0f, 29f / 4, 0f, 9f / 4, 25f / 4, 0f};
+                }});
+                shootSound = Sounds.shootMissileLong;
+                inaccuracy = 60f;
+                bullet = new BasicBulletType(2.6f, 128){{
+                    lifetime = 70f;
+                    splashDamage = damage * 0.5f;
+                    splashDamageRadius = 35f;
+                    scaledSplashDamage = true;
+                    sprite = "terra-strike";
+                    drag = -0.015f;
+                    followAimSpeed = 6f;
+                    width = 7f;
+                    height = 11f;
+                    shrinkY = 0.2f;
+                    hitColor = lightColor = trailColor = backColor = greenLight;
+                    frontColor = Color.white;
+                    trailWidth = 1.3f;
+                    trailLength = 7;
+                    despawnHit = true;
+                    despawnEffect = hitEffect = TerraFx.circleFadeSmall;
+                    despawnSound = Sounds.unitExplode1;
+                }};
             }},
             new Weapon("terra-reaper-laser-mount"){{
                 reload = 112f;
@@ -1416,7 +1440,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 60f * 4) {{
+            weapons.add(new SpeedTriggerWeapon("engine", 0.6f, 60f * 3.5) {{
                 alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
