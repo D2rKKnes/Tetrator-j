@@ -1429,9 +1429,9 @@ public class TerraUnitTypes {
                 reload = 142f;
                 x = 101f / 4;
                 y = -70f / 4;
-                shootY = 4f;
+                shootY = 5f;
                 rotate = true;
-                rotateSpeed = 5.8f;
+                rotateSpeed = 4.2f;
                 mirror = true;
                 continuous = true;
                 cooldownTime = reload * 1.9f;
@@ -1441,7 +1441,15 @@ public class TerraUnitTypes {
                     damage = 55f;
                     length = 220f;
                     width = 6f;
-                    hitEffect = Fx.hitMeltHeal;
+                    hitEffect = new Effect(12, e -> {
+                        color(Pal.unitFront);
+                        stroke(e.fout() * 2f);
+                    
+                        randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
+                            float ang = Mathf.angle(x, y);
+                            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+                        });
+                    });
                     drawSize = 420f;
                     lifetime = 90f;
                     shake = 0.8f;
@@ -1463,7 +1471,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.7f, 60f * 3.5f) {{
+            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 60f * 3.5f) {{
                 alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
