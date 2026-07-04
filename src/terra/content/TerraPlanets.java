@@ -62,7 +62,6 @@ public class TerraPlanets{
             ruleSetter = r -> {
                 r.waveTeam = Team.crux;
                 r.placeRangeCheck = false;
-                r.showSpawns = false;
             };
         }};
     }
