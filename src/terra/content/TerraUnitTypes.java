@@ -1370,7 +1370,8 @@ public class TerraUnitTypes {
                 x = 0f;
                 y = 0f;
                 mirror = false;
-                layerOffset = -0.1f;
+                layerOffset = -1f;
+                color = colorTo = Color.white;
             }});
             Weapon assault = new Weapon("terra-medium-red-weapon"){{
                 reload = 38f;
