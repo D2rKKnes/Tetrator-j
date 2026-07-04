@@ -21,7 +21,7 @@ public class SpeedTriggerWeapon extends Weapon {
 
     @Override
     public void update(Unit unit, WeaponMount mount) {
-        float velLen = unit.isRemote() ? unit.vel.len() : unit.deltaLen() / Time.delta;
+        float velLen = unit.vel.len(); //unit.isRemote() ? unit.vel.len() : unit.deltaLen() / Time.delta;
         float maxSpeed = unit.type.speed;
         float speedFrac = maxSpeed > 0 ? velLen / maxSpeed : 0f;
 
