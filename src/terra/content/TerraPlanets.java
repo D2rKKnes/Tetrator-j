@@ -40,12 +40,9 @@ public class TerraPlanets{
                 Color.valueOf("b7a0ff")
             );
         }};
-        testification = new Planet("testification", TerraPlanets.RXS, 0.5f ,3){{
-            meshLoader = () -> new MultiMesh(
-                    new HexMesh(this, 4),
-                    new HexSkyMesh(this, 11, 0.95f, 0.11f, 6, Color.valueOf("c2c2e2").a(0.75f), 8, 0.45f, 1.6f, 0.5f),
-                    new HexSkyMesh(this, 1, 1.3f, 0.15f, 6, Color.valueOf("c2c2e2").a(0.75f), 6, 0.45f, 0.6f, 0.21f)
-            );
+        testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
+            generator = new TantrosPlanetGenerator();
+            meshLoader = () -> new HexMesh(this, 4);
             atmosphereColor = Color.valueOf("021042");
             iconColor = Color.valueOf("1a1f73");
             allowWaves = true;
