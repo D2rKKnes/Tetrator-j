@@ -1388,17 +1388,21 @@ public class TerraUnitTypes {
                 reload = 86f;
                 x = 130f / 4;
                 y = 0;
-                //shootY = 6f;
+                shootY = 0f;
                 rotate = true;
                 rotateSpeed = 2.6f;
                 mirror = true;
                 shoot = new ShootBarrel(){{
                     shots = 6;
                     shotDelay = 2f;
-                    barrels = new float[]{0f, 20f / 4, 0f, -9f / 4, 25f / 4, 0f, 0f, 29f / 4, 0f, 9f / 4, 25f / 4, 0f};
+                    barrels = new float[]{
+                        0f, 20f / 4, 0f, 
+                        -9f / 4, 25f / 4, 0f, 
+                        0f, 29f / 4, 0f, 
+                        9f / 4, 25f / 4, 0f
+                    };
                 }};
                 shootSound = Sounds.shootMissileLong;
-                inaccuracy = 60f;
                 bullet = new BasicBulletType(2.6f, 128){{
                     lifetime = 70f;
                     splashDamage = damage * 0.5f;
@@ -1414,20 +1418,39 @@ public class TerraUnitTypes {
                     frontColor = Color.white;
                     trailWidth = 1.3f;
                     trailLength = 7;
+                    pierce = true;
+                    pierceCap = 3;
                     despawnHit = true;
                     despawnEffect = hitEffect = TerraFx.circleFadeSmall;
                     despawnSound = Sounds.unitExplode1;
                 }};
             }},
             new Weapon("terra-reaper-laser-mount"){{
-                reload = 112f;
+                reload = 142f;
                 x = 101f / 4;
                 y = -70f / 4;
                 shootY = 4f;
                 rotate = true;
                 rotateSpeed = 5.8f;
                 mirror = true;
-                bullet = new BasicBulletType();
+                continuous = true;
+                cooldownTime = reload * 1.9f;
+                shootSound = Sounds.beamPlasma;
+                initialShootSound = Sounds.shootBeamPlasma;
+                bullet = new ContinuousLaserBulletType(){{
+                    damage = 55f;
+                    length = 220f;
+                    width = 6f;
+                    hitEffect = Fx.hitMeltHeal;
+                    drawSize = 420f;
+                    lifetime = 90f;
+                    shake = 0.8f;
+                    despawnEffect = Fx.smokeCloud;
+                    smokeEffect = Fx.none;
+                    status = StatusEffects.melting;
+
+                    colors = new Color[]{Pal.unitFront.cpy().a(.2f), Pal.unitFront.cpy().a(.5f), Pal.unitFront.cpy().mul(1.2f), Color.white};
+                }};
             }},
             new Weapon("terra-reaper-weapon"){{
                 reload = 900f;
@@ -1440,7 +1463,7 @@ public class TerraUnitTypes {
                 bullet = new BasicBulletType();
             }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.6f, 60f * 3.5f) {{
+            weapons.add(new SpeedTriggerWeapon("engine", 0.7f, 60f * 3.5f) {{
                 alwaysContinuous = parentizeEffects = continuous = true;
                 display = rotate = mirror = false;
                 baseRotation = 180;
