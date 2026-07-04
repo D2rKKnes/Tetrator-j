@@ -13,8 +13,9 @@ import mindustry.graphics.Pal;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
 import mindustry.ui.dialogs.PlanetDialog;
-import mindustry.world.meta.*
+import mindustry.world.meta.*;
 import mindustry.content.Blocks;
+import terra.type.*;
 
 import static arc.Core.atlas;
 
