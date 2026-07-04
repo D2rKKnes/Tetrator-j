@@ -1388,15 +1388,15 @@ public class TerraUnitTypes {
                 reload = 86f;
                 x = 130f / 4;
                 y = 0;
-                shootY = 6f;
+                //shootY = 6f;
                 rotate = true;
                 rotateSpeed = 2.6f;
                 mirror = true;
                 shoot = new ShootBarrel(){{
                     shots = 6;
                     shotDelay = 2f;
-                    barrels = {0f, 20f / 4, 0f, -9f / 4, 25f / 4, 0f, 0f, 29f / 4, 0f, 9f / 4, 25f / 4, 0f};
-                }});
+                    barrels = new float[]{0f, 20f / 4, 0f, -9f / 4, 25f / 4, 0f, 0f, 29f / 4, 0f, 9f / 4, 25f / 4, 0f};
+                }};
                 shootSound = Sounds.shootMissileLong;
                 inaccuracy = 60f;
                 bullet = new BasicBulletType(2.6f, 128){{
@@ -1410,7 +1410,7 @@ public class TerraUnitTypes {
                     width = 7f;
                     height = 11f;
                     shrinkY = 0.2f;
-                    hitColor = lightColor = trailColor = backColor = greenLight;
+                    hitColor = lightColor = trailColor = backColor = Pal.unitFront;
                     frontColor = Color.white;
                     trailWidth = 1.3f;
                     trailLength = 7;
