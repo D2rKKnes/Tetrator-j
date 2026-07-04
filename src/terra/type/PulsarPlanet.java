@@ -10,10 +10,11 @@ import mindustry.graphics.g3d.*;
 import mindustry.type.*;
 
 public class PulsarPlanet extends BetterPlanet {
-    public float rotationSpeed = 1f;
+
+    public float rotationSpeed = 3f;
     public Color beamColor = Color.white.cpy();
-    public float beamAngleDeg = 45f;
-    public float beamLength = 10f;
+    public float beamAngleDeg = 30f;
+    public float beamLength = 7f;
     public float beamWidth = 0.5f;
     public int beamSegments = 20;
 
@@ -44,7 +45,7 @@ public class PulsarPlanet extends BetterPlanet {
 
         VertexBatch3D batch = new VertexBatch3D(false, false, beamSegments * 6);
         batch.proj(projection);
-        batch.transform(transform);
+        batch.proj().mul(transform);
 
         Blending.additive.apply();
 
@@ -53,7 +54,6 @@ public class PulsarPlanet extends BetterPlanet {
         if (side.len() < 0.001f) {
             side.set(Vec3.X).crs(dir).nor();
         }
-
         float halfWidth = beamWidth * 0.5f;
 
         Vec3 p1 = new Vec3();
@@ -66,7 +66,6 @@ public class PulsarPlanet extends BetterPlanet {
         for (int i = 0; i < beamSegments; i++) {
             float t1 = (float) i / beamSegments;
             float t2 = (float) (i + 1) / beamSegments;
-
             float alpha1 = 1f - t1;
             float alpha2 = 1f - t2;
 
@@ -97,7 +96,6 @@ public class PulsarPlanet extends BetterPlanet {
         }
 
         batch.flush(Gl.triangles);
-
         Blending.normal.apply();
     }
 }
