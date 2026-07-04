@@ -12,7 +12,7 @@ import mindustry.game.Team;
 import mindustry.graphics.Pal;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
-import mindustry.maps.planets.*;
+import mindustry.maps.planet.*;
 import mindustry.ui.dialogs.PlanetDialog;
 import mindustry.world.meta.*;
 import mindustry.content.Blocks;
