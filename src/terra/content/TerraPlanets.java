@@ -40,7 +40,7 @@ public class TerraPlanets{
                 Color.valueOf("b7a0ff")
             );
         }};
-        testification = new Planet("testification", RXS, 0.5f ,3){{
+        testification = new Planet("testification", TerraPlanets.RXS, 0.5f ,3){{
             meshLoader = () -> new MultiMesh(
                     new HexMesh(this, 4),
                     new HexSkyMesh(this, 11, 0.95f, 0.11f, 6, Color.valueOf("c2c2e2").a(0.75f), 8, 0.45f, 1.6f, 0.5f),
@@ -58,7 +58,7 @@ public class TerraPlanets{
             atmosphereRadIn = -0.01f;
             atmosphereRadOut = 0.3f;
             defaultEnv = Env.underwater | Env.terrestrial;
-            alwaysUnlocked = true;
+            alwaysUnlocked = accessible = true;
             ruleSetter = r -> {
                 r.waveTeam = Team.crux;
                 r.placeRangeCheck = false;
