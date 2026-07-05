@@ -31,7 +31,7 @@ public class TerraLiquids{
             cells = 9;
             colorFrom = Color.valueOf("d74e46");
             colorTo = Color.valueOf("502423");
-            lightColor = Color.red.a(0.4f);
+            lightColor = Color.red.cpy().a(0.4f);
             effect = StatusEffects.melting;
             incinerable = false;
         }};
