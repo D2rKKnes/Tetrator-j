@@ -40,7 +40,7 @@ public class TerraStatusEffects{
 
     energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
     warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
-    regeneration, superRegeneration,
+    regeneration, superRegeneration, instantDeath,
     
     common, uncommon, rare, epic, legendary;
     
@@ -236,6 +236,13 @@ public class TerraStatusEffects{
                 strokeFrom = 8f;
                 lifetime = 90f;
             }};
+        }};
+
+        instantDeath = new AdvancedStatusEffect("instant-death"){{
+            color = Color.white;
+            percentDamage = 100000f;
+            show = false;
+            permanent = true;
         }};
 
         common = new RarityStatusEffect("quality-common"){{
