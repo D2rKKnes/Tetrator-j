@@ -18,7 +18,7 @@ public class TerraCacheLayer {
 
     public static void load(){
         if(!headless){
-            magma = new ModSurfaceShader("magma");
+            magma = new CacheLayer.SurfaceShader("magma");
             loaded = true;
         }
         Log.info("[accent]<FTE + POST (CACHELAYER)>[]");
