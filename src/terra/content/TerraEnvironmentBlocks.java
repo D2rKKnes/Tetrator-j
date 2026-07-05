@@ -15,8 +15,10 @@ public class TerraEnvironmentBlocks {
     public static Block
 
         largeTree, iceBoulder, iceRift, 
-        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster, oreRawThermoxite, oreThermoxite,
-        metalTilesSpace, metalWall4, silver;
+        carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster,
+        obsidian, obsidianMagma, obsidianWall,
+        metalTilesSpace, metalWall4, 
+        oreRawThermoxite, oreThermoxite, silver;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
@@ -83,11 +85,41 @@ public class TerraEnvironmentBlocks {
             thermoxiteCrystal.asFloor().decoration = this;
             obstructsLight = false;
         }};
-        oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
-            variants = 3;
+
+        obsidian = new Floor("obsidian") {{
+            variants = 9;
+            attributes.set(Attribute.water, -0.25f);
         }};
-        oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
-            variants = 3;
+        obsidianMagma = new Floor("obsidian-magma") {{
+            variants = 9;
+            attributes.set(Attribute.heat, 0.75f);
+            attributes.set(Attribute.water, -1.5f);
+            speedMultiplier = 0.9f;
+            emitLight = true;
+            lightRadius = 30f;
+            lightColor = Color.red.cpy().a(0.25f);
+        }};
+        magma = new Floor("magma"){{
+            drownTime = 200f;
+            status = StatusEffects.melting;
+            statusDuration = 240f;
+            speedMultiplier = 0.12f;
+            variants = 0;
+            liquidDrop = Liquids.slag;
+            isLiquid = true;
+            cacheLayer = CacheLayer.slag;
+            attributes.set(Attribute.heat, 1f);
+            attributes.set(Attribute.water, -2f);
+
+            emitLight = true;
+            lightRadius = 40f;
+            lightColor = Color.red.cpy().a(0.4f);
+            obstructsLight = true;
+            forceDrawLight = true;
+        }};
+        obsidianWall = new StaticWall("obsidian-wall"){{
+            variants = 4;
+            obsidian.asFloor().wall = this;
         }};
         
         metalTilesSpace = new Floor("metal-tiles-space"){{
@@ -101,6 +133,13 @@ public class TerraEnvironmentBlocks {
         }};
         metalWall4 = new StaticWall("metal-wall-4"){{
             autotile = true;
+        }};
+
+        oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
+            variants = 3;
+        }};
+        oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
+            variants = 3;
         }};
         silver = new OreBlock(TerraItems.silver) {{
             variants = 3;
