@@ -1,6 +1,8 @@
 package terra.content;
 
-
+import arc.graphics.*;
+import arc.math.*;
+import arc.struct.*;
 import terra.content.TerraItems;
 import terra.world.meta.*;
 import mindustry.content.*;
