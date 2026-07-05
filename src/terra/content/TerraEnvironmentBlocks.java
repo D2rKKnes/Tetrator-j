@@ -18,7 +18,7 @@ public class TerraEnvironmentBlocks {
 
         largeTree, iceBoulder, iceRift, 
         carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster,
-        obsidian, obsidianMagma, magma, obsidianWall,
+        obsidian, obsidianMagmatic, magma, obsidianWall,
         metalTilesSpace, metalWall4, 
         oreRawThermoxite, oreThermoxite, silver;
 
@@ -92,7 +92,7 @@ public class TerraEnvironmentBlocks {
             variants = 9;
             attributes.set(Attribute.water, -0.25f);
         }};
-        obsidianMagma = new Floor("obsidian-magma") {{
+        obsidianMagmatic = new Floor("obsidian-magmatic") {{
             variants = 9;
             attributes.set(Attribute.heat, 0.75f);
             attributes.set(Attribute.water, -1.5f);
