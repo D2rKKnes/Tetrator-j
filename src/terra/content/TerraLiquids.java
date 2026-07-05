@@ -25,13 +25,13 @@ public class TerraLiquids{
             lightColor = Color.valueOf("bcff73").a(0.4f);
         }};
 
-        magma = new CellLiquid("magma-liquid", Color.valueOf("d73532")){{
+        magma = new CellLiquid("magma-liquid", Color.valueOf("ff4f49")){{
             temperature = 0.8f;
             viscosity = 0.9f;
             capPuddles = false;
             cells = 3;
-            colorFrom = Color.valueOf("d74e46");
-            colorTo = Color.valueOf("d73532");
+            colorFrom = Color.valueOf("ff4f49");
+            colorTo = Color.valueOf("d9423e");
             lightColor = Color.red.cpy().a(0.4f);
             effect = StatusEffects.melting;
             incinerable = false;
