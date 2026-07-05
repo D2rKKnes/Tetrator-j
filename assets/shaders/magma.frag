@@ -12,7 +12,7 @@ varying vec2 v_texCoords;
 const vec2 mscl = vec2(150.0,90.0);
 const float mth = 7.0;
 const vec3 sky = vec3(0.5,0.8,1.0);
-const vec3 basecol = vec3(0.9,0.12,0.05);
+const vec3 basecol = vec3(0.9,0.12,0.05) * 0.8;
 
 
 
@@ -47,7 +47,7 @@ void main(){
     vec3 col = basecol* vec3(getNoise(floor(dpos)*0.10 )+(0.1));
 	float liq = clamp((max(abs(rpos.x-0.5), abs(rpos.y-0.5))-size)*10.0,0.1,1.0);
 	vec2 normaldir = vec2(getLiq(rpos+vec2(0.01,0),size-0.15)-getLiq(rpos-vec2(0.01,0),size-0.15), getLiq(rpos+vec2(0,0.01),size-0.15)-getLiq(rpos-vec2(0,0.01),size-0.15)) * 0.5;
-    col*=liq*10.0;
+    col*=liq*4.0;
 	
 	
 	vec3 cam = normalize(vec3((uv.x - 0.5)*(u_resolution.x/u_resolution.y),uv.y, 1.0));
