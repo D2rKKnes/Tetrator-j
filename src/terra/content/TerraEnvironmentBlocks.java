@@ -89,11 +89,11 @@ public class TerraEnvironmentBlocks {
         }};
 
         obsidian = new Floor("obsidian") {{
-            variants = 9;
+            variants = 8;
             attributes.set(Attribute.water, -0.25f);
         }};
         obsidianMagmatic = new Floor("obsidian-magmatic") {{
-            variants = 9;
+            variants = 8;
             attributes.set(Attribute.heat, 0.65f);
             attributes.set(Attribute.water, -1.5f);
             speedMultiplier = 0.9f;
@@ -101,7 +101,7 @@ public class TerraEnvironmentBlocks {
             lightRadius = 30f;
             lightColor = Color.red.cpy().a(0.25f);
         }};
-        magmaFloor = new Floor("magma"){{
+        magmaFloor = new Floor("magma-floor"){{
             drownTime = 200f;
             status = StatusEffects.melting;
             statusDuration = 240f;
