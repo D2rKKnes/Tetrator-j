@@ -11,7 +11,7 @@ import static mindustry.Vars.*;
 
 //from Betamindy
 public class TerraCacheLayer {
-    public static @Nullable ModSurfaceShader magma;
+    public static @Nullable CacheLayer.SurfaceShader magma;
 
     public static CacheLayer.ShaderLayer magmaLayer;
     protected static boolean loaded;
