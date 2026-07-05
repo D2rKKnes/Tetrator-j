@@ -11,17 +11,16 @@ import static mindustry.Vars.*;
 
 //from Betamindy
 public class TerraCacheLayer {
-    public static @Nullable CacheLayer.SurfaceShader magma;
+    public static @Nullable Shaders.SurfaceShader magma;
 
     public static CacheLayer.ShaderLayer magmaLayer;
     protected static boolean loaded;
 
     public static void load(){
         if(!headless){
-            magma = new CacheLayer.SurfaceShader("magma");
+            magma = new Shaders.SurfaceShader("magma");
             loaded = true;
         }
-        Log.info("[accent]<FTE + POST (CACHELAYER)>[]");
         magmaLayer = new CacheLayer.ShaderLayer(magma);
         CacheLayer.add(magmaLayer);
     }
