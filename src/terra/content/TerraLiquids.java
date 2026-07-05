@@ -7,7 +7,7 @@ import mindustry.graphics.Pal;
 public class TerraLiquids{
     public static Liquid
   
-    carbonDioxide, fissilePlasma;
+    carbonDioxide, fissilePlasma, magma;
 
     public static void load(){
         carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
@@ -22,6 +22,18 @@ public class TerraLiquids{
             temperature = 3f;
             heatCapacity = 1f;
             lightColor = Color.valueOf("bcff73").a(0.4f);
+        }};
+
+        magma = new CellLiquid("magma", Color.valueOf("d73532")){{
+            temperature = 0.8f;
+            viscosity = 0.9f;
+            capPuddles = false;
+            cells = 9;
+            colorFrom = Color.valueOf("d74e46");
+            colorTo = Color.valueOf("502423");
+            lightColor = Color.red.a(0.4f);
+            effect = StatusEffects.melting;
+            incinerable = false;
         }};
     }
 }
