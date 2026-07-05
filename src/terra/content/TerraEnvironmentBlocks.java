@@ -5,6 +5,7 @@ import arc.math.*;
 import arc.struct.*;
 import terra.content.TerraItems;
 import terra.world.meta.*;
+import terra.graphics.shaders.*;
 import mindustry.content.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.CacheLayer;
@@ -109,7 +110,7 @@ public class TerraEnvironmentBlocks {
             variants = 0;
             liquidDrop = Liquids.slag;
             isLiquid = true;
-            cacheLayer = CacheLayer.slag;
+            cacheLayer = CacheLayer.magmaLayer;
             attributes.set(Attribute.heat, 1f);
             attributes.set(Attribute.water, -2f);
 
