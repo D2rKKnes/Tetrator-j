@@ -14,12 +14,19 @@ import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
 import terra.util.*;
 import terra.special.*;
+import terra.graphics.shaders.*;
 
 public class TerraMod extends Mod{
     public static Links.LinkEntry[] links;
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
+        });
+
+        Events.on(FileTreeInitEvent.class, e -> Core.app.post(TerraCacheLayer::load));
+
+        Events.on(DisposeEvent.class, e -> {
+            TerraCacheLayer.dispose();
         });
     }
     
