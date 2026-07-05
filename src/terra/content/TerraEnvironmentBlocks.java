@@ -3,7 +3,6 @@ package terra.content;
 import arc.graphics.*;
 import arc.math.*;
 import arc.struct.*;
-import terra.content.TerraItems;
 import terra.world.meta.*;
 import terra.graphics.shaders.*;
 import mindustry.content.*;
@@ -95,7 +94,7 @@ public class TerraEnvironmentBlocks {
         }};
         obsidianMagmatic = new Floor("obsidian-magmatic") {{
             variants = 9;
-            attributes.set(Attribute.heat, 0.75f);
+            attributes.set(Attribute.heat, 0.65f);
             attributes.set(Attribute.water, -1.5f);
             speedMultiplier = 0.9f;
             emitLight = true;
@@ -107,11 +106,12 @@ public class TerraEnvironmentBlocks {
             status = StatusEffects.melting;
             statusDuration = 240f;
             speedMultiplier = 0.12f;
+            liquidMultiplier = 0.6f;
             variants = 0;
-            liquidDrop = Liquids.slag;
+            liquidDrop = TerraLiquids.magma;
             isLiquid = true;
             cacheLayer = TerraCacheLayer.magmaLayer;
-            attributes.set(Attribute.heat, 1f);
+            attributes.set(Attribute.heat, 0.8f);
             attributes.set(Attribute.water, -2f);
 
             emitLight = true;
