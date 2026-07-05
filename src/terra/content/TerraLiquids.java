@@ -29,9 +29,9 @@ public class TerraLiquids{
             temperature = 0.8f;
             viscosity = 0.9f;
             capPuddles = false;
-            cells = 9;
+            cells = 3;
             colorFrom = Color.valueOf("d74e46");
-            colorTo = Color.valueOf("502423");
+            colorTo = Color.valueOf("d73532");
             lightColor = Color.red.cpy().a(0.4f);
             effect = StatusEffects.melting;
             incinerable = false;
