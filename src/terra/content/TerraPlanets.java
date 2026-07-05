@@ -25,7 +25,7 @@ public class TerraPlanets{
     public static Planet RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
-        RXS = new PulsarPlanet("1RXS", null, 0.7f){{
+        RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
             accessible = false;
             solarSystem = this;
