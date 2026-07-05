@@ -2,6 +2,7 @@ package terra.content;
 
 import arc.graphics.*;
 import mindustry.type.*;
+import mindustry.content.StatusEffects;
 import mindustry.graphics.Pal;
 
 public class TerraLiquids{
