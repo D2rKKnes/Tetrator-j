@@ -16,7 +16,7 @@ public class TerraEnvironmentBlocks {
 
         largeTree, iceBoulder, iceRift, 
         carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster,
-        obsidian, obsidianMagma, obsidianWall,
+        obsidian, obsidianMagma, magma, obsidianWall,
         metalTilesSpace, metalWall4, 
         oreRawThermoxite, oreThermoxite, silver;
 
