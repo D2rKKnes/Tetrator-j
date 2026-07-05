@@ -110,7 +110,7 @@ public class TerraEnvironmentBlocks {
             variants = 0;
             liquidDrop = Liquids.slag;
             isLiquid = true;
-            cacheLayer = CacheLayer.magmaLayer;
+            cacheLayer = TerraCacheLayer.magmaLayer;
             attributes.set(Attribute.heat, 1f);
             attributes.set(Attribute.water, -2f);
 
