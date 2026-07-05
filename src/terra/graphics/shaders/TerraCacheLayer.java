@@ -10,7 +10,7 @@ import mindustry.graphics.*;
 import static mindustry.Vars.*;
 
 //from Betamindy
-public class TerraCachneLayer {
+public class TerraCacheLayer {
     public static @Nullable ModSurfaceShader magma;
 
     public static CacheLayer.ShaderLayer magmaLayer;
