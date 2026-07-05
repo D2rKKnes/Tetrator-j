@@ -18,7 +18,7 @@ public class TerraEnvironmentBlocks {
 
         largeTree, iceBoulder, iceRift, 
         carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster,
-        obsidian, obsidianMagmatic, magma, obsidianWall,
+        obsidian, obsidianMagmatic, magmaFloor, obsidianWall,
         metalTilesSpace, metalWall4, 
         oreRawThermoxite, oreThermoxite, silver;
 
@@ -101,7 +101,7 @@ public class TerraEnvironmentBlocks {
             lightRadius = 30f;
             lightColor = Color.red.cpy().a(0.25f);
         }};
-        magma = new Floor("magma"){{
+        magmaFloor = new Floor("magma"){{
             drownTime = 200f;
             status = StatusEffects.melting;
             statusDuration = 240f;
