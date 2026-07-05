@@ -12,7 +12,7 @@ varying vec2 v_texCoords;
 const vec2 mscl = vec2(150.0,90.0);
 const float mth = 7.0;
 const vec3 sky = vec3(0.5,0.8,1.0);
-const vec3 basecol = vec3(0.9,0.12,0.05) * 0.85;
+const vec3 basecol = vec3(0.9,0.11,0.09) * 0.85;
 
 
 
