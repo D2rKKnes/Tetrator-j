@@ -25,7 +25,7 @@ public class TerraLiquids{
             lightColor = Color.valueOf("bcff73").a(0.4f);
         }};
 
-        magma = new CellLiquid("magma", Color.valueOf("d73532")){{
+        magma = new CellLiquid("magma-liquid", Color.valueOf("d73532")){{
             temperature = 0.8f;
             viscosity = 0.9f;
             capPuddles = false;
