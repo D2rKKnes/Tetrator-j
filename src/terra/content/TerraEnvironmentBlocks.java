@@ -38,6 +38,7 @@ public class TerraEnvironmentBlocks {
             speedMultiplier = 0.9f;
             attributes.set(Attribute.water, 0.4f);
             albedo = 0.65f;
+            mapColor = Color.valueOf("8181a7");
         }};
         
         Blocks.carbonStone.attributes.set(TerraAttributes.carbon, 0.25f);
@@ -55,6 +56,7 @@ public class TerraEnvironmentBlocks {
         carbonizedThermoxite = new Floor("carbonized-thermoxite") {{
             variants = 4;
             attributes.set(TerraAttributes.carbon, 0.1f);
+            mapColor = Color.valueOf("a8474a");
         }};
         thermoxiteCrystal = new Floor("thermoxite-crystal") {{
             variants = 1;
@@ -91,6 +93,7 @@ public class TerraEnvironmentBlocks {
         obsidian = new Floor("obsidian") {{
             variants = 8;
             attributes.set(Attribute.water, -0.25f);
+            mapColor = Color.valueOf("1b1925");
         }};
         obsidianMagmatic = new Floor("obsidian-magmatic") {{
             variants = 8;
@@ -100,6 +103,7 @@ public class TerraEnvironmentBlocks {
             emitLight = true;
             lightRadius = 30f;
             lightColor = Color.red.cpy().a(0.25f);
+            mapColor = Color.valueOf("922b2b");
         }};
         magmaFloor = new Floor("magma-floor"){{
             drownTime = 200f;
