@@ -9,7 +9,7 @@ import mindustry.content.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.CacheLayer;
 import mindustry.graphics.Layer;
-import mindustry.world.Block;
+import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
 
@@ -41,7 +41,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public Color minimapColor(Tile tile) {
-                return Color.valueOf("8181a7");
+                return Color.valueOf("8181a7").rgba();;
             }
         };
         
@@ -63,7 +63,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public Color minimapColor(Tile tile) {
-                return Color.valueOf("a8474a");
+                return Color.valueOf("a8474a").rgba();;
             }
         };
         thermoxiteCrystal = new Floor("thermoxite-crystal") {{
@@ -104,7 +104,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public Color minimapColor(Tile tile) {
-                return Color.valueOf("1b1925");
+                return Color.valueOf("1b1925").rgba();;
             }
         };
         obsidianMagmatic = new Floor("obsidian-magmatic") {{
@@ -118,7 +118,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public Color minimapColor(Tile tile) {
-                return Color.valueOf("922b2b");
+                return Color.valueOf("922b2b").rgba();;
             }
         };
         magmaFloor = new Floor("magma-floor"){{
