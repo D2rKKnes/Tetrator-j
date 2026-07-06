@@ -40,7 +40,7 @@ public class TerraEnvironmentBlocks {
             albedo = 0.65f;
         }
             @Override
-            public Color minimapColor(Tile tile) {
+            public int minimapColor(Tile tile) {
                 return Color.valueOf("8181a7").rgba();;
             }
         };
@@ -62,7 +62,7 @@ public class TerraEnvironmentBlocks {
             attributes.set(TerraAttributes.carbon, 0.1f);
         }
             @Override
-            public Color minimapColor(Tile tile) {
+            public int minimapColor(Tile tile) {
                 return Color.valueOf("a8474a").rgba();;
             }
         };
@@ -103,7 +103,7 @@ public class TerraEnvironmentBlocks {
             attributes.set(Attribute.water, -0.25f);
         }
             @Override
-            public Color minimapColor(Tile tile) {
+            public int minimapColor(Tile tile) {
                 return Color.valueOf("1b1925").rgba();;
             }
         };
@@ -117,7 +117,7 @@ public class TerraEnvironmentBlocks {
             lightColor = Color.red.cpy().a(0.25f);
         }
             @Override
-            public Color minimapColor(Tile tile) {
+            public int minimapColor(Tile tile) {
                 return Color.valueOf("922b2b").rgba();;
             }
         };
