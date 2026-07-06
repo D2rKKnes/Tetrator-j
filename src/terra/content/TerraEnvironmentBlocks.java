@@ -147,6 +147,7 @@ public class TerraEnvironmentBlocks {
         
         metalTilesSpace = new TiledFloor("metal-tiles-space"){{
             //cacheLayer = CacheLayer.space;
+            maxSize = 4;
             placeableOn = false;
             solid = true;
             canShadow = false;
@@ -156,6 +157,7 @@ public class TerraEnvironmentBlocks {
         }};
         metalWall4 = new TiledWall("metal-wall-4"){{
             autotile = true;
+            maxSize = 4;
         }};
 
         oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
