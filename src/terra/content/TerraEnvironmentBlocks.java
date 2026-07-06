@@ -118,7 +118,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("922b2b").rgba();
+                return Color.valueOf("5c2027").rgba();
             }
         };
         magmaFloor = new Floor("magma-floor"){{
