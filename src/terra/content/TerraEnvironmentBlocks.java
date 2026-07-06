@@ -145,7 +145,7 @@ public class TerraEnvironmentBlocks {
             obsidian.asFloor().wall = this;
         }};
         
-        /*metalTilesSpace = new Floor("metal-tiles-space"){{
+        metalTilesSpace = new TiledFloor("metal-tiles-space"){{
             //cacheLayer = CacheLayer.space;
             placeableOn = false;
             solid = true;
@@ -154,9 +154,9 @@ public class TerraEnvironmentBlocks {
             drawEdgeOut = false;
             drawEdgeIn = false;
         }};
-        metalWall4 = new StaticWall("metal-wall-4"){{
+        metalWall4 = new TiledWall("metal-wall-4"){{
             autotile = true;
-        }};*/
+        }};
 
         oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
             variants = 3;
