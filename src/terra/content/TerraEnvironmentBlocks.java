@@ -41,7 +41,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("8181a7").rgba();;
+                return Color.valueOf("8181a7").rgba();
             }
         };
         
@@ -63,7 +63,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("a8474a").rgba();;
+                return Color.valueOf("a8474a").rgba();
             }
         };
         thermoxiteCrystal = new Floor("thermoxite-crystal") {{
@@ -104,7 +104,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("1b1925").rgba();;
+                return Color.valueOf("1b1925").rgba();
             }
         };
         obsidianMagmatic = new Floor("obsidian-magmatic") {{
@@ -118,7 +118,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("922b2b").rgba();;
+                return Color.valueOf("922b2b").rgba();
             }
         };
         magmaFloor = new Floor("magma-floor"){{
