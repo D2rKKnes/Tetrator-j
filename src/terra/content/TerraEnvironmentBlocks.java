@@ -18,9 +18,9 @@ public class TerraEnvironmentBlocks {
 
         largeTree, iceBoulder, iceRift, 
         carbonizedThermoxite, thermoxiteCrystal, carbonizedThermoxiteWall, thermoxiteWall, carbonizedThermoxiteCluster, thermoxiteCluster, carbonizedThermoxiteSmallCluster, thermoxiteSmallCluster,
-        obsidian, obsidianMagmatic, magmaFloor, obsidianWall,
+        obsidian, obsidianMagmatic, magmaFloor, obsidianWall, teniriteGeode,
         metalTilesSpace, metalWall4, 
-        oreRawThermoxite, oreThermoxite, silver;
+        oreRawThermoxite, oreThermoxite, oreTenirite, oreSilver;
 
     public static void load() {
         Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
@@ -144,6 +144,9 @@ public class TerraEnvironmentBlocks {
             variants = 4;
             obsidian.asFloor().wall = this;
         }};
+        teniriteGeode = new TiledWall("tenirite-geode", 2, 3){{
+            itemDrop = TerraItems.tenirite;
+        }};
         
         metalTilesSpace = new Floor("metal-tiles-space"){{
             //cacheLayer = CacheLayer.space;
@@ -164,7 +167,10 @@ public class TerraEnvironmentBlocks {
         oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
             variants = 3;
         }};
-        silver = new OreBlock(TerraItems.silver) {{
+        oreTenirite = new OreBlock(TerraItems.tenirite) {{
+            variants = 3;
+        }};
+        oreSilver = new OreBlock(TerraItems.silver) {{
             variants = 3;
         }};
     }
