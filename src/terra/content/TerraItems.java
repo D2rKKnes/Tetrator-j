@@ -18,6 +18,7 @@ public class TerraItems{
     public static Item
 
             carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
+            tantalium, ruthenium, obsidianPowder, tenirite,
             silver, fish;
 
     public static void load(){
@@ -156,6 +157,17 @@ public class TerraItems{
             damageRand = 6.7f;
             damagePercent = false;
             damageEffect = Fx.circleColorSpark;
+        }};
+
+        obsidianPowder = new Item("obsidian-powder", Color.valueOf("292638")){{
+            cost = 1.1f;
+            hardness = 1;
+        }};
+        tenirite = new Item("tenirite", Color.valueOf("9681fb")){{
+            cost = 2.4f;
+            hardness = 6;
+            healthScaling = 1.5f;
+            charge = 0.1f;
         }};
 
         silver = new Item("silver", Color.valueOf("b1b4cc")){{
