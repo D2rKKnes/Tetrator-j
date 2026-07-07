@@ -144,9 +144,6 @@ public class TerraEnvironmentBlocks {
             variants = 4;
             obsidian.asFloor().wall = this;
         }};
-        teniriteGeode = new TiledWall("tenirite-geode", 2, 3){{
-            itemDrop = TerraItems.tenirite;
-        }};
         
         metalTilesSpace = new Floor("metal-tiles-space"){{
             //cacheLayer = CacheLayer.space;
@@ -167,6 +164,14 @@ public class TerraEnvironmentBlocks {
         oreThermoxite = new OreBlock(TerraItems.thermoxite) {{
             variants = 3;
         }};
+        teniriteGeode = new TiledWall("tenirite-geode", 2, 3){{
+            itemDrop = TerraItems.tenirite;
+        }
+            @Override
+            public int minimapColor(Tile tile) {
+                return Color.valueOf("554b86").rgba();
+            }
+        };
         oreTenirite = new OreBlock(TerraItems.tenirite) {{
             variants = 3;
         }};
