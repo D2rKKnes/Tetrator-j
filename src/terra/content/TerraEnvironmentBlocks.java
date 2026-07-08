@@ -160,7 +160,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public int minimapColor(Tile tile) {
-                return Color.valueOf("674d5d").rgba();
+                return Color.valueOf("665761").rgba();
             }
             @Override
             public TextureRegion[] icons() {
