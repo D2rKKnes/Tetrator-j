@@ -156,7 +156,12 @@ public class TerraEnvironmentBlocks {
         }};
         metalWall4 = new StaticWall("metal-wall-4"){{
             autotile = true;
-        }};
+        }
+            @Override
+            public TextureRegion getIcon() {
+                return new TextureRegion[]{Core.atlas.find(name + "-39")};
+            }
+        };
 
         oreRawThermoxite = new OreBlock(TerraItems.rawThermoxite) {{
             variants = 3;
@@ -170,6 +175,10 @@ public class TerraEnvironmentBlocks {
             @Override
             public int minimapColor(Tile tile) {
                 return Color.valueOf("554b86").rgba();
+            }
+            @Override
+            public TextureRegion getIcon() {
+                return new TextureRegion[]{Core.atlas.find(name + "-1-0")};
             }
         };
         oreTenirite = new OreBlock(TerraItems.tenirite) {{
