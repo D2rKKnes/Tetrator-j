@@ -1,15 +1,15 @@
 package terra.content;
 
 import arc.graphics.*;
+import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
-import arc.Core;
+import arc.*;
 import terra.world.meta.*;
 import terra.graphics.shaders.*;
 import mindustry.content.*;
-import mindustry.gen.Sounds;
-import mindustry.graphics.CacheLayer;
-import mindustry.graphics.Layer;
+import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
