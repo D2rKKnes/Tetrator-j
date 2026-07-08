@@ -159,8 +159,8 @@ public class TerraEnvironmentBlocks {
             autotile = true;
         }
             @Override
-            public TextureRegion getIcon() {
-                return Core.atlas.find(name + "-39");
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{Core.atlas.find(name + "-39")};
             }
         };
 
@@ -178,8 +178,8 @@ public class TerraEnvironmentBlocks {
                 return Color.valueOf("554b86").rgba();
             }
             @Override
-            public TextureRegion getIcon() {
-                return Core.atlas.find(name + "-1-0");
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{Core.atlas.find(name + "-1-0")};
             }
         };
         oreTenirite = new OreBlock(TerraItems.tenirite) {{
