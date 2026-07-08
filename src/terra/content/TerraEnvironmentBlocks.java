@@ -3,6 +3,7 @@ package terra.content;
 import arc.graphics.*;
 import arc.math.*;
 import arc.struct.*;
+import arc.Core;
 import terra.world.meta.*;
 import terra.graphics.shaders.*;
 import mindustry.content.*;
