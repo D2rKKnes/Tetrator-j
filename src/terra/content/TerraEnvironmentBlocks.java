@@ -160,7 +160,7 @@ public class TerraEnvironmentBlocks {
         }
             @Override
             public TextureRegion getIcon() {
-                return new TextureRegion[]{Core.atlas.find(name + "-39")};
+                return Core.atlas.find(name + "-39");
             }
         };
 
@@ -179,7 +179,7 @@ public class TerraEnvironmentBlocks {
             }
             @Override
             public TextureRegion getIcon() {
-                return new TextureRegion[]{Core.atlas.find(name + "-1-0")};
+                return Core.atlas.find(name + "-1-0");
             }
         };
         oreTenirite = new OreBlock(TerraItems.tenirite) {{
