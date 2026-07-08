@@ -159,6 +159,10 @@ public class TerraEnvironmentBlocks {
             autotile = true;
         }
             @Override
+            public int minimapColor(Tile tile) {
+                return Color.valueOf("674d5d").rgba();
+            }
+            @Override
             public TextureRegion[] icons() {
                 return new TextureRegion[]{Core.atlas.find(name + "-39")};
             }
