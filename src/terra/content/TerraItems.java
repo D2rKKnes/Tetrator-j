@@ -161,7 +161,8 @@ public class TerraItems{
         }};
 
         sodium = new Item("sodium", Color.valueOf("b2cdf4")){{
-            explosiveness = 1.4f;
+            flammability = 1.75f;
+            explosiveness = 1.5f;
         }};
 
         obsidianPowder = new Item("obsidian-powder", Color.valueOf("292638")){{
