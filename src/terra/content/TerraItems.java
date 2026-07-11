@@ -18,6 +18,7 @@ public class TerraItems{
     public static Item
 
             carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
+            sodium,
             tantalium, ruthenium, obsidianPowder, tenirite,
             silver, fish;
 
@@ -157,6 +158,10 @@ public class TerraItems{
             damageRand = 6.7f;
             damagePercent = false;
             damageEffect = Fx.circleColorSpark;
+        }};
+
+        sodium = new Item("sodium", Color.valueOf("b2cdf4")){{
+            explosiveness = 1.4f;
         }};
 
         obsidianPowder = new Item("obsidian-powder", Color.valueOf("292638")){{
