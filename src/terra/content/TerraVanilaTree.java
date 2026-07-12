@@ -156,7 +156,7 @@ public class TerraVanilaTree{
             nodeProduce(gallium, () -> {});
         });
         vanillaNode(erekir, hydrogen, () -> {
-            nodeProduce(sodium, () -> {});
+            nodeProduce(TerraItems.sodium, () -> {});
         });
     }
     //from prog-mats
