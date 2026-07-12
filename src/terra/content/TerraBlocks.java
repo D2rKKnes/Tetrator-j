@@ -1756,7 +1756,7 @@ public class TerraBlocks{
             requirements(Category.crafting, with(Items.silicon, 120, Items.tungsten, 200, Items.oxide, 140));
             craftEffect = Fx.none;
             outputItem = new ItemStack(TerraItems.sodium, 2);
-            craftTime = 30f;
+            craftTime = 90f;
             size = 3;
             hasPower = true;
             hasLiquids = true;
@@ -1767,12 +1767,12 @@ public class TerraBlocks{
                 strokeMax = 2.5f;
                 radius = 10f;
                 amount = 3;
-            }}, new DrawDefault(), new DrawHeatInput(), new DrawHeatRegion(){{color = Color.valueOf("d1efff").a(0.5f);}});
+            }}, new DrawDefault(), new DrawHeatInput(), new DrawGlowRegion(){{color = Color.valueOf("d1efff").a(0.5f);}});
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 0.1f;
 
-            consumeItem(Items.silicon, 1);
-            consumeLiquid(Liquids.hydrogen, 8f / 60f);
+            consumeItem(Items.silicon, 3);
+            consumeLiquid(Liquids.hydrogen, 6f / 60f);
             heatRequirement = 5f;
             maxEfficiency = 4f;
             consumePower(2.4f);
