@@ -110,6 +110,9 @@ public class TerraVanilaTree{
         vanillaNode(erekir, siliconArcFurnace, () -> {
             node(inductionFurnace, Seq.with(new SectorComplete(siege)), () -> {});
         });
+        vanillaNode(erekir, electrolyzer, () -> {
+            node(hydrogenReductor, Seq.with(new SectorComplete(marsh)), () -> {});
+        });
         vanillaNode(erekir, tankFabricator, () -> {
             node(primeProcessor, () -> {});
         });
@@ -151,6 +154,9 @@ public class TerraVanilaTree{
         });
         vanillaNode(erekir, carbide, () -> {
             nodeProduce(gallium, () -> {});
+        });
+        vanillaNode(erekir, hydrogen, () -> {
+            nodeProduce(sodium, () -> {});
         });
     }
     //from prog-mats
