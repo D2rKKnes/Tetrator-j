@@ -99,7 +99,7 @@ public class TerraBlocks{
     //power
     beamBeacon, reinforcedPanel,
     //crafters
-    inductionFurnace,
+    inductionFurnace, hydrogenReductor,
     //turrets
     split,
     //units
@@ -1751,6 +1751,31 @@ public class TerraBlocks{
 
             consumeItems(with(Items.graphite, 3, Items.sand, 9, Items.tungsten, 2));
             consumePower(11f);
+        }};
+        hydrogenReductor = new HeatCrafter("hydrogen-reductor"){{
+            requirements(Category.crafting, with(Items.silicon, 120, Items.tungsten, 200, Items.oxide, 140));
+            craftEffect = Fx.none;
+            outputItem = new ItemStack(TerraItems.sodium, 2);
+            craftTime = 30f;
+            size = 3;
+            hasPower = true;
+            hasLiquids = true;
+            itemCapacity = 50;
+            liquidCapacity = 80;
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.hydrogen, 2f), new DrawCircles(){{
+                color = TerraItems.sodium.color.a(0.24f);
+                strokeMax = 2.5f;
+                radius = 10f;
+                amount = 3;
+            }}, new DrawDefault(), new DrawHeatInput(), new DrawHeatRegion(){{color = Color.valueOf("d1efff").a(0.5f);}});
+            ambientSound = Sounds.loopSmelter;
+            ambientSoundVolume = 0.1f;
+
+            consumeItem(Items.silicon, 1);
+            consumeLiquid(Liquids.hydrogen, 8f / 60f);
+            heatRequirement = 5f;
+            maxEfficiency = 4f;
+            consumePower(2.4f);
         }};
 
         //turrets
