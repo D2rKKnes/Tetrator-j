@@ -4,11 +4,12 @@ import arc.graphics.*;
 import mindustry.type.*;
 import mindustry.content.StatusEffects;
 import mindustry.graphics.Pal;
+import terra.type.*;
 
 public class TerraLiquids{
     public static Liquid
   
-    carbonDioxide, fissilePlasma, magma;
+    carbonDioxide, fissilePlasma, magm, neon;
 
     public static void load(){
         carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
@@ -35,6 +36,17 @@ public class TerraLiquids{
             lightColor = Color.red.cpy().a(0.4f);
             effect = StatusEffects.melting;
             incinerable = false;
+        }};
+
+        Color[] neonColors = {
+            Color.valueOf("fcb4cd"),
+            Color.valueOf("b2a4ff"),
+            Color.valueOf("a8e0e8")
+        };
+        neon = new ColorfulFluid("neon", Color.valueOf("a8e0e8"), neonColors){{
+            gas = true;
+            flammability = 1f;
+            viscosity = 0f;
         }};
     }
 }
