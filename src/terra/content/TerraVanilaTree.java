@@ -146,17 +146,17 @@ public class TerraVanilaTree{
             node(turn, () -> {});
             node(emanate, Seq.with(new Research(coreAcropolis)), () -> {});
         });
-        vanillaNode(oxide, () -> {
-            nodeProduce(fissileMatter, () -> {});
+        vanillaNode(erekir, oxide, () -> {
+            node(fissileMatter);
         });
-        vanillaNode(neoplasm, () -> {
-            nodeProduce(dormantCyst, () -> {});
+        vanillaNode(erekir, neoplasm, () -> {
+            node(dormantCyst);
         });
-        vanillaNode(carbide, () -> {
-            nodeProduce(gallium, () -> {});
+        vanillaNode(erekir, carbide, () -> {
+            node(gallium);
         });
-        vanillaNode(hydrogen, () -> {
-            nodeProduce(TerraItems.sodium, () -> {});
+        vanillaNode(erekir, hydrogen, () -> {
+            node(TerraItems.sodium);
         });
     }
     //from prog-mats
