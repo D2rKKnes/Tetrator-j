@@ -9,7 +9,7 @@ import terra.type.*;
 public class TerraLiquids{
     public static Liquid
   
-    carbonDioxide, fissilePlasma, magm, neon;
+    carbonDioxide, fissilePlasma, magma, neon;
 
     public static void load(){
         carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
