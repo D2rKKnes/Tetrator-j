@@ -1767,7 +1767,10 @@ public class TerraBlocks{
                 strokeMax = 2.5f;
                 radius = 10f;
                 amount = 3;
-            }}, new DrawDefault(), new DrawHeatInput(), new DrawGlowRegion(){{color = Color.valueOf("d1efff").a(0.5f);}});
+            }}, new DrawDefault(), new DrawHeatInput(), new DrawGlowRegion(){{
+                color = Color.valueOf("d1efff");
+                alpha = 0.5f;
+            }});
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 0.1f;
 
