@@ -24,6 +24,7 @@ public class TerraSettings{
             t.pref(new Separator(8));
             t.checkPref("unitsquality", false);
             t.checkPref("qualityring", true);
+            t.checkPref("neoncolor", true);
         });
     }
 
