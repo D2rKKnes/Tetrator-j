@@ -5,18 +5,15 @@ import arc.Events;
 import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.util.Log;
 import mindustry.game.EventType;
 import mindustry.type.Liquid;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ColorfulFluid extends Liquid {
     private static final List<ColorfulFluid> instances = new ArrayList<>();
 
     private final Color[] colors;
-    private int currentIndex = -1;
 
     private Color originalColor;
     private TextureRegion originalFullIcon;
@@ -24,8 +21,8 @@ public class ColorfulFluid extends Liquid {
 
     public ColorfulFluid(String name, Color baseColor) {
         super(name, baseColor);
-        this.colors = colors != null ? colors : new Color[0];
         this.originalColor = baseColor.cpy();
+        this.colors = (colorArray != null && colorArray.length > 0) ? colorArray : new Color[0];
         instances.add(this);
     }
 
@@ -55,12 +52,10 @@ public class ColorfulFluid extends Liquid {
         }
 
         if (index >= 0 && foundIcon != null && foundColor != null) {
-            this.currentIndex = index;
             this.color.set(foundColor);
             this.fullIcon = foundIcon;
             this.uiIcon = foundIcon;
         } else {
-            this.currentIndex = -1;
             this.color.set(originalColor);
             this.fullIcon = originalFullIcon;
             this.uiIcon = originalUiIcon;
