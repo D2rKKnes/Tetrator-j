@@ -160,7 +160,7 @@ public class TerraItems{
             damageEffect = Fx.circleColorSpark;
         }};
 
-        sodium = new Item("sodium", Color.valueOf("b2cdf5ff")){{
+        sodium = new Item("sodium", Liquids.hydrogen.color){{
             flammability = 1.75f;
             explosiveness = 1.5f;
         }};
@@ -181,10 +181,11 @@ public class TerraItems{
             hardness = 3;
             healthScaling = 1.1f;
         }};
-        fish = new Item("fish", Color.valueOf("807e7f")){{
+        fish = new AdvancedItem("fish", Color.valueOf("807e7f")){{
             cost = 0.1f;
             hardness = 0;
             flammability = 0.03f;
+            threat = 0f;
         }};
     }
 }
