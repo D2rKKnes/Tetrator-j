@@ -45,7 +45,7 @@ public class TerraLiquids{
         };
         neon = new ColorfulFluid("neon", Color.valueOf("a8e0e8"), neonColors){{
             gas = true;
-            flammability = 1f;
+            heatCapacity = 0.05f;
             viscosity = 0f;
         }};
     }
