@@ -181,7 +181,8 @@ public class TerraItems{
             hardness = 3;
             healthScaling = 1.1f;
         }};
-        fish = new AdvancedItem("fish", Color.valueOf("807e7f")){{
+        fish = new AdvancedItem("fish"){{
+            color = Color.valueOf("807e7f");
             cost = 0.1f;
             hardness = 0;
             flammability = 0.03f;
