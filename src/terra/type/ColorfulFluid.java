@@ -54,10 +54,20 @@ public class ColorfulFluid extends Liquid {
 
         if (index >= 0 && foundIcon != null && foundColor != null) {
             this.color.set(foundColor);
+            if (this.barColor != null) {
+                this.barColor.set(foundColor);
+            } else {
+                this.barColor = foundColor.cpy();
+            }
             this.fullIcon = foundIcon;
             this.uiIcon = foundIcon;
         } else {
             this.color.set(originalColor);
+            if (this.barColor != null) {
+                this.barColor.set(originalColor);
+            } else {
+                this.barColor = originalColor.cpy();
+            }
             this.fullIcon = originalFullIcon;
             this.uiIcon = originalUiIcon;
         }
