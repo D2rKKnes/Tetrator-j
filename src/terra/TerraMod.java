@@ -7,7 +7,7 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.Links;
-import mindustry.content.Planets;
+import mindustry.content.*;
 import terra.content.*;
 import terra.world.blocks.multiblock.InnerBlock;
 import terra.type.units.EntityRegister;
@@ -21,6 +21,8 @@ public class TerraMod extends Mod{
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             Planets.verilus.generator = new VerilusAsteroidGenerator();
+            Liquids.gallium.uiIcon = Core.atlas.find("liquid-gallium");
+            Liquids.gallium.fullIcon = Core.atlas.find("liquid-gallium");
         });
 
         Events.on(FileTreeInitEvent.class, e -> Core.app.post(TerraCacheLayer::load));
