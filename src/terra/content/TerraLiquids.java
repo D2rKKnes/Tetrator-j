@@ -9,7 +9,7 @@ import terra.type.*;
 public class TerraLiquids{
     public static Liquid
   
-    carbonDioxide, fissilePlasma, magma, neon;
+    carbonDioxide, fissilePlasma, magma, neon, helium;
 
     public static void load(){
         carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
@@ -46,6 +46,12 @@ public class TerraLiquids{
         neon = new ColorfulFluid("neon", Color.valueOf("a8e0e8"), neonColors){{
             gas = true;
             heatCapacity = 0.05f;
+            viscosity = 0f;
+        }};
+
+        helium = new Liquid("helium", Color.valueOf("d1e2e9")){{
+            gas = true;
+            heatCapacity = 0.95f;
             viscosity = 0f;
         }};
     }
