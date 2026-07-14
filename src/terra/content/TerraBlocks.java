@@ -104,6 +104,7 @@ public class TerraBlocks{
     split,
     //units
     boatFabricator, basicFabricator, boatRefabricator, basicRefabricator, boatAssembler,
+    largeReinforcedPayloadConveyor,
     //logic
     primeProcessor;
     //OTHER =---
@@ -2010,6 +2011,17 @@ public class TerraBlocks{
 
             consumePower(3f);
             consumeLiquid(Liquids.cyanogen, 12f / 60f);
+        }};
+
+        largeReinforcedPayloadConveyor = new PayloadConveyor("large-reinforced-payload-conveyor"){{
+            requirements(Category.units, with(Items.tungsten, 20, Items.carbide, 10));
+            moveTime = 40f;
+            canOverdrive = false;
+            health = 1500;
+            researchCostMultiplier = 4f;
+            underBullets = true;
+            size = 5;
+            payloadLimit = 5f;
         }};
 
         //logic
