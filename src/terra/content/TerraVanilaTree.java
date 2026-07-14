@@ -146,6 +146,9 @@ public class TerraVanilaTree{
             node(turn, () -> {});
             node(emanate, Seq.with(new Research(coreAcropolis)), () -> {});
         });
+        vanillaNode(erekir, reinforcedPayloadConveyor, () -> {
+            node(largeReinforcedPayloadConveyor, () -> {});
+        });
         vanillaNode(erekir, oxide, () -> {
             node(fissileMatter);
         });
