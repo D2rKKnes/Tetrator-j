@@ -87,6 +87,7 @@ public class TerraBlocks{
     flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
     basicAssembler, advancedAssembler, coreFactory, droneCentre, debugAssembler,
+    largePayloadConveyor,
     //other
     //NOTVA =---
     //GIER =---
@@ -1632,6 +1633,15 @@ public class TerraBlocks{
             health = 480;
             size = 2;
         }};*/
+
+        largePayloadConveyor = new PayloadConveyor("large-payload-conveyor"){{
+            requirements(Category.units, with(Items.thorium, 15, Items.titanium, 15));
+            moveTime = 50f;
+            canOverdrive = false;
+            underBullets = true;
+            size = 5;
+            payloadLimit = 5f;
+        }};
 
         //other
 
