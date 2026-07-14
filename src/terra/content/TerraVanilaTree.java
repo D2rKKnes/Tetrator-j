@@ -77,6 +77,9 @@ public class TerraVanilaTree{
                 });
             });
         });
+        vanillaNode(payloadConveyor, () -> {
+            node(largePayloadConveyor, () -> {});
+        });
         // Erekir
         String erekir = "erekir";
         vanillaNode(erekir, berylliumWallLarge, () -> {
