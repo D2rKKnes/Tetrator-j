@@ -47,7 +47,7 @@ public class TerraUnitTypes {
     healDrone, basicAssemblyDrone, tau,
     //titans or t6\t7 (red, green, purple)
     orb, crane, desis,
-    reaper, eternity, ultra,
+    reaper, eternity,
     fin, aplysia, 
     //purple water serpulo
     
@@ -2324,9 +2324,10 @@ public class TerraUnitTypes {
 
                 parts.add(
                     new RegionPart("-side") {{
-                        mirror = true;
+                        mirror = false;
                         progress = PartProgress.warmup;
-                        moveX = moveY = 2f;
+                        moveX = -2f;
+                        moveY = 2f;
                         moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
                     }}
                 );
@@ -2335,6 +2336,7 @@ public class TerraUnitTypes {
                     lifetime = 100f;
                     pierce = true;
                     pierceCap = 3;
+                    homingPower = 0.3f;
                 }};
             }},
             new Weapon("terra-calamity-cannon"){{
