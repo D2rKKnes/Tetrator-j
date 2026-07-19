@@ -2303,7 +2303,7 @@ public class TerraUnitTypes {
             omniMovement = false;
             treadPullOffset = 1;
             treadFrames = 24;
-            treadRects = new Rect[]{new Rect(93, 175.5f, 122, 179), new Rect(154, -210, 61, 104), new Rect(54, -285, 100, 117)};
+            treadRects = new Rect[]{new Rect(93, 186, 122, 168), new Rect(154, -210, 61, 120), new Rect(54, -282, 100, 120)};
 
             weapons.add(
             new Weapon("terra-calamity-cannon"){{
@@ -2322,6 +2322,7 @@ public class TerraUnitTypes {
                 
                 bullet = new BulletType(10f, 18500){{
                     lifetime = 300f;
+                    pierce = true;
                 }};
             }});
         }
