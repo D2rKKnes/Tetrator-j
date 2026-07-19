@@ -2282,7 +2282,7 @@ public class TerraUnitTypes {
         calamity = new UnitType("calamity"){{
             speed = 0.3f;
             rotateSpeed = 0.4f;
-            hitSize = 150f;
+            hitSize = 120f;
             softShadowScl = 0.8f;
             health = 1000000;
             armor = 220;
@@ -2295,14 +2295,14 @@ public class TerraUnitTypes {
             tankMoveVolume *= 2f;
             tankMoveSound = Sounds.tankMoveHeavy;
             crushFragile = true;
-            crushDamage = 10f;
+            crushDamage = 100f;
             floorMultiplier = 0.3f;
             faceTarget = false;
             singleTarget = true;
             shadowElevation = 0.1f;
             omniMovement = false;
             treadPullOffset = 1;
-            treadRects = new Rect[]{new Rect(93, 354.5f, 122, 179), new Rect(154, -106, 61, 104), new Rect(54, -165, 100, 117)};
+            treadRects = new Rect[]{new Rect(93, 175.5f, 122, 179), new Rect(154, -210, 61, 104), new Rect(54, -285, 100, 117)};
 
             weapons.add(
             new Weapon("terra-calamity-cannon"){{
