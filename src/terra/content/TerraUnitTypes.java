@@ -2302,13 +2302,14 @@ public class TerraUnitTypes {
             shadowElevation = 0.1f;
             omniMovement = false;
             treadPullOffset = 1;
+            treadFrames = 24;
             treadRects = new Rect[]{new Rect(93, 175.5f, 122, 179), new Rect(154, -210, 61, 104), new Rect(54, -285, 100, 117)};
 
             weapons.add(
             new Weapon("terra-calamity-cannon"){{
                 x = 0f;
                 y = -117f / 4f;
-                shootY = 24f;
+                shootY = 6f;
                 rotate = true;
                 rotateSpeed = 0.14f;
                 reload = 1200f;
@@ -2320,6 +2321,7 @@ public class TerraUnitTypes {
                 mirror = false;
                 
                 bullet = new BulletType(10f, 18500){{
+                    lifetime = 300f;
                 }};
             }});
         }
