@@ -2280,7 +2280,6 @@ public class TerraUnitTypes {
         }};
 
         calamity = new UnitType("calamity"){{
-            flying = true;
             speed = 0.3f;
             rotateSpeed = 0.4f;
             hitSize = 150f;
@@ -2310,13 +2309,14 @@ public class TerraUnitTypes {
                 y = -117f / 4f;
                 shootY = 24f;
                 rotate = true;
-                rotateSpeed = 0.04f;
+                rotateSpeed = 0.14f;
                 reload = 1200f;
-                cooldownTime = 6008f;
+                cooldownTime = 600f;
                 shake = 6f;
                 layerOffset = 0.1f;
                 minWarmup = 0.75f;
                 recoil = 5f;
+                mirror = false;
                 
                 bullet = new BulletType(10f, 18500){{
                 }};
