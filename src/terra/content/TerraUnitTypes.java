@@ -2306,6 +2306,37 @@ public class TerraUnitTypes {
             treadRects = new Rect[]{new Rect(93, 186, 122, 168), new Rect(154, -210, 61, 120), new Rect(54, -282, 100, 120)};
 
             weapons.add(
+            new Weapon("terra-calamity-cannon-side"){{
+                x = 0f;
+                y = -117f / 4f;
+                shootX = 85 / 4f;
+                shootY = 345 / 4f;
+                rotate = true;
+                rotateSpeed = 0.14f;
+                reload = 20f;
+                cooldownTime = 60f;
+                layerOffset = 0.1f;
+                minWarmup = 0.95f;
+                recoil = 0.5f;
+                mirror = true;
+                shootCone = 60f;
+                showStatSprite = false;
+
+                parts.add(
+                    new RegionPart("-side") {{
+                        mirror = true;
+                        progress = PartProgress.warmup;
+                        moveX = moveY = 2f;
+                        moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
+                    }}
+                );
+                
+                bullet = new BasicBulletType(5f, 850){{
+                    lifetime = 100f;
+                    pierce = true;
+                    pierceCap = 3;
+                }};
+            }},
             new Weapon("terra-calamity-cannon"){{
                 x = 0f;
                 y = -117f / 4f;
@@ -2323,6 +2354,7 @@ public class TerraUnitTypes {
                 bullet = new BulletType(10f, 18500){{
                     lifetime = 300f;
                     pierce = true;
+                    pierceBuilding = true;
                 }};
             }});
         }
