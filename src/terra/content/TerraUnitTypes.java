@@ -2286,6 +2286,7 @@ public class TerraUnitTypes {
             softShadowScl = 0.8f;
             health = 1000000;
             armor = 220;
+            drawCell = false;
             outlineRadius = 6;
             outlineColor = Color.valueOf("36363c");
             envDisabled = Env.none;
@@ -2301,7 +2302,7 @@ public class TerraUnitTypes {
             shadowElevation = 0.1f;
             omniMovement = false;
             treadPullOffset = 1;
-            treadRects = new Rect[]{new Rect(154 / 4f, -265 / 4f, 122 / 4f, 179 / 4f), new Rect(184.5f / 4f, 158 / 4f, 61 / 4f, 104 / 4f), new Rect(104 / 4f, 223.5f / 4f, 100 / 4f, 117 / 4f)};
+            treadRects = new Rect[]{new Rect(93, 354.5f, 122, 179), new Rect(154, -106, 61, 104), new Rect(54, -165, 100, 117)};
 
             weapons.add(
             new Weapon("terra-calamity-cannon"){{
