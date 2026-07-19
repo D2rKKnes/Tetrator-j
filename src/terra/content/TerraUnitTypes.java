@@ -54,6 +54,7 @@ public class TerraUnitTypes {
     //green erekir
     flow, greenMissile, threshold, turn, movement, consequence,
     //from New Horizon
+    calamity, 
     endSpawn, endGuard, end,
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
@@ -2277,6 +2278,69 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+
+        calamity = new UnitType("calamity"){{
+            flying = true;
+            speed = 0.3f;
+            rotateSpeed = 0.4f;
+            hitSize = 150f;
+            softShadowScl = 0.8f;
+            health = 1000000;
+            armor = 220;
+            outlineRadius = 6;
+            outlineColor = Color.valueOf("36363c");
+            envDisabled = Env.none;
+            constructor = TankUnit::create;
+            healColor = Color.valueOf("e13131");
+            tankMoveVolume *= 2f;
+            tankMoveSound = Sounds.tankMoveHeavy;
+            crushFragile = true;
+            crushDamage = 10f;
+            floorMultiplier = 0.3f;
+            faceTarget = false;
+            singleTarget = true;
+            shadowElevation = 0.1f;
+            omniMovement = false;
+            treadPullOffset = 1;
+            treadRects = new Rect[]{new Rect(154 / 4f, -265 / 4f, 122 / 4f, 179 / 4f), new Rect(184.5f / 4f, 158 / 4f, 61 / 4f, 104 / 4f), new Rect(104 / 4f, 223.5f / 4f, 100 / 4f, 117 / 4f)};
+
+            weapons.add(
+            new Weapon("terra-calamity-cannon"){{
+                x = 0f;
+                y = -117f / 4f;
+                shootY = 24f;
+                rotate = true;
+                rotateSpeed = 0.04f;
+                reload = 1200f;
+                cooldownTime = 6008f;
+                shake = 6f;
+                layerOffset = 0.1f;
+                minWarmup = 0.75f;
+                recoil = 5f;
+                
+                bullet = new BulletType(10f, 18500){{
+                }};
+            }});
+        }
+            @Override
+            public void init() {
+                super.init();
+        
+                immunities = new ObjectSet<>();
+                for (StatusEffect effect : Vars.content.statusEffects()) {
+                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
+        
+                    if (effect.damage > 0
+                        || effect.healthMultiplier < 1f
+                        || effect.speedMultiplier < 1f
+                        || effect.damageMultiplier < 1f
+                        || effect.disarm
+                        || effect.reloadMultiplier < 1f) {
+                        immunities.add(effect);
+                    }
+                }
+            }
+        };
 
         endSpawn = new UnitType("end-spawn"){{
             flying = true;
