@@ -2306,7 +2306,7 @@ public class TerraUnitTypes {
             treadRects = new Rect[]{new Rect(93, 186, 122, 168), new Rect(154, -210, 61, 120), new Rect(54, -282, 100, 120)};
 
             weapons.add(
-            new Weapon("terra-calamity-cannon-side"){{
+            new Weapon("terra-calamity-cannon-side-not"){{
                 x = 0f;
                 y = -117f / 4f;
                 shootX = 85 / 4f;
@@ -2314,29 +2314,26 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 0.14f;
                 reload = 20f;
-                cooldownTime = 60f;
+                cooldownTime = 30f;
                 layerOffset = 0.1f;
                 minWarmup = 0.95f;
-                recoil = 0.5f;
+                recoil = 0f;
                 mirror = true;
                 shootCone = 60f;
                 showStatSprite = false;
-
-                parts.add(
-                    new RegionPart("-side") {{
-                        mirror = false;
-                        progress = PartProgress.warmup;
-                        moveX = -2f;
-                        moveY = 2f;
-                        moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
-                    }}
-                );
                 
                 bullet = new BasicBulletType(5f, 850){{
                     lifetime = 100f;
                     pierce = true;
                     pierceCap = 3;
-                    homingPower = 0.3f;
+                    homingPower = 0.13f;
+                    fragBullets = 2;
+                    fragBullet = new BasicBulletType(4f, 750){{
+                        lifetime = 80f;
+                        pierce = true;
+                        pierceCap = 2;
+                        homingPower = 0.06f;
+                    }};
                 }};
             }},
             new Weapon("terra-calamity-cannon"){{
@@ -2352,6 +2349,16 @@ public class TerraUnitTypes {
                 minWarmup = 0.75f;
                 recoil = 5f;
                 mirror = false;
+
+                parts.add(
+                    new RegionPart("-side") {{
+                        mirror = false;
+                        progress = PartProgress.warmup;
+                        moveX = -2f;
+                        moveY = 2f;
+                        //moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
+                    }}
+                );
                 
                 bullet = new BulletType(10f, 18500){{
                     lifetime = 300f;
