@@ -2352,7 +2352,7 @@ public class TerraUnitTypes {
 
                 parts.add(
                     new RegionPart("-side") {{
-                        mirror = true;
+                        mirror = under = true;
                         progress = PartProgress.warmup;
                         moveX = -2f;
                         moveY = 2f;
