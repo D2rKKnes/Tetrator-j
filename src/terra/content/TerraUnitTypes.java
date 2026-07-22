@@ -2310,7 +2310,7 @@ public class TerraUnitTypes {
                 x = 0f;
                 y = -117f / 4f;
                 shootX = 85 / 4f;
-                shootY = 345 / 4f;
+                shootY = 340 / 4f; //345
                 rotate = true;
                 rotateSpeed = 0.14f;
                 reload = 20f;
@@ -2352,7 +2352,7 @@ public class TerraUnitTypes {
 
                 parts.add(
                     new RegionPart("-side") {{
-                        mirror = false;
+                        mirror = true;
                         progress = PartProgress.warmup;
                         moveX = -2f;
                         moveY = 2f;
