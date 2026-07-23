@@ -205,7 +205,7 @@ public class TerraStatusEffects{
                 sizeFrom = 0f;
                 sizeTo = 15f;
                 colorFrom = color;
-                colorTo = color.a(0.5f);
+                colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
             }};
         }};
@@ -218,7 +218,7 @@ public class TerraStatusEffects{
                 sizeFrom = 15f;
                 sizeTo = 0f;
                 colorFrom = color;
-                colorTo = color.a(0.5f);
+                colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
             }};
         }};
