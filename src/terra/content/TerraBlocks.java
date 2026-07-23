@@ -1881,17 +1881,28 @@ public class TerraBlocks{
                         trailLength = 5;
                     }};
                 }},
-                Items.surgeAlloy, new BasicBulletType(4f, 53){{
+                TerraItems.sodium, new BasicBulletType(4f, 48){{
                     rangeChange = 6f * 8;
                     reloadMultiplier = 0.6f;
                     lifetime = ((178 + cap + rangeChange + 10f) / 4f) / 3;
                     width = 10f;
                     height = 15f;
-                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    hitEffect = despawnEffect = new MultiEffect(Fx.hitBulletColor, new ExplosionEffect(){{
+                        waveColor = smokeColor = Liquids.hydrogen.color;
+                        sparkColor = Color.white;
+                        waveLife = 10f;
+                        waveRad = 3.5f * 8;
+                        smokeRad = 3f * 8;
+                        smokes = 9;
+                        lifetime = 30f;
+                    }});
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                     smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Pal.surge;
+                    hitColor = backColor = trailColor = Liquids.hydrogen.color;
                     frontColor = Color.white;
+
+                    splashDamage = damage * 0.75f;
+                    splashDamageRadius = 3.5f * 8;
 
                     ammoMultiplier = 2;
                     armorMultiplier = 0.75f;
@@ -1902,29 +1913,35 @@ public class TerraBlocks{
                     statusDuration = 120f;
                     fragBullets = 4;
                     fragRandomSpread = 0f;
-                    fragVelocityMin = 0.85f;
+                    fragVelocityMin = 0.7f;
                     fragOffsetMax = 1f;
                     fragSpread = 12f;
-                    fragBullet = new BasicBulletType(4.3f, 17){{
+                    fragBullet = new BasicBulletType(4.3f, 21){{
                         rangeChange = 6f * 8;
                         lifetime = (((178 + cap + rangeChange + 10f) / 4f) / 3) * 2;
                         width = 6f;
                         height = 10f;
-                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        hitEffect = despawnEffect = new MultiEffect(Fx.hitBulletColor, new ExplosionEffect(){{
+                            waveColor = smokeColor = Liquids.hydrogen.color;
+                            sparkColor = Color.white;
+                            waveLife = 10f;
+                            waveRad = 2.5f * 8;
+                            smokeRad = 2f * 8;
+                            smokes = 6;
+                            lifetime = 20f;
+                        }});
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                         smokeEffect = Fx.shootBigSmoke;
-                        hitColor = backColor = trailColor = Pal.surge;
+                        hitColor = backColor = trailColor = Liquids.hydrogen.color;
                         frontColor = Color.white;
+
+                        splashDamage = damage * 0.75f;
+                        splashDamageRadius = 2.5f * 8;
     
                         ammoMultiplier = 2;
                         armorMultiplier = 0.5f;
                         buildingDamageMultiplier = 0.5f;
                         trailWidth = 1.3f;
-                        trailLength = 4;
-                        lightning = 1;
-                        lightningLengthRand = 3;
-                        lightningDamage = 12f;
-                        lightningCone = 75f;
                     }};
                 }}
             );
@@ -1943,7 +1960,7 @@ public class TerraBlocks{
             shootY = 4.5f;
 
             health = 1200;
-            shootSound = Sounds.shootBreach;
+            shootSound = TerraSounds.shootAlt2;
             outlineColor = Pal.darkOutline;
             heatColor = Liquids.nitrogen.color;
 
