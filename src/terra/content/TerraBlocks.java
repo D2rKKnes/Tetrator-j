@@ -1774,7 +1774,7 @@ public class TerraBlocks{
             itemCapacity = 50;
             liquidCapacity = 80;
             drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.hydrogen, 2f), new DrawCircles(){{
-                color = TerraItems.sodium.color.a(0.24f);
+                color = TerraItems.sodium.color.cpy().a(0.24f);
                 strokeMax = 2.5f;
                 radius = 10f;
                 amount = 3;
@@ -1940,6 +1940,7 @@ public class TerraBlocks{
                         armorMultiplier = 0.95f;
                         buildingDamageMultiplier = 0.25f;
                         trailWidth = 1.3f;
+                        trailLength = 5;
                     }};
                 }}
             );
