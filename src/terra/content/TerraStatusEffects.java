@@ -203,7 +203,7 @@ public class TerraStatusEffects{
             effect = new WaveEffect(){{
                 strokeFrom = 3f;
                 sizeFrom = 0f;
-                sizeTo = 15f;
+                sizeTo = 8f;
                 colorFrom = color;
                 colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
@@ -215,7 +215,7 @@ public class TerraStatusEffects{
             effectChance = 0.02f;
             effect = new WaveEffect(){{
                 strokeFrom = 3f;
-                sizeFrom = 15f;
+                sizeFrom = 8f;
                 sizeTo = 0f;
                 colorFrom = color;
                 colorTo = color.cpy().a(0.5f);
