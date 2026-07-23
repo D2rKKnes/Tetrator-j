@@ -197,14 +197,30 @@ public class TerraStatusEffects{
 
         shieldRegen = new AdvancedStatusEffect("shield-restoration"){{
             color = Pal.accent;
-            shieldDamage = -0.25f;
+            shieldDamage = -0.75f;
             shieldHealCap = 1000f;
-            effectChance = 0.05f;
+            effectChance = 0.02f;
+            effect = new WaveEffect(){{
+                strokeFrom = 3f;
+                sizeFrom = 0f;
+                sizeTo = 15f;
+                colorFrom = color;
+                colorTo = color.a(0.5f);
+                lifetime = 90f;
+            }};
         }};
         shieldDamage = new AdvancedStatusEffect("shield-destruction"){{
             color = Pal.negativeStat;
-            shieldDamage = 0.25f;
-            effectChance = 0.05f;
+            shieldDamage = 0.75f;
+            effectChance = 0.02f;
+            effect = new WaveEffect(){{
+                strokeFrom = 3f;
+                sizeFrom = 15f;
+                sizeTo = 0f;
+                colorFrom = color;
+                colorTo = color.a(0.5f);
+                lifetime = 90f;
+            }};
         }};
 
         delta32 = new AdvancedStatusEffect("delta32"){{
@@ -253,7 +269,7 @@ public class TerraStatusEffects{
         instantDeath = new AdvancedStatusEffect("instant-death"){{
             color = Color.white;
             instakill = true;
-            show = false;
+            //show = false;
             permanent = true;
         }};
 
