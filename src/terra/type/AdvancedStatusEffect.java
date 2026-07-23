@@ -22,6 +22,8 @@ public class AdvancedStatusEffect extends StatusEffect{
     public static final Stat shieldHeal = new Stat("shieldheal", StatCat.function);
     public static final Stat shieldCap = new Stat("shieldhealcap", StatCat.function);
     public static final Stat instantDeath = new Stat("instantdeath", StatCat.general);
+    public static final Stat disarmStat = new Stat("terra-disarm", StatCat.general);
+    public static final Stat permanentStat = new Stat("terra-permanent", StatCat.general);
     public float percentDamage;
     public float removeDamage;
     public float shieldDamage;
@@ -47,6 +49,8 @@ public class AdvancedStatusEffect extends StatusEffect{
             stats.add(shieldCap, shieldHealCap);
         }
         if(instakill) stats.add(instantDeath, "");
+        if(disarm) stats.add(disarmStat, "");
+        if(permanent) stats.add(permanentStat, "");
     }
 
     @Override
