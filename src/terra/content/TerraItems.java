@@ -160,7 +160,7 @@ public class TerraItems{
             damageEffect = Fx.circleColorSpark;
         }};
 
-        sodium = new Item("sodium", Liquids.hydrogen.color){{
+        sodium = new Item("sodium", Color.valueOf("d1e4ff")){{
             flammability = 1.75f;
             explosiveness = 1.5f;
         }};
