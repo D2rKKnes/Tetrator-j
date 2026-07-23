@@ -40,7 +40,7 @@ public class TerraStatusEffects{
 
     energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
     warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
-    regeneration, superRegeneration, instantDeath,
+    regeneration, superRegeneration, shieldRegen, shieldDamage, instantDeath,
     
     common, uncommon, rare, epic, legendary;
     
