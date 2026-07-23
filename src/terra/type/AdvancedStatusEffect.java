@@ -21,7 +21,7 @@ public class AdvancedStatusEffect extends StatusEffect{
     public static final Stat shieldDamag = new Stat("shielddamage", StatCat.function);
     public static final Stat shieldHeal = new Stat("shieldheal", StatCat.function);
     public static final Stat shieldCap = new Stat("shieldhealcap", StatCat.function);
-    public static final Stat instantDeath = new Stat("instantdeath");
+    public static final Stat instantDeath = new Stat("instantdeath", StatCat.general);
     public float percentDamage;
     public float removeDamage;
     public float shieldDamage;
@@ -62,7 +62,7 @@ public class AdvancedStatusEffect extends StatusEffect{
         }else if(shieldDamage < 0 && unit.shield < shieldHealCap){
             unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
         }
-        if(instakill) kill();
+        if(instakill) unit.kill();
     }
 
     @Override
