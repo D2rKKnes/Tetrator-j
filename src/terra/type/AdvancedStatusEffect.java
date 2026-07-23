@@ -18,9 +18,16 @@ import mindustry.world.meta.*;
 public class AdvancedStatusEffect extends StatusEffect{
     public static final Stat removeDamag = new Stat("removedamage", StatCat.function);
     public static final Stat removeHeal = new Stat("removeheal", StatCat.function);
+    public static final Stat shieldDamag = new Stat("shielddamage", StatCat.function);
+    public static final Stat shieldHeal = new Stat("shieldheal", StatCat.function);
+    public static final Stat shieldCap = new Stat("shieldhealcap", StatCat.function);
+    public static final Stat instantDeath = new Stat("instantdeath");
     public float percentDamage;
     public float removeDamage;
+    public float shieldDamage;
+    public float shieldHealCap = 500f;
     public Effect removeEffect = Fx.none;
+    public boolean instakill = false;
 
     public AdvancedStatusEffect(String name){
         super(name);
@@ -34,6 +41,12 @@ public class AdvancedStatusEffect extends StatusEffect{
         if(percentDamage < 0) stats.add(Stat.healing, -percentDamage + "%" + StatUnit.perSecond.localized());
         if(removeDamage > 0) stats.add(removeDamag, removeDamage);
         if(removeDamage < 0) stats.add(removeHeal, -removeDamage);
+        if(shieldDamage > 0) stats.add(shieldDamag, shieldDamage * 60f, StatUnit.perSecond);
+        if(shieldDamage < 0){
+            stats.add(shieldHeal, -shieldDamage * 60f, StatUnit.perSecond);
+            stats.add(shieldCap, shieldHealCap);
+        }
+        if(instakill) stats.add(instantDeath);
     }
 
     @Override
@@ -44,6 +57,12 @@ public class AdvancedStatusEffect extends StatusEffect{
         }else if(percentDamage < 0){ //heal unit
             unit.heal(unit.maxHealth * (-1f * ((percentDamage / 100f) / 60)) * Time.delta);
         }
+        if(shieldDamage > 0 && unit.shield > 0){
+            unit.shield = Math.max(0, unit.shield - shieldDamage);
+        }else if(shieldDamage < 0 && unit.shield < shieldHealCap){
+            unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
+        }
+        if(instakill) kill();
     }
 
     @Override
