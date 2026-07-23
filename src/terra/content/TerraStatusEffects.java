@@ -209,7 +209,7 @@ public class TerraStatusEffects{
                 colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
             }};
-            init(() -> opposite(shieldDamage));
+            //init(() -> opposite(shieldDamage));
         }};
         shieldDamage = new AdvancedStatusEffect("shield-destruction"){{
             color = Pal.negativeStat;
