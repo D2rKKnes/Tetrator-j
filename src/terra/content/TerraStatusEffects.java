@@ -209,6 +209,7 @@ public class TerraStatusEffects{
                 colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
             }};
+            init(() -> opposite(shieldDamage));
         }};
         shieldDamage = new AdvancedStatusEffect("shield-destruction"){{
             color = Pal.negativeStat;
@@ -223,6 +224,7 @@ public class TerraStatusEffects{
                 colorTo = color;
                 lifetime = 90f;
             }};
+            init(() -> opposite(shieldRegen));
         }};
 
         delta32 = new AdvancedStatusEffect("delta32"){{
@@ -241,7 +243,7 @@ public class TerraStatusEffects{
         deltaImmunized = new AdvancedStatusEffect("delta-immunized"){{
             color = Pal.heal;
             permanent = true;
-            init(() -> opposite());
+            init(() -> opposite(delta32));
         }};
 
         purification = new AdvancedStatusEffect("purification"){{
