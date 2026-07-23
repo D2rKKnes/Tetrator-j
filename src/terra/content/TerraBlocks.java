@@ -1838,7 +1838,7 @@ public class TerraBlocks{
                     }};
                 }},
                 Items.thorium, new BasicBulletType(4.3f, 66){{
-                    rangeChange = 4f * 8;
+                    rangeChange = 3f * 8;
                     reloadMultiplier = 0.8f;
                     lifetime = ((178 + cap + rangeChange + 10f) / 4.3f) / 3;
                     width = 9f;
@@ -1862,7 +1862,7 @@ public class TerraBlocks{
                     fragOffsetMax = 1f;
                     fragSpread = 15f;
                     fragBullet = new BasicBulletType(4.3f, 48){{
-                        rangeChange = 4f * 8;
+                        rangeChange = 3f * 8;
                         lifetime = (((178 + cap + rangeChange + 10f) / 4.3f) / 3) * 2;
                         width = 7f;
                         height = 10.5f;
@@ -1882,13 +1882,13 @@ public class TerraBlocks{
                     }};
                 }},
                 TerraItems.sodium, new BasicBulletType(4f, 48){{
-                    rangeChange = 6f * 8;
-                    reloadMultiplier = 0.6f;
+                    rangeChange = -2f * 8;
+                    reloadMultiplier = 0.55f;
                     lifetime = ((178 + cap + rangeChange + 10f) / 4f) / 3;
                     width = 10f;
                     height = 15f;
                     hitEffect = despawnEffect = new MultiEffect(Fx.hitBulletColor, new ExplosionEffect(){{
-                        waveColor = smokeColor = Liquids.hydrogen.color;
+                        waveColor = smokeColor = Color.valueOf("d1e4ff");
                         sparkColor = Color.white;
                         waveLife = 10f;
                         waveRad = 3.5f * 8;
@@ -1898,31 +1898,29 @@ public class TerraBlocks{
                     }});
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                     smokeEffect = Fx.shootBigSmoke;
-                    hitColor = backColor = trailColor = Liquids.hydrogen.color;
+                    hitColor = backColor = trailColor = Color.valueOf("d1e4ff");
                     frontColor = Color.white;
 
                     splashDamage = damage * 0.75f;
                     splashDamageRadius = 3.5f * 8;
 
                     ammoMultiplier = 2;
-                    armorMultiplier = 0.75f;
-                    buildingDamageMultiplier = 0.5f;
+                    armorMultiplier = 0.8f;
+                    buildingDamageMultiplier = 0.25f;
                     trailWidth = 1.7f;
                     trailLength = 6;
-                    status = StatusEffects.slow;
-                    statusDuration = 120f;
                     fragBullets = 4;
                     fragRandomSpread = 0f;
                     fragVelocityMin = 0.7f;
                     fragOffsetMax = 1f;
                     fragSpread = 12f;
-                    fragBullet = new BasicBulletType(4.3f, 21){{
-                        rangeChange = 6f * 8;
+                    fragBullet = new BasicBulletType(4.3f, 17){{
+                        rangeChange = -2f * 8;
                         lifetime = (((178 + cap + rangeChange + 10f) / 4f) / 3) * 2;
                         width = 6f;
                         height = 10f;
                         hitEffect = despawnEffect = new MultiEffect(Fx.hitBulletColor, new ExplosionEffect(){{
-                            waveColor = smokeColor = Liquids.hydrogen.color;
+                            waveColor = smokeColor = Color.valueOf("d1e4ff");
                             sparkColor = Color.white;
                             waveLife = 10f;
                             waveRad = 2.5f * 8;
@@ -1932,15 +1930,15 @@ public class TerraBlocks{
                         }});
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                         smokeEffect = Fx.shootBigSmoke;
-                        hitColor = backColor = trailColor = Liquids.hydrogen.color;
+                        hitColor = backColor = trailColor = Color.valueOf("d1e4ff");
                         frontColor = Color.white;
 
                         splashDamage = damage * 0.75f;
                         splashDamageRadius = 2.5f * 8;
     
                         ammoMultiplier = 2;
-                        armorMultiplier = 0.5f;
-                        buildingDamageMultiplier = 0.5f;
+                        armorMultiplier = 0.95f;
+                        buildingDamageMultiplier = 0.25f;
                         trailWidth = 1.3f;
                     }};
                 }}
