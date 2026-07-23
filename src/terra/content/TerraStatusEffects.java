@@ -63,7 +63,7 @@ public class TerraStatusEffects{
             });
         }};
 
-        impactStun = new StatusEffect("impact-stun"){{
+        impactStun = new AdvancedStatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
             speedMultiplier = 0.3f;
             buildSpeedMultiplier = 0f;
@@ -145,7 +145,7 @@ public class TerraStatusEffects{
             effectChance = 0.008f;
         }};
 
-        shockwaveImpact = new StatusEffect("shockwave-impact"){{
+        shockwaveImpact = new AdvancedStatusEffect("shockwave-impact"){{
             color = Color.valueOf("cbcbcb");
             speedMultiplier = 0f;
             buildSpeedMultiplier = 0f;
@@ -153,7 +153,7 @@ public class TerraStatusEffects{
             disarm = true;
         }};
 
-        hyperdrive = new StatusEffect("hyperdrive"){{
+        hyperdrive = new AdvancedStatusEffect("hyperdrive"){{
             color = Pal.lancerLaser;
             healthMultiplier = 0.75f;
             damageMultiplier = 1.7f;
@@ -195,6 +195,18 @@ public class TerraStatusEffects{
             });
         }};
 
+        shieldRegen = new AdvancedStatusEffect("shield-restoration"){{
+            color = Pal.accent;
+            shieldDamage = -0.25f;
+            shieldHealCap = 1000f;
+            effectChance = 0.05f;
+        }};
+        shieldDamage = new AdvancedStatusEffect("shield-destruction"){{
+            color = Pal.negativeStat;
+            shieldDamage = 0.25f;
+            effectChance = 0.05f;
+        }};
+
         delta32 = new AdvancedStatusEffect("delta32"){{
             color = Pal.negativeStat;
             healthMultiplier = 0.05f;
@@ -208,7 +220,7 @@ public class TerraStatusEffects{
             permanent = true;
             init(() -> opposite(deltaImmunized));
         }};
-        deltaImmunized = new StatusEffect("delta-immunized"){{
+        deltaImmunized = new AdvancedStatusEffect("delta-immunized"){{
             color = Pal.heal;
             permanent = true;
             init(() -> opposite());
@@ -240,7 +252,7 @@ public class TerraStatusEffects{
 
         instantDeath = new AdvancedStatusEffect("instant-death"){{
             color = Color.white;
-            percentDamage = 100000f;
+            instakill = true;
             show = false;
             permanent = true;
         }};
