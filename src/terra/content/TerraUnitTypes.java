@@ -1528,10 +1528,11 @@ public class TerraUnitTypes {
             hidden = true;
             speed = 10f;
             rotateSpeed = 20f;
-            drag = 1f;
-            accel = 1f;
+            drag = 0.95f;
+            accel = 0.95f;
             mineSpeed = Float.POSITIVE_INFINITY;
             mineTier = 1000;
+            mineRange = buildRange = Float.POSITIVE_INFINITY;
             mineWalls = true;
             mineHardnessScaling = false;
             buildSpeed = Float.POSITIVE_INFINITY;
@@ -1591,8 +1592,9 @@ public class TerraUnitTypes {
                     lifetime = 50f;
                     armorMultiplier = 0f;
                     pierce = true;
+                    pierceBuilding = true;
                     homingPower = 0.014f;
-                    status = StatusEffects.unmoving;
+                    status = TerraStatusEffects.instantDeath;
                     statusDuration = Float.POSITIVE_INFINITY;
                 }};
             }},
@@ -2279,6 +2281,29 @@ public class TerraUnitTypes {
             }});
         }};
 
+        private Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
+            StatusEffects.none, StatusEffects.overdrive,
+            TerraStatusEffects.warped, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
+        ));
+    
+        private Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
+            TerraStatusEffects.shieldDamage //instantDeath not included
+        ));
+    
+        private boolean shouldAddToImmunities(StatusEffect effect) {
+            if (effect == null) return false;
+            if (ignoredEffects.contains(effect)) return false;
+            if (forcedEffects.contains(effect)) return true;
+    
+            return effect.damage > 0
+                || effect.healthMultiplier < 1f
+                || effect.speedMultiplier < 1f
+                || effect.damageMultiplier < 1f
+                || effect.disarm
+                || effect.reloadMultiplier < 1f
+                || effect.dragMultiplier < 1f;
+        }
+
         calamity = new UnitType("calamity"){{
             speed = 0.3f;
             rotateSpeed = 0.4f;
@@ -2373,14 +2398,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.speedMultiplier < 1f
-                        || effect.damageMultiplier < 1f
-                        || effect.disarm
-                        || effect.reloadMultiplier < 1f) {
+                    if (shouldAddToImmunities(effect)) {
                         immunities.add(effect);
                     }
                 }
@@ -2564,14 +2582,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.speedMultiplier < 1f
-                        || effect.damageMultiplier < 1f
-                        || effect.disarm
-                        || effect.reloadMultiplier < 1f) {
+                    if (shouldAddToImmunities(effect)) {
                         immunities.add(effect);
                     }
                 }
@@ -2807,14 +2818,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.speedMultiplier < 1f
-                        || effect.damageMultiplier < 1f
-                        || effect.disarm
-                        || effect.reloadMultiplier < 1f) {
+                    if (shouldAddToImmunities(effect)) {
                         immunities.add(effect);
                     }
                 }
@@ -3152,14 +3156,7 @@ public class TerraUnitTypes {
         
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (effect == null || effect == StatusEffects.none || effect == StatusEffects.overdrive || effect == TerraStatusEffects.warped) continue;
-        
-                    if (effect.damage > 0
-                        || effect.healthMultiplier < 1f
-                        || effect.speedMultiplier < 1f
-                        || effect.damageMultiplier < 1f
-                        || effect.disarm
-                        || effect.reloadMultiplier < 1f) {
+                    if (shouldAddToImmunities(effect)) {
                         immunities.add(effect);
                     }
                 }
