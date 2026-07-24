@@ -1,5 +1,6 @@
 package terra.content;
 
+import java.util.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -3426,16 +3427,16 @@ public class TerraUnitTypes {
         return n;
     }
 
-    private Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
+    private static Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
         StatusEffects.none, StatusEffects.overdrive,
         TerraStatusEffects.warped, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
     ));
 
-    private Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
+    private static Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
         TerraStatusEffects.shieldDamage //instantDeath not included
     ));
 
-    private boolean shouldAddToImmunities(StatusEffect effect) {
+    private static boolean shouldAddToImmunities(StatusEffect effect) {
         if (effect == null) return false;
         if (ignoredEffects.contains(effect)) return false;
         if (forcedEffects.contains(effect)) return true;
