@@ -64,6 +64,7 @@ public class TerraBlocks{
     thoriumWallHuge, thoriumWallGigantic, surgeWallHuge, surgeWallGigantic, 
     doorHuge, doorGigantic, phaseWallHuge, phaseWallGigantic,
     metaglassWall, metaglassWallLarge, metaglassWallHuge, metaglassWallGigantic,
+    leadWall, leadWallLarge, leadWallHuge, leadWallGigantic,
     darkSteelWall, darkSteelWallLarge, darkSteelWallHuge, darkSteelWallSmall,
     //distrubution
     graphiteConveyor, 
@@ -115,12 +116,6 @@ public class TerraBlocks{
         //walls
         int wallHealthMultiplier = 4;
         
-        scrapWallColossol = new Wall("scrap-wall-colossol"){{
-            requirements(Category.defense, with(Items.scrap, 6 * 25));
-            health = 60 * 25 * 4;
-            size = 5;
-            buildCostMultiplier = 4f;
-        }};
         copperWallHuge = new Wall("copper-wall-huge"){{
             requirements(Category.defense, with(Items.copper, 6 * 9));
             health = 80 * 9 * wallHealthMultiplier;
@@ -130,6 +125,29 @@ public class TerraBlocks{
             requirements(Category.defense, with(Items.copper, 6 * 15));
             health = 80 * 15 * wallHealthMultiplier;
             size = 4;
+        }};
+        leadWall = new Wall("lead-wall"){{
+            requirements(Category.defense, ItemStack.with(Items.lead, 5));
+            health = 60 * wallHealthMultiplier;
+            envDisabled |= Env.scorching;
+        }};
+        leadWallLarge = new Wall("lead-wall-large"){{
+            requirements(Category.defense, ItemStack.with(Items.lead, 20));
+            health = 60 * wallHealthMultiplier * 4;
+            size = 2;
+            envDisabled |= Env.scorching;
+        }};
+        leadWallHuge = new Wall("lead-wall-huge"){{
+            requirements(Category.defense, ItemStack.with(Items.lead, 45));
+            health = 60 * wallHealthMultiplier * 9;
+            size = 3;
+            envDisabled |= Env.scorching;
+        }};
+        leadWallGigantic = new Wall("lead-wall-gigantic"){{
+            requirements(Category.defense, ItemStack.with(Items.lead, 80));
+            health = 60 * wallHealthMultiplier * 16;
+            size = 4;
+            envDisabled |= Env.scorching;
         }};
         titaniumWallHuge = new Wall("titanium-wall-huge"){{
             requirements(Category.defense, with(Items.titanium, 6 * 9));
@@ -206,6 +224,12 @@ public class TerraBlocks{
             closefx = TerraFx.doorcloseGiga;
             health = 100 * 16 * wallHealthMultiplier;
             size = 4;
+        }};
+        scrapWallColossol = new Wall("scrap-wall-colossol"){{
+            requirements(Category.defense, with(Items.scrap, 6 * 25));
+            health = 60 * 25 * 4;
+            size = 5;
+            buildCostMultiplier = 4f;
         }};
         metaglassWall = new AdvancedWall("metaglass-wall"){{
             requirements(Category.defense, with(Items.metaglass, 6));
