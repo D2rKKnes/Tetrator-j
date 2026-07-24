@@ -2281,29 +2281,6 @@ public class TerraUnitTypes {
             }});
         }};
 
-        private Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
-            StatusEffects.none, StatusEffects.overdrive,
-            TerraStatusEffects.warped, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
-        ));
-    
-        private Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
-            TerraStatusEffects.shieldDamage //instantDeath not included
-        ));
-    
-        private boolean shouldAddToImmunities(StatusEffect effect) {
-            if (effect == null) return false;
-            if (ignoredEffects.contains(effect)) return false;
-            if (forcedEffects.contains(effect)) return true;
-    
-            return effect.damage > 0
-                || effect.healthMultiplier < 1f
-                || effect.speedMultiplier < 1f
-                || effect.damageMultiplier < 1f
-                || effect.disarm
-                || effect.reloadMultiplier < 1f
-                || effect.dragMultiplier < 1f;
-        }
-
         calamity = new UnitType("calamity"){{
             speed = 0.3f;
             rotateSpeed = 0.4f;
@@ -3441,12 +3418,34 @@ public class TerraUnitTypes {
         n.y = y;
         return n;
     }
-
     public static Weapon copyAndMoveAnd(Weapon weapon, float x, float y, Cons<Weapon> modifier) {
         Weapon n = weapon.copy();
         n.x = x;
         n.y = y;
         modifier.get(n);
         return n;
+    }
+
+    private Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
+        StatusEffects.none, StatusEffects.overdrive,
+        TerraStatusEffects.warped, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
+    ));
+
+    private Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
+        TerraStatusEffects.shieldDamage //instantDeath not included
+    ));
+
+    private boolean shouldAddToImmunities(StatusEffect effect) {
+        if (effect == null) return false;
+        if (ignoredEffects.contains(effect)) return false;
+        if (forcedEffects.contains(effect)) return true;
+
+        return effect.damage > 0
+            || effect.healthMultiplier < 1f
+            || effect.speedMultiplier < 1f
+            || effect.damageMultiplier < 1f
+            || effect.disarm
+            || effect.reloadMultiplier < 1f
+            || effect.dragMultiplier < 1f;
     }
 }
