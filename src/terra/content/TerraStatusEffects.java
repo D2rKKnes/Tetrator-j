@@ -40,7 +40,7 @@ public class TerraStatusEffects{
 
     energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
     warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
-    regeneration, superRegeneration, shieldRegen, shieldDamage, instantDeath,
+    regeneration, superRegeneration, shieldRegen, shieldDamage, instantDeath, leadCorroded,
     
     common, uncommon, rare, epic, legendary;
     
@@ -55,10 +55,6 @@ public class TerraStatusEffects{
             init(() -> {
                 affinity(StatusEffects.shocked, (unit, result, time) -> {
                     unit.damage(transitionDamage);
-
-                    if(unit.team == state.rules.waveTeam){
-                        Events.fire(EventType.Trigger.shock);
-                    }
                 });
             });
         }};
@@ -83,7 +79,21 @@ public class TerraStatusEffects{
             init(() -> {
                 affinity(StatusEffects.corroded, (unit, result, time) -> {
                     unit.damagePierce(transitionDamage);
-                    result.set(radited, Math.min(time + result.time, 300f));
+                });
+            });
+        }};
+
+        leadCorroded = new StatusEffect("lead-corroded"){{
+            color = Items.lead.color.cpy();
+            speedMultiplier = 0.87f;
+            intervalDamage = 14f;
+            intervalDamageTime = 17.5f;
+            transitionDamage = 18f;
+            effectChance = 0.15f;
+            effect = Fx.corrosionVapor;
+            init(() -> {
+                affinity(StatusEffects.corroded, (unit, result, time) -> {
+                    unit.damage(transitionDamage);
                 });
             });
         }};
