@@ -97,7 +97,7 @@ public class AdvancedWall extends Wall {
 
         @Override
         public void onDestroyed() {
-            if (hitBulletOnDeath && hitBulletSpawnChance > 0) {
+            if (hitBulletOnDeath) {
                 spawnHitBullets();
             }
             super.onDestroyed();
