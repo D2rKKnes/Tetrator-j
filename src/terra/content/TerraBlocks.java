@@ -126,24 +126,53 @@ public class TerraBlocks{
             health = 80 * 15 * wallHealthMultiplier;
             size = 4;
         }};
-        leadWall = new Wall("lead-wall"){{
+        leadWall = new AdvancedWall("lead-wall"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 5));
             health = 60 * wallHealthMultiplier;
             envDisabled |= Env.scorching;
+
+            hitBulletEffect = new ExplosionEffect(){{
+                waveColor = Items.lead.color.cpy();
+                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokes = 18;
+                sparks = 0;
+                sparkStroke = 0f;
+                waveLife = 12f;
+                lifetime = 58f;
+                waveRad = 4.5f * 8f;
+                smokeRad = 4.2f * 8f;
+                smokeSize = 8f;
+            }};
+            hitBullet = new BulletType(){{
+                damage = 0f;
+                lifetime = 50f;
+                speed = 0f;
+                despawnEffect = Fx.none;
+                intervalBullets = 1;
+                bulletInterval = 1f;
+                intervalBullet = BulletType(){{
+                    damage = splashDamage = 0f;
+                    splashDamageRadius = 4 * 8f;
+                    
+                }};
+            }};
+            hitBulletAmount = 1;
+            hitBulletAmountRand = 0;
+            hitBulletSpawnChance = 0f;
         }};
-        leadWallLarge = new Wall("lead-wall-large"){{
+        leadWallLarge = new AdvancedWall("lead-wall-large"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 20));
             health = 60 * wallHealthMultiplier * 4;
             size = 2;
             envDisabled |= Env.scorching;
         }};
-        leadWallHuge = new Wall("lead-wall-huge"){{
+        leadWallHuge = new AdvancedWall("lead-wall-huge"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 45));
             health = 60 * wallHealthMultiplier * 9;
             size = 3;
             envDisabled |= Env.scorching;
         }};
-        leadWallGigantic = new Wall("lead-wall-gigantic"){{
+        leadWallGigantic = new AdvancedWall("lead-wall-gigantic"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 80));
             health = 60 * wallHealthMultiplier * 16;
             size = 4;
