@@ -150,10 +150,13 @@ public class TerraBlocks{
                 despawnEffect = Fx.none;
                 intervalBullets = 1;
                 bulletInterval = 1f;
-                intervalBullet = BulletType(){{
-                    damage = splashDamage = 0f;
+                intervalBullet = new BulletType(){{
+                    damage = splashDamage = speed = lifetime = 0f;
                     splashDamageRadius = 4 * 8f;
-                    
+                    instantDisappear = true;
+                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                    status = TerraStatusEffects.leadCorroded;
+                    statusDuration = 120f;
                 }};
             }};
             hitBulletAmount = 1;
@@ -165,18 +168,114 @@ public class TerraBlocks{
             health = 60 * wallHealthMultiplier * 4;
             size = 2;
             envDisabled |= Env.scorching;
+
+            hitBulletEffect = new ExplosionEffect(){{
+                waveColor = Items.lead.color.cpy();
+                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokes = 20;
+                sparks = 0;
+                sparkStroke = 0f;
+                waveLife = 12f;
+                lifetime = 68f;
+                waveRad = 5.5f * 8f;
+                smokeRad = 5.2f * 8f;
+                smokeSize = 8.2f;
+            }};
+            hitBullet = new BulletType(){{
+                damage = 0f;
+                lifetime = 60f;
+                speed = 0f;
+                despawnEffect = Fx.none;
+                intervalBullets = 1;
+                bulletInterval = 1f;
+                intervalBullet = new BulletType(){{
+                    damage = splashDamage = speed = lifetime = 0f;
+                    splashDamageRadius = 5 * 8f;
+                    instantDisappear = true;
+                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                    status = TerraStatusEffects.leadCorroded;
+                    statusDuration = 120f;
+                }};
+            }};
+            hitBulletAmount = 1;
+            hitBulletAmountRand = 0;
+            hitBulletSpawnChance = 0f;
         }};
         leadWallHuge = new AdvancedWall("lead-wall-huge"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 45));
             health = 60 * wallHealthMultiplier * 9;
             size = 3;
             envDisabled |= Env.scorching;
+
+            hitBulletEffect = new ExplosionEffect(){{
+                waveColor = Items.lead.color.cpy();
+                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokes = 22;
+                sparks = 0;
+                sparkStroke = 0f;
+                waveLife = 12f;
+                lifetime = 78f;
+                waveRad = 6.5f * 8f;
+                smokeRad = 6.2f * 8f;
+                smokeSize = 8.4f;
+            }};
+            hitBullet = new BulletType(){{
+                damage = 0f;
+                lifetime = 70f;
+                speed = 0f;
+                despawnEffect = Fx.none;
+                intervalBullets = 1;
+                bulletInterval = 1f;
+                intervalBullet = new BulletType(){{
+                    damage = splashDamage = speed = lifetime = 0f;
+                    splashDamageRadius = 6 * 8f;
+                    instantDisappear = true;
+                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                    status = TerraStatusEffects.leadCorroded;
+                    statusDuration = 120f;
+                }};
+            }};
+            hitBulletAmount = 1;
+            hitBulletAmountRand = 0;
+            hitBulletSpawnChance = 0f;
         }};
         leadWallGigantic = new AdvancedWall("lead-wall-gigantic"){{
             requirements(Category.defense, ItemStack.with(Items.lead, 80));
             health = 60 * wallHealthMultiplier * 16;
             size = 4;
             envDisabled |= Env.scorching;
+
+            hitBulletEffect = new ExplosionEffect(){{
+                waveColor = Items.lead.color.cpy();
+                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokes = 24;
+                sparks = 0;
+                sparkStroke = 0f;
+                waveLife = 12f;
+                lifetime = 88f;
+                waveRad = 7.5f * 8f;
+                smokeRad = 7.2f * 8f;
+                smokeSize = 8.6f;
+            }};
+            hitBullet = new BulletType(){{
+                damage = 0f;
+                lifetime = 80f;
+                speed = 0f;
+                despawnEffect = Fx.none;
+                intervalBullets = 1;
+                bulletInterval = 1f;
+                intervalBullet = new BulletType(){{
+                    damage = splashDamage = speed = lifetime = 0f;
+                    splashDamageRadius = 7 * 8f;
+                    instantDisappear = true;
+                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                    status = TerraStatusEffects.leadCorroded;
+                    statusDuration = 120f;
+                }};
+            }};
+            hitBulletAmount = 1;
+            hitBulletAmountRand = 0;
+            hitBulletSpawnChance = 0f;
         }};
         titaniumWallHuge = new Wall("titanium-wall-huge"){{
             requirements(Category.defense, with(Items.titanium, 6 * 9));
@@ -396,6 +495,17 @@ public class TerraBlocks{
             hitBulletLifeRandScl = 0.3f;
             hitBulletSpeedRandScl = 0.4f;
         }};
+        darkSteelWallSmall = new AdvancedWall("dark-steel-wall-small"){{
+            requirements(Category.defense, with(TerraItems.darkSteel, 6, TerraItems.diamondGlass, 6 / 2));
+            health = 930;
+            size = 1;
+            absorbLasers = true;
+            autoRegeneration = true;
+            regenAmount = 0.012f / 60f;
+            regenStartDelay = 150f;
+            regenDamageStop = true;
+            hitBulletOnDeath = false;
+        }};
         darkSteelWall = new AdvancedWall("dark-steel-wall"){{
             requirements(Category.defense, with(TerraItems.darkSteel, 6 * 4, TerraItems.diamondGlass, (6 * 4) / 2));
             health = 930 * 4;
@@ -405,6 +515,7 @@ public class TerraBlocks{
             regenAmount = 0.012f / 60f;
             regenStartDelay = 150f;
             regenDamageStop = true;
+            hitBulletOnDeath = false;
         }};
         darkSteelWallLarge = new AdvancedWall("dark-steel-wall-large"){{
             requirements(Category.defense, with(TerraItems.darkSteel, 6 * 9, TerraItems.diamondGlass, (6 * 9) / 2));
@@ -415,6 +526,18 @@ public class TerraBlocks{
             regenAmount = 0.012f / 60f;
             regenStartDelay = 150f;
             regenDamageStop = true;
+            hitBulletOnDeath = false;
+        }};
+        darkSteelWallHuge = new AdvancedWall("dark-steel-wall-huge"){{
+            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 15, TerraItems.diamondGlass, (6 * 15) / 2));
+            health = 930 * 15;
+            size = 4;
+            absorbLasers = true;
+            autoRegeneration = true;
+            regenAmount = 0.012f / 60f;
+            regenStartDelay = 150f;
+            regenDamageStop = true;
+            hitBulletOnDeath = false;
         }};
 
         //distrubution
@@ -496,7 +619,6 @@ public class TerraBlocks{
             hasLiquids = true;
             hasItems = false;
             squareSprite = false;
-            consumesPower = true;
             size = 3;
             ambientSound = Sounds.loopDifferential;
             ambientSoundVolume = 0.12f;
@@ -510,8 +632,7 @@ public class TerraBlocks{
                 new DrawDefault()
             );
 
-            consumePower(1.4f);
-            consumeLiquids(LiquidStack.with(Liquids.water, 15f / 60f, TerraLiquids.carbonDioxide, 30f / 60f));
+            consumeLiquids(LiquidStack.with(Liquids.water, 25f / 60f, TerraLiquids.carbonDioxide, 15f / 60f));
         }};
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
