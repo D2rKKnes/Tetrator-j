@@ -130,7 +130,7 @@ public class TerraVanilaTree{
         });
         vanillaNode(erekir, shieldedWall, () -> {
             node(shieldedWallLarge, () -> {
-                node(shieldedWallGigantic, () -> {});
+                node(shieldedWallHuge, () -> {});
             });
             node(shieldedWallSmall, () -> {});
         });
