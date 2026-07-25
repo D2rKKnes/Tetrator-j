@@ -120,7 +120,7 @@ public class TerraBlocks{
         //VERILUS & SERPULO =---
         //walls
         int wallHealthMultiplier = 4;
-        boolean shownn = Core.settings.getBool("enableblocks", true) ? true : (Vars.state == null || Vars.state.rules.infiniteResources);
+        boolean shownn = Core.settings.getBool("enableblocks", false) ? true : (Vars.state == null || Vars.state.rules.infiniteResources);
         specialContent = new BuildVisibility(() -> shownn);
         
         copperWallHuge = new Wall("copper-wall-huge"){{
