@@ -132,15 +132,15 @@ public class TerraVerilusTree {
                             });
                             node(darkSteelWall, () -> {
                                 node(darkSteelWallLarge, () -> {
-                                    if(Core.settings.getBool("enableblocks", true)){node(darkSteelWallHuge, () -> {});}
+                                    if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallHuge, () -> {});}
                                 });
-                                if(Core.settings.getBool("enableblocks", true)){node(darkSteelWallSmall, () -> {});}
+                                if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallSmall, () -> {});}
                             });
                         });
                         node(metaglassWall, () -> {
                             node(metaglassWallLarge, () -> {
                                 node(metaglassWallHuge, () -> {
-                                    if(Core.settings.getBool("enableblocks", true)){node(metaglassWallGigantic, () -> {});}
+                                    if(Core.settings.getBool("enableblocks", false)){node(metaglassWallGigantic, () -> {});}
                                 });
                             });
                         });
