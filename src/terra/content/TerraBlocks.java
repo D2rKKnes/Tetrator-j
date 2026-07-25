@@ -116,6 +116,8 @@ public class TerraBlocks{
         //VERILUS & SERPULO =---
         //walls
         int wallHealthMultiplier = 4;
+        boolean shownn = Core.settings.getBool("unitsquality", true) ? true : (Vars.state == null || Vars.state.rules.infiniteResources);
+        specialContent = new BuildVisibility(() -> shownn);
         
         copperWallHuge = new Wall("copper-wall-huge"){{
             requirements(Category.defense, with(Items.copper, 6 * 9));
@@ -431,7 +433,7 @@ public class TerraBlocks{
             hitBulletSpeedRandScl = 0.4f;
         }};
         metaglassWallGigantic = new AdvancedWall("metaglass-wall-gigantic"){{
-            requirements(Category.defense, with(Items.metaglass, 6 * 16));
+            requirements(Category.defense, specialContent, with(Items.metaglass, 6 * 16));
             health = 380 * 16;
             size = 4;
             hitBullet = new BasicBulletType(){{
@@ -465,7 +467,7 @@ public class TerraBlocks{
             hitBulletSpeedRandScl = 0.4f;
         }};
         darkSteelWallSmall = new AdvancedWall("dark-steel-wall-small"){{
-            requirements(Category.defense, with(TerraItems.darkSteel, 6, TerraItems.diamondGlass, 6 / 2));
+            requirements(Category.defense, specialContent, with(TerraItems.darkSteel, 6, TerraItems.diamondGlass, 6 / 2));
             health = 960;
             size = 1;
             absorbLasers = true;
@@ -498,7 +500,7 @@ public class TerraBlocks{
             hitBulletOnDeath = false;
         }};
         darkSteelWallHuge = new AdvancedWall("dark-steel-wall-huge"){{
-            requirements(Category.defense, with(TerraItems.darkSteel, 6 * 16, TerraItems.diamondGlass, (6 * 16) / 2));
+            requirements(Category.defense, specialContent, with(TerraItems.darkSteel, 6 * 16, TerraItems.diamondGlass, (6 * 16) / 2));
             health = 960 * 16;
             size = 4;
             absorbLasers = true;
@@ -601,7 +603,7 @@ public class TerraBlocks{
                 new DrawDefault()
             );
 
-            consumeLiquids(LiquidStack.with(Liquids.water, 25f / 60f, TerraLiquids.carbonDioxide, 15f / 60f));
+            consumeLiquids(LiquidStack.with(Liquids.water, 25f / 60f, TerraLiquids.carbonDioxide, 20f / 60f));
         }};
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
             requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
@@ -1948,7 +1950,7 @@ public class TerraBlocks{
             size = 4;
         }};
         shieldedWallSmall = new ShieldWall("shielded-wall-small"){{
-            requirements(Category.defense, ItemStack.with(Items.phaseFabric, 5, Items.surgeAlloy, 3, Items.beryllium, 3));
+            requirements(Category.defense, specialContent, ItemStack.with(Items.phaseFabric, 5, Items.surgeAlloy, 3, Items.beryllium, 3));
             consumePower((3f / 4f) / 60f);
 
             outputsPower = false;
@@ -1980,7 +1982,7 @@ public class TerraBlocks{
             size = 3;
         }};
         shieldedWallHuge = new ShieldWall("shielded-wall-huge"){{
-            requirements(Category.defense, ItemStack.with(Items.phaseFabric, 5 * 16, Items.surgeAlloy, 3 * 16, Items.beryllium, 3 * 16));
+            requirements(Category.defense, specialContent, ItemStack.with(Items.phaseFabric, 5 * 16, Items.surgeAlloy, 3 * 16, Items.beryllium, 3 * 16));
             consumePower(((3f / 4f) * 16f) / 60f);
 
             outputsPower = false;
