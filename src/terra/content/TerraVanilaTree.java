@@ -34,26 +34,44 @@ public class TerraVanilaTree{
             node(copperWallHuge, Seq.with(new Research(scrapWallGigantic)), () -> {
                 node(copperWallGigantic, Seq.with(new Research(scrapWallColossol)), () -> {});
             });
+            node(leadWall, Seq.with(new OnSector(frozenForest)), () -> {
+                node(leadWallLarge, () -> {
+                    node(leadWallHuge, Seq.with(new Research(copperWallGigantic)), () -> {
+                        node(leadWallGigantic, () -> {});
+                    });
+                });
+            });
             node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
-                    node(metaglassWallHuge, () -> {});
+                    node(metaglassWallHuge, Seq.with(new Research(copperWallHuge)), () -> {
+                        node(metaglassWallGigantic, () -> {});
+                    });
                 });
             });
         });
         vanillaNode(titaniumWallLarge, () -> {
-            node(titaniumWallHuge, () -> {
+            node(titaniumWallHuge, Seq.with(new Research(metaglassWallGigantic)), () -> {
+                node(titaniumWallGigantic, () -> {});
             });
         });
         vanillaNode(thoriumWallLarge, () -> {
-            node(thoriumWallHuge, () -> {
+            node(thoriumWallHuge, Seq.with(new Research(titaniumWallGigantic)), () -> {
+                node(thoriumWallGigantic, () -> {});
             });
         });
         vanillaNode(plastaniumWallLarge, () -> {
-            node(plastaniumWallHuge, () -> {
+            node(plastaniumWallHuge, Seq.with(new Research(titaniumWallGigantic)), () -> {
+                node(plastaniumWallGigantic, () -> {});
             });
         });
         vanillaNode(phaseWallLarge, () -> {
-            node(phaseWallHuge, () -> {
+            node(phaseWallHuge, Seq.with(new Research(thoriumWallGigantic)), () -> {
+                node(phaseWallGigantic, () -> {});
+            });
+        });
+        vanillaNode(surgeWallLarge, () -> {
+            node(surgeWallHuge, Seq.with(new Research(thoriumWallGigantic)), () -> {
+                node(surgeWallGigantic, () -> {});
             });
         });
         vanillaNode(scrapWallGigantic, () -> {
@@ -88,7 +106,9 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(erekir, tungstenWallLarge, () -> {
-            node(tungstenWallHuge, Seq.with(new SectorComplete(SectorPresets.split)), () -> {});
+            node(tungstenWallHuge, Seq.with(new SectorComplete(SectorPresets.split)), () -> {
+                node(tungstenWallGigantic, () -> {});
+            });
         });
         vanillaNode(erekir, blastDoor, () -> {
             node(blastGate, Seq.with(new SectorComplete(intersect)), () -> {
@@ -99,13 +119,30 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(erekir, carbideWallLarge, () -> {
-            node(carbideWallHuge, () -> {});
+            node(carbideWallHuge, () -> {
+                node(carbideWallGigantic, () -> {});
+            });
+        });
+        vanillaNode(erekir, reinforcedSurgeWallLarge, () -> {
+            node(reinforcedSurgeWallHuge, () -> {
+                node(reinforcedSurgeWallGigantic, () -> {});
+            });
         });
         vanillaNode(erekir, shieldedWall, () -> {
-            node(shieldedWallLarge, () -> {});
+            node(shieldedWallLarge, () -> {
+                node(shieldedWallGigantic, () -> {});
+            });
+            node(shieldedWallSmall, () -> {});
         });
         vanillaNode(erekir, beamTower, () -> {
             node(beamBeacon, () -> {});
+        });
+        vanillaNode(erekir, radar, () -> {
+            node(shieldProjector, Seq.with(new SectorComplete(karst)), () -> {
+                node(largeShieldProjector, Seq.with(new SectorComplete(origin)), () -> {
+                    node(hugeShieldProjector, () -> {});
+                });
+            });
         });
         vanillaNode(erekir, turbineCondenser, () -> {
             node(reinforcedPanel, Seq.with(new SectorComplete(lake)), () -> {});
