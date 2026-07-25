@@ -44,7 +44,7 @@ public class TerraVanilaTree{
             node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
                     node(metaglassWallHuge, Seq.with(new Research(copperWallHuge)), () -> {
-                        node(metaglassWallGigantic, () -> {});
+                        if(specialContent){node(metaglassWallGigantic, () -> {});}
                     });
                 });
             });
@@ -130,9 +130,9 @@ public class TerraVanilaTree{
         });
         vanillaNode(erekir, shieldedWall, () -> {
             node(shieldedWallLarge, () -> {
-                node(shieldedWallHuge, () -> {});
+                if(specialContent){node(shieldedWallHuge, () -> {});}
             });
-            node(shieldedWallSmall, () -> {});
+            if(specialContent){node(shieldedWallSmall, () -> {});}
         });
         vanillaNode(erekir, beamTower, () -> {
             node(beamBeacon, () -> {});
