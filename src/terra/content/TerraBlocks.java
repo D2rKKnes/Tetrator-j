@@ -113,12 +113,15 @@ public class TerraBlocks{
     //logic
     primeProcessor;
     //OTHER =---
+
+    public static BuildVisibility specialContent;
+    
     public static void load(){
         //VERILUS & SERPULO =---
         //walls
         int wallHealthMultiplier = 4;
         boolean shownn = Core.settings.getBool("enableblocks", true) ? true : (Vars.state == null || Vars.state.rules.infiniteResources);
-        public static BuildVisibility specialContent = new BuildVisibility(() -> shownn);
+        specialContent = new BuildVisibility(() -> shownn);
         
         copperWallHuge = new Wall("copper-wall-huge"){{
             requirements(Category.defense, with(Items.copper, 6 * 9));
