@@ -134,7 +134,7 @@ public class TerraBlocks{
 
             hitBulletEffect = new ExplosionEffect(){{
                 waveColor = Items.lead.color.cpy();
-                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokeColor = Items.lead.color.cpy().a(0.6f);
                 smokes = 18;
                 sparks = 0;
                 sparkStroke = 0f;
@@ -142,23 +142,15 @@ public class TerraBlocks{
                 lifetime = 58f;
                 waveRad = 4.5f * 8f;
                 smokeRad = 4.2f * 8f;
-                smokeSize = 8f;
+                smokeSize = 16f;
             }};
             hitBullet = new BulletType(){{
-                damage = 0f;
-                lifetime = 50f;
-                speed = 0f;
-                despawnEffect = Fx.none;
-                intervalBullets = 1;
-                bulletInterval = 1f;
-                intervalBullet = new BulletType(){{
-                    damage = splashDamage = speed = lifetime = 0f;
-                    splashDamageRadius = 4 * 8f;
-                    instantDisappear = true;
-                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                    status = TerraStatusEffects.leadCorroded;
-                    statusDuration = 120f;
-                }};
+                damage = splashDamage = speed = lifetime = 0f;
+                splashDamageRadius = 4 * 8f;
+                instantDisappear = true;
+                shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                status = TerraStatusEffects.leadCorroded;
+                statusDuration = 120f;
             }};
             hitBulletAmount = 1;
             hitBulletAmountRand = 0;
@@ -172,7 +164,7 @@ public class TerraBlocks{
 
             hitBulletEffect = new ExplosionEffect(){{
                 waveColor = Items.lead.color.cpy();
-                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokeColor = Items.lead.color.cpy().a(0.6f);
                 smokes = 20;
                 sparks = 0;
                 sparkStroke = 0f;
@@ -180,23 +172,15 @@ public class TerraBlocks{
                 lifetime = 68f;
                 waveRad = 5.5f * 8f;
                 smokeRad = 5.2f * 8f;
-                smokeSize = 8.2f;
+                smokeSize = 17f;
             }};
             hitBullet = new BulletType(){{
-                damage = 0f;
-                lifetime = 60f;
-                speed = 0f;
-                despawnEffect = Fx.none;
-                intervalBullets = 1;
-                bulletInterval = 1f;
-                intervalBullet = new BulletType(){{
-                    damage = splashDamage = speed = lifetime = 0f;
-                    splashDamageRadius = 5 * 8f;
-                    instantDisappear = true;
-                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                    status = TerraStatusEffects.leadCorroded;
-                    statusDuration = 120f;
-                }};
+                damage = splashDamage = speed = lifetime = 0f;
+                splashDamageRadius = 5 * 8f;
+                instantDisappear = true;
+                shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                status = TerraStatusEffects.leadCorroded;
+                statusDuration = 140f;
             }};
             hitBulletAmount = 1;
             hitBulletAmountRand = 0;
@@ -210,7 +194,7 @@ public class TerraBlocks{
 
             hitBulletEffect = new ExplosionEffect(){{
                 waveColor = Items.lead.color.cpy();
-                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokeColor = Items.lead.color.cpy().a(0.6f);
                 smokes = 22;
                 sparks = 0;
                 sparkStroke = 0f;
@@ -218,23 +202,15 @@ public class TerraBlocks{
                 lifetime = 78f;
                 waveRad = 6.5f * 8f;
                 smokeRad = 6.2f * 8f;
-                smokeSize = 8.4f;
+                smokeSize = 18f;
             }};
             hitBullet = new BulletType(){{
-                damage = 0f;
-                lifetime = 70f;
-                speed = 0f;
-                despawnEffect = Fx.none;
-                intervalBullets = 1;
-                bulletInterval = 1f;
-                intervalBullet = new BulletType(){{
-                    damage = splashDamage = speed = lifetime = 0f;
-                    splashDamageRadius = 6 * 8f;
-                    instantDisappear = true;
-                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                    status = TerraStatusEffects.leadCorroded;
-                    statusDuration = 120f;
-                }};
+                damage = splashDamage = speed = lifetime = 0f;
+                splashDamageRadius = 6 * 8f;
+                instantDisappear = true;
+                shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                status = TerraStatusEffects.leadCorroded;
+                statusDuration = 160f;
             }};
             hitBulletAmount = 1;
             hitBulletAmountRand = 0;
@@ -248,7 +224,7 @@ public class TerraBlocks{
 
             hitBulletEffect = new ExplosionEffect(){{
                 waveColor = Items.lead.color.cpy();
-                smokeColor = Items.lead.color.cpy().a(0.4f);
+                smokeColor = Items.lead.color.cpy().a(0.6f);
                 smokes = 24;
                 sparks = 0;
                 sparkStroke = 0f;
@@ -256,23 +232,15 @@ public class TerraBlocks{
                 lifetime = 88f;
                 waveRad = 7.5f * 8f;
                 smokeRad = 7.2f * 8f;
-                smokeSize = 8.6f;
+                smokeSize = 19f;
             }};
             hitBullet = new BulletType(){{
-                damage = 0f;
-                lifetime = 80f;
-                speed = 0f;
-                despawnEffect = Fx.none;
-                intervalBullets = 1;
-                bulletInterval = 1f;
-                intervalBullet = new BulletType(){{
-                    damage = splashDamage = speed = lifetime = 0f;
-                    splashDamageRadius = 7 * 8f;
-                    instantDisappear = true;
-                    shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                    status = TerraStatusEffects.leadCorroded;
-                    statusDuration = 120f;
-                }};
+                damage = splashDamage = speed = lifetime = 0f;
+                splashDamageRadius = 7 * 8f;
+                instantDisappear = true;
+                shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
+                status = TerraStatusEffects.leadCorroded;
+                statusDuration = 180f;
             }};
             hitBulletAmount = 1;
             hitBulletAmountRand = 0;
