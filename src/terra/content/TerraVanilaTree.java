@@ -1,5 +1,6 @@
 package terra.content;
 
+import arc.*;
 import arc.func.*;
 import arc.struct.*;
 import mindustry.content.*;
