@@ -100,6 +100,7 @@ public class TerraBlocks{
     tungstenWallHuge, tungstenWallGigantic, blastGate, blastDoorLarge, blastDoorHuge,
     carbideWallHuge, carbideWallGigantic, shieldedWallLarge, shieldedWallHuge, shieldedWallSmall,
     //power
+    hugeShieldProjector, 
     beamBeacon, reinforcedPanel,
     //crafters
     inductionFurnace, hydrogenReductor,
@@ -2028,6 +2029,15 @@ public class TerraBlocks{
         }};
 
         //power
+        hugeShieldProjector = new BaseShield("huge-shield-projector"){{
+            requirements(Category.effect, with(Items.beryllium, 3800 * 9, Items.graphite, 6200 * 9, Items.silicon, 5000 * 9, Items.tungsten, 3800 * 9, Items.thorium, 3000 * 9, Items.oxide, 2500 * 9, Items.surgeAlloy, 2200 * 9, Items.carbide, 2200 * 9, Items.phaseFabric, 3100 * 9, Items.fissileMatter, 1200 * 9));
+
+            size = 5;
+            radius = 600f;
+
+            consumePower(5f);
+        }};
+        
         beamBeacon = new BeamNode("beam-beacon"){{
             requirements(Category.power, with(Items.beryllium, 200, Items.oxide, 80, Items.silicon, 150, Items.surgeAlloy, 135, Items.fissileMatter, 120));
             size = 5;
