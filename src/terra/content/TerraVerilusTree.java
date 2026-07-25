@@ -105,26 +105,44 @@ public class TerraVerilusTree {
                 });
             });
             node(flight, () -> {
-                node(titaniumWall, () -> {
-                    node(titaniumWallLarge, () -> {
-                        node(titaniumWallHuge, () -> {});
-                    });
-                    node(thoriumWall, () -> {
-                        node(thoriumWallLarge, () -> {
-                            node(thoriumWallHuge, () -> {});
+                node(leadWall, () -> {
+                    node(leadWallLarge, () -> {
+                        node(leadWallHuge, () -> {
+                            node(leadWallGigantic, () -> {});
                         });
-                        node(phaseWall, () -> {
-                            node(phaseWallLarge, () -> {
-                                node(phaseWallHuge, () -> {});
+                    });
+                    node(titaniumWall, () -> {
+                        node(titaniumWallLarge, () -> {
+                            node(titaniumWallHuge, () -> {
+                                node(titaniumWallGigantic, () -> {});
                             });
                         });
-                        node(darkSteelWall, () -> {
-                            node(darkSteelWallLarge, () -> {});
+                        node(thoriumWall, () -> {
+                            node(thoriumWallLarge, () -> {
+                                node(thoriumWallHuge, () -> {
+                                    node(thoriumWallGigantic, () -> {});
+                                });
+                            });
+                            node(phaseWall, () -> {
+                                node(phaseWallLarge, () -> {
+                                    node(phaseWallHuge, () -> {
+                                        node(phaseWallGigantic, () -> {});
+                                    });
+                                });
+                            });
+                            node(darkSteelWall, () -> {
+                                node(darkSteelWallLarge, () -> {
+                                    node(darkSteelWallHuge, () -> {});
+                                });
+                                node(darkSteelWallSmall, () -> {});
+                            });
                         });
-                    });
-                    node(metaglassWall, () -> {
-                        node(metaglassWallLarge, () -> {
-                            node(metaglassWallHuge, () -> {});
+                        node(metaglassWall, () -> {
+                            node(metaglassWallLarge, () -> {
+                                node(metaglassWallHuge, () -> {
+                                    node(metaglassWallGigantic, () -> {});
+                                });
+                            });
                         });
                     });
                 });
