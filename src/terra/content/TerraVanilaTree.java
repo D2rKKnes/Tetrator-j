@@ -45,7 +45,7 @@ public class TerraVanilaTree{
             node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
                     node(metaglassWallHuge, Seq.with(new Research(copperWallHuge)), () -> {
-                        if(Core.settings.getBool("enableblocks", true)){node(metaglassWallGigantic, () -> {});}
+                        if(Core.settings.getBool("enableblocks", false)){node(metaglassWallGigantic, () -> {});}
                     });
                 });
             });
@@ -131,9 +131,9 @@ public class TerraVanilaTree{
         });
         vanillaNode(erekir, shieldedWall, () -> {
             node(shieldedWallLarge, () -> {
-                if(Core.settings.getBool("enableblocks", true)){node(shieldedWallHuge, () -> {});}
+                if(Core.settings.getBool("enableblocks", false)){node(shieldedWallHuge, () -> {});}
             });
-            if(Core.settings.getBool("enableblocks", true)){node(shieldedWallSmall, () -> {});}
+            if(Core.settings.getBool("enableblocks", false)){node(shieldedWallSmall, () -> {});}
         });
         vanillaNode(erekir, beamTower, () -> {
             node(beamBeacon, () -> {});
