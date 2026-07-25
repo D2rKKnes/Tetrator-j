@@ -25,6 +25,7 @@ public class TerraSettings{
             t.checkPref("unitsquality", false);
             t.checkPref("qualityring", true);
             t.checkPref("neoncolor", true);
+            t.checkPref("enableblocks", false);
         });
     }
 
