@@ -1,5 +1,6 @@
 package terra.type;
 
+import arc.*;
 import arc.scene.ui.layout.*;
 import mindustry.ctype.*;
 import mindustry.game.*;
