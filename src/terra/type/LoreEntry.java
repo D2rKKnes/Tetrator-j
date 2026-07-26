@@ -7,7 +7,7 @@ import mindustry.game.*;
 
 /** This class is only for displaying lore in the content database. */
 public class LoreEntry extends UnlockableContent{
-    private String bundleContentPrefix = "lore";
+    private static final String bundleContentPrefix = "lore";
 
     public LoreEntry(String name){
         super(name);
