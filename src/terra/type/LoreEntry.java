@@ -32,4 +32,9 @@ public class LoreEntry extends UnlockableContent{
             uiIcon = Core.atlas.find("book");
         }
     }
+
+    @Override
+    public ContentType getContentType(){
+        return ContentType.error;
+    }
 }
