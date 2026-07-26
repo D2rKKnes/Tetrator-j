@@ -7,6 +7,7 @@ import mindustry.game.*;
 
 /** This class is only for displaying lore in the content database. */
 public class LoreEntry extends UnlockableContent{
+    private String bundleContentPrefix = "lore";
 
     public LoreEntry(String name){
         super(name);
@@ -15,6 +16,11 @@ public class LoreEntry extends UnlockableContent{
         alwaysUnlocked = false;
         databaseCategory = "lore";
         //allDatabaseTabs = true;
+
+        this.localizedName = Core.bundle.get(bundleContentPrefix + "." + this.name + ".name", this.name);
+        this.description = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".description");
+        this.details = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".details");
+        this.credit = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".credit");
     }
 
     public LoreEntry(String name, boolean alwaysUnlocked){
