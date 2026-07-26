@@ -38,6 +38,7 @@ public class TerraMod extends Mod{
         
         EntityRegister.load();
         InnerBlock.load();
+        TerraLore.load();
         TerraSounds.load();
         //TerraFx.load();
         TerraStatusEffects.load();
