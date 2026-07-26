@@ -7,7 +7,7 @@ public class TerraLore {
 
     public static void load() {
         test = new LoreEntry("test", true){{
-            alwaysUnlocked = false;
+            allDatabaseTabs = true;
         }}; 
     }
 }
