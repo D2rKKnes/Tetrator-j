@@ -24,7 +24,7 @@ public class LoreEntry extends UnlockableContent{
     }
 
     public LoreEntry(String name, boolean alwaysUnlocked){
-        super(name);
+        this(name);
         this.alwaysUnlocked = alwaysUnlocked;
     }
 
