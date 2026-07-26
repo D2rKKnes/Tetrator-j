@@ -31,12 +31,8 @@ public class LoreEntry extends UnlockableContent{
     @Override
     public void loadIcon(){
         super.loadIcon();
-        if(fullIcon == null || !fullIcon.found()){
-            fullIcon = Core.atlas.find("book");
-        }
-        if(uiIcon == null || !uiIcon.found()){
-            uiIcon = Core.atlas.find("book");
-        }
+        if(!fullIcon || !fullIcon.found()) fullIcon = Core.atlas.find("terra-book");
+        if(!uiIcon || !uiIcon.found()) uiIcon = Core.atlas.find("terra-book");
     }
 
     @Override
