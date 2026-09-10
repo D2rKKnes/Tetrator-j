@@ -14,10 +14,13 @@ import mindustry.world.meta.*;
 
 public class AdvancedItem extends Item {
     public static final Stat statthreat = new Stat("statthreat", StatCat.function);
+    public static final Stat statmagnetic = new Stat("magnetic", StatCat.function);
 
     public float threat = -1;
     public boolean showThreat = true;
     public float threatMul = -1;
+
+    public float magnetic = 0;
 
     public boolean spawnBulletOnDestroy = false;
     public float spawnBulletChance = 0.01f;
@@ -114,6 +117,7 @@ public class AdvancedItem extends Item {
     @Override
     public void setStats() {
         super.setStats();
+        stats.addPercent(statmagnetic, magnetic);
         if (showThreat && threat >= 0) {
             Color tCol = Color.white.cpy().lerp(Color.red, Mathf.clamp(threat));
             stats.add(statthreat, "[#" + tCol.toString() + "]" + Strings.fixed(threat * 100f, 0) + "%[]");
