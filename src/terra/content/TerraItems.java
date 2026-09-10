@@ -117,6 +117,7 @@ public class TerraItems{
             cost = 60f;
             healthScaling = 5f;
             //charge = 10f;
+            magnetic = 2.5f;
             threat = 0.6f;
             
             spawnBulletOnDestroy = true;
@@ -165,7 +166,7 @@ public class TerraItems{
         }};
         gravititeLattice = new AdvancedItem("gravitite-lattice", Color.valueOf("ebb8d7")){{
             cost = 1.8f;
-            magnetic = 1;
+            magnetic = 1f;
         }};
         obsidianPowder = new AdvancedItem("obsidian-powder", Color.valueOf("292638")){{
             cost = 1.1f;
