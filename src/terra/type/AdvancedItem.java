@@ -17,10 +17,10 @@ public class AdvancedItem extends Item {
     public static final Stat statmagnetic = new Stat("magnetic", StatCat.function);
 
     public float threat = -1;
-    public boolean showThreat = true;
+    public boolean showThreat = false;
     public float threatMul = -1;
 
-    public float magnetic = 0;
+    public float magnetic = 0f;
 
     public boolean spawnBulletOnDestroy = false;
     public float spawnBulletChance = 0.01f;
@@ -35,6 +35,17 @@ public class AdvancedItem extends Item {
     public float damageRand = 0.5f;
     public boolean damagePercent = true;
     public mindustry.entities.Effect damageEffect;
+
+    public AdvancedItem(String name, Color color, boolean showThreat){
+        super(name);
+        this.color = color;
+        this.showThreat = showThreat;
+    }
+
+    public AdvancedItem(String name, Color color){
+        super(name);
+        this.color = color;
+    }
 
     public AdvancedItem(String name) {
         super(name);
