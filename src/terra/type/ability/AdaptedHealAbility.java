@@ -1,15 +1,17 @@
 package terra.type.ability;
 
-import arc.func.Cons;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Lines;
+import arc.func.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
 import mindustry.entities.Effect;
-import arc.util.Time;
-import mindustry.entities.Units;
+import arc.util.*;
+import arc.audio.*;
+import arc.math.*;
+import mindustry.entities.*;
 import mindustry.entities.abilities.RepairFieldAbility;
 import mindustry.gen.Unit;
 import mindustry.graphics.Pal;
+import java.util.*;
 
 public class AdaptedHealAbility extends RepairFieldAbility {
     public Color applyColor = Pal.heal;
