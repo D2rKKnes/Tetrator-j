@@ -19,21 +19,21 @@ public class TerraItems{
 
             carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
             sodium,
-            tantalium, ruthenium, obsidianPowder, tenirite,
+            tantalium, ruthenium, gravitite, gravititeLattice, obsidianPowder, tenirite,
             silver, fish;
 
     public static void load(){
-        carbon = new Item("carbon", Color.valueOf("3c4448")){{
+        carbon = new AdvancedItem("carbon", Color.valueOf("3c4448")){{
             flammability = 1.25f;
             explosiveness = 0.2f;
             hardness = 2;
         }};
-        diamondDust = new Item("diamond-dust", Color.valueOf("ffffff")){{
+        diamondDust = new AdvancedItem("diamond-dust", Color.valueOf("ffffff")){{
             cost = 0.75f;
             hardness = 4;
             healthScaling = 2f;
         }};
-        diamondGlass = new Item("diamond-glass", Color.valueOf("e1e9f0")){{
+        diamondGlass = new AdvancedItem("diamond-glass", Color.valueOf("e1e9f0")){{
             cost = 1.5f;
             hardness = 4;
             healthScaling = 1.3f;
@@ -43,30 +43,28 @@ public class TerraItems{
             explosiveness = 1f;
             healthScaling = -0.1f;
         }};*/
-        titaniumPlate = new Item("titanium-plate", Color.valueOf("787ac9")){{
+        titaniumPlate = new AdvancedItem("titanium-plate", Color.valueOf("787ac9")){{
             cost = 1.2f;
             healthScaling = 0.6f;
         }};
-        rawThermoxite = new Item("raw-thermoxite", Color.valueOf("ff7163")){{
+        rawThermoxite = new AdvancedItem("raw-thermoxite", Color.valueOf("ff7163")){{
             cost = 0.8f;
             hardness = 4;
             radioactivity = 0.2f;
         }};
-        thermoxite = new Item("thermoxite", Color.valueOf("e13131")){{
+        thermoxite = new AdvancedItem("thermoxite", Color.valueOf("e13131")){{
             cost = 1.5f;
             hardness = 5;
             radioactivity = 0.6f;
             charge = 0.3f;
         }};
-        uranium = new Item("uranium"){{
-            color = Color.valueOf("75ab77");
+        uranium = new AdvancedItem("uranium", Color.valueOf("75ab77")){{
             cost = 1.7f;
             hardness = 5;
             radioactivity = 3f;
             explosiveness = 0.3f;
         }};
-        plutonium = new AdvancedItem("plutonium"){{
-            color = Color.valueOf("83a8ad");
+        plutonium = new AdvancedItem("plutonium", Color.valueOf("83a8ad"), true){{
             cost = 5.8f;
             hardness = 6;
             healthScaling = -0.1f;
@@ -87,8 +85,7 @@ public class TerraItems{
             transitionFrames = 10;
             //hidden = true;
         }};*/
-        fissileCrystals = new Item("fissile-crystals"){{
-            color = Color.valueOf("50a354");
+        fissileCrystals = new AdvancedItem("fissile-crystals", Color.valueOf("50a354")){{
             cost = 10f;
             hardness = 6;
             healthScaling = -0.1f;
@@ -96,8 +93,7 @@ public class TerraItems{
             explosiveness = 0.4f;
             charge = 0.2f;
         }};
-        gammaCell = new Item("gamma-cell"){{
-            color = Color.valueOf("bcff73");
+        gammaCell = new AdvancedItem("gamma-cell", Color.valueOf("bcff73")){{
             cost = 10f;
             hardness = 6;
             radioactivity = 3f;
@@ -105,21 +101,19 @@ public class TerraItems{
             frames = 2;
             transitionFrames = 10;
         }};
-        cesium = new AdvancedItem("cesium"){{
-            color = Color.valueOf("bebdc3");
+        cesium = new AdvancedItem("cesium", Color.valueOf("bebdc3"), true){{
             cost = 20f;
             healthScaling = -0.3f;
             radioactivity = 7850f;
             threat = 1f;
             hidden = true;
         }};
-        darkSteel = new Item("dark-steel", Color.valueOf("6e7080")){{
+        darkSteel = new AdvancedItem("dark-steel", Color.valueOf("6e7080")){{
             cost = 2f;
             hardness = 5;
             healthScaling = 0.5f;
         }};
-        tesseract = new AdvancedItem("tesseract"){{
-            color = Color.valueOf("010101");
+        tesseract = new AdvancedItem("tesseract", Color.valueOf("010101"), true){{
             cost = 60f;
             healthScaling = 5f;
             //charge = 10f;
@@ -160,29 +154,36 @@ public class TerraItems{
             damageEffect = Fx.circleColorSpark;
         }};
 
-        sodium = new Item("sodium", Color.valueOf("d1e4ff")){{
+        sodium = new AdvancedItem("sodium", Color.valueOf("d1e4ff")){{
             flammability = 1.75f;
             explosiveness = 1.5f;
         }};
 
-        obsidianPowder = new Item("obsidian-powder", Color.valueOf("292638")){{
+        tantalium = new AdvancedItem("tantalium", Color.valueOf("8380a2")){{
+            cost = 1.1f;
+            hardness = 2;
+        }};
+        gravititeLattice = new AdvancedItem("gravitite-lattice", Color.valueOf("ebb8d7")){{
+            cost = 1.8f;
+            magnetic = 1;
+        }};
+        obsidianPowder = new AdvancedItem("obsidian-powder", Color.valueOf("292638")){{
             cost = 1.1f;
             hardness = 1;
         }};
-        tenirite = new Item("tenirite", Color.valueOf("9681fb")){{
+        tenirite = new AdvancedItem("tenirite", Color.valueOf("9681fb")){{
             cost = 2.4f;
             hardness = 6;
             healthScaling = 1.5f;
             charge = 0.1f;
         }};
 
-        silver = new Item("silver", Color.valueOf("b1b4cc")){{
+        silver = new AdvancedItem("silver", Color.valueOf("b1b4cc")){{
             cost = 1.4f;
             hardness = 3;
             healthScaling = 1.1f;
         }};
-        fish = new AdvancedItem("fish"){{
-            color = Color.valueOf("807e7f");
+        fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
             hardness = 0;
             flammability = 0.03f;
