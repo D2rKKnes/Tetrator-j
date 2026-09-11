@@ -22,13 +22,15 @@ public class TerraItems{
             carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
             //erekir - gier - notva(?)
             sodium,
-            //tantros - nebula
+            //tantros - nebula - notva(?)
             
             //1RXS system
             //copis
-            tantalium, ruthenium, gravitite, gravititeLattice, obsidianPowder, tenirite,
+            tantalium, ruthenium, xAlloy, yAlloy, zAlloy, silver, gravitite, gravititeLattice, obsidianPowder, tenirite,
+            //copis - ammo
+            tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
             //other and unused
-            silver, fish;
+            fish;
 
     public static void load(){
         carbon = new AdvancedItem("carbon", Color.valueOf("3c4448")){{
@@ -175,6 +177,16 @@ public class TerraItems{
         ruthenium = new AdvancedItem("ruthenium", Color.valueOf("dbe3b5")){{
             hardness = 2;
         }};
+        xAlloy = new AdvancedItem("x-alloy", Color.valueOf("bdc1b4")){{
+            cost = 1.4f;
+            hardness = 2;
+            healthScaling = 0.2f;
+        }};
+        silver = new AdvancedItem("silver", Color.valueOf("b1b4cc")){{
+            cost = 1.4f;
+            hardness = 3;
+            healthScaling = 1.1f;
+        }};
         gravitite = new AdvancedItem("gravitite", Color.valueOf("bc70a1")){{
             cost = 2f;
             hardness = 4;
@@ -195,11 +207,10 @@ public class TerraItems{
             charge = 0.1f;
         }};
 
-        silver = new AdvancedItem("silver", Color.valueOf("b1b4cc")){{
-            cost = 1.4f;
-            hardness = 3;
-            healthScaling = 1.1f;
-        }};
+        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", Color.valueOf("8380a2"));
+        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", Color.valueOf("8380a2"));
+        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", Color.valueOf("8380a2"));
+
         fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
             hardness = 0;
