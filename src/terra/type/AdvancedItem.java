@@ -37,13 +37,13 @@ public class AdvancedItem extends Item {
     public mindustry.entities.Effect damageEffect;
 
     public AdvancedItem(String name, Color color, boolean showThreat){
-        super(name);
+        this(name);
         this.color = color;
         this.showThreat = showThreat;
     }
 
     public AdvancedItem(String name, Color color){
-        super(name);
+        this(name);
         this.color = color;
     }
 
