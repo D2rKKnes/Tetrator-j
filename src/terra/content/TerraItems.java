@@ -19,7 +19,7 @@ public class TerraItems{
 
             //solar system
             //serpulo - verilus
-            carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
+            carbon, diamondDust, diamondGlass,  titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
             //erekir - gier - notva(?)
             sodium,
             //tantros - nebula - notva(?)
@@ -30,7 +30,7 @@ public class TerraItems{
             //copis - ammo
             tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
             //other and unused
-            fish;
+            fish, cryotite;
 
     public static void load(){
         carbon = new AdvancedItem("carbon", Color.valueOf("3c4448")){{
@@ -207,9 +207,9 @@ public class TerraItems{
             charge = 0.1f;
         }};
 
-        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", Color.valueOf("8380a2"));
-        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", Color.valueOf("8380a2"));
-        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", Color.valueOf("8380a2"));
+        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().darken(0.1f));
+        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().darken(0.2f));
+        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().darken(0.3f));
 
         fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
