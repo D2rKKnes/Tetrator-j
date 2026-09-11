@@ -13,14 +13,14 @@ import mindustry.type.*;
 import mindustry.world.meta.*;
 
 public class AdvancedItem extends Item {
-    public static final Stat statthreat = new Stat("statthreat", StatCat.function);
     public static final Stat statmagnetic = new Stat("magnetic", StatCat.function);
+    public static final Stat statthreat = new Stat("statthreat", StatCat.function);
 
+    public float magnetic = 0f;
+    
     public float threat = -1;
     public boolean showThreat = false;
     public float threatMul = -1;
-
-    public float magnetic = 0f;
 
     public boolean spawnBulletOnDestroy = false;
     public float spawnBulletChance = 0.01f;
