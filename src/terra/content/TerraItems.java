@@ -17,9 +17,17 @@ import static mindustry.content.Items.*;
 public class TerraItems{
     public static Item
 
+            //solar system
+            //serpulo - verilus
             carbon, diamondDust, diamondGlass, cryotite, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
+            //erekir - gier - notva(?)
             sodium,
+            //tantros - nebula
+            
+            //1RXS system
+            //copis
             tantalium, ruthenium, gravitite, gravititeLattice, obsidianPowder, tenirite,
+            //other and unused
             silver, fish;
 
     public static void load(){
@@ -161,8 +169,16 @@ public class TerraItems{
         }};
 
         tantalium = new AdvancedItem("tantalium", Color.valueOf("8380a2")){{
-            cost = 1.1f;
+            cost = 1.2f;
             hardness = 2;
+        }};
+        ruthenium = new AdvancedItem("ruthenium", Color.valueOf("dbe3b5")){{
+            hardness = 2;
+        }};
+        gravitite = new AdvancedItem("gravitite", Color.valueOf("bc70a1")){{
+            cost = 2f;
+            hardness = 4;
+            magnetic = 0.75f;
         }};
         gravititeLattice = new AdvancedItem("gravitite-lattice", Color.valueOf("ebb8d7")){{
             cost = 1.8f;
