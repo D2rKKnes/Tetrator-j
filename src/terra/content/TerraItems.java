@@ -207,9 +207,9 @@ public class TerraItems{
             charge = 0.1f;
         }};
 
-        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().darken(0.1f));
-        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().darken(0.2f));
-        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().darken(0.3f));
+        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().mul(0.9f));
+        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().mul(0.8f));
+        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().mul(0.7f));
 
         fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
