@@ -1341,7 +1341,7 @@ public class TerraUnitTypes {
                     lightColor = Pal.yellowBoltFront;
 
                     lifetime = 55f;
-                    buildingDamageMultiplier = 0.01f;
+                    buildingDamageMultiplier = 0f;
                     homingPower = 0.02f;
                     armorMultiplier = 0.9f;
                     healPercent = 1.6f;
