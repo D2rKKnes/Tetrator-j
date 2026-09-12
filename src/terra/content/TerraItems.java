@@ -19,16 +19,17 @@ public class TerraItems{
 
             //solar system
             //serpulo - verilus
-            carbon, diamondDust, diamondGlass,  titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
+            carbon, diamondDust, diamondGlass, titaniumPlate, darkSteel, rawThermoxite, thermoxite, uranium, plutonium, fissileCrystals, gammaCell, cesium, tesseract,
             //erekir - gier - notva(?)
             sodium,
             //tantros - nebula - notva(?)
             
             //1RXS system
             //copis
-            tantalium, ruthenium, xAlloy, yAlloy, zAlloy, silver, gravitite, gravititeLattice, obsidianPowder, tenirite,
+            tantalium, ruthenium, xAlloy, obsidianPowder, obsidianRubber, tenirite, silver, gravitite, gravititeLattice, yAlloy, yAlloyRoll, zAlloy, 
             //copis - ammo
             tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
+            gravititeAmmo1, gravititeAmmo2, gravititeAmmo3,
             //other and unused
             fish, cryotite;
 
@@ -182,6 +183,19 @@ public class TerraItems{
             hardness = 2;
             healthScaling = 0.2f;
         }};
+        obsidianPowder = new AdvancedItem("obsidian-powder", Color.valueOf("292638")){{
+            cost = 1.1f;
+            hardness = 1;
+        }};
+        obsidianRubber = new AdvancedItem("obsidian-rubber", Color.valueOf("1b1925")){{
+            cost = 1.3f;
+        }};
+        tenirite = new AdvancedItem("tenirite", Color.valueOf("9681fb")){{
+            cost = 2.4f;
+            hardness = 6;
+            healthScaling = 1.5f;
+            charge = 0.1f;
+        }};
         silver = new AdvancedItem("silver", Color.valueOf("b1b4cc")){{
             cost = 1.4f;
             hardness = 3;
@@ -196,20 +210,19 @@ public class TerraItems{
             cost = 1.8f;
             magnetic = 1f;
         }};
-        obsidianPowder = new AdvancedItem("obsidian-powder", Color.valueOf("292638")){{
-            cost = 1.1f;
-            hardness = 1;
-        }};
-        tenirite = new AdvancedItem("tenirite", Color.valueOf("9681fb")){{
-            cost = 2.4f;
-            hardness = 6;
-            healthScaling = 1.5f;
-            charge = 0.1f;
+        yAlloy = new AdvancedItem("y-alloy", Color.valueOf("cbd97f")){{
+            cost = 1.7f;
+            hardness = 4;
+            healthScaling = 0.5f;
+            magnetic = 0.4f;
         }};
 
         tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().mul(0.9f));
         tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().mul(0.8f));
         tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().mul(0.7f));
+        gravititeAmmo1 = new AdvancedItem("gravitite-light-ammo", silver.color.cpy().mul(0.9f));
+        gravititeAmmo2 = new AdvancedItem("gravitite-medium-ammo", silver.color.cpy().mul(0.8f));
+        gravititeAmmo3 = new AdvancedItem("gravitite-heavy-ammo", silver.color.cpy().mul(0.7f));
 
         fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
