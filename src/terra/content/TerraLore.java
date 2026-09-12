@@ -7,6 +7,6 @@ public class TerraLore {
 
     public static void load() {
         test = new LoreEntry("test", true);
-        spatialAnomaly = new LoreEntry("spatialAnomaly");
+        spatialAnomaly = new LoreEntry("spatial-anomaly");
     }
 }
