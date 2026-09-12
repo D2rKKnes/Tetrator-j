@@ -6,8 +6,7 @@ public class TerraLore {
     public static LoreEntry test;
 
     public static void load() {
-        test = new LoreEntry("test", true){{
-            allDatabaseTabs = true;
-        }}; 
+        test = new LoreEntry("test", true);
+        thermoxite = new LoreEntry("thermoxite");
     }
 }
