@@ -216,6 +216,11 @@ public class TerraItems{
             healthScaling = 0.5f;
             magnetic = 0.4f;
         }};
+        yAlloyRoll = new AdvancedItem("y-alloy-roll", Color.valueOf("edf3a9")){{
+            cost = 1.5f;
+            healthScaling = 0.8f;
+            magnetic = 0.2f;
+        }};
 
         tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().mul(0.9f));
         tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().mul(0.8f));
