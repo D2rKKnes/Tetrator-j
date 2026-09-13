@@ -54,9 +54,9 @@ public class TerraUnitTypes {
     
     //green erekir
     flow, greenMissile, threshold, turn, movement, consequence,
-    //from New Horizon
+    //doom & despair
     calamity, 
-    endSpawn, endGuard, end,
+    endSpawn, endGuard, endBattleship, //end,
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
@@ -2803,7 +2803,7 @@ public class TerraUnitTypes {
             }
         };
 
-        end = new UnitType("end"){{
+        endBattleship = new UnitType("end-battleship"){{
             hideDetails = false;
             flying = true;
             speed = 0.22f;
@@ -2812,7 +2812,7 @@ public class TerraUnitTypes {
             accel = 0.04f;
             hitSize = 150f;
             softShadowScl = 0.6f;
-            health = 1250000;
+            health = 2500000;
             armor = 260;
             engineSize = engineOffset = 0f;
             drawCell = false;
