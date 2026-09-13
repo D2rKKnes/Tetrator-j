@@ -107,27 +107,27 @@ public class TerraVerilusTree {
             node(flight, () -> {
                 node(leadWall, () -> {
                     node(leadWallLarge, () -> {
-                        node(leadWallHuge, () -> {
+                        if(Core.settings.getBool("enableblocks", false)){node(leadWallHuge, () -> {
                             node(leadWallGigantic, () -> {});
-                        });
+                        });}
                     });
                     node(titaniumWall, () -> {
                         node(titaniumWallLarge, () -> {
-                            node(titaniumWallHuge, () -> {
+                            if(Core.settings.getBool("enableblocks", false)){node(titaniumWallHuge, () -> {
                                 node(titaniumWallGigantic, () -> {});
-                            });
+                            });}
                         });
                         node(thoriumWall, () -> {
                             node(thoriumWallLarge, () -> {
-                                node(thoriumWallHuge, () -> {
+                                if(Core.settings.getBool("enableblocks", false)){node(thoriumWallHuge, () -> {
                                     node(thoriumWallGigantic, () -> {});
-                                });
+                                });}
                             });
                             node(phaseWall, () -> {
                                 node(phaseWallLarge, () -> {
-                                    node(phaseWallHuge, () -> {
+                                    if(Core.settings.getBool("enableblocks", false)){node(phaseWallHuge, () -> {
                                         node(phaseWallGigantic, () -> {});
-                                    });
+                                    });}
                                 });
                             });
                             node(darkSteelWall, () -> {
