@@ -1610,10 +1610,6 @@ public class TerraUnitTypes {
                 mirror = false;
                 recoil = 1f;
                 inaccuracy = 15f;
-                shoot = new ShootPattern(){{
-                    shots = 3;
-                    shotDelay = 0.2f;
-                }};
                 shootCone = inaccuracy + 5f;
                 shootSound = Sounds.explosionCleroi;
 
@@ -1626,7 +1622,7 @@ public class TerraUnitTypes {
                     trailWidth = 1.6f;
                     trailLength = 3;
                     shootEffect = smokeEffect = Fx.none;
-                    hitEffect = despawnEffect = new Effect(150f, 100f, e -> {
+                    hitEffect = despawnEffect = new Effect(80f, 100f, e -> {
                         color(e.color, e.foutpow());
                         Fill.circle(e.x, e.y, 15f + e.finpow() * 32f * 8f);
                     }).layer(Layer.bullet + 2f);
