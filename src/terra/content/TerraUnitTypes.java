@@ -1523,8 +1523,7 @@ public class TerraUnitTypes {
         myDoom = new UnitType("my-doom"){{ //MyDoom.exe Imput command > execute Doomsday.js
             flying = true;
             drawCell = false;
-            isEnemy = false;
-            killable = hittable = targetable = physics = false;
+            isEnemy = killable = hittable = targetable = physics = bounded = false;
             logicControllable = false;
             hidden = true;
             speed = 10f;
@@ -1533,7 +1532,7 @@ public class TerraUnitTypes {
             accel = 0.95f;
             mineSpeed = Float.POSITIVE_INFINITY;
             mineTier = 1000;
-            mineRange = buildRange = Float.POSITIVE_INFINITY;
+            mineRange = buildRange = 100000;
             mineWalls = true;
             mineHardnessScaling = false;
             buildSpeed = Float.POSITIVE_INFINITY;
@@ -1559,7 +1558,8 @@ public class TerraUnitTypes {
 
             abilities.add(new AdaptedHealAbility(Float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
 
-            weapons.add(new Weapon(){{
+            weapons.add(
+            new Weapon(){{
                 top = false;
                 reload = 1f;
                 x = 0f;
@@ -1599,6 +1599,49 @@ public class TerraUnitTypes {
                     statusDuration = Float.POSITIVE_INFINITY;
                 }};
             }},
+            new Weapon(){{
+                top = false;
+                reload = 40f;
+                x = 0f;
+                y = 0f;
+                shootY = 0f;
+                rotate = true;
+                rotateSpeed = Float.POSITIVE_INFINITY;
+                mirror = false;
+                recoil = 1f;
+                inaccuracy = 15f;
+                shoot = new ShootPattern(){{
+                    shots = 3;
+                    shotDelay = 0.2f;
+                }};
+                shootCone = inaccuracy + 5f;
+                shootSound = Sounds.explosionCleroi;
+
+                bullet = new BasicBulletType(8f, Float.POSITIVE_INFINITY){{
+                    sprite = "terra-star";
+                    keepVelocity = false;
+                    width = 32f;
+                    height = 32f;
+                    shrinkX = shrinkY = 0f;
+                    trailWidth = 1.6f;
+                    trailLength = 3;
+                    shootEffect = smokeEffect = Fx.none;
+                    hitEffect = despawnEffect = new Effect(150f, 100f, e -> {
+                        color(e.color, e.foutpow());
+                        Fill.circle(e.x, e.y, 15f + e.finpow() * 32f * 8f);
+                    }).layer(Layer.bullet + 2f);
+                    backColor = trailColor = hitColor = Color.valueOf("f53036");
+                    frontColor = lightColor = Color.valueOf("ff786e");
+
+                    splashDamage = damage;
+                    splashDamageRadius = 32f * 8f;
+                    lifetime = 100f;
+                    armorMultiplier = 0f;
+                    homingPower = 0.04f;
+                    status = TerraStatusEffects.instantDeath;
+                    statusDuration = Float.POSITIVE_INFINITY;
+                }};
+            }},
             new RepairBeamWeapon(){{
                 mirror = false;
                 shootY = x = y = 0f;
@@ -1619,7 +1662,7 @@ public class TerraUnitTypes {
                 immunities = new ObjectSet<>();
                 for (StatusEffect effect : Vars.content.statusEffects()) {
                     if (effect == null) continue;
-                    immunities.add(effect); //yes ALL effects, including buffs
+                    immunities.add(effect);
                 }
             }
         };
