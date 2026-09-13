@@ -113,8 +113,6 @@ public class TerraBlocks{
     //logic
     primeProcessor;
     //OTHER =---
-
-    public static BuildVisibility specialContent = new BuildVisibility(() -> Core.settings.getBool("enableblocks", false) ? true : BuildVisibility.sandboxOnly.visible());
     
     public static void load(){
         //VERILUS & SERPULO =---
@@ -122,12 +120,12 @@ public class TerraBlocks{
         int wallHealthMultiplier = 4;
         
         copperWallHuge = new Wall("copper-wall-huge"){{
-            requirements(Category.defense, with(Items.copper, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.copper, 6 * 9));
             health = 80 * 9 * wallHealthMultiplier;
             size = 3;
         }};
         copperWallGigantic = new Wall("copper-wall-gigantic"){{
-            requirements(Category.defense, with(Items.copper, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.copper, 6 * 16));
             health = 80 * 16 * wallHealthMultiplier;
             size = 4;
         }};
@@ -191,7 +189,7 @@ public class TerraBlocks{
             hitBulletSpawnChance = 0f;
         }};
         leadWallHuge = new AdvancedWall("lead-wall-huge"){{
-            requirements(Category.defense, ItemStack.with(Items.lead, 45));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, ItemStack.with(Items.lead, 45));
             health = 60 * wallHealthMultiplier * 9;
             size = 3;
             envDisabled |= Env.scorching;
@@ -221,7 +219,7 @@ public class TerraBlocks{
             hitBulletSpawnChance = 0f;
         }};
         leadWallGigantic = new AdvancedWall("lead-wall-gigantic"){{
-            requirements(Category.defense, ItemStack.with(Items.lead, 80));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, ItemStack.with(Items.lead, 80));
             health = 60 * wallHealthMultiplier * 16;
             size = 4;
             envDisabled |= Env.scorching;
@@ -251,12 +249,12 @@ public class TerraBlocks{
             hitBulletSpawnChance = 0f;
         }};
         titaniumWallHuge = new Wall("titanium-wall-huge"){{
-            requirements(Category.defense, with(Items.titanium, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.titanium, 6 * 9));
             health = 110 * 9 * wallHealthMultiplier;
             size = 3;
         }};
         titaniumWallGigantic = new Wall("titanium-wall-gigantic"){{
-            requirements(Category.defense, with(Items.titanium, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.titanium, 6 * 16));
             health = 110 * 16 * wallHealthMultiplier;
             size = 4;
         }};
@@ -269,7 +267,7 @@ public class TerraBlocks{
             schematicPriority = 10;
         }};
         plastaniumWallGigantic = new Wall("plastanium-wall-gigantic"){{
-            requirements(Category.defense, with(Items.plastanium, 5 * 16, Items.metaglass, 2 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.plastanium, 5 * 16, Items.metaglass, 2 * 16));
             health = 125 * wallHealthMultiplier * 16;
             size = 4;
             insulated = true;
@@ -277,37 +275,37 @@ public class TerraBlocks{
             schematicPriority = 10;
         }};
         thoriumWallHuge = new Wall("thorium-wall-huge"){{
-            requirements(Category.defense, with(Items.thorium, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.thorium, 6 * 9));
             health = 200 * 9 * wallHealthMultiplier;
             size = 3;
         }};
         thoriumWallGigantic = new Wall("thorium-wall-gigantic"){{
-            requirements(Category.defense, with(Items.thorium, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.thorium, 6 * 16));
             health = 200 * 16 * wallHealthMultiplier;
             size = 4;
         }};
         phaseWallHuge = new Wall("phase-wall-huge"){{
-            requirements(Category.defense, with(Items.phaseFabric, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.phaseFabric, 6 * 9));
             health = 150 * 9 * wallHealthMultiplier;
             size = 3;
             chanceDeflect = 10f;
             flashHit = true;
         }};
         phaseWallGigantic = new Wall("phase-wall-gigantic"){{
-            requirements(Category.defense, with(Items.phaseFabric, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.phaseFabric, 6 * 16));
             health = 150 * 16 * wallHealthMultiplier;
             size = 4;
             chanceDeflect = 10f;
             flashHit = true;
         }};
         surgeWallHuge = new Wall("surge-wall-huge"){{
-            requirements(Category.defense, with(Items.surgeAlloy, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.surgeAlloy, 6 * 9));
             health = 230 * 9 * wallHealthMultiplier;
             size = 3;
             lightningChance = 0.05f;
         }};
         surgeWallGigantic = new Wall("surge-wall-gigantic"){{
-            requirements(Category.defense, with(Items.surgeAlloy, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.surgeAlloy, 6 * 16));
             health = 230 * 16 * wallHealthMultiplier;
             size = 4;
             lightningChance = 0.05f;
@@ -435,7 +433,7 @@ public class TerraBlocks{
             hitBulletSpeedRandScl = 0.4f;
         }};
         metaglassWallGigantic = new AdvancedWall("metaglass-wall-gigantic"){{
-            requirements(Category.defense, specialContent, with(Items.metaglass, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.metaglass, 6 * 16));
             health = 380 * 16;
             size = 4;
             hitBullet = new BasicBulletType(){{
@@ -469,7 +467,7 @@ public class TerraBlocks{
             hitBulletSpeedRandScl = 0.4f;
         }};
         darkSteelWallSmall = new AdvancedWall("dark-steel-wall-small"){{
-            requirements(Category.defense, specialContent, with(TerraItems.darkSteel, 6, TerraItems.diamondGlass, 6 / 2));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(TerraItems.darkSteel, 6, TerraItems.diamondGlass, 6 / 2));
             health = 960;
             size = 1;
             absorbLasers = true;
@@ -502,7 +500,7 @@ public class TerraBlocks{
             hitBulletOnDeath = false;
         }};
         darkSteelWallHuge = new AdvancedWall("dark-steel-wall-huge"){{
-            requirements(Category.defense, specialContent, with(TerraItems.darkSteel, 6 * 16, TerraItems.diamondGlass, (6 * 16) / 2));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(TerraItems.darkSteel, 6 * 16, TerraItems.diamondGlass, (6 * 16) / 2));
             health = 960 * 16;
             size = 4;
             absorbLasers = true;
@@ -1887,27 +1885,27 @@ public class TerraBlocks{
             size = 3;
         }};
         berylliumWallGigantic = new Wall("beryllium-wall-gigantic"){{
-            requirements(Category.defense, with(Items.beryllium, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.beryllium, 6 * 16));
             health = 130 * 16 * wallHealthMultiplier;
             armor = 2f;
             size = 4;
         }};
         tungstenWallHuge = new Wall("tungsten-wall-huge"){{
-            requirements(Category.defense, with(Items.tungsten, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.tungsten, 6 * 9));
             health = 180 * 9 * wallHealthMultiplier;
             armor = 14f;
             buildCostMultiplier = 2f;
             size = 3;
         }};
         tungstenWallGigantic = new Wall("tungsten-wall-gigantic"){{
-            requirements(Category.defense, with(Items.tungsten, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.tungsten, 6 * 16));
             health = 180 * 16 * wallHealthMultiplier;
             armor = 14f;
             buildCostMultiplier = 2f;
             size = 4;
         }};
         blastGate = new AutoDoor("blast-gate"){{
-            requirements(Category.defense, with(Items.tungsten, 6, Items.silicon, 6));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.tungsten, 6, Items.silicon, 6));
             health = 175 * wallHealthMultiplier;
             armor = 14f;
         }};
@@ -1918,13 +1916,13 @@ public class TerraBlocks{
             size = 3;
         }};
         blastDoorHuge = new AutoDoor("blast-door-huge"){{
-            requirements(Category.defense, with(Items.tungsten, 6 * 16, Items.silicon, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.tungsten, 6 * 16, Items.silicon, 6 * 16));
             health = 175 * wallHealthMultiplier * 16;
             armor = 14f;
             size = 4;
         }};
         reinforcedSurgeWallHuge = new Wall("reinforced-surge-wall-huge"){{
-            requirements(Category.defense, with(Items.surgeAlloy, 6 * 9, Items.tungsten, 2 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.surgeAlloy, 6 * 9, Items.tungsten, 2 * 9));
             health = 250 * wallHealthMultiplier * 9;
             lightningChance = 0.05f;
             lightningDamage = 30f;
@@ -1932,7 +1930,7 @@ public class TerraBlocks{
             size = 3;
         }};
         reinforcedSurgeWallGigantic = new Wall("reinforced-surge-wall-gigantic"){{
-            requirements(Category.defense, with(Items.surgeAlloy, 6 * 16, Items.tungsten, 2 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.surgeAlloy, 6 * 16, Items.tungsten, 2 * 16));
             health = 250 * wallHealthMultiplier * 16;
             lightningChance = 0.05f;
             lightningDamage = 30f;
@@ -1940,19 +1938,19 @@ public class TerraBlocks{
             size = 4;
         }};
         carbideWallHuge = new Wall("carbide-wall-huge"){{
-            requirements(Category.defense, with(Items.thorium, 6 * 9, Items.carbide, 6 * 9));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.thorium, 6 * 9, Items.carbide, 6 * 9));
             health = 270 * 9 * wallHealthMultiplier;
             armor = 16f;
             size = 3;
         }};
         carbideWallGigantic = new Wall("carbide-wall-gigantic"){{
-            requirements(Category.defense, with(Items.thorium, 6 * 16, Items.carbide, 6 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, with(Items.thorium, 6 * 16, Items.carbide, 6 * 16));
             health = 270 * 16 * wallHealthMultiplier;
             armor = 16f;
             size = 4;
         }};
         shieldedWallSmall = new ShieldWall("shielded-wall-small"){{
-            requirements(Category.defense, specialContent, ItemStack.with(Items.phaseFabric, 5, Items.surgeAlloy, 3, Items.beryllium, 3));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, ItemStack.with(Items.phaseFabric, 5, Items.surgeAlloy, 3, Items.beryllium, 3));
             consumePower((3f / 4f) / 60f);
 
             outputsPower = false;
@@ -1984,7 +1982,7 @@ public class TerraBlocks{
             size = 3;
         }};
         shieldedWallHuge = new ShieldWall("shielded-wall-huge"){{
-            requirements(Category.defense, specialContent, ItemStack.with(Items.phaseFabric, 5 * 16, Items.surgeAlloy, 3 * 16, Items.beryllium, 3 * 16));
+            requirements(Category.defense, TerraBuildVisibility.specialContent, ItemStack.with(Items.phaseFabric, 5 * 16, Items.surgeAlloy, 3 * 16, Items.beryllium, 3 * 16));
             consumePower(((3f / 4f) * 16f) / 60f);
 
             outputsPower = false;
