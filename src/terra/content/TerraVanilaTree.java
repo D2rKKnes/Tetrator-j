@@ -32,25 +32,25 @@ public class TerraVanilaTree{
             });
         });
         vanillaNode(copperWallLarge, () -> {
-            node(copperWallHuge, Seq.with(new Research(scrapWallGigantic)), () -> {
+            if(Core.settings.getBool("enableblocks", false)){node(copperWallHuge, Seq.with(new Research(scrapWallGigantic)), () -> {
                 node(copperWallGigantic, Seq.with(new Research(scrapWallColossol)), () -> {});
-            });
+            });}
             node(leadWall, Seq.with(new OnSector(frozenForest)), () -> {
                 node(leadWallLarge, () -> {
-                    node(leadWallHuge, Seq.with(new Research(copperWallGigantic)), () -> {
+                    if(Core.settings.getBool("enableblocks", false)){node(leadWallHuge, Seq.with(new Research(copperWallGigantic)), () -> {
                         node(leadWallGigantic, () -> {});
-                    });
+                    });}
                 });
             });
             node(metaglassWall, Seq.with(new OnSector(ruinousShores)), () -> {
                 node(metaglassWallLarge, () -> {
-                    node(metaglassWallHuge, Seq.with(new Research(copperWallHuge)), () -> {
+                    node(metaglassWallHuge, () -> {
                         if(Core.settings.getBool("enableblocks", false)){node(metaglassWallGigantic, () -> {});}
                     });
                 });
             });
         });
-        vanillaNode(titaniumWallLarge, () -> {
+        if(Core.settings.getBool("enableblocks", false)){vanillaNode(titaniumWallLarge, () -> {
             node(titaniumWallHuge, Seq.with(new Research(metaglassWallGigantic)), () -> {
                 node(titaniumWallGigantic, () -> {});
             });
@@ -59,14 +59,14 @@ public class TerraVanilaTree{
             node(thoriumWallHuge, Seq.with(new Research(titaniumWallGigantic)), () -> {
                 node(thoriumWallGigantic, () -> {});
             });
-        });
+        });}
         vanillaNode(plastaniumWallLarge, () -> {
-            node(plastaniumWallHuge, Seq.with(new Research(titaniumWallGigantic)), () -> {
-                node(plastaniumWallGigantic, () -> {});
+            node(plastaniumWallHuge, () -> {
+                if(Core.settings.getBool("enableblocks", false)){node(plastaniumWallGigantic, () -> {});}
             });
         });
-        vanillaNode(phaseWallLarge, () -> {
-            node(phaseWallHuge, Seq.with(new Research(thoriumWallGigantic)), () -> {
+        if(Core.settings.getBool("enableblocks", false)){vanillaNode(phaseWallLarge, () -> {
+            node(phaseWallHuge, () -> {
                 node(phaseWallGigantic, () -> {});
             });
         });
@@ -74,7 +74,7 @@ public class TerraVanilaTree{
             node(surgeWallHuge, Seq.with(new Research(thoriumWallGigantic)), () -> {
                 node(surgeWallGigantic, () -> {});
             });
-        });
+        });}
         vanillaNode(scrapWallGigantic, () -> {
             node(scrapWallColossol, Seq.with(new SectorComplete(facility32m)), () -> {
             });
@@ -101,7 +101,7 @@ public class TerraVanilaTree{
         });
         // Erekir
         String erekir = "erekir";
-        vanillaNode(erekir, berylliumWallLarge, () -> {
+        if(Core.settings.getBool("enableblocks", false)){vanillaNode(erekir, berylliumWallLarge, () -> {
             node(berylliumWallHuge, Seq.with(new SectorComplete(intersect)), () -> {
                 node(berylliumWallGigantic, Seq.with(new SectorComplete(basin)), () -> {});
             });
@@ -110,16 +110,14 @@ public class TerraVanilaTree{
             node(tungstenWallHuge, Seq.with(new SectorComplete(SectorPresets.split)), () -> {
                 node(tungstenWallGigantic, () -> {});
             });
-        });
+        });}
         vanillaNode(erekir, blastDoor, () -> {
-            node(blastGate, Seq.with(new SectorComplete(intersect)), () -> {
-            });
+            if(Core.settings.getBool("enableblocks", false)){node(blastGate, Seq.with(new SectorComplete(intersect)), () -> {});}
             node(blastDoorLarge, () -> {
-                node(blastDoorHuge, Seq.with(new SectorComplete(atlas)), () -> {
-                });
+                if(Core.settings.getBool("enableblocks", false)){node(blastDoorHuge, Seq.with(new SectorComplete(atlas)), () -> {});}
             });
         });
-        vanillaNode(erekir, carbideWallLarge, () -> {
+        if(Core.settings.getBool("enableblocks", false)){vanillaNode(erekir, carbideWallLarge, () -> {
             node(carbideWallHuge, () -> {
                 node(carbideWallGigantic, () -> {});
             });
@@ -128,7 +126,7 @@ public class TerraVanilaTree{
             node(reinforcedSurgeWallHuge, () -> {
                 node(reinforcedSurgeWallGigantic, () -> {});
             });
-        });
+        });}
         vanillaNode(erekir, shieldedWall, () -> {
             node(shieldedWallLarge, () -> {
                 if(Core.settings.getBool("enableblocks", false)){node(shieldedWallHuge, () -> {});}
