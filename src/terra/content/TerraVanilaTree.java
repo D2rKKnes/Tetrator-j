@@ -101,12 +101,12 @@ public class TerraVanilaTree{
         });
         // Erekir
         String erekir = "erekir";
-        if(Core.settings.getBool("enableblocks", false)){vanillaNode(erekir, berylliumWallLarge, () -> {
+        vanillaNode(erekir, berylliumWallLarge, () -> {
             node(berylliumWallHuge, Seq.with(new SectorComplete(intersect)), () -> {
-                node(berylliumWallGigantic, Seq.with(new SectorComplete(basin)), () -> {});
+                if(Core.settings.getBool("enableblocks", false)){node(berylliumWallGigantic, Seq.with(new SectorComplete(basin)), () -> {});}
             });
         });
-        vanillaNode(erekir, tungstenWallLarge, () -> {
+        if(Core.settings.getBool("enableblocks", false)){vanillaNode(erekir, tungstenWallLarge, () -> {
             node(tungstenWallHuge, Seq.with(new SectorComplete(SectorPresets.split)), () -> {
                 node(tungstenWallGigantic, () -> {});
             });
