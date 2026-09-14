@@ -452,9 +452,12 @@ public class TerraUnitTypes {
                 rotate = true;
                 mirror = false;
                 inaccuracy = 4f;
+                layerOffset = 0.002f;
                 shootY = 20f / 4;
+                recoils = 2;
+                recoil = 0.5f;
                 shoot = new ShootAlternate() {{
-                    spread = 9f / 4;
+                    spread = 10f / 4;
                 }};
                 parts.add(
                     new RegionPart("-barrel-l") {{
@@ -482,9 +485,12 @@ public class TerraUnitTypes {
                 rotate = true;
                 mirror = false;
                 inaccuracy = 4f;
+                layerOffset = 0.002f;
                 shootY = 20f / 4;
+                recoils = 2;
+                recoil = 0.5f;
                 shoot = new ShootAlternate() {{
-                    spread = 9f / 4;
+                    spread = 10f / 4;
                 }};
                 parts.add(
                     new RegionPart("-barrel-l") {{
@@ -515,7 +521,8 @@ public class TerraUnitTypes {
                 baseRotation = -45;
                 rotationLimit = 70f;
                 mirror = true;
-                layerOffset = -0.001f;
+                layerOffset = -0.002f;
+                shootCone = 20f;
                 shoot = new ShootAlternate() {{
                     shots = 5;
                     shotDelay = 9f;
