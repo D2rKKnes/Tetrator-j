@@ -219,7 +219,7 @@ public class TerraVerilusTree {
                     nodeProduce(carbonDioxide, () -> {});
                     nodeProduce(rawThermoxite, () -> {
                         nodeProduce(thermoxite, () -> {
-                            node(spatialAnomaly, Seq.with(new AtWave(verilus, 33)), () -> {});
+                            node(TerraLore.spatialAnomaly, Seq.with(new AtWave(verilus, 33)), () -> {});
                         });
                     });
                 });
