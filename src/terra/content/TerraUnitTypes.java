@@ -405,7 +405,7 @@ public class TerraUnitTypes {
             hitSize = 31f;
             softShadowScl = 0.8f;
             health = 8600;
-            armor = 10;
+            armor = 14;
             targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.core, null};
             engineSize = 6f;
             engineOffset = 14f;
@@ -444,33 +444,78 @@ public class TerraUnitTypes {
             }};
 
             weapons.add(
-            new Weapon("terra-dynamite-weapon"){{
-                x = 40f / 4f;
-                y = -34f / 4f;
+            new Weapon("terra-catastrophe-weapon"){{
+                x = 35f / 4f;
+                y = -24f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 16f;
                 rotate = true;
+                mirror = false;
                 inaccuracy = 4f;
+                shootY = 20f / 4;
+                shoot = new ShootAlternate() {{
+                    spread = 9f / 4;
+                }};
+                parts.add(
+                    new RegionPart("-barrel-l") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 0;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1f;
+                    }},
+                    new RegionPart("-barrel-r") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 1;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1f;
+                    }}
+                );
                 bullet = sapper;
             }},
-            new Weapon("terra-dynamite-weapon"){{
-                x = 49f / 4f;
-                y = -3f / 4f;
+            new Weapon("terra-catastrophe-weapon"){{
+                x = -35f / 4f;
+                y = -24f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 18f;
                 rotate = true;
+                mirror = false;
                 inaccuracy = 4f;
+                shootY = 20f / 4;
+                shoot = new ShootAlternate() {{
+                    spread = 9f / 4;
+                }};
+                parts.add(
+                    new RegionPart("-barrel-l") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 0;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1f;
+                    }},
+                    new RegionPart("-barrel-r") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 1;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1f;
+                    }}
+                );
                 bullet = sapper;
             }},
             new Weapon("terra-sap-launcher"){{
-                x = 0f;
-                y = -12f / 4f;
+                x = 54f / 4f;
+                y = 6f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 190f;
                 rotate = true;
                 rotateSpeed = 1.2f;
-                mirror = false;
+                baseRotation = -45;
+                rotationLimit = 70f;
+                mirror = true;
+                layerOffset = -0.001f;
                 shoot = new ShootAlternate() {{
                     shots = 5;
                     shotDelay = 9f;
@@ -589,8 +634,8 @@ public class TerraUnitTypes {
                 new SpawnDeathAbility(inevitabilityCore, 1, 11f));
             weapons.add(
             new Weapon("terra-inevitability-mount"){{
-                x = 44f / 4f;
-                y = 24.5f / 4f;
+                x = 79f / 4f;
+                y = -10f / 4f;
                 shootSound = Sounds.shootAvert;
                 reload = 24f;
                 rotate = true;
@@ -626,8 +671,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon("terra-small-sap-launcher"){{
-                x = -62f / 4f;
-                y = -15.5f / 4f;
+                x = 37f / 4f;
+                y = -29f / 4f;
                 shootY = 2.5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 87f;
@@ -651,9 +696,9 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-railgun"){{
                 x = 0f;
-                y = -7.5f / 4f;
+                y = 0f;
                 shootY = 5f;
-                layerOffset = 0.002f;
+                layerOffset = -0.01f;
                 shootSound = Sounds.shootSmite;
                 chargeSound = TerraSounds.railGunCharge;
                 soundPitchMin = 0.93f;
