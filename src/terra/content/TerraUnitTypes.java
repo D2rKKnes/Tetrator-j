@@ -49,7 +49,7 @@ public class TerraUnitTypes {
     //titans or t6\t7 (red, green, purple)
     orb, crane, desis,
     reaper, eternity,
-    fin, aplysia, 
+    fin, aplysia,
     //purple water serpulo
     
     //green erekir
