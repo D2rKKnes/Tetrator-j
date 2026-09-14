@@ -27,11 +27,11 @@ public class TerraItems{
             //1RXS system
             //copis
             tantalium, ruthenium, xAlloy, obsidianPowder, obsidianRubber, tenirite, silver, gravitite, gravititeLattice, yAlloy, yAlloyRoll, zAlloy, 
-            //copis - ammo
-            tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
-            gravititeAmmo1, gravititeAmmo2, gravititeAmmo3,
+            //copis - ammo (SCRAPPED)
+            // tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
+            // gravititeAmmo1, gravititeAmmo2, gravititeAmmo3,
             //other and unused
-            fish, cryotite;
+            fish, cryotite, chippedFish, money, moneyStack;
 
     public static void load(){
         carbon = new AdvancedItem("carbon", Color.valueOf("3c4448")){{
@@ -108,6 +108,7 @@ public class TerraItems{
             cost = 10f;
             hardness = 6;
             radioactivity = 3f;
+            magnetic = 0.25f;
             charge = 1f;
             frames = 2;
             transitionFrames = 10;
@@ -123,6 +124,7 @@ public class TerraItems{
             cost = 2f;
             hardness = 5;
             healthScaling = 0.5f;
+            magnetic = 0.6f;
         }};
         tesseract = new AdvancedItem("tesseract", Color.valueOf("010101"), true){{
             cost = 60f;
@@ -214,26 +216,45 @@ public class TerraItems{
             cost = 1.7f;
             hardness = 4;
             healthScaling = 0.5f;
-            magnetic = 0.4f;
+            magnetic = -0.4f;
         }};
         yAlloyRoll = new AdvancedItem("y-alloy-roll", Color.valueOf("edf3a9")){{
             cost = 1.5f;
             healthScaling = 0.8f;
-            magnetic = 0.2f;
+            magnetic = -0.4f;
         }};
 
-        tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().mul(0.9f));
-        tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().mul(0.8f));
-        tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().mul(0.7f));
-        gravititeAmmo1 = new AdvancedItem("gravitite-light-ammo", silver.color.cpy().mul(0.9f));
-        gravititeAmmo2 = new AdvancedItem("gravitite-medium-ammo", silver.color.cpy().mul(0.8f));
-        gravititeAmmo3 = new AdvancedItem("gravitite-heavy-ammo", silver.color.cpy().mul(0.7f));
+        //this is so ahhh bad
+        // tantaliumAmmo1 = new AdvancedItem("tantalium-light-ammo", tantalium.color.cpy().mul(0.9f));
+        // tantaliumAmmo2 = new AdvancedItem("tantalium-medium-ammo", tantalium.color.cpy().mul(0.8f));
+        // tantaliumAmmo3 = new AdvancedItem("tantalium-heavy-ammo", tantalium.color.cpy().mul(0.7f));
+        // gravititeAmmo1 = new AdvancedItem("gravitite-light-ammo", silver.color.cpy().mul(0.9f));
+        // gravititeAmmo2 = new AdvancedItem("gravitite-medium-ammo", silver.color.cpy().mul(0.8f));
+        // gravititeAmmo3 = new AdvancedItem("gravitite-heavy-ammo", silver.color.cpy().mul(0.7f));
 
         fish = new AdvancedItem("fish", Color.valueOf("807e7f"), true){{
             cost = 0.1f;
             hardness = 0;
             flammability = 0.03f;
             threat = 0f;
+        }};
+        chippedFish = new AdvancedItem("chipped-fish", fish.color.cpy().lerp(darkSteel.color.cpy(), 0.75f), true){{
+            cost = 10f;
+            hardness = 1;
+            flammability = 0.02f;
+            explosiveness = 10f;
+            magnetic = 0.1f;
+            threat = 1f;
+        }};
+        money = new AdvancedItem("money", Color.valueOf("5b8d46")){{
+            cost = 0.02f;
+            hardness = 0;
+            flammability = 0.08f;
+        }};
+        moneyStack = new AdvancedItem("money-stack", money.color.cpy().lerp(obsidianRubber.color.cpy(), 0.25f)){{
+            cost = 0.9f;
+            hardness = 0;
+            flammability = 0.15f;
         }};
     }
 }
