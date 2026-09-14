@@ -218,7 +218,9 @@ public class TerraVerilusTree {
                     });
                     nodeProduce(carbonDioxide, () -> {});
                     nodeProduce(rawThermoxite, () -> {
-                        nodeProduce(thermoxite, () -> {});
+                        nodeProduce(thermoxite, () -> {
+                            node(spatialAnomaly, Seq.with(new AtWave(verilus, 33)), () -> {});
+                        });
                     });
                 });
                 nodeProduce(titanium, () -> {
