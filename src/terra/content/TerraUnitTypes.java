@@ -519,7 +519,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 1.2f;
                 baseRotation = -45;
-                rotationLimit = 70f;
+                rotationLimit = 90f;
                 mirror = true;
                 layerOffset = -0.002f;
                 shootCone = 20f;
@@ -742,7 +742,8 @@ public class TerraUnitTypes {
                     new RegionPart("-antenna-l") {{
                         mirror = true;
                         progress = PartProgress.warmup;
-                        y = 5.75f;
+                        y = 5.75f - 10f;
+                        moveY = 10f;
                         moveX = -1f;
                         under = true;
                         moves.addAll(
