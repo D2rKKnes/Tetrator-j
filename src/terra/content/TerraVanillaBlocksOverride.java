@@ -68,14 +68,14 @@ public class TerraVanillaBlocksOverride {
             r.waveTeam = Team.blue;
         };
         Planets.tantros.cloudMeshLoader = () -> new MultiMesh(
-            new HexSkyMesh(Planets.tantros, 5, 0.15, 0.14, 5, Color.valueOf("96c0e3").a(0.75f), 2, 0.45, 0.9, 0.42),
-            new HexSkyMesh(Planets.tantros, 8, 0.6, 0.15, 5, Color.valueOf("bcd7e6").a(0.75f), 2, 0.45, 1.1, 0.44)
+            new HexSkyMesh(Planets.tantros, 5, 0.15f, 0.14f, 5, Color.valueOf("96c0e3").a(0.75f), 2, 0.45f, 0.9f, 0.42f),
+            new HexSkyMesh(Planets.tantros, 8, 0.6f, 0.15f, 5, Color.valueOf("bcd7e6").a(0.75f), 2, 0.45f, 1.1f, 0.44f)
         );
         Planets.gier.alwaysUnlocked = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
-        Planets.gier.accessible = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
+        Planets.gier.accessible = Planets.notva.accessible = Planets.verilus.accessible = true;
         Planets.gier.drawOrbit = true;
-        Planets.gier.defaultEnv = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = Env.space | Env.terrestrial;
-        Planets.gier.clearSectorOnLose = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
+        Planets.gier.defaultEnv = Planets.notva.defaultEnv = Planets.verilus.defaultEnv = Env.space | Env.terrestrial;
+        Planets.gier.clearSectorOnLose = Planets.notva.clearSectorOnLose = Planets.verilus.clearSectorOnLose = true;
     
         ((Thruster) Blocks.thruster).buildVisibility = BuildVisibility.shown;
         ((LaunchPad) Blocks.launchPad).buildVisibility = BuildVisibility.sandboxOnly;
