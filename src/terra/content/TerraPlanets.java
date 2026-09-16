@@ -25,8 +25,7 @@ public class TerraPlanets{ //NebulaMoonGenerator
     public static Planet nebula, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
-        nebula = new BetterPlanet("nebula", null, 0.5f){{
-            sectorSize = 1;
+        nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
             accessible = true;
             alwaysUnlocked = false;
             orbitSpacing = 1;
@@ -39,10 +38,8 @@ public class TerraPlanets{ //NebulaMoonGenerator
             iconColor = Color.valueOf("c2bffb");
             hasAtmosphere = true;
             atmosphereColor = Color.white;
-            atmosphereRadIn = -0.025;
-            atmosphereRadOut = 0.1;
-            parent = Planets.tantros;
-            solarSystem = Planets.sun;
+            atmosphereRadIn = -0.025f;
+            atmosphereRadOut = 0.1f;
         }};
         
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
