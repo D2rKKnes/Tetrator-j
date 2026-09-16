@@ -76,8 +76,8 @@ public class TerraVanilaTree{
             });
         });}
         vanillaNode(scrapWallGigantic, () -> {
-            node(scrapWallColossol, Seq.with(new SectorComplete(facility32m)), () -> {
-            });
+            node(scrapWallColossol, Seq.with(new SectorComplete(facility32m)), () -> {});
+            node(thruster, Seq.with(new SectorComplete(impact0078)), () -> {});
         });
         vanillaNode(doorLarge, () -> {
             node(doorHuge, Seq.with(new SectorComplete(overgrowth)), () -> {
@@ -152,6 +152,12 @@ public class TerraVanilaTree{
         vanillaNode(erekir, electrolyzer, () -> {
             node(hydrogenReductor, Seq.with(new SectorComplete(marsh)), () -> {});
         });
+        vanillaNode(erekir, carbideCrucible, () -> {
+            node(slagCentrifuge, () -> {});
+        });
+        vanillaNode(erekir, phaseSynthesizer, () -> {
+            node(heatReactor, Seq.with(new SectorComplete(karst)), () -> {});
+        });
         vanillaNode(erekir, tankFabricator, () -> {
             node(primeProcessor, () -> {});
         });
@@ -184,6 +190,34 @@ public class TerraVanilaTree{
         vanillaNode(erekir, primeRefabricator, () -> {
             node(turn, () -> {});
             node(emanate, Seq.with(new Research(coreAcropolis)), () -> {});
+        });
+        vanillaNode(erekir, neoplasiaReactor, () -> {
+            node(renale, ItemStack.with(Items.beryllium, 600, Items.silicon, 800, Items.dormantCyst, 1400), () -> {
+                node(latum, ItemStack.with(Items.thorium, 4600, Items.silicon, 8000, Items.tungsten, 6000, Items.dormantCyst, 12500), Seq.with(new SectorComplete(origin)), () -> {});
+            });
+        });
+        vanillaNode(erekir, tankAssembler, () -> {
+            node(assemblyDrone, () -> {});
+        });
+        vanillaNode(erekir, unitCargoLoader, () -> {
+            node(manifold, () -> {});
+        });
+        vanillaNode(erekir, anthicus, () -> {
+            node(Vars.content.unit("anthicus-missile"), () -> {});
+        });
+        vanillaNode(erekir, quell, () -> {
+            node(Vars.content.unit("quell-missile"), () -> {});
+        });
+        vanillaNode(erekir, disrupt, () -> {
+            node(Vars.content.unit("disrupt-missile"), () -> {});
+        });
+        vanillaNode(erekir, scathe, () -> {
+            node(Vars.content.unit("scathe-missile"), () -> {
+                node(Vars.content.unit("scathe-missile-phase"), Seq.with(new Research(phaseFabric)), () -> {});
+                node(Vars.content.unit("scathe-missile-surge"), Seq.with(new Research(surgeAlloy)), () -> {
+                    node(Vars.content.unit("scathe-missile-surge-split"), () -> {});
+                });
+            });
         });
         vanillaNode(erekir, reinforcedPayloadConveyor, () -> {
             node(largeReinforcedPayloadConveyor, () -> {});
