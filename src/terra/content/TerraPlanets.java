@@ -30,10 +30,10 @@ public class TerraPlanets{
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
             generator = new NebulaMoonGenerator();
             meshLoader = () -> new MultiMesh(
-                new BetterPlanet.AtmosphereHexMesh(5),
-                new HexMesh(this, 5)
+                new BetterPlanet.AtmosphereHexMesh(3),
+                new HexMesh(this, 3)
             );
-            accessible = true;
+            accessible = false;
             alwaysUnlocked = false;
             orbitSpacing = 1;
             orbitRadius = 5.8f;
