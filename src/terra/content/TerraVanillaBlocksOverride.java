@@ -17,6 +17,7 @@ import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.units.*;
 import mindustry.world.blocks.legacy.*;
+import mindustry.world.blocks.campaign.*;
 import mindustry.world.meta.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
