@@ -20,12 +20,13 @@ import terra.type.*;
 
 import static arc.Core.atlas;
 
-public class TerraPlanets{ //NebulaMoonGenerator
+public class TerraPlanets{
 
     public static Planet nebula, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
+            generator = new NebulaMoonGenerator();
             accessible = true;
             alwaysUnlocked = false;
             orbitSpacing = 1;
