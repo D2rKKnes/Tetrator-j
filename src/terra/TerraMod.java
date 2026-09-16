@@ -34,7 +34,7 @@ public class TerraMod extends Mod{
     
     @Override
     public void init(){
-        DepthShader.load();
+        TerraShaders.load();
         TerraIcons.init();
         TerraSettings.init();
         UnitsRarity.init();
