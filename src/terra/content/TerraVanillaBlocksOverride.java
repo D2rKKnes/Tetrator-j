@@ -5,6 +5,10 @@ import mindustry.io.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.*;
+import mindustry.graphics.*;
+import mindustry.graphics.g3d.*;
+import mindustry.graphics.g3d.PlanetGrid.*;
+import mindustry.maps.planet.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;  
 import mindustry.world.*;
@@ -24,6 +28,12 @@ import mindustry.ai.types.*;
 import mindustry.gen.*;
 import arc.struct.*;
 import arc.util.*;
+import arc.func.*;
+import arc.graphics.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.struct.*;
+
 import static mindustry.type.ItemStack.with;
 
 public class TerraVanillaBlocksOverride {
@@ -32,6 +42,9 @@ public class TerraVanillaBlocksOverride {
     
         Items.fissileMatter.hidden = false;
         Items.dormantCyst.hidden = false;
+
+        StatusEffects.invincible.alwaysUnlocked = true;
+        StatusEffects.invincible.show = true;
 
         Weathers.rain.databaseCategory = "weather";
         Weathers.rain.allDatabaseTabs = true;
@@ -46,6 +59,26 @@ public class TerraVanillaBlocksOverride {
         Weathers.suspendParticles.hidden = false;
         Weathers.suspendParticles.databaseCategory = "weather";
         Weathers.suspendParticles.allDatabaseTabs = true;
+
+        Planets.tantros.alwaysUnlocked = true;
+        Planets.tantros.accessible = true;
+        Planets.tantros.visible = true;
+        Planets.tantros.atmosphereColor = Color.valueOf("143d33");
+        Planets.tantros.ruleSetter = r => {
+            r.waveTeam = Team.blue;
+        };
+        Planets.tantros.cloudMeshLoader = () -> {
+            const tanti = Planets.tantros;
+            return new MultiMesh(
+                new HexSkyMesh(tanti, 5, 0.15, 0.14, 5, Color.valueOf("96c0e3c2"), 2, 0.45, 0.9, 0.42),
+                new HexSkyMesh(tanti, 8, 0.6, 0.15, 5, Color.valueOf("bcd7e6c2"), 2, 0.45, 1.1, 0.44)
+            )
+        };
+        Planets.gier.alwaysUnlocked = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
+        Planets.gier.accessible = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
+        Planets.gier.drawOrbit = true;
+        Planets.gier.defaultEnv = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = Env.space | Env.terrestrial;
+        Planets.gier.clearSectorOnLose = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
     
         ((Thruster) Blocks.thruster).buildVisibility = BuildVisibility.shown;
         ((LaunchPad) Blocks.launchPad).buildVisibility = BuildVisibility.sandboxOnly;
