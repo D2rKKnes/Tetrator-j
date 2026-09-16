@@ -20,11 +20,31 @@ import terra.type.*;
 
 import static arc.Core.atlas;
 
-public class TerraPlanets{
+public class TerraPlanets{ //NebulaMoonGenerator
 
-    public static Planet RXS, testification;
+    public static Planet nebula, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
+        nebula = new BetterPlanet("nebula", null, 0.5f){{
+            sectorSize = 1;
+            accessible = true;
+            alwaysUnlocked = false;
+            orbitSpacing = 1;
+            orbitRadius = 5.8f;
+            orbitOffset = 180;
+            drawOrbit = true;
+            bloom = true;
+            minZoom = 2;
+            maxZoom = 3;
+            iconColor = Color.valueOf("c2bffb");
+            hasAtmosphere = true;
+            atmosphereColor = Color.white;
+            atmosphereRadIn = -0.025;
+            atmosphereRadOut = 0.1;
+            parent = Planets.tantros;
+            solarSystem = Planets.sun;
+        }};
+        
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
             accessible = false;
