@@ -64,16 +64,13 @@ public class TerraVanillaBlocksOverride {
         Planets.tantros.accessible = true;
         Planets.tantros.visible = true;
         Planets.tantros.atmosphereColor = Color.valueOf("143d33");
-        Planets.tantros.ruleSetter = r => {
+        Planets.tantros.ruleSetter = r -> {
             r.waveTeam = Team.blue;
         };
-        Planets.tantros.cloudMeshLoader = () -> {
-            const tanti = Planets.tantros;
-            return new MultiMesh(
-                new HexSkyMesh(tanti, 5, 0.15, 0.14, 5, Color.valueOf("96c0e3c2"), 2, 0.45, 0.9, 0.42),
-                new HexSkyMesh(tanti, 8, 0.6, 0.15, 5, Color.valueOf("bcd7e6c2"), 2, 0.45, 1.1, 0.44)
-            )
-        };
+        Planets.tantros.cloudMeshLoader = () -> new MultiMesh(
+            new HexSkyMesh(Planets.tantros, 5, 0.15, 0.14, 5, Color.valueOf("96c0e3").a(0.75f), 2, 0.45, 0.9, 0.42),
+            new HexSkyMesh(Planets.tantros, 8, 0.6, 0.15, 5, Color.valueOf("bcd7e6").a(0.75f), 2, 0.45, 1.1, 0.44)
+        );
         Planets.gier.alwaysUnlocked = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
         Planets.gier.accessible = Planets.notva.alwaysUnlocked = Planets.verilus.alwaysUnlocked = true;
         Planets.gier.drawOrbit = true;
