@@ -7,10 +7,15 @@
 To run this mod, you need to install Black Holes Library mod.
 <br>![Black Holes Library](https://github.com/MEEPofFaith/black-holes-library/blob/master/assets/icon.png)
 <br>![Get Black Holes Library here](https://github.com/MEEPofFaith/black-holes-library)
+## Downloading
+To play this mod or view beta versions, you need to:
+<br>1 - Open Actions in the top bar (next to Issues and Code).
+<br>2 - Click on the latest green checkmark or any other one.
+<br>3 - At the very bottom, download the ZIP archive. If you don’t have the install button, register on GitHub.
+<br>4 - Unzip the archive; there will be a .jar file for the mod. This file must either be dragged into the root mods folder or, in the game, click “Import mod” and select this file.
+<br>5 - If the dependencies did not install automatically, install them manually (see above).
 <br>
-<br>You also need Expander.
-<br>![Expander](https://github.com/D2rKKnes/EXPander/blob/main/icon.png)
-<br>![Get Expander here](https://github.com/D2rKKnes/Expander)
+<br>
 <br>
 <br>
 <br>
