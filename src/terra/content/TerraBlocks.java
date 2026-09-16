@@ -2004,6 +2004,7 @@ public class TerraBlocks{
 
             size = 5;
             radius = 600f;
+            researchCostMultiplier = 0.01f;
 
             consumePower(5f);
         }};
