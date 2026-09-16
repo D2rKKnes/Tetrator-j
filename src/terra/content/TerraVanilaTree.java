@@ -3,6 +3,8 @@ package terra.content;
 import arc.*;
 import arc.func.*;
 import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.Objectives.*;
