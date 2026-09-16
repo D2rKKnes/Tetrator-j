@@ -33,6 +33,14 @@ public class TerraMod extends Mod{
     }
     
     @Override
+    public void init(){
+        DepthShader.load();
+        TerraIcons.init();
+        TerraSettings.init();
+        UnitsRarity.init();
+    }
+    
+    @Override
     public void loadContent(){
         Utils.init();
         
@@ -52,12 +60,5 @@ public class TerraMod extends Mod{
         TerraVanillaBlocksOverride.load();
         TerraVanilaTree.load();
         TerraVerilusTree.load();
-    }
-
-    @Override
-    public void init(){
-        TerraIcons.init();
-        TerraSettings.init();
-        UnitsRarity.init();
     }
 }
