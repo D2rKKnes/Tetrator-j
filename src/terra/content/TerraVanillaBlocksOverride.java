@@ -28,12 +28,24 @@ import static mindustry.type.ItemStack.with;
 
 public class TerraVanillaBlocksOverride {
     public static void load() {
-        ((Liquid) Liquids.gallium).hidden = false;
+        Liquids.gallium.hidden = false;
     
-        ((Item) Items.fissileMatter).hidden = false;
-        ((Item) Items.dormantCyst).hidden = false;
-    
-        ((Weather) Weathers.suspendParticles).hidden = false;
+        Items.fissileMatter.hidden = false;
+        Items.dormantCyst.hidden = false;
+
+        Weathers.rain.databaseCategory = "weather";
+        Weathers.rain.allDatabaseTabs = true;
+        Weathers.snow.databaseCategory = "weather";
+        Weathers.snow.allDatabaseTabs = true;
+        Weathers.sandstorm.databaseCategory = "weather";
+        Weathers.sandstorm.allDatabaseTabs = true;
+        Weathers.sporestorm.databaseCategory = "weather";
+        Weathers.sporestorm.allDatabaseTabs = true;
+        Weathers.fog.databaseCategory = "weather";
+        Weathers.fog.allDatabaseTabs = true;
+        Weathers.suspendParticles.hidden = false;
+        Weathers.suspendParticles.databaseCategory = "weather";
+        Weathers.suspendParticles.allDatabaseTabs = true;
     
         ((Thruster) Blocks.thruster).buildVisibility = BuildVisibility.shown;
         ((LaunchPad) Blocks.launchPad).buildVisibility = BuildVisibility.sandboxOnly;
