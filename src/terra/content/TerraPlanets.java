@@ -17,6 +17,8 @@ import mindustry.ui.dialogs.PlanetDialog;
 import mindustry.world.meta.*;
 import mindustry.content.Blocks;
 import terra.type.*;
+import terra.maps.planets.*;
+import terra.maps.generators.*;
 
 import static arc.Core.atlas;
 
@@ -27,6 +29,10 @@ public class TerraPlanets{
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
             generator = new NebulaMoonGenerator();
+            meshLoader = () -> new MultiMesh(
+                new BetterPlanet.AtmosphereHexMesh(5),
+                new HexMesh(this, 5)
+            );
             accessible = true;
             alwaysUnlocked = false;
             orbitSpacing = 1;
