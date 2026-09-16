@@ -17,8 +17,8 @@ To play this mod or view beta versions, you need to:
 <br>![Help3](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help3.png)
 <br>4 - Unzip the archive; there will be a .jar file for the mod. This file must either be dragged into the root mods folder or, in the game, click “Import mod” and select this file.
 <br>![Help4](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help4.png)
+![Help5](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help5.png)
 <br>5 - If the dependencies did not install automatically, install them manually.
-<br>![Help5](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help5.png)
 <br>
 <br>
 <br>
