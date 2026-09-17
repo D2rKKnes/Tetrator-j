@@ -19,7 +19,7 @@ import mindustry.world.blocks.environment.*;
 import terra.graphics.g3d.*;
 
 public class NebulaMoonGenerator extends PlanetGenerator {
-    public double octaves = 4, persistence = 0.8, scl = 0.4, pow = 0.9, mag = 2;
+    public double octaves = 4, persistence = 0.8, scl = 0.58, pow = 1, mag = 2;
     float heightYOffset = 41.3f;
     float sclh = 5f;
     float waterOffset = 0.04f;
@@ -51,7 +51,7 @@ public class NebulaMoonGenerator extends PlanetGenerator {
     
     float craterNoise(Vec3 position, boolean smooth){
         initCraters();
-        float d = craterScl * craterScl * 4f, s = 0.3f;
+        float d = craterScl * craterScl * 4f, s = 0.6f;
         for(int i = 0; i < craters.length; i++){
             float dt = craters[i].dst2(position);
             if(dt < d){
@@ -78,7 +78,7 @@ public class NebulaMoonGenerator extends PlanetGenerator {
                 position.z * sclh) * heightScl,
             2.3f
         );
-        float crater = craterNoise(cratPos, true) * 0.3f;
+        float crater = craterNoise(cratPos, true) * 0.6f;
         return (base + crater + waterOffset) / (1f + waterOffset);
     }
 
@@ -90,7 +90,7 @@ public class NebulaMoonGenerator extends PlanetGenerator {
 
     @Override
     public void getColor(Vec3 position, Color out) {
-        Tmp.v31.set(position).rotate(Vec3.Y, position.x * rotationScl).add(850f, 0f, 500f);
+        Tmp.v31.set(position).rotate(Vec3.Y, position.x * rotationScl).add(1000f, 0f, 500f);
         double height = Math.pow(Simplex.noise3d(0, octaves, persistence, scl, Tmp.v31.x, Tmp.v31.y, Tmp.v31.z), pow) * mag;
         //out.set(c1).lerp(c2, Mathf.clamp(Mathf.round(depth, 0.15f))).a(1f - 0.2f).toFloatBits();
         out.set(colors[Mathf.clamp((int) (height * colors.length), 0, colors.length - 1)]);
