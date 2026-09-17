@@ -1,4 +1,4 @@
-package example;
+package terra.world.blocks;
 
 import arc.scene.ui.layout.Table;
 import arc.util.io.Reads;
