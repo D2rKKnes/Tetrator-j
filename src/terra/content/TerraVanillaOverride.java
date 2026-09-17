@@ -36,7 +36,7 @@ import arc.struct.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class TerraVanillaBlocksOverride {
+public class TerraVanillaOverride {
     public static void load() {
         Liquids.gallium.hidden = false;
     
@@ -60,6 +60,8 @@ public class TerraVanillaBlocksOverride {
         Weathers.suspendParticles.databaseCategory = "weather";
         Weathers.suspendParticles.allDatabaseTabs = true;
 
+        Planets.sun.iconColor = Color.valueOf("ffc64c");
+        
         Planets.tantros.alwaysUnlocked = true;
         Planets.tantros.accessible = true;
         Planets.tantros.visible = true;
