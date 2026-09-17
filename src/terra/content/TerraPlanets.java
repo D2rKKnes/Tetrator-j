@@ -52,6 +52,7 @@ public class TerraPlanets{
         deltaOmega = new BetterPlanet("delta-omega", null, 40f){{
             bloom = true;
             accessible = false;
+            iconColor = Color.valueOf("ff2222");
             solarSystem = this;
             meshLoader = () -> new SunMesh(
                 this, 7,
@@ -74,6 +75,7 @@ public class TerraPlanets{
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
             accessible = false;
+            iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
             meshLoader = () -> new SunMesh(
                 this, 6,
