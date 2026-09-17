@@ -9,6 +9,7 @@ import mindustry.ui.dialogs.*;
 import mindustry.ui.Links;
 import mindustry.content.*;
 import terra.content.*;
+import terra.world.blocks.RouterSorter;
 import terra.world.blocks.multiblock.InnerBlock;
 import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
