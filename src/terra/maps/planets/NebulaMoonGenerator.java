@@ -16,6 +16,7 @@ import mindustry.maps.generators.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
+import terra.graphics.g3d.*;
 
 public class NebulaMoonGenerator extends PlanetGenerator {
     public double octaves = 4, persistence = 0.8, scl = 1.3, pow = 1.7, mag = 2;
