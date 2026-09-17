@@ -79,26 +79,27 @@ public class TerraVanillaOverride {
         Planets.gier.defaultEnv = Planets.notva.defaultEnv = Planets.verilus.defaultEnv = Env.space | Env.terrestrial;
         Planets.gier.clearSectorOnLose = Planets.notva.clearSectorOnLose = Planets.verilus.clearSectorOnLose = true;
     
-        ((Thruster) Blocks.thruster).buildVisibility = BuildVisibility.shown;
-        ((LaunchPad) Blocks.launchPad).buildVisibility = BuildVisibility.sandboxOnly;
-        ((HeatProducer) Blocks.heatReactor).buildVisibility = BuildVisibility.shown;
-        ((GenericCrafter) Blocks.slagCentrifuge).buildVisibility = BuildVisibility.shown;
-        ((BaseShield) Blocks.shieldProjector).buildVisibility = BuildVisibility.shown;
-        ((BaseShield) Blocks.shieldProjector).requirements = with(Items.graphite, 6200, Items.thorium, 3000, Items.silicon, 5000, Items.phaseFabric, 3100, Items.surgeAlloy, 2200, Items.beryllium, 3800, Items.tungsten, 3800, Items.oxide, 2500, Items.carbide, 2200, Items.fissileMatter, 1200);
-        ((BaseShield) Blocks.shieldProjector).researchCostMultiplier = 0.01f;
-        ((BaseShield) Blocks.largeShieldProjector).buildVisibility = BuildVisibility.shown;
-        ((BaseShield) Blocks.largeShieldProjector).requirements = with(Items.graphite, 6200 * 3, Items.thorium, 3000 * 3, Items.silicon, 5000 * 3, Items.phaseFabric, 3100 * 3, Items.surgeAlloy, 2200 * 3, Items.beryllium, 3800 * 3, Items.tungsten, 3800 * 3, Items.oxide, 2500 * 3, Items.carbide, 2200 * 3, Items.fissileMatter, 1200 * 3);
-        ((BaseShield) Blocks.largeShieldProjector).researchCostMultiplier = 0.01f;
-        ((PowerNode) Blocks.powerNode).requirements = with(Items.graphite, 2, Items.lead, 6);
+        Blocks.thruster.buildVisibility = BuildVisibility.shown;
+        Blocks.launchPad.buildVisibility = BuildVisibility.sandboxOnly;
+        Blocks.heatReactor.buildVisibility = BuildVisibility.shown;
+        Blocks.slagCentrifuge.buildVisibility = BuildVisibility.shown;
+        Blocks.shieldProjector.buildVisibility = BuildVisibility.shown;
+        Blocks.shieldProjector.requirements = with(Items.graphite, 6200, Items.thorium, 3000, Items.silicon, 5000, Items.phaseFabric, 3100, Items.surgeAlloy, 2200, Items.beryllium, 3800, Items.tungsten, 3800, Items.oxide, 2500, Items.carbide, 2200, Items.fissileMatter, 1200);
+        Blocks.shieldProjector.researchCostMultiplier = 0.01f;
+        Blocks.largeShieldProjector.buildVisibility = BuildVisibility.shown;
+        Blocks.largeShieldProjector.requirements = with(Items.graphite, 6200 * 3, Items.thorium, 3000 * 3, Items.silicon, 5000 * 3, Items.phaseFabric, 3100 * 3, Items.surgeAlloy, 2200 * 3, Items.beryllium, 3800 * 3, Items.tungsten, 3800 * 3, Items.oxide, 2500 * 3, Items.carbide, 2200 * 3, Items.fissileMatter, 1200 * 3);
+        Blocks.largeShieldProjector.researchCostMultiplier = 0.01f;
+        Blocks.powerNode.requirements = with(Items.graphite, 2, Items.lead, 6);
+        Blocks.fuse.requirements = with(Items.lead, 225, Items.graphite, 225, Items.thorium, 100);
     
-        ((Floor) Blocks.slag).supportsOverlay = true;
-        ((Floor) Blocks.tar).supportsOverlay = true;
-        ((Floor) Blocks.arkyciteFloor).supportsOverlay = true;
+        Blocks.slag.supportsOverlay = true;
+        Blocks.tar.supportsOverlay = true;
+        Blocks.arkyciteFloor.supportsOverlay = true;
     
-        ((NeoplasmUnitType) UnitTypes.renale).hidden = false;
-        ((NeoplasmUnitType) UnitTypes.latum).hidden = false;
-        ((ErekirUnitType) UnitTypes.manifold).hidden = false;
-        ((ErekirUnitType) UnitTypes.assemblyDrone).hidden = false;
+        UnitTypes.renale.hidden = false;
+        UnitTypes.latum.hidden = false;
+        UnitTypes.manifold.hidden = false;
+        UnitTypes.assemblyDrone.hidden = false;
         ((ErekirUnitType) UnitTypes.evoke).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
         ((ErekirUnitType) UnitTypes.incite).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
         ((ErekirUnitType) UnitTypes.emanate).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
