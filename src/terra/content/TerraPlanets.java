@@ -24,7 +24,7 @@ import static arc.Core.atlas;
 
 public class TerraPlanets{
 
-    public static Planet nebula, RXS, testification;
+    public static Planet nebula, deltaOmega, copis, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
@@ -47,6 +47,28 @@ public class TerraPlanets{
             atmosphereColor = Color.white;
             atmosphereRadIn = -0.025f;
             atmosphereRadOut = 0.1f;
+        }};
+
+        deltaOmega = new BetterPlanet("delta-omega", null, 40f){{
+            bloom = true;
+            accessible = false;
+            solarSystem = this;
+            meshLoader = () -> new SunMesh(
+                this, 10,
+                5, 0.3, 2.7, 1.2, 1,
+                1.6f,
+                Color.valueOf("ca0808"),
+                Color.valueOf("db1313"),
+                Color.valueOf("ff2222"),
+                Color.valueOf("ff4135"),
+                Color.valueOf("fc5d53"),
+                Color.valueOf("ff7456")
+            );
+            cloudMeshLoader = () -> new MultiMesh(
+                new HexSkyMesh(this, 5, 1f, 0.02f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
+                new HexSkyMesh(this, 8, 1.4f, 0.03f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
+                new HexSkyMesh(this, 11, 2f, 0.04f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
+            );
         }};
         
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
