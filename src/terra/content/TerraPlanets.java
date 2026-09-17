@@ -34,7 +34,7 @@ public class TerraPlanets{
                 new BetterPlanet.AtmosphereHexMesh(4),
                 new HexMesh(this, 4),
                 new QuadMesh(this, "terra-nebula-ring1"){{
-                    radius = 0.7f;
+                    radius = 0.75f;
                     this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, -20f);
                     stroke = 0.1f;
                     updateMesh();
