@@ -31,7 +31,13 @@ public class TerraPlanets{
             generator = new NebulaMoonGenerator();
             meshLoader = () -> new MultiMesh(
                 new BetterPlanet.AtmosphereHexMesh(4),
-                new HexMesh(this, 4)
+                new HexMesh(this, 4),
+                new QuadMesh(this, "terra-nebula-ring1"){{
+                    radius = 1.1f;
+                    this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, 8f);
+                    stroke = 0.1f;
+                    updateMesh();
+                }}
             );
             accessible = false;
             alwaysUnlocked = false;
@@ -62,13 +68,13 @@ public class TerraPlanets{
                 Color.valueOf("db1313"),
                 Color.valueOf("ff2222"),
                 Color.valueOf("ff4135"),
-                Color.valueOf("fc5d53"),
-                Color.valueOf("ff7456")
+                Color.valueOf("fc5853"),
+                Color.valueOf("ff6556")
             );
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 5, 1f, 0.1f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
-                new HexSkyMesh(this, 8, 1.4f, 0.15f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
-                new HexSkyMesh(this, 11, 2f, 0.2f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
+                new HexSkyMesh(this, 5, 1f, 1.1f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
+                new HexSkyMesh(this, 8, 1.4f, 1.15f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
+                new HexSkyMesh(this, 11, 2f, 1.2f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
             );
         }};
         
