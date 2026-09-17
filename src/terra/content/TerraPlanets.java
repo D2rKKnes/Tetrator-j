@@ -30,8 +30,8 @@ public class TerraPlanets{
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
             generator = new NebulaMoonGenerator();
             meshLoader = () -> new MultiMesh(
-                new BetterPlanet.AtmosphereHexMesh(3),
-                new HexMesh(this, 3)
+                new BetterPlanet.AtmosphereHexMesh(4),
+                new HexMesh(this, 4)
             );
             accessible = false;
             alwaysUnlocked = false;
@@ -40,7 +40,7 @@ public class TerraPlanets{
             orbitOffset = 180;
             drawOrbit = true;
             bloom = true;
-            minZoom = 2;
+            minZoom = 1.7f;
             maxZoom = 3;
             iconColor = Color.valueOf("c2bffb");
             hasAtmosphere = true;
@@ -54,9 +54,9 @@ public class TerraPlanets{
             accessible = false;
             solarSystem = this;
             meshLoader = () -> new SunMesh(
-                this, 10,
-                5, 0.3, 2.7, 1.2, 1,
-                1.6f,
+                this, 7,
+                5, 0.3, 2.4, 1.3, 1,
+                1.5f,
                 Color.valueOf("ca0808"),
                 Color.valueOf("db1313"),
                 Color.valueOf("ff2222"),
@@ -65,9 +65,9 @@ public class TerraPlanets{
                 Color.valueOf("ff7456")
             );
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 5, 1f, 0.02f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
-                new HexSkyMesh(this, 8, 1.4f, 0.03f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
-                new HexSkyMesh(this, 11, 2f, 0.04f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
+                new HexSkyMesh(this, 5, 1f, 0.1f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
+                new HexSkyMesh(this, 8, 1.4f, 0.15f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
+                new HexSkyMesh(this, 11, 2f, 0.2f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
             );
         }};
         
