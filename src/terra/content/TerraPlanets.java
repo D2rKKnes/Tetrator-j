@@ -34,8 +34,8 @@ public class TerraPlanets{
                 new BetterPlanet.AtmosphereHexMesh(4),
                 new HexMesh(this, 4),
                 new QuadMesh(this, "terra-nebula-ring1"){{
-                    radius = 0.75f;
-                    this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, -20f);
+                    radius = 1f;
+                    this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, -35f);
                     stroke = 0.1f;
                     updateMesh();
                 }}
@@ -73,9 +73,9 @@ public class TerraPlanets{
                 Color.valueOf("ff6556")
             );
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 5, 1f, 0.01f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
-                new HexSkyMesh(this, 8, 1.4f, 0.02f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
-                new HexSkyMesh(this, 11, 2f, 0.03f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
+                new HexSkyMesh(this, 5, 1f, 0.001f, 5, Color.valueOf("db1313").a(0.25f), 5, 0.42f, 1f, 0.15f),
+                new HexSkyMesh(this, 8, 1.4f, 0.01f, 6, Color.valueOf("ca0808").a(0.25f), 5, 0.42f, 1.2f, 0.14f),
+                new HexSkyMesh(this, 11, 2f, 0.1f, 7, Color.valueOf("a90606").a(0.25f), 5, 0.42f, 1.4f, 0.13f)
             );
         }};
         
