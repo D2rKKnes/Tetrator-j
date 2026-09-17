@@ -56,7 +56,7 @@ public class TerraPlanets{
             atmosphereRadOut = 0.1f;
         }};
 
-        deltaOmega = new BetterPlanet("delta-omega", null, 40f){{
+        deltaOmega = new BetterPlanet("delta-omega", null, 32f){{
             bloom = true;
             accessible = false;
             iconColor = Color.valueOf("ff2222");
@@ -73,9 +73,9 @@ public class TerraPlanets{
                 Color.valueOf("ff6556")
             );
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 5, 1f, 1.1f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
-                new HexSkyMesh(this, 8, 1.4f, 1.15f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
-                new HexSkyMesh(this, 11, 2f, 1.2f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
+                new HexSkyMesh(this, 5, 1f, 0.01f, 5, Color.valueOf("db1313").a(0.25f), 3, 0.42f, 1f, 0.15f),
+                new HexSkyMesh(this, 8, 1.4f, 0.02f, 6, Color.valueOf("ca0808").a(0.25f), 3, 0.42f, 1.2f, 0.14f),
+                new HexSkyMesh(this, 11, 2f, 0.03f, 7, Color.valueOf("a90606").a(0.25f), 3, 0.42f, 1.4f, 0.13f)
             );
         }};
         
