@@ -24,7 +24,7 @@ public class QuadMesh extends PlanetMesh{
 
     public QuadMesh(Planet planet, String regionName){
         this.planet = planet;
-        this.shader = ExoShaders.rings;
+        this.shader = TerraShaders.rings;
         this.baseRegion = atlas.find(regionName);
         this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, 22f);
         
