@@ -19,14 +19,14 @@ import mindustry.world.blocks.environment.*;
 import terra.graphics.g3d.*;
 
 public class NebulaMoonGenerator extends PlanetGenerator {
-    public double octaves = 4, persistence = 0.8, scl = 0.4, pow = 1.7, mag = 2;
+    public double octaves = 4, persistence = 0.8, scl = 0.4, pow = 0.9, mag = 2;
     float heightYOffset = 41.3f;
     float sclh = 5f;
     float waterOffset = 0.04f;
     float heightScl = 1.01f;
     Vec3[] craters = new Vec3[4];
     float[] craterSize = new float[craters.length];
-    float craterScl = 2.2f;
+    float craterScl = 5f;
     public float rotationScl = -100;
     //Color c1 = Color.valueOf("5057a6"), c2 = Color.valueOf("272766");
     public Color[] colors = new Color[]{
