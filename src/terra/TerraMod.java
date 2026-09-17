@@ -60,5 +60,6 @@ public class TerraMod extends Mod{
         TerraVanillaOverride.load();
         TerraVanilaTree.load();
         TerraVerilusTree.load();
+        RouterSorter.setup();
     }
 }
