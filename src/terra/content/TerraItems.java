@@ -31,7 +31,8 @@ public class TerraItems{
             // tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
             // gravititeAmmo1, gravititeAmmo2, gravititeAmmo3,
             //other and unused
-            fish, cryotite, chippedFish, money, moneyStack;
+            fish, cryotite, chippedFish, money, moneyStack,
+            e5821;
 
     public static void load(){
         carbon = new AdvancedItem("carbon", Color.valueOf("3c4448")){{
@@ -256,5 +257,7 @@ public class TerraItems{
             hardness = 0;
             flammability = 0.15f;
         }};
+
+        e5821 = new Item("e5821");
     }
 }
