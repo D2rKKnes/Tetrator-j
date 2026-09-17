@@ -19,6 +19,7 @@ import mindustry.content.Blocks;
 import terra.type.*;
 import terra.maps.planets.*;
 import terra.maps.generators.*;
+import terra.graphics.g3d.*;
 
 import static arc.Core.atlas;
 
