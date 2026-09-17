@@ -18,11 +18,14 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 
 public class NebulaMoonGenerator extends PlanetGenerator {
-    public double octaves = 4, persistence = 0.8, scl = 1.0, pow = 1.7, mag = 2;
+    public double octaves = 4, persistence = 0.8, scl = 1.3, pow = 1.7, mag = 2;
     float heightYOffset = 41.3f;
     float sclh = 5f;
     float waterOffset = 0.04f;
     float heightScl = 1.01f;
+    Vec3[] craters = new Vec3[4];
+    float[] craterSize = new float[craters.length];
+    float craterScl = 2.2f;
     public float rotationScl = -100;
     //Color c1 = Color.valueOf("5057a6"), c2 = Color.valueOf("272766");
     public Color[] colors = new Color[]{
@@ -34,8 +37,48 @@ public class NebulaMoonGenerator extends PlanetGenerator {
             Color.valueOf("ffffff")
     };
 
+    void initCraters(){
+        if(craters[0] != null) return;
+        for(int i = 0; i < craters.length; i++){
+            rand.setSeed(seed + i + 66);
+            craters[i] = new Vec3(craterScl, 0, 0)
+                .setToRandomDirection(rand)
+                .setLength2(craterScl * craterScl);
+            craterSize[i] = rand.nextFloat() * 0.15f + 0.03f;
+        }
+    }
+    
+    float craterNoise(Vec3 position, boolean smooth){
+        initCraters();
+        float d = craterScl * craterScl * 4f, s = 0.3f;
+        for(int i = 0; i < craters.length; i++){
+            float dt = craters[i].dst2(position);
+            if(dt < d){
+                d = dt;
+                s = craterSize[i];
+            }
+        }
+        d /= craterScl * craterScl;
+        if(d <= s){
+            if(smooth) return d / s * 1.3f - 0.7f;
+            return -0.7f;
+        }
+        if(d >= s + 0.15f) return 0.2f;
+        float a = (d - s) / 0.15f;
+        return (1f - Mathf.sqrt(a)) * 0.38f + 0.22f;
+    }
+
     float rawHeight(Vec3 position){
-        return (Mathf.pow(Simplex.noise3d(seed, 7, 0.5f, 1f/3f, position.x * sclh, position.y * sclh + heightYOffset, position.z * sclh) * heightScl, 2.3f) + waterOffset) / (1f + waterOffset);
+        Vec3 cratPos = Tmp.v33.set(position).scl(craterScl);
+        float base = Mathf.pow(
+            Simplex.noise3d(seed, 7, 0.5f, 1f/3f,
+                position.x * sclh,
+                position.y * sclh + heightYOffset,
+                position.z * sclh) * heightScl,
+            2.3f
+        );
+        float crater = craterNoise(cratPos, true) * 0.3f;
+        return (base + crater + waterOffset) / (1f + waterOffset);
     }
 
     @Override
