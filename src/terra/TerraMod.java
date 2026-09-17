@@ -57,7 +57,7 @@ public class TerraMod extends Mod{
         TerraBlocks.load();
         TerraSectorPresets.load();
         TerraPlanets.load();
-        TerraVanillaBlocksOverride.load();
+        TerraVanillaOverride.load();
         TerraVanilaTree.load();
         TerraVerilusTree.load();
     }
