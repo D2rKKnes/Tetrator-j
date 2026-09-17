@@ -20,7 +20,7 @@ import mindustry.world.blocks.environment.*;
 public class NebulaMoonGenerator extends PlanetGenerator {
     public double octaves = 4, persistence = 0.8, scl = 1.0, pow = 1.7, mag = 2;
     float heightYOffset = 41.3f;
-    float sclh = 4f;
+    float sclh = 5f;
     float waterOffset = 0.04f;
     float heightScl = 1.01f;
     public float rotationScl = -100;
@@ -41,7 +41,7 @@ public class NebulaMoonGenerator extends PlanetGenerator {
     @Override
     public float getHeight(Vec3 position) {
         float height = rawHeight(position);
-        return Math.max(height, 2);
+        return Math.max(height, 0.1538f);
     }
 
     @Override
