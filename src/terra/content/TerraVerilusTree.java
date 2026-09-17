@@ -154,6 +154,7 @@ public class TerraVerilusTree {
                 });
                 node(dynamics, () -> {
                     node(fracture, () -> {});
+                    node(fuse, () -> {});
                 });
                 node(aircraft, () -> {
                     node(aircraftThoriumMissile, () -> {
