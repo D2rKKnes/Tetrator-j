@@ -34,7 +34,6 @@ public class NebulaMoonGenerator extends PlanetGenerator {
             Color.valueOf("c2bffb"),
             Color.valueOf("6b698a"),
             Color.valueOf("9192a6"),
-            Color.valueOf("a1b1d0"),
             Color.valueOf("e1e9f0"),
             Color.valueOf("ffffff")
     };
