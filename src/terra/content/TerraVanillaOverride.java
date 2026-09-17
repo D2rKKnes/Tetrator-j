@@ -92,9 +92,9 @@ public class TerraVanillaOverride {
         Blocks.powerNode.requirements = with(Items.graphite, 2, Items.lead, 6);
         Blocks.fuse.requirements = with(Items.lead, 225, Items.graphite, 225, Items.thorium, 100);
     
-        Blocks.slag.supportsOverlay = true;
-        Blocks.tar.supportsOverlay = true;
-        Blocks.arkyciteFloor.supportsOverlay = true;
+        ((Floor) Blocks.slag).supportsOverlay = true;
+        ((Floor) Blocks.tar).supportsOverlay = true;
+        ((Floor) Blocks.arkyciteFloor).supportsOverlay = true;
     
         UnitTypes.renale.hidden = false;
         UnitTypes.latum.hidden = false;
