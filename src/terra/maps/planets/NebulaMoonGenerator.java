@@ -14,16 +14,18 @@ public class NebulaMoonGenerator extends PlanetGenerator {
     public float rotationScl = -100;
     //Color c1 = Color.valueOf("5057a6"), c2 = Color.valueOf("272766");
     public Color[] colors = new Color[]{
-            //valueOf("0e0f33"),
+            valueOf("827de9"),
             valueOf("c2bffb"),
-            valueOf("e9ebff"),
+            valueOf("6b698a"),
+            valueOf("9192a6"),
             valueOf("e1e9f0"),
             valueOf("ffffff")
     };
 
     @Override
     public float getHeight(Vec3 position) {
-        return 0;
+        float height = rawHeight(position);
+        return Math.max(height, 2);
     }
 
     @Override
