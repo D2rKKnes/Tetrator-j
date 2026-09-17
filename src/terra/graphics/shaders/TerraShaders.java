@@ -39,6 +39,8 @@ public class TerraShaders {
             Shader.prependFragmentCode = "#define HAS_GL_FRAGDEPTH\n";
         }
 
+        rings = new RingShader("rings", "rings");
+
         depth = new DepthShader();
         depthAtmosphere = new DepthAtmosphereShader();
 
@@ -46,7 +48,6 @@ public class TerraShaders {
         glaciumLayer = new CacheLayer.ShaderLayer(glacium);
         CacheLayer.add(glaciumLayer);
 
-        rings = new RingShader("rings", "rings");
         planetTextureShader = new PlanetTextureShader();
 
 //        shelter = new ShelterShader();
