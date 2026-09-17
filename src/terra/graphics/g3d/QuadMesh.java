@@ -24,7 +24,7 @@ public class QuadMesh extends PlanetMesh{
 
     public QuadMesh(Planet planet, String regionName){
         this.planet = planet;
-        this.shader = TerraShaders.rings;
+        //this.shader = TerraShaders.rings;
         this.baseRegion = atlas.find(regionName);
         this.normal = new Vec3(Vec3.Y).rotate(Vec3.X, 22f);
         
@@ -52,6 +52,8 @@ public class QuadMesh extends PlanetMesh{
 
     @Override
     public void preRender(PlanetParams params){
+        if(shader == null) shader = TerraShaders.rings;
+        
         TerraShaders.rings.baseRegion = baseRegion;
         TerraShaders.rings.alpha = params.planet == planet ? params.uiAlpha : 0f;
         TerraShaders.rings.planetPos = planet.position;
