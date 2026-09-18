@@ -17,8 +17,13 @@ public class ManualGate extends OverflowGate {
     public ManualGate(String name) {
         super(name);
         configurable = true;
+        saveConfig = true;
         drawDynamic = true;
         drawCached = false;
+
+        config(Boolean.class, (ManualGateBuild build, Boolean b) -> {
+            build.invert = b;
+        });
     }
 
     public class ManualGateBuild extends OverflowGateBuild {
@@ -28,10 +33,15 @@ public class ManualGate extends OverflowGate {
         @Override
         public void buildConfiguration(Table table) {
             table.button(Icon.refresh, () -> {
-                invert = !invert;
+                configure(!invert);
                 Sounds.click.at(this);
                 fx = true;
             }).size(40f).checked(b -> invert);
+        }
+
+        @Override
+        public Boolean config() {
+            return invert;
         }
 
         @Override
