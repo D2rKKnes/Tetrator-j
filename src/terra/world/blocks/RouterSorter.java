@@ -107,7 +107,7 @@ public class RouterSorter extends Sorter {
 
             if (fx) {
                 Draw.color();
-                Fx.placeBlock.at(this, 1.7f);
+                Fx.placeBlock.at(this, 1.5f);
                 fx = false;
             }
         }
