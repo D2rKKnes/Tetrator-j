@@ -16,6 +16,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.*;
 import mindustry.world.meta.*;
 import mindustry.world.blocks.distribution.Conveyor;
+import terra.content.*;
 
 public class CappedConveyor extends Conveyor {
     public TextureRegion[] topRegions = new TextureRegion[5];
@@ -36,6 +37,14 @@ public class CappedConveyor extends Conveyor {
         ambientSoundVolume = 0.0022f;
         unloadable = false;
         noUpdateDisabled = false;
+    }
+
+    @Override
+    public void init(){
+        super.init();
+
+        if(junctionReplacement == null) junctionReplacement = TerraBlocks.graphiteJunction;
+        if(bridgeReplacement == null || !(bridgeReplacement instanceof ItemBridge || bridgeReplacement instanceof DuctBridge)) bridgeReplacement = TerraBlocks.graphieBridge;
     }
 
     @Override
@@ -78,11 +87,12 @@ public class CappedConveyor extends Conveyor {
         @Override
         public void onProximityUpdate() {
             super.onProximityUpdate();
-            Building next = this.front();
-            Building prev = this.back();
-            
-            this.capped = next == null || !next.block.hasItems;
-            this.backCapped = (this.blendbits == 0) && (prev == null || !prev.block.hasItems);
+
+            Building next = nearby(rotation);
+            Building prev = nearby((rotation + 2) % 4);
+
+            this.capped = next == null || (!next.block.hasItems && !next.block.instantTransfer);
+            this.backCapped = (this.blendbits == 0) && (prev == null || (!prev.block.hasItems && !prev.block.instantTransfer));
         }
 
         @Override
@@ -104,7 +114,7 @@ public class CappedConveyor extends Conveyor {
                     
                     Draw.z(Layer.blockUnder);
                     if (topRegions[0].found()) {
-                        Draw.rect(topRegions[0], this.x + dx[dir] * 8f, this.y + dy[dir] * 8f, rot);
+                        Draw.rect(sliced(topRegions[0], i != 0 ? SliceMode.bottom : SliceMode.top), this.x + dx[dir] * 8f, this.y + dy[dir] * 8f, rot);
                     }
                 }
             }
