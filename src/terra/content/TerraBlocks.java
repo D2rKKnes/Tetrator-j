@@ -85,7 +85,7 @@ public class TerraBlocks{
     mechanicalWell, electricalWell,
     pulseDrill, plasmaDrill, beamMiningFacility,
     //storage
-    coreSolaris,
+    coreRay, coreSolaris, coreStellaris,
     //turrets
     flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
@@ -1256,8 +1256,36 @@ public class TerraBlocks{
         }};
 
         //storage
+        coreRay = new SolarGeneratorCore("core-ray"){{
+            requirements(Category.effect, with(Items.metaglass, 1000, Items.lead, 2000, Items.graphite, 1500));
+            //alwaysUnlocked = true;
+            unitType = UnitTypes.alpha;
+            health = 1400;
+            itemCapacity = 3000;
+            size = 3;
+
+            unitCapModifier = 10;
+            researchCostMultiplier = 0.05f;
+
+            baseExplosiveness = 10;
+            powerProduction = 1.9f;
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        };
+        
         coreSolaris = new SolarGeneratorCore("core-solaris"){{
-            requirements(Category.effect, with(Items.metaglass, 2500, Items.lead, 5000, Items.silicon, 6000, Items.titanium, 5500, Items.phaseFabric, 3000));
+            requirements(Category.effect, with(Items.metaglass, 2500, Items.lead, 4000, Items.silicon, 3000, Items.titanium, 2500, TerraItems.diamondDust, 1500));
             //alwaysUnlocked = true;
             unitType = TerraUnitTypes.tau;
             health = 3800;
@@ -1270,6 +1298,35 @@ public class TerraBlocks{
 
             baseExplosiveness = 10;
             powerProduction = 2.8f;
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        };
+
+        coreStellaris = new SolarGeneratorCore("core-stellaris"){{
+            requirements(Category.effect, with(Items.silicon, 6000, TerraItems.titaniumPlate, 4500, Items.phaseFabric, 2000, TerraItems.darkSteel, 3000, TerraItems.diamondGlass, 1500));
+            //alwaysUnlocked = true;
+            unitType = TerraUnitTypes.tau;
+            health = 7500;
+            itemCapacity = 11000;
+            size = 5;
+            thrusterLength = 40/4f;
+
+            unitCapModifier = 30;
+            researchCostMultiplier = 0.08f;
+
+            baseExplosiveness = 10;
+            powerProduction = 7f;
         }
             public TextureRegion fullRegion;
                                                                                  
