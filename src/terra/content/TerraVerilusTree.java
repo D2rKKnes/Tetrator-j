@@ -22,7 +22,7 @@ import static mindustry.content.UnitTypes.*;
 
 public class TerraVerilusTree {
     public static void load() {
-        Planets.verilus.techTree = nodeRoot("verilus", coreSolaris, () -> {
+        Planets.verilus.techTree = nodeRoot("verilus", coreRay, () -> {
             node(graphiteConveyor, () -> {
                 node(graphiteJunction, () -> {
                     node(graphiteRouter, () -> {
@@ -51,6 +51,9 @@ public class TerraVerilusTree {
                     });
                     node(phaseConveyor, () -> {});
                 });
+            });
+            node(coreSolaris, () -> {
+                node(coreStellaris, () -> {});
             });
             node(graphiteMiner, () -> {
                 node(pulseDrill, () -> {
@@ -243,7 +246,7 @@ public class TerraVerilusTree {
                     });
                 });
             });
-            node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreSolaris)), () -> {});
+            node(TerraSectorPresets.verilus, Seq.with(new Objectives.Research(coreRay)), () -> {});
         });
     }
 
