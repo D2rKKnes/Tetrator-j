@@ -29,8 +29,8 @@ public class TerraVanilaTree{
             node(multicellBattery, () -> {
             });
         });
-        vanillaNode(coreFoundation, () -> {
-            node(coreSolaris, () -> {
+        vanillaNode(coreShard, () -> {
+            node(coreRay, () -> {
             });
         });
         vanillaNode(copperWallLarge, () -> {
