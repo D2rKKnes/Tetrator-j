@@ -94,8 +94,8 @@ public class TerraVanilaTree{
             node(alpha, () -> {
                 node(beta, Seq.with(new Research(coreFoundation)), () -> {
                     node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
-                    //node(tau, Seq.with(new Research(coreSolaris)), () -> {});
                 });
+                node(ksi, Seq.with(new Research(coreRay)), () -> {});
             });
         });
         vanillaNode(payloadConveyor, () -> {
