@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Add Android Tools to PATH
+        shell: cmd
+        run: echo E:\sdk\cmdline-tools\bin>>%GITHUB_PATH%
+
       - name: Build with Gradle
         shell: cmd
         run: gradlew.bat deploy
