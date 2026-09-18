@@ -44,7 +44,7 @@ public class CappedConveyor extends Conveyor {
         super.init();
 
         if(junctionReplacement == null) junctionReplacement = TerraBlocks.graphiteJunction;
-        if(bridgeReplacement == null || !(bridgeReplacement instanceof ItemBridge || bridgeReplacement instanceof DuctBridge)) bridgeReplacement = TerraBlocks.graphieBridge;
+        if(bridgeReplacement == null || !(bridgeReplacement instanceof ItemBridge || bridgeReplacement instanceof DuctBridge)) bridgeReplacement = TerraBlocks.graphiteBridge;
     }
 
     @Override
