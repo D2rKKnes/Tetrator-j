@@ -87,14 +87,14 @@ public class TerraVanilaTree{
                 });
             });
         });
-        vanillaNode(impact0078, () -> {
-            node(TerraSectorPresets.verilus, Seq.with(new Research(coreSolaris)), () -> {});
+        vanillaNode(facility32m, () -> {
+            node(TerraSectorPresets.verilus, Seq.with(new Research(coreRay)), () -> {});
         });
         vanillaNode(airFactory, () -> {
             node(alpha, () -> {
                 node(beta, Seq.with(new Research(coreFoundation)), () -> {
                     node(gamma, Seq.with(new Research(coreNucleus)), () -> {});
-                    node(tau, Seq.with(new Research(coreSolaris)), () -> {});
+                    //node(tau, Seq.with(new Research(coreSolaris)), () -> {});
                 });
             });
         });
