@@ -15,7 +15,7 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.*;
 import mindustry.world.meta.*;
-import mindustry.world.blocks.distribution.Conveyor;
+import mindustry.world.blocks.distribution.*;
 import terra.content.*;
 
 public class CappedConveyor extends Conveyor {
