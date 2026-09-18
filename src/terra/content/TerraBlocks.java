@@ -1259,7 +1259,7 @@ public class TerraBlocks{
         coreRay = new SolarGeneratorCore("core-ray"){{
             requirements(Category.effect, with(Items.metaglass, 1000, Items.lead, 2000, Items.graphite, 1500));
             //alwaysUnlocked = true;
-            unitType = UnitTypes.alpha;
+            unitType = TerraUnitTypes.ksi;
             health = 1400;
             itemCapacity = 3000;
             size = 3;
@@ -1830,6 +1830,7 @@ public class TerraBlocks{
             requirements(Category.units, with(Items.lead, 280, Items.silicon, 420, Items.titanium, 380, TerraItems.titaniumPlate, 165));
             size = 4;
             //core
+            addPlan(TerraUnitTypes.ksi, 60f * 17.5f).item(ItemStack.with(Items.silicon, 45, Items.graphite, 20, Items.metaglass, 30));
             addPlan(TerraUnitTypes.tau, 60f * 27.5f).item(ItemStack.with(Items.silicon, 90, Items.graphite, 35, TerraItems.titaniumPlate, 50, TerraItems.diamondDust, 30));
             //attack
             addPlan(UnitTypes.flare, 60f * 15f).item(ItemStack.with(Items.silicon, 20));
@@ -1872,9 +1873,11 @@ public class TerraBlocks{
         }};
         //using only for cost param in units
         debugAssembler = new UnitFactory("debug-assembler"){{
-            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.tesseract, 1));
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 15));
             size = 2;
             plans = Seq.with(
+                //core
+                new UnitPlan(TerraUnitTypes.tau, 60f * 27.5f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.titaniumPlate, 50, TerraItems.diamondDust, 30)),
                 //purple
                 new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
                 new UnitPlan(TerraUnitTypes.dynamite, 60f * 30f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55)),
@@ -1900,7 +1903,7 @@ public class TerraBlocks{
         ((Reconstructor) Blocks.additiveReconstructor).upgrades.addAll(new UnitType[]{UnitTypes.alpha, UnitTypes.beta});
         ((Reconstructor) Blocks.multiplicativeReconstructor).upgrades.addAll(
             new UnitType[]{UnitTypes.beta, UnitTypes.gamma},
-            new UnitType[]{UnitTypes.alpha, TerraUnitTypes.tau}
+            new UnitType[]{UnitTypes.alpha, TerraUnitTypes.ksi}
         );
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
