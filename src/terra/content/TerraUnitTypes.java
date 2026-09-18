@@ -1363,7 +1363,7 @@ public class TerraUnitTypes {
 
             weapons.add(new Weapon("terra-ksi-weapon"){{
                 top = false;
-                reload = 8f;
+                reload = 10f;
                 x = 6f / 4f;
                 y = 13f / 4f;
                 shootY = 2f;
