@@ -533,7 +533,7 @@ public class TerraBlocks{
             buildCostMultiplier = 4f;
             health = 85;
         }};
-        graphiteGate = new OverflowGate("graphite-gate"){{
+        graphiteGate = new ManualGate("graphite-gate"){{
             requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
             buildCostMultiplier = 3f;
             health = 85;
