@@ -3,7 +3,7 @@ uniform vec4 u_textureUV;
 
 uniform float u_opacity;
 
-uniform vec3 u_planet_pos;
+uniform highp vec3 u_planet_pos;
 uniform vec3 u_sun_pos;
 
 uniform vec2 u_stroke;
