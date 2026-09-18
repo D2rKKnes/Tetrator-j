@@ -2,7 +2,7 @@ package terra.content;
 
 import mindustry.game.*;
 
-public class Loadouts{
+public class TerraLoadouts{
     public static Schematic
     basicRay;
 
