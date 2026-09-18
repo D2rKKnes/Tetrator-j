@@ -45,7 +45,7 @@ public class TerraUnitTypes {
     //flying special units
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile,
     //drones & core units
-    healDrone, basicAssemblyDrone, tau,
+    healDrone, basicAssemblyDrone, ksi, tau, tiamas,
     //titans or t6\t7 (red, green, purple)
     orb, crane, desis,
     reaper, eternity,
@@ -1330,6 +1330,70 @@ public class TerraUnitTypes {
             envEnabled = Env.any;
             envDisabled = Env.none;
             constructor = BuildingTetherPayloadUnit::create;
+        }};
+        ksi = new UnitType("ksi"){{
+            controller = u -> u.team.isAI() ? new BuilderAI(true, 400f) : new CommandAI();
+            flying = true;
+            targetBuildingsMobile = false;
+            isEnemy = false;
+            speed = 3.1f;
+            rotateSpeed = 6f;
+            drag = 0.025f;
+            accel = 0.035f;
+            mineSpeed = 7f;
+            mineTier = 2;
+            mineWalls = true;
+            buildSpeed = 0.75f;
+            buildBeamOffset = 20f / 4;
+            hitSize = 11f;
+            health = 190;
+            engineSize = 1.6f;
+            engineOffset = -16f / 4f;
+            itemCapacity = 100;
+            fogRadius = 0f;
+            lowAltitude = false;
+            researchCostMultiplier = 0f;
+            
+            constructor = UnitEntity::create;
+            outlineColor = Pal.darkerMetal;
+            faceTarget = false;
+            setEnginesMirror(
+                new UnitEngine(19.5f / 4f, 16f / 4, 1.6f, 90f)
+            );
+
+            weapons.add(new Weapon("small-basic-weapon"){{
+                top = false;
+                reload = 20f;
+                x = 6f;
+                y = 13f;
+                shootY = 2f;
+                rotate = top = false;
+                mirror = under = true;
+                shootCone = 20f;
+                recoil = 1f;
+                shootSound = Sounds.shootAlpha;
+
+                bullet = new LaserBoltBulletType(4.2f, 17){{
+                    keepVelocity = false;
+                    width = 1.5f;
+                    height = 6.5f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    trailWidth = 1.2f;
+                    trailLength = 4;
+                    shootEffect = Fx.shootSmallColor;
+                    smokeEffect = Fx.hitLaserColor;
+                    backColor = trailColor = Pal.yellowBoltFront;
+                    hitColor = Pal.yellowBoltFront;
+                    frontColor = Color.white;
+                    lightColor = Pal.yellowBoltFront;
+
+                    lifetime = 60f;
+                    buildingDamageMultiplier = 0f;
+                    homingPower = 0.04f;
+                    healPercent = 1.3f;
+                    collidesTeam = true;
+                }};
+            }});
         }};
         tau = new UnitType("tau"){{
             controller = u -> u.team.isAI() ? new BuilderAI(true, 400f) : new CommandAI();
