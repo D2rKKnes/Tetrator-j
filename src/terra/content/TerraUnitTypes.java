@@ -1361,7 +1361,7 @@ public class TerraUnitTypes {
                 new UnitEngine(19.5f / 4f, 16f / 4, 1.6f, 90f)
             );
 
-            weapons.add(new Weapon("ksi-weapon"){{
+            weapons.add(new Weapon("terra-ksi-weapon"){{
                 top = false;
                 reload = 8f;
                 x = 6f / 4f;
