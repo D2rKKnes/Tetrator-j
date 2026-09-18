@@ -17,9 +17,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Android Build Tools and Platform
+      - name: Install Android Build Tools & Platform
         run: |
-          echo "y" | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "build-tools;34.0.0" "platforms;android-34"
+          yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-34" "build-tools;34.0.0"
+          echo "${ANDROID_SDK_ROOT}/build-tools/34.0.0" >> $GITHUB_PATH
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
