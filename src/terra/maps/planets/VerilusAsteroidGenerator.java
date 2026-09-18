@@ -35,7 +35,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
     int seed;
 
     {
-        defaultLoadout = Schematics.readBase64("bXNjaAF4nBWLMQ6AIBAEF0IstPMfPMUXGIsTryBBjtzRGf8uJpOpZhAQBpVuRkiijDlJ7Vz7Rg3+ebFcbElz61kqgKnQycXg98Nh7axK8f+iSSHNNhL3M/QBaAwXkg==");
+        defaultLoadout = TerraLoadouts.basicRay;
     }
 
     void asteroid(int ax, int ay, int rad){
@@ -210,7 +210,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
         //core zones
         floorZone(Blocks.coreZone, Blocks.metalFloorDamaged, Blocks.metalFloor, 3, 0.2f, 0.5f, xr, yr);
-        floorZone(Blocks.coreZone, Blocks.metalFloorDamaged, Blocks.metalFloor, 4, 0.2f, 0.5f, sx, sy);
+        floorZone(Blocks.coreZone, Blocks.metalFloorDamaged, Blocks.metalFloor, 5, 0.2f, 0.5f, sx, sy);
 
         //walls at insides
         pass((x, y) -> {
