@@ -14,17 +14,12 @@ jobs:
           fetch-depth: 1
           clean: false
 
-      - name: Add d8 to PATH
+      - name: Build with Gradle for PC and Android
         shell: cmd
-        run: echo E:\sdk\build-tools\35.0.0>>%GITHUB_PATH%
-
-      - name: Build with Gradle
-        shell: cmd
-        run: gradlew.bat deploy
+        run: gradlew.bat deploy -PandroidSdk="E:/sdk"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: UnzipMeImNotAModModIsJarInsideMe
+          name: Tetrator-j-Crossplatform
           path: build/libs/*.jar
-
