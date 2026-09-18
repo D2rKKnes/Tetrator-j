@@ -114,7 +114,7 @@ public class CappedConveyor extends Conveyor {
                     
                     Draw.z(Layer.blockUnder);
                     if (topRegions[0].found()) {
-                        Draw.rect(sliced(topRegions[0], i != 0 ? SliceMode.bottom : SliceMode.top), this.x + dx[dir] * 8f, this.y + dy[dir] * 8f, rot);
+                        Draw.rect(sliced(topRegions[0], i != 0 ? SliceMode.bottom : SliceMode.top), this.x + dx[dir] * tilesize*0.75f, this.y + dx[dir] * tilesize*0.75f, rot);
                     }
                 }
             }
