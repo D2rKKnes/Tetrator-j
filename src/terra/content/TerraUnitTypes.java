@@ -1368,7 +1368,7 @@ public class TerraUnitTypes {
                 y = 13f;
                 shootY = 2f;
                 rotate = top = false;
-                mirror = under = true;
+                mirror = true;
                 shootCone = 20f;
                 recoil = 1f;
                 shootSound = Sounds.shootAlpha;
