@@ -1336,19 +1336,19 @@ public class TerraUnitTypes {
             flying = true;
             targetBuildingsMobile = false;
             isEnemy = false;
-            speed = 3.1f;
+            speed = 3.2f;
             rotateSpeed = 6f;
-            drag = 0.025f;
-            accel = 0.035f;
-            mineSpeed = 7f;
-            mineTier = 2;
+            drag = 0.06f;
+            accel = 0.07f;
+            mineSpeed = 6.5f;
+            mineTier = 1;
             mineWalls = true;
             buildSpeed = 0.75f;
             buildBeamOffset = 20f / 4;
             hitSize = 11f;
             health = 190;
             engineSize = 1.6f;
-            engineOffset = -16f / 4f;
+            engineOffset = 16f / 4f;
             itemCapacity = 100;
             fogRadius = 0f;
             lowAltitude = false;
@@ -1356,16 +1356,16 @@ public class TerraUnitTypes {
             
             constructor = UnitEntity::create;
             outlineColor = Pal.darkerMetal;
-            faceTarget = false;
+            faceTarget = true;
             setEnginesMirror(
                 new UnitEngine(19.5f / 4f, 16f / 4, 1.6f, 90f)
             );
 
             weapons.add(new Weapon("small-basic-weapon"){{
                 top = false;
-                reload = 20f;
-                x = 6f;
-                y = 13f;
+                reload = 14f;
+                x = 6f / 4f;
+                y = 13f / 4f;
                 shootY = 2f;
                 rotate = top = false;
                 mirror = true;
@@ -1617,26 +1617,26 @@ public class TerraUnitTypes {
             }});
         }};
 
-        latumFAKE = new NeoplasmUnitType("latum"){{
-            health = 20000;
-            armor = 12;
-            hitSize = 48f;
-            omniMovement = false;
-            rotateSpeed = 1.7f;
-            segments = 4;
-            drawBody = false;
-            hidden = true;
-            crushDamage = 2f;
-            aiController = HugAI::new;
-            constructor = CrawlUnit::create;
-            targetAir = false;
+        // latumFAKE = new NeoplasmUnitType("latum"){{
+        //     health = 20000;
+        //     armor = 12;
+        //     hitSize = 48f;
+        //     omniMovement = false;
+        //     rotateSpeed = 1.7f;
+        //     segments = 4;
+        //     drawBody = false;
+        //     hidden = true;
+        //     crushDamage = 2f;
+        //     aiController = HugAI::new;
+        //     constructor = CrawlUnit::create;
+        //     targetAir = false;
 
-            segmentScl = 4f;
-            segmentPhase = 5f;
-            speed = 1f;
+        //     segmentScl = 4f;
+        //     segmentPhase = 5f;
+        //     speed = 1f;
 
-            abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
-        }};
+        //     abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
+        // }};
         myDoom = new UnitType("my-doom"){{ //MyDoom.exe Imput command > execute Doomsday.js
             flying = true;
             drawCell = false;
