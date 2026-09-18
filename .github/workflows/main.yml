@@ -4,9 +4,6 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: self-hosted
-    env:
-      ANDROID_HOME: "E:/sdk"
-      ANDROID_SDK_ROOT: "E:/sdk"
 
     steps:
       - uses: actions/checkout@v4
@@ -14,9 +11,12 @@ jobs:
           fetch-depth: 1
           clean: false
 
-      - name: Build with Gradle for PC and Android
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build with Gradle
         shell: cmd
-        run: gradlew.bat deploy -PandroidSdk="E:/sdk"
+        run: gradlew.bat deploy
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
