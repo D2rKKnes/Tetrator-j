@@ -1337,7 +1337,7 @@ public class TerraUnitTypes {
             targetBuildingsMobile = false;
             isEnemy = false;
             speed = 3.2f;
-            rotateSpeed = 6f;
+            rotateSpeed = 9f;
             drag = 0.06f;
             accel = 0.07f;
             mineSpeed = 6.5f;
@@ -1363,12 +1363,13 @@ public class TerraUnitTypes {
 
             weapons.add(new Weapon("small-basic-weapon"){{
                 top = false;
-                reload = 14f;
+                reload = 8f;
                 x = 6f / 4f;
                 y = 13f / 4f;
                 shootY = 2f;
                 rotate = top = false;
                 mirror = true;
+                layerOffset = -0.0001f;
                 shootCone = 20f;
                 recoil = 1f;
                 shootSound = Sounds.shootAlpha;
