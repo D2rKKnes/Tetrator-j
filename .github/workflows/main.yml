@@ -10,10 +10,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          clean: false
 
-      - name: Add Android Build Tools to PATH
+      - name: Add d8 to PATH
         shell: cmd
-        run: echo E:\sdk\build-tools\34.0.0>>%GITHUB_PATH%
+        run: echo E:\sdk\build-tools\35.0.0>>%GITHUB_PATH%
 
       - name: Build with Gradle
         shell: cmd
