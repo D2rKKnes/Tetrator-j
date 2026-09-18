@@ -1349,7 +1349,7 @@ public class TerraUnitTypes {
             health = 190;
             engineSize = 1.6f;
             engineOffset = 16f / 4f;
-            itemCapacity = 100;
+            itemCapacity = 60;
             fogRadius = 0f;
             lowAltitude = false;
             researchCostMultiplier = 0f;
@@ -1361,7 +1361,7 @@ public class TerraUnitTypes {
                 new UnitEngine(19.5f / 4f, 16f / 4, 1.6f, 90f)
             );
 
-            weapons.add(new Weapon("small-basic-weapon"){{
+            weapons.add(new Weapon("ksi-weapon"){{
                 top = false;
                 reload = 8f;
                 x = 6f / 4f;
