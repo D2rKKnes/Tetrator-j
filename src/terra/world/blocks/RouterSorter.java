@@ -1,13 +1,15 @@
 package terra.world.blocks;
 
-import arc.Core;
+import  arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.scene.ui.layout.Table;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import mindustry.content.Fx;
 import mindustry.gen.Building;
 import mindustry.gen.Icon;
+import mindustry.gen.Sounds;
 import mindustry.type.Item;
 import mindustry.world.blocks.distribution.Sorter;
 
@@ -23,6 +25,7 @@ public class RouterSorter extends Sorter {
     public class RouterSorterBuild extends SorterBuild {
         public boolean invert = false;
         public int cdump = 0;
+        public boolean fx = false;
 
         @Override
         public void buildConfiguration(Table table) {
@@ -32,6 +35,8 @@ public class RouterSorter extends Sorter {
                 table.row();
                 table.button(Icon.refresh, () -> {
                     invert = !invert;
+                    Sounds.click.at(this);
+                    fx = true;
                 }).size(40f).checked(b -> invert);
             }
         }
@@ -98,6 +103,12 @@ public class RouterSorter extends Sorter {
                 var invertTex = Core.atlas.find(name + "-invert");
                 Draw.color();
                 Draw.rect(invertTex, x, y);
+            }
+
+            if (fx) {
+                Draw.color();
+                Fx.placeBlock.at(this, 1.7f);
+                fx = false;
             }
         }
 
