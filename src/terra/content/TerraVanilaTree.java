@@ -87,7 +87,7 @@ public class TerraVanilaTree{
                 });
             });
         });
-        vanillaNode(facility32m, () -> {
+        vanillaNode(crateredBattleground, () -> {
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreRay)), () -> {});
         });
         vanillaNode(airFactory, () -> {
