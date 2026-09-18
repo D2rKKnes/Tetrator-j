@@ -13,19 +13,19 @@ import mindustry.world.blocks.distribution.Sorter;
 
 public class RouterSorter extends Sorter {
 
-    public static RouterSorter routerSorter;
+    // public static RouterSorter routerSorter;
 
-    public static void setup() {
-        routerSorter = new RouterSorter("router-sorter");
-    }
+    // public static void setup() {
+    //     routerSorter = new RouterSorter("router-sorter");
+    // }
 
     public RouterSorter(String name) {
         super(name);
         configurable = true;
 
-        requirements(Category.distribution, ItemStack.with(Items.lead, 3, Items.graphite, 2));
-        buildCostMultiplier = 4f;
-        health = 85;
+        // requirements(Category.distribution, ItemStack.with(Items.lead, 3, Items.graphite, 2));
+        // buildCostMultiplier = 4f;
+        // health = 85;
     }
 
     public class RouterSorterBuild extends SorterBuild {
