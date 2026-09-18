@@ -100,6 +100,7 @@ public class TerraVanillaOverride {
         UnitTypes.latum.hidden = false;
         UnitTypes.manifold.hidden = false;
         UnitTypes.assemblyDrone.hidden = false;
+        UnitTypes.mono.mineWalls = true;
         ((ErekirUnitType) UnitTypes.evoke).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
         ((ErekirUnitType) UnitTypes.incite).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
         ((ErekirUnitType) UnitTypes.emanate).controller = u -> u.team.isAI() ? new BuilderAI(true, 500f) : new CommandAI();
