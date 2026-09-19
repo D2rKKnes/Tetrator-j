@@ -168,7 +168,7 @@ public class TerraUnitTypes {
             health = 420;
             engineSize = 2.75f;
             engineOffset = 7.7f;
-            range = 90f;
+            //range = 90f;
             itemCapacity = 15;
             lowAltitude = true;
             constructor = UnitEntity::create;
@@ -178,6 +178,7 @@ public class TerraUnitTypes {
             weapons.add(
             new Weapon(){{
                 shootOnDeath = true;
+                useAttackRange = false;
                 controllable = false;
                 reload = 60f;
                 shootCone = 180f;
@@ -232,7 +233,7 @@ public class TerraUnitTypes {
             targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.battery, BlockFlag.core, null};
             engineSize = 3.5f;
             engineOffset = 7f;
-            range = 70f;
+            //range = 70f;
             itemCapacity = 40;
             lowAltitude = true;
             constructor = UnitEntity::create;
@@ -244,6 +245,7 @@ public class TerraUnitTypes {
             weapons.add(
             new Weapon(){{
                 shootOnDeath = true;
+                useAttackRange = false;
                 controllable = false;
                 reload = 60f;
                 shootCone = 180f;
@@ -408,7 +410,7 @@ public class TerraUnitTypes {
             armor = 14;
             targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.core, null};
             engineSize = 6f;
-            engineOffset = 14f;
+            engineOffset = 13f;
             //range = 120f;
             itemCapacity = 60;
             lowAltitude = true;
@@ -416,10 +418,10 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(StatusEffects.sapped);
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
-            abilities.add(new UnitSpawnAbility(wickC, 480f, 19.125f, -8.375f), new UnitSpawnAbility(wickC, 480f, -19.125f, -8.375f), 
+            abilities.add(new UnitSpawnAbility(wickC, 480f, 76f / 4f, -28f / 4f), new UnitSpawnAbility(wickC, 480f, -76f / 4f, -28f / 4f), 
             new ShieldArcAbility(){{
                 region = "terra-catastrophe-shield";
-                radius = 32f;
+                radius = 31f;
                 angle = 146f;
                 regen = 1.4f;
                 cooldown = 60f * 4f;
@@ -446,7 +448,7 @@ public class TerraUnitTypes {
             weapons.add(
             new Weapon("terra-catastrophe-weapon"){{
                 x = 35f / 4f;
-                y = -24f / 4f;
+                y = -19f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 16f;
                 rotate = true;
@@ -479,7 +481,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-catastrophe-weapon"){{
                 x = -35f / 4f;
-                y = -24f / 4f;
+                y = -19f / 4f;
                 shootSound = Sounds.shootScepterSecondary;
                 reload = 18f;
                 rotate = true;
@@ -512,7 +514,7 @@ public class TerraUnitTypes {
             }},
             new Weapon("terra-sap-launcher"){{
                 x = 54f / 4f;
-                y = 6f / 4f;
+                y = 9f / 4f;
                 shootY = 5f;
                 shootSound = TerraSounds.shootLaunch;
                 reload = 190f;
@@ -627,7 +629,7 @@ public class TerraUnitTypes {
             itemCapacity = 90;
             lowAltitude = true;
             constructor = UnitEntity::create;
-            immunities = ObjectSet.with(StatusEffects.sapped, TerraStatusEffects.impactStun);
+            immunities = ObjectSet.with(StatusEffects.sapped, StatusEffects.electrified, TerraStatusEffects.impactStun);
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
             abilities.addAll(
@@ -1646,8 +1648,8 @@ public class TerraUnitTypes {
             hidden = true;
             speed = 10f;
             rotateSpeed = 20f;
-            drag = 0.95f;
-            accel = 0.95f;
+            drag = 0.9f;
+            accel = 0.9f;
             mineSpeed = Float.POSITIVE_INFINITY;
             mineTier = 1000;
             mineRange = buildRange = 100000;
@@ -1738,7 +1740,7 @@ public class TerraUnitTypes {
                     height = 32f;
                     shrinkX = shrinkY = 0f;
                     trailWidth = 1.6f;
-                    trailLength = 3;
+                    trailLength = 4;
                     shootEffect = smokeEffect = Fx.none;
                     hitEffect = despawnEffect = new Effect(80f, 100f, e -> {
                         color(e.color, e.foutpow());
