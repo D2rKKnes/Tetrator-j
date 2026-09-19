@@ -23,7 +23,7 @@ public class ManualGate extends OverflowGate {
         clearOnDoubleTap = true;
 
         config(Boolean.class, (ManualGateBuild build, Boolean b) -> build.invertr = b);
-        configClear((ManualGateBuild tile) -> build.invertr = false);
+        configClear((ManualGateBuild build) -> build.invertr = false);
     }
 
     @Override
