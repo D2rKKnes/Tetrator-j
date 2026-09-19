@@ -1,16 +1,13 @@
 package terra.world.blocks;
 
-import  arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.scene.ui.layout.Table;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import mindustry.content.Fx;
-import mindustry.gen.Building;
-import mindustry.gen.Icon;
-import mindustry.gen.Sounds;
-import mindustry.type.Item;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.scene.ui.layout.*;
+import arc.util.io.*;
+import mindustry.content.*;
+import mindustry.gen.*;
+import mindustry.type.*;
 import mindustry.world.blocks.distribution.Sorter;
 
 public class RouterSorter extends Sorter {
@@ -23,9 +20,8 @@ public class RouterSorter extends Sorter {
     }
 
     public class RouterSorterBuild extends SorterBuild {
-        public boolean invert = false;
+        public boolean invertr = false;
         public int cdump = 0;
-        public boolean fx = false;
 
         @Override
         public void buildConfiguration(Table table) {
@@ -34,10 +30,10 @@ public class RouterSorter extends Sorter {
             if (sortItem != null) {
                 table.row();
                 table.button(Icon.refresh, () -> {
-                    invert = !invert;
+                    invertr = !invertr;
                     Sounds.click.at(this);
-                    fx = true;
-                }).size(40f).checked(b -> invert);
+                    Fx.placeBlock.at(this, 1.5f);
+                }).size(40f).checked(b -> invertr);
             }
         }
 
@@ -62,7 +58,7 @@ public class RouterSorter extends Sorter {
                 return null;
             }
 
-            if (((item == sortItem) != invert) == enabled) {
+            if (((item == sortItem) != invertr) == enabled) {
                 if (isSame(source) && isSame(nearby(dir))) {
                     return null;
                 }
@@ -104,25 +100,19 @@ public class RouterSorter extends Sorter {
                 Draw.color();
                 Draw.rect(invertTex, x, y);
             }
-
-            if (fx) {
-                Draw.color();
-                Fx.placeBlock.at(this, 1.5f);
-                fx = false;
-            }
         }
 
         @Override
         public void write(Writes write) {
             super.write(write);
-            write.bool(invert);
+            write.bool(invertr);
             write.i(cdump);
         }
 
         @Override
         public void read(Reads read, byte revision) {
             super.read(read, revision);
-            invert = read.bool();
+            invertr = read.bool();
             cdump = read.i();
         }
     }
