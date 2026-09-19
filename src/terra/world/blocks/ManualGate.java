@@ -35,7 +35,7 @@ public class ManualGate extends OverflowGate {
                 configure(!invertr);
                 Sounds.click.at(this);
                 Fx.placeBlock.at(this, 1.5f);
-            }).size(40f).checked(b -> invert);
+            }).size(40f).checked(b -> invertr);
         }
 
         @Override
