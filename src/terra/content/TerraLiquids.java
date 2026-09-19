@@ -64,7 +64,7 @@ public class TerraLiquids{
             spreadTarget = TerraLiquids.helium;
             colorFrom = Color.valueOf("bc70a1");
             colorTo = Color.valueOf("ebb8d7");
-            effect = StatusEffects.melting;
+            effect = TerraStatusEffects.graviforce;
             incinerable = coolant = false;
         }};
     }
