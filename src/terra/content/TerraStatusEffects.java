@@ -38,11 +38,11 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, 
-    warped, warpPower, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification,
-    regeneration, superRegeneration, shieldRegen, shieldDamage, instantDeath, leadCorroded,
+    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, graviforce, graviforce2,
+    warped, warpPower, warpHell, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification, anviled,
+    regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded,
     
-    common, uncommon, rare, epic, legendary;
+    common, uncommon, rare, epic, legendary, mythical;
     
     public static void load(){
         energyOverload = new StatusEffect("energy-overload"){{
@@ -155,12 +155,50 @@ public class TerraStatusEffects{
             effectChance = 0.008f;
         }};
 
-        shockwaveImpact = new AdvancedStatusEffect("shockwave-impact"){{
+        warpHell = new StatusEffect("warp-hell"){{
+            color = Color.valueOf("e13131");
+            healthMultiplier = 0.33f;
+            damageMultiplier = 1.3f;
+            speedMultiplier = -1f;
+            dragMultiplier = 0.05f;
+            effect = extinction.effect;
+            effectChance = 0.015f;
+        }};
+
+        shockwaveImpact = new StatusEffect("shockwave-impact"){{
             color = Color.valueOf("cbcbcb");
             speedMultiplier = 0f;
             buildSpeedMultiplier = 0f;
             dragMultiplier = 0.2f;
             disarm = true;
+        }};
+
+        graviforce = new AdvancedStatusEffect("graviforce"){{
+            color = Color.valueOf("ebb8d7");
+            speedMultiplier = 0.6f;
+            dragMultiplier = 2f;
+            percentDamage = 0.4f;
+            effectChance = 0.075f;
+            effect = new Effect(35f, e -> {
+                Draw.color(color, Color.white, e.fin() - 0.5f);
+                randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
+                    Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
+                });
+            });
+        }};
+        graviforce2 = new AdvancedStatusEffect("graviforce-lethal"){{
+            color = Color.valueOf("ebb8d7");
+            speedMultiplier = 0.2f;
+            dragMultiplier = 10f;
+            percentDamage = 2f;
+            effectChance = 0.2f;
+            permanent = true;
+            effect = new Effect(35f, e -> {
+                Draw.color(color, Color.white, e.fin() - 0.5f);
+                randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
+                    Fill.square(e.x + x, e.y + y, e.fslope() * 1.1f, 45f);
+                });
+            });
         }};
 
         hyperdrive = new AdvancedStatusEffect("hyperdrive"){{
@@ -178,6 +216,18 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
             });
+        }};
+        speedup = new AdvancedStatusEffect("speedup"){{
+            color = Pal.stat;
+            healthMultiplier = 0.5f;
+            speedMultiplier = 0.5f;
+            reloadMultiplier = 5f;
+            buildSpeedMultiplier = 5f;
+        }};
+        anviled = new AdvancedStatusEffect("extreme-height"){{
+            color = Color.valueOf("6e6f81");
+            speedMultiplier = 0.01f;
+            reloadMultiplier = 0.33f;
         }};
 
         regeneration = new AdvancedStatusEffect("regeneration"){{
@@ -294,7 +344,7 @@ public class TerraStatusEffects{
             drawAura = false;
             alwaysUnlocked = true;
             outline = false;
-            init(() -> opposite(uncommon, rare, epic, legendary));
+            init(() -> opposite(uncommon, rare, epic, legendary, mythical));
         }};
         uncommon = new RarityStatusEffect("quality-uncommon"){{
             color = tintColor = Color.valueOf("3eec57");
@@ -306,7 +356,7 @@ public class TerraStatusEffects{
             alwaysUnlocked = true;
             outline = false;
             sides = 3;
-            init(() -> opposite(common, rare, epic, legendary));
+            init(() -> opposite(common, rare, epic, legendary, mythical));
         }};
         rare = new RarityStatusEffect("quality-rare"){{
             color = tintColor = Color.valueOf("2495ff");
@@ -319,7 +369,7 @@ public class TerraStatusEffects{
             alwaysUnlocked = true;
             outline = false;
             sides = 4;
-            init(() -> opposite(common, uncommon, epic, legendary));
+            init(() -> opposite(common, uncommon, epic, legendary, mythical));
         }};
         epic = new RarityStatusEffect("quality-epic"){{
             color = tintColor = Color.valueOf("c400ff");
@@ -332,8 +382,8 @@ public class TerraStatusEffects{
             //show = false;
             alwaysUnlocked = true;
             outline = false;
-            sides = 6;
-            init(() -> opposite(common, uncommon, rare, legendary));
+            sides = 5;
+            init(() -> opposite(common, uncommon, rare, legendary, mythical));
         }};
         legendary = new RarityStatusEffect("quality-legendary"){{
             color = tintColor = Color.valueOf("ff9500");
@@ -346,7 +396,21 @@ public class TerraStatusEffects{
             //show = false;
             alwaysUnlocked = true;
             outline = false;
-            init(() -> opposite(common, uncommon, rare, epic));
+            sides = 6;
+            init(() -> opposite(common, uncommon, rare, epic, mythical));
+        }};
+        mythical = new RarityStatusEffect("quality-mythical"){{
+            color = tintColor = Color.valueOf("00ffdd");
+            damageMultiplier = 5f;
+            healthMultiplier = 4f;
+            reloadMultiplier = 3.5f;
+            speedMultiplier = 2f;
+            buildSpeedMultiplier = 2f;
+            permanent = true;
+            //show = false;
+            alwaysUnlocked = true;
+            outline = false;
+            init(() -> opposite(common, uncommon, rare, epic, legendary));
         }};
     }
 }
