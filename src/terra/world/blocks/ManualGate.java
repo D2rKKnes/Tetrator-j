@@ -22,26 +22,25 @@ public class ManualGate extends OverflowGate {
         drawCached = false;
 
         config(Boolean.class, (ManualGateBuild build, Boolean b) -> {
-            build.invert = b;
+            build.invertr = b;
         });
     }
 
     public class ManualGateBuild extends OverflowGateBuild {
-        public boolean invert = false;
-        public boolean fx = false;
+        public boolean invertr = false;
 
         @Override
         public void buildConfiguration(Table table) {
             table.button(Icon.refresh, () -> {
-                configure(!invert);
+                configure(!invertr);
                 Sounds.click.at(this);
-                fx = true;
+                Fx.placeBlock.at(this, 1.5f);
             }).size(40f).checked(b -> invert);
         }
 
         @Override
         public Boolean config() {
-            return invert;
+            return invertr;
         }
 
         @Override
@@ -62,7 +61,7 @@ public class ManualGate extends OverflowGate {
             boolean ac = a != null && !(a.block.instantTransfer && source.block.instantTransfer) && a.acceptItem(this, item);
             boolean bc = b != null && !(b.block.instantTransfer && source.block.instantTransfer) && b.acceptItem(this, item);
 
-            if (!invert) {
+            if (!invertr) {
                 if (canForward) return to;
                 if (ac && !bc) return a;
                 if (bc && !ac) return b;
@@ -90,29 +89,23 @@ public class ManualGate extends OverflowGate {
             var base = Core.atlas.find(name);
             Draw.rect(base, x, y);
 
-            if (invert) {
+            if (invertr) {
                 var invertTex = Core.atlas.find(name + "-invert");
                 Draw.color();
                 Draw.rect(invertTex, x, y);
-            }
-
-            if (fx) {
-                Draw.color();
-                Fx.placeBlock.at(this, 1.5f);
-                fx = false;
             }
         }
 
         @Override
         public void write(Writes write) {
             super.write(write);
-            write.bool(invert);
+            write.bool(invertr);
         }
 
         @Override
         public void read(Reads read, byte revision) {
             super.read(read, revision);
-            invert = read.bool();
+            invertr = read.bool();
         }
     }
 }
