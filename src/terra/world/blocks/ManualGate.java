@@ -20,10 +20,17 @@ public class ManualGate extends OverflowGate {
         saveConfig = true;
         drawDynamic = true;
         drawCached = false;
+        clearOnDoubleTap = true;
 
-        config(Boolean.class, (ManualGateBuild build, Boolean b) -> {
-            build.invertr = b;
-        });
+        config(Boolean.class, (ManualGateBuild build, Boolean b) -> build.invertr = b);
+        configClear((ManualGateBuild tile) -> build.invertr = false);
+    }
+
+    @Override
+    public void drawPlanConfig(BuildPlan plan, Eachable<BuildPlan> list){
+        if (plan.config instanceof Boolean b && b){
+            Draw.rect(Core.atlas.find(name + "-invert"), plan.drawx(), plan.drawy());
+        }
     }
 
     public class ManualGateBuild extends OverflowGateBuild {
