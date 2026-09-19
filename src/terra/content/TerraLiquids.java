@@ -9,7 +9,7 @@ import terra.type.*;
 public class TerraLiquids{
     public static Liquid
   
-    carbonDioxide, fissilePlasma, magma, neon, helium;
+    carbonDioxide, fissilePlasma, magma, neon, helium, gravititeMass;
 
     public static void load(){
         carbonDioxide = new Liquid("carbon-dioxide", Pal.darkerGray){{
@@ -21,6 +21,7 @@ public class TerraLiquids{
 
         fissilePlasma = new Liquid("fissile-plasma", Color.valueOf("bcff73")){{
             gas = true;
+            incinerable = false;
             temperature = 3f;
             heatCapacity = 1f;
             lightColor = Color.valueOf("bcff73").a(0.4f);
@@ -53,6 +54,18 @@ public class TerraLiquids{
             gas = true;
             heatCapacity = 0.95f;
             viscosity = 0f;
+        }};
+
+        gravititeMass = new CellLiquid("gravitite-mass", Color.valueOf("dc94c0")){{
+            viscosity = 0.7f;
+            capPuddles = false;
+            moveThroughBlocks = true;
+            boilPoint = 8f;
+            spreadTarget = TerraLiquids.helium;
+            colorFrom = Color.valueOf("bc70a1");
+            colorTo = Color.valueOf("ebb8d7");
+            effect = StatusEffects.melting;
+            incinerable = coolant = false;
         }};
     }
 }
