@@ -43,8 +43,8 @@ public class CappedConveyor extends Conveyor {
     public void init(){
         super.init();
 
-        if(junctionReplacement == null) junctionReplacement = TerraBlocks.graphiteJunction;
-        if(bridgeReplacement == null || !(bridgeReplacement instanceof ItemBridge || bridgeReplacement instanceof DuctBridge)) bridgeReplacement = TerraBlocks.graphiteBridge;
+        if(junctionReplacement != TerraBlocks.graphiteJunction) junctionReplacement = TerraBlocks.graphiteJunction;
+        if(bridgeReplacement != TerraBlocks.graphiteBridge || !(bridgeReplacement instanceof ItemBridge || bridgeReplacement instanceof DuctBridge)) bridgeReplacement = TerraBlocks.graphiteBridge;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class CappedConveyor extends Conveyor {
                     
                     Draw.z(Layer.blockUnder);
                     if (topRegions[0].found()) {
-                        Draw.rect(sliced(topRegions[0], i != 0 ? SliceMode.bottom : SliceMode.top), this.x + dx[dir] * 8*0.75f, this.y + dx[dir] * 8*0.75f, rot);
+                        Draw.rect(sliced(topRegions[0], i != 0 ? SliceMode.bottom : SliceMode.top), this.x + dx[dir] * 8*0.75f, this.y + dy[dir] * 8*0.75f, rot);
                     }
                 }
             }
