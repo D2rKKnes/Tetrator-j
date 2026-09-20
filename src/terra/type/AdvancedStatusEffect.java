@@ -40,7 +40,7 @@ public class AdvancedStatusEffect extends StatusEffect{
     @Override
     public void setStats(){
         super.setStats();
-        if(drag != 1) stats.addMultModifier(dragStat, drag);
+        if(dragMultiplier != 1) stats.addMultModifier(dragStat, dragMultiplier);
         if(percentDamage > 0) stats.add(Stat.damage, percentDamage + "%" + StatUnit.perSecond.localized());
         if(percentDamage < 0) stats.add(Stat.healing, -percentDamage + "%" + StatUnit.perSecond.localized());
         if(removeDamage > 0) stats.add(removeDamag, removeDamage);
