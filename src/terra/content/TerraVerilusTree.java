@@ -47,7 +47,9 @@ public class TerraVerilusTree {
                 });
                 node(graphiteBridge, () -> {
                     node(smallDriver, () -> {
-                        node(massDriver, () -> {});
+                        node(massDriver, () -> {
+                            node(warpGate, () -> {});
+                        });
                     });
                     node(phaseConveyor, () -> {});
                 });
