@@ -16,14 +16,15 @@ import mindustry.graphics.MultiPacker.*;
 import mindustry.world.meta.*;
 
 public class AdvancedStatusEffect extends StatusEffect{
+    public static final Stat drgaStat = new Stat("terra-drag", StatCat.general);
     public static final Stat removeDamag = new Stat("removedamage", StatCat.function);
     public static final Stat removeHeal = new Stat("removeheal", StatCat.function);
     public static final Stat shieldDamag = new Stat("shielddamage", StatCat.function);
     public static final Stat shieldHeal = new Stat("shieldheal", StatCat.function);
     public static final Stat shieldCap = new Stat("shieldhealcap", StatCat.function);
-    public static final Stat instantDeath = new Stat("instantdeath", StatCat.general);
     public static final Stat disarmStat = new Stat("terra-disarm", StatCat.general);
     public static final Stat permanentStat = new Stat("terra-permanent", StatCat.general);
+    public static final Stat instantDeath = new Stat("instantdeath", StatCat.general);
     public float percentDamage;
     public float removeDamage;
     public float shieldDamage;
@@ -39,6 +40,7 @@ public class AdvancedStatusEffect extends StatusEffect{
     @Override
     public void setStats(){
         super.setStats();
+        if(drag != 1) stats.addMultModifier(dragStat, drag);
         if(percentDamage > 0) stats.add(Stat.damage, percentDamage + "%" + StatUnit.perSecond.localized());
         if(percentDamage < 0) stats.add(Stat.healing, -percentDamage + "%" + StatUnit.perSecond.localized());
         if(removeDamage > 0) stats.add(removeDamag, removeDamage);
@@ -48,9 +50,9 @@ public class AdvancedStatusEffect extends StatusEffect{
             stats.add(shieldHeal, -shieldDamage * 60f, StatUnit.perSecond);
             stats.add(shieldCap, shieldHealCap);
         }
-        if(instakill) stats.add(instantDeath, "");
         if(disarm) stats.add(disarmStat, "");
         if(permanent) stats.add(permanentStat, "");
+        if(instakill) stats.add(instantDeath, "");
     }
 
     @Override
