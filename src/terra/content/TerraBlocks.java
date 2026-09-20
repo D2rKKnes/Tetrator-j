@@ -562,7 +562,7 @@ public class TerraBlocks{
             itemCapacity = 125;
             health = 3000;
             canOverdrive = false;
-            consumePower(250f / 60f);
+            consumePower(250.0001f / 60f);
         }};
         
         //power
