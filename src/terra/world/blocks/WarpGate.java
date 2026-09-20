@@ -9,6 +9,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.entities.units.*;
 import mindustry.game.EventType.*;
 import mindustry.game.*;
 import mindustry.gen.*;
@@ -20,10 +21,11 @@ import mindustry.world.meta.*;
 
 public class WarpGate extends Block {
     public static final String[] colorNames = new String[]{
-        "purple", "pink", "red", "orange", "yellow", "green", "cyan", "blue", "white", "black"
+        "blue", "purple", "pink", "red", "orange", "yellow", "green", "cyan", "white", "black"
     };
 
     public static final Color[] gateColors = new Color[]{
+        Color.valueOf("6f80e8"),
         Color.valueOf("8a73c6"),
         Color.valueOf("fc81de"),
         Color.valueOf("f25555"),
@@ -31,7 +33,6 @@ public class WarpGate extends Block {
         Color.valueOf("eab678"),
         Color.valueOf("3a8f64"),
         Color.valueOf("86aeca"),
-        Color.valueOf("6f80e8"),
         Color.valueOf("d1d1df"),
         Color.valueOf("515151")
     };
@@ -98,15 +99,15 @@ public class WarpGate extends Block {
         super.setBars();
 
         // addBar("mode", (WarpGateBuild build) -> new Bar(
-        //         () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
-        //         () -> build.isOutput ? Pal.remove : Pal.accent,
-        //         () -> 1f
+        //     () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
+        //     () -> build.isOutput ? Pal.remove : Pal.accent,
+        //     () -> 1f
         // ));
 
         addBar("cooldown", (WarpGateBuild build) -> new Bar(
-                () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
-                () -> Pal.power,
-                () -> build.isOutput ? 0f : build.cooldown / 60f
+            () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
+            () -> Pal.power,
+            () -> build.isOutput ? 0f : build.cooldown / 60f
         ));
     }
 
