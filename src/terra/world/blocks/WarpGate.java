@@ -96,13 +96,13 @@ public class WarpGate extends Block {
         super.setBars();
 
         addBar("mode", (WarpGateBuild build) -> new Bar(
-                () -> build.isOutput ? "Режим: Вывод" : "Режим: Ввод",
+                () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
                 () -> build.isOutput ? Pal.remove : Pal.accent,
                 () -> 1f
         ));
 
         addBar("cooldown", (WarpGateBuild build) -> new Bar(
-                () -> build.isOutput ? "Перезарядка: Отсутствует" : "Перезарядка " + Strings.fixed(Math.max(0f, build.cooldown / 60f), 2) + " сек",
+                () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
                 () -> Pal.power,
                 () -> build.isOutput ? 0f : build.cooldown / 60f
         ));
@@ -248,7 +248,7 @@ public class WarpGate extends Block {
             table.add(colorsTable).row();
 
             table.button(b -> {
-                b.add(isOutput ? "Режим: Вывод" : "Режим: Ввод");
+                b.add(Core.bundle.get(isOutput ? "warpgate.mode.output" : "warpgate.mode.input"));
             }, () -> {
                 configure(colorIndex + (!isOutput ? 100 : 0));
                 deselect();
