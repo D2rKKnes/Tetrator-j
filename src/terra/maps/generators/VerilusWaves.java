@@ -355,6 +355,26 @@ public class VerilusWaves {
             shieldScaling = 58f;
             unitAmount = 3;
         }});
+        
+        out.add(new SpawnGroup(pick(fspec, 9, rand)){{
+            begin = 68;
+            spacing = 30;
+            max = 6;
+            unitScaling = 2.7f;
+            shields = 50000f;
+            shieldScaling = 72f;
+            effect = StatusEffects.boss;
+        }});
+        out.add(new SpawnGroup(pick(fspec, 8, rand)){{
+            begin = 68;
+            spacing = 30;
+            max = 6;
+            unitScaling = 2.7f;
+            shields = 50000f;
+            shieldScaling = 72f;
+            effect = StatusEffects.boss;
+        }});
+        
         out.add(new SpawnGroup(pick(fspec, 2, rand)){{
             begin = 71;
             end = 81;
@@ -378,6 +398,13 @@ public class VerilusWaves {
             shieldScaling = 89f;
             unitAmount = 4;
         }});
+        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
+            begin = 77;
+            spacing = 5;
+            max = 4;
+            unitScaling = 3.3f;
+            shieldScaling = 66f;
+        }});
         out.add(new SpawnGroup(pick(fspec, 4, rand)){{
             begin = 78;
             spacing = 2;
@@ -385,6 +412,13 @@ public class VerilusWaves {
             unitScaling = 3.8f;
             shieldScaling = 89f;
             unitAmount = 5;
+        }});
+        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
+            begin = 80;
+            spacing = 4;
+            max = 5;
+            unitScaling = 4f;
+            shieldScaling = 72f;
         }});
         out.add(new SpawnGroup(pick(fspec, 5, rand)){{
             begin = 81;
@@ -425,6 +459,13 @@ public class VerilusWaves {
             unitAmount = 2;
             effect = StatusEffects.overdrive;
         }});
+        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
+            begin = 97;
+            spacing = 3;
+            max = 6;
+            unitScaling = 5f;
+            shieldScaling = 83f;
+        }});
         out.add(new SpawnGroup(pick(fspec, 5, rand)){{
             begin = 98;
             spacing = 40;
@@ -443,48 +484,25 @@ public class VerilusWaves {
             shieldScaling = 100f;
             unitAmount = 3;
         }});
-        out.add(new SpawnGroup(pick(fspec, 9, rand)){{
+
+        out.add(new SpawnGroup(pick(fspec, 8, rand)){{
             begin = 98;
-            spacing = 40;
-            max = 6;
-            unitScaling = 2.7f;
+            spacing = 18;
+            max = 4;
+            unitScaling = 2f;
             shields = 50000f;
-            shieldScaling = 72f;
-            effect = StatusEffects.boss;
+            shieldScaling = 1000f / 18;
         }});
         out.add(new SpawnGroup(pick(fspec, 8, rand)){{
             begin = 98;
-            spacing = 40;
-            max = 6;
-            unitScaling = 2.7f;
-            shields = 50000f;
-            shieldScaling = 72f;
-            effect = StatusEffects.boss;
-        }});
-        
-        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
-            begin = 117;
-            spacing = 7;
-            max = 3;
-            unitScaling = 9.1f;
-            shieldScaling = 66f;
-        }});
-        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
-            begin = 130;
-            spacing = 5;
+            spacing = 18;
             max = 4;
-            unitScaling = 11.1f;
-            shieldScaling = 72f;
-        }});
-        out.add(new SpawnGroup(pick(fspec, 7, rand)){{
-            begin = 177;
-            spacing = 3;
-            max = 5;
-            unitScaling = 14.3f;
-            shieldScaling = 83f;
+            unitScaling = 2f;
+            shields = 50000f;
+            shieldScaling = 1000f / 18;
         }});
         out.add(new SpawnGroup(TerraUnitTypes.eternity){{
-            begin = 178;
+            begin = 98;
             spacing = 18;
             max = 4;
             unitScaling = 5f;
