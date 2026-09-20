@@ -151,21 +151,29 @@ public class TerraStatusEffects{
             color = Pal.accent;
             healthMultiplier = 2f;
             damageMultiplier = 1.3f;
-            effect = Fx.overdriven;
+            effect = new Effect(60f, 20f, e -> {
+                Draw.color(Color.white, color, e.fin() + 0.35f);
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 0);
+            });
             effectChance = 0.008f;
         }};
 
-        warpHell = new StatusEffect("warp-hell"){{
+        warpHell = new AdvancedStatusEffect("warp-hell"){{
             color = Color.valueOf("e13131");
             healthMultiplier = 0.33f;
-            damageMultiplier = 1.3f;
+            damageMultiplier = 0.67f;
             speedMultiplier = -1f;
+            reloadMultiplier = 0.15f;
+            buildSpeedMultiplier = 0.5f;
             dragMultiplier = 0.05f;
+            damage = 13.4f;
+            removeDamage = 666f;
+            effectChance = 0.075f;
             effect = extinction.effect;
-            effectChance = 0.015f;
         }};
 
-        shockwaveImpact = new StatusEffect("shockwave-impact"){{
+        shockwaveImpact = new AdvancedStatusEffect("shockwave-impact"){{
             color = Color.valueOf("cbcbcb");
             speedMultiplier = 0f;
             buildSpeedMultiplier = 0f;
@@ -219,10 +227,10 @@ public class TerraStatusEffects{
         }};
         speedup = new AdvancedStatusEffect("speedup"){{
             color = Pal.stat;
-            healthMultiplier = 0.5f;
-            speedMultiplier = 0.5f;
-            reloadMultiplier = 5f;
-            buildSpeedMultiplier = 5f;
+            healthMultiplier = 0.33f;
+            speedMultiplier = 0.33f;
+            reloadMultiplier = 3f;
+            buildSpeedMultiplier = 3f;
         }};
         anviled = new AdvancedStatusEffect("extreme-height"){{
             color = Color.valueOf("6e6f81");
@@ -276,11 +284,11 @@ public class TerraStatusEffects{
             shieldDamage = 0.75f;
             effectChance = 0.02f;
             effect = new WaveEffect(){{
-                strokeFrom = 0f;
-                strokeTo = 3f;
+                strokeFrom = 3f;
+                strokeTo = 0f;
                 sizeFrom = 8f;
                 sizeTo = 0f;
-                colorFrom = color.cpy().a(0.5f);
+                colorFrom = color.cpy().a(0f);
                 colorTo = color;
                 lifetime = 90f;
             }};
