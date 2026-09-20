@@ -70,7 +70,7 @@ public class TerraBlocks{
     //distrubution
     graphiteConveyor, 
     graphiteJunction, graphiteRouter, graphiteGate,
-    graphiteBridge, smallDriver,
+    graphiteBridge, smallDriver, warpGate,
     //power
     photonPanel, photonPanelLarge,
     multicellBattery,
@@ -555,6 +555,14 @@ public class TerraBlocks{
             range = 260f;
             hasPower = false;
             health = 485;
+        }};
+        warpGate = new WarpGate("warp-gate"){{
+            requirements(Category.distribution, with(Items.lead, 500, Items.thorium, 150, TerraItems.darkSteel, 285, TerraItems.thermoxite, 175, TerraItems.titaniumPlate, 300, TerraItems.diamondDust, 120));
+            size = 3;
+            itemCapacity = 125;
+            health = 3000;
+            canOverdrive = false;
+            consumePower(250f / 60f);
         }};
         
         //power
