@@ -7,8 +7,8 @@
 To run this mod, you need to install Black Holes Library mod.
 <br>![Black Holes Library](https://github.com/MEEPofFaith/black-holes-library/blob/master/assets/icon.png)
 <br>![Get Black Holes Library here](https://github.com/MEEPofFaith/black-holes-library)
-## Downloading
-To play this mod or view beta versions, you need to:
+## Downloading unreleased beta versions
+To play and test unreleased beta versions, you need to:
 <br>1 - Open Actions in the top bar (next to Issues and Code).
 <br>![Help1](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help1.png)
 <br>2 - Click on the latest green checkmark or any other one.
