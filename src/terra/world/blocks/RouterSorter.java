@@ -95,7 +95,7 @@ public class RouterSorter extends Sorter {
                 Draw.color();
             }
 
-            if (invert && sortItem != null) {
+            if (invertr && sortItem != null) {
                 var invertTex = Core.atlas.find(name + "-invert");
                 Draw.color();
                 Draw.rect(invertTex, x, y);
