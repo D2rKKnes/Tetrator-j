@@ -16,7 +16,7 @@ public class TerraSectorPresets {
             allowLaunchSchematics = true;
             overrideLaunchDefaults = true;
             allowLaunchLoadout = true;
-            captureWave = 180;
+            captureWave = 100;
         }}; 
     }
 
