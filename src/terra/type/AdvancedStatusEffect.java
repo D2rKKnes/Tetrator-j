@@ -16,7 +16,7 @@ import mindustry.graphics.MultiPacker.*;
 import mindustry.world.meta.*;
 
 public class AdvancedStatusEffect extends StatusEffect{
-    public static final Stat dragStat = new Stat("terra-drag", StatCat.general);
+    public static final Stat dragStat = new Stat("terra-drag");
     public static final Stat removeDamag = new Stat("removedamage", StatCat.function);
     public static final Stat removeHeal = new Stat("removeheal", StatCat.function);
     public static final Stat shieldDamag = new Stat("shielddamage", StatCat.function);
