@@ -9,6 +9,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.content.*;
 import mindustry.entities.units.*;
 import mindustry.game.EventType.*;
 import mindustry.game.*;
@@ -242,6 +243,8 @@ public class WarpGate extends Block {
                 colorsTable.button(b -> {
                     b.image(Tex.whiteui).size(28f).color(gateColors[idx]);
                 }, () -> {
+                    Sounds.click.at(this);
+                    Fx.placeBlock.at(this, 3.5f);
                     configure(idx + (isOutput ? 100 : 0));
                     deselect();
                 }).size(44f).pad(4f);
@@ -253,6 +256,7 @@ public class WarpGate extends Block {
             table.button(b -> {
                 b.add(Core.bundle.get(isOutput ? "warpgate.mode.output" : "warpgate.mode.input"));
             }, () -> {
+                Sounds.click.at(this);
                 configure(colorIndex + (!isOutput ? 100 : 0));
                 deselect();
             }).size(220f, 44f).pad(4f);
