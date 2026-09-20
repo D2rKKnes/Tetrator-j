@@ -1,29 +1,22 @@
 package terra.world.blocks;
 
-import arc.Core;
-import arc.Events;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.scene.ui.layout.Table;
-import arc.struct.ObjectMap;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import arc.util.Strings;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import mindustry.Vars;
-import mindustry.game.EventType.WorldLoadEvent;
-import mindustry.game.Team;
-import mindustry.gen.Building;
-import mindustry.gen.Tex;
-import mindustry.graphics.Pal;
-import mindustry.type.Item;
-import mindustry.ui.Bar;
-import mindustry.ui.Styles;
-import mindustry.world.Block;
-import mindustry.world.meta.Env;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.scene.ui.layout.*;
+import arc.struct.*;
+import arc.util.*;
+import arc.util.io.*;
+import mindustry.*;
+import mindustry.game.EventType.*;
+import mindustry.game.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.ui.*;
+import mindustry.world.*;
+import mindustry.world.meta.*;
 
 public class WarpGate extends Block {
     public static final String[] colorNames = new String[]{
@@ -92,14 +85,23 @@ public class WarpGate extends Block {
     }
 
     @Override
+    public void drawPlanConfig(BuildPlan plan, Eachable<BuildPlan> list){
+        int cfg = plan.config instanceof Integer i ? i : 0;
+        int index = cfg >= 100 ? cfg - 100 : cfg;
+        if (index >= 0 && index < topRegions.length && topRegions[index].found()) {
+            Draw.rect(topRegions[index], plan.drawx(), plan.drawy());
+        }
+    }
+
+    @Override
     public void setBars() {
         super.setBars();
 
-        addBar("mode", (WarpGateBuild build) -> new Bar(
-                () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
-                () -> build.isOutput ? Pal.remove : Pal.accent,
-                () -> 1f
-        ));
+        // addBar("mode", (WarpGateBuild build) -> new Bar(
+        //         () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
+        //         () -> build.isOutput ? Pal.remove : Pal.accent,
+        //         () -> 1f
+        // ));
 
         addBar("cooldown", (WarpGateBuild build) -> new Bar(
                 () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
