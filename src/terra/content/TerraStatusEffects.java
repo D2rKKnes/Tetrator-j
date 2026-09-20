@@ -156,7 +156,7 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 0);
             });
-            effectChance = 0.008f;
+            effectChance = 0.02f;
         }};
 
         warpHell = new AdvancedStatusEffect("warp-hell"){{
@@ -170,7 +170,11 @@ public class TerraStatusEffects{
             damage = 13.4f;
             removeDamage = 666f;
             effectChance = 0.075f;
-            effect = extinction.effect;
+            effect = new Effect(30f, 20f, e -> {
+                Draw.color(Color.white, color, e.fin() + 0.35f);
+                Lines.stroke(1.5f * e.fout(Interp.pow3Out));
+                Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 0);
+            });
         }};
 
         shockwaveImpact = new AdvancedStatusEffect("shockwave-impact"){{
@@ -198,7 +202,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("ebb8d7");
             speedMultiplier = 0.2f;
             dragMultiplier = 10f;
-            percentDamage = 2f;
+            percentDamage = 8f;
             effectChance = 0.2f;
             permanent = true;
             effect = new Effect(35f, e -> {
@@ -236,6 +240,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("6e6f81");
             speedMultiplier = 0.01f;
             reloadMultiplier = 0.33f;
+            dragMultiplier = 100f;
         }};
 
         regeneration = new AdvancedStatusEffect("regeneration"){{
