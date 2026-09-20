@@ -515,8 +515,8 @@ public class TerraBlocks{
         graphiteConveyor = new CappedConveyor("graphite-conveyor"){{
             requirements(Category.distribution, with(Items.lead, 1, Items.graphite, 1));
             health = 85;
-            speed = 0.042f;
-            displayedSpeed = 6f;
+            speed = 0.056f;
+            displayedSpeed = 8f;
             buildCostMultiplier = 2f;
             pushUnits = false;
             researchCost = with(Items.lead, 20, Items.graphite, 20);
