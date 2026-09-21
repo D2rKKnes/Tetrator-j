@@ -39,7 +39,6 @@ public class TerraMod extends Mod{
         TerraIcons.init();
         TerraSettings.init();
         UnitsRarity.init();
-        AdvancedDataBase.init();
     }
     
     @Override
@@ -63,5 +62,7 @@ public class TerraMod extends Mod{
         TerraVanillaOverride.load();
         TerraVanilaTree.load();
         TerraVerilusTree.load();
+
+        AdvancedDataBase.initStats();
     }
 }
