@@ -23,7 +23,14 @@ import static mindustry.Vars.*;
 
 public class AdvancedDataBase {
     static final Stat
-        twattrs = new Stat("terraweatherattrs", StatCat.function);
+        twattrs = new Stat("terraweatherattrs", StatCat.function),
+        tbore = new Stat("terrablockore", StatCat.function),
+        tborewall = new Stat("terrablockorewall", StatCat.function),
+        tbcore = new Stat("terrablockcore", StatCat.function),
+        tbspeed = new Stat("terrablockspeed", StatCat.function),
+        tbdrag = new Stat("terrablockdrag", StatCat.function),
+        tbliquid = new Stat("terraweatherliquid", StatCat.function),
+        tbstatus = new Stat("terraweatherstatus", StatCat.function);
 
     public static final Seq<WeatherEntry> entries = new Seq<>();
 
@@ -51,6 +58,57 @@ public class AdvancedDataBase {
             entry.description = w.description;
             entry.details = w.details;
             entry.credit = w.credit;
+        }
+
+        for (var b : content.blocks()) {
+            if (b instanceof Floor fb) {
+                fb.databaseCategory = "naturalBlocks";
+                fb.databaseTag = "floors";
+                if (fb.speedMultiplier != 1f) {
+                    fb.stats.addMultModifier(tbspeed, fb.speedMultiplier);
+                }
+                if (fb.dragMultiplier != 1f) {
+                    fb.stats.addMultModifier(tbdrag, fb.dragMultiplier);
+                }
+                if (fb.liquidDrop != null) {
+                    fb.stats.add(tbliquid, b.liquidDrop.emoji() + fb.liquidDrop.localizedName);
+                }
+                if (fb.status != StatusEffects.none) {
+                    fb.stats.add(tbstatus, b.status.emoji() + fb.status.localizedName);
+                }
+                if (fb.allowCorePlacement == true) {
+                    fb.stats.add(tbcore, fb.allowCorePlacement);
+                }
+                if (fb.itemOre != null) {
+                    fb.stats.add(tbore, b.itemOre.emoji() + fb.itemOre.localizedName);
+                }
+                attri(stats, fb.attributes);
+            } else if (b instanceof StaticWall wb) {
+                wb.databaseCategory = "naturalBlocks";
+                wb.databaseTag = "staticWalls";
+                if (wb.itemOre != null) {
+                    wb.stats.add(tbore, wb.itemOre.emoji() + wb.itemOre.localizedName);
+                }
+                attri(stats, wb.attributes);
+            //idk why TallBlock is not a StaticWall but just a Block
+            } else if (b instanceof TallBlock tb) {
+                tb.databaseCategory = "naturalBlocks";
+                tb.databaseTag = "staticWalls";
+                if (tb.itemOre != null) {
+                    tb.stats.add(tbore, tb.itemOre.emoji() + tb.itemOre.localizedName);
+                }
+                attri(stats, wb.attributes);
+            } else if (b instanceof Prop pb) {
+                pb.databaseCategory = "naturalBlocks";
+                pb.databaseTag = "props";
+            } else if (b instanceof OverlayFloor ob) {
+                ob.databaseCategory = "naturalBlocks";
+                ob.databaseTag = "overlays";
+                if (ob.itemOre != null) {
+                    ob.stats.add(tbore, ob.itemOre.emoji() + ob.itemOre.localizedName);
+                    ob.stats.add(tborewall, ob.wallOre);
+                }
+            }
         }
     }
     public static void attri(Stats stats, Attributes at) {
