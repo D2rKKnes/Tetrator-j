@@ -15,11 +15,6 @@ public class WeatherEntry extends UnlockableContent{
         hideDetails = false;
         alwaysUnlocked = true;
         databaseCategory = "weather";
-
-        this.localizedName = Core.bundle.get(bundleContentPrefix + "." + this.name + ".name", this.name);
-        this.description = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".description");
-        this.details = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".details");
-        this.credit = Core.bundle.getOrNull(bundleContentPrefix + "." + this.name + ".credit");
     }
 
     public WeatherEntry(String name, boolean alwaysUnlocked){
