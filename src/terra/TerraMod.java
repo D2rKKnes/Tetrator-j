@@ -24,6 +24,9 @@ public class TerraMod extends Mod{
             Planets.verilus.generator = new VerilusAsteroidGenerator();
             Liquids.gallium.uiIcon = Core.atlas.find("liquid-gallium");
             Liquids.gallium.fullIcon = Core.atlas.find("liquid-gallium");
+            Time.runTask(60, () -> {
+                AdvancedDataBase.initStats();
+            });
         });
 
         Events.on(FileTreeInitEvent.class, e -> Core.app.post(TerraCacheLayer::load));
@@ -39,7 +42,6 @@ public class TerraMod extends Mod{
         TerraIcons.init();
         TerraSettings.init();
         UnitsRarity.init();
-        AdvancedDataBase.initStats();
     }
     
     @Override
