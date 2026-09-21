@@ -35,15 +35,22 @@ public class AdvancedDataBase {
 
             WeatherEntry entry = new WeatherEntry("entry-" + w.name, w);
             entries.add(entry);
-            
-            entry.fullIcon = w.fullIcon;
-            entry.uiIcon = w.uiIcon;
+
+            if (w.fullIcon == null || !w.fullIcon.found()) {
+                entry.fullIcon = Icon.rainSmall;
+            } else {
+                entry.fullIcon = w.fullIcon;
+            }
+            if (w.uiIcon == null || !w.uiIcon.found()) {
+                entry.uiIcon = Icon.rainSmall;
+            } else {
+                entry.uiIcon = w.uiIcon;
+            }
             
             entry.localizedName = w.localizedName;
             entry.description = w.description;
             entry.details = w.details;
             entry.credit = w.credit;
-
         }
     }
     public static void attri(Stats stats, Attributes at) {
