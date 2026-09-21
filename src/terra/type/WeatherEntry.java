@@ -27,12 +27,12 @@ public class WeatherEntry extends UnlockableContent{
         this.alwaysUnlocked = alwaysUnlocked;
     }
 
-    @Override
-    public void loadIcon(){
-        super.loadIcon();
-        if(fullIcon == null || !fullIcon.found()) fullIcon = Core.atlas.find("terra-book");
-        if(uiIcon == null || !uiIcon.found()) uiIcon = Core.atlas.find("terra-book");
-    }
+    // @Override
+    // public void loadIcon(){
+    //     super.loadIcon();
+    //     if(fullIcon == null || !fullIcon.found()) fullIcon = Core.atlas.find("terra-book");
+    //     if(uiIcon == null || !uiIcon.found()) uiIcon = Core.atlas.find("terra-book");
+    // }
 
     @Override
     public ContentType getContentType(){
