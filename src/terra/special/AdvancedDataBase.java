@@ -35,6 +35,10 @@ public class AdvancedDataBase {
         for (var weather : content.getContentMap()[ContentType.weather.ordinal()]) {
             var w = (Weather) weather;
             attri(w.stats, w.attrs);
+            w.databaseCategory = "weather";
+            w.allDatabaseTabs = true;
+            w.hideDatabase = false;
+            w.alwaysUnlocked = true;
             if (w.status != StatusEffects.none) {
                 w.stats.add(twstatus, w.status.emoji() + w.status.localizedName);
                 w.stats.add(Stat.targetsAir, w.statusAir);
