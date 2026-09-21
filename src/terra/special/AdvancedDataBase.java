@@ -16,6 +16,7 @@ import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.blocks.*;
+import mindustry.world.blocks.environment.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import terra.type.*;
@@ -82,14 +83,14 @@ public class AdvancedDataBase {
                 if (fb.itemOre != null) {
                     fb.stats.add(tbore, b.itemOre.emoji() + fb.itemOre.localizedName);
                 }
-                attri(stats, fb.attributes);
+                attri(fb.stats, fb.attributes);
             } else if (b instanceof StaticWall wb) {
                 wb.databaseCategory = "naturalBlocks";
                 wb.databaseTag = "staticWalls";
                 if (wb.itemOre != null) {
                     wb.stats.add(tbore, wb.itemOre.emoji() + wb.itemOre.localizedName);
                 }
-                attri(stats, wb.attributes);
+                attri(wb.stats, wb.attributes);
             //idk why TallBlock is not a StaticWall but just a Block
             } else if (b instanceof TallBlock tb) {
                 tb.databaseCategory = "naturalBlocks";
@@ -97,7 +98,7 @@ public class AdvancedDataBase {
                 if (tb.itemOre != null) {
                     tb.stats.add(tbore, tb.itemOre.emoji() + tb.itemOre.localizedName);
                 }
-                attri(stats, wb.attributes);
+                attri(tb.stats, tb.attributes);
             } else if (b instanceof Prop pb) {
                 pb.databaseCategory = "naturalBlocks";
                 pb.databaseTag = "props";
