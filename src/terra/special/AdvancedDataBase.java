@@ -40,30 +40,9 @@ public class AdvancedDataBase {
         for (var c : content.getContentMap()[ContentType.weather.ordinal()]) {
             Weather w = (Weather) c;
 
-            WeatherEntry entry = new WeatherEntry("entry-" + w.name);
+            WeatherEntry entry = new WeatherEntry("entry-" + w.name, w);
             entries.add(entry);
-            entry.fullIcon = w.fullIcon;
-            entry.uiIcon = w.uiIcon;
             
-            entry.localizedName = w.localizedName;
-            entry.description = w.description;
-            entry.details = w.details;
-            entry.credit = w.credit;
-
-            attri(entry.stats, w.attrs);
-
-            if (w.status != StatusEffects.none) {
-                entry.stats.add(twstatus, w.status.emoji() + w.status.localizedName);
-                entry.stats.add(Stat.targetsAir,   w.statusAir);
-                entry.stats.add(Stat.targetsGround, w.statusGround);
-            }
-
-            if (w instanceof ParticleWeather pw && pw.force > 0) {
-                entry.stats.add(twwind, pw.force, StatUnit.tilesSecond);
-            }
-
-            if (w instanceof RainWeather rw && rw.liquid != null) {
-                entry.stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
             }
         }
     }
