@@ -26,6 +26,10 @@ import terra.special.*;
 public class WeatherEntry extends UnlockableContent{
     private static final String bundleContentPrefix = "weather";
     public Weather weather = Weathers.rain;
+    static final Stat
+        twstatus = new Stat("terraweatherstatus", StatCat.function),
+        twwind = new Stat("terraweatherwind", StatCat.function),
+        twliquid = new Stat("terraweatherliquid", StatCat.function);
 
     public WeatherEntry(String name){
         super(name);
@@ -43,17 +47,17 @@ public class WeatherEntry extends UnlockableContent{
     @Override
     public void setStats(){
         if (weather.status != StatusEffects.none) {
-            stats.add(AdvancedDataBase.twstatus, weather.status.emoji() + weather.status.localizedName);
+            stats.add(twstatus, weather.status.emoji() + weather.status.localizedName);
             stats.add(Stat.targetsAir,   weather.statusAir);
             stats.add(Stat.targetsGround, weather.statusGround);
         }
 
         if (weather instanceof ParticleWeather pw && pw.force > 0) {
-            stats.add(AdvancedDataBase.twwind, pw.force, StatUnit.tilesSecond);
+            stats.add(twwind, pw.force, StatUnit.tilesSecond);
         }
 
         if (weather instanceof RainWeather rw && rw.liquid != null) {
-            stats.add(AdvancedDataBase.twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
+            stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
         }
 
         AdvancedDataBase.attri(this.stats, weather.attrs);
