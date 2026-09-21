@@ -37,12 +37,12 @@ public class AdvancedDataBase {
             entries.add(entry);
 
             if (w.fullIcon == null || !w.fullIcon.found()) {
-                entry.fullIcon = Icon.rainSmall;
+                entry.fullIcon = Icon.rainSmall.getRegion();
             } else {
                 entry.fullIcon = w.fullIcon;
             }
             if (w.uiIcon == null || !w.uiIcon.found()) {
-                entry.uiIcon = Icon.rainSmall;
+                entry.uiIcon = Icon.rainSmall.getRegion();
             } else {
                 entry.uiIcon = w.uiIcon;
             }
