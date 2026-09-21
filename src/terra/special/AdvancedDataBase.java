@@ -22,11 +22,8 @@ import terra.type.*;
 import static mindustry.Vars.*;
 
 public class AdvancedDataBase {
-    // static final Stat
-    //     twstatus = new Stat("terraweatherstatus", StatCat.function),
-    //     twwind = new Stat("terraweatherwind", StatCat.function),
-    //     twliquid = new Stat("terraweatherliquid", StatCat.function),
-    //     twattrs = new Stat("terraweatherattrs", StatCat.function);
+    static final Stat
+        twattrs = new Stat("terraweatherattrs", StatCat.function);
 
     public static final Seq<WeatherEntry> entries = new Seq<>();
 
