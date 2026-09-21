@@ -45,6 +45,7 @@ public class TerraVanillaOverride {
 
         StatusEffects.invincible.alwaysUnlocked = true;
         StatusEffects.invincible.show = true;
+        StatusEffects.invincible.color = Color.valueOf("bf92f9");
         StatusEffects.shielded.show = true;
         StatusEffects.muddy.alwaysUnlocked = true;
         StatusEffects.muddy.show = true;
