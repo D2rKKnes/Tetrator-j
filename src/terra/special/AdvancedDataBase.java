@@ -18,6 +18,7 @@ import mindustry.graphics.Pal;
 import mindustry.type.StatusEffect;
 import mindustry.type.Weapon;
 import mindustry.type.Weather;
+import mindustry.type.weather.*;
 import mindustry.world.blocks.Attributes;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
@@ -39,11 +40,17 @@ public class AdvancedDataBase {
                 w.stats.add(Stat.targetsAir, w.statusAir);
                 w.stats.add(Stat.targetsGround, w.statusGround);
             }
-            if (w instanceof ParticleWeather && w.force > 0) {
-                w.stats.add(twwind, w.force, StatUnit.tilesSecond);
+            if (w instanceof ParticleWeather) {
+                ParticleWeather pw = (ParticleWeather) w;
+                if (pw.force > 0) {
+                    w.stats.add(twwind, pw.force, StatUnit.tilesSecond);
+                }
             }
             if (w instanceof RainWeather && w.liquid != null) {
-                w.stats.add(twliquid, w.liquid.emoji() + w.liquid.localizedName);
+                ParticleWeather rw = (ParticleWeather) w;
+                if (rw.liquid != null) {
+                    w.stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
+                }
             }
         }
     }
@@ -52,7 +59,7 @@ public class AdvancedDataBase {
         for (var a : Attribute.all) {
             var g = at.get(a);
             if (g != 0) {
-                s += arc.Core.bundle.get("attribute." + a.name) + attrs.get(a, "") + ": [accent]";
+                s += arc.Core.bundle.get("attribute." + a.name) + ": [accent]";
                 if (g == (int) g)
                     s += (int) g;
                 else
