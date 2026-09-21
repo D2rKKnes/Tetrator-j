@@ -22,6 +22,7 @@ import mindustry.type.weather.*;
 import mindustry.world.blocks.Attributes;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
+import terra.type.*;
 import static mindustry.Vars.*;
 
 public class AdvancedDataBase {
@@ -31,31 +32,31 @@ public class AdvancedDataBase {
         twliquid = new Stat("terraweatherliquid", StatCat.function),
         twattrs = new Stat("terraweatherattrs", StatCat.function);
 
+    public static final Seq<WeatherEntry> entries = new Seq<>();
+
     public static void initStats() {
-        for (var weather : content.getContentMap()[ContentType.weather.ordinal()]) {
-            var w = (Weather) weather;
-            attri(w.stats, w.attrs);
-            w.databaseCategory = "weather";
-            w.allDatabaseTabs = true;
-            w.hideDatabase = false;
-            w.alwaysUnlocked = true;
-            w.isHidden(){return false;}
+        entries.clear();
+
+        for (var c : content.getContentMap()[ContentType.weather.ordinal()]) {
+            Weather w = (Weather) c;
+
+            WeatherEntry entry = new WeatherEntry(w);
+            entries.add(entry);
+
+            attri(entry.stats, w.attrs);
+
             if (w.status != StatusEffects.none) {
-                w.stats.add(twstatus, w.status.emoji() + w.status.localizedName);
-                w.stats.add(Stat.targetsAir, w.statusAir);
-                w.stats.add(Stat.targetsGround, w.statusGround);
+                entry.stats.add(twstatus, w.status.emoji() + w.status.localizedName);
+                entry.stats.add(Stat.targetsAir,   w.statusAir);
+                entry.stats.add(Stat.targetsGround, w.statusGround);
             }
-            if (w instanceof ParticleWeather) {
-                ParticleWeather pw = (ParticleWeather) w;
-                if (pw.force > 0) {
-                    w.stats.add(twwind, pw.force, StatUnit.tilesSecond);
-                }
+
+            if (w instanceof ParticleWeather pw && pw.force > 0) {
+                entry.stats.add(twwind, pw.force, StatUnit.tilesSecond);
             }
-            if (w instanceof RainWeather) {
-                RainWeather rw = (RainWeather) w;
-                if (rw.liquid != null) {
-                    w.stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
-                }
+
+            if (w instanceof RainWeather rw && rw.liquid != null) {
+                entry.stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
             }
         }
     }
