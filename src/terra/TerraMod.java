@@ -39,6 +39,7 @@ public class TerraMod extends Mod{
         TerraIcons.init();
         TerraSettings.init();
         UnitsRarity.init();
+        AdvancedDataBase.init();
     }
     
     @Override
