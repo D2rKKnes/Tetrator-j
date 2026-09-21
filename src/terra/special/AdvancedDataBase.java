@@ -39,7 +39,7 @@ public class AdvancedDataBase {
             w.allDatabaseTabs = true;
             w.hideDatabase = false;
             w.alwaysUnlocked = true;
-            w.isHidden() -> return false;
+            w.isHidden(){return false;}
             if (w.status != StatusEffects.none) {
                 w.stats.add(twstatus, w.status.emoji() + w.status.localizedName);
                 w.stats.add(Stat.targetsAir, w.statusAir);
