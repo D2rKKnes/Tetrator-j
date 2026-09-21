@@ -1,26 +1,22 @@
 package terra.special;
 
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.TextureRegion;
-import arc.graphics.g2d.TextureAtlas.AtlasRegion;
-import arc.scene.ui.layout.Table;
-import arc.struct.ObjectMap;
-import arc.struct.Seq;
-import mindustry.ai.types.AssemblerAI;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.graphics.g2d.TextureAtlas.*;
+import arc.scene.ui.layout.*;
+import arc.struct.*;
+import mindustry.ai.types.*;
 import mindustry.content.*;
-import mindustry.ctype.ContentType;
-import mindustry.ctype.UnlockableContent;
-import mindustry.entities.bullet.BulletType;
-import mindustry.entities.part.DrawPart;
-import mindustry.gen.Icon;
-import mindustry.graphics.Pal;
-import mindustry.type.StatusEffect;
-import mindustry.type.Weapon;
-import mindustry.type.Weather;
+import mindustry.ctype.*;
+import mindustry.entities.bullet.*;
+import mindustry.entities.part.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
 import mindustry.type.weather.*;
-import mindustry.world.blocks.Attributes;
-import mindustry.world.draw.DrawBlock;
+import mindustry.world.blocks.*;
+import mindustry.world.draw.*;
 import mindustry.world.meta.*;
 import terra.type.*;
 import static mindustry.Vars.*;
@@ -43,7 +39,14 @@ public class AdvancedDataBase {
             WeatherEntry entry = new WeatherEntry("entry-" + w.name, w);
             entries.add(entry);
             
-            }
+            entry.fullIcon = w.fullIcon;
+            entry.uiIcon = w.uiIcon;
+            
+            entry.localizedName = w.localizedName;
+            entry.description = w.description;
+            entry.details = w.details;
+            entry.credit = w.credit;
+
         }
     }
     public static void attri(Stats stats, Attributes at) {
