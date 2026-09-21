@@ -45,6 +45,11 @@ public class TerraVanillaOverride {
 
         StatusEffects.invincible.alwaysUnlocked = true;
         StatusEffects.invincible.show = true;
+        StatusEffects.shielded.show = true;
+        StatusEffects.muddy.alwaysUnlocked = true;
+        StatusEffects.muddy.show = true;
+        StatusEffects.slow.show = true;
+        StatusEffects.disarmed.show = true;
 
         Weathers.rain.databaseCategory = "weather";
         Weathers.rain.allDatabaseTabs = true;
