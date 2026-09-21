@@ -52,19 +52,7 @@ public class TerraVanillaOverride {
         StatusEffects.slow.show = true;
         StatusEffects.disarmed.show = true;
 
-        Weathers.rain.databaseCategory = "weather";
-        Weathers.rain.allDatabaseTabs = true;
-        Weathers.snow.databaseCategory = "weather";
-        Weathers.snow.allDatabaseTabs = true;
-        Weathers.sandstorm.databaseCategory = "weather";
-        Weathers.sandstorm.allDatabaseTabs = true;
-        Weathers.sporestorm.databaseCategory = "weather";
-        Weathers.sporestorm.allDatabaseTabs = true;
-        Weathers.fog.databaseCategory = "weather";
-        Weathers.fog.allDatabaseTabs = true;
         Weathers.suspendParticles.hidden = false;
-        Weathers.suspendParticles.databaseCategory = "weather";
-        Weathers.suspendParticles.allDatabaseTabs = true;
 
         Planets.sun.iconColor = Color.valueOf("ffc64c");
         
