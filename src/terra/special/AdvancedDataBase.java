@@ -46,8 +46,8 @@ public class AdvancedDataBase {
                     w.stats.add(twwind, pw.force, StatUnit.tilesSecond);
                 }
             }
-            if (w instanceof RainWeather && w.liquid != null) {
-                ParticleWeather rw = (ParticleWeather) w;
+            if (w instanceof RainWeather) {
+                RainWeather rw = (RainWeather) w;
                 if (rw.liquid != null) {
                     w.stats.add(twliquid, rw.liquid.emoji() + rw.liquid.localizedName);
                 }
