@@ -22,20 +22,20 @@ import mindustry.world.meta.*;
 
 public class WarpGate extends Block {
     public static final String[] colorNames = new String[]{
-        "blue", "purple", "pink", "red", "orange", "yellow", "green", "cyan", "white", "black"
+            "blue", "purple", "pink", "red", "orange", "yellow", "green", "cyan", "white", "black"
     };
 
     public static final Color[] gateColors = new Color[]{
-        Color.valueOf("6f80e8"),
-        Color.valueOf("8a73c6"),
-        Color.valueOf("fc81de"),
-        Color.valueOf("f25555"),
-        Color.valueOf("ea8878"),
-        Color.valueOf("eab678"),
-        Color.valueOf("3a8f64"),
-        Color.valueOf("86aeca"),
-        Color.valueOf("d1d1df"),
-        Color.valueOf("515151")
+            Color.valueOf("6f80e8"),
+            Color.valueOf("8a73c6"),
+            Color.valueOf("fc81de"),
+            Color.valueOf("f25555"),
+            Color.valueOf("ea8878"),
+            Color.valueOf("eab678"),
+            Color.valueOf("3a8f64"),
+            Color.valueOf("86aeca"),
+            Color.valueOf("d1d1df"),
+            Color.valueOf("515151")
     };
 
     public TextureRegion[] topRegions = new TextureRegion[colorNames.length];
@@ -106,9 +106,9 @@ public class WarpGate extends Block {
         // ));
 
         addBar("cooldown", (WarpGateBuild build) -> new Bar(
-            () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
-            () -> Pal.power,
-            () -> build.isOutput ? 0f : build.cooldown / 60f
+                () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
+                () -> Pal.power,
+                () -> build.isOutput ? 0f : build.cooldown / 60f
         ));
     }
 
@@ -230,6 +230,20 @@ public class WarpGate extends Block {
             super.draw();
             if (topRegions[colorIndex] != null && topRegions[colorIndex].found()) {
                 Draw.rect(topRegions[colorIndex], x, y);
+            }
+
+            if (power.status == 1) {
+                Draw.color(team.color);
+                Draw.z(Layer.effect);
+
+                Fill.circle(x, y, 10);
+
+                Draw.reset();
+                Draw.color(0f, 0f, 0f);
+
+                Fill.circle(x , y, 8);
+
+                Draw.color(Color.white);
             }
         }
 
