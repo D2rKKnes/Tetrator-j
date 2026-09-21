@@ -40,7 +40,7 @@ public class AdvancedDataBase {
         for (var c : content.getContentMap()[ContentType.weather.ordinal()]) {
             Weather w = (Weather) c;
 
-            WeatherEntry entry = new WeatherEntry(w);
+            WeatherEntry entry = new WeatherEntry(w.name);
             entries.add(entry);
 
             attri(entry.stats, w.attrs);
