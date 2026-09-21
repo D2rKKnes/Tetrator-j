@@ -62,7 +62,14 @@ public class AdvancedDataBase {
         }
 
         for (var b : content.blocks()) {
-            if (b instanceof Floor fb) {
+            if (b instanceof OverlayFloor ob) {
+                ob.databaseCategory = "naturalBlocks";
+                ob.databaseTag = "overlays";
+                if (ob.itemDrop != null) {
+                    ob.stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
+                    ob.stats.add(tborewall, ob.wallOre);
+                }
+            } else if (b instanceof Floor fb) {
                 fb.databaseCategory = "naturalBlocks";
                 fb.databaseTag = "floors";
                 if (fb.speedMultiplier != 1f) {
@@ -81,7 +88,7 @@ public class AdvancedDataBase {
                     fb.stats.add(tbcore, fb.allowCorePlacement);
                 }
                 if (fb.itemDrop != null) {
-                    fb.stats.add(tbore, b.itemDrop.emoji() + fb.itemDrop.localizedName);
+                    fb.stats.add(tbore, fb.itemDrop.emoji() + fb.itemDrop.localizedName);
                 }
                 attri(fb.stats, fb.attributes);
             } else if (b instanceof StaticWall wb) {
@@ -102,13 +109,6 @@ public class AdvancedDataBase {
             } else if (b instanceof Prop pb) {
                 pb.databaseCategory = "naturalBlocks";
                 pb.databaseTag = "props";
-            } else if (b instanceof OverlayFloor ob) {
-                ob.databaseCategory = "naturalBlocks";
-                ob.databaseTag = "overlays";
-                if (ob.itemDrop != null) {
-                    ob.stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
-                    ob.stats.add(tborewall, ob.wallOre);
-                }
             }
         }
     }
