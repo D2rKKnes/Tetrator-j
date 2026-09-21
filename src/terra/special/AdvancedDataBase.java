@@ -72,31 +72,31 @@ public class AdvancedDataBase {
                     fb.stats.addMultModifier(tbdrag, fb.dragMultiplier);
                 }
                 if (fb.liquidDrop != null) {
-                    fb.stats.add(tbliquid, b.liquidDrop.emoji() + fb.liquidDrop.localizedName);
+                    fb.stats.add(tbliquid, fb.liquidDrop.emoji() + fb.liquidDrop.localizedName);
                 }
                 if (fb.status != StatusEffects.none) {
-                    fb.stats.add(tbstatus, b.status.emoji() + fb.status.localizedName);
+                    fb.stats.add(tbstatus, fb.status.emoji() + fb.status.localizedName);
                 }
                 if (fb.allowCorePlacement == true) {
                     fb.stats.add(tbcore, fb.allowCorePlacement);
                 }
-                if (fb.itemOre != null) {
-                    fb.stats.add(tbore, b.itemOre.emoji() + fb.itemOre.localizedName);
+                if (fb.itemDrop != null) {
+                    fb.stats.add(tbore, b.itemDrop.emoji() + fb.itemDrop.localizedName);
                 }
                 attri(fb.stats, fb.attributes);
             } else if (b instanceof StaticWall wb) {
                 wb.databaseCategory = "naturalBlocks";
                 wb.databaseTag = "staticWalls";
-                if (wb.itemOre != null) {
-                    wb.stats.add(tbore, wb.itemOre.emoji() + wb.itemOre.localizedName);
+                if (wb.itemDrop != null) {
+                    wb.stats.add(tbore, wb.itemDrop.emoji() + wb.itemDrop.localizedName);
                 }
                 attri(wb.stats, wb.attributes);
             //idk why TallBlock is not a StaticWall but just a Block
             } else if (b instanceof TallBlock tb) {
                 tb.databaseCategory = "naturalBlocks";
                 tb.databaseTag = "staticWalls";
-                if (tb.itemOre != null) {
-                    tb.stats.add(tbore, tb.itemOre.emoji() + tb.itemOre.localizedName);
+                if (tb.itemDrop != null) {
+                    tb.stats.add(tbore, tb.itemDrop.emoji() + tb.itemDrop.localizedName);
                 }
                 attri(tb.stats, tb.attributes);
             } else if (b instanceof Prop pb) {
@@ -105,8 +105,8 @@ public class AdvancedDataBase {
             } else if (b instanceof OverlayFloor ob) {
                 ob.databaseCategory = "naturalBlocks";
                 ob.databaseTag = "overlays";
-                if (ob.itemOre != null) {
-                    ob.stats.add(tbore, ob.itemOre.emoji() + ob.itemOre.localizedName);
+                if (ob.itemDrop != null) {
+                    ob.stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
                     ob.stats.add(tborewall, ob.wallOre);
                 }
             }
