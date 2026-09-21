@@ -42,6 +42,8 @@ public class AdvancedDataBase {
 
             WeatherEntry entry = new WeatherEntry(w.name);
             entries.add(entry);
+            entry.fullIcon = w.fullIcon;
+            entry.uiIcon = w.uiIcon;
 
             attri(entry.stats, w.attrs);
 
