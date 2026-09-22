@@ -1,9 +1,26 @@
 package terra.type;
 
 import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.graphics.g2d.TextureAtlas.*;
 import arc.scene.ui.layout.*;
+import arc.struct.*;
+import mindustry.ai.types.*;
+import mindustry.content.*;
 import mindustry.ctype.*;
+import mindustry.entities.bullet.*;
+import mindustry.entities.part.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.game.*;
+import mindustry.type.*;
+import mindustry.type.weather.*;
+import mindustry.world.*;
+import mindustry.world.blocks.*;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.draw.*;
+import mindustry.world.meta.*;
 
 /** This class is only for displaying lore in the content database. */
 public class LoreEntry extends UnlockableContent{
