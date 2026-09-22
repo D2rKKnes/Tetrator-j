@@ -381,14 +381,14 @@ public class TerraStatusEffects{
             speedMultiplier = 0.7f;
             dragMultiplier = 0.3f;
             percentDamage = 50f;
-            effectChance = 0.03f;
+            effectChance = 0.01f;
             parentizeEffect = true;
-            effect = applyEffect = new Effect(80f, 100f, e -> {
+            effect = applyEffect = new Effect(140f, 200f, e -> {
                 color(e.color, Color.white, e.fin());
                 stroke(e.fout() * 3f);
         
-                randLenVectors(e.id, 1, 256f * e.fin(), 90, 0.5f, (x, y) -> {
-                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
+                randLenVectors(e.id, 1, 2f * e.fin(), 90, 0.5f, (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 170f + 30f);
                 });
             });
         }};
