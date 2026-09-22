@@ -70,10 +70,10 @@ public class AdvancedDataBase {
                 entry.details = b.details;
                 entry.credit = b.credit;
                 
-                if (b instanceof OverlayFloor) -> entry.databaseTag = "overlays";
-                else if (b instanceof Floor) -> entry.databaseTag = "floors";
-                else if (b instanceof StaticWall || b instanceof TallBlock || b instanceof TreeBlock) -> entry.databaseTag = "staticWalls";
-                else if (b instanceof Prop) -> entry.databaseTag = "props";
+                if (b instanceof OverlayFloor) { entry.databaseTag = "overlays";}
+                else if (b instanceof Floor) { entry.databaseTag = "floors";}
+                else if (b instanceof StaticWall || b instanceof TallBlock || b instanceof TreeBlock) { entry.databaseTag = "staticWalls";}
+                else if (b instanceof Prop) { entry.databaseTag = "props";}
             }
         }
     }
