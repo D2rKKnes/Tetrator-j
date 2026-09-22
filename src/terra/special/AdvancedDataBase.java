@@ -24,19 +24,14 @@ import static mindustry.Vars.*;
 
 public class AdvancedDataBase {
     static final Stat
-        twattrs = new Stat("terraweatherattrs", StatCat.function),
-        tbore = new Stat("terrablockore", StatCat.function),
-        tborewall = new Stat("terrablockorewall", StatCat.function),
-        tbcore = new Stat("terrablockcore", StatCat.function),
-        tbspeed = new Stat("terrablockspeed", StatCat.function),
-        tbdrag = new Stat("terrablockdrag", StatCat.function),
-        tbliquid = new Stat("terraweatherliquid", StatCat.function),
-        tbstatus = new Stat("terraweatherstatus", StatCat.function);
+        twattrs = new Stat("terraweatherattrs", StatCat.function);
 
     public static final Seq<WeatherEntry> entries = new Seq<>();
+    public static final Seq<NaturalBlockEntry> bentries = new Seq<>();
 
     public static void initStats() {
         entries.clear();
+        bentries.clear();
 
         for (var c : content.getContentMap()[ContentType.weather.ordinal()]) {
             Weather w = (Weather) c;
@@ -62,53 +57,17 @@ public class AdvancedDataBase {
         }
 
         for (var b : content.blocks()) {
-            if (b instanceof OverlayFloor ob) {
-                ob.databaseCategory = "naturalBlocks";
-                ob.databaseTag = "overlays";
-                if (ob.itemDrop != null) {
-                    ob.stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
-                    ob.stats.add(tborewall, ob.wallOre);
-                }
-            } else if (b instanceof Floor fb) {
-                fb.databaseCategory = "naturalBlocks";
-                fb.databaseTag = "floors";
-                if (fb.speedMultiplier != 1f) {
-                    fb.stats.addMultModifier(tbspeed, fb.speedMultiplier);
-                }
-                if (fb.dragMultiplier != 1f) {
-                    fb.stats.addMultModifier(tbdrag, fb.dragMultiplier);
-                }
-                if (fb.liquidDrop != null) {
-                    fb.stats.add(tbliquid, fb.liquidDrop.emoji() + fb.liquidDrop.localizedName);
-                }
-                if (fb.status != StatusEffects.none) {
-                    fb.stats.add(tbstatus, fb.status.emoji() + fb.status.localizedName);
-                }
-                if (fb.allowCorePlacement == true) {
-                    fb.stats.add(tbcore, fb.allowCorePlacement);
-                }
-                if (fb.itemDrop != null) {
-                    fb.stats.add(tbore, fb.itemDrop.emoji() + fb.itemDrop.localizedName);
-                }
-                attri(fb.stats, fb.attributes);
-            } else if (b instanceof StaticWall wb) {
-                wb.databaseCategory = "naturalBlocks";
-                wb.databaseTag = "staticWalls";
-                if (wb.itemDrop != null) {
-                    wb.stats.add(tbore, wb.itemDrop.emoji() + wb.itemDrop.localizedName);
-                }
-                attri(wb.stats, wb.attributes);
-            //idk why TallBlock is not a StaticWall but just a Block
-            } else if (b instanceof TallBlock tb) {
-                tb.databaseCategory = "naturalBlocks";
-                tb.databaseTag = "staticWalls";
-                if (tb.itemDrop != null) {
-                    tb.stats.add(tbore, tb.itemDrop.emoji() + tb.itemDrop.localizedName);
-                }
-                attri(tb.stats, tb.attributes);
-            } else if (b instanceof Prop pb) {
-                pb.databaseCategory = "naturalBlocks";
-                pb.databaseTag = "props";
+            if (b instanceof OverlayFloor || b instanceof Floor || b instanceof StaticWall || b instanceof TallBlock || b instanceof Prop) {
+                NaturalBlockEntry entry = new NaturalBlockEntry("entry-" + b.name, b);
+                entries.add(entry);
+
+                entry.fullIcon = b.fullIcon;
+                entry.uiIcon = b.uiIcon;
+                
+                entry.localizedName = b.localizedName;
+                entry.description = b.description;
+                entry.details = b.details;
+                entry.credit = b.credit;
             }
         }
     }
