@@ -12,6 +12,7 @@ import arc.util.io.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.entities.units.*;
+import mindustry.entities.*;
 import mindustry.game.EventType.*;
 import mindustry.game.*;
 import mindustry.gen.*;
@@ -38,6 +39,20 @@ public class WarpGate extends Block {
             Color.valueOf("d1d1df"),
             Color.valueOf("515151")
     };
+
+    public static final Effect warpLaserFx = new Effect(120, 8000f, e -> {
+        if (!(e.data instanceof Object[] data)) return;
+        Position target = (Position) data[0];
+        int colorIdx = (Integer) data[1];
+
+        float alpha = 1f - e.fin();
+        Draw.z(Layer.effect);
+        Draw.color(gateColors[colorIdx]);
+        Draw.alpha(alpha);
+        Lines.stroke(3.5f * alpha);
+        Lines.line(e.x, e.y, target.getX(), target.getY());
+        Draw.reset();
+    });
 
     public TextureRegion[] topRegions = new TextureRegion[colorNames.length];
     public static final ObjectMap<String, ObjectSet<WarpGateBuild>> gateNetworks = new ObjectMap<>();
@@ -226,6 +241,8 @@ public class WarpGate extends Block {
                         totalTransferred += actual;
                         transferredAny = true;
 
+                        warpLaserFx.at(this.x, this.y, new Object[]{new Vec2(target.x, target.y), colorIndex});
+
                         Vec2 targetPos = new Vec2(target.x, target.y);
                         boolean exists = false;
                         for (Vec2 p : laserTargets) {
@@ -236,6 +253,7 @@ public class WarpGate extends Block {
                         }
                         if (!exists) {
                             laserTargets.add(targetPos);
+                            warpLaserFx.at(this.x, this.y, new Object[]{new Vec2(target.x, target.y), colorIndex});
                         }
 
                         if (totalTransferred >= maxBatch) break;
@@ -280,7 +298,7 @@ public class WarpGate extends Block {
                 Draw.color(Color.white);
             }
 
-            if (laserTimer > 0f && !laserTargets.isEmpty()) {
+            /* if (laserTimer > 0f && !laserTargets.isEmpty()) {
                 float alpha = laserTimer / LASER_DURATION;
                 Draw.z(Layer.effect - 1f);
                 Draw.color(gateColors[colorIndex]);
@@ -290,7 +308,7 @@ public class WarpGate extends Block {
                     Lines.line(x, y, targetPos.x, targetPos.y);
                 }
                 Draw.reset();
-            }
+            } */
         }
 
         @Override
