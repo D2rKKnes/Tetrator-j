@@ -4,6 +4,7 @@ import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import arc.math.geom.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
@@ -46,6 +47,11 @@ public class WarpGate extends Block {
     static {
         Events.on(WorldLoadEvent.class, event -> {
             gateNetworks.clear();
+            mindustry.gen.Groups.build.each(b -> {
+                if (b instanceof WarpGateBuild gate) {
+                    getNetworkGates(gate.team, gate.colorIndex).add(gate);
+                }
+            });
         });
     }
 
@@ -99,16 +105,10 @@ public class WarpGate extends Block {
     public void setBars() {
         super.setBars();
 
-        // addBar("mode", (WarpGateBuild build) -> new Bar(
-        //     () -> Core.bundle.get(build.isOutput ? "warpgate.mode.output" : "warpgate.mode.input"),
-        //     () -> build.isOutput ? Pal.remove : Pal.accent,
-        //     () -> 1f
-        // ));
-
         addBar("cooldown", (WarpGateBuild build) -> new Bar(
-                () -> build.isOutput ? Core.bundle.get("warpgate.cooldown.none") : Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
+                () -> Core.bundle.format("warpgate.cooldown", Strings.fixed(Math.max(0f, build.cooldown / 60f), 2)),
                 () -> Pal.power,
-                () -> build.isOutput ? 0f : build.cooldown / 60f
+                () -> build.cooldown / 60f
         ));
     }
 
@@ -124,6 +124,9 @@ public class WarpGate extends Block {
         public int colorIndex = 0;
         public boolean isOutput = false;
         public float cooldown = 0f;
+        public float laserTimer = 0f;
+        public static final float LASER_DURATION = 120f;
+        public Seq<Vec2> laserTargets = new Seq<>();
 
         @Override
         public void created() {
@@ -154,18 +157,22 @@ public class WarpGate extends Block {
         public void updateTile() {
             super.updateTile();
 
+            if (cooldown > 0f) {
+                float powerFactor = power != null ? power.status : 1f;
+                cooldown -= edelta() * powerFactor;
+                if (cooldown < 0f) cooldown = 0f;
+            }
+
+            if (laserTimer > 0f) {
+                laserTimer -= edelta();
+                if (laserTimer < 0f) laserTimer = 0f;
+            }
+
             if (isOutput) {
                 if (items.total() > 0) {
                     dump();
                 }
-                cooldown = 0f;
             } else {
-                if (cooldown > 0f) {
-                    float powerFactor = power != null ? power.status : 1f;
-                    cooldown -= edelta() * powerFactor;
-                    if (cooldown < 0f) cooldown = 0f;
-                }
-
                 if (cooldown <= 0f && items.total() > 0 && (power == null || power.status > 0f)) {
                     teleportItems();
                 }
@@ -179,21 +186,28 @@ public class WarpGate extends Block {
             ObjectSet<WarpGateBuild> allGates = getNetworkGates(team, colorIndex);
 
             for (WarpGateBuild gate : allGates) {
-                if (gate != this && gate.isOutput && gate.isValidTarget()) {
+                if (gate != this && gate.isValidTarget()) {
                     validTargets.add(gate);
                 }
             }
 
             if (validTargets.isEmpty()) return;
 
+            int maxBatch = 20;
+            int totalTransferred = 0;
             boolean transferredAny = false;
+            laserTargets.clear();
 
             for (Item item : Vars.content.items()) {
                 int amount = items.get(item);
                 if (amount <= 0) continue;
 
-                int perTarget = amount / validTargets.size;
-                int remainder = amount % validTargets.size;
+                int remainingCapacity = maxBatch - totalTransferred;
+                if (remainingCapacity <= 0) break;
+
+                int maxToTransfer = Math.min(amount, remainingCapacity);
+                int perTarget = maxToTransfer / validTargets.size;
+                int remainder = maxToTransfer % validTargets.size;
 
                 for (int i = 0; i < validTargets.size; i++) {
                     WarpGateBuild target = validTargets.get(i);
@@ -206,18 +220,39 @@ public class WarpGate extends Block {
                     if (actual > 0) {
                         target.items.add(item, actual);
                         this.items.remove(item, actual);
+
+                        target.cooldown = reloadTicks;
+
+                        totalTransferred += actual;
                         transferredAny = true;
+
+                        Vec2 targetPos = new Vec2(target.x, target.y);
+                        boolean exists = false;
+                        for (Vec2 p : laserTargets) {
+                            if (p.equals(targetPos)) {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists) {
+                            laserTargets.add(targetPos);
+                        }
+
+                        if (totalTransferred >= maxBatch) break;
                     }
                 }
+
+                if (totalTransferred >= maxBatch) break;
             }
 
             if (transferredAny) {
                 cooldown = reloadTicks;
+                laserTimer = LASER_DURATION;
             }
         }
 
         public boolean isValidTarget() {
-            return (power == null || power.status > 0f) && items.total() < block.itemCapacity;
+            return isOutput && cooldown <= 0f && (power == null || power.status > 0f) && items.total() < block.itemCapacity;
         }
 
         @Override
@@ -234,15 +269,27 @@ public class WarpGate extends Block {
 
             float powerFactor = power != null ? power.status : 1f;
             if (power.status > 0) {
-                Draw.color(team.color);
+                Draw.color(gateColors[colorIndex]);
                 Draw.z(Layer.effect);
                 Fill.circle(x, y, 7 * powerFactor + (cooldown / reloadTicks));
                 Draw.reset();
-                
+
                 Draw.color(0f, 0f, 0f);
                 Draw.z(Layer.effect + 1f);
                 Fill.circle(x , y, 4 * powerFactor + (cooldown / reloadTicks));
                 Draw.color(Color.white);
+            }
+
+            if (laserTimer > 0f && !laserTargets.isEmpty()) {
+                float alpha = laserTimer / LASER_DURATION;
+                Draw.z(Layer.effect - 1f);
+                Draw.color(gateColors[colorIndex]);
+                Draw.alpha(alpha);
+                Lines.stroke(3.5f * alpha);
+                for (Vec2 targetPos : laserTargets) {
+                    Lines.line(x, y, targetPos.x, targetPos.y);
+                }
+                Draw.reset();
             }
         }
 
@@ -282,18 +329,18 @@ public class WarpGate extends Block {
 
         @Override
         public void write(Writes write) {
+            super.write(write);
             write.b((byte) colorIndex);
             write.bool(isOutput);
             write.f(cooldown);
-            super.write(write);
         }
 
         @Override
         public void read(Reads read, byte revision) {
+            super.read(read, revision);
             colorIndex = read.b();
             isOutput = read.bool();
             cooldown = read.f();
-            super.read(read, revision);
         }
     }
 }
