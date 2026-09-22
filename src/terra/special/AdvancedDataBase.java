@@ -58,7 +58,7 @@ public class AdvancedDataBase {
         }
 
         for (var b : content.blocks()) {
-            if (b instanceof OverlayFloor || b instanceof Floor || b instanceof StaticWall || b instanceof TallBlock || b instanceof Prop) {
+            if (b instanceof OverlayFloor || b instanceof Floor || b instanceof StaticWall || b instanceof TallBlock || b instanceof TreeBlock || b instanceof Prop) {
                 NaturalBlockEntry entry = new NaturalBlockEntry("entry-" + b.name, b);
                 bentries.add(entry);
 
@@ -69,6 +69,11 @@ public class AdvancedDataBase {
                 entry.description = b.description;
                 entry.details = b.details;
                 entry.credit = b.credit;
+                
+                if (b instanceof OverlayFloor) -> entry.databaseTag = "overlays";
+                else if (b instanceof Floor) -> entry.databaseTag = "floors";
+                else if (b instanceof StaticWall || b instanceof TallBlock || b instanceof TreeBlock) -> entry.databaseTag = "staticWalls";
+                else if (b instanceof Prop) -> entry.databaseTag = "props";
             }
         }
     }
