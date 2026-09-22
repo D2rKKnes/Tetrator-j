@@ -26,9 +26,13 @@ import terra.special.*;
 public class NaturalBlockEntry extends UnlockableContent{
     public Block block = null;
     static final Stat
-        twstatus = new Stat("terraweatherstatus", StatCat.function),
-        twwind = new Stat("terraweatherwind", StatCat.function),
-        twliquid = new Stat("terraweatherliquid", StatCat.function);
+        tbore = new Stat("terrablockore", StatCat.function),
+        tborewall = new Stat("terrablockorewall", StatCat.function),
+        tbcore = new Stat("terrablockcore", StatCat.function),
+        tbspeed = new Stat("terrablockspeed", StatCat.function),
+        tbdrag = new Stat("terrablockdrag", StatCat.function),
+        tbliquid = new Stat("terraweatherliquid", StatCat.function),
+        tbstatus = new Stat("terraweatherstatus", StatCat.function);
 
     public NaturalBlockEntry(String name){
         super(name);
@@ -45,9 +49,51 @@ public class NaturalBlockEntry extends UnlockableContent{
 
     @Override
     public void setStats(){
-        
+        if (block instanceof OverlayFloor ob) {
+            databaseTag = "overlays";
+            if (ob.itemDrop != null) {
+                stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
+                stats.add(tborewall, ob.wallOre);
+            }
+        } else if (block instanceof Floor fb) {
+            databaseTag = "floors";
+            if (fb.speedMultiplier != 1f) {
+                stats.addMultModifier(tbspeed, fb.speedMultiplier);
+            }
+            if (fb.dragMultiplier != 1f) {
+                stats.addMultModifier(tbdrag, fb.dragMultiplier);
+            }
+            if (fb.liquidDrop != null) {
+                stats.add(tbliquid, fb.liquidDrop.emoji() + fb.liquidDrop.localizedName);
+            }
+            if (fb.status != StatusEffects.none) {
+                stats.add(tbstatus, fb.status.emoji() + fb.status.localizedName);
+            }
+            if (fb.allowCorePlacement == true) {
+                stats.add(tbcore, fb.allowCorePlacement);
+            }
+            if (fb.itemDrop != null) {
+                stats.add(tbore, fb.itemDrop.emoji() + fb.itemDrop.localizedName);
+            }
+            attri(stats, fb.attributes);
+        } else if (block instanceof StaticWall wb) {
+            databaseTag = "staticWalls";
+            if (wb.itemDrop != null) {
+                stats.add(tbore, wb.itemDrop.emoji() + wb.itemDrop.localizedName);
+            }
+            attri(stats, wb.attributes);
+        //idk why TallBlock is not a StaticWall but just a Block
+        } else if (block instanceof TallBlock tb) {
+            databaseTag = "staticWalls";
+            if (tb.itemDrop != null) {
+                stats.add(tbore, tb.itemDrop.emoji() + tb.itemDrop.localizedName);
+            }
+            attri(tb.stats, tb.attributes);
+        } else if (block instanceof Prop pb) {
+            databaseTag = "props";
+        }
 
-        AdvancedDataBase.attri(this.stats, block.attrs);
+        AdvancedDataBase.attri(this.stats, block.attributes);
     }
 
     @Override
