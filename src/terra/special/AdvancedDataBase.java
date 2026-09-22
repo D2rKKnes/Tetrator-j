@@ -15,6 +15,7 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
+import mindustry.world.*;
 import mindustry.world.blocks.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.draw.*;
