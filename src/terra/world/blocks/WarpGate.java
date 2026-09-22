@@ -241,8 +241,8 @@ public class WarpGate extends Block {
                         totalTransferred += actual;
                         transferredAny = true;
 
-                        warpLaserFx.at(this.x, this.y, new Object[]{new Vec2(target.x, target.y), colorIndex});
-
+                        warpLaserFx.at(this.x, this.y, 0f, new Object[]{new Vec2(target.x, target.y), colorIndex});
+                        
                         Vec2 targetPos = new Vec2(target.x, target.y);
                         boolean exists = false;
                         for (Vec2 p : laserTargets) {
@@ -253,7 +253,6 @@ public class WarpGate extends Block {
                         }
                         if (!exists) {
                             laserTargets.add(targetPos);
-                            warpLaserFx.at(this.x, this.y, new Object[]{new Vec2(target.x, target.y), colorIndex});
                         }
 
                         if (totalTransferred >= maxBatch) break;
