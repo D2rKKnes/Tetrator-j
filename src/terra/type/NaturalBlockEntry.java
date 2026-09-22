@@ -38,7 +38,7 @@ public class NaturalBlockEntry extends UnlockableContent{
 
     public NaturalBlockEntry(String name){
         super(name);
-        //allDatabaseTabs = true;
+        allDatabaseTabs = true;
         hideDetails = false;
         alwaysUnlocked = true;
         databaseCategory = "naturalBlocks";
