@@ -52,13 +52,13 @@ public class NaturalBlockEntry extends UnlockableContent{
     @Override
     public void setStats(){
         if (block instanceof OverlayFloor ob) {
-            databaseTag = "overlays";
+            //databaseTag = "overlays";
             if (ob.itemDrop != null) {
                 stats.add(tbore, ob.itemDrop.emoji() + ob.itemDrop.localizedName);
                 stats.add(tborewall, ob.wallOre);
             }
         } else if (block instanceof Floor fb) {
-            databaseTag = "floors";
+            //databaseTag = "floors";
             if (fb.speedMultiplier != 1f) {
                 stats.addMultModifier(tbspeed, fb.speedMultiplier);
             }
@@ -78,21 +78,15 @@ public class NaturalBlockEntry extends UnlockableContent{
                 stats.add(tbore, fb.itemDrop.emoji() + fb.itemDrop.localizedName);
             }
             AdvancedDataBase.attri(this.stats, fb.attributes);
-        } else if (block instanceof StaticWall wb) {
-            databaseTag = "staticWalls";
-            if (wb.itemDrop != null) {
-                stats.add(tbore, wb.itemDrop.emoji() + wb.itemDrop.localizedName);
+        //idk why TallBlock is not a StaticWall but just a Block.. Same to the TreeBlock
+        } else if (block instanceof StaticWall || block instanceof TallBlock || block instanceof TreeBlock) {
+            //databaseTag = "staticWalls";
+            if (block.itemDrop != null) {
+                stats.add(tbore, block.itemDrop.emoji() + block.itemDrop.localizedName);
             }
             AdvancedDataBase.attri(this.stats, wb.attributes);
-        //idk why TallBlock is not a StaticWall but just a Block
-        } else if (block instanceof TallBlock tb) {
-            databaseTag = "staticWalls";
-            if (tb.itemDrop != null) {
-                stats.add(tbore, tb.itemDrop.emoji() + tb.itemDrop.localizedName);
-            }
-            AdvancedDataBase.attri(this.stats, tb.attributes);
         } else if (block instanceof Prop pb) {
-            databaseTag = "props";
+            //databaseTag = "props";
         }
     }
 
