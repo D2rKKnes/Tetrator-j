@@ -76,25 +76,23 @@ public class NaturalBlockEntry extends UnlockableContent{
             if (fb.itemDrop != null) {
                 stats.add(tbore, fb.itemDrop.emoji() + fb.itemDrop.localizedName);
             }
-            attri(stats, fb.attributes);
+            AdvancedDataBase.attri(this.stats, fb.attributes);
         } else if (block instanceof StaticWall wb) {
             databaseTag = "staticWalls";
             if (wb.itemDrop != null) {
                 stats.add(tbore, wb.itemDrop.emoji() + wb.itemDrop.localizedName);
             }
-            attri(stats, wb.attributes);
+            AdvancedDataBase.attri(this.stats, wb.attributes);
         //idk why TallBlock is not a StaticWall but just a Block
         } else if (block instanceof TallBlock tb) {
             databaseTag = "staticWalls";
             if (tb.itemDrop != null) {
                 stats.add(tbore, tb.itemDrop.emoji() + tb.itemDrop.localizedName);
             }
-            attri(tb.stats, tb.attributes);
+            AdvancedDataBase.attri(this.stats, tb.attributes);
         } else if (block instanceof Prop pb) {
             databaseTag = "props";
         }
-
-        AdvancedDataBase.attri(this.stats, block.attributes);
     }
 
     @Override
