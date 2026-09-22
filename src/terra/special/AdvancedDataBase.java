@@ -60,7 +60,7 @@ public class AdvancedDataBase {
         for (var b : content.blocks()) {
             if (b instanceof OverlayFloor || b instanceof Floor || b instanceof StaticWall || b instanceof TallBlock || b instanceof Prop) {
                 NaturalBlockEntry entry = new NaturalBlockEntry("entry-" + b.name, b);
-                entries.add(entry);
+                bentries.add(entry);
 
                 entry.fullIcon = b.fullIcon;
                 entry.uiIcon = b.uiIcon;
