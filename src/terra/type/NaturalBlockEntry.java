@@ -84,7 +84,7 @@ public class NaturalBlockEntry extends UnlockableContent{
             if (block.itemDrop != null) {
                 stats.add(tbore, block.itemDrop.emoji() + block.itemDrop.localizedName);
             }
-            AdvancedDataBase.attri(this.stats, wb.attributes);
+            AdvancedDataBase.attri(this.stats, block.attributes);
         } else if (block instanceof Prop pb) {
             //databaseTag = "props";
         }
