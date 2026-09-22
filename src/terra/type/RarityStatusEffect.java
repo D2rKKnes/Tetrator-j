@@ -24,6 +24,8 @@ public class RarityStatusEffect extends StatusEffect {
         super(name);
         if (!Core.settings.getBool("unitsquality", true)){hideDatabase = true;}
         else hideDatabase = false;
+        alwaysUnlocked = true;
+        outline = false;
     }
 
     @Override
