@@ -22,11 +22,10 @@ import mindustry.world.meta.*;
 
 public class WarpGate extends Block {
     public static final String[] colorNames = new String[]{
-            "blue", "purple", "pink", "red", "orange", "yellow", "green", "cyan", "white", "black"
+            "purple", "pink", "red", "orange", "yellow", "green", "cyan", "blue", "white", "black"
     };
 
     public static final Color[] gateColors = new Color[]{
-            Color.valueOf("6f80e8"),
             Color.valueOf("8a73c6"),
             Color.valueOf("fc81de"),
             Color.valueOf("f25555"),
@@ -34,6 +33,7 @@ public class WarpGate extends Block {
             Color.valueOf("eab678"),
             Color.valueOf("3a8f64"),
             Color.valueOf("86aeca"),
+            Color.valueOf("6f80e8"),
             Color.valueOf("d1d1df"),
             Color.valueOf("515151")
     };
@@ -41,7 +41,7 @@ public class WarpGate extends Block {
     public TextureRegion[] topRegions = new TextureRegion[colorNames.length];
     public static final ObjectMap<String, ObjectSet<WarpGateBuild>> gateNetworks = new ObjectMap<>();
 
-    public float energyRequirement = 10f;
+    public float reloadTicks = 60f;
 
     static {
         Events.on(WorldLoadEvent.class, event -> {
@@ -73,7 +73,7 @@ public class WarpGate extends Block {
         size = 3;
         unloadable = true;
 
-        consumePower(energyRequirement / 60f);
+        consumePower(1f);
 
         config(Integer.class, (WarpGateBuild build, Integer val) -> {
             if (val >= 100) {
@@ -212,7 +212,7 @@ public class WarpGate extends Block {
             }
 
             if (transferredAny) {
-                cooldown = 60f;
+                cooldown = reloadTicks;
             }
         }
 
@@ -232,17 +232,16 @@ public class WarpGate extends Block {
                 Draw.rect(topRegions[colorIndex], x, y);
             }
 
-            if (power.status == 1) {
+            float powerFactor = power != null ? power.status : 1f;
+            if (power.status > 0) {
                 Draw.color(team.color);
                 Draw.z(Layer.effect);
-
-                Fill.circle(x, y, 10);
-
+                Fill.circle(x, y, 7 * powerFactor + (cooldown / reloadTicks));
                 Draw.reset();
+                
                 Draw.color(0f, 0f, 0f);
-
-                Fill.circle(x , y, 8);
-
+                Draw.z(Layer.effect + 1f);
+                Fill.circle(x , y, 4 * powerFactor + (cooldown / reloadTicks));
                 Draw.color(Color.white);
             }
         }
