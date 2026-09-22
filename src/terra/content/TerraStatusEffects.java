@@ -356,8 +356,9 @@ public class TerraStatusEffects{
             speedMultiplier = 0.6f;
             reloadMultiplier = 0.5f;
             damage = 0.7f;
-            removeDamage = 500f;
+            removeDamage = 200f;
             effectChance = 0.14f;
+            parentizeEffect = true;
             effect = new Effect(50f, 20f, e -> {
                 color(e.color, Color.white, e.fin());
                 stroke(e.fout() * 1.3f + 0.7f);
@@ -367,7 +368,7 @@ public class TerraStatusEffects{
                 });
             });
             removeEffect = new WaveEffect(){{
-                sizeTo = 200f;
+                sizeTo = 100f;
                 colorFrom = Color.white;
                 colorTo = color;
                 strokeFrom = 8f;
@@ -375,20 +376,33 @@ public class TerraStatusEffects{
             }};
         }};
 
+        quantumBeam = new AdvancedStatusEffect("quantum-beam"){{
+            color = Color.valueOf("7fffe2");
+            speedMultiplier = 0.7f;
+            dragMultiplier = 0.3f;
+            percentDamage = 50f;
+            effectChance = 0.03f;
+            parentizeEffect = true;
+            effect = applyEffect = new Effect(80f, 100f, e -> {
+                color(e.color, Color.white, e.fin());
+                stroke(e.fout() * 3f);
+        
+                randLenVectors(e.id, 1, 256f * e.fin(), 90, 0.5f, (x, y) -> {
+                    lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
+                });
+            });
+        }};
+
         instantDeath = new AdvancedStatusEffect("instant-death"){{
             color = Color.white;
             instakill = true;
-            //show = false;
             permanent = true;
         }};
 
         common = new RarityStatusEffect("quality-common"){{
             color = tintColor = Color.valueOf("abb1bf");
             permanent = true;
-            //show = false;
             drawAura = false;
-            alwaysUnlocked = true;
-            outline = false;
             init(() -> opposite(uncommon, rare, epic, legendary, mythical));
         }};
         uncommon = new RarityStatusEffect("quality-uncommon"){{
@@ -397,9 +411,6 @@ public class TerraStatusEffects{
             healthMultiplier = 1.15f;
             reloadMultiplier = 1.1f;
             permanent = true;
-            //show = false;
-            alwaysUnlocked = true;
-            outline = false;
             sides = 3;
             init(() -> opposite(common, rare, epic, legendary, mythical));
         }};
@@ -410,9 +421,6 @@ public class TerraStatusEffects{
             reloadMultiplier = 1.25f;
             speedMultiplier = 1.2f;
             permanent = true;
-            //show = false;
-            alwaysUnlocked = true;
-            outline = false;
             sides = 4;
             init(() -> opposite(common, uncommon, epic, legendary, mythical));
         }};
@@ -424,9 +432,6 @@ public class TerraStatusEffects{
             speedMultiplier = 1.4f;
             buildSpeedMultiplier = 1.25f;
             permanent = true;
-            //show = false;
-            alwaysUnlocked = true;
-            outline = false;
             sides = 5;
             init(() -> opposite(common, uncommon, rare, legendary, mythical));
         }};
@@ -438,9 +443,6 @@ public class TerraStatusEffects{
             speedMultiplier = 1.75f;
             buildSpeedMultiplier = 1.5f;
             permanent = true;
-            //show = false;
-            alwaysUnlocked = true;
-            outline = false;
             sides = 6;
             init(() -> opposite(common, uncommon, rare, epic, mythical));
         }};
@@ -452,9 +454,6 @@ public class TerraStatusEffects{
             speedMultiplier = 2f;
             buildSpeedMultiplier = 2f;
             permanent = true;
-            //show = false;
-            alwaysUnlocked = true;
-            outline = false;
             init(() -> opposite(common, uncommon, rare, epic, legendary));
         }};
     }
