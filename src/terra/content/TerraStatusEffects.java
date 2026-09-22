@@ -38,9 +38,9 @@ import static mindustry.Vars.*;
 public class TerraStatusEffects{
     public static StatusEffect 
 
-    energyOverload, singularEvaporation, impactStun, radited, extinction, crystalization, graviforce, graviforce2,
-    warped, warpPower, warpHell, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification, anviled,
-    regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded,
+    energyOverload, zapped, singularEvaporation, impactStun, radited, extinction, crystalization, graviforce, graviforce2,
+    warped, warpPower, warpHell, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification, anviled, quantumBeam,
+    regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded, ending,
     
     common, uncommon, rare, epic, legendary, mythical;
     
@@ -49,12 +49,33 @@ public class TerraStatusEffects{
             color = Color.valueOf("bf92f9");
             speedMultiplier = 0.7f;
             reloadMultiplier = 0.4f;
+            transitionDamage = 14f;
             damage = 0.6f;
-            transitionDamage = 17f;
             effect = Fx.circleColorSpark;
             init(() -> {
                 affinity(StatusEffects.shocked, (unit, result, time) -> {
-                    unit.damage(transitionDamage);
+                    unit.damage(17f);
+                });
+                affinity(StatusEffects.wet, (unit, result, time) -> {
+                    unit.damagePierce(transitionDamage);
+
+                    if(unit.team == state.rules.waveTeam){
+                        Events.fire(Trigger.shock);
+                    }
+                });
+            });
+        }};
+
+        zapped = new StatusEffect("zapped"){{
+            color = Pal.stat;
+            speedMultiplier = 1.1f;
+            reloadMultiplier = 0.8f;
+            transitionDamage = 14f;
+            damage = 0.3f;
+            applyEffect = Fx.circleColorSpark;
+            init(() -> {
+                affinity(StatusEffects.wet, (unit, result, time) -> {
+                    unit.damagePierce(transitionDamage);
                 });
             });
         }};
@@ -138,13 +159,24 @@ public class TerraStatusEffects{
             effectChance = 0.1f;
         }};
 
+        ending = new AdvancedStatusEffect("ending"){{
+            color = Color.valueOf("ff0000");
+            speedMultiplier = 0f;
+            buildSpeedMultiplier = 0f;
+            healthMultiplier = 0.25f;
+            reloadMultiplier = 0.1f;
+            damageMultiplier = 0.01f;
+            buildSpeedMultiplier = 0.2f;
+            percentDamage = 6.66f;
+        }};
+
         warped = new StatusEffect("warped"){{
             color = Pal.accent;
             speedMultiplier = 0.5f;
             healthMultiplier = 5f;
             buildSpeedMultiplier = 0.2f;
             effect = Fx.overdriven;
-            effectChance = 0.008f;
+            effectChance = 0.01f;
         }};
 
         warpPower = new StatusEffect("warp-power"){{
@@ -156,7 +188,7 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 0);
             });
-            effectChance = 0.02f;
+            effectChance = 0.03f;
         }};
 
         warpHell = new AdvancedStatusEffect("warp-hell"){{
