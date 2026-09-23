@@ -242,6 +242,7 @@ public class WarpGate extends Block {
                         transferredAny = true;
 
                         warpLaserFx.at(this.x, this.y, 0f, new Object[]{new Vec2(target.x, target.y), colorIndex});
+                        Sounds.explosionPlasmaSmall.at(target.x, target.y, 1f + Mathf.range(0.2f), 1f);
                         
                         Vec2 targetPos = new Vec2(target.x, target.y);
                         boolean exists = false;
@@ -263,6 +264,7 @@ public class WarpGate extends Block {
             }
 
             if (transferredAny) {
+                Sounds.explosionPlasmaSmall.at(this.x, this.y, 1f + Mathf.range(0.2f), 1f);
                 cooldown = reloadTicks;
                 laserTimer = LASER_DURATION;
             }
