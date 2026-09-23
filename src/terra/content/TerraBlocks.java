@@ -559,7 +559,7 @@ public class TerraBlocks{
         warpGate = new WarpGate("warp-gate"){{
             requirements(Category.distribution, with(Items.lead, 500, Items.thorium, 150, TerraItems.darkSteel, 285, TerraItems.thermoxite, 175, TerraItems.titaniumPlate, 300, TerraItems.diamondDust, 120));
             size = 3;
-            itemCapacity = 125;
+            itemCapacity = 50;
             health = 3000;
             canOverdrive = false;
             consumePower(250.0001f / 60f);
