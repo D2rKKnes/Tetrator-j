@@ -73,7 +73,7 @@ public class TerraBlocks{
     graphiteBridge, smallDriver, warpGate,
     //power
     photonPanel, photonPanelLarge,
-    multicellBattery,
+    multicellBattery, powerNodeHuge,
     sapt, antimatterCollider,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
@@ -591,6 +591,12 @@ public class TerraBlocks{
             size = 2;
             consumePowerBuffered(20000f);
             baseExplosiveness = 3f;
+        }};
+        powerNodeHuge = new PowerNode("network-power-node"){{
+            requirements(Category.power, with(Items.thorium, 30, Items.metaglass, 15, TerraItems.titaniumPlate, 25, TerraItems.diamondDust, 8));
+            size = 3;
+            maxNodes = 20;
+            laserRange = 35f;
         }};
         sapt = new ConsumeGenerator("sapt"){{ //A setup for an experiment on extraterrestrial artificial photosynthesis technology > S.A.P.T
             requirements(Category.power, with(Items.lead, 90, Items.titanium, 150, Items.silicon, 65, Items.metaglass, 50));
