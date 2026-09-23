@@ -271,7 +271,7 @@ public class TerraVerilusTree {
         }
 
         @Override public String display() {
-            return Core.bundle.format("requirement.omaloon-at-wave", wave, sector.localizedName);
+            return Core.bundle.format("requirement.terra-at-wave", wave, sector.localizedName);
         }
     }
 }
