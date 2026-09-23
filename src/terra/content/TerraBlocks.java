@@ -73,7 +73,7 @@ public class TerraBlocks{
     graphiteBridge, smallDriver, warpGate,
     //power
     photonPanel, photonPanelLarge,
-    multicellBattery, powerNodeHuge,
+    multicellBattery, powerNodeHuge, surgeTowerOmega,
     sapt, antimatterCollider,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
@@ -598,6 +598,15 @@ public class TerraBlocks{
             maxNodes = 20;
             laserRange = 35f;
         }};
+        surgeTowerOmega = new PowerNode("power-substation"){{
+            requirements(Category.power, with(Items.titanium, 25, Items.lead, 100, TerraItems.titaniumPlate, 35, TerraItems.diamondGlass, 15, TerraItems.rawThermoxite, 50));
+            size = 3;
+            maxNodes = 3;
+            laserRange = 110f;
+            schematicPriority = -15;
+            sameBlockConnection = true;
+            laserScale = 0.67f;
+        }};
         sapt = new ConsumeGenerator("sapt"){{ //A setup for an experiment on extraterrestrial artificial photosynthesis technology > S.A.P.T
             requirements(Category.power, with(Items.lead, 90, Items.titanium, 150, Items.silicon, 65, Items.metaglass, 50));
             powerProduction = 8f;
@@ -838,7 +847,7 @@ public class TerraBlocks{
         };
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
-            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, Items.metaglass, 225, TerraItems.rawThermoxite, 180));
+            requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, TerraItems.diamondGlass, 225, TerraItems.rawThermoxite, 180));
             consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
             consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
