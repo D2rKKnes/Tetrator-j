@@ -70,10 +70,11 @@ public class TerraVerilusTree {
                         });
                         node(powerNode, () -> {
                             node(powerNodeLarge, () -> {
-                                node(multicellBattery, () -> {
-                                    node(batteryLarge, () -> {});
-                                });
+                                node(powerNodeHuge, () -> {});
                                 node(forceProjector, () -> {});
+                            });
+                            node(multicellBattery, () -> {
+                                node(batteryLarge, () -> {});
                             });
                             node(solarPanel, () -> {
                                 node(largeSolarPanel, () -> {});
