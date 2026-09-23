@@ -217,7 +217,7 @@ public class WarpGate extends Block {
                 int amount = items.get(item);
                 if (amount <= 0) continue;
 
-                int remainingCapacity = maxBatch - totalTransferred;
+                int remainingCapacity = itemCapacity - totalTransferred;
                 if (remainingCapacity <= 0) break;
 
                 int maxToTransfer = Math.min(amount, remainingCapacity);
@@ -256,11 +256,11 @@ public class WarpGate extends Block {
                             laserTargets.add(targetPos);
                         }
 
-                        if (totalTransferred >= maxBatch) break;
+                        if (totalTransferred >= itemCapacity) break;
                     }
                 }
 
-                if (totalTransferred >= maxBatch) break;
+                if (totalTransferred >= itemCapacity) break;
             }
 
             if (transferredAny) {
