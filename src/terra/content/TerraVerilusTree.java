@@ -95,11 +95,11 @@ public class TerraVerilusTree {
                                     node(diamondCrusher, () -> {
                                         node(diamondCoverer, () -> {});
                                     });
-                                    node(phaseWeaver, () -> {});
+                                    node(phaseWeaver, () -> {
+                                        node(crystalIncubator, () -> {});
+                                    });
                                 });
-                                node(darkSteelWorkshop, Seq.with(new Objectives.Research(diamondGlass)), () -> {
-                                    node(crystalIncubator, () -> {});
-                                });
+                                node(darkSteelWorkshop, Seq.with(new Objectives.Research(diamondGlass)), () -> {});
                                 node(electricalWell, () -> {});
                                 node(ventPump, () -> {});
                             });
