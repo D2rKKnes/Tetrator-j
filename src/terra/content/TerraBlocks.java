@@ -81,7 +81,7 @@ public class TerraBlocks{
     diamondCrusher, diamondCoverer,
     multiMixer,
     //production
-    graphiteMiner,
+    graphiteMiner, ventPump,
     mechanicalWell, electricalWell,
     pulseDrill, plasmaDrill, beamMiningFacility,
     //storage
@@ -1167,6 +1167,26 @@ public class TerraBlocks{
                 Items.graphite, 17,
                 Items.thorium, 3
             );
+        }};
+
+        ventPump = new AttributeCrafter("vent-pump"){{
+            requirements(Category.production, with(Items.metaglass, 30, Items.titanium, 50, Items.lead, 40));
+            attribute = Attribute.steam;
+            group = BlockGroup.liquids;
+            minEfficiency = 9f - 0.0001f;
+            baseEfficiency = 0f;
+            displayEfficiency = false;
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(TerraLiquids.carbonDioxide), new DrawDefault());
+            craftTime = 120f;
+            size = 3;
+            ambientSound = Sounds.loopHum;
+            ambientSoundVolume = 0.06f;
+            hasLiquids = true;
+            boostScale = 1f / 9f;
+            itemCapacity = 0;
+            outputLiquid = new LiquidStack(TerraLiquids.carbonDioxide, 25f / 60f);
+            consumePower(0.25f);
+            liquidCapacity = 50f;
         }};
 
         pulseDrill = new BurstDrill("pulse-drill"){{
