@@ -24,8 +24,8 @@ public class TerraEnvironmentBlocks {
         oreRawThermoxite, oreThermoxite, oreTenirite, oreSilver;
 
     public static void load() {
-        Blocks.ice.attributes.set(TerraAttributes.ice, 0.25f);
-        Blocks.redIce.attributes.set(TerraAttributes.ice, 0.25f);
+        Blocks.ice.attributes.set(TerraAttributes.ice, 1f);
+        Blocks.redIce.attributes.set(TerraAttributes.ice, 1f);
         //largeTree = new TreeBlock("large-tree");
         iceBoulder = new Prop("ice-boulder") {{
             variants = 3;
@@ -38,6 +38,7 @@ public class TerraEnvironmentBlocks {
             dragMultiplier = 0.35f;
             speedMultiplier = 0.9f;
             attributes.set(Attribute.water, 0.4f);
+            attributes.set(TerraAttributes.ice, 1f);
             albedo = 0.65f;
         }
             @Override
