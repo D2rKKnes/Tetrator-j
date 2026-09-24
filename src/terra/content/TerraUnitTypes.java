@@ -100,7 +100,9 @@ public class TerraUnitTypes {
                     hitEffect = Fx.pulverize;
                     speed = 0f;
                     splashDamageRadius = 44f;
-                    instantDisappear = true;
+                    //instantDisappear = true;
+                    lifetime = 1f;
+                    shieldDamageMultiplier = 0.25f;
                     splashDamage = 70f;
                     buildingDamageMultiplier = 0.68f;
                     killShooter = true;
@@ -149,7 +151,9 @@ public class TerraUnitTypes {
                     hitEffect = Fx.pulverize;
                     speed = 0f;
                     splashDamageRadius = 44f;
-                    instantDisappear = true;
+                    //instantDisappear = true;
+                    lifetime = 1f;
+                    shieldDamageMultiplier = 0.25f;
                     splashDamage = 70f;
                     buildingDamageMultiplier = 0.68f;
                     killShooter = true;
@@ -193,7 +197,9 @@ public class TerraUnitTypes {
                     hitEffect = Fx.pulverize;
                     speed = 0f;
                     splashDamageRadius = 60f;
-                    instantDisappear = true;
+                    //instantDisappear = true;
+                    lifetime = 1f;
+                    shieldDamageMultiplier = 0.3f;
                     splashDamage = 187f;
                     buildingDamageMultiplier = 0.68f;
                     killShooter = true;
@@ -243,31 +249,6 @@ public class TerraUnitTypes {
             abilities.add(new SpawnDeathAbility(wick, 3, 11f));
 
             weapons.add(
-            new Weapon(){{
-                shootOnDeath = true;
-                useAttackRange = false;
-                controllable = false;
-                reload = 60f;
-                shootCone = 180f;
-                ejectEffect = Fx.none;
-                shootSound = Sounds.explosionCrawler;
-                shootSoundVolume = 0.7f;
-                x = shootY = 0f;
-                mirror = false;
-                bullet = new BulletType(){{
-                    collidesTiles = false;
-                    collides = false;
-                    hitEffect = Fx.pulverize;
-                    speed = 0f;
-                    splashDamageRadius = 60f;
-                    instantDisappear = true;
-                    splashDamage = 250f;
-                    buildingDamageMultiplier = 0.68f;
-                    killShooter = true;
-                    hittable = false;
-                    collidesAir = true;
-                }};
-            }},
             new Weapon("terra-incident-mount"){{
                 x = 24f / 4f;
                 y = -1f / 4f;
@@ -276,7 +257,7 @@ public class TerraUnitTypes {
                 reload = 28f;
                 rotate = true;
                 shoot = new ShootSpread() {{
-                    shots = 3;
+                    shots = 2;
                     spread = 10f;
                 }};
                 bullet = new SapBulletType(){{
