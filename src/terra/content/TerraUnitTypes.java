@@ -101,7 +101,7 @@ public class TerraUnitTypes {
                     speed = 0f;
                     splashDamageRadius = 44f;
                     //instantDisappear = true;
-                    lifetime = 1f;
+                    lifetime = 2f;
                     shieldDamageMultiplier = 0.25f;
                     splashDamage = 70f;
                     buildingDamageMultiplier = 0.68f;
@@ -152,7 +152,7 @@ public class TerraUnitTypes {
                     speed = 0f;
                     splashDamageRadius = 44f;
                     //instantDisappear = true;
-                    lifetime = 1f;
+                    lifetime = 2f;
                     shieldDamageMultiplier = 0.25f;
                     splashDamage = 70f;
                     buildingDamageMultiplier = 0.68f;
@@ -198,7 +198,7 @@ public class TerraUnitTypes {
                     speed = 0f;
                     splashDamageRadius = 60f;
                     //instantDisappear = true;
-                    lifetime = 1f;
+                    lifetime = 2f;
                     shieldDamageMultiplier = 0.3f;
                     splashDamage = 187f;
                     buildingDamageMultiplier = 0.68f;
