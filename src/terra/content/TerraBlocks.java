@@ -757,6 +757,7 @@ public class TerraBlocks{
                 new DrawRegion("-top")
             );
             attribute = TerraAttributes.ice;
+            boostScale = 0.25f;
             minEfficiency = 0.1f;
             baseEfficiency = 0f;
         }};
@@ -813,7 +814,7 @@ public class TerraBlocks{
             researchCostMultiplier = 0.25f;
             attribute = TerraAttributes.ice;
             maxBoost = 1.25f;
-            boostScale = 0.0625f;
+            boostScale = outputScale = 0.0625f / 4f;
 
             buildType = () -> new AttributeCrafterBuild() {
                 @Override
