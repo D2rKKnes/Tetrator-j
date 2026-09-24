@@ -101,6 +101,7 @@ public class TerraVerilusTree {
                                     node(crystalIncubator, () -> {});
                                 });
                                 node(electricalWell, () -> {});
+                                node(ventPump, () -> {});
                             });
                         });
                         node(logicProcessor, () -> {
