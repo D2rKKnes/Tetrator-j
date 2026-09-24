@@ -932,7 +932,7 @@ public class TerraBlocks{
                 new Recipe() {{
                     inputItem = ItemStack.list(Items.fissileMatter, 1);
                     inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 25f / 60f);
-                    outputItem = ItemStack.list(TerraItems.fissileCrystal, 1);
+                    outputItem = ItemStack.list(TerraItems.fissileCrystals, 1);
                     craftTime = 10f;
                 }}
             );
