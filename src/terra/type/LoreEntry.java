@@ -28,7 +28,6 @@ public class LoreEntry extends UnlockableContent{
 
     public LoreEntry(String name){
         super(name);
-        allDatabaseTabs = true;
         hideDetails = false;
         alwaysUnlocked = false;
         databaseCategory = "lore";
@@ -43,6 +42,7 @@ public class LoreEntry extends UnlockableContent{
     public LoreEntry(String name, boolean alwaysUnlocked){
         this(name);
         this.alwaysUnlocked = alwaysUnlocked;
+        this.allDatabaseTabs = true;
     }
 
     @Override
