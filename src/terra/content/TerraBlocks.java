@@ -905,7 +905,7 @@ public class TerraBlocks{
         };
 
         crystalIncubator = new RecipeGenericCrafter("crystal-incubator") {{
-            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 80, TerraItems.rawThermoxite, 40, TerraItems.darkSteel, 115));
+            requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 80, TerraItems.rawThermoxite, 40, TerraItems.titaniumPlate, 115));
 
             size = 2;
             hasLiquids = true;
@@ -918,16 +918,22 @@ public class TerraBlocks{
             consumePower(1.3f);
             recipes.addAll(
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 1);
+                    inputItem = ItemStack.list(TerraItems.carbon, 3);
                     inputLiquid = LiquidStack.list(Liquids.water, 6f / 60f);
-                    outputItem = ItemStack.list(TerraItems.rawThermoxite, 1);
-                    craftTime = 40f;
+                    outputItem = ItemStack.list(TerraItems.rawThermoxite, 3);
+                    craftTime = 45f;
                 }},
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 2);
-                    inputLiquid = LiquidStack.list(Liquids.cryofluid, 6f / 60f);
-                    outputItem = ItemStack.list(TerraItems.thermoxite, 1);
-                    craftTime = 100f;
+                    inputItem = ItemStack.list(TerraItems.carbon, 5);
+                    inputLiquid = LiquidStack.list(TerraLiquids.carbonDioxide, 6f / 60f);
+                    outputItem = ItemStack.list(TerraItems.thermoxite, 3);
+                    craftTime = 60f;
+                }},
+                new Recipe() {{
+                    inputItem = ItemStack.list(Items.fissileMatter, 1);
+                    inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 25f / 60f);
+                    outputItem = ItemStack.list(TerraItems.fissileCrystal, 1);
+                    craftTime = 10f;
                 }}
             );
             drawer = new DrawMulti(
@@ -970,13 +976,13 @@ public class TerraBlocks{
             consumePower(3.333f);
             recipes.addAll(
                 new Recipe() {{
-                    inputItem = ItemStack.list(TerraItems.carbon, 4);
+                    inputItem = ItemStack.list(TerraItems.carbon, 3);
                     inputLiquid = LiquidStack.list(Liquids.water, 16f / 60f);
                     outputItem = ItemStack.list(TerraItems.diamondDust, 1);
                     craftTime = 40f;
                 }},
                 new Recipe() {{
-                    inputItem = ItemStack.list(Items.graphite, 6);
+                    inputItem = ItemStack.list(Items.graphite, 5);
                     inputLiquid = LiquidStack.list(Liquids.water, 12f / 60f);
                     outputItem = ItemStack.list(TerraItems.diamondDust, 3);
                     craftTime = 90f;
