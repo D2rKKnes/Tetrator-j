@@ -528,8 +528,9 @@ public class TerraBlocks{
             displayedSpeed = 16f;
             buildCostMultiplier = 2f;
             pushUnits = true;
-            capacity = 4;
-            itemSpace = 0.3f;
+            //private :(
+            //capacity = 4;
+            //itemSpace = 0.3f;
         }};
         graphiteJunction = new Junction("graphite-junction"){{
             requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
