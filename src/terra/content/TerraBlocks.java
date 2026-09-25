@@ -68,7 +68,7 @@ public class TerraBlocks{
     leadWall, leadWallLarge, leadWallHuge, leadWallGigantic,
     darkSteelWall, darkSteelWallLarge, darkSteelWallHuge, darkSteelWallSmall,
     //distrubution
-    graphiteConveyor, 
+    graphiteConveyor, darkConveyor, 
     graphiteJunction, graphiteRouter, graphiteGate,
     graphiteBridge, smallDriver, warpGate,
     //power
@@ -520,6 +520,16 @@ public class TerraBlocks{
             buildCostMultiplier = 2f;
             pushUnits = false;
             researchCost = with(Items.lead, 20, Items.graphite, 20);
+        }};
+        darkConveyor = new CappedConveyor("phase-conveyor"){{
+            requirements(Category.distribution, with(TerraItems.darkSteel, 1, Items.phaseFabric, 1));
+            health = 300;
+            speed = 0.12f;
+            displayedSpeed = 16f;
+            buildCostMultiplier = 2f;
+            pushUnits = true;
+            capacity = 4;
+            itemSpace = 0.3f;
         }};
         graphiteJunction = new Junction("graphite-junction"){{
             requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
