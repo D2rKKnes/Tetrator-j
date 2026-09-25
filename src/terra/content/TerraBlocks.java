@@ -1050,7 +1050,7 @@ public class TerraBlocks{
             requirements(Category.crafting, with(Items.silicon, 80, TerraItems.titaniumPlate, 145, TerraItems.diamondDust, 65));
 
             outputItem = new ItemStack(TerraItems.diamondGlass, 1);
-            craftTime = 35f;
+            craftTime = 30f;
             itemCapacity = 15;
             size = 2;
             hasItems = true;
@@ -1060,7 +1060,7 @@ public class TerraBlocks{
             drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.water), new DrawDefault());
 
             consumePower(1.3f);
-            consumeItems(with(Items.metaglass, 1, TerraItems.diamondDust, 3));
+            consumeItems(with(Items.metaglass, 1, TerraItems.diamondDust, 2));
             consumeLiquid(Liquids.water, 0.2f);
         }};
         multiMixer = new MultiBlockCrafter("multi-mixer") {{
