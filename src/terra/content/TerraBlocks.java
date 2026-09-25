@@ -81,7 +81,7 @@ public class TerraBlocks{
     diamondCrusher, diamondCoverer,
     multiMixer,
     //production
-    graphiteMiner, ventPump,
+    graphiteMiner, graphiteMinerLarge, ventPump,
     mechanicalWell, electricalWell,
     pulseDrill, plasmaDrill, beamMiningFacility,
     //storage
@@ -538,6 +538,8 @@ public class TerraBlocks{
             capacity = 6;
             health = 70;
             buildCostMultiplier = 6f;
+            displayedSpeed = 18f;
+            speed = 36;
         }};
         graphiteRouter = new RouterSorter("graphite-router"){{
             requirements(Category.distribution, with(Items.lead, 3, Items.graphite, 2));
@@ -561,8 +563,8 @@ public class TerraBlocks{
         smallDriver = new MassDriver("small-driver"){{
             requirements(Category.distribution, with(Items.titanium, 50, Items.graphite, 85, Items.lead, 100));
             size = 2;
-            itemCapacity = 65;
-            reload = 340f;
+            itemCapacity = 75;
+            reload = 300f;
             range = 260f;
             hasPower = false;
             health = 485;
@@ -644,7 +646,8 @@ public class TerraBlocks{
             size = 7;
             researchCostMultiplier = 0.1f;
             squareSprite = false;
-            health = 7850;
+            health = 14850;
+            armor = 15;
             powerProduction = 325f;
             itemDuration = 20f;
             ambientSound = Sounds.loopPulse;
@@ -860,10 +863,10 @@ public class TerraBlocks{
 
         darkSteelWorkshop = new GenericCrafter("dark-steel-production-workshop"){{
             requirements(Category.crafting, with(Items.thorium, 600, Items.silicon, 385, TerraItems.titaniumPlate, 340, TerraItems.diamondGlass, 225, TerraItems.rawThermoxite, 180));
-            consumeItems(with(Items.lead, 6, Items.titanium, 3, Items.thorium, 5, TerraItems.carbon, 8));
+            consumeItems(with(Items.lead, 6, Items.titanium, 4, Items.thorium, 5, TerraItems.carbon, 7));
             consumeLiquid(Liquids.cryofluid, 42f / 60f);
             consumePower(12.5f);
-            outputItem = new ItemStack(TerraItems.darkSteel, 7);
+            outputItem = new ItemStack(TerraItems.darkSteel, 9);
             size = 5;
             hasPower = true;
             hasItems = true;
@@ -923,8 +926,8 @@ public class TerraBlocks{
             hasItems = true;
             hasPower = true;
             scaledHealth = 100f;
-            itemCapacity = 10;
-            liquidCapacity = 100;
+            itemCapacity = 20;
+            liquidCapacity = 200;
 
             consumePower(1.3f);
             recipes.addAll(
@@ -941,10 +944,10 @@ public class TerraBlocks{
                     craftTime = 60f;
                 }},
                 new Recipe() {{
-                    inputItem = ItemStack.list(Items.fissileMatter, 1);
-                    inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 25f / 60f);
+                    inputItem = ItemStack.list(Items.fissileMatter, 2);
+                    inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 75f / 60f);
                     outputItem = ItemStack.list(TerraItems.fissileCrystals, 1);
-                    craftTime = 10f;
+                    craftTime = 20f;
                 }}
             );
             drawer = new DrawMulti(
@@ -1124,6 +1127,19 @@ public class TerraBlocks{
             ambientSoundVolume = 0.04f;
             itemCapacity = 20;
             attribute = TerraAttributes.graphite;
+        }};
+        graphiteMinerLarge = new WallCrafter("graphite-miner-large"){{
+            requirements(Category.production, with(Items.lead, 12));
+            output = Items.graphite;
+            size = 3;
+            envEnabled = Env.any;
+            drillTime = 90f;
+            fogRadius = 3;
+            ambientSound = Sounds.loopDrill;
+            ambientSoundVolume = 0.1f;
+            itemCapacity = 40;
+            attribute = TerraAttributes.graphite;
+            consumePower(0.75f);
         }};
         mechanicalWell = new AttributeSeparator("mechanical-well"){{
             requirements(Category.production, with(Items.graphite, 25, Items.titanium, 40));
