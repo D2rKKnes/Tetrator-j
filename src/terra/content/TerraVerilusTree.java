@@ -51,7 +51,9 @@ public class TerraVerilusTree {
                             node(warpGate, () -> {});
                         });
                     });
-                    node(phaseConveyor, () -> {});
+                    node(phaseConveyor, () -> {
+                        node(darkConveyor, () -> {});
+                    });
                 });
             });
             node(coreSolaris, () -> {
