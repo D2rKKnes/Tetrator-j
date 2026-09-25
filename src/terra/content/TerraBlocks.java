@@ -521,7 +521,7 @@ public class TerraBlocks{
             pushUnits = false;
             researchCost = with(Items.lead, 20, Items.graphite, 20);
         }};
-        darkConveyor = new CappedConveyor("phase-conveyor"){{
+        darkConveyor = new Conveyor("phase-conveyor"){{
             requirements(Category.distribution, with(TerraItems.darkSteel, 1, Items.phaseFabric, 1));
             health = 300;
             speed = 0.12f;
