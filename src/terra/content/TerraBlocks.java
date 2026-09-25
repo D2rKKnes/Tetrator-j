@@ -673,11 +673,11 @@ public class TerraBlocks{
             consumeLiquid(Liquids.cryofluid, 500.0001f / 60);
             ObjectFloatMap<Item> fuelMap = new ObjectFloatMap<>();
                 fuelMap.put(Items.thorium, 0.75f);
-                fuelMap.put(TerraItems.rawThermoxite, 0.75f);
-                fuelMap.put(Items.phaseFabric, 0.85f);
+                fuelMap.put(TerraItems.rawThermoxite, 0.85f);
                 fuelMap.put(TerraItems.thermoxite, 1f);
-                fuelMap.put(Items.fissileMatter, 1f);
-                fuelMap.put(TerraItems.gammaCell, 1.5f);
+                fuelMap.put(Items.phaseFabric, 1.1f);
+                fuelMap.put(Items.fissileMatter, 1.2f);
+                fuelMap.put(TerraItems.gammaCell, 1.6f);
             consume(new ConsumeItemEfficiencyList(fuelMap));
         }};
         
@@ -880,7 +880,7 @@ public class TerraBlocks{
                 }},
                 new DrawWarmupRegion()
             );
-            craftTime = 190;
+            craftTime = 180;
             itemCapacity = 24;
             researchCostMultiplier = 0.25f;
             lightLiquid = Liquids.cryofluid;
@@ -1278,7 +1278,7 @@ public class TerraBlocks{
         }};
 
         beamMiningFacility = new SmartDrill("beam-mining-facility"){{
-            requirements(Category.production, with(Items.phaseFabric, 65, TerraItems.darkSteel, 185, TerraItems.diamondGlass, 110));
+            requirements(Category.production, with(Items.phaseFabric, 65, TerraItems.titaniumPlate, 350, TerraItems.thermoxite, 115, TerraItems.darkSteel, 185, TerraItems.diamondGlass, 110));
             size = 4;
             tier = 5;
             itemCapacity = 75;
