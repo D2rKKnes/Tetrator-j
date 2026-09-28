@@ -2,6 +2,7 @@ package terra.maps.planets;
 
 import terra.content.*;
 import terra.maps.generators.VerilusWaves;
+import arc.*;
 import arc.graphics.*;
 import arc.math.*;
 import arc.math.geom.*;
