@@ -143,8 +143,8 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         //the center asteroid is always stone
         asteroid(sx, sy, rand.random((int)radMax / 2, (int)radMax), Blocks.stone.asFloor());
 
-        float radr = 170f + Mathf.random(10f, 50f);
-        float anglr = Mathf.random(360f);
+        float radr = 170f + rand.random(10f, 50f);
+        float anglr = rand.random(360f);
         int xr = sx + (int)(Mathf.cosDeg(anglr) * radr);
         int yr = sy + (int)(Mathf.sinDeg(anglr) * radr);
 
@@ -368,7 +368,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         if (Core.settings.getBool("veriluswave", true)){
             state.rules.spawns = VerilusWaves.generate(rand2);
         } else {
-            state.rules.spawns = VerilusWaves.generate(new Rand(seed));
+            state.rules.spawns = VerilusWaves.generate(new Rand(seed + 1));
         }
     }
 
