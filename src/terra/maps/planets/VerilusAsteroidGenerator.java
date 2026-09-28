@@ -368,7 +368,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         if (Core.settings.getBool("veriluswave", true)){
             state.rules.spawns = VerilusWaves.generate(rand2);
         } else {
-            state.rules.spawns = VerilusWaves.generate(rand);
+            state.rules.spawns = VerilusWaves.generate(new Rand(seed));
         }
     }
 
