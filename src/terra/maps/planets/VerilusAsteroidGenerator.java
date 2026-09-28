@@ -126,7 +126,7 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
     @Override
     public void generate(){
-        rand2 = new Rand(Mathf.random(1000000));
+        @Nullable Rand rand2 = new Rand(Mathf.random(1000000));
         if (Core.settings.getBool("verilusgen", true)){
             seed = Mathf.random(1000000);
             rand2 = new Rand(seed);
