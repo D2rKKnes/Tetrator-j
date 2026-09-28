@@ -125,7 +125,11 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
 
     @Override
     public void generate(){
-        seed = Mathf.random(1000000);
+        if (Core.settings.getBool("verilusgen", true)){
+            seed = Mathf.random(1000000);
+        } else{
+            seed = state.rules.sector.planet.id;
+        }
         int sx = width/2, sy = height/2;
         rand = new Rand(seed);
 
@@ -358,7 +362,11 @@ public class VerilusAsteroidGenerator extends BlankPlanetGenerator{
         }
 
         state.rules.hideSpawns = false;
-        state.rules.spawns = VerilusWaves.generate(rand);
+        if (Core.settings.getBool("veriluswave", true)){
+            state.rules.spawns = VerilusWaves.generate(rand);
+        } else {
+            state.rules.spawns = VerilusWaves.generate(seed);
+        }
     }
 
     @Override
