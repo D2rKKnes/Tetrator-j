@@ -5,16 +5,16 @@ displayName: "[[]red]Tetrator[[]]"
 name: "terra"
 
 #your name
-author: "[[]#770606]The_alone[[]]"
+author: "[[]red]The_alone[[]]"
 
 #the fully qualified main class of the mod
 main: "terra.TerraMod"
 
 #the mod description as seen in the mod dialog
-description: "A Mindustry Java mod."
+description: "Tetrative reconstructor not included.\n\nThis mod abbs a bunch of random cool ideas and campaigns. Can de very unbalanced.\n[#ff0000]YOU ARE NOTHING JUST GIVE UP ALREADY[]"
 
 #the mod version
-version: "[stat]BETA[] 0.2"
+version: "[stat]BETA[] 0.3"
 
 #the minimum game build required to run this mod
 minGameVersion: 159
