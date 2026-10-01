@@ -1129,7 +1129,7 @@ public class TerraBlocks{
             attribute = TerraAttributes.graphite;
         }};
         graphiteMinerLarge = new WallCrafter("graphite-miner-large"){{
-            requirements(Category.production, with(Items.lead, 12));
+            requirements(Category.production, with(Items.lead, 120, Items.graphite, 90, TerraItems.titaniumPlate, 70, TerraItems.rawThermoxite, 45));
             output = Items.graphite;
             size = 3;
             envEnabled = Env.any;
@@ -1137,7 +1137,7 @@ public class TerraBlocks{
             fogRadius = 3;
             ambientSound = Sounds.loopDrill;
             ambientSoundVolume = 0.1f;
-            itemCapacity = 40;
+            itemCapacity = 50;
             attribute = TerraAttributes.graphite;
             consumePower(0.75f);
         }};
