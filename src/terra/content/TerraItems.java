@@ -31,7 +31,7 @@ public class TerraItems{
             // tantaliumAmmo1, tantaliumAmmo2, tantaliumAmmo3,
             // gravititeAmmo1, gravititeAmmo2, gravititeAmmo3,
             //other and unused
-            fish, cryotite, chippedFish, money, moneyStack,
+            fish, cryotite, chippedFish, money, moneyStack, wonderflesh,
             e5821;
 
     public static void load(){
@@ -242,8 +242,8 @@ public class TerraItems{
         chippedFish = new AdvancedItem("chipped-fish", fish.color.cpy().lerp(darkSteel.color.cpy(), 0.75f), true){{
             cost = 10f;
             hardness = 1;
-            flammability = 0.02f;
-            explosiveness = 10f;
+            flammability = 0.3f;
+            explosiveness = 100f;
             magnetic = 0.1f;
             threat = 1f;
         }};
@@ -258,6 +258,13 @@ public class TerraItems{
             flammability = 0.15f;
         }};
 
-        e5821 = new Item("e5821");
+        wonderflesh = new AdvancedItem("wonderflesh", Color.valueOf("d30000")){{
+            cost = 3f;
+            hardness = 1;
+            flammability = 0.15f;
+            charge = -0.25f;
+        }};
+
+        //e5821 = new Item("e5821");
     }
 }
