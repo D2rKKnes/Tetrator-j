@@ -50,9 +50,9 @@ public class AdvancedStatusEffect extends StatusEffect{
             stats.add(shieldHeal, -shieldDamage * 60f, StatUnit.perSecond);
             stats.add(shieldCap, shieldHealCap);
         }
-        if(disarm) stats.add(disarmStat, "");
-        if(permanent) stats.add(permanentStat, "");
-        if(instakill) stats.add(instantDeath, "");
+        if(disarm) stats.add(disarmStat, disarm);
+        if(permanent) stats.add(permanentStat, permanent);
+        if(instakill) stats.add(instantDeath, instakill);
     }
 
     @Override
