@@ -66,6 +66,7 @@ public class TerraVerilusTree {
                     });
                     node(sandExtractor, () -> {
                         node(iceMelter, () -> {
+                            node(graphiteMinerLarge, () -> {});
                             node(cryofluidMixer, () -> {
                                 node(multiMixer, () -> {});
                             });
@@ -121,37 +122,37 @@ public class TerraVerilusTree {
                         if(Core.settings.getBool("enableblocks", false)){node(leadWallHuge, () -> {
                             node(leadWallGigantic, () -> {});
                         });}
-                    });
-                    node(titaniumWall, () -> {
-                        node(titaniumWallLarge, () -> {
-                            if(Core.settings.getBool("enableblocks", false)){node(titaniumWallHuge, () -> {
-                                node(titaniumWallGigantic, () -> {});
-                            });}
-                        });
-                        node(thoriumWall, () -> {
-                            node(thoriumWallLarge, () -> {
-                                if(Core.settings.getBool("enableblocks", false)){node(thoriumWallHuge, () -> {
-                                    node(thoriumWallGigantic, () -> {});
+                        node(titaniumWall, () -> {
+                            node(titaniumWallLarge, () -> {
+                                if(Core.settings.getBool("enableblocks", false)){node(titaniumWallHuge, () -> {
+                                    node(titaniumWallGigantic, () -> {});
                                 });}
-                            });
-                            node(phaseWall, () -> {
-                                node(phaseWallLarge, () -> {
-                                    if(Core.settings.getBool("enableblocks", false)){node(phaseWallHuge, () -> {
-                                        node(phaseWallGigantic, () -> {});
-                                    });}
+                                node(thoriumWall, () -> {
+                                    node(thoriumWallLarge, () -> {
+                                        if(Core.settings.getBool("enableblocks", false)){node(thoriumWallHuge, () -> {
+                                            node(thoriumWallGigantic, () -> {});
+                                        });}
+                                        node(phaseWall, () -> {
+                                            node(phaseWallLarge, () -> {
+                                                if(Core.settings.getBool("enableblocks", false)){node(phaseWallHuge, () -> {
+                                                    node(phaseWallGigantic, () -> {});
+                                                });}
+                                            });
+                                        });
+                                        node(darkSteelWall, () -> {
+                                            node(darkSteelWallLarge, () -> {
+                                                if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallHuge, () -> {});}
+                                            });
+                                            if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallSmall, () -> {});}
+                                        });
+                                    });
                                 });
-                            });
-                            node(darkSteelWall, () -> {
-                                node(darkSteelWallLarge, () -> {
-                                    if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallHuge, () -> {});}
-                                });
-                                if(Core.settings.getBool("enableblocks", false)){node(darkSteelWallSmall, () -> {});}
-                            });
-                        });
-                        node(metaglassWall, () -> {
-                            node(metaglassWallLarge, () -> {
-                                node(metaglassWallHuge, () -> {
-                                    if(Core.settings.getBool("enableblocks", false)){node(metaglassWallGigantic, () -> {});}
+                                node(metaglassWall, () -> {
+                                    node(metaglassWallLarge, () -> {
+                                        node(metaglassWallHuge, () -> {
+                                            if(Core.settings.getBool("enableblocks", false)){node(metaglassWallGigantic, () -> {});}
+                                        });
+                                    });
                                 });
                             });
                         });
