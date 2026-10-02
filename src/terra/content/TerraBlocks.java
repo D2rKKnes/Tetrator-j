@@ -1976,11 +1976,13 @@ public class TerraBlocks{
             );
             consumePower(3.6f);
         }};*/
-        ((UnitFactory) Blocks.airFactory).plans.addAll(new UnitFactory.UnitPlan(UnitTypes.alpha, 60f * 50, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20)));
+        ((UnitFactory) Blocks.airFactory).plans.addAll(
+            new UnitFactory.UnitPlan(UnitTypes.alpha, 60f * 50, with(Items.silicon, 40, Items.copper, 50, Items.lead, 20),
+            new UnitFactory.UnitPlan(TerraUnitTypes.ksi, 60f * 60, with(Items.silicon, 45, Items.graphite, 20, Items.metaglass, 30),
+        ));
         ((Reconstructor) Blocks.additiveReconstructor).upgrades.addAll(new UnitType[]{UnitTypes.alpha, UnitTypes.beta});
         ((Reconstructor) Blocks.multiplicativeReconstructor).upgrades.addAll(
-            new UnitType[]{UnitTypes.beta, UnitTypes.gamma},
-            new UnitType[]{UnitTypes.alpha, TerraUnitTypes.ksi}
+            new UnitType[]{UnitTypes.beta, UnitTypes.gamma}
         );
         /*droneCentre = new DroneCentre("drone-centre"){{
             requirements(Category.units, with(Items.titanium, 135, Items.lead, 190, Items.silicon, 160));
