@@ -56,7 +56,7 @@ public class TerraUnitTypes {
     flow, greenMissile, threshold, turn, movement, consequence,
     //doom & despair
     calamity, 
-    endSpawn, endGuard, endBattleship, //end,
+    endSpawn, endGuard, endBattleship, end,
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
@@ -1451,155 +1451,155 @@ public class TerraUnitTypes {
             }});
         }};
 
-        reaper = new UnitType("reaper"){{
-            flying = true;
-            lowAltitude = true;
-            speed = 0.7f;
-            rotateSpeed = 0.6f;
-            drag = 0.04f;
-            accel = 0.04f;
-            hitSize = 70f;
-            health = 92000;
-            armor = 62;
-            engineSize = 0f;
-            constructor = UnitEntity::create;
-            outlineColor = Pal.darkerMetal;
-            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
-            setEnginesMirror(
-                new UnitEngine(92f / 4f, -110f / 4f, 10f, 315f),
-                new UnitEngine(142f / 4f, -66f / 4f, 8f, 315f)
-            );
-            parts.add(new RegionPart("-under"){{
-                x = 0f;
-                y = 0f;
-                mirror = false;
-                layerOffset = -1f;
-            }});
-            Weapon assault = new Weapon("terra-medium-red-weapon"){{
-                reload = 38f;
-                shootY = 6f;
-                rotate = true;
-                rotateSpeed = 11f;
-                mirror = true;
-                bullet = new BasicBulletType();
-            }};
+        // reaper = new UnitType("reaper"){{
+        //     flying = true;
+        //     lowAltitude = true;
+        //     speed = 0.7f;
+        //     rotateSpeed = 0.6f;
+        //     drag = 0.04f;
+        //     accel = 0.04f;
+        //     hitSize = 70f;
+        //     health = 92000;
+        //     armor = 62;
+        //     engineSize = 0f;
+        //     constructor = UnitEntity::create;
+        //     outlineColor = Pal.darkerMetal;
+        //     targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
+        //     setEnginesMirror(
+        //         new UnitEngine(92f / 4f, -110f / 4f, 10f, 315f),
+        //         new UnitEngine(142f / 4f, -66f / 4f, 8f, 315f)
+        //     );
+        //     parts.add(new RegionPart("-under"){{
+        //         x = 0f;
+        //         y = 0f;
+        //         mirror = false;
+        //         layerOffset = -1f;
+        //     }});
+        //     Weapon assault = new Weapon("terra-medium-red-weapon"){{
+        //         reload = 38f;
+        //         shootY = 6f;
+        //         rotate = true;
+        //         rotateSpeed = 11f;
+        //         mirror = true;
+        //         bullet = new BasicBulletType();
+        //     }};
 
-            weapons.add(copyAndMove(assault, 71f / 4f, 103f / 4f));
-            weapons.add(copyAndMoveAnd(assault, 75f / 4f, 24f / 4f, w -> {w.reload = 44f;}));
-            weapons.add(copyAndMoveAnd(assault, 45f / 4f, -15f / 4f, w -> {w.reload = 50f;}));
-            weapons.add(new Weapon("terra-heavy-rockets"){{
-                reload = 86f;
-                x = 130f / 4;
-                y = 0;
-                shootY = 0f;
-                rotate = true;
-                rotateSpeed = 2.6f;
-                mirror = true;
-                shoot = new ShootBarrel(){{
-                    shots = 6;
-                    shotDelay = 2f;
-                    barrels = new float[]{
-                        0f, 20f / 4, 0f, 
-                        -9f / 4, 25f / 4, 0f, 
-                        0f, 29f / 4, 0f, 
-                        9f / 4, 25f / 4, 0f
-                    };
-                }};
-                shootSound = Sounds.shootMissileLong;
-                bullet = new BasicBulletType(2.6f, 128){{
-                    lifetime = 70f;
-                    splashDamage = damage * 0.5f;
-                    splashDamageRadius = 35f;
-                    scaledSplashDamage = true;
-                    sprite = "terra-strike";
-                    drag = -0.015f;
-                    followAimSpeed = 6f;
-                    width = 7f;
-                    height = 11f;
-                    shrinkY = 0.2f;
-                    hitColor = lightColor = trailColor = backColor = Pal.unitFront;
-                    frontColor = Color.white;
-                    trailWidth = 1.3f;
-                    trailLength = 7;
-                    pierce = true;
-                    pierceCap = 3;
-                    despawnHit = true;
-                    despawnEffect = hitEffect = TerraFx.circleFadeSmall;
-                    despawnSound = Sounds.unitExplode1;
-                }};
-            }},
-            new Weapon("terra-reaper-laser-mount"){{
-                reload = 142f;
-                x = 101f / 4;
-                y = -70f / 4;
-                shootY = 5f;
-                rotate = true;
-                rotateSpeed = 4.2f;
-                mirror = true;
-                continuous = true;
-                cooldownTime = reload * 1.9f;
-                shootSound = Sounds.beamPlasma;
-                initialShootSound = Sounds.shootBeamPlasma;
-                bullet = new ContinuousLaserBulletType(){{
-                    damage = 55f;
-                    length = 220f;
-                    width = 6f;
-                    hitEffect = new Effect(12, e -> {
-                        color(Pal.unitFront);
-                        stroke(e.fout() * 2f);
+        //     weapons.add(copyAndMove(assault, 71f / 4f, 103f / 4f));
+        //     weapons.add(copyAndMoveAnd(assault, 75f / 4f, 24f / 4f, w -> {w.reload = 44f;}));
+        //     weapons.add(copyAndMoveAnd(assault, 45f / 4f, -15f / 4f, w -> {w.reload = 50f;}));
+        //     weapons.add(new Weapon("terra-heavy-rockets"){{
+        //         reload = 86f;
+        //         x = 130f / 4;
+        //         y = 0;
+        //         shootY = 0f;
+        //         rotate = true;
+        //         rotateSpeed = 2.6f;
+        //         mirror = true;
+        //         shoot = new ShootBarrel(){{
+        //             shots = 6;
+        //             shotDelay = 2f;
+        //             barrels = new float[]{
+        //                 0f, 20f / 4, 0f, 
+        //                 -9f / 4, 25f / 4, 0f, 
+        //                 0f, 29f / 4, 0f, 
+        //                 9f / 4, 25f / 4, 0f
+        //             };
+        //         }};
+        //         shootSound = Sounds.shootMissileLong;
+        //         bullet = new BasicBulletType(2.6f, 128){{
+        //             lifetime = 70f;
+        //             splashDamage = damage * 0.5f;
+        //             splashDamageRadius = 35f;
+        //             scaledSplashDamage = true;
+        //             sprite = "terra-strike";
+        //             drag = -0.015f;
+        //             followAimSpeed = 6f;
+        //             width = 7f;
+        //             height = 11f;
+        //             shrinkY = 0.2f;
+        //             hitColor = lightColor = trailColor = backColor = Pal.unitFront;
+        //             frontColor = Color.white;
+        //             trailWidth = 1.3f;
+        //             trailLength = 7;
+        //             pierce = true;
+        //             pierceCap = 3;
+        //             despawnHit = true;
+        //             despawnEffect = hitEffect = TerraFx.circleFadeSmall;
+        //             despawnSound = Sounds.unitExplode1;
+        //         }};
+        //     }},
+        //     new Weapon("terra-reaper-laser-mount"){{
+        //         reload = 142f;
+        //         x = 101f / 4;
+        //         y = -70f / 4;
+        //         shootY = 5f;
+        //         rotate = true;
+        //         rotateSpeed = 4.2f;
+        //         mirror = true;
+        //         continuous = true;
+        //         cooldownTime = reload * 1.9f;
+        //         shootSound = Sounds.beamPlasma;
+        //         initialShootSound = Sounds.shootBeamPlasma;
+        //         bullet = new ContinuousLaserBulletType(){{
+        //             damage = 55f;
+        //             length = 220f;
+        //             width = 6f;
+        //             hitEffect = new Effect(12, e -> {
+        //                 color(Pal.unitFront);
+        //                 stroke(e.fout() * 2f);
                     
-                        randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
-                            float ang = Mathf.angle(x, y);
-                            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
-                        });
-                    });
-                    drawSize = 420f;
-                    lifetime = 90f;
-                    shake = 0.8f;
-                    despawnEffect = Fx.smokeCloud;
-                    smokeEffect = Fx.none;
-                    status = StatusEffects.melting;
+        //                 randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
+        //                     float ang = Mathf.angle(x, y);
+        //                     lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+        //                 });
+        //             });
+        //             drawSize = 420f;
+        //             lifetime = 90f;
+        //             shake = 0.8f;
+        //             despawnEffect = Fx.smokeCloud;
+        //             smokeEffect = Fx.none;
+        //             status = StatusEffects.melting;
 
-                    colors = new Color[]{Pal.unitFront.cpy().a(.2f), Pal.unitFront.cpy().a(.5f), Pal.unitFront.cpy().mul(1.2f), Color.white};
-                }};
-            }},
-            new Weapon("terra-reaper-weapon"){{
-                reload = 900f;
-                x = 0;
-                y = 0;
-                shootY = 60f / 4;
-                rotate = false;
-                mirror = false;
-                recoil = 0f;
-                bullet = new BasicBulletType();
-            }});
+        //             colors = new Color[]{Pal.unitFront.cpy().a(.2f), Pal.unitFront.cpy().a(.5f), Pal.unitFront.cpy().mul(1.2f), Color.white};
+        //         }};
+        //     }},
+        //     new Weapon("terra-reaper-weapon"){{
+        //         reload = 900f;
+        //         x = 0;
+        //         y = 0;
+        //         shootY = 60f / 4;
+        //         rotate = false;
+        //         mirror = false;
+        //         recoil = 0f;
+        //         bullet = new BasicBulletType();
+        //     }});
 
-            weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 60f * 3.5f) {{
-                alwaysContinuous = parentizeEffects = continuous = true;
-                display = rotate = mirror = false;
-                baseRotation = 180;
-                x = 0;
-                y = -100f / 4;
-                shootY = 0;
-                shootSound = Sounds.none;
-                shootStatus = StatusEffects.fast;
-                shootStatusDuration = 10f;
-                bullet = new ContinuousFlameBulletType() {{
-                    damage = 48f;
-                    //recoil = 0.04f;
-                    width = 9f;
-                    layer = Layer.flyingUnitLow - 0.5f;
-                    drawFlare = collides = collidesGround = collidesAir = false;
-                    shootEffect = smokeEffect = Fx.none;
-                    length = 32;
-                    divisions = 20;
-                    intervalBullets = 2;
-                    intervalRandomSpread = 1;
-                    bulletInterval = 2.7f;
-                    colors = new Color[]{Color.valueOf("ec745855"), Color.valueOf("ec7458aa"), Color.valueOf("ff9c5a"), Color.white};
-                }};
-            }});
-        }};
+        //     weapons.add(new SpeedTriggerWeapon("engine", 0.8f, 60f * 3.5f) {{
+        //         alwaysContinuous = parentizeEffects = continuous = true;
+        //         display = rotate = mirror = false;
+        //         baseRotation = 180;
+        //         x = 0;
+        //         y = -100f / 4;
+        //         shootY = 0;
+        //         shootSound = Sounds.none;
+        //         shootStatus = StatusEffects.fast;
+        //         shootStatusDuration = 10f;
+        //         bullet = new ContinuousFlameBulletType() {{
+        //             damage = 48f;
+        //             //recoil = 0.04f;
+        //             width = 9f;
+        //             layer = Layer.flyingUnitLow - 0.5f;
+        //             drawFlare = collides = collidesGround = collidesAir = false;
+        //             shootEffect = smokeEffect = Fx.none;
+        //             length = 32;
+        //             divisions = 20;
+        //             intervalBullets = 2;
+        //             intervalRandomSpread = 1;
+        //             bulletInterval = 2.7f;
+        //             colors = new Color[]{Color.valueOf("ec745855"), Color.valueOf("ec7458aa"), Color.valueOf("ff9c5a"), Color.white};
+        //         }};
+        //     }});
+        // }};
 
         // latumFAKE = new NeoplasmUnitType("latum"){{
         //     health = 20000;
@@ -1622,6 +1622,7 @@ public class TerraUnitTypes {
         //     abilities.add(new SpawnDeathAbility(UnitTypes.renale, 5, 11f));
         // }};
         myDoom = new UnitType("my-doom"){{ //MyDoom.exe Imput command > execute Doomsday.js
+            hideDetails = false;
             flying = true;
             drawCell = false;
             isEnemy = killable = hittable = targetable = physics = bounded = false;
@@ -2202,7 +2203,7 @@ public class TerraUnitTypes {
                         growX = growY = -xScl;
                     }}
                 );
-                bullet = new BasicBulletType(4.2f, 200){{
+                bullet = new ArtilleryBulletType(4.2f, 200){{
                     lifetime = 90f;
                     sprite = "terra-plasma";
                     width = height = 18f;
@@ -2252,6 +2253,7 @@ public class TerraUnitTypes {
                         shootEffect = smokeEffect = Fx.none;
                         reflectable = false;
                         absorbable = false;
+                        pierce = true;
                         armorMultiplier = blockArmorMultiplier = 0.5f;
                         buildingDamageMultiplier = 0.75f;
                         parts.add(new HoverPart(){{
@@ -2423,6 +2425,7 @@ public class TerraUnitTypes {
         }};
 
         calamity = new UnitType("calamity"){{
+            hideDetails = false;
             speed = 0.3f;
             rotateSpeed = 0.4f;
             hitSize = 120f;
@@ -2524,6 +2527,7 @@ public class TerraUnitTypes {
         };
 
         endSpawn = new UnitType("end-spawn"){{
+            hideDetails = false;
             flying = true;
             speed = 1.9f;
             rotateSpeed = 4f;
@@ -2708,6 +2712,7 @@ public class TerraUnitTypes {
         };
 
         endGuard = new UnitType("end-guard"){{
+            hideDetails = false;
             flying = true;
             speed = 1.1f;
             rotateSpeed = 1.7f;
@@ -3148,7 +3153,7 @@ public class TerraUnitTypes {
                         suctionRadius = 240f;
                         growTime = 40f;
                         shrinkTime = 70f;
-                        status = TerraStatusEffects.singularEvaporation;
+                        status = TerraStatusEffects.warpHell;
                         loopSoundVolume = 1.2f;
                         statusDuration = 150f;
                         keepVelocity = false;
@@ -3162,7 +3167,7 @@ public class TerraUnitTypes {
                             shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
                             splashDamage = 0.001f;
                             splashDamageRadius = 33f;
-                            status = TerraStatusEffects.singularEvaporation;
+                            status = TerraStatusEffects.warpHell;
                             statusDuration = 150f;
                         }};
                     }};
@@ -3569,7 +3574,7 @@ public class TerraUnitTypes {
 
     private static Set<StatusEffect> ignoredEffects = new HashSet<>(Arrays.asList(
         StatusEffects.none, StatusEffects.overdrive,
-        TerraStatusEffects.warped, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
+        TerraStatusEffects.warped, TerraStatusEffects.speedup, TerraStatusEffects.shieldRegen, TerraStatusEffects.superRegeneration, TerraStatusEffects.hyperdrive
     ));
 
     private static Set<StatusEffect> forcedEffects = new HashSet<>(Arrays.asList(
