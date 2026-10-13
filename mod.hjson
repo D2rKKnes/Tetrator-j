@@ -11,7 +11,10 @@ author: "[[]red]The_alone[[]]"
 main: "terra.TerraMod"
 
 #the mod description as seen in the mod dialog
-description: "Tetrative reconstructor not included.\n\nThis mod abbs a bunch of random cool ideas and campaigns. Can de very unbalanced.\n[[]#ff0000]YOU ARE NOTHING JUST GIVE UP ALREADY[[]]"
+description: "Tetrative reconstructor not included.\n\nThis mod abbs a bunch of random cool ideas and campaigns. Can de very unbalanced.\n\n[[]stat]BETA ACCESS WARNING! Content may be unpolishend and be removed in the future/[[]]\n\n[[]#ff0000]YOU ARE NOTHING, JUST GIVE UP ALREADY![[]]"
+
+#the mod subtitle as seen in the mod browser
+subtitle: "[[]stat]BETA ACCESS[]"
 
 #the mod version
 version: "[stat]BETA[] 0.3"
