@@ -66,19 +66,19 @@ public class TerraStatusEffects{
             });
         }};
 
-        zapped = new StatusEffect("zapped"){{
-            color = Pal.stat;
-            speedMultiplier = 1.1f;
-            reloadMultiplier = 0.8f;
-            transitionDamage = 14f;
-            damage = 0.3f;
-            applyEffect = Fx.circleColorSpark;
-            init(() -> {
-                affinity(StatusEffects.wet, (unit, result, time) -> {
-                    unit.damagePierce(transitionDamage);
-                });
-            });
-        }};
+        // zapped = new StatusEffect("zapped"){{
+        //     color = Pal.stat;
+        //     speedMultiplier = 1.1f;
+        //     reloadMultiplier = 0.8f;
+        //     transitionDamage = 14f;
+        //     damage = 0.3f;
+        //     applyEffect = Fx.circleColorSpark;
+        //     init(() -> {
+        //         affinity(StatusEffects.wet, (unit, result, time) -> {
+        //             unit.damagePierce(transitionDamage);
+        //         });
+        //     });
+        // }};
 
         impactStun = new AdvancedStatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
@@ -268,7 +268,7 @@ public class TerraStatusEffects{
             reloadMultiplier = 3f;
             buildSpeedMultiplier = 3f;
         }};
-        anviled = new AdvancedStatusEffect("extreme-height"){{
+        anviled = new AdvancedStatusEffect("extreme-weight"){{
             color = Color.valueOf("6e6f81");
             speedMultiplier = 0.01f;
             reloadMultiplier = 0.33f;
