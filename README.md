@@ -27,3 +27,8 @@ To play and test unreleased beta versions, you need to:
 <br> 
 <br> Notva?
 
+## Previews
+<br>![Prev1](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/prev1.png)
+<br>![Prev2](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/prev2.png)
+<br>![Prev3](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/prev3.png)
+<br>![Prev4](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/prev4.png)
