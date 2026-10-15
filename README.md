@@ -1,5 +1,5 @@
 # Tetrator
-![Black sun](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/black-sun.png)
+![Logo](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites-override/ui/logo.png)
 <br>Tetrative reconstructor not included
 <br>
 <br>~~Awesome~~ mod that add a huge amount of content
