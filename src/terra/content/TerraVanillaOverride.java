@@ -85,19 +85,19 @@ public class TerraVanillaOverride {
         Blocks.largeShieldProjector.researchCostMultiplier = 0.03f;
         Blocks.powerNode.requirements = with(Items.graphite, 2, Items.lead, 6);
         Blocks.fuse.requirements = with(Items.lead, 225, Items.graphite, 225, Items.thorium, 100);
-        ((ItemTurret) Blocks.duo).ammo.addAll(
-            Items.titanium,  new BasicBulletType(3.5f, 26){{
-                width = 9f;
-                height = 12f;
-                ammoMultiplier = 3;
-                lifetime = 60f;
-                reloadMultiplier = 0.75f;
-                rangeChange = 20f;
+        // ((ItemTurret) Blocks.duo).ammo.addAll(
+        //     Items.titanium,  new BasicBulletType(3.5f, 26){{
+        //         width = 9f;
+        //         height = 12f;
+        //         ammoMultiplier = 3;
+        //         lifetime = 60f;
+        //         reloadMultiplier = 0.75f;
+        //         rangeChange = 20f;
 
-                hitEffect = despawnEffect = Fx.hitBulletColor;
-                hitColor = backColor = trailColor = Color.valueOf("919fe7");
-                frontColor = Color.valueOf("a4b8fa");
-            }});
+        //         hitEffect = despawnEffect = Fx.hitBulletColor;
+        //         hitColor = backColor = trailColor = Color.valueOf("919fe7");
+        //         frontColor = Color.valueOf("a4b8fa");
+        //     }});
     
         ((Floor) Blocks.slag).supportsOverlay = true;
         ((Floor) Blocks.tar).supportsOverlay = true;
