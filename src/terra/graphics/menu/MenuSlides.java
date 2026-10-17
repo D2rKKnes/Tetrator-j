@@ -132,8 +132,8 @@ public class MenuSlides{
                     float turnChance = 0.08f;
             
                     for(int i = 0; i < lineCount; i++){
-                        int x = Mathf.random(tiles.width);
-                        int y = Mathf.random(tiles.height);
+                        int x2 = Mathf.random(tiles.width);
+                        int y2 = Mathf.random(tiles.height);
             
                         int dx = Mathf.randomBoolean() ? 1 : -1;
                         int dy = 0;
@@ -144,8 +144,8 @@ public class MenuSlides{
                         int steps = Mathf.random(30, 70);
             
                         for(int s = 0; s < steps; s++){
-                            if(x < 0 || y < 0 || x >= tiles.width || y >= tiles.height) return;
-                            setTile(x, y, Blocks.air, Blocks.air, Blocks.metalTiles12);
+                            if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) return;
+                            setTile(x2, y2, Blocks.air, Blocks.air, Blocks.metalTiles12);
             
                             if(Mathf.chance(turnChance)){
                                 if(dx != 0){
@@ -157,10 +157,10 @@ public class MenuSlides{
                                 }
                             }
             
-                            x += dx;
-                            y += dy;
+                            x2 += dx;
+                            y2 += dy;
             
-                            if(x < 2 || y < 2 || x >= tiles.width - 3 || y >= tiles.height - 3) break;
+                            if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) break;
                         }
                     }
 
