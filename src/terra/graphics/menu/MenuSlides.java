@@ -47,10 +47,6 @@ public class MenuSlides{
                         }
                     }
 
-                    if(wall == Blocks.air && (floor == Blocks.basalt || floor == Blocks.stone) && Math.abs(0.5f - noise2d(seed + 1, 3, 0.6, 1/20.0, x, y)) > 0.31f){
-                        overlay = TerraEnvironmentBlocks.oreSilver;
-                    }
-
                     setTile(x, y, wall, overlay, floor);
                 }
             }
