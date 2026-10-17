@@ -2,6 +2,7 @@ package terra.graphics.menu;
 
 import arc.math.*;
 import arc.util.noise.*;
+import mindustry.*;
 import mindustry.content.*;
 import mindustry.world.*;
 import terra.content.*;
