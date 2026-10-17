@@ -15,12 +15,19 @@ import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
 import terra.util.*;
 import terra.special.*;
+import terra.graphics.menu.*;
 import terra.graphics.shaders.*;
 
 public class TerraMod extends Mod{
     public static Links.LinkEntry[] links;
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
+            try{
+                Reflect.set(MenuFragment.class, Vars.ui.menufrag, "renderer", new TerraMenuRenderer());
+            }catch(Exception ex){
+                Log.err("Failed to replace renderer", ex);
+            }
+            
             Planets.verilus.generator = new VerilusAsteroidGenerator();
             Liquids.gallium.uiIcon = Core.atlas.find("liquid-gallium");
             Liquids.gallium.fullIcon = Core.atlas.find("liquid-gallium");
