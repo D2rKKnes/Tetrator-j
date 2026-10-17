@@ -40,7 +40,7 @@ public class AdvancedArmouredConveyor extends Conveyor {
         }
         return super.blends(tile, rotation, otherx, othery, otherrot, otherblock);
     }
-    
+
     public boolean blendsArmored(Tile tile, int rotation, int otherx, int othery, int otherrot, Block otherblock){
         return Point2.equals(tile.x + Geometry.d4(rotation).x, tile.y + Geometry.d4(rotation).y, otherx, othery)
                 || ((!otherblock.rotatedOutput(otherx, othery, tile) && Edges.getFacingEdge(otherblock, otherx, othery, tile) != null &&
@@ -126,7 +126,7 @@ public class AdvancedArmouredConveyor extends Conveyor {
                 }
 
                 if (region.found()) {
-                    Draw.rect(region, x, y, rotdeg());
+                    Draw.rect(region, x, y, tilesize * blendsclx, tilesize * blendscly, rotation * 90);
                 }
             }
         }
