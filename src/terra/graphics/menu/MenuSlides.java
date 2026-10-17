@@ -109,24 +109,18 @@ public class MenuSlides{
                     Block wall = Blocks.air;
 
                     boolean c1, c2, c3, c4;
-                    c1 = x % 14 == 0;
-                    c2 = y % 14 == 0;
-                    if(c1 || c2){
-                        floor = Blocks.metalTiles1;
-
-                        if(c1 && c2){
-                            setTile(x + 2, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
-                            setTile(x + 3, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
-                        }
-                    }
+                    c1 = x % 14 == 2 || x % 14 == 3;
+                    c2 = y % 14 == 2;
                     c3 = x % 14 == 0 || x % 14 == 1 || x % 14 == 13;
                     c4 = y % 14 == 0 || y % 14 == 1 || y % 14 == 13;
                     if(c3 || c4){
                         floor = Blocks.metalTiles1;
-                        if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.3){
+                        if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.4){
                             wall = Blocks.metalWall1;
                         }
                     }
+                    
+                    setTile(x, y, wall, overlay, floor);
 
                     int lineCount = 12;
                     float turnChance = 0.08f;
@@ -164,7 +158,10 @@ public class MenuSlides{
                         }
                     }
 
-                    setTile(x, y, wall, overlay, floor);
+                    if(c1 && c2){
+                        tile.setOverlay(Blocks.cruxRuneOverlay);
+                        tile.overlayData = (byte)Mathf.random(108);
+                    }
                 }
             }
         }
