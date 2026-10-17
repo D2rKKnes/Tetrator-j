@@ -103,6 +103,81 @@ public class MenuSlides{
         }
     },
 
+    metal = new MenuSlide(false){
+        @Override
+        protected void generate(Tiles tiles){
+            for(int x = 0; x < tiles.width; x++){
+                for(int y = 0; y < tiles.height; y++){
+                    Block floor = Blocks.metalTiles9;
+                    Block overlay = Blocks.air;
+                    Block wall = Blocks.air;
+
+                    boolean c1, c2, c3, c4;
+                    c1 = x % 18 == 0;
+                    c2 = y % 18 == 0;
+                    if(c1 || c2){
+                        floor = Blocks.metalTiles1;
+
+                        if(c1 && c2){
+                            setTile(x + 2, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
+                            setTile(x + 3, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
+                        }
+                    }
+                    c3 = x % 18 == 0 || x % 18 == 1 || x % 18 == 17;
+                    c4 = y % 18 == 0 || y % 18 == 1 || y % 18 == 17;
+                    if(c3 || c4){
+                        floor = Blocks.metalTiles1;
+                        if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.3){
+                            wall = Blocks.metalWall1;
+                        }
+                    }
+
+                    setTile(x, y, wall, overlay, floor);
+                }
+            }
+            int lineCount = 8;
+            float turnChance = 0.08f;
+    
+            for(int i = 0; i < lineCount; i++){
+                int x = Mathf.random(tiles.width);
+                int y = Mathf.random(tiles.height);
+    
+                int dx = Mathf.randomBoolean() ? 1 : -1;
+                int dy = 0;
+                if(Mathf.chance(0.5f)){
+                    dy = dx; dx = 0;
+                }
+    
+                int steps = Mathf.random(20, 100);
+    
+                for(int s = 0; s < steps; s++){
+                    placeLine(tiles, x, y);
+                    if(dx != 0) placeLine(tiles, x, y + 1);
+                    else        placeLine(tiles, x + 1, y);
+    
+                    if(Mathf.chance(turnChance)){
+                        if(dx != 0){
+                            dy = Mathf.randomBoolean() ? 1 : -1;
+                            dx = 0;
+                        } else {
+                            dx = Mathf.randomBoolean() ? 1 : -1;
+                            dy = 0;
+                        }
+                    }
+    
+                    x += dx;
+                    y += dy;
+    
+                    if(x < 2 || y < 2 || x >= tiles.width - 3 || y >= tiles.height - 3) break;
+                }
+            }
+        }
+        void placeLine(Tiles tiles, int x, int y){
+            if(x < 0 || y < 0 || x >= tiles.width || y >= tiles.height) return;
+            tiles.setFloor(x, y, Blocks.metalTiles12);
+        }
+    },
+
     warzone = new MenuSlide(true){
         @Override
         protected void generate(Tiles tiles){
