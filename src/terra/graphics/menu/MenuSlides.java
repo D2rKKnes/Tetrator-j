@@ -175,7 +175,7 @@ public class MenuSlides{
     
                 for(int s = 0; s < steps; s++){
                     if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) break;
-                    Tile cur = tiles.get(x, y);
+                    Tile cur = tiles.get(x2, y2);
                     Block wall  = cur != null ? cur.block() : Blocks.air;
                     setTile(x2, y2, wall, Blocks.air, Blocks.metalTiles12);
     
