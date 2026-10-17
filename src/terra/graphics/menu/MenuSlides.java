@@ -17,14 +17,19 @@ public class MenuSlides{
             for(int x = 0; x < tiles.width; x++){
                 for(int y = 0; y < tiles.height; y++){
                     Block floor = Blocks.basalt;
+                    Block overlay = Blocks.air;
                     Block wall = Blocks.air;
 
                     if(Simplex.noise2d(seed + 1, 3, 0.5, 1/20.0, x, y) > 0.4){
                         floor = Blocks.stone;
                     }
 
-                    if(Simplex.noise2d(seed + 1, 3, 0.3, 1/20.0, x, y) > 0.5){
+                    if(Simplex.noise2d(seed + 1, 3, 0.25, 1/20.0, x, y) > 0.5){
                         wall = Blocks.stoneWall;
+                    }
+
+                    if(Simplex.noise2d(seed + 1, 3, 0.125, 1/20.0, x, y) > 0.5){
+                        wall = Blocks.carbonWall;
                     }
 
                     if(tech){
@@ -42,7 +47,11 @@ public class MenuSlides{
                         }
                     }
 
-                    setTile(x, y, wall, Blocks.air, floor);
+                    if(wall == Blocks.air && (floor == Blocks.basalt || floor == Blocks.stone) && Math.abs(0.5f - noise(x, y + (seed + 1) - x*1.5f, 3, 0.6, 66)) > 0.31f){
+                        overlay = TerraEnvironmentBlocks.oreSilver;
+                    }
+
+                    setTile(x, y, wall, overlay, floor);
                 }
             }
         }
@@ -54,6 +63,7 @@ public class MenuSlides{
             for(int x = 0; x < tiles.width; x++){
                 for(int y = 0; y < tiles.height; y++){
                     Block floor = Blocks.metalFloor4;
+                    Block overlay = Blocks.air;
                     Block wall = Blocks.air;
 
                     if(tiles.get(x, y) == null){
@@ -91,7 +101,7 @@ public class MenuSlides{
                         }
                     }
 
-                    setTile(x, y, wall, Blocks.air, floor);
+                    setTile(x, y, wall, overlay, floor);
                 }
             }
         }
