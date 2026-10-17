@@ -18,6 +18,8 @@ import mindustry.world.Edges;
 import mindustry.world.Tile;
 import mindustry.world.blocks.distribution.Conveyor;
 
+import static mindustry.Vars.tilesize;
+
 public class AdvancedArmouredConveyor extends Conveyor {
     public static boolean lastArmoredState = false;
 
