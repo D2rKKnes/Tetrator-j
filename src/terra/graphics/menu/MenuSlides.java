@@ -122,7 +122,19 @@ public class MenuSlides{
                     }
                     
                     setTile(x, y, wall, overlay, floor);
-                    
+
+                    if(c1 && c2){
+                        Tile tile = Vars.world.tiles.get(x, y);
+                        if(tile == null) break;
+                        
+                        tile.setOverlay(Blocks.cruxRuneOverlay);
+                        tile.overlayData = (byte)Mathf.random(109);
+                    }
+                }
+            }
+
+            for(int x = 0; x < tiles.width; x++){
+                for(int y = 0; y < tiles.height; y++){
                     if(x % 14 == 2 && y % 14 == 2){
                         float chanc = Mathf.random(100);
                         if(chanc >= 75){
@@ -147,18 +159,10 @@ public class MenuSlides{
                             }
                         }
                     }
-
-                    if(c1 && c2){
-                        Tile tile = Vars.world.tiles.get(x, y);
-                        if(tile == null) break;
-                        
-                        tile.setOverlay(Blocks.cruxRuneOverlay);
-                        tile.overlayData = (byte)Mathf.random(109);
-                    }
                 }
             }
             
-            int lineCount = 15;
+            int lineCount = 18;
             float turnChance = 0.15f;
     
             for(int i = 0; i < lineCount; i++){
