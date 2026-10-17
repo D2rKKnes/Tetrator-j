@@ -123,49 +123,49 @@ public class MenuSlides{
                     
                     setTile(x, y, wall, overlay, floor);
 
-                    int lineCount = 12;
-                    float turnChance = 0.08f;
-            
-                    for(int i = 0; i < lineCount; i++){
-                        int x2 = Mathf.random(tiles.width);
-                        int y2 = Mathf.random(tiles.height);
-            
-                        int dx = Mathf.randomBoolean() ? 1 : -1;
-                        int dy = 0;
-                        if(Mathf.chance(0.5f)){
-                            dy = dx; dx = 0;
-                        }
-            
-                        int steps = Mathf.random(30, 70);
-            
-                        for(int s = 0; s < steps; s++){
-                            if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) return;
-                            setTile(x2, y2, Blocks.air, Blocks.air, Blocks.metalTiles12);
-            
-                            if(Mathf.chance(turnChance)){
-                                if(dx != 0){
-                                    dy = Mathf.randomBoolean() ? 1 : -1;
-                                    dx = 0;
-                                } else {
-                                    dx = Mathf.randomBoolean() ? 1 : -1;
-                                    dy = 0;
-                                }
-                            }
-            
-                            x2 += dx;
-                            y2 += dy;
-            
-                            if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) break;
-                        }
-                    }
-
                     if(c1 && c2){
                         Tile tile = Vars.world.tiles.get(x, y);
-                        if(tile == null) return;
+                        if(tile == null) break;
                         
                         tile.setOverlay(Blocks.cruxRuneOverlay);
-                        tile.overlayData = (byte)Mathf.random(108);
+                        tile.overlayData = (byte)Mathf.random(109);
                     }
+                }
+            }
+            
+            int lineCount = 12;
+            float turnChance = 0.08f;
+    
+            for(int i = 0; i < lineCount; i++){
+                int x2 = Mathf.random(tiles.width);
+                int y2 = Mathf.random(tiles.height);
+    
+                int dx = Mathf.randomBoolean() ? 1 : -1;
+                int dy = 0;
+                if(Mathf.chance(0.5f)){
+                    dy = dx; dx = 0;
+                }
+    
+                int steps = Mathf.random(30, 70);
+    
+                for(int s = 0; s < steps; s++){
+                    if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) break;
+                    setTile(x2, y2, Blocks.air, Blocks.air, Blocks.metalTiles12);
+    
+                    if(Mathf.chance(turnChance)){
+                        if(dx != 0){
+                            dy = Mathf.randomBoolean() ? 1 : -1;
+                            dx = 0;
+                        } else {
+                            dx = Mathf.randomBoolean() ? 1 : -1;
+                            dy = 0;
+                        }
+                    }
+    
+                    x2 += dx;
+                    y2 += dy;
+    
+                    if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) break;
                 }
             }
         }
