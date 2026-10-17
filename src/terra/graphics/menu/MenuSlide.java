@@ -146,9 +146,10 @@ public class MenuSlide implements Disposable{
     };
 
     public void render(float time, float duration, int viewWidth, int viewHeight){
-        float movement = ((width - viewWidth) * tilesize) / duration;
+        float movementX = ((width - viewWidth) * tilesize) / duration;
+        float movementY = ((height - viewHeight) * tilesize) / duration;
         float scaling = Math.max(Scl.scl(4f), Math.max(Core.graphics.getWidth() / ((viewWidth - 1f) * tilesize), Core.graphics.getHeight() / ((viewHeight - 1f) * tilesize)));
-        camera.position.set(viewWidth * tilesize / 2f + movement * time, viewHeight * tilesize / 2f);
+        camera.position.set(viewWidth * tilesize / 2f + movementX * time, viewHeight * tilesize / 2f + movementY * time);
         camera.resize(Core.graphics.getWidth() / scaling,
         Core.graphics.getHeight() / scaling);
 
