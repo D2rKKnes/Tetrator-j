@@ -109,9 +109,7 @@ public class MenuSlides{
                     Block overlay = Blocks.air;
                     Block wall = Blocks.air;
 
-                    boolean c1, c2, c3, c4;
-                    c1 = x % 14 == 2 || x % 14 == 3 || x % 14 == 4;
-                    c2 = y % 14 == 2;
+                    boolean c3, c4;
                     c3 = x % 14 == 0 || x % 14 == 1 || x % 14 == 13;
                     c4 = y % 14 == 0 || y % 14 == 1 || y % 14 == 13;
                     if(c3 || c4){
@@ -134,7 +132,7 @@ public class MenuSlides{
                                 for(int j = 0; j < 11; j++){
                                     int px = x + i;
                                     int py = y + j;
-                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) break;
+                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) continue;
         
                                     setTile(px, py, Blocks.air, Blocks.air, Blocks.metalTiles7);
                                 }
@@ -144,7 +142,7 @@ public class MenuSlides{
                                 for(int j = 0; j < 11; j++){
                                     int px = x + i;
                                     int py = y + j;
-                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) break;
+                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) continue;
         
                                     setTile(px, py, Blocks.air, Blocks.air, Blocks.metalTiles2);
                                 }
@@ -170,7 +168,7 @@ public class MenuSlides{
                 int steps = Mathf.random(30, 70);
     
                 for(int s = 0; s < steps; s++){
-                    if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) break;
+                    if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) continue;
                     Tile cur = tiles.get(x2, y2);
                     Block wall  = cur != null ? cur.block() : Blocks.air;
                     setTile(x2, y2, wall, Blocks.air, Blocks.metalTiles12);
@@ -188,15 +186,18 @@ public class MenuSlides{
                     x2 += dx;
                     y2 += dy;
     
-                    if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) break;
+                    if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) continue;
                 }
             }
 
+            boolean c1, c2;
+            c1 = x % 14 == 2 || x % 14 == 3 || x % 14 == 4;
+            c2 = y % 14 == 2;
             for(int x = 0; x < tiles.width; x++){
                 for(int y = 0; y < tiles.height; y++){
                     if(c1 && c2){
                         Tile tile = Vars.world.tiles.get(x, y);
-                        if(tile == null) break;
+                        if(tile == null) continue;
                         
                         tile.setOverlay(Blocks.cruxRuneOverlay);
                         tile.overlayData = (byte)Mathf.random(109);
