@@ -152,8 +152,8 @@ public class MenuSlides{
                 }
             }
             
-            int lineCount = 18;
-            float turnChance = 0.15f;
+            int lineCount = 20;
+            float turnChance = 0.12f;
     
             for(int i = 0; i < lineCount; i++){
                 int x2 = Mathf.random(tiles.width);
@@ -198,8 +198,12 @@ public class MenuSlides{
                     if(c1 && c2){
                         Tile tile = Vars.world.tiles.get(x, y);
                         if(tile == null) continue;
-                        
-                        tile.setOverlay(Blocks.cruxRuneOverlay);
+
+                        if(tile.floor() == Blocks.metalTiles12){
+                            tile.setOverlay(Blocks.runeOverlay);
+                        } else {
+                            tile.setOverlay(Blocks.cruxRuneOverlay);
+                        }
                         tile.overlayData = (byte)Mathf.random(109);
                     }
                 }
