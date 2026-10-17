@@ -23,7 +23,6 @@ public class TerraMenuRenderer extends MenuRenderer{
 
     public TerraMenuRenderer(){
         width += (int)Math.ceil((slideDuration * scrollSpeed) / 60) + 5;
-        height += (int)Math.ceil((slideDuration * (scrollSpeed / 4)) / 60) + 5;
         terraGenerate();
     }
 
