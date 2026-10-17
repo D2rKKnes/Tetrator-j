@@ -159,6 +159,9 @@ public class MenuSlides{
                     }
 
                     if(c1 && c2){
+                        Tile tile = world.tiles.get(x, y);
+                        if(tile == null) return;
+                        
                         tile.setOverlay(Blocks.cruxRuneOverlay);
                         tile.overlayData = (byte)Mathf.random(108);
                     }
