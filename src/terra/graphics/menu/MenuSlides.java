@@ -190,11 +190,11 @@ public class MenuSlides{
                 }
             }
 
-            boolean c1, c2;
-            c1 = x % 14 == 2 || x % 14 == 3 || x % 14 == 4;
-            c2 = y % 14 == 2;
             for(int x = 0; x < tiles.width; x++){
                 for(int y = 0; y < tiles.height; y++){
+                    boolean c1, c2;
+                    c1 = x % 14 == 2 || x % 14 == 3 || x % 14 == 4;
+                    c2 = y % 14 == 2;
                     if(c1 && c2){
                         Tile tile = Vars.world.tiles.get(x, y);
                         if(tile == null) continue;
