@@ -113,8 +113,8 @@ public class MenuSlides{
                     Block wall = Blocks.air;
 
                     boolean c1, c2, c3, c4;
-                    c1 = x % 18 == 0;
-                    c2 = y % 18 == 0;
+                    c1 = x % 15 == 0;
+                    c2 = y % 15 == 0;
                     if(c1 || c2){
                         floor = Blocks.metalTiles1;
 
@@ -123,8 +123,8 @@ public class MenuSlides{
                             setTile(x + 3, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
                         }
                     }
-                    c3 = x % 18 == 0 || x % 18 == 1 || x % 18 == 17;
-                    c4 = y % 18 == 0 || y % 18 == 1 || y % 18 == 17;
+                    c3 = x % 15 == 0 || x % 15 == 1 || x % 15 == 14;
+                    c4 = y % 15 == 0 || y % 15 == 1 || y % 15 == 14;
                     if(c3 || c4){
                         floor = Blocks.metalTiles1;
                         if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.3){
