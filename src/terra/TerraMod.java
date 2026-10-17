@@ -1,12 +1,18 @@
 package terra;
 
 import arc.*;
+import arc.struct.*;
 import arc.util.*;
 import arc.Events;
+import mindustry.*;
+import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 import mindustry.ui.Links;
+import mindustry.ui.dialogs.*;
+import mindustry.ui.dialogs.JoinDialog.*;
+import mindustry.ui.fragments.*;
 import mindustry.content.*;
 import terra.content.*;
 import terra.world.blocks.RouterSorter;
