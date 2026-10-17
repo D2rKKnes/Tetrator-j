@@ -13,7 +13,7 @@ public class TerraMenuRenderer extends MenuRenderer{
     public float slideDuration = 60 * 40, transitionTime = 120, scrollSpeed = 1;
     private float time;
     private int width = !mobile ? 100 : 60, height = !mobile ? 50 : 40;
-    private final int viewWidth = !mobile ? 100 : 60;
+    private final int viewWidth = !mobile ? 100 : 60, viewHeight = !mobile ? 50 : 40;;
     private int index = 0;
 
     private final MenuSlide[] menus = {
@@ -23,7 +23,7 @@ public class TerraMenuRenderer extends MenuRenderer{
 
     public TerraMenuRenderer(){
         width += (int)Math.ceil((slideDuration * scrollSpeed) / 60) + 5;
-        height += (int)Math.ceil((slideDuration * (scrollSpeed / 4)) / 60) + 5;
+        height += (int)Math.ceil((slideDuration * (scrollSpeed / 5)) / 60) + 5;
         terraGenerate();
     }
 
@@ -52,7 +52,7 @@ public class TerraMenuRenderer extends MenuRenderer{
         float out = Mathf.curve(time, slideDuration - transitionTime / 2, slideDuration);
         float dark = in - out;
 
-        menus[index].render(time, slideDuration, viewWidth, height);
+        menus[index].render(time, slideDuration, viewWidth, viewHeight);
 
         Draw.color(0, 0, 0, 1 - dark);
         Fill.crect(0, 0, Core.graphics.getWidth(), Core.graphics.getHeight());
