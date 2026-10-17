@@ -122,14 +122,6 @@ public class MenuSlides{
                     }
                     
                     setTile(x, y, wall, overlay, floor);
-
-                    if(c1 && c2){
-                        Tile tile = Vars.world.tiles.get(x, y);
-                        if(tile == null) break;
-                        
-                        tile.setOverlay(Blocks.cruxRuneOverlay);
-                        tile.overlayData = (byte)Mathf.random(109);
-                    }
                 }
             }
 
@@ -197,6 +189,18 @@ public class MenuSlides{
                     y2 += dy;
     
                     if(x2 < 2 || y2 < 2 || x2 >= tiles.width - 3 || y2 >= tiles.height - 3) break;
+                }
+            }
+
+            for(int x = 0; x < tiles.width; x++){
+                for(int y = 0; y < tiles.height; y++){
+                    if(c1 && c2){
+                        Tile tile = Vars.world.tiles.get(x, y);
+                        if(tile == null) break;
+                        
+                        tile.setOverlay(Blocks.cruxRuneOverlay);
+                        tile.overlayData = (byte)Mathf.random(109);
+                    }
                 }
             }
         }
