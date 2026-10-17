@@ -18,7 +18,7 @@ public class MenuSlide implements Disposable{
     protected Mat mat = new Mat();
     protected Camera camera = new Camera();
 
-    protected int cacheFloor, cacheWall;
+    protected int cacheFloor, cacheWall, cacheOverlay;
     protected CacheBatch batch;
     protected FrameBuffer shadows;
     protected FrameBuffer dark;
