@@ -50,7 +50,6 @@ public class AdvancedArmouredConveyor extends Conveyor {
 
     public class AdvancedArmouredConveyorBuild extends ConveyorBuild {
         public boolean armored = lastArmoredState;
-        public boolean fx = false;
 
         @Override
         public void placed() {
@@ -74,7 +73,7 @@ public class AdvancedArmouredConveyor extends Conveyor {
                 armored = !armored;
                 lastArmoredState = armored;
                 Sounds.click.at(this);
-                fx = true;
+                Fx.placeBlock.at(this, 1.5f);
                 onProximityUpdate();
                 wakeSurrounding();
             }).size(40f).checked(b -> armored);
@@ -129,12 +128,6 @@ public class AdvancedArmouredConveyor extends Conveyor {
                 if (region.found()) {
                     Draw.rect(region, x, y, rotdeg());
                 }
-            }
-
-            if (fx) {
-                Draw.color();
-                Fx.placeBlock.at(this, 1.5f);
-                fx = false;
             }
         }
 
