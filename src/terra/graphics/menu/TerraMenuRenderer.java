@@ -18,7 +18,7 @@ public class TerraMenuRenderer extends MenuRenderer{
 
     private final MenuSlide[] menus = {
         MenuSlides.stone,
-        MenuSlides.grass
+        MenuSlides.metal
     };
 
     public TerraMenuRenderer(){
