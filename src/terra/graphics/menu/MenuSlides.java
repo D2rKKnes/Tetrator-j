@@ -114,7 +114,7 @@ public class MenuSlides{
                     c4 = y % 14 == 0 || y % 14 == 1 || y % 14 == 13;
                     if(c3 || c4){
                         floor = Blocks.metalTiles1;
-                        if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.4){
+                        if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.33){
                             wall = Blocks.metalWall1;
                         }
                     }
@@ -137,7 +137,7 @@ public class MenuSlides{
                                     setTile(px, py, Blocks.air, Blocks.air, Blocks.metalTiles7);
                                 }
                             }
-                        } else if(chanc >= 60){
+                        } else if(chanc >= 55){
                             for(int i = 0; i < 11; i++){
                                 for(int j = 0; j < 11; j++){
                                     int px = x + i;
@@ -153,7 +153,7 @@ public class MenuSlides{
             }
             
             int lineCount = 20;
-            float turnChance = 0.12f;
+            float turnChance = 0.13f;
     
             for(int i = 0; i < lineCount; i++){
                 int x2 = Mathf.random(tiles.width);
@@ -165,13 +165,15 @@ public class MenuSlides{
                     dy = dx; dx = 0;
                 }
     
-                int steps = Mathf.random(30, 70);
+                int steps = Mathf.random(40, 100);
     
                 for(int s = 0; s < steps; s++){
                     if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) continue;
-                    Tile cur = tiles.get(x2, y2);
-                    Block wall  = cur != null ? cur.block() : Blocks.air;
-                    setTile(x2, y2, wall, Blocks.air, Blocks.metalTiles12);
+                    if(x2 % 14 != 2 && x2 % 14 != 3 && x2 % 14 != 4 && y2 % 14 != 2){
+                        Tile cur = tiles.get(x2, y2);
+                        Block wall  = cur != null ? cur.block() : Blocks.air;
+                        setTile(x2, y2, wall, Blocks.air, Blocks.metalTiles12);
+                    }
     
                     if(Mathf.chance(turnChance)){
                         if(dx != 0){
@@ -199,11 +201,7 @@ public class MenuSlides{
                         Tile tile = Vars.world.tiles.get(x, y);
                         if(tile == null) continue;
 
-                        if(tile.floor() == Blocks.metalTiles12){
-                            tile.setOverlay(Blocks.runeOverlay);
-                        } else {
-                            tile.setOverlay(Blocks.cruxRuneOverlay);
-                        }
+                        tile.setOverlay(Blocks.cruxRuneOverlay);
                         tile.overlayData = (byte)Mathf.random(109);
                     }
                 }
