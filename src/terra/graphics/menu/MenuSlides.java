@@ -174,7 +174,7 @@ public class MenuSlides{
         }
         void placeLine(Tiles tiles, int x, int y){
             if(x < 0 || y < 0 || x >= tiles.width || y >= tiles.height) return;
-            tiles.setFloor(x, y, Blocks.metalTiles12);
+            setTile(x, y, Blocks.air, Blocks.air, Blocks.metalTiles12);
         }
     },
 
