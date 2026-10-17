@@ -7,7 +7,7 @@
 To run this mod, you need to install Black Holes Library mod.
 <br>![Black Holes Library](https://github.com/MEEPofFaith/black-holes-library/blob/master/assets/icon.png)
 <br>![Get Black Holes Library here](https://github.com/MEEPofFaith/black-holes-library)
-## Downloading unreleased beta versions
+# Downloading unreleased beta versions
 To play and test unreleased beta versions, you need to:
 <br>1 - Open Actions in the top bar (next to Issues and Code).
 <br>![Help1](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help1.png)
@@ -19,7 +19,7 @@ To play and test unreleased beta versions, you need to:
 <br>![Help4](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help4.png)
 ![Help5](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help5.png)
 <br>5 - If the dependencies did not install automatically, install them manually.
-## Content map
+## Update map
 > Verilus full campaign & Other stuff
 <br> First release
 <br> 1RXS system & Copis campaign
