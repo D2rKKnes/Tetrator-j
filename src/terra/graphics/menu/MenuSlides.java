@@ -28,10 +28,6 @@ public class MenuSlides{
                         wall = Blocks.stoneWall;
                     }
 
-                    if(Simplex.noise2d(seed + 1, 3, 0.125, 1/20.0, x, y) > 0.5){
-                        wall = Blocks.carbonWall;
-                    }
-
                     if(tech){
                         int mx = x % 10, my = y % 10;
                         int sclx = x / 10, scly = y / 10;
@@ -113,8 +109,8 @@ public class MenuSlides{
                     Block wall = Blocks.air;
 
                     boolean c1, c2, c3, c4;
-                    c1 = x % 15 == 0;
-                    c2 = y % 15 == 0;
+                    c1 = x % 14 == 0;
+                    c2 = y % 14 == 0;
                     if(c1 || c2){
                         floor = Blocks.metalTiles1;
 
@@ -123,8 +119,8 @@ public class MenuSlides{
                             setTile(x + 3, y + 2, Blocks.air, Blocks.cruxRuneOverlay, Blocks.air);
                         }
                     }
-                    c3 = x % 15 == 0 || x % 15 == 1 || x % 15 == 14;
-                    c4 = y % 15 == 0 || y % 15 == 1 || y % 15 == 14;
+                    c3 = x % 14 == 0 || x % 14 == 1 || x % 14 == 13;
+                    c4 = y % 14 == 0 || y % 14 == 1 || y % 14 == 13;
                     if(c3 || c4){
                         floor = Blocks.metalTiles1;
                         if(Simplex.noise2d(seed + 3, 2, 0.6, 1/22.0, x, y) > 0.3){
@@ -132,49 +128,45 @@ public class MenuSlides{
                         }
                     }
 
+                    int lineCount = 12;
+                    float turnChance = 0.08f;
+            
+                    for(int i = 0; i < lineCount; i++){
+                        int x = Mathf.random(tiles.width);
+                        int y = Mathf.random(tiles.height);
+            
+                        int dx = Mathf.randomBoolean() ? 1 : -1;
+                        int dy = 0;
+                        if(Mathf.chance(0.5f)){
+                            dy = dx; dx = 0;
+                        }
+            
+                        int steps = Mathf.random(30, 70);
+            
+                        for(int s = 0; s < steps; s++){
+                            if(x < 0 || y < 0 || x >= tiles.width || y >= tiles.height) return;
+                            setTile(x, y, Blocks.air, Blocks.air, Blocks.metalTiles12);
+            
+                            if(Mathf.chance(turnChance)){
+                                if(dx != 0){
+                                    dy = Mathf.randomBoolean() ? 1 : -1;
+                                    dx = 0;
+                                } else {
+                                    dx = Mathf.randomBoolean() ? 1 : -1;
+                                    dy = 0;
+                                }
+                            }
+            
+                            x += dx;
+                            y += dy;
+            
+                            if(x < 2 || y < 2 || x >= tiles.width - 3 || y >= tiles.height - 3) break;
+                        }
+                    }
+
                     setTile(x, y, wall, overlay, floor);
                 }
             }
-            int lineCount = 8;
-            float turnChance = 0.08f;
-    
-            for(int i = 0; i < lineCount; i++){
-                int x = Mathf.random(tiles.width);
-                int y = Mathf.random(tiles.height);
-    
-                int dx = Mathf.randomBoolean() ? 1 : -1;
-                int dy = 0;
-                if(Mathf.chance(0.5f)){
-                    dy = dx; dx = 0;
-                }
-    
-                int steps = Mathf.random(20, 100);
-    
-                for(int s = 0; s < steps; s++){
-                    placeLine(tiles, x, y);
-                    if(dx != 0) placeLine(tiles, x, y + 1);
-                    else        placeLine(tiles, x + 1, y);
-    
-                    if(Mathf.chance(turnChance)){
-                        if(dx != 0){
-                            dy = Mathf.randomBoolean() ? 1 : -1;
-                            dx = 0;
-                        } else {
-                            dx = Mathf.randomBoolean() ? 1 : -1;
-                            dy = 0;
-                        }
-                    }
-    
-                    x += dx;
-                    y += dy;
-    
-                    if(x < 2 || y < 2 || x >= tiles.width - 3 || y >= tiles.height - 3) break;
-                }
-            }
-        }
-        void placeLine(Tiles tiles, int x, int y){
-            if(x < 0 || y < 0 || x >= tiles.width || y >= tiles.height) return;
-            setTile(x, y, Blocks.air, Blocks.air, Blocks.metalTiles12);
         }
     },
 
