@@ -160,7 +160,7 @@ public class MenuSlides{
                     }
 
                     if(c1 && c2){
-                        Tile tile = world.tiles.get(x, y);
+                        Tile tile = Vars.world.tiles.get(x, y);
                         if(tile == null) return;
                         
                         tile.setOverlay(Blocks.cruxRuneOverlay);
