@@ -110,7 +110,7 @@ public class MenuSlides{
                     Block wall = Blocks.air;
 
                     boolean c1, c2, c3, c4;
-                    c1 = x % 14 == 2 || x % 14 == 3;
+                    c1 = x % 14 == 2 || x % 14 == 3 || x % 14 == 4;
                     c2 = y % 14 == 2;
                     c3 = x % 14 == 0 || x % 14 == 1 || x % 14 == 13;
                     c4 = y % 14 == 0 || y % 14 == 1 || y % 14 == 13;
@@ -122,6 +122,31 @@ public class MenuSlides{
                     }
                     
                     setTile(x, y, wall, overlay, floor);
+                    
+                    if(x % 14 == 2 && y % 14 == 2){
+                        float chanc = Mathf.random(100);
+                        if(chanc >= 75){
+                            for(int i = 0; i < 11; i++){
+                                for(int j = 0; j < 11; j++){
+                                    int px = x + i;
+                                    int py = y + j;
+                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) break;
+        
+                                    setTile(px, py, Blocks.air, Blocks.air, Blocks.metalTiles7);
+                                }
+                            }
+                        } else if(chanc >= 60){
+                            for(int i = 0; i < 11; i++){
+                                for(int j = 0; j < 11; j++){
+                                    int px = x + i;
+                                    int py = y + j;
+                                    if(px < 0 || py < 0 || px >= tiles.width || py >= tiles.height) break;
+        
+                                    setTile(px, py, Blocks.air, Blocks.air, Blocks.metalTiles2);
+                                }
+                            }
+                        }
+                    }
 
                     if(c1 && c2){
                         Tile tile = Vars.world.tiles.get(x, y);
@@ -133,8 +158,8 @@ public class MenuSlides{
                 }
             }
             
-            int lineCount = 12;
-            float turnChance = 0.08f;
+            int lineCount = 15;
+            float turnChance = 0.15f;
     
             for(int i = 0; i < lineCount; i++){
                 int x2 = Mathf.random(tiles.width);
@@ -150,7 +175,9 @@ public class MenuSlides{
     
                 for(int s = 0; s < steps; s++){
                     if(x2 < 0 || y2 < 0 || x2 >= tiles.width || y2 >= tiles.height) break;
-                    setTile(x2, y2, Blocks.air, Blocks.air, Blocks.metalTiles12);
+                    Tile cur = tiles.get(x, y);
+                    Block wall  = cur != null ? cur.block() : Blocks.air;
+                    setTile(x2, y2, wall, Blocks.air, Blocks.metalTiles12);
     
                     if(Mathf.chance(turnChance)){
                         if(dx != 0){
