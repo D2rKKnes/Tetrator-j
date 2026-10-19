@@ -129,7 +129,7 @@ public class TerraVanillaOverride {
                 toColor = Pal.surgeAmmoFront;
                 shootEffect = smokeEffect = TerraFx.fuseShoot;
                 spawnBulletRandomSpread = 60f;
-                spawnBullets = new Seq.with(
+                spawnBullets.add(
                     new MultiBulletType(4, new LightningBulletType(){{
                         shootEffect = smokeEffect = Fx.none;
                         damage = 8;
