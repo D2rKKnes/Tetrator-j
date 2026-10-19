@@ -25,6 +25,7 @@ import mindustry.world.blocks.campaign.*;
 import mindustry.world.meta.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.gen.*;
