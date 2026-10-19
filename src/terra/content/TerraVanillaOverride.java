@@ -126,7 +126,7 @@ public class TerraVanillaOverride {
                 reloadMultiplier = 0.7f;
                 width = 25f;
                 status = StatusEffects.shocked;
-                toColor = Pal.surgeAmmoFront;
+                toColor = Color.valueOf("f3e979");
                 shootEffect = smokeEffect = TerraFx.fuseShoot;
                 spawnBulletRandomSpread = 60f;
                 spawnBullets.add(
@@ -135,12 +135,16 @@ public class TerraVanillaOverride {
                         damage = 8;
                         lightningLength = 8;
                         lightningLengthRand = 5;
-                        lightningColor = Pal.surgeAmmoFront;
+                        lightningColor = Color.valueOf("f3e979");
                         collidesAir = true;
                         buildingDamageMultiplier = 0.4f;
                         shieldDamageMultiplier = 0.3f;
                     }})
                 );
+                //stats
+                lightning = 12;
+                lightningDamage = 8;
+                lightningLength = 0;
             }});
         ((ItemTurret) Blocks.breach).ammoTypes.put(
             Items.phaseFabric, new BasicBulletType(10f, 165){{
