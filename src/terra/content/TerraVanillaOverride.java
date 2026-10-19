@@ -127,7 +127,7 @@ public class TerraVanillaOverride {
                 toColor = Pal.surgeAmmoFront;
                 shootEffect = smokeEffect = Fx.surgeAmmoBack;
                 spawnBulletRandomSpread = 60f;
-                spawnBullets = [
+                spawnBullets = new BulletType[]{
                     new MultiBulletType(4, new LightningBulletType(){{
                         shootEffect = smokeEffect = Fx.none;
                         damage = 8;
@@ -137,8 +137,8 @@ public class TerraVanillaOverride {
                         collidesAir = true;
                         buildingDamageMultiplier = 0.4f;
                         shieldDamageMultiplier = 0.3f;
-                    }});
-                ];
+                    }})
+                };
             }});
         ((ItemTurret) Blocks.breach).ammoTypes.put(
             Items.phaseFabric, new BasicBulletType(10f, 165){{
@@ -170,31 +170,29 @@ public class TerraVanillaOverride {
                 fragAngle = 180f;
                 fragVelocityMin = 1;
                 fragOffsetMin = fragOffsetMax = 0;
-                fragBullet = {
-                    new BasicBulletType(10f, 130){{
-                        width = 14f;
-                        height = 20f;
-                        hitSize = 7f;
-                        lifetime = 28f;
-                        rangeChange = 72f;
-                        shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
-                        smokeEffect = Fx.shootBigSmoke;
-                        hitEffect = despawnEffect = Fx.hitBulletColor;
-                        ammoMultiplier = 1;
-                        reloadMultiplier = 1f;
-                        pierce = true;
-                        pierceBuilding = true;
-                        buildingDamageMultiplier = 0.3f;
-                        hitColor = backColor = trailColor = Color.valueOf("ffd59e");
-                        frontColor = Color.white;
-                        
-                        trailEffect = Fx.disperseTrail;
-                        trailInterval = 2;
-                        trailRotation = true;
-                        trailWidth = 2.2f;
-                        trailLength = 11;
-                    }}
-                };
+                fragBullet = new BasicBulletType(10f, 130){{
+                    width = 14f;
+                    height = 20f;
+                    hitSize = 7f;
+                    lifetime = 28f;
+                    rangeChange = 72f;
+                    shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
+                    smokeEffect = Fx.shootBigSmoke;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    ammoMultiplier = 1;
+                    reloadMultiplier = 1f;
+                    pierce = true;
+                    pierceBuilding = true;
+                    buildingDamageMultiplier = 0.3f;
+                    hitColor = backColor = trailColor = Color.valueOf("ffd59e");
+                    frontColor = Color.white;
+                    
+                    trailEffect = Fx.disperseTrail;
+                    trailInterval = 2;
+                    trailRotation = true;
+                    trailWidth = 2.2f;
+                    trailLength = 11;
+                }};
             }});
 
         ((Floor) Blocks.slag).supportsOverlay = true;
