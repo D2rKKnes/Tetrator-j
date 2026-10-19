@@ -36,6 +36,7 @@ import arc.graphics.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
+import terra.content.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -126,7 +127,7 @@ public class TerraVanillaOverride {
                 width = 25f;
                 status = StatusEffects.shocked;
                 toColor = Pal.surgeAmmoFront;
-                shootEffect = smokeEffect = Fx.surgeAmmoBack;
+                shootEffect = smokeEffect = TerraFx.fuseShoot;
                 spawnBulletRandomSpread = 60f;
                 spawnBullets = new Seq.with(
                     new MultiBulletType(4, new LightningBulletType(){{
