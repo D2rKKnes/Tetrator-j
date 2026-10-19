@@ -58,15 +58,15 @@ public class SappingFieldAbility extends Ability{
         timer += Time.delta;
 
         if(timer >= reload && (!onShoot || unit.isShooting)){
-            boolean anyEnemy = false;
+            boolean[] anyEnemy = {false};
             Units.nearbyEnemies(unit.team, unit.x, unit.y, range, other -> {
-                anyEnemy = true;
+                anyEnemy[0] = true;
                 other.apply(effect, duration);
                 applyEffect.at(other, parentizeEffects);
             });
 
             timer = 0f;
-            if(anyEnemy){
+            if(anyEnemy[0]){
                 float x = unit.x + Angles.trnsx(unit.rotation, effectY, effectX), y = unit.y + Angles.trnsy(unit.rotation, effectY, effectX);
                 activeEffect.at(x, y, effectSizeParam ? range : unit.rotation, color, parentizeEffects ? unit : null);
             }
