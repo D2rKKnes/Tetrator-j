@@ -42,16 +42,19 @@ import static mindustry.Vars.*;
 
 public class TerraUnitTypes {
     public static UnitType
-    //flying special units
+    //purple flying serpulo
     wick, wickC, dynamite, incident, catastrophe, sapEnergyMissile, inevitability, inevitabilityCore, eternityMissile,
+    //purple water serpulo
+    //blue flying serpulo
+    charge, 
+    //blue groung serpulo
+    //blue water serpulo
     //drones & core units
     healDrone, basicAssemblyDrone, ksi, tau, tiamas,
     //titans or t6\t7 (red, green, purple)
     orb, crane, desis,
     reaper, eternity,
     fin, aplysia,
-    //purple water serpulo
-    
     //green erekir
     flow, greenMissile, threshold, turn, movement, consequence,
     //doom & despair
@@ -1256,6 +1259,50 @@ public class TerraUnitTypes {
                         status = TerraStatusEffects.singularEvaporation;
                         statusDuration = 240f;
                     }};
+                }};
+            }});
+        }};
+
+        //BLUE
+        Color blueTerraFront = Color.valueOf("8aa3f4");
+        Color blueTerraBack = Color.valueOf("6974c4");
+        charge = new UnitType("charge"){{
+            flying = true;
+            speed = 2.5f;
+            drag = 0.04f;
+            accel = 0.08f;
+            hitSize = 7f;
+            health = 160;
+            armor = 2;
+            engineSize = engineOffset = 0f;
+            itemCapacity = 15;
+            constructor = UnitEntity::create;
+            healColor = blueTerraFront;
+            outlineColor = Pal.darkerMetal;
+            setEnginesMirror(
+                new UnitEngine(22f / 4f, -12f / 4f, 3.5f, 0f)
+            );
+            weapons.add(new Weapon(){{
+                targetUnderBlocks = false;
+                reload = 24f;
+                ejectEffect = Fx.none;
+                shootSoundVolume = 0.4f;
+                x = y = shootY = 0f;
+                mirror = false;
+                rotate = true;
+                shootSound = Sounds.shootArc;
+                bullet = new ChainLightningBulletType() {{
+                    lightningColor = hitColor = blueTerraFront;
+                    range = 90;
+                    width = 6;
+                    shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
+                    hitEffect = Fx.hitBulletColor;
+                    arc = 0.3f;
+                    targetRange = 30;
+                    damage = 26;
+                    jumpDamageFactor = 0.75f;
+                    chainLightning = 2;
+                    segmentLength = 3;
                 }};
             }});
         }};
