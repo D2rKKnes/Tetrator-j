@@ -9,12 +9,15 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.pooling.*;
 import arc.util.pooling.Pool.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
 import mindustry.core.World;
 import mindustry.entities.*;
 import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.world.*;
+import mindustry.content.*;
 
 import java.io.*;
 import java.util.zip.*;
