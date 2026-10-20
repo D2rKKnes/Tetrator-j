@@ -1268,9 +1268,9 @@ public class TerraUnitTypes {
         Color blueTerraBack = Color.valueOf("6974c4");
         charge = new UnitType("charge"){{
             flying = true;
-            speed = 2.5f;
-            drag = 0.04f;
-            accel = 0.08f;
+            speed = 2.3f;
+            drag = 0.05f;
+            accel = 0.06f;
             hitSize = 7f;
             health = 180;
             armor = 2;
@@ -1284,7 +1284,7 @@ public class TerraUnitTypes {
             );
             weapons.add(new Weapon(){{
                 targetUnderBlocks = false;
-                reload = 24f;
+                reload = 30f;
                 ejectEffect = Fx.none;
                 shootSoundVolume = 0.4f;
                 x = y = shootY = 0f;
@@ -1299,9 +1299,10 @@ public class TerraUnitTypes {
                     hitEffect = Fx.hitBulletColor;
                     arc = 0.3f;
                     targetRange = 30;
-                    damage = 26;
-                    statusEffect = TerraStatusEffects.zapped;
-                    statusEffectDuration = 3f * 60f;
+                    damage = 22;
+                    status = TerraStatusEffects.zapped;
+                    statusDuration = 3f * 60f;
+                    shieldDamageMultiplier = 2f;
                     jumpDamageFactor = 0.75f;
                     chainLightning = 2;
                     segmentLength = 3;
