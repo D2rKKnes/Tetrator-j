@@ -55,7 +55,7 @@ public class TerraUnitTypes {
     orb, crane, desis,
     reaper, eternity,
     fin, aplysia,
-    //green erekir
+    //water erekir
     flow, greenMissile, threshold, turn, movement, consequence,
     //doom & despair
     calamity, 
@@ -1272,7 +1272,7 @@ public class TerraUnitTypes {
             drag = 0.04f;
             accel = 0.08f;
             hitSize = 7f;
-            health = 160;
+            health = 180;
             armor = 2;
             engineSize = engineOffset = 0f;
             itemCapacity = 15;
@@ -1280,7 +1280,7 @@ public class TerraUnitTypes {
             healColor = blueTerraFront;
             outlineColor = Pal.darkerMetal;
             setEnginesMirror(
-                new UnitEngine(22f / 4f, -12f / 4f, 3.5f, 0f)
+                new UnitEngine(22f / 4f, -12f / 4f, 3f, -90f)
             );
             weapons.add(new Weapon(){{
                 targetUnderBlocks = false;
@@ -1300,6 +1300,8 @@ public class TerraUnitTypes {
                     arc = 0.3f;
                     targetRange = 30;
                     damage = 26;
+                    statusEffect = TerraStatusEffects.zapped;
+                    statusEffectDuration = 3f * 60f;
                     jumpDamageFactor = 0.75f;
                     chainLightning = 2;
                     segmentLength = 3;
