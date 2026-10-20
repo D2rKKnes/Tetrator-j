@@ -632,4 +632,20 @@ public final class Utils{
             return null;
         }
     }
+
+    //From Betamindy
+    public static void lightningCircle(float x, float y, float r, int n, Color color){
+        if(n < 3) return;
+        float start = Mathf.random(360f);
+        float end = start + Mathf.range(70f) + 180f;
+        Seq<Vec2> lines = new Seq<>();
+        float mid = n / 2f - 0.5f;
+
+        lines.add(new Vec2().trns(start, r).add(x, y));
+        for(int i = 1; i < n - 1; i++){
+            lines.add(new Vec2().trns(((i <= (int)mid) ? start : end) + Mathf.range(30f), r * (Math.abs((float)i - mid) / mid + Mathf.range(0.4f / mid))).add(x, y));
+        }
+        lines.add(new Vec2().trns(end, r).add(x, y));
+        Fx.lightning.at(x, y, start, color, lines);
+    }
 }
