@@ -22,14 +22,26 @@ public class AdvancedStatusEffect extends StatusEffect{
     public static final Stat shieldDamag = new Stat("shielddamage", StatCat.function);
     public static final Stat shieldHeal = new Stat("shieldheal", StatCat.function);
     public static final Stat shieldCap = new Stat("shieldhealcap", StatCat.function);
+    public static final Stat movementDamag = new Stat("movementdamage", StatCat.function);
+    public static final Stat movementHeal = new Stat("movementheal", StatCat.function);
     public static final Stat disarmStat = new Stat("terra-disarm", StatCat.general);
     public static final Stat permanentStat = new Stat("terra-permanent", StatCat.general);
     public static final Stat instantDeath = new Stat("instantdeath", StatCat.general);
+    //Damage in percent from unit max health per second
     public float percentDamage;
+    //Damage dealt when status removed
     public float removeDamage;
+    //Shield damage per tick
     public float shieldDamage;
+    //Damage dealt when moving
+    public float movementDamage;
+    //Incresing or decreasing effectChance when moving
+    public float effectChanceMoveIncrease;
+    //How much can shield regenerate
     public float shieldHealCap = 500f;
+    //Effect when status removed
     public Effect removeEffect = Fx.none;
+    //When true, any unit will die instantly
     public boolean instakill = false;
 
     public AdvancedStatusEffect(String name){
@@ -50,6 +62,8 @@ public class AdvancedStatusEffect extends StatusEffect{
             stats.add(shieldHeal, -shieldDamage * 60f, StatUnit.perSecond);
             stats.add(shieldCap, shieldHealCap);
         }
+        if(movementDamage > 0) stats.add(movementDamag, movementDamage * 60f, StatUnit.perSecond);
+        if(movementDamage < 0) stats.add(movementHeal, -movementDamage * 60f, StatUnit.perSecond);
         if(disarm) stats.add(disarmStat, disarm);
         if(permanent) stats.add(permanentStat, permanent);
         if(instakill) stats.add(instantDeath, instakill);
@@ -57,7 +71,12 @@ public class AdvancedStatusEffect extends StatusEffect{
 
     @Override
     public void update(Unit unit, StatusEntry entry){
+        float oldChance = effectChance;
+        if(effectChanceMoveIncrease != 0f && unit.vel.len() > 0.1f){
+            effectChance += effectChanceMoveIncrease;
+        }
         super.update(unit, entry);
+        effectChance = oldChance;
         if(percentDamage > 0){
             unit.damageContinuousPierce(unit.maxHealth * ((percentDamage / 100f) / 60));
         }else if(percentDamage < 0){ //heal unit
@@ -67,6 +86,11 @@ public class AdvancedStatusEffect extends StatusEffect{
             unit.shield = Math.max(0, unit.shield - shieldDamage);
         }else if(shieldDamage < 0 && unit.shield < shieldHealCap){
             unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
+        }
+        if(movementDamage > 0 && unit.vel.len() > 0.1f){
+            unit.damageContinuousPierce(movementDamage);
+        }else if(movementDamage < 0 && unit.vel.len() > 0.1f){ //heal unit
+            unit.heal(-1 * movementDamage * Time.delta);
         }
         if(instakill) unit.kill();
     }
@@ -80,7 +104,7 @@ public class AdvancedStatusEffect extends StatusEffect{
             unit.heal(-1f * removeDamage);
         }
         if(!Vars.headless && removeEffect != Fx.none && !unit.inFogTo(Vars.player.team())){
-            effect.at(unit.x, unit.y, 0, color, parentizeEffect ? unit : null);
+            removeEffect.at(unit.x, unit.y, 0, color, parentizeEffect ? unit : null);
         }
     }
 }
