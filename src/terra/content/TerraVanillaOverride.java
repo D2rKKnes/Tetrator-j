@@ -170,7 +170,8 @@ public class TerraVanillaOverride {
                 trailWidth = 2.2f;
                 trailLength = 11;
                 
-                despawnHit = fragOnHit = true;
+                despawnHit = true;
+                fragOnHit = false;
                 fragBullets = 1;
                 fragRandomSpread = 0f;
                 fragAngle = 180f;
