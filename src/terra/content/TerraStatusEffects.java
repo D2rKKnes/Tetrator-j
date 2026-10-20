@@ -69,7 +69,8 @@ public class TerraStatusEffects{
 
         zapped = new AdvancedStatusEffect("zapped"){
             @Override
-            public void update(Unit unit, float time){
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
                 if(Mathf.chanceDelta(effectChance)){
                     Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
                 }
