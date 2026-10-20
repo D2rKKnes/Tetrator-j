@@ -28,6 +28,7 @@ import mindustry.entities.bullet.*;
 import mindustry.type.*;
 import mindustry.type.unit.*;
 import terra.type.*;
+import terra.util.*;
 
 import static arc.graphics.g2d.Draw.rect;
 import static arc.graphics.g2d.Draw.*;
@@ -66,19 +67,30 @@ public class TerraStatusEffects{
             });
         }};
 
-        // zapped = new StatusEffect("zapped"){{
-        //     color = Pal.stat;
-        //     speedMultiplier = 1.1f;
-        //     reloadMultiplier = 0.8f;
-        //     transitionDamage = 14f;
-        //     damage = 0.3f;
-        //     applyEffect = Fx.circleColorSpark;
-        //     init(() -> {
-        //         affinity(StatusEffects.wet, (unit, result, time) -> {
-        //             unit.damagePierce(transitionDamage);
-        //         });
-        //     });
-        // }};
+        zapped = new StatusEffect("zapped"){
+            @Override
+            public void update(Unit unit, float time){
+                if(Mathf.chanceDelta(effectChance)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
+            color = Color.valueOf("8aa3f4");
+            speedMultiplier = 1.15f;
+            reloadMultiplier = 0.8f;
+            transitionDamage = 14f;
+            damage = 0.3f;
+            movementDamage = 1.2f;
+            effect = Fx.none;
+            effectChance = 0.05f;
+            effectChanceMoveIncrease = 0.25f;
+            applyEffect = Fx.circleColorSpark;
+            init(() -> {
+                affinity(StatusEffects.wet, (unit, result, time) -> {
+                    unit.damagePierce(transitionDamage);
+                });
+            });
+        }};
 
         impactStun = new AdvancedStatusEffect("impact-stun"){{
             color = Color.valueOf("d46a36");
