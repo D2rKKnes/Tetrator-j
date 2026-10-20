@@ -67,7 +67,7 @@ public class TerraStatusEffects{
             });
         }};
 
-        zapped = new StatusEffect("zapped"){
+        zapped = new AdvancedStatusEffect("zapped"){
             @Override
             public void update(Unit unit, float time){
                 if(Mathf.chanceDelta(effectChance)){
@@ -78,7 +78,7 @@ public class TerraStatusEffects{
             color = Color.valueOf("8aa3f4");
             speedMultiplier = 1.15f;
             reloadMultiplier = 0.8f;
-            transitionDamage = 14f;
+            transitionDamage = 19f;
             damage = 0.3f;
             movementDamage = 1.2f;
             effect = Fx.none;
