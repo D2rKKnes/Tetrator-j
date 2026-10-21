@@ -121,7 +121,7 @@ public class TerraVanillaOverride {
             Items.surgeAlloy, new ShrapnelBulletType(){{
                 length = 130;
                 rangeChange = 30f;
-                damage = 245f;
+                damage = 165f;
                 ammoMultiplier = 6f;
                 reloadMultiplier = 0.7f;
                 width = 25f;
@@ -130,11 +130,11 @@ public class TerraVanillaOverride {
                 shootEffect = smokeEffect = TerraFx.fuseShoot;
                 spawnBulletRandomSpread = 60f;
                 spawnBullets.add(
-                    new MultiBulletType(4, new LightningBulletType(){{
+                    new MultiBulletType(2, new LightningBulletType(){{
                         shootEffect = smokeEffect = Fx.none;
-                        damage = 8;
-                        lightningLength = 8;
-                        lightningLengthRand = 5;
+                        damage = 11;
+                        lightningLength = 11;
+                        lightningLengthRand = 4;
                         lightningColor = Color.valueOf("f3e979");
                         collidesAir = true;
                         buildingDamageMultiplier = 0.4f;
@@ -142,8 +142,8 @@ public class TerraVanillaOverride {
                     }})
                 );
                 //stats
-                lightning = 12;
-                lightningDamage = 8;
+                lightning = 6;
+                lightningDamage = 11;
                 lightningLength = 0;
             }});
         ((ItemTurret) Blocks.breach).ammoTypes.put(
@@ -161,7 +161,7 @@ public class TerraVanillaOverride {
                 pierce = true;
                 pierceBuilding = true;
                 pierceDamageFactor = 0.1f;
-                maxDamageFraction = 0.3333f;
+                maxDamageFraction = 0.4f;
                 buildingDamageMultiplier = 0.3f;
                 hitColor = backColor = trailColor = Color.valueOf("ffd59e");
                 frontColor = Color.white;
@@ -192,8 +192,8 @@ public class TerraVanillaOverride {
                     reloadMultiplier = 1f;
                     pierce = true;
                     pierceBuilding = true;
-                    pierceDamageFactor = 0.1f;
-                    maxDamageFraction = 0.3333f / 1.4f;
+                    pierceDamageFactor = 0.15f;
+                    maxDamageFraction = 0.4f;
                     buildingDamageMultiplier = 0.3f;
                     hitColor = backColor = trailColor = Color.valueOf("ffd59e");
                     frontColor = Color.white;
