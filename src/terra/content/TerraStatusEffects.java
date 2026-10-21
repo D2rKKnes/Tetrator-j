@@ -315,14 +315,12 @@ public class TerraStatusEffects{
             speedMultiplier = 0.33f;
             reloadMultiplier = 3f;
             buildSpeedMultiplier = 3f;
-            init(() -> opposite(StatusEffects.slow));
         }};
         anviled = new AdvancedStatusEffect("extreme-weight"){{
             color = Color.valueOf("6e6f81");
             speedMultiplier = 0.01f;
             reloadMultiplier = 0.33f;
             dragMultiplier = 100f;
-            init(() -> opposite(StatusEffects.fast));
         }};
 
         regeneration = new AdvancedStatusEffect("regeneration"){{
@@ -378,7 +376,7 @@ public class TerraStatusEffects{
                 colorTo = color;
                 lifetime = 90f;
             }};
-            init(() -> opposite(shieldRegen));
+            init(() -> opposite(shieldRegen, StatusEffects.shielded));
         }};
 
         delta32 = new AdvancedStatusEffect("delta32"){{
