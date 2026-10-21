@@ -33,6 +33,11 @@ public class TerraMod extends Mod{
             }catch(Exception ex){
                 Log.err("Failed to replace renderer", ex);
             }
+
+            for (UnitType unit : Vars.content.units()) {
+                if (unit == TerraUnitTypes.myDoom) continue;
+                unit.immunities.remove(TerraStatusEffects.instantDeath);
+            }
             
             Planets.verilus.generator = new VerilusAsteroidGenerator();
             Liquids.gallium.uiIcon = Core.atlas.find("liquid-gallium");
