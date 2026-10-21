@@ -12,7 +12,7 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.type.StatusEffect;
 
-public class RarityStatusEffect extends StatusEffect {
+public class RarityStatusEffect extends AdvancedStatusEffect {
 
     public Color tintColor = Color.white;
     public Float alpha = 0.8f;
