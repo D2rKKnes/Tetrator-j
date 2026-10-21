@@ -91,7 +91,7 @@ public class TerraStatusEffects{
                 affinity(StatusEffects.wet, (unit, result, time) -> {
                     unit.damagePierce(transitionDamage);
                 });
-                opposite(hyperdrive));
+                opposite(hyperdrive);
             });
         }};
 
