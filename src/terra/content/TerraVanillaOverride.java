@@ -160,6 +160,8 @@ public class TerraVanillaOverride {
                 reloadMultiplier = 0.5f;
                 pierce = true;
                 pierceBuilding = true;
+                pierceDamageFactor = 0.1f;
+                maxDamageFraction = 0.3333f;
                 buildingDamageMultiplier = 0.3f;
                 hitColor = backColor = trailColor = Color.valueOf("ffd59e");
                 frontColor = Color.white;
@@ -177,7 +179,7 @@ public class TerraVanillaOverride {
                 fragAngle = 180f;
                 fragVelocityMin = 1;
                 fragOffsetMin = fragOffsetMax = 0;
-                fragBullet = new BasicBulletType(10f, 130){{
+                fragBullet = new BasicBulletType(10f, damage / 2f){{
                     width = 14f;
                     height = 20f;
                     hitSize = 7f;
@@ -190,6 +192,8 @@ public class TerraVanillaOverride {
                     reloadMultiplier = 1f;
                     pierce = true;
                     pierceBuilding = true;
+                    pierceDamageFactor = 0.1f;
+                    maxDamageFraction = 0.3333f / 1.4f;
                     buildingDamageMultiplier = 0.3f;
                     hitColor = backColor = trailColor = Color.valueOf("ffd59e");
                     frontColor = Color.white;
