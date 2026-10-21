@@ -78,13 +78,14 @@ public class TerraStatusEffects{
             {
             color = Color.valueOf("8aa3f4");
             speedMultiplier = 1.15f;
-            reloadMultiplier = 0.8f;
+            reloadMultiplier = 0.75f;
+            buildSpeedMultiplier = 0.6f;
             transitionDamage = 19f;
-            damage = 0.3f;
-            movementDamage = 1.2f;
+            damage = 2f / 60f;
+            movementDamage = 18f / 60f;
             effect = Fx.none;
-            effectChance = 0.05f;
-            effectChanceMoveIncrease = 0.25f;
+            effectChance = 0.1f;
+            effectChanceMoveIncrease = 0.3f;
             applyEffect = Fx.circleColorSpark;
             init(() -> {
                 affinity(StatusEffects.wet, (unit, result, time) -> {
