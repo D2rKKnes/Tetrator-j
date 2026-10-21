@@ -91,6 +91,7 @@ public class TerraStatusEffects{
                 affinity(StatusEffects.wet, (unit, result, time) -> {
                     unit.damagePierce(transitionDamage);
                 });
+                opposite(hyperdrive));
             });
         }};
 
@@ -184,16 +185,32 @@ public class TerraStatusEffects{
             percentDamage = 6.66f;
         }};
 
-        warped = new StatusEffect("warped"){{
+        warped = new StatusEffect("warped"){
+            @Override
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
+                if(Mathf.chanceDelta(effectChance)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
             color = Pal.accent;
             speedMultiplier = 0.5f;
             healthMultiplier = 5f;
             buildSpeedMultiplier = 0.2f;
-            effect = Fx.overdriven;
-            effectChance = 0.01f;
+            effect = Fx.none;
+            effectChance = 0.02f;
         }};
 
-        warpPower = new StatusEffect("warp-power"){{
+        warpPower = new StatusEffect("warp-power"){
+            @Override
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
+                if(Mathf.chanceDelta(0.02f)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
             color = Pal.accent;
             healthMultiplier = 2f;
             damageMultiplier = 1.3f;
@@ -205,7 +222,15 @@ public class TerraStatusEffects{
             effectChance = 0.03f;
         }};
 
-        warpHell = new AdvancedStatusEffect("warp-hell"){{
+        warpHell = new AdvancedStatusEffect("warp-hell"){
+            @Override
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
+                if(Mathf.chanceDelta(0.04f)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
             color = Color.valueOf("e13131");
             healthMultiplier = 0.33f;
             damageMultiplier = 0.67f;
@@ -259,7 +284,15 @@ public class TerraStatusEffects{
             });
         }};
 
-        hyperdrive = new AdvancedStatusEffect("hyperdrive"){{
+        hyperdrive = new AdvancedStatusEffect("hyperdrive"){
+            @Override
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
+                if(Mathf.chanceDelta(0.02f)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
             color = Pal.lancerLaser;
             healthMultiplier = 0.75f;
             damageMultiplier = 1.7f;
@@ -274,6 +307,7 @@ public class TerraStatusEffects{
                 Lines.stroke(1.5f * e.fout(Interp.pow3Out));
                 Lines.square(e.x, e.y, Mathf.randomSeed(e.id, 2f, 8f) * e.fin(Interp.pow2Out) + 6f, 45);
             });
+            init(() -> opposite(zapped));
         }};
         speedup = new AdvancedStatusEffect("speedup"){{
             color = Pal.stat;
@@ -281,12 +315,14 @@ public class TerraStatusEffects{
             speedMultiplier = 0.33f;
             reloadMultiplier = 3f;
             buildSpeedMultiplier = 3f;
+            init(() -> opposite(StatusEffects.slow));
         }};
         anviled = new AdvancedStatusEffect("extreme-weight"){{
             color = Color.valueOf("6e6f81");
             speedMultiplier = 0.01f;
             reloadMultiplier = 0.33f;
             dragMultiplier = 100f;
+            init(() -> opposite(StatusEffects.fast));
         }};
 
         regeneration = new AdvancedStatusEffect("regeneration"){{
@@ -328,7 +364,7 @@ public class TerraStatusEffects{
                 colorTo = color.cpy().a(0.5f);
                 lifetime = 90f;
             }};
-            //init(() -> opposite(shieldDamage));
+            init(() -> opposite(shieldDamage));
         }};
         shieldDamage = new AdvancedStatusEffect("shield-destruction"){{
             color = Pal.negativeStat;
@@ -454,6 +490,7 @@ public class TerraStatusEffects{
             damageMultiplier = 2.6f;
             healthMultiplier = 2.2f;
             reloadMultiplier = 2f;
+            dragMultiplier = 2f;
             speedMultiplier = 1.75f;
             buildSpeedMultiplier = 1.5f;
             permanent = true;
@@ -465,8 +502,10 @@ public class TerraStatusEffects{
             damageMultiplier = 5f;
             healthMultiplier = 4f;
             reloadMultiplier = 3.5f;
+            dragMultiplier = 3f;
             speedMultiplier = 2f;
             buildSpeedMultiplier = 2f;
+            percentDamage = -0.8f;
             permanent = true;
             init(() -> opposite(common, uncommon, rare, epic, legendary));
         }};
