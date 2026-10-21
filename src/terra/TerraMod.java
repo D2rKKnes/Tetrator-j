@@ -5,6 +5,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.Events;
 import mindustry.*;
+import mindustry.type.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
