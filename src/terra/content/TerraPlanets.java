@@ -1,4 +1,5 @@
 package terra.content;
+
 import arc.func.Prov;
 import arc.math.Mathf;
 import arc.struct.Seq;
@@ -84,16 +85,46 @@ public class TerraPlanets{
             accessible = false;
             iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
-            meshLoader = () -> new SunMesh(
-                this, 6,
-                5, 0.3, 2.7, 1.2, 1,
-                1.6f,
-                Color.valueOf("451cff"),
-                Color.valueOf("3f3fff"),
-                Color.valueOf("5d47ff"),
-                Color.valueOf("6d47ff"),
-                Color.valueOf("9771ff"),
-                Color.valueOf("b7a0ff")
+
+            meshLoader = () -> new MultiMesh(
+                new SunMesh(
+                    this, 5,
+                    5, 0.3, 2.4, 1.3, 1,
+                    1.4f,
+                    Color.valueOf("2a0f9e"),
+                    Color.valueOf("451cff"),
+                    Color.valueOf("5d47ff"),
+                    Color.valueOf("6d47ff"),
+                    Color.valueOf("9771ff"),
+                    Color.valueOf("d8ccff")
+                ),
+
+                new PulsarMesh(this){{
+                    drawCore = false;
+                    beamColor = Color.valueOf("7f9bff");
+                    intensity = 1.8f;
+
+                    pulseRate = 2f;
+                    pulseDepth = 0.6f;
+                    pulseSharpness = 3f;
+
+                    spinSpeed = 2.45f;
+                    beamTilt = 30f;
+                    beamLength = 8f;
+                    beamWidth = 0.7f;
+                    beamFalloff = 1.2f;
+                    beamAlpha = 0.5f;
+                    beamLayers = 3;
+                }},
+
+                new PulsarDiskMesh(this){{
+                    ringRadius = 2.5f;
+                    ringWidth = 1.4f;
+                    tilt = 0f;
+                    color = Color.valueOf("7f9bff");
+                    intensity = 1.4f;
+                    alpha = 0.6f;
+                }}
             );
         }};
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
