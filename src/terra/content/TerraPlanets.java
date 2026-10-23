@@ -87,31 +87,30 @@ public class TerraPlanets{
             solarSystem = this;
 
             meshLoader = () -> new MultiMesh(
-                new SunMesh(
-                    this, 5,
-                    5, 0.3, 2.4, 1.3, 1,
-                    1.4f,
-                    Color.valueOf("2a0f9e"),
-                    Color.valueOf("451cff"),
-                    Color.valueOf("5d47ff"),
-                    Color.valueOf("6d47ff"),
-                    Color.valueOf("9771ff"),
-                    Color.valueOf("d8ccff")
-                ),
-
                 new PulsarMesh(this){{
-                    drawCore = false;
+                    surface = new SunMesh(
+                            planet, 5,
+                            5, 0.3, 2.4, 1.3, 1,
+                            1.4f,
+                            Color.valueOf("2a0f9e"),
+                            Color.valueOf("451cff"),
+                            Color.valueOf("5d47ff"),
+                            Color.valueOf("6d47ff"),
+                            Color.valueOf("9771ff"),
+                            Color.valueOf("d8ccff")
+                    );
+
                     beamColor = Color.valueOf("7f9bff");
                     intensity = 1.8f;
 
-                    pulseRate = 2f;
+                    pulseRate = 1.6f;
                     pulseDepth = 0.6f;
                     pulseSharpness = 3f;
 
-                    spinSpeed = 2.45f;
-                    beamTilt = 30f;
+                    spinSpeed = 1.85f;
+                    beamTilt = 37f;
                     beamLength = 8f;
-                    beamWidth = 0.7f;
+                    beamWidth = 0.6f;
                     beamFalloff = 1.2f;
                     beamAlpha = 0.5f;
                     beamLayers = 3;
@@ -119,7 +118,7 @@ public class TerraPlanets{
 
                 new PulsarDiskMesh(this){{
                     ringRadius = 2.5f;
-                    ringWidth = 1.4f;
+                    ringWidth = 1.7f;
                     tilt = 0f;
                     color = Color.valueOf("7f9bff");
                     intensity = 1.4f;
