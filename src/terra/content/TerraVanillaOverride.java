@@ -58,7 +58,8 @@ public class TerraVanillaOverride {
 
         Weathers.suspendParticles.hidden = false;
 
-        Planets.sun.fullOverride = "terra-sun";
+        Planets.sun.uiIcon = Core.atlas.find("terra-sun");
+        Planets.sun.fullIcon = Core.atlas.find("terra-sun");
         Planets.sun.iconColor = Color.valueOf("ffc64c");
         
         Planets.tantros.alwaysUnlocked = true;
