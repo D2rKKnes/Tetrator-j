@@ -6,11 +6,14 @@ import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.struct.FloatSeq;
 import arc.util.Time;
+import mindustry.graphics.g3d.GenericMesh;
 import mindustry.graphics.g3d.PlanetMesh;
 import mindustry.graphics.g3d.PlanetParams;
 import mindustry.type.Planet;
 
 public class PulsarMesh extends PlanetMesh{
+    public GenericMesh surface;
+
     public Color coreColor = Color.valueOf("5d47ff");
     public Color hotColor  = Color.valueOf("d8ccff");
     public Color beamColor = Color.valueOf("7f9bff");
@@ -39,6 +42,7 @@ public class PulsarMesh extends PlanetMesh{
     private Mesh beamMesh;
     private Shader coreShader, beamShader;
     private final Vec3 axis = new Vec3(), right = new Vec3(), fwd = new Vec3();
+    private final Mat3D spinTrans = new Mat3D();
 
     public PulsarMesh(Planet planet){
         this.planet = planet;
@@ -59,9 +63,10 @@ public class PulsarMesh extends PlanetMesh{
 
         float time = Time.globalTime / 60f;
 
+        spinTrans.set(transform).rotate(Vec3.Y, time * spinSpeed * 360f);
+
         float tilt = beamTilt * Mathf.degRad;
-        float spin = time * spinSpeed * Mathf.PI2;
-        axis.set(Mathf.sin(tilt) * Mathf.cos(spin), Mathf.cos(tilt), Mathf.sin(tilt) * Mathf.sin(spin)).nor();
+        axis.set(Mathf.sin(tilt), Mathf.cos(tilt), 0f).nor();
         right.set(Vec3.Y).crs(axis);
         if(right.len2() < 0.0001f) right.set(Vec3.X);
         right.nor();
@@ -70,10 +75,12 @@ public class PulsarMesh extends PlanetMesh{
         float s = 0.5f + 0.5f * Mathf.sin(time * pulseRate * Mathf.PI2);
         float flash = (1f - pulseDepth) + pulseDepth * Mathf.pow(s, pulseSharpness);
 
-        if(drawCore){
+        if(surface != null){
+            surface.render(params, projection, spinTrans);
+        }else if(drawCore){
             coreShader.bind();
             coreShader.setUniformMatrix4("u_proj", projection.val);
-            coreShader.setUniformMatrix4("u_trans", transform.val);
+            coreShader.setUniformMatrix4("u_trans", spinTrans.val);
             coreShader.setUniformf("u_radius", planet.radius);
             coreShader.setUniformf("u_axis", axis.x, axis.y, axis.z);
             coreShader.setUniformf("u_coreColor", coreColor.r, coreColor.g, coreColor.b);
@@ -93,7 +100,7 @@ public class PulsarMesh extends PlanetMesh{
 
         beamShader.bind();
         beamShader.setUniformMatrix4("u_proj", projection.val);
-        beamShader.setUniformMatrix4("u_trans", transform.val);
+        beamShader.setUniformMatrix4("u_trans", spinTrans.val);
         beamShader.setUniformf("u_axis", axis.x, axis.y, axis.z);
         beamShader.setUniformf("u_right", right.x, right.y, right.z);
         beamShader.setUniformf("u_fwd", fwd.x, fwd.y, fwd.z);
@@ -115,13 +122,13 @@ public class PulsarMesh extends PlanetMesh{
 
     @Override
     public void dispose(){
+        if(surface != null) surface.dispose();
         if(!ready) return;
         super.dispose();
         beamMesh.dispose();
         coreShader.dispose();
         beamShader.dispose();
     }
-
 
     private static Mesh makeMesh(float[] v){
         Mesh m = new Mesh(true, v.length / 3, 0, VertexAttribute.position3);
