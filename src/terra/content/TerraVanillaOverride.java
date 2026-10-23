@@ -2,7 +2,6 @@ package terra.content;
 
 import mindustry.*;
 import mindustry.io.*;
-import mindustry.core.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.*;
@@ -30,6 +29,7 @@ import mindustry.entities.effect.*;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.gen.*;
+import arc.*;
 import arc.struct.*;
 import arc.util.*;
 import arc.func.*;
