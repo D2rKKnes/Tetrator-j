@@ -21,6 +21,7 @@ import terra.type.*;
 import terra.maps.planets.*;
 import terra.maps.generators.*;
 import terra.graphics.g3d.*;
+import terra.util.*;
 
 import static arc.Core.atlas;
 
@@ -50,6 +51,7 @@ public class TerraPlanets{
             bloom = true;
             minZoom = 1.7f;
             maxZoom = 3;
+            icon = "terra-satellite";
             iconColor = Color.valueOf("c2bffb");
             hasAtmosphere = true;
             atmosphereColor = Color.white;
@@ -60,6 +62,7 @@ public class TerraPlanets{
         deltaOmega = new BetterPlanet("delta-omega", null, 32f){{
             bloom = true;
             accessible = false;
+            icon = "terra-sun";
             iconColor = Color.valueOf("ff2222");
             solarSystem = this;
             meshLoader = () -> new SunMesh(
@@ -83,6 +86,7 @@ public class TerraPlanets{
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
             accessible = false;
+            icon = "terra-sun";
             iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
 
@@ -130,6 +134,7 @@ public class TerraPlanets{
             generator = new TantrosPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 4);
             atmosphereColor = Color.valueOf("021042");
+            icon = "terra-unknown-planet";
             iconColor = Color.valueOf("1a1f73");
             allowWaves = true;
             allowSectorInvasion = true;
