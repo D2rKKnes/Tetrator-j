@@ -44,17 +44,6 @@ public class BetterPlanet extends Planet{
     }
 
     @Override
-    public void createIcons(MultiPacker packer){
-        super.createIcons(packer);
-        if (!headless && icon != null && !icon.isEmpty()) {
-            var region = Core.atlas.find(icon);
-            if (region != null && region.found()) {
-                uiIcon = region;
-            }
-        }
-    }
-
-    @Override
     public void drawAtmosphere(Mesh atmosphere, Camera3D cam){
         Gl.depthMask(false);
         Blending.additive.apply();
