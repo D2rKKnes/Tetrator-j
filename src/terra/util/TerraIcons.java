@@ -3,6 +3,7 @@ package terra.util;
 import arc.*;
 import arc.scene.style.*;
 import mindustry.content.*;
+import mindustry.graphics.*;
 
 public class TerraIcons{
     public static TextureRegionDrawable
@@ -15,6 +16,16 @@ public class TerraIcons{
         moonIcon = get("satellite");
         nanPlanetIcon = get("unknown-planet");
         //alpha = new TextureRegionDrawable(UnitTypes.alpha.uiIcon);
+
+        if (sunIcon != null) {
+            Icon.icons.put("terra-sun", sunIcon);
+        }
+        if (moonIcon != null) {
+            Icon.icons.put("terra-satellite", moonIcon);
+        }
+        if (nanPlanetIcon != null) {
+            Icon.icons.put("terra-unknown-planet", nanPlanetIcon);
+        }
     }
 
     static TextureRegionDrawable get(String name){
