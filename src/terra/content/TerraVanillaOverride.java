@@ -2,6 +2,7 @@ package terra.content;
 
 import mindustry.*;
 import mindustry.io.*;
+import mindustry.core.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.game.*;
