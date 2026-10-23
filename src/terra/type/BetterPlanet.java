@@ -7,6 +7,7 @@ import arc.graphics.g3d.*;
 import arc.graphics.gl.*;
 import arc.math.geom.*;
 import arc.util.*;
+import arc.*;
 import terra.graphics.shaders.*;
 import mindustry.game.EventType;
 import mindustry.graphics.*;
@@ -40,6 +41,17 @@ public class BetterPlanet extends Planet{
     @Override
     public void load(){
         super.load();
+    }
+
+    @Override
+    public void createIcons(MultiPacker packer){
+        super.createIcons(packer);
+        if (!headless && icon != null && !icon.isEmpty()) {
+            var region = Core.atlas.find(icon);
+            if (region != null && region.found()) {
+                uiIcon = region;
+            }
+        }
     }
 
     @Override
