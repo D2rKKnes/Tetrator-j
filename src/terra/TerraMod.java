@@ -82,6 +82,9 @@ public class TerraMod extends Mod{
         TerraSectorPresets.load();
         TerraPlanets.load();
         TerraVanillaOverride.load();
+        if(Core.settings.getBool("vanilaoverhaul", true)){
+            TerraVanillaUnitsOverride.load();
+        }
         TerraVanilaTree.load();
         TerraVerilusTree.load();
     }
