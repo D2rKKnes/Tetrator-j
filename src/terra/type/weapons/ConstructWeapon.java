@@ -1,4 +1,4 @@
-package progressed.type.weapons;
+package terra.type.weapons;
 
 import arc.*;
 import arc.graphics.*;
