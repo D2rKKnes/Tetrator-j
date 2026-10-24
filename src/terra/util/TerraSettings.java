@@ -28,6 +28,7 @@ public class TerraSettings{
             t.checkPref("veriluswave", true);
             t.checkPref("neoncolor", true);
             t.checkPref("enableblocks", false);
+            t.checkPref("vanilaoverhaul", true);
         });
     }
 
