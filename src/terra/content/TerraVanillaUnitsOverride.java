@@ -42,5 +42,26 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.omura.wespons.add(
+            new ConstructWeapon("flare"){{
+                x = -77f / 4f;
+                y = -121.5f / 4f;
+                shootY = 0f;
+                //shootSound = TerraSounds.shootLaunch;
+                reload = 180f;
+                rotate = true;
+                rotateSpeed = 14f;
+                mirror = false;
+                shootCone = 20f;
+                bullet = new BulletType(){{
+                    shootEffect = smokeEffect = Fx.none;
+                    shake = 1f;
+                    speed = 0.001f;
+                    keepVelocity = false;
+
+                    spawnUnit = UnitTypes.flare;
+                }};
+            }}
+        );
     }
 }
