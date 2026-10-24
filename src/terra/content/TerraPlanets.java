@@ -87,7 +87,7 @@ public class TerraPlanets{
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
             accessible = false;
-            icon = "terra-sun";
+            icon = "terra-pulsar";
             iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
 
