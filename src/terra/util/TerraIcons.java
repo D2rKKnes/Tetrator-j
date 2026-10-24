@@ -7,12 +7,13 @@ import mindustry.graphics.*;
 
 public class TerraIcons{
     public static TextureRegionDrawable
-    eyeBleeding, eyeMelting, sunIcon, moonIcon, nanPlanetIcon;
+    eyeBleeding, eyeMelting, sunIcon, moonIcon, pulsarIcon, nanPlanetIcon;
 
     public static void init(){
         eyeBleeding = get("eye-bleeding");
         eyeMelting = get("eye-melting");
         sunIcon = get("sun");
+        pulsarIcon = get("pulsar");
         moonIcon = get("satellite");
         nanPlanetIcon = get("unknown-planet");
         //alpha = new TextureRegionDrawable(UnitTypes.alpha.uiIcon);
