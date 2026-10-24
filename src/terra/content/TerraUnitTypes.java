@@ -68,7 +68,7 @@ public class TerraUnitTypes {
     latumFAKE, myDoom, flareC;
 
     public static void load() {
-        flareC = new UnitType("flareC"){{
+        flareC = new UnitType("flare-c"){{
             speed = 2.7f;
             accel = 0.08f;
             drag = 0.04f;
@@ -3653,6 +3653,54 @@ public class TerraUnitTypes {
                     reloadMultiplier = 0.33f;
                     status = TerraStatusEffects.radited;
                     statusDuration = 200f;
+                }};
+            }});
+        }};
+        omuraMissile = new MissileUnitType("omura-missile"){{
+            speed = 5.7f;
+            maxRange = 6f;
+            lifetime = 85f;
+            hitSize = 3.5f;
+            outlineColor = Pal.darkerMetal;
+            engineColor = trailColor = Pal.stat;
+            engineLayer = Layer.effect;
+            engineSize = 1.6f;
+            engineOffset = 3f;
+            //rotateSpeed = 2.5f;
+            //trailLength = 9;
+            //missileAccelTime = 20f;
+            lowAltitude = true;
+            targetAir = true;
+
+            fogRadius = 4f;
+
+            health = 80;
+            armor = 1;
+            hidden = false;
+
+            parts.add(new FlarePart(){{
+                progress = PartProgress.life.slope().curve(Interp.pow2In);
+                radius = 0f;
+                radiusTo = 30f;
+                stroke = 3f;
+                rotation = 45f;
+                y = -3f;
+                followRotation = true;
+            }});
+
+            weapons.add(new Weapon(){{
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                shootSound = Sounds.none;
+                shootOnDeath = true;
+                shootOnDeathEffect = Fx.massiveExplosion;
+                shake = 0.5f;
+                bullet = new ExplosionBulletType(48f, 4f * 8){{
+                    collidesAir = true;
+                    buildingDamageMultiplier = 0.3f;
+                    ammoMultiplier = 1.5f;
+                    status = StatusEffects.blasted;
                 }};
             }});
         }};
