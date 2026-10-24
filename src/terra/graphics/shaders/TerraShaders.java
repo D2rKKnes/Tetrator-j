@@ -87,7 +87,7 @@ public class TerraShaders {
         return tree.get("shaders/" + name);
     }
 
-    public static class VerticalBuildShader extends OlLoadShader{
+    public static class VerticalBuildShader extends PMLoadShader{
         public float progress, time;
         public Color color = new Color();
         public TextureRegion region;
@@ -104,6 +104,19 @@ public class TerraShaders {
             setUniformf("u_uv", region.u, region.v);
             setUniformf("u_uv2", region.u2, region.v2);
             setUniformf("u_texsize", region.texture.width, region.texture.height);
+        }
+    }
+
+    public static class PMLoadShader extends Shader{
+        public PMLoadShader(String vert, String frag){
+            super(
+                files.internal("shaders/" + vert + ".vert"),
+                tree.get("shaders/" + frag + ".frag")
+            );
+        }
+
+        public PMLoadShader(String frag){
+            this("default", frag);
         }
     }
 
