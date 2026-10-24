@@ -101,6 +101,9 @@ public class TerraVanilaTree{
         vanillaNode(payloadConveyor, () -> {
             node(largePayloadConveyor, () -> {});
         });
+        if(Core.settings.getBool("vanilaoverhaul", true)){vanillaNode(omura, () -> {
+            node(omuraMissile, () -> {});
+        });}
         // Erekir
         String erekir = "erekir";
         vanillaNode(erekir, berylliumWallLarge, () -> {
