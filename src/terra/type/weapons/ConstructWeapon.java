@@ -77,7 +77,7 @@ public class ConstructWeapon extends Weapon{
         if(rMount.warmup > 0.01f || loadf(mount) > 0.01f){
             if(outlineRegion.found() && !top){
                 Draw.draw(Draw.z(), () -> {
-                    PMDrawf.vertConstruct(wx, wy, outlineRegion, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
+                    vertConstruct(wx, wy, outlineRegion, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
                 });
             }
         }else{
@@ -110,9 +110,9 @@ public class ConstructWeapon extends Weapon{
         if(rMount.warmup > 0.01f || loadf(mount) > 0.01f){
             Draw.draw(Draw.z(), () -> {
                 if(outlineRegion.found() && top){
-                    PMDrawf.vertConstruct(wx, wy, outlineRegion, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
+                    vertConstruct(wx, wy, outlineRegion, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
                 }
-                PMDrawf.vertConstruct(wx, wy, region, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
+                vertConstruct(wx, wy, region, weaponRotation, loadf(mount), rMount.warmup, rMount.total);
             });
         }else{
             if(outlineRegion.found() && top){
