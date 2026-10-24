@@ -55,11 +55,36 @@ public class TerraVanillaUnitsOverride {
                 shootCone = 20f;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
-                    shake = 1f;
+                    //shake = 1f;
                     speed = 0.001f;
                     keepVelocity = false;
-
-                    spawnUnit = UnitTypes.flare;
+                    spawnUnit = TerraUnitTypes.flareC;
+                }};
+            }},
+            new Weapon("terra-heavy-rockets"){{
+                reload = 86f;
+                x = 77f / 4f;
+                y = -121.5f / 4f;
+                shootY = 0f;
+                rotate = true;
+                rotateSpeed = 2.6f;
+                mirror = false;
+                shoot = new ShootBarrel(){{
+                    shots = 7;
+                    shotDelay = 2.5f;
+                    barrels = new float[]{
+                        0f, 20f / 4, 0f, 
+                        -9f / 4, 25f / 4, 0f, 
+                        0f, 29f / 4, 0f, 
+                        9f / 4, 25f / 4, 0f
+                    };
+                }};
+                shootSound = Sounds.shootMissileLong;
+                bullet = new BulletType(){{
+                    shake = 1.3f;
+                    speed = 0.001f;
+                    keepVelocity = false;
+                    spawnUnit = TerraUnitTypes.omuraMissile;
                 }};
             }}
         );
