@@ -42,7 +42,7 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
-        UnitTypes.omura.wespons.add(
+        UnitTypes.omura.weapons.add(
             new ConstructWeapon("flare"){{
                 x = -77f / 4f;
                 y = -121.5f / 4f;
