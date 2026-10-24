@@ -63,10 +63,59 @@ public class TerraUnitTypes {
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
+    omuraMissile,
     //other
-    latumFAKE, myDoom;
+    latumFAKE, myDoom, flare/*<-- fake*/;
 
     public static void load() {
+        flare = new UnitType("flare"){{ //fake
+            speed = 2.7f;
+            accel = 0.08f;
+            drag = 0.04f;
+            flying = true;
+            health = 70;
+            engineOffset = 5.75f;
+            targetFlags = new BlockFlag[]{BlockFlag.generator, null};
+            hitSize = 9;
+            itemCapacity = 10;
+            circleTarget = true;
+            omniMovement = false;
+            rotateSpeed = 5f;
+            circleTargetRadius = 60f;
+            wreckSoundVolume = 0.7f;
+
+            moveSound = Sounds.loopThruster;
+            moveSoundPitchMin = 0.3f;
+            moveSoundPitchMax = 1.5f;
+            moveSoundVolume = 0.2f;
+
+            useUnitCap = false;
+            hidden = true;
+            constructor = TimedKillUnit::create;
+            outlineColor = Pal.darkerMetal;
+            lifetime = 60f * 60f;
+
+            weapons.add(new Weapon(){{
+                y = 1f;
+                x = 0f;
+                minShootVelocity = 2f;
+                shootCone = 10f;
+                reload = 80f;
+                shoot.shots = 3;
+                shoot.shotDelay = 3f;
+                ejectEffect = Fx.casing1;
+                mirror = false;
+                bullet = new BasicBulletType(2.5f, 9){{
+                    inaccuracy = 4f;
+                    width = 7f;
+                    height = 9f;
+                    lifetime = 32f;
+                    shootEffect = Fx.shootSmall;
+                    smokeEffect = Fx.shootSmallSmoke;
+                    ammoMultiplier = 2;
+                }};
+            }});
+        }};
         wick = new UnitType("wick"){{
             flying = true;
             aiController = FlyingSuicideAI::new;
@@ -249,7 +298,7 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(StatusEffects.sapped);
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
-            abilities.add(new SpawnDeathAbility(wick, 3, 11f));
+            abilities.add(new SpawnDeathAbility(wickC, 3, 11f));
 
             weapons.add(
             new Weapon("terra-incident-mount"){{
@@ -2290,7 +2339,7 @@ public class TerraUnitTypes {
                     fragBullets = 1;
                     fragVelocityMin = 1f;
                     fragOffsetMax = 1f;
-                    fragBullet = new BasicBulletType(0f, 200){{
+                    fragBullet = new BasicBulletType(0f, 100){{
                         lifetime = 120f;
                         sprite = "terra-plasma";
                         width = height = 18f;
@@ -2298,12 +2347,13 @@ public class TerraUnitTypes {
                         backColor = trailColor = hitColor = lightColor = greenLight;
                         frontColor = Color.white;
                         lightOpacity = 0.8f;
-                        splashDamage = 160f;
+                        splashDamage = 60f;
                         splashDamageRadius = 80f;
                         shootEffect = smokeEffect = Fx.none;
                         reflectable = false;
                         absorbable = false;
                         pierce = true;
+                        pierceCap = 5;
                         armorMultiplier = blockArmorMultiplier = 0.5f;
                         buildingDamageMultiplier = 0.75f;
                         parts.add(new HoverPart(){{
@@ -2318,7 +2368,7 @@ public class TerraUnitTypes {
                             layerOffset = -0.001f;
                             color = greenLight;
                         }});
-                        intervalBullets = 4;
+                        intervalBullets = fragBullets = 5;
                         intervalDelay = 3f;
                         intervalBullet = fragBullet = new BasicBulletType(5f, 38){{
                             lifetime = 30f;
