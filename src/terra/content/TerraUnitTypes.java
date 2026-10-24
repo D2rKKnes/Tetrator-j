@@ -65,10 +65,10 @@ public class TerraUnitTypes {
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
     omuraMissile,
     //other
-    latumFAKE, myDoom, flare/*<-- fake*/;
+    latumFAKE, myDoom, flareC;
 
     public static void load() {
-        flare = new UnitType("flare"){{ //fake
+        flareC = new UnitType("flareC"){{
             speed = 2.7f;
             accel = 0.08f;
             drag = 0.04f;
