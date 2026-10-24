@@ -5,6 +5,8 @@ import arc.files.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.graphics.gl.*;
+import arc.graphics.Texture.*;
+import arc.scene.ui.layout.*;
 import arc.math.geom.*;
 import arc.util.*;
 //import exogenesis.graphics.shaders.DepthAtmosphereShader;
@@ -17,10 +19,13 @@ import terra.*;
 import static arc.Core.*;
 import static mindustry.Vars.*;
 
+//Original code from Exogenesis(java)
 public class TerraShaders {
 
 //    public static @Nullable ShelterShader shelter;
 //    public static final float shelterShieldLayer = 128f;
+
+    public static VerticalBuildShader vertBuild;
 
     public static DepthShader depth;
     public static DepthAtmosphereShader depthAtmosphere;
@@ -40,6 +45,8 @@ public class TerraShaders {
         }
 
         rings = new RingShader("rings", "rings");
+
+        vertBuild = new VerticalBuildShader();
 
         depth = new DepthShader();
         depthAtmosphere = new DepthAtmosphereShader();
@@ -78,6 +85,26 @@ public class TerraShaders {
      */
     public static Fi file(String name){
         return tree.get("shaders/" + name);
+    }
+
+    public static class VerticalBuildShader extends OlLoadShader{
+        public float progress, time;
+        public Color color = new Color();
+        public TextureRegion region;
+
+        public VerticalBuildShader(){
+            super("vertbuild");
+        }
+
+        @Override
+        public void apply(){
+            setUniformf("u_time", time);
+            setUniformf("u_color", color);
+            setUniformf("u_progress", progress);
+            setUniformf("u_uv", region.u, region.v);
+            setUniformf("u_uv2", region.u2, region.v2);
+            setUniformf("u_texsize", region.texture.width, region.texture.height);
+        }
     }
 
     public static class PlanetTextureShader extends OlLoadShader{
