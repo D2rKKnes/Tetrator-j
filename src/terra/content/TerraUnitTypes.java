@@ -77,7 +77,7 @@ public class TerraUnitTypes {
             engineOffset = 5.75f;
             targetFlags = new BlockFlag[]{BlockFlag.generator, null};
             hitSize = 9;
-            itemCapacity = 10;
+            itemCapacity = 0;
             circleTarget = true;
             omniMovement = false;
             rotateSpeed = 5f;
@@ -89,6 +89,8 @@ public class TerraUnitTypes {
             moveSoundPitchMax = 1.5f;
             moveSoundVolume = 0.2f;
 
+            playerControllable = false;
+            logicControllable = false;
             useUnitCap = false;
             hidden = true;
             constructor = TimedKillUnit::create;
@@ -3657,7 +3659,7 @@ public class TerraUnitTypes {
             }});
         }};
         omuraMissile = new MissileUnitType("omura-missile"){{
-            speed = 5.7f;
+            speed = 4.3f;
             maxRange = 6f;
             lifetime = 85f;
             hitSize = 3.5f;
@@ -3686,6 +3688,7 @@ public class TerraUnitTypes {
                 rotation = 45f;
                 y = -3f;
                 followRotation = true;
+                color1 = trailColor;
             }});
 
             weapons.add(new Weapon(){{
