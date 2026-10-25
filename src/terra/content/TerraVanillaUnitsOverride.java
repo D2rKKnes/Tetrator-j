@@ -43,14 +43,14 @@ import static mindustry.Vars.*;
 public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.omura.weapons.add(
-            new ConstructWeapon("flare"){{
-                x = -77f / 4f;
-                y = -121.5f / 4f;
+            new ConstructWeapon("terra-omura-drone"){{
+                x = 0f;
+                y = -141.5f / 4f;
                 shootY = 0f;
                 //shootSound = TerraSounds.shootLaunch;
-                reload = 180f;
+                reload = 220f;
                 rotate = true;
-                rotateSpeed = 14f;
+                rotateSpeed = 8f;
                 mirror = false;
                 shootCone = 20f;
                 bullet = new BulletType(){{
@@ -58,11 +58,11 @@ public class TerraVanillaUnitsOverride {
                     //shake = 1f;
                     speed = 0.001f;
                     keepVelocity = false;
-                    spawnUnit = TerraUnitTypes.flareC;
+                    spawnUnit = TerraUnitTypes.omuraDrone;
                 }};
             }},
             new Weapon("terra-heavy-rockets"){{
-                reload = 86f;
+                reload = 98f;
                 x = 77f / 4f;
                 y = -121.5f / 4f;
                 shootY = 0f;
@@ -81,6 +81,7 @@ public class TerraVanillaUnitsOverride {
                 }};
                 shootSound = Sounds.shootMissileLong;
                 bullet = new BulletType(){{
+                    inaccuracy = 10f;
                     shake = 1.3f;
                     speed = 0.001f;
                     keepVelocity = false;
