@@ -70,7 +70,7 @@ public class TerraVanillaUnitsOverride {
                 shootY = 33f / 4f;
                 rotate = true;
                 rotateSpeed = 2f;
-                shootSound = Sounds.shootSpectreSecondary;
+                shootSound = Sounds.shootScepterSecondary;
                 shootSoundVolume = 1.1f;
                 chargeSound = Sounds.chargeVela;
                 parentizeEffects = true;
