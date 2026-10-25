@@ -65,7 +65,7 @@ public class TerraUnitTypes {
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
     omuraMissile,
     //other
-    latumFAKE, myDoom, flareC;
+    latumFAKE, myDoom, flareC, omuraDrone;
 
     public static void load() {
         flareC = new UnitType("flare-c"){{
@@ -118,6 +118,86 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
+        omuraDrone = new UnitType("omura-drone"){{
+            speed = 3.2f;
+            accel = 0.08f;
+            drag = 0.04f;
+            flying = true;
+            health = 470;
+            armor = 6f;
+            engineSize = engineOffset = 0f;
+            setEnginesMirror(
+                new UnitEngine(15f / 4f, -12f / 4f, 2.5f, -70f)
+            );
+            targetFlags = new BlockFlag[]{BlockFlag.generator, null};
+            hitSize = 10;
+            itemCapacity = 0;
+            circleTarget = true;
+            autoDropBombs = true;
+            omniMovement = false;
+            rotateSpeed = 6f;
+            circleTargetRadius = 60f;
+            wreckSoundVolume = 0.7f;
+
+            moveSound = Sounds.loopThruster;
+            moveSoundPitchMin = 0.4f;
+            moveSoundPitchMax = 1.6f;
+            moveSoundVolume = 0.2f;
+
+            playerControllable = false;
+            logicControllable = false;
+            useUnitCap = false;
+            hidden = true;
+            constructor = TimedKillUnit::create;
+            controller = u -> new MissileAI();
+            outlineColor = Pal.darkerMetal;
+            lifetime = 60f * 60f;
+
+            weapons.add(new Weapon(){{
+                minShootVelocity = 1f;
+                x = 3f;
+                shootY = 0f;
+                reload = 12f;
+                shootCone = 180f;
+                ejectEffect = Fx.none;
+                inaccuracy = 15f;
+                ignoreRotation = true;
+                shootSound = Sounds.shootHorizon;
+                soundPitchMax = 1.2f;
+                bullet = new BombBulletType(27f, 25f){{
+                    width = 10f;
+                    height = 14f;
+                    hitEffect = Fx.flakExplosion;
+                    shootEffect = Fx.none;
+                    smokeEffect = Fx.none;
+
+                    status = StatusEffects.blasted;
+                    statusDuration = 60f;
+                    damage = splashDamage * 0.5f;
+                }};
+            }},
+            new Weapon(){{
+                y = 15f;
+                x = 25.5f;
+                minShootVelocity = 2f;
+                shootCone = 10f;
+                reload = 80f;
+                shoot.shots = 3;
+                shoot.shotDelay = 3f;
+                ejectEffect = Fx.casing1;
+                mirror = true;
+                bullet = new BasicBulletType(2.7f, 14){{
+                    inaccuracy = 4f;
+                    width = 7f;
+                    height = 9f;
+                    lifetime = 33f;
+                    shootEffect = Fx.shootSmall;
+                    smokeEffect = Fx.shootSmallSmoke;
+                    ammoMultiplier = 2;
+                }};
+            }});
+        }};
+        
         wick = new UnitType("wick"){{
             flying = true;
             aiController = FlyingSuicideAI::new;
@@ -1331,7 +1411,7 @@ public class TerraUnitTypes {
             healColor = blueTerraFront;
             outlineColor = Pal.darkerMetal;
             setEnginesMirror(
-                new UnitEngine(22f / 4f, -12f / 4f, 3f, -90f)
+                new UnitEngine(22f / 4f, -12f / 4f, 2f, -90f)
             );
             weapons.add(new Weapon(){{
                 targetUnderBlocks = false;
