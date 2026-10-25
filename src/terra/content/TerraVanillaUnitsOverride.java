@@ -82,7 +82,7 @@ public class TerraVanillaUnitsOverride {
                 shoot = new ShootBarrel(){{
                     shots = 18;
                     shotDelay = 1.5f;
-                    fistShotDelay = 39f;
+                    firstShotDelay = 39f;
                     barrels = new float[]{
                         10f / 4, 11f / 4, 0f, 
                         -10f / 4, 11f / 4, 0f
