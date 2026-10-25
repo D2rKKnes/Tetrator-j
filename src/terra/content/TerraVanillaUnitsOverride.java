@@ -50,8 +50,9 @@ public class TerraVanillaUnitsOverride {
                 //shootSound = TerraSounds.shootLaunch;
                 reload = 220f;
                 rotate = true;
-                rotateSpeed = 8f;
+                rotateSpeed = 0.4f;
                 mirror = false;
+                useAttackRange = false;
                 shootCone = 20f;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
