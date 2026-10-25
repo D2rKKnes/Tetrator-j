@@ -48,6 +48,7 @@ public class TerraVanillaUnitsOverride {
                 y = -141.5f / 4f;
                 shootY = 0f;
                 shootSound = Sounds.shootMissileSmall;
+                shootCone = 360f;
                 reload = 300f;
                 rotate = false;
                 //rotateSpeed = 0.4f;
@@ -63,13 +64,13 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-heavy-gun"){{
-                reload = 138f;
+                reload = 138f + (3f * 18f);
                 x = -77f / 4f;
                 y = -121.5f / 4f;
                 shootY = 33f / 4f;
                 rotate = true;
                 rotateSpeed = 2f;
-                shootSound = Sounds.shootSpectre;
+                shootSound = Sounds.shootSpectreSecondary;
                 shootSoundVolume = 1.1f;
                 chargeSound = Sounds.chargeVela;
                 parentizeEffects = true;
@@ -81,7 +82,7 @@ public class TerraVanillaUnitsOverride {
                 cooldownTime = 60f;
                 shoot = new ShootBarrel(){{
                     shots = 18;
-                    shotDelay = 1.5f;
+                    shotDelay = 3f;
                     firstShotDelay = 39f;
                     barrels = new float[]{
                         10f / 4, 11f / 4, 0f, 
@@ -104,8 +105,9 @@ public class TerraVanillaUnitsOverride {
                         moveY = -1.25f;
                     }}
                 );
-                bullet = new LaserBoltBulletType(3.7f, 20){{
+                bullet = new LaserBoltBulletType(3.7f, 23){{
                     scaleKeepVelocity = true;
+                    inaccuracy = 3f;
                     width = 2.5f;
                     height = 6f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -113,17 +115,17 @@ public class TerraVanillaUnitsOverride {
                         color(Pal.stat);
                         stroke(e.fin() * 2f);
                 
-                        Fill.circle(e.x, e.y, e.fin() * 20);
+                        Fill.circle(e.x, e.y, e.fin() * 6);
                 
                         randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
-                            Fill.circle(e.x + x, e.y + y, e.fin() * 5f);
-                            Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Pal.stat, 0.7f);
+                            Fill.circle(e.x + x, e.y + y, e.fin() * 1.5f);
+                            Drawf.light(e.x + x, e.y + y, e.fin() * 3f, Pal.stat, 0.7f);
                         });
                 
                         color();
                 
-                        Fill.circle(e.x, e.y, e.fin() * 10);
-                        Drawf.light(e.x, e.y, e.fin() * 20f, Pal.stat, 0.7f);
+                        Fill.circle(e.x, e.y, e.fin() * 3);
+                        Drawf.light(e.x, e.y, e.fin() * 6f, Pal.stat, 0.7f);
                     }).followParent(true).rotWithParent(true);
                     
                     trailWidth = 1.6f;
