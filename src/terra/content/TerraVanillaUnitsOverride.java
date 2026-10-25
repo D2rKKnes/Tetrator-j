@@ -54,7 +54,6 @@ public class TerraVanillaUnitsOverride {
                 //rotateSpeed = 0.4f;
                 mirror = false;
                 useAttackRange = false;
-                shootCone = 20f;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
                     //shake = 1f;
