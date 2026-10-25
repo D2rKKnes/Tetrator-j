@@ -47,10 +47,10 @@ public class TerraVanillaUnitsOverride {
                 x = 0f;
                 y = -141.5f / 4f;
                 shootY = 0f;
-                //shootSound = TerraSounds.shootLaunch;
-                reload = 220f;
-                rotate = true;
-                rotateSpeed = 0.4f;
+                shootSound = Sounds.shootMissileSmall;
+                reload = 300f;
+                rotate = false;
+                //rotateSpeed = 0.4f;
                 mirror = false;
                 useAttackRange = false;
                 shootCone = 20f;
@@ -60,6 +60,83 @@ public class TerraVanillaUnitsOverride {
                     speed = 0.001f;
                     keepVelocity = false;
                     spawnUnit = TerraUnitTypes.omuraDrone;
+                }};
+            }},
+            new Weapon("terra-heavy-gun"){{
+                reload = 138f;
+                x = -77f / 4f;
+                y = -121.5f / 4f;
+                shootY = 33f / 4f;
+                rotate = true;
+                rotateSpeed = 2f;
+                shootSound = Sounds.shootSpectre;
+                shootSoundVolume = 1.1f;
+                chargeSound = Sounds.chargeVela;
+                parentizeEffects = true;
+                
+                mirror = false;
+                recoils = 2;
+                recoil = 0.25f;
+                layerOffset = 0.001f;
+                cooldownTime = 60f;
+                shoot = new ShootBarrel(){{
+                    shots = 18;
+                    shotDelay = 1.5f;
+                    fistShotDelay = 39f;
+                    barrels = new float[]{
+                        10f / 4, 11f / 4, 0f, 
+                        -10f / 4, 11f / 4, 0f
+                    };
+                }};
+                parts.add(
+                    new RegionPart("-barrel-l") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 0;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1.25f;
+                    }},
+                    new RegionPart("-barrel-r") {{
+                        mirror = false;
+                        under = true;
+                        recoilIndex = 1;
+                        progress = heatProgress = PartProgress.recoil;
+                        moveY = -1.25f;
+                    }}
+                );
+                bullet = new LaserBoltBulletType(3.7f, 20){{
+                    scaleKeepVelocity = true;
+                    width = 2.5f;
+                    height = 6f;
+                    hitEffect = despawnEffect = Fx.hitBulletColor;
+                    chargeEffect = new Effect(40f, 100f, e -> {
+                        color(Pal.stat);
+                        stroke(e.fin() * 2f);
+                
+                        Fill.circle(e.x, e.y, e.fin() * 20);
+                
+                        randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
+                            Fill.circle(e.x + x, e.y + y, e.fin() * 5f);
+                            Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Pal.stat, 0.7f);
+                        });
+                
+                        color();
+                
+                        Fill.circle(e.x, e.y, e.fin() * 10);
+                        Drawf.light(e.x, e.y, e.fin() * 20f, Pal.stat, 0.7f);
+                    }).followParent(true).rotWithParent(true);
+                    
+                    trailWidth = 1.6f;
+                    trailLength = 4;
+                    shootEffect = Fx.shootSmallColor;
+                    smokeEffect = Fx.hitLaserColor;
+                    backColor = trailColor = Pal.yellowBoltFront;
+                    hitColor = Pal.yellowBoltFront;
+                    frontColor = Color.white;
+                    lightColor = Pal.yellowBoltFront;
+
+                    lifetime = 70f;
+                    buildingDamageMultiplier = 0.4f;
                 }};
             }},
             new Weapon("terra-heavy-rockets"){{
