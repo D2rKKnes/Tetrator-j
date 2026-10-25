@@ -126,17 +126,17 @@ public class TerraUnitTypes {
             health = 470;
             armor = 6f;
             engineSize = engineOffset = 0f;
+            trailLength = 5;
             setEnginesMirror(
                 new UnitEngine(15f / 4f, -12f / 4f, 2.5f, -70f)
             );
-            targetFlags = new BlockFlag[]{BlockFlag.generator, null};
             hitSize = 10;
             itemCapacity = 0;
             circleTarget = true;
             autoDropBombs = true;
             omniMovement = false;
-            rotateSpeed = 6f;
-            circleTargetRadius = 60f;
+            rotateSpeed = 4.6f;
+            circleTargetRadius = 55f;
             wreckSoundVolume = 0.7f;
 
             moveSound = Sounds.loopThruster;
@@ -177,8 +177,8 @@ public class TerraUnitTypes {
                 }};
             }},
             new Weapon(){{
-                y = 15f;
-                x = 25.5f;
+                y = 15f / 4f;
+                x = 25.5f / 4f;
                 minShootVelocity = 2f;
                 shootCone = 10f;
                 reload = 80f;
@@ -193,7 +193,6 @@ public class TerraUnitTypes {
                     lifetime = 33f;
                     shootEffect = Fx.shootSmall;
                     smokeEffect = Fx.shootSmallSmoke;
-                    ammoMultiplier = 2;
                 }};
             }});
         }};
