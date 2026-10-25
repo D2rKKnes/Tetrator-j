@@ -94,6 +94,7 @@ public class TerraUnitTypes {
             useUnitCap = false;
             hidden = true;
             constructor = TimedKillUnit::create;
+            targetPriority = -1f;
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
 
@@ -150,6 +151,7 @@ public class TerraUnitTypes {
             hidden = true;
             constructor = TimedKillUnit::create;
             controller = u -> new MissileAI();
+            targetPriority = -1f;
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
 
@@ -262,6 +264,7 @@ public class TerraUnitTypes {
             useUnitCap = false;
             hidden = true;
             constructor = TimedKillUnit::create;
+            targetPriority = -1f;
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
             lifetime = 2400f;
