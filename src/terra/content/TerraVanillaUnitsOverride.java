@@ -43,8 +43,8 @@ import static mindustry.Vars.*;
 public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
-        UnitTypes.omura.uiIcon = Core.atlas.find("terra-new-omura-full");
-        UnitTypes.omura.fullIcon = Core.atlas.find("terra-new-omura-full");
+        UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
+        UnitTypes.omura.fullIcon = Core.atlas.find("new-omura-full");
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
@@ -68,7 +68,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-heavy-gun"){{
-                reload = 138f + (3f * 18f);
+                reload = 158f + (3f * 18f);
                 x = -77f / 4f;
                 y = -121.5f / 4f;
                 shootY = 33f / 4f;
@@ -84,11 +84,11 @@ public class TerraVanillaUnitsOverride {
                 recoil = 0f;
                 recoilTime = 6f;
                 layerOffset = 0.001f;
-                cooldownTime = 60f;
+                cooldownTime = 90f;
                 shoot = new ShootBarrel(){{
                     shots = 18;
                     shotDelay = 3f;
-                    firstShotDelay = 39f;
+                    firstShotDelay = 40f;
                     barrels = new float[]{
                         10f / 4, 11f / 4, 0f, 
                         -10f / 4, 11f / 4, 0f
@@ -116,7 +116,7 @@ public class TerraVanillaUnitsOverride {
                     width = 2.5f;
                     height = 6f;
                     hitEffect = despawnEffect = Fx.hitBulletColor;
-                    chargeEffect = new Effect(40f, 100f, e -> {
+                    chargeEffect = new Effect(41f, 100f, e -> {
                         color(Pal.stat);
                         stroke(e.fin() * 2f);
                 
@@ -143,10 +143,9 @@ public class TerraVanillaUnitsOverride {
                     lightColor = Pal.yellowBoltFront;
 
                     lifetime = 70f;
+                    shake = 1.3f;
                     buildingDamageMultiplier = 0.4f;
                     shieldDamageMultiplier = 1.6f;
-                    armorMultiplier = 1.1f;
-                    homingPower = 0.015f;
 
                     fragBullets = 1;
                     fragRandomSpread = 30f;
