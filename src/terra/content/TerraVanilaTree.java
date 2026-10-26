@@ -103,6 +103,7 @@ public class TerraVanilaTree{
         });
         if(Core.settings.getBool("vanilaoverhaul", true)){vanillaNode(omura, () -> {
             node(omuraMissile, () -> {});
+            node(omuraDrone, () -> {});
         });}
         // Erekir
         String erekir = "erekir";
