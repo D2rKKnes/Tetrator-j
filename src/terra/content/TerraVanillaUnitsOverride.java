@@ -109,7 +109,7 @@ public class TerraVanillaUnitsOverride {
                         moveY = -1.25f;
                     }}
                 );
-                bullet = new LaserBoltBulletType(3.7f, 23){{
+                bullet = new LaserBoltBulletType(3.7f, 26){{
                     scaleKeepVelocity = true;
                     inaccuracy = 3f;
                     width = 2.5f;
@@ -143,6 +143,8 @@ public class TerraVanillaUnitsOverride {
 
                     lifetime = 70f;
                     buildingDamageMultiplier = 0.4f;
+                    shieldDamageMultiplier = 1.6f;
+                    homingPower = 0.015f;
                 }};
             }},
             new Weapon("terra-heavy-rockets"){{
