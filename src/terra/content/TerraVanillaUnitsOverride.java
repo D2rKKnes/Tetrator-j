@@ -42,6 +42,7 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
         UnitTypes.omura.uiIcon = Core.atlas.find("terra-new-omura-full");
         UnitTypes.omura.fullIcon = Core.atlas.find("terra-new-omura-full");
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
