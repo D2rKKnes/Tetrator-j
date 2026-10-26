@@ -64,6 +64,7 @@ public class TerraVanillaUnitsOverride {
                     speed = 0.001f;
                     keepVelocity = false;
                     spawnUnit = TerraUnitTypes.omuraDrone;
+                    rangeOverride = 500f;
                 }};
             }},
             new Weapon("terra-heavy-gun"){{
@@ -144,7 +145,24 @@ public class TerraVanillaUnitsOverride {
                     lifetime = 70f;
                     buildingDamageMultiplier = 0.4f;
                     shieldDamageMultiplier = 1.6f;
+                    armorMultiplier = 1.1f;
                     homingPower = 0.015f;
+
+                    fragBullets = 1;
+                    fragRandomSpread = 30f;
+                    fragLifeMax = 2f;
+                    fragOffsetMax = 2f;
+                    fragBullet = new LaserBulletType(){{
+                        damage = 18f;
+                        buildingDamageMultiplier = 0.5f;
+                        sideAngle = 25f;
+                        sideWidth = 1.5f;
+                        sideLength = 14f;
+                        width = 10f;
+                        length = 40f;
+                        lifetime = 20f;
+                        colors = new Color[]{Pal.yellowBoltFront.cpy().a(0.4f), Pal.yellowBoltFront, Color.white};
+                    }};
                 }};
             }},
             new Weapon("terra-heavy-rockets"){{
