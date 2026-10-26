@@ -148,7 +148,6 @@ public class TerraUnitTypes {
             playerControllable = false;
             logicControllable = false;
             useUnitCap = false;
-            hidden = true;
             constructor = TimedKillUnit::create;
             controller = u -> new MissileAI();
             targetPriority = -1f;
