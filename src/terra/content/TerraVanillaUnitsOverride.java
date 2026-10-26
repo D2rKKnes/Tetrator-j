@@ -42,6 +42,9 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.omura.uiIcon = Core.atlas.find("terra-new-omura-full");
+        UnitTypes.omura.fullIcon = Core.atlas.find("terra-new-omura-full");
+        UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
                 x = 0f;
@@ -49,7 +52,7 @@ public class TerraVanillaUnitsOverride {
                 shootY = 0f;
                 shootSound = Sounds.shootMissileSmall;
                 shootCone = 360f;
-                reload = 300f;
+                reload = 8f * 60f;
                 rotate = false;
                 //rotateSpeed = 0.4f;
                 mirror = false;
@@ -76,7 +79,8 @@ public class TerraVanillaUnitsOverride {
                 
                 mirror = false;
                 recoils = 2;
-                recoil = 0.25f;
+                recoil = 0f;
+                recoilTime = 6f;
                 layerOffset = 0.001f;
                 cooldownTime = 60f;
                 shoot = new ShootBarrel(){{
