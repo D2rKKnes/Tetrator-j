@@ -42,6 +42,48 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.corvus.weapons.add(
+            new Weapon("terra-heal-charger"){{
+                reload = 100f;
+                x = 57f / 4f;
+                y = -10f / 4f;
+                shootY = 16f / 4f;
+                rotate = true;
+                rotateSpeed = 3f;
+                recoilTime = reload * 0.8f;
+                minWarmup = 0.9f;
+                shoot.firstShotDelay = 50;
+                shootSound = TerraSounds.shootElectro;
+                chargeSound = Sounds.chargeVela;
+                parts.addAll(
+                    new RegionPart("-blade") {{
+                        mirror = true;
+                        under = true;
+                        moves.add(new PartMove(PartProgress.warmup, 0.75f, 0f, 0f));
+                        x = 0;
+                        y = 0;
+                        moveRot = -25;
+                        progress = PartProgress.recoil;
+                    }},
+                    new RegionPart("-none") {{
+                        mirror = false;
+                        progress = PartProgress.charge.curve(Interp.fastSlow);
+                        y = 0f;
+                        moveY = 16f / 4f;
+                        children.addAll(
+                            new FlarePart(){{
+                                progress = PartProgress.charge.curve(Interp.fastSlow);
+                                color1 = Pal.heal;
+                                radius = 0;
+                                radiusTo = 9;
+                                stroke = 3f;
+                            }}
+                        );
+                        under = false;
+                    }}
+                );
+            }};
+        );
         // UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
         // UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
         // UnitTypes.omura.fullIcon = Core.atlas.find("new-omura-full");
