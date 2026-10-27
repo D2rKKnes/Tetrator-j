@@ -22,6 +22,11 @@ public class FancyLaserBulletType extends LaserBulletType {
     public void init(Bullet b){
         super.init(b);
         PositionLightning.createEffect(b, b.fdata * 0.95f, b.rotation(), hitColor, boltNum, liWidth);
+        if(spawnBullets.size > 0){
+            for(var bullet : spawnBullets){
+                bullet.create(b, b.x, b.y, b.rotation() + Mathf.range(spawnBulletRandomSpread));
+            }
+        }
     }
 
     @Override
