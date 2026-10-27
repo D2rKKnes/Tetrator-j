@@ -2,6 +2,7 @@ package terra.type.bullet;
 
 import mindustry.content.Fx;
 import mindustry.gen.Bullet;
+import mindustry.entities.bullet.*;
 
 //Original code from Exogenesis (java)
 public class EffectBulletType extends BulletType{
