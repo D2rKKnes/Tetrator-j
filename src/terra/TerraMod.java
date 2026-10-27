@@ -38,6 +38,16 @@ public class TerraMod extends Mod{
             for (UnitType unit : Vars.content.units()) {
                 if (unit == TerraUnitTypes.myDoom) continue;
                 unit.immunities.remove(TerraStatusEffects.instantDeath);
+
+                String fullSprite = "new-" + unit.name + "-full";
+                if (Core.atlas.has(fullSprite)) {
+                    unit.uiIcon = Core.atlas.find(fullSprite);
+                    unit.fullIcon = Core.atlas.find(fullSprite);
+                }
+                String newDesc = Core.bundle.getOrNull("unit." + unit.name + ".new-description");
+                if (newDesc != null && !newDesc.isEmpty()) {
+                    unit.description = newDesc;
+                }
             }
             
             Planets.verilus.generator = new VerilusAsteroidGenerator();
