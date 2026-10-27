@@ -18,7 +18,7 @@ public class TerraSounds {
 
     public static Sound
             railGunCharge, acceleratinglaserloop, jumpIn, shockwave,
-            shootHeavy, shootBlackhole, shootFastLaser, shootLaunch, shootAlt2;
+            shootHeavy, shootBlackhole, shootFastLaser, shootLaunch, shootAlt2, shootElectro;
 
     public static void load() {
         try {
