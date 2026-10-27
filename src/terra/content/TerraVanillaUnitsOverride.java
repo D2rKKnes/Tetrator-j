@@ -69,17 +69,19 @@ public class TerraVanillaUnitsOverride {
                         x = 0;
                         y = 0;
                         moveRot = -25;
-                        progress = PartProgress.recoil;
+                        progress = PartProgress.recoil.curve(Interp.fastSlow);
                     }},
                     new RegionPart("-aglow") {{
                         mirror = under = outline = false;
                         x = y = 0;
                         color = Pal.heal.cpy().a(0f);
                         colorTo = Pal.heal.cpy().a(1f);
+                        mixColor = Color.white.cpy().a(0f);
+                        mixColorTo = Color.white.cpy().a(0.75f);
                         progress = PartProgress.charge.curve(Interp.fastSlow);
                     }},
                     new RegionPart("-none") {{
-                        mirror = drawRegion = false;
+                        mirror = under = drawRegion = false;
                         progress = PartProgress.charge.curve(Interp.fastSlow);
                         y = 0f;
                         moveY = 16f / 4f;
@@ -92,7 +94,6 @@ public class TerraVanillaUnitsOverride {
                                 stroke = 3f;
                             }}
                         );
-                        under = false;
                     }}
                 );
                 bullet = new FancyLaserBulletType() {{
@@ -115,7 +116,7 @@ public class TerraVanillaUnitsOverride {
                         int s = j;
                         for(int i : Mathf.signs){
                             float fin = 0.05f + (j + 1) / (float)count;
-                            float spd = 5.5f;
+                            float spd = 7f;
                             float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
                             boolean show = j == 0 && i > 0;
                             spawnBullets.add(new BasicBulletType(spd * fin, 30){{
@@ -135,8 +136,6 @@ public class TerraVanillaUnitsOverride {
 
                                 splashDamage = 35f;
                                 splashDamageRadius = 30f;
-                                status = StatusEffects.electrified;
-                                statusDuration = 30f;
                                 healPercent = 0.5f;
                                 collidesTeam = true;
                                 despawnEffect = hitEffect = new ExplosionEffect(){{
@@ -159,7 +158,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-corvus-launcher"){{
-                reload = 140f + (6f * 7f);
+                reload = 125f + (6f * 7f);
                 shootY = 0f;
                 x = 51 / 4f;
                 y = -52f / 4;
@@ -171,7 +170,7 @@ public class TerraVanillaUnitsOverride {
                 layerOffset = -0.001f;
                 minWarmup = 0.96f;
                 inaccuracy = 5f;
-                recoil = 1.5f;
+                recoil = 1f;
                 shootSound = TerraSounds.shootLaunch;
                 shootSoundVolume = 0.7f;
                 shoot = new ShootBarrel(){{
@@ -188,16 +187,16 @@ public class TerraVanillaUnitsOverride {
                         name = "terra-heal-hidden-launcher";
                         mirror = false;
                         under = true;
-                        moves.add(new PartMove(PartProgress.warmup, 0f, 7f, 0f));
+                        //moves.add(new PartMove(PartProgress.warmup, 0f, 7f, 0f));
                         x = 0;
                         y = -7f;
-                        moveY = -1.5f;
-                        progress = PartProgress.recoil;
+                        moveY = 7f;
+                        progress = PartProgress.warmup;
                     }}
                 );
                 bullet = new BasicBulletType(4f, 77){{
                     lifetime = 85f;
-                    rangeOverride = 225f;
+                    rangeOverride = 250f;
                     splashDamage = damage * 0.6f;
                     splashDamageRadius = 5f * 8f;
                     scaledSplashDamage = true;
@@ -221,9 +220,6 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        // UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
-        // UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
-        // UnitTypes.omura.fullIcon = Core.atlas.find("new-omura-full");
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
