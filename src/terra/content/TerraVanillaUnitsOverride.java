@@ -82,7 +82,7 @@ public class TerraVanillaUnitsOverride {
                         under = false;
                     }}
                 );
-            }};
+            }}
         );
         // UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
         // UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
