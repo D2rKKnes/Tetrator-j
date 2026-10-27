@@ -79,6 +79,7 @@ public class TerraVanillaUnitsOverride {
                         mixColor = Color.white.cpy().a(0f);
                         mixColorTo = Color.white.cpy().a(0.75f);
                         progress = PartProgress.charge.curve(Interp.fastSlow);
+                        layer = Layer.effect;
                     }},
                     new RegionPart("-none") {{
                         mirror = under = drawRegion = false;
