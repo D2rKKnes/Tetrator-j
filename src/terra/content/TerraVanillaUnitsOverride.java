@@ -57,6 +57,7 @@ public class TerraVanillaUnitsOverride {
                 minWarmup = 0.9f;
                 shoot.firstShotDelay = 44;
                 shootSound = TerraSounds.shootElectro;
+                shootSoundVolume = 1.3f;
                 chargeSound = Sounds.chargeVela;
                 heatColor = Pal.heal;
                 parts.addAll(
@@ -154,6 +155,68 @@ public class TerraVanillaUnitsOverride {
                             }});
                         }
                     }
+                }};
+            }},
+            new Weapon("terra-corvus-launcher"){{
+                reload = 155f + (6f * 8f);
+                shootY = 0f;
+                x = 51 / 4f;
+                y = -52f / 4;
+                rotate = false;
+                shootCone = 360f;
+                baseRotation = 180f - 10;
+                mirror = true;
+                alternate = false;
+                layerOffset = -0.001f;
+                minWarmup = 0.95f;
+                inaccuracy = 5f;
+                recoil = 1.5f;
+                shootSound = TerraSounds.shootLaunch;
+                shootSoundVolume = 0.7f;
+                shoot = new ShootBarrel(){{
+                    shots = 6;
+                    shotDelay = 8f;
+                    barrels = new float[]{
+                        13.5f / 4f, 2f, 0f, 
+                        0f, 2f, 0f, 
+                        -13.5f / 4f, 2f, 0f
+                    };
+                }};
+                parts.addAll(
+                    new RegionPart("") {{
+                        name = "terra-heal-hidden-launcher"
+                        mirror = false;
+                        under = true;
+                        moves.add(new PartMove(PartProgress.warmup, 0f, 5f, 0f));
+                        x = 0;
+                        y = -5;
+                        moveY = -1.5;
+                        progress = PartProgress.recoil;
+                    }}
+                );
+                bullet = new BasicBulletType(2.2f, 77){{
+                    lifetime = 85f;
+                    rangeOverride = 225f;
+                    splashDamage = damage * 0.6f;
+                    splashDamageRadius = 5f * 8f;
+                    scaledSplashDamage = true;
+                    status = StatusEffects.electrified;
+                    statusDuration = 45f;
+                    healPercent = 0.75f;
+                    collidesTeam = true;
+                    sprite = "terra-strike";
+                    drag = -0.012f;
+                    followAimSpeed = 3.2f;
+                    width = 12f;
+                    height = 16f;
+                    shrinkY = 0.1f;
+                    hitColor = lightColor = trailColor = backColor = Pal.heal;
+                    frontColor = Color.white;
+                    trailWidth = 1.7f;
+                    trailLength = 8;
+                    despawnHit = true;
+                    despawnEffect = hitEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, hitColor));
+                    despawnSound = Sounds.unitExplode1;
                 }};
             }}
         );
