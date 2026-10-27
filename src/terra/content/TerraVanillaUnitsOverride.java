@@ -44,10 +44,11 @@ public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.corvus.weapons.add(
             new Weapon("terra-heal-charger"){{
-                reload = 100f;
+                reload = cooldownTime = 120f;
                 x = 57f / 4f;
                 y = -10f / 4f;
                 shootY = 16f / 4f;
+                layerOffset = 0.001f;
                 rotate = true;
                 rotateSpeed = 3f;
                 recoilTime = reload * 0.8f;
@@ -82,6 +83,19 @@ public class TerraVanillaUnitsOverride {
                         under = false;
                     }}
                 );
+                bullet = new FancyLaserBulletType() {{
+                    damage = 105f;
+                    sideAngle = 25f;
+                    sideWidth = 1f;
+                    sideLength = 50f;
+                    healPercent = 6f;
+                    collidesTeam = true;
+                    width = 20f;
+                    length = 110f;
+                    hitColor = lightningColor = Pal.heal;
+                    shootEffect = Fx.colorSpark;
+                    colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
+                }};
             }}
         );
         // UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
