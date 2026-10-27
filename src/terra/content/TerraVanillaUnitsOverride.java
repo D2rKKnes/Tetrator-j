@@ -42,6 +42,8 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.corvus.weapons.get(0).bullet.status = StatusEffects.electrified;
+        UnitTypes.corvus.weapons.get(0).bullet.statusDuration = 4f * 60f;
         UnitTypes.corvus.weapons.add(
             new Weapon("terra-heal-charger"){{
                 reload = cooldownTime = 120f;
@@ -53,7 +55,7 @@ public class TerraVanillaUnitsOverride {
                 rotateSpeed = 3f;
                 recoilTime = reload * 0.8f;
                 minWarmup = 0.9f;
-                shoot.firstShotDelay = 50;
+                shoot.firstShotDelay = 45;
                 shootSound = TerraSounds.shootElectro;
                 chargeSound = Sounds.chargeVela;
                 parts.addAll(
@@ -67,7 +69,7 @@ public class TerraVanillaUnitsOverride {
                         progress = PartProgress.recoil;
                     }},
                     new RegionPart("-none") {{
-                        mirror = false;
+                        mirror = drawRegion = false;
                         progress = PartProgress.charge.curve(Interp.fastSlow);
                         y = 0f;
                         moveY = 16f / 4f;
@@ -85,16 +87,66 @@ public class TerraVanillaUnitsOverride {
                 );
                 bullet = new FancyLaserBulletType() {{
                     damage = 105f;
-                    sideAngle = 25f;
+                    sideAngle = 5f;
                     sideWidth = 1f;
                     sideLength = 50f;
                     healPercent = 6f;
                     collidesTeam = true;
-                    width = 20f;
-                    length = 110f;
+                    width = 24f;
+                    length = 175f;
+                    lifatime = 90f;
                     hitColor = lightningColor = Pal.heal;
                     shootEffect = Fx.colorSpark;
+                    status = StatusEffects.electrified;
+                    statusDuration = 90f;
                     colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
+
+                    int count = 3;
+                    for(int j = 0; j < count; j++){
+                        int s = j;
+                        for(int i : Mathf.signs){
+                            float fin = 0.05f + (j + 1) / (float)count;
+                            float spd = 4;
+                            float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
+                            boolean show = j == 0 && i > 0;
+                            spawnBullets.add(new BasicBulletType(spd * fin, 30){{
+                                drag = 0.002f;
+                                width = 9f;
+                                height = 8f;
+                                lifetime = life + 5f;
+                                weaveRandom = false;
+                                hitSize = 5f;
+                                showStats = show;
+                                hitColor = backColor = trailColor = Pal.heal;
+                                frontColor = Color.white;
+                                trailWidth = 2.5f;
+                                trailLength = 5;
+                                weaveScale = (3f + s/2f) / 1.2f;
+                                weaveMag = i * (4f - fin * 2f);
+
+                                splashDamage = 35f;
+                                splashDamageRadius = 30f;
+                                status = StatusEffects.electrified;
+                                statusDuration = 30f;
+                                healPercent = 0.5f;
+                                collidesTeam = true;
+                                despawnEffect = new ExplosionEffect(){{
+                                    lifetime = 50f;
+                                    waveStroke = 4f;
+                                    waveColor = sparkColor = trailColor;
+                                    waveRad = 30f;
+                                    smokeSize = 7f;
+                                    smokes = 6;
+                                    smokeSizeBase = 0f;
+                                    smokeColor = trailColor;
+                                    sparks = 5;
+                                    sparkRad = 30f;
+                                    sparkLen = 3f;
+                                    sparkStroke = 1.5f;
+                                }};
+                            }});
+                        }
+                    }
                 }};
             }}
         );
