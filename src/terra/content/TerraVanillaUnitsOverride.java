@@ -42,7 +42,7 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
-        UnitTypes.corvus.immunities = ObjectSet.with(StatusEffects.shock, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.corvus.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.corvus.weapons.get(0).bullet.status = StatusEffects.electrified;
         UnitTypes.corvus.weapons.get(0).bullet.statusDuration = 4f * 60f;
         UnitTypes.corvus.weapons.add(
@@ -159,7 +159,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-corvus-launcher"){{
-                reload = 125f + (6f * 8f);
+                reload = 140f + (6f * 7f);
                 shootY = 0f;
                 x = 51 / 4f;
                 y = -52f / 4;
@@ -176,7 +176,7 @@ public class TerraVanillaUnitsOverride {
                 shootSoundVolume = 0.7f;
                 shoot = new ShootBarrel(){{
                     shots = 6;
-                    shotDelay = 8f;
+                    shotDelay = 7f;
                     barrels = new float[]{
                         13.5f / 4f, 2f, 0f, 
                         0f, 2f, 0f, 
