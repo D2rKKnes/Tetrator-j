@@ -68,6 +68,14 @@ public class TerraVanillaUnitsOverride {
                         moveRot = -25;
                         progress = PartProgress.recoil;
                     }},
+                    new RegionPart("-aglow") {{
+                        mirror = true;
+                        under = true;
+                        x = y = 0;
+                        color = Pal.heal.cpy().a(0f);
+                        colorTo = Pal.heal.cpy().a(1f);
+                        progress = PartProgress.charge.curve(Interp.fastSlow);
+                    }},
                     new RegionPart("-none") {{
                         mirror = drawRegion = false;
                         progress = PartProgress.charge.curve(Interp.fastSlow);
@@ -94,7 +102,7 @@ public class TerraVanillaUnitsOverride {
                     collidesTeam = true;
                     width = 24f;
                     length = 175f;
-                    lifatime = 90f;
+                    lifetime = 90f;
                     hitColor = lightningColor = Pal.heal;
                     shootEffect = Fx.colorSpark;
                     status = StatusEffects.electrified;
