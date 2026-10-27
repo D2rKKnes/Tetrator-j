@@ -42,9 +42,9 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
-        UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
-        UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
-        UnitTypes.omura.fullIcon = Core.atlas.find("new-omura-full");
+        // UnitTypes.omura.description = Core.bundle.getOrNull("unit.omura.new-description");
+        // UnitTypes.omura.uiIcon = Core.atlas.find("new-omura-full");
+        // UnitTypes.omura.fullIcon = Core.atlas.find("new-omura-full");
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
@@ -146,6 +146,7 @@ public class TerraVanillaUnitsOverride {
                     shake = 1.3f;
                     buildingDamageMultiplier = 0.4f;
                     shieldDamageMultiplier = 1.6f;
+                    armorMultiplier = 0.2f;
 
                     fragBullets = 1;
                     fragRandomSpread = 30f;
@@ -154,6 +155,8 @@ public class TerraVanillaUnitsOverride {
                     fragBullet = new LaserBulletType(){{
                         damage = 18f;
                         buildingDamageMultiplier = 0.5f;
+                        shieldDamageMultiplier = 1.4f;
+                        armorMultiplier = 0.3f;
                         sideAngle = 25f;
                         sideWidth = 1.5f;
                         sideLength = 14f;
@@ -165,7 +168,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-heavy-rockets"){{
-                reload = 98f;
+                reload = 70f + (4f * 7f);
                 x = 77f / 4f;
                 y = -121.5f / 4f;
                 shootY = 0f;
@@ -174,7 +177,7 @@ public class TerraVanillaUnitsOverride {
                 mirror = false;
                 shoot = new ShootBarrel(){{
                     shots = 7;
-                    shotDelay = 2.5f;
+                    shotDelay = 4f;
                     barrels = new float[]{
                         0f, 20f / 4, 0f, 
                         -9f / 4, 25f / 4, 0f, 
