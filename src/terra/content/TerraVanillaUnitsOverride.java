@@ -42,6 +42,7 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.corvus.immunities = ObjectSet.with(StatusEffects.shock, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.corvus.weapons.get(0).bullet.status = StatusEffects.electrified;
         UnitTypes.corvus.weapons.get(0).bullet.statusDuration = 4f * 60f;
         UnitTypes.corvus.weapons.add(
@@ -109,12 +110,12 @@ public class TerraVanillaUnitsOverride {
                     statusDuration = 90f;
                     colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
 
-                    int count = 3;
+                    int count = 4;
                     for(int j = 0; j < count; j++){
                         int s = j;
                         for(int i : Mathf.signs){
                             float fin = 0.05f + (j + 1) / (float)count;
-                            float spd = 4;
+                            float spd = 5.5f;
                             float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
                             boolean show = j == 0 && i > 0;
                             spawnBullets.add(new BasicBulletType(spd * fin, 30){{
@@ -138,7 +139,7 @@ public class TerraVanillaUnitsOverride {
                                 statusDuration = 30f;
                                 healPercent = 0.5f;
                                 collidesTeam = true;
-                                despawnEffect = new ExplosionEffect(){{
+                                despawnEffect = hitEffect = new ExplosionEffect(){{
                                     lifetime = 50f;
                                     waveStroke = 4f;
                                     waveColor = sparkColor = trailColor;
@@ -158,17 +159,17 @@ public class TerraVanillaUnitsOverride {
                 }};
             }},
             new Weapon("terra-corvus-launcher"){{
-                reload = 155f + (6f * 8f);
+                reload = 125f + (6f * 8f);
                 shootY = 0f;
                 x = 51 / 4f;
                 y = -52f / 4;
                 rotate = false;
                 shootCone = 360f;
-                baseRotation = 180f - 10;
+                baseRotation = 180f + 10;
                 mirror = true;
                 alternate = false;
                 layerOffset = -0.001f;
-                minWarmup = 0.95f;
+                minWarmup = 0.96f;
                 inaccuracy = 5f;
                 recoil = 1.5f;
                 shootSound = TerraSounds.shootLaunch;
@@ -187,14 +188,14 @@ public class TerraVanillaUnitsOverride {
                         name = "terra-heal-hidden-launcher";
                         mirror = false;
                         under = true;
-                        moves.add(new PartMove(PartProgress.warmup, 0f, 5f, 0f));
+                        moves.add(new PartMove(PartProgress.warmup, 0f, 7f, 0f));
                         x = 0;
-                        y = -5f;
+                        y = -7f;
                         moveY = -1.5f;
                         progress = PartProgress.recoil;
                     }}
                 );
-                bullet = new BasicBulletType(2.2f, 77){{
+                bullet = new BasicBulletType(4f, 77){{
                     lifetime = 85f;
                     rangeOverride = 225f;
                     splashDamage = damage * 0.6f;
@@ -205,8 +206,8 @@ public class TerraVanillaUnitsOverride {
                     healPercent = 0.75f;
                     collidesTeam = true;
                     sprite = "terra-strike";
-                    drag = -0.012f;
-                    followAimSpeed = 3.2f;
+                    drag = -0.004f;
+                    followAimSpeed = 5f;
                     width = 12f;
                     height = 16f;
                     shrinkY = 0.1f;
