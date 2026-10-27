@@ -184,7 +184,7 @@ public class TerraVanillaUnitsOverride {
                 }};
                 parts.addAll(
                     new RegionPart("") {{
-                        name = "terra-heal-hidden-launcher"
+                        name = "terra-heal-hidden-launcher";
                         mirror = false;
                         under = true;
                         moves.add(new PartMove(PartProgress.warmup, 0f, 5f, 0f));
