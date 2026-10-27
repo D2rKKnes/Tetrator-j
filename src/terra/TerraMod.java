@@ -39,7 +39,7 @@ public class TerraMod extends Mod{
                 if (unit == TerraUnitTypes.myDoom) continue;
                 unit.immunities.remove(TerraStatusEffects.instantDeath);
 
-                String fullSprite = "new-" + unit.name + "-full";
+                String fullSprite = "terra-new-" + unit.name + "-full";
                 if (Core.atlas.has(fullSprite)) {
                     unit.uiIcon = Core.atlas.find(fullSprite);
                     unit.fullIcon = Core.atlas.find(fullSprite);
