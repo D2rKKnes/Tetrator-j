@@ -189,8 +189,8 @@ public class TerraVanillaUnitsOverride {
                         under = true;
                         moves.add(new PartMove(PartProgress.warmup, 0f, 5f, 0f));
                         x = 0;
-                        y = -5;
-                        moveY = -1.5;
+                        y = -5f;
+                        moveY = -1.5f;
                         progress = PartProgress.recoil;
                     }}
                 );
