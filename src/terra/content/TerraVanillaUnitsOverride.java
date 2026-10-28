@@ -153,14 +153,10 @@ public class TerraVanillaUnitsOverride {
                         progress = PartProgress.recoil.curve(Interp.fastSlow);
                     }},
                     new RegionPart("-aglow") {{
-                        mirror = under = outline = false;
+                        mirror = under = drawRegion = false;
                         x = y = 0;
-                        color = Pal.heal.cpy().a(0f);
-                        colorTo = Pal.heal.cpy().a(1f);
-                        mixColor = Color.white.cpy().a(0f);
-                        mixColorTo = Color.white.cpy().a(0.75f);
-                        progress = PartProgress.charge.curve(Interp.fastSlow);
-                        layer = Layer.effect;
+                        heatColor = Pal.heal;
+                        heatProgress = PartProgress.charge.curve(Interp.fastSlow);
                     }},
                     new RegionPart("-none") {{
                         mirror = under = drawRegion = false;
