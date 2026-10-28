@@ -42,6 +42,87 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.vela.immunities = ObjectSet.with(StatusEffects.shocked);
+        UnitTypes.vela.weapons.add(
+            new Weapon("terra-dual-mount"){{
+                x = 0f;
+                y = -1.5f;
+                shootY = 7f;
+                reload = 112f;
+                mirror = false;
+                shootSound = Sounds.shootLancer;
+                rotate = true;
+                rotateSpeed = 2.1f;
+                recoil = 0.4f;
+                layerOffset = 0.001f;
+    
+                shoot = new ShootAlternate() {{
+                    shots = 2;
+                    barrels = 2;
+                    spread = 8.5f;
+                }};
+    
+                parts.add(new RegionPart("-barrels") {{
+                    progress = PartProgress.recoil;
+                    moveY = -3.3f;
+                }});
+    
+                bullet = new EmpBulletType() {{
+                    sprite = "circle-bullet";
+                    damage = 38f;
+                    splashDamage = 45f;
+                    splashDamageRadius = 3f * 8f;
+                    radius = 3f * 8f;
+                    timeIncrease = 1.5f;
+                    timeDuration = 60f * 5f;
+                    powerSclDecrease = 0.7f;
+                    speed = 6f;
+                    lifetime = 45f;
+                    width = 6f;
+                    height = 6f;
+                    backColor = Pal.heal;
+                    hitColor = Pal.heal;
+                    trailColor = Pal.heal;
+                    frontColor = Color.white;
+                    trailWidth = 3f;
+                    trailLength = 16;
+                    hitSound = Sounds.explosionNavanax;
+                    homingPower = 0.25f;
+                    homingRange = 28f;
+                    collidesTeam = true;
+                    healPercent = 1f;
+        
+                    hitEffect = new ExplosionEffect() {{
+                        waveColor = smokeColor = sparkColor = Pal.heal;
+                        waveRad = 3f * 8f;
+                        sparkStroke = 2f;
+                        sparks = 5;
+                    }};
+        
+                    despawnEffect = new ExplosionEffect() {{
+                        waveColor = smokeColor = Pal.heal;
+                        waveRad = 3f * 8f;
+                        sparks = 0;
+                    }};
+        
+                    intervalBullets = 1;
+                    intervalRandomSpread = 360f;
+                    fragBullets = 1;
+                    fragRandomSpread = 45f;
+                    intervalBullet = fragBullet = new LaserBulletType() {{
+                        length = 24f;
+                        width = 16f;
+                        lifetime = 30f;
+                        colors = new Color[]{Pal.heal, Pal.heal, Color.white};
+                        damage = 30f;
+                        collidesTeam = true;
+                        collidesAir = true;
+                        healPercent = 0.5f;
+                        sideWidth = 0f;
+                    }};
+                }};
+            }}
+        );
         UnitTypes.corvus.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.corvus.weapons.get(0).bullet.status = StatusEffects.electrified;
         UnitTypes.corvus.weapons.get(0).bullet.statusDuration = 4f * 60f;
