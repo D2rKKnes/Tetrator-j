@@ -44,17 +44,18 @@ public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.vela.immunities = ObjectSet.with(StatusEffects.shocked);
         UnitTypes.vela.weapons.add(
-            new Weapon("terra-dual-mount"){{
-                x = 0f;
-                y = -1.5f;
-                shootY = 7f;
-                reload = 112f;
-                mirror = false;
+            new Weapon("terra-big-heal-gun"){{
+                x = 46f / 4f;
+                y = 30f / 4f;
+                shootY = 5f;
+                reload = 40f;
+                mirror = true;
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 rotateSpeed = 2.1f;
-                recoil = 0.4f;
-                layerOffset = 0.001f;
+                rotationLimit = 20f;
+                recoil = 2f;
+                layerOffset = -0.001f;
     
                 shoot = new ShootAlternate() {{
                     shots = 2;
@@ -70,16 +71,16 @@ public class TerraVanillaUnitsOverride {
                 bullet = new EmpBulletType() {{
                     sprite = "circle-bullet";
                     damage = 38f;
-                    splashDamage = 45f;
+                    splashDamage = 25f;
                     splashDamageRadius = 3f * 8f;
                     radius = 3f * 8f;
                     timeIncrease = 1.5f;
                     timeDuration = 60f * 5f;
                     powerSclDecrease = 0.7f;
-                    speed = 6f;
-                    lifetime = 45f;
-                    width = 6f;
-                    height = 6f;
+                    speed = 4f;
+                    lifetime = 50f;
+                    width = 5f;
+                    height = 5f;
                     backColor = Pal.heal;
                     hitColor = Pal.heal;
                     trailColor = Pal.heal;
@@ -107,6 +108,7 @@ public class TerraVanillaUnitsOverride {
         
                     intervalBullets = 1;
                     intervalRandomSpread = 360f;
+                    bulletInterval = 15f;
                     fragBullets = 1;
                     fragRandomSpread = 45f;
                     intervalBullet = fragBullet = new LaserBulletType() {{
@@ -114,10 +116,10 @@ public class TerraVanillaUnitsOverride {
                         width = 16f;
                         lifetime = 30f;
                         colors = new Color[]{Pal.heal, Pal.heal, Color.white};
-                        damage = 30f;
+                        damage = 14f;
                         collidesTeam = true;
                         collidesAir = true;
-                        healPercent = 0.5f;
+                        healPercent = 0.2f;
                         sideWidth = 0f;
                     }};
                 }};
