@@ -53,13 +53,14 @@ public class TerraVanillaUnitsOverride {
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 rotateSpeed = 2.1f;
-                rotationLimit = 20f;
+                rotationLimit = 40f;
+                shootCone = 15f;
                 recoil = 2f;
                 layerOffset = -0.001f;
     
                 bullet = new EmpBulletType() {{
                     sprite = "circle-bullet";
-                    damage = 38f;
+                    damage = 45f;
                     splashDamage = 25f;
                     splashDamageRadius = 3f * 8f;
                     radius = 3f * 8f;
@@ -80,7 +81,7 @@ public class TerraVanillaUnitsOverride {
                     homingPower = 0.25f;
                     homingRange = 28f;
                     collidesTeam = true;
-                    healPercent = 1f;
+                    healPercent = 1.5f;
         
                     hitEffect = new ExplosionEffect() {{
                         waveColor = smokeColor = sparkColor = Pal.heal;
@@ -105,10 +106,10 @@ public class TerraVanillaUnitsOverride {
                         width = 16f;
                         lifetime = 30f;
                         colors = new Color[]{Pal.heal, Pal.heal, Color.white};
-                        damage = 14f;
+                        damage = 20f;
                         collidesTeam = true;
                         collidesAir = true;
-                        healPercent = 0.2f;
+                        healPercent = 0.5f;
                         sideWidth = 0f;
                     }};
                 }};
@@ -167,9 +168,9 @@ public class TerraVanillaUnitsOverride {
                 );
                 bullet = new FancyLaserBulletType() {{
                     damage = 105f;
-                    sideAngle = 5f;
-                    sideWidth = 1f;
-                    sideLength = 50f;
+                    // sideAngle = 5f;
+                    // sideWidth = 1f;
+                    // sideLength = 50f;
                     healPercent = 6f;
                     collidesTeam = true;
                     width = 24f;
