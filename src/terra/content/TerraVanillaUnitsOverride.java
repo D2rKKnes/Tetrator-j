@@ -57,17 +57,6 @@ public class TerraVanillaUnitsOverride {
                 recoil = 2f;
                 layerOffset = -0.001f;
     
-                shoot = new ShootAlternate() {{
-                    shots = 2;
-                    barrels = 2;
-                    spread = 8.5f;
-                }};
-    
-                parts.add(new RegionPart("-barrels") {{
-                    progress = PartProgress.recoil;
-                    moveY = -3.3f;
-                }});
-    
                 bullet = new EmpBulletType() {{
                     sprite = "circle-bullet";
                     damage = 38f;
