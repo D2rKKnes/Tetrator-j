@@ -28,7 +28,7 @@ import static arc.Core.atlas;
 
 public class TerraPlanets{
 
-    public static Planet nebula, deltaOmega, copis, RXS, testification;
+    public static Planet nebula, deltaOmega, onixis, vortar, copis, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
@@ -122,14 +122,48 @@ public class TerraPlanets{
                 }},
 
                 new PulsarDiskMesh(this){{
-                    ringRadius = 2.5f;
-                    ringWidth = 1.7f;
+                    ringRadius = 3.3f;
+                    ringWidth = 1.9f;
                     tilt = 0f;
                     color = Color.valueOf("7f9bff");
                     intensity = 1.4f;
                     alpha = 0.6f;
                 }}
             );
+        }};
+        vortar = new BetterPlanet("vortar", TerraPlanets.RXS, 1f){{
+            hasAtmosphere = false;
+            accessible = false;
+            alwaysUnlocked = false;
+            drawOrbit = false;
+            orbitRadius = 0f;
+            icon = "iforgotlol";
+            iconColor = Color.valueOf("1d1d1b");
+
+            meshLoader = () -> new AsteroidBeltMesh(this){{
+                ringRadius = 40f;
+                ringWidth = 1.5f;
+                ringThickness = 0.25f;
+                tilt = 0f;
+
+                clipRadius = 4;
+
+                count = 1500;
+                minSize = 0.1f;
+                maxSize = 0.3f;
+                jaggedness = 0.6f;
+                stretch = 0.5f;
+                seed = 1;
+
+                orbitSpeed = 0.004f;
+                kepler = 1f;
+
+                colorDark = Color.valueOf("1d1d1b");
+                colorLight = Color.valueOf("ffffff");
+                ambient = 0.25f;
+                lightPower = 1.3f;
+                lightFromCenter = true;
+            }};
         }};
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
             generator = new TantrosPlanetGenerator();
@@ -142,14 +176,14 @@ public class TerraPlanets{
             allowLaunchSchematics = true;
             enemyCoreSpawnReplace = true;
             allowLaunchLoadout = true;
-            orbitRadius = 5;
+            orbitRadius = 7;
             startSector = 10;
             atmosphereRadIn = -0.01f;
             atmosphereRadOut = 0.3f;
             defaultEnv = Env.underwater | Env.terrestrial;
             alwaysUnlocked = accessible = true;
             ruleSetter = r -> {
-                r.waveTeam = Team.crux;
+                r.waveTeam = Team.blue;
                 r.placeRangeCheck = false;
             };
         }};
