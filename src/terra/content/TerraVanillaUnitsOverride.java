@@ -109,7 +109,7 @@ public class TerraVanillaUnitsOverride {
                 recoil = 3f;
                 shake = 2f;
                 rotate = true;
-                rotateSpeed = 4f;
+                rotateSpeed = 3f;
                 ejectEffect = Fx.casing3Double;
                 shootSound = Sounds.shootRipple;
                 bullet = new ArtilleryBulletType(3f, 50, "shell"){{
@@ -119,6 +119,7 @@ public class TerraVanillaUnitsOverride {
                     width = height = 14f;
                     collides = true;
                     collidesTiles = true;
+                    //collidesAir = true;
                     splashDamageRadius = 5.5f * 8f;
                     splashDamage = 125f;
                     armorMultiplier = 0.4f;
@@ -131,7 +132,7 @@ public class TerraVanillaUnitsOverride {
                     hitEffect = TerraFx.smoothColorCircle(Pal.bulletYellow, 5.5f * 8f, 60f);
                     status = StatusEffects.blasted;
                     incendAmount = 15;
-                    incendChance = 0.9;
+                    incendChance = 0.9f;
                     incendSpread = 6f * 8f;
                 }};
             }}
