@@ -130,7 +130,15 @@ public class TerraVanillaUnitsOverride {
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
-                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.reactorExplosion, Fx.massiveExplosion);
+                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.massiveExplosion, new ExplosionEffect(){{
+                        waveColor = smokeColor = sparkColor = frontColor;
+                        waveRad = smokeRad = sparkRad = 6f * 8f;
+                        smokes = 20;
+                        lifetime = 50f;
+                        waveLife = 25f;
+                        sparkStroke = 2f;
+                        sparks = 10;
+                    }});
                     status = StatusEffects.blasted;
                     
                     incendAmount = 18;
@@ -432,6 +440,7 @@ public class TerraVanillaUnitsOverride {
                 alternate = false;
                 shootSound = Sounds.shootLancer;
                 rotate = true;
+                controllable = false;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
                 baseRotation = -45f;
@@ -525,6 +534,7 @@ public class TerraVanillaUnitsOverride {
                 alternate = false;
                 shootSound = Sounds.shootLancer;
                 rotate = true;
+                controllable = false;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
                 baseRotation = -135f;
