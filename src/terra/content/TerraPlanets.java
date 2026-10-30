@@ -125,13 +125,13 @@ public class TerraPlanets{
 
                 new PulsarDiskMesh(this){{
                     ringRadius = 3.3f;
-                    ringWidth = 2.9f;
+                    ringWidth = 2.6f;
                     tilt = 0f;
                     color = Color.valueOf("7f9bff");
                     intensity = 1.4f;
                     alpha = 0.6f;
 
-                    clipRadius = 3;
+                    clipRadius = 2;
                 }}
             );
         }};
@@ -155,12 +155,12 @@ public class TerraPlanets{
 
                 count = 1400;
                 minSize = 0.08f;
-                maxSize = 0.27f;
+                maxSize = 0.22f;
                 jaggedness = 0.6f;
                 stretch = 0.5f;
                 seed = 6;
 
-                orbitSpeed = 0.0004f;
+                orbitSpeed = 0.0005f;
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
