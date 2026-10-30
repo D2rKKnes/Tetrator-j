@@ -441,6 +441,7 @@ public class TerraVanillaUnitsOverride {
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 controllable = false;
+                autoTarget = true;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
                 baseRotation = -45f;
@@ -535,6 +536,7 @@ public class TerraVanillaUnitsOverride {
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 controllable = false;
+                autoTarget = true;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
                 baseRotation = -135f;
