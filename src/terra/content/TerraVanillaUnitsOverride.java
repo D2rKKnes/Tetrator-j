@@ -44,20 +44,20 @@ public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.scepter.immunities = ObjectSet.with(StatusEffects.blasted);
         UnitTypes.reign.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
-        UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, hitSize * 2.5f, Pal.negativeStat, new Effect(40, e -> {
+        UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, UnitTypes.reign.hitSize * 2.5f, Pal.negativeStat, new Effect(40, e -> {
             color(e.color);
             stroke(e.fout());
             Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
         })));
         UnitTypes.reign.abilities.add(
-            new StatusFieldAbility(TerraStatusEffects.shieldRegen, 4 * 60f, 10 * 60f, hitSize * 2.5f){{
+            new StatusFieldAbility(TerraStatusEffects.shieldRegen, 4 * 60f, 10 * 60f, UnitTypes.reign.hitSize * 2.5f){{
                 color = Pal.stat; 
                 activeEffect = new Effect(40, e -> {
                     color(e.color);
                     stroke(e.fout());
                     Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
                     stroke(e.fout() * 3f);
-                    Lines.circle(e.x, e.y, hitSize * 2.5f);
+                    Lines.circle(e.x, e.y, UnitTypes.reign.hitSize * 2.5f);
                 });
             }}
         );
