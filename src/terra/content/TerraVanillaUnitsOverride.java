@@ -44,6 +44,23 @@ public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.scepter.immunities = ObjectSet.with(StatusEffects.blasted);
         UnitTypes.reign.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
+        UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, hitSize * 2.5f, Pal.negativeStat, new Effect(40, e -> {
+            color(e.color);
+            stroke(e.fout());
+            Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
+        })));
+        UnitTypes.reign.abilities.add(
+            new StatusFieldAbility(TerraStatusEffects.shieldRegen, 4 * 60f, 10 * 60f, hitSize * 2.5f){{
+                color = Pal.stat; 
+                activeEffect = new Effect(40, e -> {
+                    color(e.color);
+                    stroke(e.fout());
+                    Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
+                    stroke(e.fout() * 3f);
+                    Lines.circle(e.x, e.y, hitSize * 2.5f);
+                });
+            }}
+        );
         UnitTypes.reign.weapons.add(
             new Weapon("terra-heavy-artillery"){{
                 x = -41f / 4f;
@@ -62,13 +79,19 @@ public class TerraVanillaUnitsOverride {
                 ejectEffect = Fx.none;
                 bullet = new BulletType(4.2f, 18f){{
                     ammoMultiplier = 3f;
-                    hitSize = 7f;
-                    lifetime = 13f;
+                    hitSize = 7.3f;
+                    lifetime = 18f;
                     pierce = true;
                     pierceBuilding = pierceArmor = true;
                     pierceCap = 3;
                     statusDuration = 60f * 7;
-                    shootEffect = Fx.shootSmallFlame;
+                    shootEffect = new Effect(33f, 100f, e -> {
+                        color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+                
+                        randLenVectors(e.id, 14, e.finpow() * 90f, e.rotation, 11f, (x, y) -> {
+                            Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.5f);
+                        });
+                    }).followParent(false);
                     hitEffect = Fx.hitFlameSmall;
                     despawnEffect = Fx.none;
                     status = StatusEffects.burning;
