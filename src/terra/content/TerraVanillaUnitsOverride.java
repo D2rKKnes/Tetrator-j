@@ -130,7 +130,7 @@ public class TerraVanillaUnitsOverride {
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
-                    hitEffect = TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f);
+                    hitEffect = MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.massiveExplosion);
                     status = StatusEffects.blasted;
                     
                     incendAmount = 18;
@@ -301,7 +301,7 @@ public class TerraVanillaUnitsOverride {
                     hitColor = lightningColor = Pal.heal;
                     shootEffect = Fx.colorSpark;
                     status = StatusEffects.electrified;
-                    statusDuration = 90f;
+                    statusDuration = 80f;
                     colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
 
                     int count = 4;
@@ -394,7 +394,7 @@ public class TerraVanillaUnitsOverride {
                     splashDamageRadius = 5f * 8f;
                     scaledSplashDamage = true;
                     status = StatusEffects.electrified;
-                    statusDuration = 45f;
+                    statusDuration = 30f;
                     healPercent = 0.75f;
                     collidesTeam = true;
                     sprite = "terra-strike";
