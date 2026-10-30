@@ -100,7 +100,7 @@ public class AdvancedStatusEffect extends StatusEffect{
                     t -= Time.delta;
                     if(t <= 0f){
                         unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
-                        shieldTimer.remove(unit);
+                        shieldTimer.remove(unit, 0f);
                     }else{
                         shieldTimer.put(unit, t);
                     }
