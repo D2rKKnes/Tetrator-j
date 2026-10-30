@@ -113,21 +113,25 @@ public class TerraPlanets{
                     pulseSharpness = 3f;
 
                     spinSpeed = 1.85f;
-                    beamTilt = 37f;
-                    beamLength = 8f;
+                    beamTilt = 34f;
+                    beamLength = 11f;
                     beamWidth = 0.6f;
                     beamFalloff = 1.2f;
                     beamAlpha = 0.5f;
                     beamLayers = 3;
+
+                    clipRadius = 3;
                 }},
 
                 new PulsarDiskMesh(this){{
                     ringRadius = 3.3f;
-                    ringWidth = 1.9f;
+                    ringWidth = 2.9f;
                     tilt = 0f;
                     color = Color.valueOf("7f9bff");
                     intensity = 1.4f;
                     alpha = 0.6f;
+
+                    clipRadius = 3;
                 }}
             );
         }};
@@ -138,33 +142,34 @@ public class TerraPlanets{
             drawOrbit = false;
             orbitRadius = 0f;
             icon = "commandRally";
-            iconColor = Color.valueOf("1d1d1b");
-            minZoom = 19f * 0.7f;
-            maxZoom = 21f * 0.7f;
+            iconColor = TerraItems.carbon.color.cpy();
+            minZoom = 17f * 0.7f;
+            maxZoom = 18f * 0.7f;
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
-                ringRadius = 20f;
-                ringWidth = ringThickness = 1.5f;
+                ringRadius = 17f;
+                ringWidth = ringThickness = 1.7f;
                 tilt = 0f;
 
-                clipRadius = 4;
+                clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.1f;
-                maxSize = 0.3f;
+                minSize = 0.08f;
+                maxSize = 0.27f;
                 jaggedness = 0.6f;
                 stretch = 0.5f;
                 seed = 6;
 
                 orbitSpeed = 0.0004f;
 
-                colorDark = Color.valueOf("1d1d1b");
-                colorLight = Color.valueOf("ffffff");
+                colorDark = TerraItems.carbon.color.cpy();
+                colorLight = TerraItems.diamondDust.color.cpy();
                 ambient = 0.25f;
                 lightPower = 1.3f;
                 lightFromCenter = true;
             }};
         }};
+        //TODO: Replace with Copis
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
             generator = new TantrosPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 4);
@@ -176,7 +181,7 @@ public class TerraPlanets{
             allowLaunchSchematics = true;
             enemyCoreSpawnReplace = true;
             allowLaunchLoadout = true;
-            orbitRadius = 7;
+            orbitRadius = 8;
             startSector = 10;
             atmosphereRadIn = -0.01f;
             atmosphereRadOut = 0.3f;
