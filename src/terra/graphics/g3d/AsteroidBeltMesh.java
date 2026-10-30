@@ -171,9 +171,9 @@ public class AsteroidBeltMesh extends PlanetMesh{
                 double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2f, lx, ly, lz);
                 float faceShade = noise > 0.5 ? 1f : 0f;
 
-                idx = put(out, idx, a, nor, orbit, faseShade);
-                idx = put(out, idx, b, nor, orbit, faseShade);
-                idx = put(out, idx, c, nor, orbit, faseShade);
+                idx = put(out, idx, a, nor, orbit, faceShade);
+                idx = put(out, idx, b, nor, orbit, faceShade);
+                idx = put(out, idx, c, nor, orbit, faceShade);
             }
         }
         return out;
