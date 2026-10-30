@@ -41,8 +41,7 @@ public class TerraMod extends Mod{
 
                 String fullSprite = "terra-new-" + unit.name + "-full";
                 if (Core.atlas.has(fullSprite)) {
-                    unit.uiIcon = Core.atlas.find(fullSprite);
-                    unit.fullIcon = Core.atlas.find(fullSprite);
+                    unit.uiIcon = unit.fullIcon = unit.shadowRegion = Core.atlas.find(fullSprite);
                 }
                 String newDesc = Core.bundle.getOrNull("unit." + unit.name + ".new-description");
                 if (newDesc != null && !newDesc.isEmpty()) {
