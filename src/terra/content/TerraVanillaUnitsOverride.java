@@ -42,6 +42,42 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
+        UnitTypes.scepter.immunities = ObjectSet.with(StatusEffects.blasted);
+        UnitTypes.reign.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
+        UnitTypes.reign.weapons.add(
+            new Weapon("terra-heavy-artillery"){{
+                x = -41f / 4f;
+                y = -9f / 4f;
+                shootY = 8f;
+                recoil = 1f;
+                recoilTime = 30f;
+                reload = 3f;
+                mirror = false;
+                shootSound = Sounds.shootFlame;
+                rotate = true;
+                rotateSpeed = 2.4f;
+                rotationLimit = 30f;
+                parentizeEffects = true;
+                shake = 0.4f;
+                ejectEffect = Fx.none;
+                bullet = new BulletType(4.2f, 18f){{
+                    ammoMultiplier = 3f;
+                    hitSize = 7f;
+                    lifetime = 13f;
+                    pierce = true;
+                    pierceBuilding = pierceArmor = true;
+                    pierceCap = 3;
+                    statusDuration = 60f * 7;
+                    shootEffect = Fx.shootSmallFlame;
+                    hitEffect = Fx.hitFlameSmall;
+                    despawnEffect = Fx.none;
+                    status = StatusEffects.burning;
+                    keepVelocity = false;
+                    hittable = false;
+                    buildingDamageMultiplier = 1.15f;
+                }};
+            }}
+        );
         UnitTypes.vela.immunities = ObjectSet.with(StatusEffects.shocked);
         UnitTypes.vela.weapons.add(
             new Weapon("terra-big-heal-gun"){{
@@ -290,6 +326,15 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
+        UnitTypes.spiroct.immunities = ObjectSet.with(StatusEffects.sapped);
+        UnitTypes.arkyid.immunities = ObjectSet.with(StatusEffects.sapped);
+        UnitTypes.toxopid.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.sapped);
+        UnitTypes.zenith.immunities = ObjectSet.with(StatusEffects.blasted);
+        UnitTypes.antumbra.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted);
+        UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped);
+        UnitTypes.mega.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
+        UnitTypes.quad.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.oct.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
@@ -440,5 +485,9 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
+        UnitTypes.oxynoe.immunities = ObjectSet.with(StatusEffects.burning);
+        UnitTypes.cyerse.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
+        UnitTypes.aegires.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.navanax.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
     }
 }
