@@ -5,6 +5,7 @@ import arc.graphics.gl.Shader;
 import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.util.Time;
+import arc.util.noise.*;
 import mindustry.graphics.g3d.PlanetMesh;
 import mindustry.graphics.g3d.PlanetParams;
 import mindustry.type.Planet;
@@ -140,31 +141,34 @@ public class AsteroidBeltMesh extends PlanetMesh{
             float cz = Mathf.sin(ang) * dist * R;
 
             float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
-            float shade = rnd.nextFloat();
+            //float shade = rnd.nextFloat();
 
             for(int i = 0; i < 12; i++){
                 float jag = 1f + jaggedness * (rnd.nextFloat() - 0.5f);
                 pv[i].set(base[i]).scl(jag).scl(sx, sy, 1f)
                         .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
-                        .scl(size * R).add(cx, cy, cz);
+                        .scl(size * R); //.add(cx, cy, cz);
+                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, pv[i].x, pv[i].y, pv[i].z);
+                pv[i].add(cx, cy, cz);
             }
 
             for(int[] f : FACES){
-                a.set(pv[f[0]]);
-                b.set(pv[f[1]]);
-                c.set(pv[f[2]]);
+                a.set(pv[i0]);
+                b.set(pv[i1]);
+                c.set(pv[i2]);
 
                 nor.set(b).sub(a).crs(c.x - a.x, c.y - a.y, c.z - a.z);
                 tmp.set(a).add(b).add(c).scl(1f / 3f).sub(cx, cy, cz);
                 if(nor.dot(tmp) < 0f){
                     tmp.set(b); b.set(c); c.set(tmp);
+                    int ti = i1; i1 = i2; i2 = ti;
                     nor.scl(-1f);
                 }
                 nor.nor();
 
-                idx = put(out, idx, a, nor, orbit, shade);
-                idx = put(out, idx, b, nor, orbit, shade);
-                idx = put(out, idx, c, nor, orbit, shade);
+                idx = put(out, idx, a, nor, orbit, shades[i0]);
+                idx = put(out, idx, b, nor, orbit, shades[i1]);
+                idx = put(out, idx, c, nor, orbit, shades[i2]);
             }
         }
         return out;
