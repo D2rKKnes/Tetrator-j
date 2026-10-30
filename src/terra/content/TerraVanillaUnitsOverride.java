@@ -130,7 +130,7 @@ public class TerraVanillaUnitsOverride {
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
-                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.massiveExplosion);
+                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.reactorExplosion, Fx.massiveExplosion);
                     status = StatusEffects.blasted;
                     
                     incendAmount = 18;
@@ -427,13 +427,14 @@ public class TerraVanillaUnitsOverride {
                 x = 91f / 4f;
                 y = 57f / 4f;
                 shootY = 5f;
-                reload = 14.5f;
+                reload = 18f;
                 mirror = true;
+                alternate = false;
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 rotateSpeed = 1.8f;
-                rotationLimit = 60f;
-                baseRotation = 45f;
+                rotationLimit = 110f;
+                baseRotation = -45f;
                 shootCone = 10f;
                 recoil = 0f;
                 recoils = 2;
@@ -519,13 +520,14 @@ public class TerraVanillaUnitsOverride {
                 x = 91f / 4f;
                 y = -120f / 4f;
                 shootY = 5f;
-                reload = 14.5f;
+                reload = 18f;
                 mirror = true;
+                alternate = false;
                 shootSound = Sounds.shootLancer;
                 rotate = true;
                 rotateSpeed = 1.8f;
-                rotationLimit = 60f;
-                baseRotation = 45f;
+                rotationLimit = 110f;
+                baseRotation = -135f;
                 shootCone = 10f;
                 recoil = 0f;
                 recoils = 2;
