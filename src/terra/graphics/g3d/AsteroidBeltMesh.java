@@ -165,10 +165,11 @@ public class AsteroidBeltMesh extends PlanetMesh{
                 }
                 nor.nor();
 
-                float lx = (a.x + b.x + c.x) / 3f - cx;
-                float ly = (a.y + b.y + c.y) / 3f - cy;
-                float lz = (a.z + b.z + c.z) / 3f - cz;
-                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2f, lx, ly, lz);
+                float inv = 1f / (size * R);
+                float lx = ((a.x + b.x + c.x) / 3f - cx) * inv;
+                float ly = ((a.y + b.y + c.y) / 3f - cy) * inv;
+                float lz = ((a.z + b.z + c.z) / 3f - cz) * inv;
+                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2.2f, lx, ly, lz);
                 float faceShade = noise > 0.5 ? 1f : 0f;
 
                 idx = put(out, idx, a, nor, orbit, faceShade);
