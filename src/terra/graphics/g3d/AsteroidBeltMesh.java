@@ -121,7 +121,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
 
         Vec3[] base = icoBase();
         Vec3[] pv = new Vec3[12];
-        float[] shades = new float[12];    
         for(int i = 0; i < 12; i++) pv[i] = new Vec3();
         Vec3 a = new Vec3(), b = new Vec3(), c = new Vec3(), nor = new Vec3(), tmp = new Vec3();
 
@@ -148,10 +147,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
                 float jag = 1f + jaggedness * (rnd.nextFloat() - 0.5f);
                 pv[i].set(base[i]).scl(jag).scl(sx, sy, 1f)
                         .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
-                        .scl(size * R); //.add(cx, cy, cz);
-                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2f, pv[i].x, pv[i].y, pv[i].z);
-                shades[i] = noise > 0.5 ? 1f : 0f; 
-                pv[i].add(cx, cy, cz);
+                        .scl(size * R).add(cx, cy, cz);
             }
 
             for(int[] f : FACES){
@@ -169,9 +165,15 @@ public class AsteroidBeltMesh extends PlanetMesh{
                 }
                 nor.nor();
 
-                idx = put(out, idx, a, nor, orbit, shades[i0]);
-                idx = put(out, idx, b, nor, orbit, shades[i1]);
-                idx = put(out, idx, c, nor, orbit, shades[i2]);
+                float lx = (a.x + b.x + c.x) / 3f - cx;
+                float ly = (a.y + b.y + c.y) / 3f - cy;
+                float lz = (a.z + b.z + c.z) / 3f - cz;
+                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2f, lx, ly, lz);
+                float faceShade = noise > 0.5 ? 1f : 0f;
+
+                idx = put(out, idx, a, nor, orbit, faseShade);
+                idx = put(out, idx, b, nor, orbit, faseShade);
+                idx = put(out, idx, c, nor, orbit, faseShade);
             }
         }
         return out;
