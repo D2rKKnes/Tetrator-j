@@ -99,6 +99,41 @@ public class TerraVanillaUnitsOverride {
                     hittable = false;
                     buildingDamageMultiplier = 1.15f;
                 }};
+            }},
+            new Weapon("terra-medium-red-weapon"){{
+                x = 41f / 4f;
+                y = -9f / 4f;
+                shootY = 6f;
+                reload = 120f;
+                mirror = false;
+                recoil = 3f;
+                shake = 2f;
+                rotate = true;
+                rotateSpeed = 4f;
+                ejectEffect = Fx.casing3Double;
+                shootSound = Sounds.shootRipple;
+                bullet = new ArtilleryBulletType(3f, 50, "shell"){{
+                    knockback = 3f;
+                    lifetime = 65f;
+                    maxRange = 260f;
+                    width = height = 14f;
+                    collides = true;
+                    collidesTiles = true;
+                    splashDamageRadius = 5.5f * 8f;
+                    splashDamage = 125f;
+                    armorMultiplier = 0.4f;
+                    backColor = Pal.bulletYellowBack;
+                    frontColor = Pal.bulletYellow;
+                    despawnHit = true;
+                    hitShake = 5f;
+                    hitSound = Sounds.explosionReactor;
+                    hitSoundVolume = 2f;
+                    hitEffect = TerraFx.smoothColorCircle(Pal.bulletYellow, 5.5f * 8f, 60f);
+                    status = StatusEffects.blasted;
+                    incendAmount = 15;
+                    incendChance = 0.9;
+                    incendSpread = 6f * 8f;
+                }};
             }}
         );
         UnitTypes.vela.immunities = ObjectSet.with(StatusEffects.shocked);
