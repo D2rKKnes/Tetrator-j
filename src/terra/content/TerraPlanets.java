@@ -137,26 +137,26 @@ public class TerraPlanets{
             alwaysUnlocked = false;
             drawOrbit = false;
             orbitRadius = 0f;
-            icon = "iforgotlol";
+            icon = "commandRally";
             iconColor = Color.valueOf("1d1d1b");
+            minZoom = 19f * 0.7f;
+            maxZoom = 21f * 0.7f;
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
-                ringRadius = 40f;
-                ringWidth = 1.5f;
-                ringThickness = 0.25f;
+                ringRadius = 20f;
+                ringWidth = ringThickness = 1.5f;
                 tilt = 0f;
 
                 clipRadius = 4;
 
-                count = 1500;
+                count = 1400;
                 minSize = 0.1f;
                 maxSize = 0.3f;
                 jaggedness = 0.6f;
                 stretch = 0.5f;
-                seed = 1;
+                seed = 6;
 
-                orbitSpeed = 0.004f;
-                kepler = 1f;
+                orbitSpeed = 0.0004f;
 
                 colorDark = Color.valueOf("1d1d1b");
                 colorLight = Color.valueOf("ffffff");
