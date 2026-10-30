@@ -125,22 +125,42 @@ public class TerraVanillaUnitsOverride {
                     armorMultiplier = 0.4f;
                     backColor = Color.valueOf("cf6a53");
                     frontColor = Color.valueOf("ffa566");
+                    
                     despawnHit = true;
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
                     hitEffect = TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f);
                     status = StatusEffects.blasted;
+                    
                     incendAmount = 18;
-                    incendChance = 0.9f;
-                    incendSpread = 5f * 8f;
+                    incendChance = 1f;
+                    incendSpread = 6f * 8f;
+                    
+                    // lightning = 7f;
+                    // lightningLength = 7;
+                    // lightningLengthRand = 2;
+                    // lightningDamage = 15f;
+                    // lightningColor = frontColor;
+                    
                     fragBullets = 6;
                     fragLifeMin = 0.4f;
-                    fragBullet = new FireBulletType(4f, 15){{
+                    fragOffsetMax = 1.2f;
+                    fragOnAbsorb = false;
+                    fragBullet = new BasicBulletType(4f, 12){{
                         lifetime = 11f;
+                        width = height = 8;
+                        shrinkX = shrinkY = 0.33f;
                         incendAmount = 2;
-                        incendChance = 0.8f;
+                        incendChance = 1f;
                         incendSpread = 2f * 8f;
+                        trailChance = 1f;
+                        trailParam = 4f;
+                        trailEffect = Fx.ballfire;
+                        sprite = "terra-plasma";
+                        frontColor = Pal.lightFlame;
+                        backColor = hitColor = trailColor = Pal.darkFlame;
+                        hitEffect = despawnEffect = Fx.none;
                     }};
                 }};
             }}
