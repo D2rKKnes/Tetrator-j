@@ -43,6 +43,8 @@ public class AdvancedStatusEffect extends StatusEffect{
     public Effect removeEffect = Fx.none;
     //When true, any unit will die instantly
     public boolean instakill = false;
+    
+    protected ObjectFloatMap<Unit> shieldTimer = new ObjectFloatMap<>();
 
     public AdvancedStatusEffect(String name){
         super(name);
@@ -85,7 +87,25 @@ public class AdvancedStatusEffect extends StatusEffect{
         if(shieldDamage > 0 && unit.shield > 0){
             unit.shield = Math.max(0, unit.shield - shieldDamage);
         }else if(shieldDamage < 0 && unit.shield < shieldHealCap){
-            unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
+            if(unit.shield > 0){
+                shieldTimer.remove(unit);
+                unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
+            }else{
+                if(!shieldTimer.containsKey(unit)){
+                    shieldTimer.put(unit, 1f / 3f);
+                }
+
+                float t = shieldTimer.get(unit, 0f);
+                if(t > 0f){
+                    t -= Time.delta;
+                    if(t <= 0f){
+                        unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
+                        shieldTimer.remove(unit);
+                    }else{
+                        sshieldTimer.put(unit, t);
+                    }
+                }
+            }
         }
         if(movementDamage > 0 && unit.vel.len() > 0.1f){
             unit.damageContinuousPierce(movementDamage);
