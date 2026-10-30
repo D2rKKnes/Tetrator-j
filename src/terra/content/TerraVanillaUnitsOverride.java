@@ -44,20 +44,20 @@ public class TerraVanillaUnitsOverride {
     public static void load() {
         UnitTypes.scepter.immunities = ObjectSet.with(StatusEffects.blasted);
         UnitTypes.reign.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
-        UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, UnitTypes.reign.hitSize * 2.5f, Pal.negativeStat, new Effect(40, e -> {
+        UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, 80f, Pal.negativeStat, new Effect(40, e -> {
             color(e.color);
             stroke(e.fout());
             Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
         })));
         UnitTypes.reign.abilities.add(
-            new StatusFieldAbility(TerraStatusEffects.shieldRegen, 4 * 60f, 10 * 60f, UnitTypes.reign.hitSize * 2.5f){{
+            new StatusFieldAbility(TerraStatusEffects.shieldRegen, 4 * 60f, 10 * 60f, 80f){{
                 color = Pal.stat; 
                 activeEffect = new Effect(40, e -> {
                     color(e.color);
                     stroke(e.fout());
                     Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
                     stroke(e.fout() * 3f);
-                    Lines.circle(e.x, e.y, UnitTypes.reign.hitSize * 2.5f);
+                    Lines.circle(e.x, e.y, 80f);
                 });
             }}
         );
@@ -115,7 +115,7 @@ public class TerraVanillaUnitsOverride {
                 bullet = new ArtilleryBulletType(3f, 50, "shell"){{
                     knockback = 3f;
                     lifetime = 65f;
-                    maxRange = 260f;
+                    maxRange = 250f;
                     width = height = 14f;
                     collides = true;
                     collidesTiles = true;
@@ -123,17 +123,25 @@ public class TerraVanillaUnitsOverride {
                     splashDamageRadius = 5.5f * 8f;
                     splashDamage = 125f;
                     armorMultiplier = 0.4f;
-                    backColor = Pal.bulletYellowBack;
-                    frontColor = Pal.bulletYellow;
+                    backColor = Color.valueOf("cf6a53");
+                    frontColor = Color.valueOf("ffa566");
                     despawnHit = true;
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
-                    hitSoundVolume = 2f;
-                    hitEffect = TerraFx.smoothColorCircle(Pal.bulletYellow, 5.5f * 8f, 60f);
+                    hitSoundVolume = 1.2f;
+                    hitEffect = TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f);
                     status = StatusEffects.blasted;
-                    incendAmount = 15;
+                    incendAmount = 18;
                     incendChance = 0.9f;
-                    incendSpread = 6f * 8f;
+                    incendSpread = 5f * 8f;
+                    fragBullets = 6;
+                    fragLifeMin = 0.4f;
+                    fragBullet = new FireBulletType(4f, 15){{
+                        lifetime = 11f;
+                        incendAmount = 2;
+                        incendChance = 0.8f;
+                        incendSpread = 2f * 8f;
+                    }};
                 }};
             }}
         );
