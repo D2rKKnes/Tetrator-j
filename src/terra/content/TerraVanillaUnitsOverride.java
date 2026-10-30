@@ -486,7 +486,7 @@ public class TerraVanillaUnitsOverride {
             }}
         );
         UnitTypes.oxynoe.immunities = ObjectSet.with(StatusEffects.burning);
-        UnitTypes.cyerse.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
+        UnitTypes.cyerce.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
         UnitTypes.aegires.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.navanax.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
     }
