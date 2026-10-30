@@ -88,7 +88,7 @@ public class AdvancedStatusEffect extends StatusEffect{
             unit.shield = Math.max(0, unit.shield - shieldDamage);
         }else if(shieldDamage < 0 && unit.shield < shieldHealCap){
             if(unit.shield > 0){
-                shieldTimer.remove(unit);
+                shieldTimer.remove(unit, 0f);
                 unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
             }else{
                 if(!shieldTimer.containsKey(unit)){
@@ -102,7 +102,7 @@ public class AdvancedStatusEffect extends StatusEffect{
                         unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
                         shieldTimer.remove(unit);
                     }else{
-                        sshieldTimer.put(unit, t);
+                        shieldTimer.put(unit, t);
                     }
                 }
             }
