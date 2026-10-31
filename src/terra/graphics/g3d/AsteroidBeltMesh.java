@@ -33,7 +33,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
     public Color colorLight = Color.valueOf("8a84a8");
     public float ambient = 0f;
     public float lightPower = 1f;
-    public boolean lightFromCenter = false;
+    public boolean lightFromCenter = true;
 
     private boolean ready;
     private Shader beltShader;
