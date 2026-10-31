@@ -33,7 +33,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
     public Color colorLight = Color.valueOf("8a84a8");
     public float ambient = 0f;
     public float lightPower = 1f;
-    public boolean lightFromCenter = true;
+    public boolean lightFromCenter = false;
 
     private boolean ready;
     private Shader beltShader;
@@ -193,16 +193,15 @@ private float[] buildRocks(){
 double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
 float faceShade = noise > 0.5 ? 1f : 0f;
 
+rotNor.set(nor).rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
 for(int k = 0; k < 3; k++){
     Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
-    rotNor.set(p).nor();
     tmp.set(p)
        .scl(sx, sy, 1f)
        .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
        .scl(size * R).add(cx, cy, cz);
-    rotNor.rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
     idx = put(out, idx, tmp, rotNor, orbit, faceShade);
-               }
+}
         }
     }
     return out;
