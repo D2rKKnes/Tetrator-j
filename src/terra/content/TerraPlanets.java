@@ -171,7 +171,7 @@ public class TerraPlanets{
                 count = 1400;
                 minSize = 0.07f;
                 maxSize = 0.28f;
-                jaggedness = 0.5f;
+                jaggedness = 0.2f;
                 stretch = 0.3f;
                 seed = 6;
 
@@ -179,7 +179,7 @@ public class TerraPlanets{
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
-                ambient = 0.002f;
+                ambient = 0.005f;
             }};
         }};
         //TODO: Replace with Copis
@@ -219,7 +219,7 @@ public class TerraPlanets{
             );
             accessible = false;
             alwaysUnlocked = false;
-            orbitRadius = 32.4f;
+            orbitRadius = 33.4f;
             drawOrbit = true;
             iconColor = Color.valueOf("3a3c6e");
             hasAtmosphere = true;
