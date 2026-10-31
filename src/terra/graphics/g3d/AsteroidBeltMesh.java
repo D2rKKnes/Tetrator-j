@@ -94,25 +94,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
     }
 
     private static final int FLOATS = 8;
-
-    private static final int[][] FACES = {
-            {0, 11, 5}, {0, 5, 1}, {0, 1, 7}, {0, 7, 10}, {0, 10, 11},
-            {1, 5, 9}, {5, 11, 4}, {11, 10, 2}, {10, 7, 6}, {7, 1, 8},
-            {3, 9, 4}, {3, 4, 2}, {3, 2, 6}, {3, 6, 8}, {3, 8, 9},
-            {4, 9, 5}, {2, 4, 11}, {6, 2, 10}, {8, 6, 7}, {9, 8, 1}
-    };
-
-    private static Vec3[] icoBase(){
-        float t = (1f + Mathf.sqrt(5f)) / 2f;
-        float[][] v = {
-                {-1, t, 0}, {1, t, 0}, {-1, -t, 0}, {1, -t, 0},
-                {0, -1, t}, {0, 1, t}, {0, -1, -t}, {0, 1, -t},
-                {t, 0, -1}, {t, 0, 1}, {-t, 0, -1}, {-t, 0, 1}
-        };
-        Vec3[] out = new Vec3[12];
-        for(int i = 0; i < 12; i++) out[i] = new Vec3(v[i][0], v[i][1], v[i][2]).nor();
-        return out;
-    }
     
     private float[] buildRocks(){
         HexMesher mesher = new HexMesher(){
@@ -146,7 +127,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
         int idx = 0;
     
         Vec3 v0 = new Vec3(), v1 = new Vec3(), v2 = new Vec3();
-        Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3();
+        Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3(), dir = new Vec3();
         float R = planet.radius;
     
         for(int r = 0; r < n; r++){
@@ -164,11 +145,14 @@ public class AsteroidBeltMesh extends PlanetMesh{
             float cz = Mathf.sin(ang) * dist * R;
     
             float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
-    
+
+            int shapeSeed = 1000 + seed * 31 + r * 7;
+            float shapeFreq = 1.5f + rnd.nextFloat() * 2.5f;
+            float shapeAmp = jaggedness * (0.7f + rnd.nextFloat() * 0.8f);
             for(int tri = 0; tri < triangleCount; tri++){
                 int i0, i1, i2;
                 if(baseIndices != null){
-                    i0 = baseIndices[tri * 3]     & 0xFFFF;
+                    i0 = baseIndices[tri * 3] & 0xFFFF;
                     i1 = baseIndices[tri * 3 + 1] & 0xFFFF;
                     i2 = baseIndices[tri * 3 + 2] & 0xFFFF;
                 }else{
@@ -189,6 +173,19 @@ public class AsteroidBeltMesh extends PlanetMesh{
                     v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
                     nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
                 }
+
+                for(int k = 0; k < 3; k++){
+                    Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
+                    dir.set(p).nor();
+                    double nn = Simplex.noise3d(
+                        shapeSeed, 3, 0.5, 2.0,
+                        dir.x * shapeFreq,
+                        dir.y * shapeFreq,
+                        dir.z * shapeFreq
+                    );
+                    p.scl(1f + shapeAmp * (float)nn);
+                }
+                nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
 
                 double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
                 float faceShade = noise > 0.5 ? 1f : 0f;
