@@ -6,8 +6,10 @@ import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.util.Time;
 import arc.util.noise.*;
+import mindustry.graphics.*;
 import mindustry.graphics.g3d.*;
 import mindustry.type.Planet;
+import java.nio.*;
 
 import java.util.Random;
 
@@ -116,26 +118,33 @@ public class AsteroidBeltMesh extends PlanetMesh{
     HexMesher mesher = new HexMesher(){
         public float getHeight(Vec3 pos){ return 0f; }
     };
-    FloatBuffer vbuf = baseMesh.getVerticesBuffer();
-vbuf.rewind();
-float[] baseVerts = new float[vbuf.limit()];
-vbuf.get(baseVerts);
-    ShortBuffer ibuf = baseMesh.getIndicesBuffer();
-short[] baseIndices = null;
-if(ibuf != null){
-    ibuf.rewind();
-    baseIndices = new short[ibuf.limit()];
-    ibuf.get(baseIndices);
-}
+    Mesh baseMesh = MeshBuilder.buildHex(mesher, 1, 1f, 0.2f);
 
-baseMesh.dispose();
+    FloatBuffer vbuf = baseMesh.getVerticesBuffer();
+    vbuf.rewind();
+    float[] baseVerts = new float[vbuf.limit()];
+    vbuf.get(baseVerts);
+
+    ShortBuffer ibuf = baseMesh.getIndicesBuffer();
+    short[] baseIndices = null;
+    if(ibuf != null){
+        ibuf.rewind();
+        baseIndices = new short[ibuf.limit()];
+        ibuf.get(baseIndices);
+    }
+
+    baseMesh.dispose();
 
     int baseFloats = 6;
-    int baseVertCount = baseVerts.length / baseFloats;
 
     Random rnd = new Random(seed);
     int n = Math.max(1, count);
-    float[] out = new float[n * baseVertCount * FLOATS];
+
+    int triangleCount = baseIndices != null
+            ? baseIndices.length / 3
+            : baseVerts.length / (baseFloats * 3);
+
+    float[] out = new float[n * triangleCount * 3 * FLOATS];
     int idx = 0;
 
     Vec3 v = new Vec3(), nor = new Vec3();
@@ -157,20 +166,35 @@ baseMesh.dispose();
 
         float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
 
-        for(int i = 0; i < baseVerts.length; i += baseFloats * 3){
-            float nx = baseVerts[i + 3];
-            float ny = baseVerts[i + 4];
-            float nz = baseVerts[i + 5];
+        for(int tri = 0; tri < triangleCount; tri++){
+            int i0, i1, i2;
+            if(baseIndices != null){
+                i0 = baseIndices[tri * 3]     & 0xFFFF;
+                i1 = baseIndices[tri * 3 + 1] & 0xFFFF;
+                i2 = baseIndices[tri * 3 + 2] & 0xFFFF;
+            }else{
+                i0 = tri * 3;
+                i1 = tri * 3 + 1;
+                i2 = tri * 3 + 2;
+            }
 
-            double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nx, ny, nz);
+            int noff = i0 * baseFloats + 3;
+            float nx = baseVerts[noff];
+            float ny = baseVerts[noff + 1];
+            float nz = baseVerts[noff + 2];
+
+            double noise = Simplex.noise3d(8 + seed + r, 3, 0.5f, 2f, nx, ny, nz);
             float faceShade = noise > 0.5 ? 1f : 0f;
 
-            for(int vIdx = 0; vIdx < 3; vIdx++){
-                int off = i + vIdx * baseFloats;
+            int[] vids = {i0, i1, i2};
+            for(int vIdx : vids){
+                int off = vIdx * baseFloats;
                 v.set(baseVerts[off], baseVerts[off + 1], baseVerts[off + 2]);
                 nor.set(nx, ny, nz);
 
-                v.scl(sx, sy, 1f).rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz).scl(size * R).add(cx, cy, cz);
+                v.scl(sx, sy, 1f)
+                 .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
+                 .scl(size * R).add(cx, cy, cz);
                 nor.rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
 
                 idx = put(out, idx, v, nor, orbit, faceShade);
@@ -178,7 +202,7 @@ baseMesh.dispose();
         }
     }
     return out;
-}
+    }
 
     private static int put(float[] out, int i, Vec3 p, Vec3 n, float orbit, float shade){
         out[i++] = p.x; out[i++] = p.y; out[i++] = p.z;
