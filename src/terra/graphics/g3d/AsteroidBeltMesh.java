@@ -128,6 +128,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
     
         Vec3 v0 = new Vec3(), v1 = new Vec3(), v2 = new Vec3();
         Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3(), dir = new Vec3();
+        Vec3 cA = new Vec3(), cB = new Vec3(), cC = new Vec3(), tileNor = new Vec3();
         float R = planet.radius;
     
         for(int r = 0; r < n; r++){
@@ -147,6 +148,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
             float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
 
             int shapeSeed = 1000 + seed * 31 + r * 7;
+            int tileStart = -1;
             float shapeFreq = 1.5f + rnd.nextFloat() * 2.5f;
             float shapeAmp = jaggedness * (0.7f + rnd.nextFloat() * 0.8f);
             for(int tri = 0; tri < triangleCount; tri++){
@@ -234,7 +236,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
         if(len < 1e-6f) return;
         float inv = 1f / len;
         double nn = Simplex.noise3d(seed, 3, 0.5, 2.0, p.x * inv * freq, p.y * inv * freq, p.z * inv * freq);
-        p.scl(nn);
+        p.scl((float)nn);
     }
 
     private static int put(float[] out, int i, Vec3 p, Vec3 n, float orbit, float shade){
