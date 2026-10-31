@@ -190,18 +190,19 @@ private float[] buildRocks(){
                 nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
             }
 
-            double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
-            float faceShade = noise > 0.5 ? 1f : 0f;
-            rotNor.set(nor).rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
+double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
+float faceShade = noise > 0.5 ? 1f : 0f;
 
-            for(int k = 0; k < 3; k++){
-                Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
-                tmp.set(p)
-                   .scl(sx, sy, 1f)
-                   .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
-                   .scl(size * R).add(cx, cy, cz);
-                idx = put(out, idx, tmp, rotNor, orbit, faceShade);
-            }
+for(int k = 0; k < 3; k++){
+    Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
+    rotNor.set(p).nor();
+    tmp.set(p)
+       .scl(sx, sy, 1f)
+       .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
+       .scl(size * R).add(cx, cy, cz);
+    rotNor.rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
+    idx = put(out, idx, tmp, rotNor, orbit, faceShade);
+               }
         }
     }
     return out;
