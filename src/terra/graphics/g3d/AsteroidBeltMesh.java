@@ -127,8 +127,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
         int idx = 0;
     
         Vec3 v0 = new Vec3(), v1 = new Vec3(), v2 = new Vec3();
-        Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3(), dir = new Vec3();
-        Vec3 cA = new Vec3(), cB = new Vec3(), cC = new Vec3(), tileNor = new Vec3();
+        Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3();
         float R = planet.radius;
     
         for(int r = 0; r < n; r++){
@@ -146,73 +145,31 @@ public class AsteroidBeltMesh extends PlanetMesh{
             float cz = Mathf.sin(ang) * dist * R;
     
             float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
-
-            int shapeSeed = 1000 + seed * 31 + r * 7;
-            int tileStart = -1;
-            float shapeFreq = 1.5f + rnd.nextFloat() * 2.5f;
-            float shapeAmp = jaggedness * (0.7f + rnd.nextFloat() * 0.8f);
+    
             for(int tri = 0; tri < triangleCount; tri++){
                 int i0, i1, i2;
                 if(baseIndices != null){
-                    i0 = baseIndices[tri * 3] & 0xFFFF;
+                    i0 = baseIndices[tri * 3]     & 0xFFFF;
                     i1 = baseIndices[tri * 3 + 1] & 0xFFFF;
                     i2 = baseIndices[tri * 3 + 2] & 0xFFFF;
                 }else{
                     i0 = tri * 3; i1 = tri * 3 + 1; i2 = tri * 3 + 2;
                 }
     
-                //int o0 = i0 * baseFloats, o1 = i1 * baseFloats, o2 = i2 * baseFloats;
-                v0.set(baseVerts[i0 * baseFloats], baseVerts[i0 * baseFloats + 1], baseVerts[i0 * baseFloats + 2]);
-                v1.set(baseVerts[i1 * baseFloats], baseVerts[i1 * baseFloats + 1], baseVerts[i1 * baseFloats + 2]);
-                v2.set(baseVerts[i2 * baseFloats], baseVerts[i2 * baseFloats + 1], baseVerts[i2 * baseFloats + 2]);
-
-                deformVertex(v0, shapeSeed, shapeFreq, shapeAmp);
-                deformVertex(v1, shapeSeed, shapeFreq, shapeAmp);
-                deformVertex(v2, shapeSeed, shapeFreq, shapeAmp);
-                
-                nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z);
+                int o0 = i0 * baseFloats, o1 = i1 * baseFloats, o2 = i2 * baseFloats;
+                v0.set(baseVerts[o0], baseVerts[o0 + 1], baseVerts[o0 + 2]);
+                v1.set(baseVerts[o1], baseVerts[o1 + 1], baseVerts[o1 + 2]);
+                v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
+    
+                nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
                 tmp.set(v0).add(v1).add(v2).scl(1f / 3f);
                 if(nor.dot(tmp) < 0f){
                     int ti = i1; i1 = i2; i2 = ti;
-                    v1.set(baseVerts[i1 * baseFloats], baseVerts[i1 * baseFloats + 1], baseVerts[i1 * baseFloats + 2]);
-                    v2.set(baseVerts[i2 * baseFloats], baseVerts[i2 * baseFloats + 1], baseVerts[i2 * baseFloats + 2]);
-                    deformVertex(v1, shapeSeed, shapeFreq, shapeAmp);
-                    deformVertex(v2, shapeSeed, shapeFreq, shapeAmp);
+                    int to = o1; o1 = o2; o2 = to;
+                    v1.set(baseVerts[o1], baseVerts[o1 + 1], baseVerts[o1 + 2]);
+                    v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
+                    nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
                 }
-
-                if(baseIndices != null){
-                    if(i0 != tileStart){
-                        tileStart = i0;
-                        cA.set(baseVerts[tileStart * baseFloats], baseVerts[tileStart * baseFloats + 1], baseVerts[tileStart * baseFloats + 2]);
-                        int o2 = (tileStart + 2) * baseFloats;
-                        int o4 = (tileStart + 4) * baseFloats;
-                        cB.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
-                        cC.set(baseVerts[o4], baseVerts[o4 + 1], baseVerts[o4 + 2]);
-
-                        deformVertex(cA, shapeSeed, shapeFreq, shapeAmp);
-                        deformVertex(cB, shapeSeed, shapeFreq, shapeAmp);
-                        deformVertex(cC, shapeSeed, shapeFreq, shapeAmp);
-
-                        tileNor.set(cB).sub(cA).crs(cC.x - cA.x, cC.y - cA.y, cC.z - cA.z).nor();
-
-                        tmp.set(cA).add(cB).add(cC).scl(1f / 3f);
-                        if(tileNor.dot(tmp) < 0f) tileNor.scl(-1f);
-                    }
-                    nor.set(tileNor);
-                }
-
-                for(int k = 0; k < 3; k++){
-                    Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
-                    dir.set(p).nor();
-                    double nn = Simplex.noise3d(
-                        shapeSeed, 3, 0.5, 2.0,
-                        dir.x * shapeFreq,
-                        dir.y * shapeFreq,
-                        dir.z * shapeFreq
-                    );
-                    p.scl(1f + shapeAmp * (float)nn);
-                }
-                nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
 
                 double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
                 float faceShade = noise > 0.5 ? 1f : 0f;
@@ -229,14 +186,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
             }
         }
         return out;
-    }
-    
-    private static void deformVertex(Vec3 p, int seed, float freq, float amp){
-        float len = p.len();
-        if(len < 1e-6f) return;
-        float inv = 1f / len;
-        double nn = Simplex.noise3d(seed, 3, 0.5, 2.0, p.x * inv * freq, p.y * inv * freq, p.z * inv * freq);
-        p.scl((float)nn);
     }
 
     private static int put(float[] out, int i, Vec3 p, Vec3 n, float orbit, float shade){
@@ -287,4 +236,4 @@ public class AsteroidBeltMesh extends PlanetMesh{
                     "    vec3 base = mix(u_colorDark, u_colorLight, v_shade);\n" +
                     "    gl_FragColor = vec4(base * (u_ambient + diff * u_lightPower), 1.0);\n" +
                     "}\n";
-}
+        }
