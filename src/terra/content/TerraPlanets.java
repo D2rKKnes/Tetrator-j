@@ -90,6 +90,7 @@ public class TerraPlanets{
             icon = "terra-pulsar";
             iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
+            clipRadius = 12f;
 
             final PulsarMesh[] shared = {null};
             Prov<PulsarMesh> pulsar = () -> {
@@ -107,6 +108,9 @@ public class TerraPlanets{
                             Color.valueOf("d8ccff")
                     );
 
+                    hideBehindStar = true;
+                    beamsOverPlanets = false;
+                    deferBeams = true;
                     beamColor = Color.valueOf("7f9bff");
                     intensity = 1.8f;
 
@@ -115,7 +119,7 @@ public class TerraPlanets{
                     pulseSharpness = 3f;
 
                     spinSpeed = -1.85f;
-                    beamTilt = 34f;
+                    beamTilt = 20f;
                     beamLength = 14f;
                     beamWidth = 0.7f;
                     beamFalloff = 1.2f;
@@ -141,7 +145,10 @@ public class TerraPlanets{
                     clipRadius = 2;
                 }}
             );
+
+            cloudMeshLoader = () -> new PulsarBeamsMesh(pulsar.get());
         }};
+
         vortar = new BetterPlanet("vortar", TerraPlanets.RXS, 1f){{
             hasAtmosphere = false;
             accessible = false;

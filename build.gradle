@@ -1,4 +1,8 @@
 apply plugin: "java"
+File localScript = file('buildd.gradle')
+if (localScript.exists()) {
+    apply from: 'buildd.gradle'
+}
 
 version = '1.0'
 
