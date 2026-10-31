@@ -29,8 +29,8 @@ public class AsteroidBeltMesh extends PlanetMesh{
     public float orbitSpeed = 0.02f;
     public float kepler = 1f;
 
-    public Color colorDark = Color.valueOf("3a3550");
-    public Color colorLight = Color.valueOf("8a84a8");
+    public Color colorDark = Color.valueOf("000000");
+    public Color colorLight = Color.valueOf("ffffff");
     public float ambient = 0f;
     public float lightPower = 1f;
     public boolean lightFromCenter = true;
@@ -114,97 +114,97 @@ public class AsteroidBeltMesh extends PlanetMesh{
         return out;
     }
     
-private float[] buildRocks(){
-    HexMesher mesher = new HexMesher(){
-        public float getHeight(Vec3 pos){ return 0f; }
-    };
-    Mesh baseMesh = MeshBuilder.buildHex(mesher, 1, 1f, 0.2f);
-
-    int baseFloats = baseMesh.getVertexSize() / 4;
-    if(baseFloats < 3) baseFloats = 3;
-
-    FloatBuffer vbuf = baseMesh.getVerticesBuffer();
-    vbuf.rewind();
-    float[] baseVerts = new float[vbuf.limit()];
-    vbuf.get(baseVerts);
-
-    ShortBuffer ibuf = baseMesh.getIndicesBuffer();
-    short[] baseIndices = null;
-    if(ibuf != null){
-        ibuf.rewind();
-        baseIndices = new short[ibuf.limit()];
-        ibuf.get(baseIndices);
-    }
-    baseMesh.dispose();
-
-    int vertexCount = baseVerts.length / baseFloats;
-    int triangleCount = baseIndices != null ? baseIndices.length / 3 : vertexCount / 3;
-
-    Random rnd = new Random(seed);
-    int n = Math.max(1, count);
-    float[] out = new float[n * triangleCount * 3 * FLOATS];
-    int idx = 0;
-
-    Vec3 v0 = new Vec3(), v1 = new Vec3(), v2 = new Vec3();
-    Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3();
-    float R = planet.radius;
-
-    for(int r = 0; r < n; r++){
-        float ang = rnd.nextFloat() * Mathf.PI2;
-        float dist = ringRadius + (rnd.nextFloat() + rnd.nextFloat() - 1f) * ringWidth * 0.5f;
-        float y = Mathf.clamp((float)rnd.nextGaussian() * ringThickness * 0.5f, -ringThickness, ringThickness);
-        float size = minSize + (float)Math.pow(rnd.nextFloat(), 3.0) * (maxSize - minSize);
-
-        float sx = 1f + stretch * rnd.nextFloat();
-        float sy = 1f - 0.5f * stretch * rnd.nextFloat();
-        float rx = rnd.nextFloat() * 360f, ry = rnd.nextFloat() * 360f, rz = rnd.nextFloat() * 360f;
-
-        float cx = Mathf.cos(ang) * dist * R;
-        float cy = y * R;
-        float cz = Mathf.sin(ang) * dist * R;
-
-        float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
-
-        for(int tri = 0; tri < triangleCount; tri++){
-            int i0, i1, i2;
-            if(baseIndices != null){
-                i0 = baseIndices[tri * 3]     & 0xFFFF;
-                i1 = baseIndices[tri * 3 + 1] & 0xFFFF;
-                i2 = baseIndices[tri * 3 + 2] & 0xFFFF;
-            }else{
-                i0 = tri * 3; i1 = tri * 3 + 1; i2 = tri * 3 + 2;
-            }
-
-            int o0 = i0 * baseFloats, o1 = i1 * baseFloats, o2 = i2 * baseFloats;
-            v0.set(baseVerts[o0], baseVerts[o0 + 1], baseVerts[o0 + 2]);
-            v1.set(baseVerts[o1], baseVerts[o1 + 1], baseVerts[o1 + 2]);
-            v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
-
-            nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
-            tmp.set(v0).add(v1).add(v2).scl(1f / 3f);
-            if(nor.dot(tmp) < 0f){
-                int ti = i1; i1 = i2; i2 = ti;
-                int to = o1; o1 = o2; o2 = to;
+    private float[] buildRocks(){
+        HexMesher mesher = new HexMesher(){
+            public float getHeight(Vec3 pos){ return 0f; }
+        };
+        Mesh baseMesh = MeshBuilder.buildHex(mesher, 1, 1f, 0.2f);
+    
+        int baseFloats = baseMesh.getVertexSize() / 4;
+        if(baseFloats < 3) baseFloats = 3;
+    
+        FloatBuffer vbuf = baseMesh.getVerticesBuffer();
+        vbuf.rewind();
+        float[] baseVerts = new float[vbuf.limit()];
+        vbuf.get(baseVerts);
+    
+        ShortBuffer ibuf = baseMesh.getIndicesBuffer();
+        short[] baseIndices = null;
+        if(ibuf != null){
+            ibuf.rewind();
+            baseIndices = new short[ibuf.limit()];
+            ibuf.get(baseIndices);
+        }
+        baseMesh.dispose();
+    
+        int vertexCount = baseVerts.length / baseFloats;
+        int triangleCount = baseIndices != null ? baseIndices.length / 3 : vertexCount / 3;
+    
+        Random rnd = new Random(seed);
+        int n = Math.max(1, count);
+        float[] out = new float[n * triangleCount * 3 * FLOATS];
+        int idx = 0;
+    
+        Vec3 v0 = new Vec3(), v1 = new Vec3(), v2 = new Vec3();
+        Vec3 nor = new Vec3(), tmp = new Vec3(), rotNor = new Vec3();
+        float R = planet.radius;
+    
+        for(int r = 0; r < n; r++){
+            float ang = rnd.nextFloat() * Mathf.PI2;
+            float dist = ringRadius + (rnd.nextFloat() + rnd.nextFloat() - 1f) * ringWidth * 0.5f;
+            float y = Mathf.clamp((float)rnd.nextGaussian() * ringThickness * 0.5f, -ringThickness, ringThickness);
+            float size = minSize + (float)Math.pow(rnd.nextFloat(), 3.0) * (maxSize - minSize);
+    
+            float sx = 1f + stretch * rnd.nextFloat();
+            float sy = 1f - 0.5f * stretch * rnd.nextFloat();
+            float rx = rnd.nextFloat() * 360f, ry = rnd.nextFloat() * 360f, rz = rnd.nextFloat() * 360f;
+    
+            float cx = Mathf.cos(ang) * dist * R;
+            float cy = y * R;
+            float cz = Mathf.sin(ang) * dist * R;
+    
+            float orbit = orbitSpeed * Mathf.PI2 * (float)Math.pow(ringRadius / Math.max(dist, 0.01f), 1.5f * kepler);
+    
+            for(int tri = 0; tri < triangleCount; tri++){
+                int i0, i1, i2;
+                if(baseIndices != null){
+                    i0 = baseIndices[tri * 3]     & 0xFFFF;
+                    i1 = baseIndices[tri * 3 + 1] & 0xFFFF;
+                    i2 = baseIndices[tri * 3 + 2] & 0xFFFF;
+                }else{
+                    i0 = tri * 3; i1 = tri * 3 + 1; i2 = tri * 3 + 2;
+                }
+    
+                int o0 = i0 * baseFloats, o1 = i1 * baseFloats, o2 = i2 * baseFloats;
+                v0.set(baseVerts[o0], baseVerts[o0 + 1], baseVerts[o0 + 2]);
                 v1.set(baseVerts[o1], baseVerts[o1 + 1], baseVerts[o1 + 2]);
                 v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
+    
                 nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
+                tmp.set(v0).add(v1).add(v2).scl(1f / 3f);
+                if(nor.dot(tmp) < 0f){
+                    int ti = i1; i1 = i2; i2 = ti;
+                    int to = o1; o1 = o2; o2 = to;
+                    v1.set(baseVerts[o1], baseVerts[o1 + 1], baseVerts[o1 + 2]);
+                    v2.set(baseVerts[o2], baseVerts[o2 + 1], baseVerts[o2 + 2]);
+                    nor.set(v1).sub(v0).crs(v2.x - v0.x, v2.y - v0.y, v2.z - v0.z).nor();
+                }
+
+                double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
+                float faceShade = noise > 0.5 ? 1f : 0f;
+                
+                rotNor.set(nor).rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
+                for(int k = 0; k < 3; k++){
+                    Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
+                    tmp.set(p)
+                       .scl(sx, sy, 1f)
+                       .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
+                       .scl(size * R).add(cx, cy, cz);
+                    idx = put(out, idx, tmp, rotNor, orbit, faceShade);
+                }
             }
-
-double noise = Simplex.noise3d(8 + seed + r, 3, 0.5, 2, nor.x, nor.y, nor.z);
-float faceShade = noise > 0.5 ? 1f : 0f;
-
-rotNor.set(nor).rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz);
-for(int k = 0; k < 3; k++){
-    Vec3 p = (k == 0) ? v0 : (k == 1) ? v1 : v2;
-    tmp.set(p)
-       .scl(sx, sy, 1f)
-       .rotate(Vec3.X, rx).rotate(Vec3.Y, ry).rotate(Vec3.Z, rz)
-       .scl(size * R).add(cx, cy, cz);
-    idx = put(out, idx, tmp, rotNor, orbit, faceShade);
-}
         }
-    }
-    return out;
+        return out;
     }
 
     private static int put(float[] out, int i, Vec3 p, Vec3 n, float orbit, float shade){
