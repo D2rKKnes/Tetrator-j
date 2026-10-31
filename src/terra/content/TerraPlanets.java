@@ -164,8 +164,6 @@ public class TerraPlanets{
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
-                ambient = 0.25f;
-                lightPower = 1.3f;
                 lightFromCenter = true;
             }};
         }};
