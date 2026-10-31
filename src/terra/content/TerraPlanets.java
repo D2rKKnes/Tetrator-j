@@ -164,7 +164,6 @@ public class TerraPlanets{
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
-                lightFromCenter = true;
             }};
         }};
         //TODO: Replace with Copis
