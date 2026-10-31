@@ -22,7 +22,7 @@ version: "[stat]BETA[] 0.3"
 #the minimum game build required to run this mod
 minGameVersion: 160.5
 
-#this is a java mod
+#this is a java modd
 java: true
 
 dependencies: ["black-hole-renderer"]
