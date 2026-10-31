@@ -38,6 +38,9 @@ public class PulsarMesh extends PlanetMesh{
     public float beamAlpha = 0.5f;
     public int beamLayers = 3;
 
+    public boolean deferBeams = false;
+    private float flash;
+
     private boolean ready;
     private Mesh beamMesh;
     private Shader coreShader, beamShader;
@@ -57,10 +60,7 @@ public class PulsarMesh extends PlanetMesh{
         this.ready = true;
     }
 
-    @Override
-    public void render(PlanetParams params, Mat3D projection, Mat3D transform){
-        if(!ready) init();
-
+    private void update(Mat3D transform){
         float time = Time.globalTime / 60f;
 
         spinTrans.set(transform).rotate(Vec3.Y, time * spinSpeed * 360f);
@@ -73,7 +73,15 @@ public class PulsarMesh extends PlanetMesh{
         fwd.set(axis).crs(right).nor();
 
         float s = 0.5f + 0.5f * Mathf.sin(time * pulseRate * Mathf.PI2);
-        float flash = (1f - pulseDepth) + pulseDepth * Mathf.pow(s, pulseSharpness);
+        flash = (1f - pulseDepth) + pulseDepth * Mathf.pow(s, pulseSharpness);
+    }
+
+    @Override
+    public void render(PlanetParams params, Mat3D projection, Mat3D transform){
+        if(!ready) init();
+        update(transform);
+
+        float time = Time.globalTime / 60f;
 
         if(surface != null){
             surface.render(params, projection, spinTrans);
@@ -94,6 +102,16 @@ public class PulsarMesh extends PlanetMesh{
             mesh.render(coreShader, Gl.triangles);
         }
 
+        if(!deferBeams) drawBeams(projection);
+    }
+
+    public void renderBeams(PlanetParams params, Mat3D projection, Mat3D transform){
+        if(!ready) init();
+        update(transform);
+        drawBeams(projection);
+    }
+
+    private void drawBeams(Mat3D projection){
         Gl.depthMask(false);
         Gl.enable(Gl.blend);
         Gl.blendFunc(Gl.srcAlpha, Gl.one);
