@@ -116,10 +116,19 @@ public class AsteroidBeltMesh extends PlanetMesh{
     HexMesher mesher = new HexMesher(){
         public float getHeight(Vec3 pos){ return 0f; }
     };
-    Mesh baseMesh = MeshBuilder.buildHex(mesher, 1, 1f, 0.2f);
-    float[] baseVerts = new float[baseMesh.getVertices().length];
-    baseMesh.getVertices(baseVerts);
-    baseMesh.dispose();
+    FloatBuffer vbuf = baseMesh.getVerticesBuffer();
+vbuf.rewind();
+float[] baseVerts = new float[vbuf.limit()];
+vbuf.get(baseVerts);
+    ShortBuffer ibuf = baseMesh.getIndicesBuffer();
+short[] baseIndices = null;
+if(ibuf != null){
+    ibuf.rewind();
+    baseIndices = new short[ibuf.limit()];
+    ibuf.get(baseIndices);
+}
+
+baseMesh.dispose();
 
     int baseFloats = 6;
     int baseVertCount = baseVerts.length / baseFloats;
