@@ -112,12 +112,12 @@ public class TerraPlanets{
                     pulseDepth = 0.6f;
                     pulseSharpness = 3f;
 
-                    spinSpeed = 1.85f;
+                    spinSpeed = -1.85f;
                     beamTilt = 34f;
-                    beamLength = 11f;
-                    beamWidth = 0.6f;
+                    beamLength = 14f;
+                    beamWidth = 0.7f;
                     beamFalloff = 1.2f;
-                    beamAlpha = 0.5f;
+                    beamAlpha = 0.55f;
                     beamLayers = 3;
 
                     clipRadius = 3;
@@ -147,24 +147,25 @@ public class TerraPlanets{
             maxZoom = 18f * 0.7f;
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
-                ringRadius = 17f;
-                ringWidth = ringThickness = 1.7f;
+                ringRadius = 17.2f;
+                ringWidth = 2.7f;
+                ringThickness = 1.5f;
                 tilt = 0f;
 
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.06f;
-                maxSize = 0.3f;
-                jaggedness = 1.1f;
+                minSize = 0.07f;
+                maxSize = 0.28f;
+                jaggedness = 3f;
                 stretch = 0.6f;
                 seed = 6;
 
-                orbitSpeed = 0.0005f;
+                orbitSpeed = 0.001f;
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
-                ambient= 0.005f;
+                ambient = 0.0015f;
             }};
         }};
         //TODO: Replace with Copis
@@ -190,7 +191,7 @@ public class TerraPlanets{
                 r.placeRangeCheck = false;
             };
         }};
-        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.5f, 4){{
+        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.6f, 4){{
             generator = new OnixisPlanetGenerator();
             meshLoader = () -> new MultiMesh(
                 new BetterPlanet.AtmosphereHexMesh(7),
@@ -204,13 +205,13 @@ public class TerraPlanets{
             );
             accessible = false;
             alwaysUnlocked = false;
-            orbitRadius = 28f;
+            orbitRadius = 32.4f;
             drawOrbit = true;
             iconColor = Color.valueOf("3a3c6e");
             hasAtmosphere = true;
             atmosphereColor = Color.valueOf("4a424f");
             atmosphereRadIn = 0f;
-            atmosphereRadOut = 0.05f;
+            atmosphereRadOut = 0.08f;
         }};
     }
 }
