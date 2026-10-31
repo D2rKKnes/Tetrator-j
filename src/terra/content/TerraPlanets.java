@@ -190,5 +190,27 @@ public class TerraPlanets{
                 r.placeRangeCheck = false;
             };
         }};
+        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.5f, 4){{
+            generator = new OnixisMoonGenerator();
+            meshLoader = () -> new MultiMesh(
+                new BetterPlanet.AtmosphereHexMesh(7),
+                new HexMesh(this, 7)
+            );
+            cloudMeshLoader = () -> new MultiMesh(
+                new HexSkyMesh(this, 2, 1.8f, 0.04f, 6, Color.valueOf("343665").a(0.6f), 2, 0.8f, 1f, 0.4f),
+                new HexSkyMesh(this, 3, -1.8f, 0.05f, 6, Color.valueOf("4e509a").a(0.6f), 2, 0.8f, 1f, 0.5f),
+                new HexSkyMesh(this, 4, 2.6f, 0.06f, 6, Color.valueOf("7f71b2").a(0.6f), 2, 0.8f, 1.2f, 0.5f),
+                new HexSkyMesh(this, 5, -3f, 0.07f, 6, Color.valueOf("7169c1").a(0.6f), 2, 0.8f, 1.2f, 0.6f)
+            );
+            accessible = false;
+            alwaysUnlocked = false;
+            orbitRadius = 28f;
+            drawOrbit = true;
+            iconColor = Color.valueOf("3a3c6e");
+            hasAtmosphere = true;
+            atmosphereColor = Color.valueOf("4a424f");
+            atmosphereRadIn = 0f;
+            atmosphereRadOut = 0.05f;
+        }};
     }
 }
