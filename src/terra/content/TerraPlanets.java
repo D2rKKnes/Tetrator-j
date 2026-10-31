@@ -155,7 +155,7 @@ public class TerraPlanets{
 
                 count = 1400;
                 minSize = 0.08f;
-                maxSize = 0.22f;
+                maxSize = 0.33f;
                 jaggedness = 0.6f;
                 stretch = 0.5f;
                 seed = 6;
@@ -164,6 +164,7 @@ public class TerraPlanets{
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
+                ambient= 0.05f;
             }};
         }};
         //TODO: Replace with Copis
