@@ -163,7 +163,7 @@ public class TerraPlanets{
             meshLoader = () -> new AsteroidBeltMesh(this){{
                 ringRadius = 17.2f;
                 ringWidth = 2.7f;
-                ringThickness = 1.5f;
+                ringThickness = 1.3f;
                 tilt = 0f;
 
                 clipRadius = 40;
@@ -171,15 +171,15 @@ public class TerraPlanets{
                 count = 1400;
                 minSize = 0.07f;
                 maxSize = 0.28f;
-                jaggedness = 3f;
-                stretch = 0.6f;
+                jaggedness = 0.5f;
+                stretch = 0.3f;
                 seed = 6;
 
                 orbitSpeed = 0.001f;
 
                 colorDark = TerraItems.carbon.color.cpy();
                 colorLight = TerraItems.diamondDust.color.cpy();
-                ambient = 0.0015f;
+                ambient = 0.002f;
             }};
         }};
         //TODO: Replace with Copis
