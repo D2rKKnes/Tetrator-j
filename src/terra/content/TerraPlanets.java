@@ -91,9 +91,11 @@ public class TerraPlanets{
             iconColor = Color.valueOf("5d47ff");
             solarSystem = this;
 
-            meshLoader = () -> new MultiMesh(
-                new PulsarMesh(this){{
-                    surface = new SunMesh(
+            final PulsarMesh[] shared = {null};
+            Prov<PulsarMesh> pulsar = () -> {
+                if(shared[0] == null){
+                    shared[0] = new PulsarMesh(this){{
+                        surface = new SunMesh(
                             planet, 5,
                             5, 0.3, 2.4, 1.3, 1,
                             1.4f,
@@ -121,9 +123,14 @@ public class TerraPlanets{
                     beamLayers = 3;
 
                     clipRadius = 3;
-                }},
+                    }};
+                }
+                return shared[0];
+            };
 
-                new PulsarDiskMesh(this){{
+                meshLoader = () -> new MultiMesh(
+                    pulsar.get(),
+                    new PulsarDiskMesh(this){{
                     ringRadius = 3.3f;
                     ringWidth = 2.6f;
                     tilt = 0f;
