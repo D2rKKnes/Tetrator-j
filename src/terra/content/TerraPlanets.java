@@ -191,7 +191,7 @@ public class TerraPlanets{
             };
         }};
         onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.5f, 4){{
-            generator = new OnixisMoonGenerator();
+            generator = new OnixisPlanetGenerator();
             meshLoader = () -> new MultiMesh(
                 new BetterPlanet.AtmosphereHexMesh(7),
                 new HexMesh(this, 7)
