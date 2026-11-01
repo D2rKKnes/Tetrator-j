@@ -169,14 +169,11 @@ public class TerraPlanets{
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.01f;
-                maxSize = 0.05f;
+                minSize = 0.07f;
+                maxSize = 0.25f;
                 seed = 6;
 
                 orbitSpeed = 0.001f;
-
-                tint = TerraItems.carbon.color.cpy();
-                color = TerraItems.diamondDust.color.cpy();
             }};
         }};
         //TODO: Replace with Copis
