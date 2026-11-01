@@ -154,7 +154,7 @@ public class TerraPlanets{
             accessible = false;
             alwaysUnlocked = false;
             drawOrbit = false;
-            orbitRadius = 0.001f;
+            //orbitRadius = 0.001f;
             icon = "terra-asteroid-belt";
             iconColor = TerraItems.carbon.color.cpy();
             minZoom = 15f * 0.7f;
@@ -169,11 +169,14 @@ public class TerraPlanets{
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.07f;
-                maxSize = 0.25f;
+                minSize = 0.01f;
+                maxSize = 0.05f;
                 seed = 6;
 
                 orbitSpeed = 0.001f;
+
+                tint = TerraItems.carbon.color.cpy();
+                color = TerraItems.diamondDust.color.cpy();
             }};
         }};
         //TODO: Replace with Copis
