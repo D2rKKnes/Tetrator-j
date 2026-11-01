@@ -6,6 +6,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.noise.*;
+import arc.struct.*;
 import mindustry.graphics.*;
 import mindustry.graphics.g3d.*;
 import mindustry.type.Planet;
@@ -26,10 +27,11 @@ public class AsteroidBeltMesh extends PlanetMesh{
     public float persistence   = 0.6f;
     public float noiseScale    = 0.38f;
     public float noiseMag      = 20f;
-    public int   coordsScale   = 3;
-    public float coordsPersist = 0.6f;
-    public float coordsScale2  = 0.38f;
-    public float tintThresh    = 0.6f;
+
+    public int   tintOctaves = 3;
+    public float tintPersist = 0.6f;
+    public float tintScale   = 0.38f;
+    public float tintThresh  = 0.6f;
 
     public float minSize = 0.022f;
     public float maxSize = 0.061f;
@@ -53,10 +55,10 @@ public class AsteroidBeltMesh extends PlanetMesh{
         Seq<GenericMesh> rocks = new Seq<>(count);
 
         for(int i = 0; i < count; i++){
-            float ang  = rand.random(Mathf.PI2);
-            float dist = ringRadius + (rand.random() + rand.random() - 1f) * ringWidth * 0.5f;
-            float y    = rand.randomGaussian() * ringThickness * 0.5f;
-            float size = minSize + rand.random(maxSize - minSize);
+            float ang  = rand.nextFloat() * Mathf.PI2;
+            float dist = ringRadius + (rand.nextFloat() + rand.nextFloat() - 1f) * ringWidth * 0.5f;
+            float y    = rand.nextGaussian() * ringThickness * 0.5f;
+            float size = minSize + rand.nextFloat() * (maxSize - minSize);
 
             float cx = Mathf.cos(ang) * dist * planet.radius;
             float cy = y * planet.radius;
@@ -72,13 +74,13 @@ public class AsteroidBeltMesh extends PlanetMesh{
                     noiseScale,
                     noiseMag,
                     color, tinted,
-                    coordsScale, coordsPersist, coordsScale2, tintThresh
+                    tintOctaves, tintPersist, tintScale, tintThresh
             );
 
             Mat3D place = new Mat3D()
                     .translate(cx, cy, cz)
-                    .rotate(Vec3.Y, rand.random(360f))
-                    .rotate(Vec3.X, rand.random(360f));
+                    .rotate(Vec3.Y, rand.nextFloat() * 360f)
+                    .rotate(Vec3.X, rand.nextFloat() * 360f);
 
             rocks.add(new MatMesh(rock, place));
         }
