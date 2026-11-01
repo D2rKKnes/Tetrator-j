@@ -48,20 +48,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
 
     public AsteroidBeltMesh(Planet planet){ this.planet = planet; }
 
-    @Override
-    public void render(PlanetParams params, Mat3D projection, Mat3D transform){
-        if(!ready) init();
-    
-        mat.set(transform)
-           .rotate(Vec3.X, tilt)
-           .rotate(Vec3.Y, Time.globalTime / 60f * orbitSpeed * Mathf.PI2);
-    
-        Shaders.planet.bind();
-        Shaders.planet.setUniformf("u_lightDir", 1f, 1f, 1f);
-    
-        belt.render(params, projection, mat);
-    }
-
     private void init(){
         Rand rand = new Rand(seed);
         Color tinted = tint.cpy().a(1f - tint.a);
@@ -106,11 +92,14 @@ public class AsteroidBeltMesh extends PlanetMesh{
     @Override
     public void render(PlanetParams params, Mat3D projection, Mat3D transform){
         if(!ready) init();
-
+    
         mat.set(transform)
            .rotate(Vec3.X, tilt)
            .rotate(Vec3.Y, Time.globalTime / 60f * orbitSpeed * Mathf.PI2);
-
+    
+        Shaders.planet.bind();
+        Shaders.planet.setUniformf("u_lightDir", 1f, 1f, 1f);
+    
         belt.render(params, projection, mat);
     }
 
