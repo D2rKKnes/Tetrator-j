@@ -28,7 +28,7 @@ public class OnixisPlanetGenerator extends PlanetGenerator {
 
     @Override
     public void getColor(Vec3 position, Color out){
-        Tmp.v31.set(position).rotate(Vec3.Y, position.y * rotationScl).add(700f, 0f, 500f);
+        Tmp.v31.set(position).rotate(Vec3.Y, position.y * rotationScl).add(550f, 0f, 500f);
         double height = Math.pow(Simplex.noise3d(0, octaves, persistence, scl, Tmp.v31.x, Tmp.v31.y, Tmp.v31.z), pow) * mag;
         out.set(colors[Mathf.clamp((int)(height * colors.length), 0, colors.length - 1)]);
     }
