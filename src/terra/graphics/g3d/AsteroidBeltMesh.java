@@ -57,7 +57,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
         for(int i = 0; i < count; i++){
             float ang  = rand.nextFloat() * Mathf.PI2;
             float dist = ringRadius + (rand.nextFloat() + rand.nextFloat() - 1f) * ringWidth * 0.5f;
-            float y    = rand.nextGaussian() * ringThickness * 0.5f;
+            float y = ((rand.nextFloat() + rand.nextFloat()) - 1f) * ringThickness * 0.5f;
             float size = minSize + rand.nextFloat() * (maxSize - minSize);
 
             float cx = Mathf.cos(ang) * dist * planet.radius;
