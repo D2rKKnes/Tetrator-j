@@ -169,8 +169,8 @@ public class TerraPlanets{
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.07f;
-                maxSize = 0.25f;
+                minSize = 0.01f;
+                maxSize = 0.05f;
                 seed = 6;
 
                 orbitSpeed = 0.001f;
