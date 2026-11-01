@@ -205,7 +205,7 @@ public class TerraPlanets{
                 r.placeRangeCheck = false;
             };
         }};
-        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.6f){{
+        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.6f, 4){{
             generator = new OnixisPlanetGenerator();
             meshLoader = () -> new MultiMesh(
                 new BetterPlanet.AtmosphereHexMesh(7),
