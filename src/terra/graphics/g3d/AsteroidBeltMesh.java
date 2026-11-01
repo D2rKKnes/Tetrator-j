@@ -97,9 +97,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
            .rotate(Vec3.X, tilt)
            .rotate(Vec3.Y, Time.globalTime / 60f * orbitSpeed * Mathf.PI2);
     
-        Shaders.planet.bind();
-        Shaders.planet.setUniformf("u_lightDir", 1f, 1f, 1f);
-    
         belt.render(params, projection, mat);
     }
 
