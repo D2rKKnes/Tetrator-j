@@ -167,11 +167,12 @@ public class TerraPlanets{
                 tilt = 0f;
 
                 clipRadius = 40;
+                hexDivisions = 1;
 
                 count = 1400;
                 minSize = 0.07f;
                 maxSize = 0.28f;
-                jaggedness = 0.2f;
+                jaggedness = 0.3f;
                 stretch = 0.3f;
                 seed = 6;
 
