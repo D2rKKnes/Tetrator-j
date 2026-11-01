@@ -157,7 +157,7 @@ public class TerraPlanets{
             orbitRadius = 0f;
             icon = "terra-asteroid-belt";
             iconColor = TerraItems.carbon.color.cpy();
-            minZoom = 16f * 0.7f;
+            minZoom = 15f * 0.7f;
             maxZoom = 17f * 0.7f;
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
@@ -167,20 +167,16 @@ public class TerraPlanets{
                 tilt = 0f;
 
                 clipRadius = 40;
-                hexDivisions = 1;
 
                 count = 1400;
                 minSize = 0.07f;
-                maxSize = 0.28f;
-                jaggedness = 0.3f;
-                stretch = 0.3f;
+                maxSize = 0.25f;
                 seed = 6;
 
                 orbitSpeed = 0.001f;
 
-                colorDark = TerraItems.carbon.color.cpy();
-                colorLight = TerraItems.diamondDust.color.cpy();
-                ambient = 0.005f;
+                tint = TerraItems.carbon.color.cpy();
+                color = TerraItems.diamondDust.color.cpy();
             }};
         }};
         //TODO: Replace with Copis
