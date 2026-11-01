@@ -157,8 +157,8 @@ public class TerraPlanets{
             orbitRadius = 0f;
             icon = "terra-asteroid-belt";
             iconColor = TerraItems.carbon.color.cpy();
-            minZoom = 17f * 0.7f;
-            maxZoom = 18f * 0.7f;
+            minZoom = 16f * 0.7f;
+            maxZoom = 17f * 0.7f;
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
                 ringRadius = 17.2f;
@@ -205,27 +205,27 @@ public class TerraPlanets{
                 r.placeRangeCheck = false;
             };
         }};
-        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.6f, 4){{
+        onixis = new BetterPlanet("onixis", TerraPlanets.RXS, 4.6f){{
             generator = new OnixisPlanetGenerator();
             meshLoader = () -> new MultiMesh(
                 new BetterPlanet.AtmosphereHexMesh(7),
                 new HexMesh(this, 7)
             );
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 2, 1.8f, 0.04f, 6, Color.valueOf("343665").a(0.6f), 2, 0.8f, 1f, 0.4f),
-                new HexSkyMesh(this, 3, -1.8f, 0.05f, 6, Color.valueOf("4e509a").a(0.6f), 2, 0.8f, 1f, 0.5f),
-                new HexSkyMesh(this, 4, 2.6f, 0.06f, 6, Color.valueOf("7f71b2").a(0.6f), 2, 0.8f, 1.2f, 0.5f),
-                new HexSkyMesh(this, 5, -3f, 0.07f, 6, Color.valueOf("7169c1").a(0.6f), 2, 0.8f, 1.2f, 0.6f)
+                new HexSkyMesh(this, 2, 1.8f, 0.04f, 6, Color.valueOf("343665").a(0.6f).b(0.2f), 2, 0.8f, 1f, 0.4f),
+                new HexSkyMesh(this, 3, -1.8f, 0.05f, 6, Color.valueOf("4e509a").a(0.6f).b(0.2f), 2, 0.8f, 1f, 0.5f),
+                new HexSkyMesh(this, 4, 2.6f, 0.06f, 6, Color.valueOf("7f71b2").a(0.6f).b(0.3f), 2, 0.8f, 1.2f, 0.5f),
+                new HexSkyMesh(this, 5, -3f, 0.07f, 6, Color.valueOf("7169c1").a(0.6f).b(0.3f), 2, 0.8f, 1.2f, 0.6f)
             );
             accessible = false;
             alwaysUnlocked = false;
-            orbitRadius = 33.4f;
+            orbitRadius = 34f;
             drawOrbit = true;
             iconColor = Color.valueOf("3a3c6e");
             hasAtmosphere = true;
-            atmosphereColor = Color.valueOf("4a424f");
+            atmosphereColor = Color.valueOf("4a424f").b(0.2f);
             atmosphereRadIn = 0f;
-            atmosphereRadOut = 0.08f;
+            atmosphereRadOut = 0.05f;
         }};
     }
 }
