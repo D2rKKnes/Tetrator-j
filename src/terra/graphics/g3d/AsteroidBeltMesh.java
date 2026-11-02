@@ -102,7 +102,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
         var s = Shaders.planet;
         s.planet = planet;
     
-        Planet sun = planet.getSolarSystem();
+        Planet sun = planet.solarSystem;
         Vec3 dir = new Vec3(sun.position).sub(planet.position);
     
         if(dir.len() < 0.0001f){
