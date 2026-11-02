@@ -19,13 +19,6 @@ To play and test unreleased beta versions, you need to:
 <br>![Help4](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help4.png)
 ![Help5](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/help5.png)
 <br>5 - If the dependencies did not install automatically, install them manually.
-## Update map
-> Verilus full campaign & Other stuff
-<br> First release
-<br> 1RXS system & Copis campaign
-<br> 
-<br> 
-<br> Notva?
 
 ## Previews
 <br>![Prev1](https://raw.githubusercontent.com/D2rKKnes/Tetrator-j/master/assets/sprites/something/prev1.png)
