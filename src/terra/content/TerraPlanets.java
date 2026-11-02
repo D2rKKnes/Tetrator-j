@@ -142,7 +142,7 @@ public class TerraPlanets{
                     intensity = 1.4f;
                     alpha = 0.6f;
 
-                    clipRadius = 2;
+                    clipRadius = 3;
                 }}
             );
 
@@ -160,43 +160,24 @@ public class TerraPlanets{
             minZoom = 15f * 0.7f;
             maxZoom = 17f * 0.7f;
 
-            meshLoader = () -> {
-                Rand rand = new Rand(6);
-                Seq<GenericMesh> rocks = new Seq<>();
-            
-                Color color = TerraItems.carbon.color.cpy();
-                Color tinted = TerraItems.diamondDust.color.cpy().a(1f - TerraItems.diamondDust.color.a);
-            
-                float ringRadius = 17.2f;
-                float ringWidth = 2.6f;
-                float ringThickness = 1.7f;
-            
-                int count = 1400;
-                float minSize = 0.01f;
-                float maxSize = 0.05f;
-            
-                for(int i = 0; i < count; i++){
-                    float ang = rand.nextFloat() * Mathf.PI2;
-                    float dist = ringRadius + (rand.nextFloat() + rand.nextFloat() - 1f) * ringWidth * 0.5f;
-                    float y = ((rand.nextFloat() + rand.nextFloat()) - 1f) * ringThickness * 0.5f;
-                    float size = minSize + rand.nextFloat() * (maxSize - minSize);
-            
-                    float cx = Mathf.cos(ang) * dist * radius;
-                    float cy = y * radius;
-                    float cz = Mathf.sin(ang) * dist * radius;
-            
-                    GenericMesh rock = new NoiseMesh(this, 6 + i + 1, 1, size, 2, 0.6f, 0.38f, 20f, color, tinted, 3, 0.6f, 0.38f, 0.6f);
-            
-                    Mat3D place = new Mat3D()
-                        .translate(cx, cy, cz)
-                        .rotate(Vec3.Y, rand.nextFloat() * 360f)
-                        .rotate(Vec3.X, rand.nextFloat() * 360f);
-            
-                    rocks.add(new MatMesh(rock, place));
-                }
-            
-                return new MultiMesh(rocks.toArray(GenericMesh.class));
-            };
+            meshLoader = () -> new AsteroidBeltMesh(this){{
+                ringRadius = 17.2f;
+                ringWidth = 2.7f;
+                ringThickness = 1.3f;
+                tilt = 0f;
+
+                clipRadius = 40;
+
+                count = 1400;
+                minSize = 0.01f;
+                maxSize = 0.05f;
+                seed = 6;
+
+                orbitSpeed = 0.01f;
+
+                tint = TerraItems.carbon.color.cpy();
+                color = TerraItems.diamondDust.color.cpy();
+            }};
         }};
         //TODO: Replace with Copis
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
