@@ -79,7 +79,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
                     tintOctaves, tintPersist, tintScale, tintThresh
             );
 
-            Mat3D place = new Mat3D().translate(cx, cy, cz).rotate(Vec3.Y, (Mathf.atan2(cz, cx)) * Mathf.radDeg);
+            Mat3D place = new Mat3D().translate(cx, cy, cz).rotate(Vec3.Y, (Mathf.atan2(cz, cx) + Mathf.PI) * Mathf.radDeg);
 
             rocks.add(new MatMesh(rock, place));
         }
