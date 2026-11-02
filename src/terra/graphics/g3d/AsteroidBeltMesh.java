@@ -95,7 +95,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
     @Override
     public void preRender(PlanetParams params){
         super.preRender(params);
-
+        var shader = Shaders.planet;
         shader.planet = planet;
         shader.lightDir.set(planet.solarSystem.position).sub(planet.position).rotate(Vec3.Y, planet.getRotation()).nor();
         shader.ambientColor.set(planet.solarSystem.lightColor);
