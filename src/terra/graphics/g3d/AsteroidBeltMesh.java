@@ -95,8 +95,8 @@ public class AsteroidBeltMesh extends PlanetMesh{
     @Override
     public void preRender(PlanetParams params){
         if(!ready) init();
-        if(belt != null){
-            belt.preRender(params);
+        if(belt instanceof PlanetMesh){
+            ((PlanetMesh) belt).preRender(params);
         }
     }
 
