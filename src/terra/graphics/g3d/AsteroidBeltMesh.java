@@ -22,7 +22,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
 
     public int count = 1500;
 
-    public int divisions = 1;
+    public int divisions = 2;
     public int octaves = 2;
     public float persistence = 0.6f;
     public float noiseScale = 0.38f;
@@ -47,7 +47,6 @@ public class AsteroidBeltMesh extends PlanetMesh{
     private final Mat3D mat = new Mat3D();
 
     public AsteroidBeltMesh(Planet planet){
-        super(planet, null, Shaders.planet);
         this.planet = planet;
     }
 
@@ -80,36 +79,13 @@ public class AsteroidBeltMesh extends PlanetMesh{
                     tintOctaves, tintPersist, tintScale, tintThresh
             );
 
-            Mat3D place = new Mat3D()
-                    .translate(cx, cy, cz)
-                    .rotate(Vec3.Y, rand.nextFloat() * 360f)
-                    .rotate(Vec3.X, rand.nextFloat() * 360f);
+            Mat3D place = new Mat3D().translate(cx, cy, cz);
 
             rocks.add(new MatMesh(rock, place));
         }
 
         belt = new MultiMesh(rocks.toArray(GenericMesh.class));
         ready = true;
-    }
-
-    @Override
-    public void preRender(PlanetParams params){
-        if(!ready) init();
-        if(belt instanceof PlanetMesh){
-            ((PlanetMesh) belt).preRender(params);
-        }
-    
-        var s = Shaders.planet;
-        s.planet = planet;
-    
-        Planet sun = planet.solarSystem;
-        Vec3 dir = new Vec3(sun.position).sub(planet.position);
-    
-        if(dir.len() < 0.0001f){
-            dir.set(1f, 0.8f, 1f);
-        }
-        s.lightDir.set(dir.nor());
-        s.ambientColor.set(sun.lightColor);
     }
 
     @Override
