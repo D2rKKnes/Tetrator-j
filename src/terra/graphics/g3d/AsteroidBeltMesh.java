@@ -46,7 +46,10 @@ public class AsteroidBeltMesh extends PlanetMesh{
     private GenericMesh belt;
     private final Mat3D mat = new Mat3D();
 
-    public AsteroidBeltMesh(Planet planet){ this.planet = planet; }
+    public AsteroidBeltMesh(Planet planet){
+        super(planet, null, Shaders.planet);
+        this.planet = planet;
+    }
 
     private void init(){
         Rand rand = new Rand(seed);
