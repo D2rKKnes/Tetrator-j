@@ -154,7 +154,7 @@ public class TerraPlanets{
             accessible = false;
             alwaysUnlocked = false;
             drawOrbit = false;
-            orbitRadius = 0f;
+            orbitRadius = 0.001f;
             icon = "terra-asteroid-belt";
             iconColor = TerraItems.carbon.color.cpy();
             minZoom = 15f * 0.7f;
@@ -162,15 +162,15 @@ public class TerraPlanets{
 
             meshLoader = () -> new AsteroidBeltMesh(this){{
                 ringRadius = 17.2f;
-                ringWidth = 2.7f;
-                ringThickness = 1.3f;
+                ringWidth = 2.4f;
+                ringThickness = 1.6f;
                 tilt = 0f;
 
                 clipRadius = 40;
 
                 count = 1400;
                 minSize = 0.01f;
-                maxSize = 0.05f;
+                maxSize = 0.055f;
                 seed = 6;
 
                 orbitSpeed = 0.01f;
