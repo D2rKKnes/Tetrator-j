@@ -2,7 +2,9 @@ package terra.content;
 
 import arc.*;
 import arc.func.Prov;
+import arc.graphics.Mesh;
 import arc.math.Mathf;
+import arc.math.geom.MeshResult;
 import arc.struct.Seq;
 import arc.util.noise.Simplex;
 import arc.graphics.Color;
@@ -13,6 +15,7 @@ import mindustry.content.*;
 import mindustry.game.Team;
 import mindustry.graphics.Pal;
 import mindustry.graphics.g3d.*;
+import mindustry.maps.generators.PlanetGenerator;
 import mindustry.type.*;
 import mindustry.maps.planet.*;
 import mindustry.ui.dialogs.PlanetDialog;
@@ -169,16 +172,25 @@ public class TerraPlanets{
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.01f;
-                maxSize = 0.05f;
+                minSize = 0.1f;
+                maxSize = 0.2f;
                 seed = 6;
+                jaggedness = 0.4f;
 
                 orbitSpeed = 0.001f;
 
-                tint = TerraItems.carbon.color.cpy();
-                color = TerraItems.diamondDust.color.cpy();
+                lightSrcFrom = 0;
+                lightColor = Color.gray;
+                updateLighting = true;
+                lightFromCenter = true;
+                ambient = 0.4f;
+                lightPower = 1.2f;
+
+                colorDark = Color.valueOf("2a2a2a");
+                colorLight = Color.valueOf("6a6a6a");
             }};
         }};
+
         //TODO: Replace with Copis
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
             generator = new TantrosPlanetGenerator();
@@ -225,8 +237,16 @@ public class TerraPlanets{
             atmosphereRadOut = 0.05f;
         }};
 
-        aegis = new BetterPlanet("aegis", TerraPlanets.onixis, 1f, 3) {{
-
-        }};
+//        aegis = new BetterPlanet("aegis", TerraPlanets.onixis, 0.9f, 3) {{
+//            generator = new AsteroidGenerator();
+//            meshLoader = () -> new MultiMesh(
+//                new HexSkyMesh(this, 5, -3f, 0.07f, 6, Color.valueOf("7169c1").a(0.6f), 2, 0.8f, 1.2f, 0.6f),
+//                new HexMesh(this, 3)
+//            );
+//            hasAtmosphere = true;
+//            atmosphereColor = Color.valueOf("4A424f");
+//            atmosphereRadIn = 0f;
+//            atmosphereRadOut = 0.05f;
+//        }};
     }
 }
