@@ -93,6 +93,14 @@ public class AsteroidBeltMesh extends PlanetMesh{
     }
 
     @Override
+    public void preRender(PlanetParams params){
+        if(!ready) init();
+        if(belt != null){
+            belt.preRender(params);
+        }
+    }
+
+    @Override
     public void render(PlanetParams params, Mat3D projection, Mat3D transform){
         if(!ready) init();
     
