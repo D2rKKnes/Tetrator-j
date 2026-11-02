@@ -28,7 +28,7 @@ import static arc.Core.atlas;
 
 public class TerraPlanets{
 
-    public static Planet nebula, deltaOmega, onixis, vortar, copis, RXS, testification;
+    public static Planet nebula, deltaOmega, onixis, vortar, copis, RXS, testification, aegis;
     public static void load(){
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
@@ -223,6 +223,10 @@ public class TerraPlanets{
             atmosphereColor = Color.valueOf("4a424f");
             atmosphereRadIn = 0f;
             atmosphereRadOut = 0.05f;
+        }};
+
+        aegis = new BetterPlanet("aegis", TerraPlanets.onixis, 1f, 3) {{
+
         }};
     }
 }
