@@ -30,8 +30,8 @@ public class AsteroidBeltMesh extends PlanetMesh{
 
     public int tintOctaves = 3;
     public float tintPersist = 0.6f;
-    public float tintScale = 0.38f;
-    public float tintThresh = 0.6f;
+    public float tintScale = 0.41f;
+    public float tintThresh = 0.58f;
 
     public float minSize = 0.022f;
     public float maxSize = 0.061f;
@@ -68,7 +68,7 @@ public class AsteroidBeltMesh extends PlanetMesh{
 
             GenericMesh rock = new NoiseMesh(
                     planet,
-                    seed + i + 1,
+                    seed + i * 2,
                     divisions,
                     size,
                     octaves,
