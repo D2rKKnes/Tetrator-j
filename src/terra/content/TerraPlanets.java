@@ -2,9 +2,7 @@ package terra.content;
 
 import arc.*;
 import arc.func.Prov;
-import arc.graphics.Mesh;
 import arc.math.Mathf;
-import arc.math.geom.MeshResult;
 import arc.struct.Seq;
 import arc.util.noise.Simplex;
 import arc.graphics.Color;
@@ -15,7 +13,6 @@ import mindustry.content.*;
 import mindustry.game.Team;
 import mindustry.graphics.Pal;
 import mindustry.graphics.g3d.*;
-import mindustry.maps.generators.PlanetGenerator;
 import mindustry.type.*;
 import mindustry.maps.planet.*;
 import mindustry.ui.dialogs.PlanetDialog;
@@ -31,7 +28,7 @@ import static arc.Core.atlas;
 
 public class TerraPlanets{
 
-    public static Planet nebula, deltaOmega, onixis, vortar, copis, RXS, testification, aegis;
+    public static Planet nebula, deltaOmega, onixis, vortar, copis, RXS, testification;
     public static void load(){
         PlanetDialog.debugSelect = true;
         nebula = new BetterPlanet("nebula", Planets.tantros, 0.5f, 1){{
@@ -63,29 +60,29 @@ public class TerraPlanets{
             atmosphereRadOut = 0.1f;
         }};
 
-        deltaOmega = new BetterPlanet("delta-omega", null, 32f){{
-            bloom = true;
-            accessible = false;
-            icon = "terra-sun";
-            iconColor = Color.valueOf("ff2222");
-            solarSystem = this;
-            meshLoader = () -> new SunMesh(
-                this, 7,
-                5, 0.3, 2.4, 1.3, 1,
-                1.5f,
-                Color.valueOf("ca0808"),
-                Color.valueOf("db1313"),
-                Color.valueOf("ff2222"),
-                Color.valueOf("ff4135"),
-                Color.valueOf("fc5853"),
-                Color.valueOf("ff6556")
-            );
-            cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 5, 1f, 0.001f, 5, Color.valueOf("db1313").a(0.25f), 5, 0.42f, 1f, 0.15f),
-                new HexSkyMesh(this, 8, 1.4f, 0.01f, 6, Color.valueOf("ca0808").a(0.25f), 5, 0.42f, 1.2f, 0.14f),
-                new HexSkyMesh(this, 11, 2f, 0.1f, 7, Color.valueOf("a90606").a(0.25f), 5, 0.42f, 1.4f, 0.13f)
-            );
-        }};
+        // deltaOmega = new BetterPlanet("delta-omega", null, 32f){{
+        //     bloom = true;
+        //     accessible = false;
+        //     icon = "terra-sun";
+        //     iconColor = Color.valueOf("ff2222");
+        //     solarSystem = this;
+        //     meshLoader = () -> new SunMesh(
+        //         this, 7,
+        //         5, 0.3, 2.4, 1.3, 1,
+        //         1.5f,
+        //         Color.valueOf("ca0808"),
+        //         Color.valueOf("db1313"),
+        //         Color.valueOf("ff2222"),
+        //         Color.valueOf("ff4135"),
+        //         Color.valueOf("fc5853"),
+        //         Color.valueOf("ff6556")
+        //     );
+        //     cloudMeshLoader = () -> new MultiMesh(
+        //         new HexSkyMesh(this, 5, 1f, 0.001f, 5, Color.valueOf("db1313").a(0.25f), 5, 0.42f, 1f, 0.15f),
+        //         new HexSkyMesh(this, 8, 1.4f, 0.01f, 6, Color.valueOf("ca0808").a(0.25f), 5, 0.42f, 1.2f, 0.14f),
+        //         new HexSkyMesh(this, 11, 2f, 0.1f, 7, Color.valueOf("a90606").a(0.25f), 5, 0.42f, 1.4f, 0.13f)
+        //     );
+        // }};
         
         RXS = new BetterPlanet("1RXS", null, 0.7f){{
             bloom = true;
@@ -172,25 +169,16 @@ public class TerraPlanets{
                 clipRadius = 40;
 
                 count = 1400;
-                minSize = 0.1f;
-                maxSize = 0.2f;
+                minSize = 0.01f;
+                maxSize = 0.05f;
                 seed = 6;
-                jaggedness = 0.4f;
 
-                orbitSpeed = 0.001f;
+                orbitSpeed = 0.01f;
 
-                lightSrcFrom = 0;
-                lightColor = Color.gray;
-                updateLighting = true;
-                lightFromCenter = true;
-                ambient = 0.4f;
-                lightPower = 1.2f;
-
-                colorDark = Color.valueOf("2a2a2a");
-                colorLight = Color.valueOf("6a6a6a");
+                tint = TerraItems.carbon.color.cpy();
+                color = TerraItems.diamondDust.color.cpy();
             }};
         }};
-
         //TODO: Replace with Copis
         testification = new Planet("testification", TerraPlanets.RXS, 1f ,3){{
             generator = new TantrosPlanetGenerator();
@@ -236,17 +224,5 @@ public class TerraPlanets{
             atmosphereRadIn = 0f;
             atmosphereRadOut = 0.05f;
         }};
-
-//        aegis = new BetterPlanet("aegis", TerraPlanets.onixis, 0.9f, 3) {{
-//            generator = new AsteroidGenerator();
-//            meshLoader = () -> new MultiMesh(
-//                new HexSkyMesh(this, 5, -3f, 0.07f, 6, Color.valueOf("7169c1").a(0.6f), 2, 0.8f, 1.2f, 0.6f),
-//                new HexMesh(this, 3)
-//            );
-//            hasAtmosphere = true;
-//            atmosphereColor = Color.valueOf("4A424f");
-//            atmosphereRadIn = 0f;
-//            atmosphereRadOut = 0.05f;
-//        }};
     }
 }
