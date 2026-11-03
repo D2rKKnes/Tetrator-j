@@ -106,27 +106,36 @@ public class TerraPlanets{
                             Color.valueOf("6d47ff"),
                             Color.valueOf("9771ff"),
                             Color.valueOf("d8ccff")
-                    );
-
-                    hideBehindStar = true;
-                    beamsOverPlanets = false;
-                    deferBeams = true;
-                    beamColor = Color.valueOf("7f9bff");
-                    intensity = 1.8f;
-
-                    pulseRate = 1.6f;
-                    pulseDepth = 0.6f;
-                    pulseSharpness = 3f;
-
-                    spinSpeed = -1.85f;
-                    beamTilt = 20f;
-                    beamLength = 14f;
-                    beamWidth = 0.7f;
-                    beamFalloff = 1.2f;
-                    beamAlpha = 0.55f;
-                    beamLayers = 3;
-
-                    clipRadius = 3;
+                        ){
+                            @Override
+                            public void getColor(Vec3 position, Color out) {
+                                Vec3 transformed = new Vec3(position);
+                                //transformed.rotate(Vec3.Y, position.y * -100f);
+                                transformed.add(500f, 0f, 500f);
+                                double height = Math.pow(Simplex.noise3d(0, octaves, persistence, scl, transformed.x, transformed.y, transformed.z), pow) * mag;
+                                out.set(colors[Mathf.clamp((int)(height * colors.length), 0, colors.length - 1)]).mul(colorScale);
+                            }
+                        };
+    
+                        hideBehindStar = true;
+                        beamsOverPlanets = false;
+                        deferBeams = true;
+                        beamColor = Color.valueOf("7f9bff");
+                        intensity = 1.8f;
+    
+                        pulseRate = 1.6f;
+                        pulseDepth = 0.6f;
+                        pulseSharpness = 3f;
+    
+                        spinSpeed = 1.85f;
+                        beamTilt = 20f;
+                        beamLength = 14f;
+                        beamWidth = 0.7f;
+                        beamFalloff = 1.2f;
+                        beamAlpha = 0.55f;
+                        beamLayers = 3;
+    
+                        clipRadius = 3;
                     }};
                 }
                 return shared[0];
@@ -138,8 +147,9 @@ public class TerraPlanets{
                     ringRadius = 3.3f;
                     ringWidth = 2.6f;
                     tilt = 0f;
-                    color = Color.valueOf("7f9bff");
+                    color = Color.valueOf("d8ccff");
                     intensity = 1.4f;
+                    swirlSpeed = -0.65f;
                     alpha = 0.6f;
 
                     clipRadius = 3;
@@ -173,7 +183,7 @@ public class TerraPlanets{
                 maxSize = 0.055f;
                 seed = 6;
 
-                orbitSpeed = 0.01f;
+                orbitSpeed = 0.015f;
 
                 tint = TerraItems.diamondGlass.color.cpy();
                 color = TerraItems.carbon.color.cpy();
