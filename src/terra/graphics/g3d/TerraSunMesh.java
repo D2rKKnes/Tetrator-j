@@ -8,7 +8,7 @@ import mindustry.graphics.*;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
 
-public class TerraSunMesh extends SunMesh{
+public class TerraSunMesh extends HexMesh{
     public float offX = 500f, offY = 0f, offZ = 500f;
     public float rotationScl = 0f;
     public TerraSunMesh(Planet planet, int divisions, double octaves, double persistence, double scl, double pow, double mag, float colorScale, Color... colors){
