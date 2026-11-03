@@ -5,9 +5,8 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.util.noise.*;
 import mindustry.graphics.*;
+import mindustry.graphics.g3d.*;
 import mindustry.type.*;
-
-import mindustry.graphics.g3d.SunMesh;
 
 public class TerraSunMesh extends SunMesh{
     public float offX = 500f, offY = 0f, offZ = 500f;
