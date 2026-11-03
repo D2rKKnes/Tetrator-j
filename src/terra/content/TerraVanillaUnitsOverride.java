@@ -421,9 +421,45 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
+        UnitTypes.atrax.abilities.add(new LiquidExplodeAbility(){{
+            liquid = Liquids.slag;
+            radScale = 1.5f;
+            amount = 9f;
+        }};
         UnitTypes.spiroct.immunities = ObjectSet.with(StatusEffects.sapped);
         UnitTypes.arkyid.immunities = ObjectSet.with(StatusEffects.sapped);
         UnitTypes.toxopid.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.sapped);
+        UnitTypes.toxopid.weapons.add(
+            new Weapon("atrax-weapon"){{
+                x = 52f / 4f;
+                y = 40f / 4f;
+                shootY = 4f;
+                reload = 80f;
+                mirror = true;
+                alternate = false;
+                shootSound = Sounds.shootAtrax;
+                rotate = true;
+                rotationLimit = 35f;
+                shootCone = 10f;
+                layerOffset = -0.001f;
+                inaccuracy = 5f;
+
+                shoot = new ShootPattern() {{
+                    shots = 25;
+                    shotDelay = 3;
+                }};
+    
+                bullet = new LiquidBulletType(Liquids.slag){{
+                    damage = 16;
+                    speed = 2.4f;
+                    knockback = 0.65f;
+                    shootEffect = Fx.shootSmall;
+                    lifetime = 67f;
+                    collidesAir = false;
+                    despawnHit = true;
+                }};
+            }}
+        );
         UnitTypes.zenith.immunities = ObjectSet.with(StatusEffects.blasted);
         UnitTypes.antumbra.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted);
         UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped);
