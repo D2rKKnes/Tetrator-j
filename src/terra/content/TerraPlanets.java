@@ -96,7 +96,7 @@ public class TerraPlanets{
             Prov<PulsarMesh> pulsar = () -> {
                 if(shared[0] == null){
                     shared[0] = new PulsarMesh(this){{
-                        surface = new SunMesh(
+                        surface = new TerraSunMesh(
                             planet, 5,
                             5, 0.3, 2.4, 1.3, 1,
                             1.4f,
