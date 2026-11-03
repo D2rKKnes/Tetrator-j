@@ -425,7 +425,7 @@ public class TerraVanillaUnitsOverride {
             liquid = Liquids.slag;
             radScale = 1.5f;
             amount = 9f;
-        }};
+        }});
         UnitTypes.spiroct.immunities = ObjectSet.with(StatusEffects.sapped);
         UnitTypes.arkyid.immunities = ObjectSet.with(StatusEffects.sapped);
         UnitTypes.toxopid.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.sapped);
