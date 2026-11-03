@@ -106,16 +106,7 @@ public class TerraPlanets{
                             Color.valueOf("6d47ff"),
                             Color.valueOf("9771ff"),
                             Color.valueOf("d8ccff")
-                        ){
-                            @Override
-                            public void getColor(Vec3 position, Color out) {
-                                Vec3 transformed = new Vec3(position);
-                                //transformed.rotate(Vec3.Y, position.y * -100f);
-                                transformed.add(500f, 0f, 500f);
-                                double height = Math.pow(Simplex.noise3d(0, octaves, persistence, scl, transformed.x, transformed.y, transformed.z), pow) * mag;
-                                out.set(colors[Mathf.clamp((int)(height * colors.length), 0, colors.length - 1)]).mul(colorScale);
-                            }
-                        };
+                        );
     
                         hideBehindStar = true;
                         beamsOverPlanets = false;
