@@ -10,9 +10,9 @@ import mindustry.type.*;
 
 public class TerraSunMesh extends HexMesh{
     public float offX = 500f, offY = 0f, offZ = 500f;
-    public float rotationScl = 0f;
+    public float rotationScl = -100f;
     public TerraSunMesh(Planet planet, int divisions, double octaves, double persistence, double scl, double pow, double mag, float colorScale, Color... colors){
-        this(planet, divisions, octaves, persistence, scl, pow, mag, colorScale, 0f, 500f, 0f, 500f, colors);
+        this(planet, divisions, octaves, persistence, scl, pow, mag, colorScale, -100f, 500f, 0f, 500f, colors);
     }
     public TerraSunMesh(Planet planet, int divisions, double octaves, double persistence, double scl, double pow, double mag, float colorScale, float rotationScl, float offX, float offY, float offZ, Color... colors){
         super(planet, new HexMesher(){
