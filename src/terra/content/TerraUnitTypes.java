@@ -63,7 +63,7 @@ public class TerraUnitTypes {
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
-    omuraMissile,
+    omuraMissile, eclipseMissile,
     //other
     latumFAKE, myDoom, flareC, omuraDrone;
 
@@ -3727,7 +3727,7 @@ public class TerraUnitTypes {
                 shootOnDeath = true;
                 shake = 3f;
                 bullet = new ExplosionBulletType(88f, 14f * 8){{
-                    hitColor = TerraItems.rawThermoxite.color;
+                    hitColor = TerraItems.gammaCell.color;
                     shootEffect = new WrapEffect(Fx.titanExplosionSmall, TerraItems.gammaCell.color);
                     smokeEffect = new WrapEffect(Fx.titanSmokeSmall, TerraItems.gammaCell.color);
                     collidesAir = true;
@@ -3736,6 +3736,83 @@ public class TerraUnitTypes {
                     reloadMultiplier = 0.33f;
                     status = TerraStatusEffects.radited;
                     statusDuration = 200f;
+                }};
+            }});
+        }};
+        eclipseMissile = new MissileUnitType("eclipse-missile"){{
+            speed = 3.44f;
+            maxRange = 6f;
+            lifetime = 120f;
+            hitSize = 6f;
+            outlineColor = Pal.darkerMetal;
+            engineColor = trailColor = TerraStatusEffects.sunBurn.color;
+            engineLayer = Layer.effect;
+            engineSize = 1.5f;
+            engineOffset = 10f;
+            rotateSpeed = 5f;
+            trailLength = 9;
+            missileAccelTime = 20f;
+            lowAltitude = true;
+            loopSound = Sounds.loopMissileTrail;
+            loopSoundVolume = 0.33f;
+            deathSound = Sounds.explosionMissile;
+            targetAir = true;
+            targetUnderBlocks = false;
+
+            fogRadius = 9f;
+
+            health = 400;
+            armor = 7;
+            hidden = false;
+
+            abilities.add(new MoveEffectAbility(){{
+                effect = Fx.missileTrailSmoke;
+                rotation = 180f;
+                y = -9f;
+                color = Color.grays(0.6f).lerp(trailColor, 0.4f).a(0.4f);
+                interval = 9f;
+            }});
+
+            weapons.add(new Weapon(){{
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                deathExplosionEffect = Fx.massiveExplosion;
+                shootOnDeath = true;
+                shake = 3f;
+                bullet = new ExplosionBulletType(76f, 8f * 8){{
+                    hitColor = TerraStatusEffects.sunBurn.color;
+                    shootEffect = new WrapEffect(Fx.titanExplosionSmall, hitColor);
+                    smokeEffect = new WrapEffect(Fx.titanSmokeSmall, hitColor);
+                    collidesAir = true;
+                    status = StatusEffects.blasted;
+                    statusDuration = 200f;
+                    armorMultiplier = 0.5f;
+
+                    incendAmount = 5;
+                    incendChance = 1f;
+                    incendSpread = 3f * 8f;
+                    
+                    fragBullets = 18;
+                    fragLifeMin = 0.2f;
+                    fragOffsetMax = 1.6f;
+                    fragRandomSpread = 50f;
+                    fragBullet = new BasicBulletType(6f, 15){{
+                        lifetime = 19f;
+                        width = height = 8;
+                        shrinkX = shrinkY = 0.33f;
+                        incendAmount = 2;
+                        incendChance = 1f;
+                        incendSpread = 2f * 8f;
+                        trailChance = 1f;
+                        trailParam = 4f;
+                        trailEffect = Fx.ballfire;
+                        sprite = "terra-plasma";
+                        frontColor = Pal.lightFlame;
+                        backColor = hitColor = trailColor = Pal.darkFlame;
+                        hitEffect = despawnEffect = Fx.none;
+                        collides = reflectable = hittable = false;
+                    }};
                 }};
             }});
         }};
