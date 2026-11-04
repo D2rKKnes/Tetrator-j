@@ -169,6 +169,7 @@ public class TerraVanillaUnitsOverride {
                         frontColor = Pal.lightFlame;
                         backColor = hitColor = trailColor = Pal.darkFlame;
                         hitEffect = despawnEffect = Fx.none;
+                        despawnHit = true;
                     }};
                 }};
             }}
