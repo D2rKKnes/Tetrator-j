@@ -41,7 +41,7 @@ public class TerraStatusEffects{
 
     energyOverload, zapped, singularEvaporation, impactStun, radited, extinction, crystalization, graviforce, graviforce2,
     warped, warpPower, warpHell, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification, anviled, quantumBeam,
-    regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded, ending,
+    regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded, ending, sunBurn,
     
     common, uncommon, rare, epic, legendary, mythical;
     
@@ -323,6 +323,24 @@ public class TerraStatusEffects{
             dragMultiplier = 100f;
         }};
 
+        sunBurn = new StatusEffect("sun-burn"){{
+            color = Color.valueOf("ffa566");
+            speedMultiplier = 0.7f;
+            healthMultiplier = 0.8f;
+            reloadMultiplier = 0.75f;
+            damage = 0.7f;
+            effect = new MultiEffect(Fx.melting, Fx.burning);
+
+            init(() -> {
+                opposite(wet, freezing);
+                affinity(tarred, (unit, result, time) -> {
+                    unit.damagePierce(10f);
+                    Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f));
+                    result.set(melting, Math.min(time + result.time, 200f));
+                });
+            });
+        }};
+
         regeneration = new AdvancedStatusEffect("regeneration"){{
             color = Pal.heal;
             speedMultiplier = 1.1f;
@@ -487,7 +505,7 @@ public class TerraStatusEffects{
             damageMultiplier = 2.6f;
             healthMultiplier = 2.2f;
             reloadMultiplier = 2f;
-            dragMultiplier = 2f;
+            //dragMultiplier = 2f;
             speedMultiplier = 1.75f;
             buildSpeedMultiplier = 1.5f;
             permanent = true;
@@ -499,10 +517,11 @@ public class TerraStatusEffects{
             damageMultiplier = 5f;
             healthMultiplier = 4f;
             reloadMultiplier = 3.5f;
-            dragMultiplier = 3f;
+            //dragMultiplier = 3f;
             speedMultiplier = 2f;
             buildSpeedMultiplier = 2f;
-            percentDamage = -0.8f;
+            shieldDamage = -0.5f;
+            shieldHealCap = 500f;
             permanent = true;
             init(() -> opposite(common, uncommon, rare, epic, legendary));
         }};
