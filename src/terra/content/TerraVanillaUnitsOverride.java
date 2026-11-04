@@ -469,8 +469,8 @@ public class TerraVanillaUnitsOverride {
             alpha(0.2f * e.fout());
             Fill.circle(e.x, e.y, 8.5f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 30, (7.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.circle(x, y, e.fout() * 1.5f);
+            randLenVectors(e.id, 30, 7.5f * 8f, (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
         UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped, TerraStatusEffects.sunBurn);
@@ -481,11 +481,11 @@ public class TerraVanillaUnitsOverride {
             alpha(0.3f * e.fout());
             Fill.circle(e.x, e.y, 15f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 20, (13.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.square(x, y, e.fout() * 1.75f, 45f);
+            randLenVectors(e.id, 20, 13.5f * 8f, (x, y) -> {
+                Fill.square(e.x + x, e.y + y, e.fout() * 1.75f, 45f);
             });
-            randLenVectors(e.id, 30, (13.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.circle(x, y, e.fout() * 1.5f);
+            randLenVectors(e.id, 30, 13.5f * 8f, (x, y) -> {
+                Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
         UnitTypes.eclipse.weapons.add(
@@ -501,6 +501,7 @@ public class TerraVanillaUnitsOverride {
                 rotationLimit = 25f;
                 shootCone = 15f;
                 mirror = true;
+                layerOffset = -0.002f;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
                     //shake = 1f;
