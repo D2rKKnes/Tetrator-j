@@ -42,8 +42,8 @@ import static mindustry.Vars.*;
 
 public class TerraVanillaUnitsOverride {
     public static void load() {
-        UnitTypes.scepter.immunities = ObjectSet.with(StatusEffects.blasted);
-        UnitTypes.reign.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
+        UnitTypes.scepter.immunities = addAll(StatusEffects.blasted);
+        UnitTypes.reign.immunities = addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.shieldDamage);
         UnitTypes.reign.abilities.add(new SappingFieldAbility(TerraStatusEffects.shieldDamage, 3 * 60f, 5 * 60f, 80f, Pal.negativeStat, new Effect(40, e -> {
             color(e.color);
             stroke(e.fout());
@@ -174,7 +174,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        UnitTypes.vela.immunities = ObjectSet.with(StatusEffects.shocked);
+        UnitTypes.vela.immunities = addAll(StatusEffects.shocked);
         UnitTypes.vela.weapons.add(
             new Weapon("terra-big-heal-gun"){{
                 x = 46f / 4f;
@@ -247,7 +247,7 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        UnitTypes.corvus.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.corvus.immunities = addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.corvus.weapons.get(0).bullet.status = StatusEffects.electrified;
         UnitTypes.corvus.weapons.get(0).bullet.statusDuration = 4f * 60f;
         UnitTypes.corvus.weapons.add(
@@ -427,9 +427,10 @@ public class TerraVanillaUnitsOverride {
             radScale = 1.5f;
             amount = 9f;
         }});
-        UnitTypes.spiroct.immunities = ObjectSet.with(StatusEffects.sapped);
-        UnitTypes.arkyid.immunities = ObjectSet.with(StatusEffects.sapped);
-        UnitTypes.toxopid.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.sapped);
+        UnitTypes.spiroct.immunities = addAll(StatusEffects.sapped);
+        UnitTypes.arkyid.immunities = addAll(StatusEffects.sapped);
+        UnitTypes.toxopid.immunities = addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.sapped);
+        UnitTypes.toxopid.abilities.add(new LiquidExplodeAbility(){{liquid = Liquids.slag;}});
         UnitTypes.toxopid.weapons.add(
             new Weapon("atrax-weapon"){{
                 x = 52f / 4f;
@@ -461,8 +462,8 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        UnitTypes.zenith.immunities = ObjectSet.with(StatusEffects.blasted);
-        UnitTypes.antumbra.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted);
+        UnitTypes.zenith.immunities = addAll(StatusEffects.blasted);
+        UnitTypes.antumbra.immunities = addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted);
         UnitTypes.antumbra.abilities.add(new SappingFieldAbility(StatusEffects.melting, 2.5f * 60f, 4 * 60f, 8.5f * 8f, StatusEffects.melting.color, new Effect(60, e -> {
             color(e.color);
             stroke(e.fout() * 2f);
@@ -474,7 +475,7 @@ public class TerraVanillaUnitsOverride {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
-        UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped, TerraStatusEffects.sunBurn);
+        UnitTypes.eclipse.immunities = addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped, TerraStatusEffects.sunBurn);
         UnitTypes.eclipse.abilities.add(new SappingFieldAbility(TerraStatusEffects.sunBurn, 4.5f * 60f, 6 * 60f, 15f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
             color(e.color);
             stroke(e.fout() * 3f);
@@ -513,9 +514,10 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        UnitTypes.mega.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
-        UnitTypes.quad.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
-        UnitTypes.oct.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
+        UnitTypes.mega.immunities = addAll(StatusEffects.shocked, TerraStatusEffects.zapped);
+        UnitTypes.quad.immunities = addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.oct.immunities = addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
+        UnitTypes.oct.abilities.add(new RegenAbility(){{amount = 90f / 60f;}});
         UnitTypes.oct.weapons.add(
             new Weapon("terra-dual-mount-alt"){{
                 x = 91f / 4f;
@@ -854,9 +856,9 @@ public class TerraVanillaUnitsOverride {
                 }};
             }}
         );
-        UnitTypes.oxynoe.immunities = ObjectSet.with(StatusEffects.burning);
-        UnitTypes.cyerce.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
-        UnitTypes.aegires.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
-        UnitTypes.navanax.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
+        UnitTypes.oxynoe.immunities = addAll(StatusEffects.burning);
+        UnitTypes.cyerce.immunities = addAll(StatusEffects.shocked, TerraStatusEffects.zapped);
+        UnitTypes.aegires.immunities = addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
+        UnitTypes.navanax.immunities = addAll(StatusEffects.burning, StatusEffects.melting, StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
     }
 }
