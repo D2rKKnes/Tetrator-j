@@ -3742,16 +3742,16 @@ public class TerraUnitTypes {
         eclipseMissile = new MissileUnitType("eclipse-missile"){{
             speed = 3.44f;
             maxRange = 6f;
-            lifetime = 120f;
+            lifetime = 105f;
             hitSize = 6f;
             outlineColor = Pal.darkerMetal;
             engineColor = trailColor = TerraStatusEffects.sunBurn.color;
             engineLayer = Layer.effect;
             engineSize = 1.5f;
             engineOffset = 10f;
-            rotateSpeed = 5f;
+            rotateSpeed = 2.3f;
             trailLength = 9;
-            missileAccelTime = 20f;
+            missileAccelTime = 0f;
             lowAltitude = true;
             loopSound = Sounds.loopMissileTrail;
             loopSoundVolume = 0.33f;
@@ -3766,11 +3766,11 @@ public class TerraUnitTypes {
             hidden = false;
 
             abilities.add(new MoveEffectAbility(){{
-                effect = Fx.missileTrailSmoke;
+                effect = Fx.missileTrailSmokeSmall;
                 rotation = 180f;
                 y = -9f;
                 color = Color.grays(0.6f).lerp(trailColor, 0.4f).a(0.4f);
-                interval = 9f;
+                interval = 5f;
             }});
 
             weapons.add(new Weapon(){{
@@ -3811,7 +3811,8 @@ public class TerraUnitTypes {
                         frontColor = Pal.lightFlame;
                         backColor = hitColor = trailColor = Pal.darkFlame;
                         hitEffect = despawnEffect = Fx.none;
-                        collides = reflectable = hittable = false;
+                        collidesAir = collidesGround = reflectable = hittable = false;
+                        collidesFlor = true;
                     }};
                 }};
             }});
