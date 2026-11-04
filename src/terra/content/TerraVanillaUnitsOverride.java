@@ -486,7 +486,7 @@ public class TerraVanillaUnitsOverride {
             randLenVectors(e.id, 35, 13.5f * 8f, (x, y) -> {
                 Fill.square(e.x + x, e.y + y, (e.fout() + 0.5f) * 1.75f, 45f);
             });
-            randLenVectors(e.id, 50, 13.5f * 8f, (x, y) -> {
+            randLenVectors(e.id + 100, 50, 13.5f * 8f, (x, y) -> {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
@@ -503,6 +503,7 @@ public class TerraVanillaUnitsOverride {
                 rotationLimit = 25f;
                 shootCone = 15f;
                 mirror = true;
+                predictTarget = false;
                 layerOffset = -0.002f;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
@@ -527,6 +528,8 @@ public class TerraVanillaUnitsOverride {
                 mirror = true;
                 alternate = false;
                 shootSound = Sounds.shootLancer;
+                controllable = false;
+                autoTarget = true;
                 rotate = true;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
@@ -620,6 +623,8 @@ public class TerraVanillaUnitsOverride {
                 mirror = true;
                 alternate = false;
                 shootSound = Sounds.shootLancer;
+                controllable = false;
+                autoTarget = true;
                 rotate = true;
                 rotateSpeed = 1.8f;
                 rotationLimit = 110f;
@@ -852,6 +857,7 @@ public class TerraVanillaUnitsOverride {
                     shake = 1.3f;
                     speed = 0.001f;
                     keepVelocity = false;
+                    predictTarget = false;
                     spawnUnit = TerraUnitTypes.omuraMissile;
                 }};
             }}
