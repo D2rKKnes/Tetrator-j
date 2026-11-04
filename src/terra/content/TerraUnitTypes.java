@@ -3812,7 +3812,7 @@ public class TerraUnitTypes {
                         backColor = hitColor = trailColor = Pal.darkFlame;
                         hitEffect = despawnEffect = Fx.none;
                         collidesAir = collidesGround = reflectable = hittable = false;
-                        collidesFloor = true;
+                        collideFloor = true;
                     }};
                 }};
             }});
