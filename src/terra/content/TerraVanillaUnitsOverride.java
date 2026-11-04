@@ -470,7 +470,7 @@ public class TerraVanillaUnitsOverride {
             alpha(0.2f * e.fout());
             Fill.circle(e.x, e.y, 8.5f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 30, 7.5f * 8f, (x, y) -> {
+            randLenVectors(e.id, 40, 7.5f * 8f, (x, y) -> {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
@@ -482,10 +482,10 @@ public class TerraVanillaUnitsOverride {
             alpha(0.3f * e.fout());
             Fill.circle(e.x, e.y, 15f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 20, 13.5f * 8f, (x, y) -> {
-                Fill.square(e.x + x, e.y + y, e.fout() * 1.75f, 45f);
+            randLenVectors(e.id, 35, 13.5f * 8f, (x, y) -> {
+                Fill.square(e.x + x, e.y + y, (e.fout() + 0.2f) * 1.75f, 45f);
             });
-            randLenVectors(e.id, 30, 13.5f * 8f, (x, y) -> {
+            randLenVectors(e.id, 50, 13.5f * 8f, (x, y) -> {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
@@ -508,6 +508,7 @@ public class TerraVanillaUnitsOverride {
                     //shake = 1f;
                     speed = 0.001f;
                     keepVelocity = false;
+                    targetMissiles = false;
                     spawnUnit = TerraUnitTypes.eclipseMissile;
                 }};
             }}
