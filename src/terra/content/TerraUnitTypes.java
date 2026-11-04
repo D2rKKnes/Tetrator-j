@@ -3750,11 +3750,11 @@ public class TerraUnitTypes {
             engineSize = 1.5f;
             engineOffset = 10f;
             rotateSpeed = 2.3f;
-            trailLength = 9;
+            trailLength = 13;
             missileAccelTime = 0f;
-            lowAltitude = true;
+            lowAltitude = false;
             loopSound = Sounds.loopMissileTrail;
-            loopSoundVolume = 0.33f;
+            loopSoundVolume = 0.5f;
             deathSound = Sounds.explosionMissile;
             targetAir = true;
             targetUnderBlocks = false;
