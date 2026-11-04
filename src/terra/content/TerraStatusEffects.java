@@ -332,11 +332,11 @@ public class TerraStatusEffects{
             effect = new MultiEffect(Fx.melting, Fx.burning);
 
             init(() -> {
-                opposite(wet, freezing);
-                affinity(tarred, (unit, result, time) -> {
+                opposite(StatusEffects.wet, StatusEffects.freezing);
+                affinity(StatusEffects.tarred, (unit, result, time) -> {
                     unit.damagePierce(10f);
                     Fx.burning.at(unit.x + Mathf.range(unit.bounds() / 2f), unit.y + Mathf.range(unit.bounds() / 2f));
-                    result.set(melting, Math.min(time + result.time, 200f));
+                    result.set(sunBurn, Math.min(time + result.time, 200f));
                 });
             });
         }};
