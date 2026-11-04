@@ -3811,8 +3811,8 @@ public class TerraUnitTypes {
                         frontColor = Pal.lightFlame;
                         backColor = hitColor = trailColor = Pal.darkFlame;
                         hitEffect = despawnEffect = Fx.none;
-                        collidesAir = collidesGround = reflectable = hittable = false;
-                        collideFloor = true;
+                        collides = reflectable = hittable = false;
+                        despawnHit = true;
                     }};
                 }};
             }});
