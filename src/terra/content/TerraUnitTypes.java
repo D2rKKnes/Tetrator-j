@@ -3750,7 +3750,7 @@ public class TerraUnitTypes {
             engineSize = 1.5f;
             engineOffset = 10f;
             rotateSpeed = 2.3f;
-            trailLength = 13;
+            trailLength = 15;
             missileAccelTime = 0f;
             lowAltitude = false;
             loopSound = Sounds.loopMissileTrail;
@@ -3780,7 +3780,7 @@ public class TerraUnitTypes {
                 deathExplosionEffect = Fx.massiveExplosion;
                 shootOnDeath = true;
                 shake = 3f;
-                bullet = new ExplosionBulletType(76f, 8f * 8){{
+                bullet = new ExplosionBulletType(146f, 8f * 8){{
                     hitColor = TerraStatusEffects.sunBurn.color;
                     shootEffect = new WrapEffect(Fx.titanExplosionSmall, hitColor);
                     smokeEffect = new WrapEffect(Fx.titanSmokeSmall, hitColor);
@@ -3797,7 +3797,7 @@ public class TerraUnitTypes {
                     fragLifeMin = 0.2f;
                     fragOffsetMax = 1.6f;
                     fragRandomSpread = 50f;
-                    fragBullet = new BasicBulletType(6f, 15){{
+                    fragBullet = new BasicBulletType(6f, 0){{
                         lifetime = 19f;
                         width = height = 8;
                         shrinkX = shrinkY = 0.33f;
