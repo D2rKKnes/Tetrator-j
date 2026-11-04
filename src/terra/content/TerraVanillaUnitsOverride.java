@@ -470,7 +470,7 @@ public class TerraVanillaUnitsOverride {
             Fill.circle(e.x, e.y, 8.5f * 8f);
             alpha(e.fout());
             randLenVectors(e.id, 30, (7.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.circle(e.x, e.y, e.fout() * 1.5f);
+                Fill.circle(x, y, e.fout() * 1.5f);
             });
         })));
         UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped, TerraStatusEffects.sunBurn);
@@ -482,12 +482,34 @@ public class TerraVanillaUnitsOverride {
             Fill.circle(e.x, e.y, 15f * 8f);
             alpha(e.fout());
             randLenVectors(e.id, 20, (13.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.square(e.x, e.y, e.fout() * 1.5f, 45f);
+                Fill.square(x, y, e.fout() * 1.75f, 45f);
             });
             randLenVectors(e.id, 30, (13.5f * 8f) * e.fout(), (x, y) -> {
-                Fill.circle(e.x, e.y, e.fout() * 1.5f);
+                Fill.circle(x, y, e.fout() * 1.5f);
             });
         })));
+        UnitTypes.eclipse.weapons.add(
+            new ConstructWeapon("terra-eclipse-missile"){{
+                x = 89f / 4f;
+                y = 90.5f / 4f;
+                shootY = 0f;
+                shootSound = Sounds.shootMissileLarge;
+                shootCone = 360f;
+                reload = 160f;
+                rotate = true;
+                rotateSpeed = 0.4f;
+                rotationLimit = 25f;
+                shootCone = 15f;
+                mirror = true;
+                bullet = new BulletType(){{
+                    shootEffect = smokeEffect = Fx.none;
+                    //shake = 1f;
+                    speed = 0.001f;
+                    keepVelocity = false;
+                    spawnUnit = TerraUnitTypes.eclipseMissile;
+                }};
+            }}
+        );
         UnitTypes.mega.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
         UnitTypes.quad.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.oct.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
