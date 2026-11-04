@@ -462,7 +462,21 @@ public class TerraVanillaUnitsOverride {
         );
         UnitTypes.zenith.immunities = ObjectSet.with(StatusEffects.blasted);
         UnitTypes.antumbra.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted);
-        UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped);
+        UnitTypes.antumbra.abilities.add(new SappingFieldAbility(StatusEffects.melting, 2.5f * 60f, 4 * 60f, 7.5f * 8f, StatusEffects.melting.color, new Effect(60, e -> {
+            color(e.color);
+            stroke(e.fout() * 2f);
+            Lines.circle(e.x, e.y, 7.5f * 8f);
+            color(e.color.cpy().a(0.2f));
+            Fill.circle(e.x, e.y, 7.5f * 8f);
+        })));
+        UnitTypes.eclipse.immunities = ObjectSet.with(StatusEffects.burning, StatusEffects.melting, StatusEffects.blasted, TerraStatusEffects.zapped, TerraStatusEffects.sunBurn);
+        UnitTypes.eclipse.abilities.add(new SappingFieldAbility(TerraStatusEffects.sunBurn, 4.5f * 60f, 6 * 60f, 15f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
+            color(e.color);
+            stroke(e.fout() * 3f);
+            Lines.circle(e.x, e.y, 15f * 8f);
+            color(e.color.cpy().a(0.3f));
+            Fill.circle(e.x, e.y, 15f * 8f);
+        })));
         UnitTypes.mega.immunities = ObjectSet.with(StatusEffects.shocked, TerraStatusEffects.zapped);
         UnitTypes.quad.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.oct.immunities = ObjectSet.with(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
