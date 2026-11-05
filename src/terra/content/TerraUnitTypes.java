@@ -1003,7 +1003,7 @@ public class TerraUnitTypes {
             rotateSpeed = 0.9f;
             drag = 0.04f;
             accel = 0.03f;
-            hitSize = 80f;
+            hitSize = 75f;
             softShadowScl = 1f;
             health = 88000;
             armor = 56;
@@ -1016,8 +1016,8 @@ public class TerraUnitTypes {
             engineSize = 7f;
             engineOffset = 110f / 4f;
             setEnginesMirror(
-                new UnitEngine(104f / 4f, -93f / 4f, 10f, 315f),
-                new UnitEngine(202f / 4f, -84f / 4f, 11f, 315f)
+                new UnitEngine(104f / 4f, -93f / 4f, 8f, 315f),
+                new UnitEngine(202f / 4f, -84f / 4f, 9f, 315f)
             );
             range = 210f;
             itemCapacity = 200;
@@ -1035,7 +1035,15 @@ public class TerraUnitTypes {
                     maxDelay = 60f;
                     reload = 1200f;
                     y = -5f;
-                    orbRadius = 5f;
+                    orbRadius = 3.5f;
+                    orbSinScl = 4f;
+                    particleSize = 6;
+                    layer = Layer.flyingUnitLow - 1;
+                }},
+                new SuppressionFieldAbility(){{
+                    active = false;
+                    y = 160f / 4f;
+                    orbRadius = 13f;
                     orbMidScl = 0.4f;
                     orbSinScl = 4f;
                     particleSize = 6;
@@ -1315,7 +1323,7 @@ public class TerraUnitTypes {
                 reload = 1124f;
                 mirror = false;
                 rotate = true;
-                rotationLimit = 50f;
+                rotationLimit = 100f;
                 x = 0f;
                 y = 160f / 4f;
                 shootSound = TerraSounds.shootBlackhole;
@@ -1349,9 +1357,9 @@ public class TerraUnitTypes {
                         lifetime = 0f;
                         instantDisappear = true;
                         shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                        splashDamage = 0.001f;
+                        splashDamage = 0f;
                         splashDamageRadius = 14f * 1.2f;
-                        status = TerraStatusEffects.singularEvaporation;
+                        status = TerraStatusEffects.singularEvaporation; //work...
                         statusDuration = 180f;
                     }};
                 }};
@@ -1388,7 +1396,7 @@ public class TerraUnitTypes {
                         lifetime = 0f;
                         instantDisappear = true;
                         shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                        splashDamage = 0.001f;
+                        splashDamage = 0f;
                         splashDamageRadius = 30f;
                         status = TerraStatusEffects.singularEvaporation;
                         statusDuration = 240f;
@@ -3350,7 +3358,7 @@ public class TerraUnitTypes {
                             lifetime = 0f;
                             instantDisappear = true;
                             shootEffect = despawnEffect = hitEffect = smokeEffect = Fx.none;
-                            splashDamage = 0.001f;
+                            splashDamage = 0f;
                             splashDamageRadius = 33f;
                             status = TerraStatusEffects.warpHell;
                             statusDuration = 150f;
