@@ -999,25 +999,25 @@ public class TerraUnitTypes {
         
         eternity = new UnitType("eternity"){{
             flying = true;
-            speed = 0.46f;
-            rotateSpeed = 0.8f;
+            speed = 0.53f;
+            rotateSpeed = 0.9f;
             drag = 0.04f;
             accel = 0.03f;
-            hitSize = 100f;
+            hitSize = 80f;
             softShadowScl = 1f;
             health = 88000;
             armor = 56;
             targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.core, BlockFlag.turret, null};
-            engineSize = 0f;
-            engineOffset = 0f;
             outlineRadius = 6;
             crashDamageMultiplier = 10;
             targetPriority = 4f;
             fallSpeed = 0.01f;
-            faceTarget = false;
+            faceTarget = true;
+            engineSize = 7f;
+            engineOffset = 110f / 4f;
             setEnginesMirror(
-                new UnitEngine(168f / 4f, 0.25f, 13.5f, 315f),
-                new UnitEngine(100f / 4f, -55f / 4f, 11f, 315f)
+                new UnitEngine(104f / 4f, -93f / 4f, 10f, 315f),
+                new UnitEngine(202f / 4f, -84f / 4f, 11f, 315f)
             );
             range = 210f;
             itemCapacity = 200;
@@ -1025,7 +1025,7 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             immunities = ObjectSet.with(
                 StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, StatusEffects.unmoving, 
-                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.singularEvaporation, TerraStatusEffects.crystalization
+                TerraStatusEffects.impactStun, TerraStatusEffects.energyOverload, TerraStatusEffects.zapped, TerraStatusEffects.singularEvaporation, TerraStatusEffects.crystalization
             );
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
@@ -1034,8 +1034,8 @@ public class TerraUnitTypes {
                     range = 450f;
                     maxDelay = 60f;
                     reload = 1200f;
-                    y = 39.25f;
-                    orbRadius = 13f;
+                    y = -5f;
+                    orbRadius = 5f;
                     orbMidScl = 0.4f;
                     orbSinScl = 4f;
                     particleSize = 6;
@@ -1091,6 +1091,7 @@ public class TerraUnitTypes {
                 cooldownTime = 90f;
                 shake = 4f;
                 parentizeEffects = true;
+                mirror = false;
 
                 bullet = new BasicBulletType(){{
                     sprite = "terra-plasma";
@@ -1153,7 +1154,7 @@ public class TerraUnitTypes {
                 shootY = 10f;
                 rotate = true;
                 mirror = false;
-                layerOffset = 0.001f;
+                layerOffset = -0.002f;
                 rotateSpeed = 2.25f;
                 shootSound = TerraSounds.shootFastLaser;
                 ejectEffect = Fx.none;
@@ -1233,20 +1234,20 @@ public class TerraUnitTypes {
                 }};
             }};
 
-            weapons.add(copyAndMove(sapPlasma, 136f / 4f, -17f / 4f));
-            weapons.add(copyAndMoveAnd(sapPlasma, 218f / 4f, 26f / 4f, w -> {w.reload = 222f;}));
-            weapons.add(copyAndMove(sapLauncher, 67f / 4f, -8f / 4f));
-            weapons.add(copyAndMove(sapLasers, 0f, -70f / 4f));
+            weapons.add(copyAndMove(sapPlasma, 203f / 4f, -30f / 4f));
+            weapons.add(copyAndMoveAnd(sapPlasma, -203f / 4f, -30f / 4f, w -> {w.reload = 222f;}));
+            weapons.add(copyAndMove(sapLauncher, 127f / 4f, -73f / 4f));
+            weapons.add(copyAndMove(sapLasers, 0f, 30.5f / 4f));
             weapons.add(
             new Weapon("terra-eternity-mount"){{
-                x = 128f / 4f;
-                y = 94f / 4f;
-                shootY = 8f;
+                x = 75f / 4f;
+                y = 9f / 4f;
+                shootY = 2f;
                 rotate = true;
                 rotateSpeed = 1.8f;
                 shootSound = TerraSounds.acceleratinglaserloop;
                 shootSoundVolume = activeSoundVolume = 0.6f;
-                reload = 126f;
+                reload = 130f;
                 continuous = true;
                 parentizeEffects = true;
                 shake = 0.6f;
@@ -1278,8 +1279,8 @@ public class TerraUnitTypes {
                 reload = 130f;
                 mirror = true;
                 rotate = false;
-                x = 204f / 4f;
-                y = 104f / 4f;
+                x = 225f / 4f;
+                y = 10.5f / 4f;
                 shootSound = TerraSounds.shootLaunch;
                 shootSoundVolume = 0.4f;
                 baseRotation = -45;
@@ -1314,8 +1315,9 @@ public class TerraUnitTypes {
                 reload = 1124f;
                 mirror = false;
                 rotate = true;
+                rotationLimit = 50f;
                 x = 0f;
-                y = 39.25f;
+                y = 160f / 4f;
                 shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
                 recoil = 0;
