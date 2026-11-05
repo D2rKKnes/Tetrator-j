@@ -749,7 +749,7 @@ public class TerraUnitTypes {
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
             abilities.addAll(
-                new ShieldRegenFieldAbility(1500f, 6000f, 1200f, 120f), 
+                new ShieldRegenFieldAbility(1000f, 3000f, 1200f, 120f), 
                 new SuppressionFieldAbility(){{
                     range = 180f;
                     maxDelay = 60f;
@@ -1029,14 +1029,22 @@ public class TerraUnitTypes {
             );
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
+            parts.addAll(
+                new RegionPart("-part"){{
+                    mirror = false;
+                    layer = Layer.flyingUnitLow - 0.003f;
+                    color = Color.valueOf("cccccc")
+                    outline = false;
+                }}
+            );
             abilities.addAll(
                 new SuppressionFieldAbility(){{
                     range = 450f;
                     maxDelay = 60f;
                     reload = 1200f;
                     y = -5f;
-                    orbRadius = 3.5f;
-                    orbSinScl = 4f;
+                    orbRadius = 3.4f;
+                    orbSinScl = 3f;
                     particleSize = 6;
                     layer = Layer.flyingUnitLow - 0.002f;
                 }},
