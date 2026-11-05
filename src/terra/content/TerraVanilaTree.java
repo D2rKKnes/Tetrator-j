@@ -101,10 +101,15 @@ public class TerraVanilaTree{
         vanillaNode(payloadConveyor, () -> {
             node(largePayloadConveyor, () -> {});
         });
-        if(Core.settings.getBool("vanilaoverhaul", true)){vanillaNode(omura, () -> {
-            node(omuraMissile, () -> {});
-            node(omuraDrone, () -> {});
-        });}
+        if(Core.settings.getBool("vanilaoverhaul", true)){
+            vanillaNode(omura, () -> {
+                node(omuraMissile, () -> {});
+                node(omuraDrone, () -> {});
+            });
+            vanillaNode(eclipse, () -> {
+                node(eclipseMissile, () -> {});
+            });
+        }
         // Erekir
         String erekir = "erekir";
         vanillaNode(erekir, berylliumWallLarge, () -> {
