@@ -1033,7 +1033,7 @@ public class TerraUnitTypes {
                 new RegionPart("-part"){{
                     mirror = false;
                     layer = Layer.flyingUnitLow - 0.003f;
-                    color = Color.valueOf("cccccc")
+                    color = Color.valueOf("cccccc");
                     outline = false;
                 }}
             );
