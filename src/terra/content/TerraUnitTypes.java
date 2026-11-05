@@ -1038,7 +1038,7 @@ public class TerraUnitTypes {
                     orbRadius = 3.5f;
                     orbSinScl = 4f;
                     particleSize = 6;
-                    layer = Layer.flyingUnitLow - 1;
+                    layer = Layer.flyingUnitLow - 0.002f;
                 }},
                 new SuppressionFieldAbility(){{
                     active = false;
@@ -1162,7 +1162,7 @@ public class TerraUnitTypes {
                 shootY = 10f;
                 rotate = true;
                 mirror = false;
-                layerOffset = -0.002f;
+                layerOffset = -0.005f;
                 rotateSpeed = 2.25f;
                 shootSound = TerraSounds.shootFastLaser;
                 ejectEffect = Fx.none;
