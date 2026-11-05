@@ -200,14 +200,16 @@ public class TerraVerilusTree {
                 });
                 node(advancedAssembler, () -> {
                     node(antumbra, Seq.with(new AtWave(verilus, 33)), () -> {
-                        node(eclipse, Seq.with(new AtWave(verilus, 75)), () -> {});
+                        node(eclipse, Seq.with(new AtWave(verilus, 70)), () -> {
+                            node(eclipseMissile, () -> {});
+                        });
                     });
                     node(quad, Seq.with(new AtWave(verilus, 33)), () -> {
-                        node(oct, Seq.with(new AtWave(verilus, 75)), () -> {});
+                        node(oct, Seq.with(new AtWave(verilus, 70)), () -> {});
                     });
                     node(catastrophe, Seq.with(new AtWave(verilus, 33)), () -> {
-                        node(inevitability, Seq.with(new AtWave(verilus, 75)), () -> {
-                            node(eternity, ItemStack.with(TerraItems.tesseract, 5, TerraItems.darkSteel, 8200, TerraItems.diamondGlass, 5000, TerraItems.thermoxite, 7800), Seq.with(new AtWave(verilus, 180)), () -> {
+                        node(inevitability, Seq.with(new AtWave(verilus, 70)), () -> {
+                            node(eternity, ItemStack.with(TerraItems.tesseract, 5, TerraItems.darkSteel, 8200, TerraItems.diamondGlass, 5000, TerraItems.thermoxite, 7800), Seq.with(new AtWave(verilus, 100)), () -> {
                                 node(eternityMissile, () -> {});
                             });
                             node(inevitabilityCore, () -> {});
