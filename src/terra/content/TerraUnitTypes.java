@@ -119,61 +119,6 @@ public class TerraUnitTypes {
                 }};
             }});
         }};
-        omuraDrone = new UnitType("omura-drone"){{
-            speed = 3.2f;
-            accel = 0.08f;
-            drag = 0.04f;
-            flying = true;
-            health = 620;
-            armor = 6f;
-            engineSize = engineOffset = 0f;
-            setEnginesMirror(
-                new UnitEngine(15f / 4f, -12f / 4f, 2.5f, -70f)
-            );
-            hitSize = 10;
-            itemCapacity = 0;
-            circleTarget = true;
-            omniMovement = false;
-            rotateSpeed = 4.6f;
-            circleTargetRadius = 55f;
-            wreckSoundVolume = 0.7f;
-
-            moveSound = Sounds.loopThruster;
-            moveSoundPitchMin = 0.4f;
-            moveSoundPitchMax = 1.6f;
-            moveSoundVolume = 0.2f;
-
-            playerControllable = false;
-            logicControllable = false;
-            useUnitCap = false;
-            constructor = TimedKillUnit::create;
-            controller = u -> new MissileAI();
-            targetPriority = -1f;
-            outlineColor = Pal.darkerMetal;
-            lifetime = 60f * 60f;
-
-            weapons.add(new ConstructWeapon("terra-omura-missile"){{
-                x = 18f / 4f;
-                y = 12f / 4f;
-                shootY = 0f;
-                shootSound = Sounds.shootMissileSmall;
-                reload = 35f;
-                rotate = false;
-                baseRotation = -30f;
-                shootCone = 100f;
-                mirror = true;
-                predictTarget = false;
-                layerOffset = -0.002f;
-                bullet = new BulletType(){{
-                    shootEffect = smokeEffect = Fx.none;
-                    //shake = 1f;
-                    speed = 0.001f;
-                    keepVelocity = false;
-                    targetMissiles = false;
-                    spawnUnit = omuraMissile;
-                }};
-            }});
-        }};
         
         wick = new UnitType("wick"){{
             flying = true;
@@ -3865,6 +3810,62 @@ public class TerraUnitTypes {
                     buildingDamageMultiplier = 0.3f;
                     ammoMultiplier = 1.5f;
                     status = StatusEffects.blasted;
+                }};
+            }});
+        }};
+        
+        omuraDrone = new UnitType("omura-drone"){{
+            speed = 3.2f;
+            accel = 0.08f;
+            drag = 0.04f;
+            flying = true;
+            health = 620;
+            armor = 6f;
+            engineSize = engineOffset = 0f;
+            setEnginesMirror(
+                new UnitEngine(15f / 4f, -12f / 4f, 2.5f, -70f)
+            );
+            hitSize = 10;
+            itemCapacity = 0;
+            circleTarget = true;
+            omniMovement = false;
+            rotateSpeed = 4.6f;
+            circleTargetRadius = 55f;
+            wreckSoundVolume = 0.7f;
+
+            moveSound = Sounds.loopThruster;
+            moveSoundPitchMin = 0.4f;
+            moveSoundPitchMax = 1.6f;
+            moveSoundVolume = 0.2f;
+
+            playerControllable = false;
+            logicControllable = false;
+            useUnitCap = false;
+            constructor = TimedKillUnit::create;
+            controller = u -> new MissileAI();
+            targetPriority = -1f;
+            outlineColor = Pal.darkerMetal;
+            lifetime = 60f * 60f;
+
+            weapons.add(new ConstructWeapon("terra-omura-missile"){{
+                x = 18f / 4f;
+                y = 12f / 4f;
+                shootY = 0f;
+                shootSound = Sounds.shootMissileSmall;
+                reload = 35f;
+                rotate = false;
+                baseRotation = -30f;
+                shootCone = 100f;
+                mirror = true;
+                predictTarget = false;
+                layerOffset = -0.002f;
+                bullet = new BulletType(){{
+                    shootEffect = smokeEffect = Fx.none;
+                    //shake = 1f;
+                    speed = 0.001f;
+                    keepVelocity = false;
+                    targetMissiles = false;
+                    spawnUnit = omuraMissile;
                 }};
             }});
         }};
