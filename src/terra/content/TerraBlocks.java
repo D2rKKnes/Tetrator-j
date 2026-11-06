@@ -2539,7 +2539,25 @@ public class TerraBlocks{
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 1.3f;
             researchCostMultiplier = 0.1f;
-        }};
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
+            }
+        
+            @Override
+            public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
+                Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
         
         //OTHER =---
 
