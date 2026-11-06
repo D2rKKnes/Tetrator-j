@@ -1263,6 +1263,7 @@ public class TerraUnitTypes {
                 shootY = 0;
                 recoil = 0;
                 shake = 15f;
+                minWarmup = 0.97f;
                 parts.add(new BlackHolePart(){{
                     color = Pal.suppress;
                     size = 0f;
