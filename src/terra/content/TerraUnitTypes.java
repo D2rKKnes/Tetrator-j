@@ -3846,7 +3846,6 @@ public class TerraUnitTypes {
                 reload = 35f;
                 rotate = true;
                 rotationLimit = 60f;
-                shootCone = 100f;
                 mirror = true;
                 predictTarget = false;
                 layerOffset = -0.002f;
