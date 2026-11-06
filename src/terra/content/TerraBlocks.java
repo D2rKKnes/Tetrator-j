@@ -95,7 +95,7 @@ public class TerraBlocks{
     //NOTVA =---
     //GIER =---
     //TATNTROS =---
-    //EREKIR & COPIS =---
+    //EREKIR =---
     //walls
     berylliumWallHuge, berylliumWallGigantic, reinforcedSurgeWallHuge, reinforcedSurgeWallGigantic,
     tungstenWallHuge, tungstenWallGigantic, blastGate, blastDoorLarge, blastDoorHuge,
@@ -111,7 +111,9 @@ public class TerraBlocks{
     boatFabricator, basicFabricator, boatRefabricator, basicRefabricator, boatAssembler,
     largeReinforcedPayloadConveyor,
     //logic
-    primeProcessor;
+    primeProcessor,
+    //COPIS =---
+    circularFurnace;
     //OTHER =---
     
     public static void load(){
@@ -2014,7 +2016,7 @@ public class TerraBlocks{
 
 
         
-        //EREKIR & COPIS =---
+        //EREKIR=---
         //walls
         berylliumWallHuge = new Wall("beryllium-wall-huge"){{
             requirements(Category.defense, with(Items.beryllium, 6 * 9));
@@ -2497,6 +2499,46 @@ public class TerraBlocks{
             instructionsPerTick = 12;
             range = 8 * 28;
             size = 2;
+        }};
+
+        //COPIS =---
+        //crafters
+        circularFurnace = new GenericCrafter("circular-furnace"){{
+            requirements(Category.crafting, with(TerraItems.tantalium, 220, TerraItems.ruthenium, 275));
+            consumeItems(with(TerraItems.tantalium, 5, TerraItems.ruthenium, 4, TerraItems.obsidianPowder, 2));
+            consumeLiquid(TerraLiquids.magma, 40f / 60f);
+            consumePower(2.6f);
+            outputItems = with(TerraItems.xAlloy, 3);
+            size = 4;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            envEnabled = Env.any;
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"), 
+                new DrawLiquidTile(TerraLiquids.magma),
+                new DrawRegion() {{
+                    suffix = "-gear1";
+                    spinSprite = true;
+                    rotateSpeed = 2f;
+                    x = 5f;
+                    y = -5f;
+                }},
+                new DrawRegion() {{
+                    suffix = "-gear2";
+                    spinSprite = true;
+                    rotateSpeed = -1f;
+                    x = -1.5f;
+                    y = -8f;
+                }},
+                new DrawDefault()
+            );
+            craftTime = 90;
+            itemCapacity = 20;
+            liquidCapacity = 200;
+            ambientSound = Sounds.loopSmelter;
+            ambientSoundVolume = 1.3f;
+            researchCostMultiplier = 0.1f;
         }};
         
         //OTHER =---
