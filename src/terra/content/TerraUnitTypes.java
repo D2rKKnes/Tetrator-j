@@ -2003,7 +2003,7 @@ public class TerraUnitTypes {
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet
             );
 
-            weapons.add(new ConstructWeapon("terra-missile-void"){{
+            weapons.add(new ConstructWeapon("terra-green-micro-missile"){{
                 reload = 45f;
                 x = 17f / 4;
                 shootY = 0f;
@@ -2012,15 +2012,6 @@ public class TerraUnitTypes {
                 rotateSpeed = 5f;
                 shootSound = Sounds.shootMissileLarge;
                 shootSoundVolume = 0.5f;
-                // parts.add(new RegionPart("-preview"){{
-                //     progress = PartProgress.reload;
-                //     colorTo = new Color(1f, 1f, 1f, 0f);
-                //     color = Color.white;
-                //     mixColorTo = Pal.accent;
-                //     mixColor = new Color(1f, 1f, 1f, 0f);
-                //     outline = false;
-                //     under = false;
-                // }});
                 predictTarget = false;
                 bullet = new BulletType(){{
                     speed = 0f;
