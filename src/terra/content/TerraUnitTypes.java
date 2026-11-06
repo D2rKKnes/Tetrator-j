@@ -159,7 +159,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.shootMissileSmall;
                 reload = 35f;
                 rotate = false;
-                baseRotate = 45f;
+                baseRotate = 30f;
                 shootCone = 100f;
                 mirror = true;
                 predictTarget = false;
