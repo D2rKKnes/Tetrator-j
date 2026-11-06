@@ -2509,7 +2509,7 @@ public class TerraBlocks{
             consumeLiquid(TerraLiquids.magma, 40f / 60f);
             consumePower(2.6f);
             outputItems = with(TerraItems.xAlloy, 3);
-            size = 4;
+            size = 3;
             hasPower = true;
             hasItems = true;
             hasLiquids = true;
