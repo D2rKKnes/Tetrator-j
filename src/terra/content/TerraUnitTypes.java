@@ -124,17 +124,15 @@ public class TerraUnitTypes {
             accel = 0.08f;
             drag = 0.04f;
             flying = true;
-            health = 470;
+            health = 620;
             armor = 6f;
             engineSize = engineOffset = 0f;
-            trailLength = 5;
             setEnginesMirror(
                 new UnitEngine(15f / 4f, -12f / 4f, 2.5f, -70f)
             );
             hitSize = 10;
             itemCapacity = 0;
             circleTarget = true;
-            autoDropBombs = true;
             omniMovement = false;
             rotateSpeed = 4.6f;
             circleTargetRadius = 55f;
@@ -154,46 +152,25 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
 
-            weapons.add(new Weapon(){{
-                minShootVelocity = 1f;
-                x = 3f;
+            weapons.add(new ConstructWeapon("terra-omura-missile"){{
+                x = 18f / 4f;
+                y = 12f / 4f;
                 shootY = 0f;
-                reload = 12f;
-                shootCone = 180f;
-                ejectEffect = Fx.none;
-                inaccuracy = 15f;
-                ignoreRotation = true;
-                shootSound = Sounds.shootHorizon;
-                soundPitchMax = 1.2f;
-                bullet = new BombBulletType(27f, 25f){{
-                    width = 10f;
-                    height = 14f;
-                    hitEffect = Fx.flakExplosion;
-                    shootEffect = Fx.none;
-                    smokeEffect = Fx.none;
-
-                    status = StatusEffects.blasted;
-                    statusDuration = 60f;
-                    damage = splashDamage * 0.5f;
-                }};
-            }},
-            new Weapon(){{
-                y = 15f / 4f;
-                x = 25.5f / 4f;
-                minShootVelocity = 2f;
-                shootCone = 10f;
-                reload = 80f;
-                shoot.shots = 3;
-                shoot.shotDelay = 3f;
-                ejectEffect = Fx.casing1;
+                shootSound = Sounds.shootMissileSmall;
+                reload = 35f;
+                rotate = false;
+                baseRotate = 45f;
+                shootCone = 100f;
                 mirror = true;
-                bullet = new BasicBulletType(2.7f, 14){{
-                    inaccuracy = 4f;
-                    width = 7f;
-                    height = 9f;
-                    lifetime = 33f;
-                    shootEffect = Fx.shootSmall;
-                    smokeEffect = Fx.shootSmallSmoke;
+                predictTarget = false;
+                layerOffset = -0.002f;
+                bullet = new BulletType(){{
+                    shootEffect = smokeEffect = Fx.none;
+                    //shake = 1f;
+                    speed = 0.001f;
+                    keepVelocity = false;
+                    targetMissiles = false;
+                    spawnUnit = omuraMissile;
                 }};
             }});
         }};
@@ -639,6 +616,7 @@ public class TerraUnitTypes {
                 baseRotation = -45;
                 rotationLimit = 90f;
                 mirror = true;
+                predictTarget = false;
                 layerOffset = -0.002f;
                 shootCone = 20f;
                 shoot = new ShootAlternate() {{
@@ -809,6 +787,7 @@ public class TerraUnitTypes {
                     barrels = 2;
                     spread = 3.5f;
                 }};
+                predictTarget = false;
                 bullet = new BulletType(){{
                     shootEffect = Fx.sparkShoot;
                     hitColor = Pal.suppress;
@@ -1315,6 +1294,7 @@ public class TerraUnitTypes {
                 layerOffset = -0.001f;
                 recoil = 1;
                 shake = 0.5f;
+                predictTarget = false;
                 bullet = new BulletType(){{
                     shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSparkBig);
                     smokeEffect = Fx.shootSmokeTitan;
@@ -2078,7 +2058,7 @@ public class TerraUnitTypes {
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet
             );
 
-            weapons.add(new Weapon("terra-missile-void"){{
+            weapons.add(new ConstructWeapon("terra-missile-void"){{
                 reload = 45f;
                 x = 17f / 4;
                 shootY = 0f;
@@ -2087,15 +2067,16 @@ public class TerraUnitTypes {
                 rotateSpeed = 5f;
                 shootSound = Sounds.shootMissileLarge;
                 shootSoundVolume = 0.5f;
-                parts.add(new RegionPart("-preview"){{
-                    progress = PartProgress.reload;
-                    colorTo = new Color(1f, 1f, 1f, 0f);
-                    color = Color.white;
-                    mixColorTo = Pal.accent;
-                    mixColor = new Color(1f, 1f, 1f, 0f);
-                    outline = false;
-                    under = false;
-                }});
+                // parts.add(new RegionPart("-preview"){{
+                //     progress = PartProgress.reload;
+                //     colorTo = new Color(1f, 1f, 1f, 0f);
+                //     color = Color.white;
+                //     mixColorTo = Pal.accent;
+                //     mixColor = new Color(1f, 1f, 1f, 0f);
+                //     outline = false;
+                //     under = false;
+                // }});
+                predictTarget = false;
                 bullet = new BulletType(){{
                     speed = 0f;
                     keepVelocity = false;
@@ -2169,6 +2150,7 @@ public class TerraUnitTypes {
                     barrels = 2;
                     spread = 3.5f;
                 }};
+                predictTarget = false;
                 bullet = new BasicBulletType(2.2f, 98){{
                     lifetime = 55f;
                     splashDamage = damage * 0.3f;
@@ -2225,7 +2207,7 @@ public class TerraUnitTypes {
                 shootSound = Sounds.shootLancer;
                 shootSoundVolume = 0.4f;
                 inaccuracy = 12f;
-                bullet = new LaserBulletType(){{
+                bullet = new FancyLaserBulletType(){{
                     damage = 68f;
                     recoil = 0f;
                     sideAngle = 15f;
@@ -2594,6 +2576,7 @@ public class TerraUnitTypes {
                     barrels = 4;
                     spread = 42f / 8;
                 }};
+                predictTarget = false;
                 bullet = new BasicBulletType(5.8f, 138){{
                     lifetime = 75f;
                     splashDamage = damage * 0.6f;
@@ -2625,107 +2608,107 @@ public class TerraUnitTypes {
             }});
         }};
 
-        calamity = new UnitType("calamity"){{
-            hideDetails = false;
-            speed = 0.3f;
-            rotateSpeed = 0.4f;
-            hitSize = 120f;
-            softShadowScl = 0.8f;
-            health = 1000000;
-            armor = 220;
-            drawCell = false;
-            outlineRadius = 6;
-            outlineColor = Color.valueOf("36363c");
-            envDisabled = Env.none;
-            constructor = TankUnit::create;
-            healColor = Color.valueOf("e13131");
-            tankMoveVolume *= 2f;
-            tankMoveSound = Sounds.tankMoveHeavy;
-            crushFragile = true;
-            crushDamage = 100f;
-            floorMultiplier = 0.3f;
-            faceTarget = false;
-            singleTarget = true;
-            shadowElevation = 0.1f;
-            omniMovement = false;
-            treadPullOffset = 1;
-            treadFrames = 24;
-            treadRects = new Rect[]{new Rect(93, 186, 122, 168), new Rect(154, -210, 61, 120), new Rect(54, -282, 100, 120)};
+        // calamity = new UnitType("calamity"){{
+        //     hideDetails = false;
+        //     speed = 0.3f;
+        //     rotateSpeed = 0.4f;
+        //     hitSize = 120f;
+        //     softShadowScl = 0.8f;
+        //     health = 1000000;
+        //     armor = 220;
+        //     drawCell = false;
+        //     outlineRadius = 6;
+        //     outlineColor = Color.valueOf("36363c");
+        //     envDisabled = Env.none;
+        //     constructor = TankUnit::create;
+        //     healColor = Color.valueOf("e13131");
+        //     tankMoveVolume *= 2f;
+        //     tankMoveSound = Sounds.tankMoveHeavy;
+        //     crushFragile = true;
+        //     crushDamage = 100f;
+        //     floorMultiplier = 0.3f;
+        //     faceTarget = false;
+        //     singleTarget = true;
+        //     shadowElevation = 0.1f;
+        //     omniMovement = false;
+        //     treadPullOffset = 1;
+        //     treadFrames = 24;
+        //     treadRects = new Rect[]{new Rect(93, 186, 122, 168), new Rect(154, -210, 61, 120), new Rect(54, -282, 100, 120)};
 
-            weapons.add(
-            new Weapon("terra-calamity-cannon-side-not"){{
-                x = 0f;
-                y = -117f / 4f;
-                shootX = 85 / 4f;
-                shootY = 340 / 4f; //345
-                rotate = true;
-                rotateSpeed = 0.14f;
-                reload = 20f;
-                cooldownTime = 30f;
-                layerOffset = 0.1f;
-                minWarmup = 0.95f;
-                recoil = 0f;
-                mirror = true;
-                shootCone = 60f;
-                showStatSprite = false;
+        //     weapons.add(
+        //     new Weapon("terra-calamity-cannon-side-not"){{
+        //         x = 0f;
+        //         y = -117f / 4f;
+        //         shootX = 85 / 4f;
+        //         shootY = 340 / 4f; //345
+        //         rotate = true;
+        //         rotateSpeed = 0.14f;
+        //         reload = 20f;
+        //         cooldownTime = 30f;
+        //         layerOffset = 0.1f;
+        //         minWarmup = 0.95f;
+        //         recoil = 0f;
+        //         mirror = true;
+        //         shootCone = 60f;
+        //         showStatSprite = false;
                 
-                bullet = new BasicBulletType(5f, 850){{
-                    lifetime = 100f;
-                    pierce = true;
-                    pierceCap = 3;
-                    homingPower = 0.13f;
-                    fragBullets = 2;
-                    fragBullet = new BasicBulletType(4f, 750){{
-                        lifetime = 80f;
-                        pierce = true;
-                        pierceCap = 2;
-                        homingPower = 0.06f;
-                    }};
-                }};
-            }},
-            new Weapon("terra-calamity-cannon"){{
-                x = 0f;
-                y = -117f / 4f;
-                shootY = 6f;
-                rotate = true;
-                rotateSpeed = 0.14f;
-                reload = 1200f;
-                cooldownTime = 600f;
-                shake = 6f;
-                layerOffset = 0.1f;
-                minWarmup = 0.75f;
-                recoil = 5f;
-                mirror = false;
+        //         bullet = new BasicBulletType(5f, 850){{
+        //             lifetime = 100f;
+        //             pierce = true;
+        //             pierceCap = 3;
+        //             homingPower = 0.13f;
+        //             fragBullets = 2;
+        //             fragBullet = new BasicBulletType(4f, 750){{
+        //                 lifetime = 80f;
+        //                 pierce = true;
+        //                 pierceCap = 2;
+        //                 homingPower = 0.06f;
+        //             }};
+        //         }};
+        //     }},
+        //     new Weapon("terra-calamity-cannon"){{
+        //         x = 0f;
+        //         y = -117f / 4f;
+        //         shootY = 6f;
+        //         rotate = true;
+        //         rotateSpeed = 0.14f;
+        //         reload = 1200f;
+        //         cooldownTime = 600f;
+        //         shake = 6f;
+        //         layerOffset = 0.1f;
+        //         minWarmup = 0.75f;
+        //         recoil = 5f;
+        //         mirror = false;
 
-                parts.add(
-                    new RegionPart("-side") {{
-                        mirror = under = true;
-                        progress = PartProgress.warmup;
-                        moveX = -2f;
-                        moveY = 2f;
-                        //moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
-                    }}
-                );
+        //         parts.add(
+        //             new RegionPart("-side") {{
+        //                 mirror = under = true;
+        //                 progress = PartProgress.warmup;
+        //                 moveX = -2f;
+        //                 moveY = 2f;
+        //                 //moves.add(new PartMove(PartProgress.recoil, 0f, -1f, 0f));
+        //             }}
+        //         );
                 
-                bullet = new BulletType(10f, 18500){{
-                    lifetime = 300f;
-                    pierce = true;
-                    pierceBuilding = true;
-                }};
-            }});
-        }
-            @Override
-            public void init() {
-                super.init();
+        //         bullet = new BulletType(10f, 18500){{
+        //             lifetime = 300f;
+        //             pierce = true;
+        //             pierceBuilding = true;
+        //         }};
+        //     }});
+        // }
+        //     @Override
+        //     public void init() {
+        //         super.init();
         
-                immunities = new ObjectSet<>();
-                for (StatusEffect effect : Vars.content.statusEffects()) {
-                    if (shouldAddToImmunities(effect)) {
-                        immunities.add(effect);
-                    }
-                }
-            }
-        };
+        //         immunities = new ObjectSet<>();
+        //         for (StatusEffect effect : Vars.content.statusEffects()) {
+        //             if (shouldAddToImmunities(effect)) {
+        //                 immunities.add(effect);
+        //             }
+        //         }
+        //     }
+        // };
 
         endSpawn = new UnitType("end-spawn"){{
             hideDetails = false;
@@ -2980,6 +2963,7 @@ public class TerraUnitTypes {
                     shots = 2;
                     firstShotDelay = 0f;
                 }};
+                predictTarget = false;
                 bullet = new BasicBulletType(8f, 518){{
                     lifetime = 98f;
                     splashDamage = damage / 2f;
@@ -3760,7 +3744,7 @@ public class TerraUnitTypes {
         eclipseMissile = new MissileUnitType("eclipse-missile"){{
             speed = 3.44f;
             maxRange = 6f;
-            lifetime = 105f;
+            lifetime = 78f;
             hitSize = 6f;
             outlineColor = Pal.darkerMetal;
             engineColor = trailColor = TerraStatusEffects.sunBurn.color;
@@ -3779,7 +3763,7 @@ public class TerraUnitTypes {
 
             fogRadius = 9f;
 
-            health = 400;
+            health = 500;
             armor = 7;
             hidden = false;
 
@@ -3798,7 +3782,7 @@ public class TerraUnitTypes {
                 deathExplosionEffect = Fx.massiveExplosion;
                 shootOnDeath = true;
                 shake = 3f;
-                bullet = new ExplosionBulletType(146f, 8f * 8){{
+                bullet = new ExplosionBulletType(246f, 9f * 8){{
                     hitColor = TerraStatusEffects.sunBurn.color;
                     shootEffect = new WrapEffect(Fx.titanExplosionSmall, hitColor);
                     smokeEffect = new WrapEffect(Fx.titanSmokeSmall, hitColor);
@@ -3811,11 +3795,11 @@ public class TerraUnitTypes {
                     incendChance = 1f;
                     incendSpread = 3f * 8f;
                     
-                    fragBullets = 18;
+                    fragBullets = 20;
                     fragLifeMin = 0.2f;
                     fragOffsetMax = 1.6f;
                     fragRandomSpread = 50f;
-                    fragBullet = new BasicBulletType(6f, 0){{
+                    fragBullet = new BasicBulletType(6.3f, 0){{
                         lifetime = 19f;
                         width = height = 8;
                         shrinkX = shrinkY = 0.33f;
