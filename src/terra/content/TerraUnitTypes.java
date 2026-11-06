@@ -1973,7 +1973,7 @@ public class TerraUnitTypes {
                 mirror = false;
                 reload = 1f;
                 shootOnDeath = true;
-                shake = 1.5f;
+                shake = 0.4f;
                 bullet = new ExplosionBulletType(76f, 22f){{ //damage, radius!
                     hitColor = greenLight;
                     collidesAir = true;
