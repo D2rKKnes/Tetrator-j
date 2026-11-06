@@ -2520,14 +2520,14 @@ public class TerraBlocks{
                 new DrawRegion() {{
                     suffix = "-gear1";
                     spinSprite = true;
-                    rotateSpeed = 2f;
+                    rotateSpeed = 1f;
                     x = 5f;
                     y = -5f;
                 }},
                 new DrawRegion() {{
                     suffix = "-gear2";
                     spinSprite = true;
-                    rotateSpeed = -1f;
+                    rotateSpeed = -2f;
                     x = -1.5f;
                     y = -8f;
                 }},
