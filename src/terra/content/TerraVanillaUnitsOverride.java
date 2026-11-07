@@ -375,6 +375,7 @@ public class TerraVanillaUnitsOverride {
                 recoil = 1f;
                 shootSound = TerraSounds.shootLaunch;
                 shootSoundVolume = 0.7f;
+                predictTarget = false;
                 shoot = new ShootBarrel(){{
                     shots = 6;
                     shotDelay = 7f;
@@ -724,6 +725,7 @@ public class TerraVanillaUnitsOverride {
                 //rotateSpeed = 0.4f;
                 mirror = false;
                 useAttackRange = false;
+                predictTarget = false;
                 bullet = new BulletType(){{
                     shootEffect = smokeEffect = Fx.none;
                     //shake = 1f;
