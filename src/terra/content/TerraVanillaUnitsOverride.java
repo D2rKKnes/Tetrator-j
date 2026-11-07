@@ -130,10 +130,11 @@ public class TerraVanillaUnitsOverride {
                     hitShake = 5f;
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
-                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(frontColor, 5.5f * 8f, 60f), Fx.massiveExplosion, new ExplosionEffect(){{
+                    hitEffect = new MultiEffect(TerraFx.smoothColorCircle(backColor, 5.5f * 8f, 60f), Fx.massiveExplosion, new ExplosionEffect(){{
                         waveColor = smokeColor = sparkColor = frontColor;
                         waveRad = smokeRad = sparkRad = 6f * 8f;
                         smokes = 20;
+                        smokeSize = 15f;
                         lifetime = 50f;
                         waveLife = 25f;
                         sparkStroke = 2f;
@@ -472,7 +473,7 @@ public class TerraVanillaUnitsOverride {
             alpha(0.2f * e.fout());
             Fill.circle(e.x, e.y, 8.5f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 40, 7.5f * 8f, (x, y) -> {
+            randLenVectors(e.id, 40, 8.3f * 8f, (x, y) -> {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
@@ -484,10 +485,10 @@ public class TerraVanillaUnitsOverride {
             alpha(0.3f * e.fout());
             Fill.circle(e.x, e.y, 15f * 8f);
             alpha(e.fout());
-            randLenVectors(e.id, 35, 13.5f * 8f, (x, y) -> {
+            randLenVectors(e.id, 35, 14.7f * 8f, (x, y) -> {
                 Fill.square(e.x + x, e.y + y, (e.fout() + 0.5f) * 1.75f, 45f);
             });
-            randLenVectors(e.id + 100, 50, 13.5f * 8f, (x, y) -> {
+            randLenVectors(e.id + 100, 50, 14.8f * 8f, (x, y) -> {
                 Fill.circle(e.x + x, e.y + y, e.fout() * 1.5f);
             });
         })));
@@ -498,7 +499,7 @@ public class TerraVanillaUnitsOverride {
                 shootY = 0f;
                 shootSound = Sounds.shootMissileLarge;
                 shootCone = 360f;
-                reload = 160f;
+                reload = 150f;
                 rotate = true;
                 rotateSpeed = 0.4f;
                 rotationLimit = 25f;
@@ -520,198 +521,6 @@ public class TerraVanillaUnitsOverride {
         UnitTypes.quad.immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
         UnitTypes.oct.immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload, TerraStatusEffects.shieldDamage);
         UnitTypes.oct.abilities.add(new RegenAbility(){{amount = 90f / 60f;}});
-        UnitTypes.oct.weapons.add(
-            new Weapon("terra-dual-mount-alt"){{
-                x = 91f / 4f;
-                y = 57f / 4f;
-                shootY = 5f;
-                reload = 18f;
-                mirror = true;
-                alternate = false;
-                shootSound = Sounds.shootLancer;
-                controllable = false;
-                autoTarget = true;
-                rotate = true;
-                rotateSpeed = 1.8f;
-                rotationLimit = 110f;
-                baseRotation = -45f;
-                shootCone = 10f;
-                recoil = 0f;
-                recoils = 2;
-                layerOffset = -0.001f;
-
-                shoot = new ShootAlternate() {{
-                    shots = 1;
-                    barrels = 2;
-                    spread = 8.5f;
-                }};
-    
-                parts.add(
-                    new RegionPart("-barrel-l") {{
-                        progress = PartProgress.recoil;
-                        recoilIndex = 0;
-                        moveY = -3.3f;
-                    }},
-                    new RegionPart("-barrel-r") {{
-                        progress = PartProgress.recoil;
-                        recoilIndex = 1;
-                        moveY = -3.3f;
-                    }}
-                );
-    
-                bullet = new EmpBulletType() {{
-                    sprite = "circle-bullet";
-                    damage = 31f;
-                    splashDamage = 20f;
-                    splashDamageRadius = 4f * 8f;
-                    radius = 4f * 8f;
-                    timeIncrease = 1.5f;
-                    timeDuration = 60f * 5f;
-                    powerSclDecrease = 0.5f;
-                    speed = 6.5f;
-                    lifetime = 40f;
-                    width = 5f;
-                    height = 5f;
-                    backColor = Pal.heal;
-                    hitColor = Pal.heal;
-                    trailColor = Pal.heal;
-                    frontColor = Color.white;
-                    trailWidth = 3f;
-                    trailLength = 16;
-                    hitSound = Sounds.explosionNavanax;
-                    homingPower = 0.15f;
-                    homingRange = 40f;
-                    collidesTeam = true;
-                    healPercent = 1f;
-        
-                    hitEffect = new ExplosionEffect() {{
-                        waveColor = smokeColor = sparkColor = Pal.heal;
-                        waveRad = 3f * 8f;
-                        sparkStroke = 2f;
-                        sparks = 5;
-                    }};
-        
-                    despawnEffect = new ExplosionEffect() {{
-                        waveColor = smokeColor = Pal.heal;
-                        waveRad = 3f * 8f;
-                        sparks = 0;
-                    }};
-        
-                    intervalBullets = 2;
-                    intervalRandomSpread = 60f;
-                    intervalAngle = 180f;
-                    bulletInterval = 8f;
-                    fragBullets = 2;
-                    fragRandomSpread = 45f;
-                    intervalBullet = fragBullet = new LaserBulletType() {{
-                        length = 21f;
-                        width = 15f;
-                        lifetime = 20f;
-                        colors = new Color[]{Pal.heal, Pal.heal, Color.white};
-                        damage = 10f;
-                        collidesTeam = true;
-                        collidesAir = true;
-                        healPercent = 0.25f;
-                        sideWidth = 0f;
-                    }};
-                }};
-            }},
-            new Weapon("terra-dual-mount-alt"){{
-                x = 91f / 4f;
-                y = -120f / 4f;
-                shootY = 5f;
-                reload = 18f;
-                mirror = true;
-                alternate = false;
-                shootSound = Sounds.shootLancer;
-                controllable = false;
-                autoTarget = true;
-                rotate = true;
-                rotateSpeed = 1.8f;
-                rotationLimit = 110f;
-                baseRotation = -135f;
-                shootCone = 10f;
-                recoil = 0f;
-                recoils = 2;
-                layerOffset = -0.001f;
-
-                shoot = new ShootAlternate() {{
-                    shots = 1;
-                    barrels = 2;
-                    spread = 8.5f;
-                }};
-    
-                parts.add(
-                    new RegionPart("-barrel-l") {{
-                        progress = PartProgress.recoil;
-                        recoilIndex = 0;
-                        moveY = -3.3f;
-                    }},
-                    new RegionPart("-barrel-r") {{
-                        progress = PartProgress.recoil;
-                        recoilIndex = 1;
-                        moveY = -3.3f;
-                    }}
-                );
-    
-                bullet = new EmpBulletType() {{
-                    sprite = "circle-bullet";
-                    damage = 31f;
-                    splashDamage = 20f;
-                    splashDamageRadius = 4f * 8f;
-                    radius = 4f * 8f;
-                    timeIncrease = 1.5f;
-                    timeDuration = 60f * 5f;
-                    powerSclDecrease = 0.5f;
-                    speed = 6.5f;
-                    lifetime = 40f;
-                    width = 5f;
-                    height = 5f;
-                    backColor = Pal.heal;
-                    hitColor = Pal.heal;
-                    trailColor = Pal.heal;
-                    frontColor = Color.white;
-                    trailWidth = 3f;
-                    trailLength = 16;
-                    hitSound = Sounds.explosionNavanax;
-                    homingPower = 0.15f;
-                    homingRange = 40f;
-                    collidesTeam = true;
-                    healPercent = 1f;
-        
-                    hitEffect = new ExplosionEffect() {{
-                        waveColor = smokeColor = sparkColor = Pal.heal;
-                        waveRad = 3f * 8f;
-                        sparkStroke = 2f;
-                        sparks = 5;
-                    }};
-        
-                    despawnEffect = new ExplosionEffect() {{
-                        waveColor = smokeColor = Pal.heal;
-                        waveRad = 3f * 8f;
-                        sparks = 0;
-                    }};
-        
-                    intervalBullets = 2;
-                    intervalRandomSpread = 60f;
-                    intervalAngle = 180f;
-                    bulletInterval = 8f;
-                    fragBullets = 2;
-                    fragRandomSpread = 45f;
-                    intervalBullet = fragBullet = new LaserBulletType() {{
-                        length = 21f;
-                        width = 15f;
-                        lifetime = 20f;
-                        colors = new Color[]{Pal.heal, Pal.heal, Color.white};
-                        damage = 10f;
-                        collidesTeam = true;
-                        collidesAir = true;
-                        healPercent = 0.25f;
-                        sideWidth = 0f;
-                    }};
-                }};
-            }}
-        );
         UnitTypes.omura.weapons.get(0).layerOffset = 0.003f;
         UnitTypes.omura.weapons.add(
             new ConstructWeapon("terra-omura-drone"){{
