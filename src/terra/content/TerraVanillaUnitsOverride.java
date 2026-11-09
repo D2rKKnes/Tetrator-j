@@ -135,7 +135,7 @@ public class TerraVanillaUnitsOverride {
                         waveRad = smokeRad = sparkRad = 6f * 8f;
                         smokes = 20;
                         smokeSize = 15f;
-                        lifetime = 50f;
+                        lifetime = 100f;
                         waveLife = 25f;
                         sparkStroke = 2f;
                         sparks = 10;
@@ -172,6 +172,30 @@ public class TerraVanillaUnitsOverride {
                         hitEffect = despawnEffect = Fx.none;
                         despawnHit = true;
                     }};
+                }};
+            }}
+        );
+        UnitTypes.quasar.weapons.add(
+            new Weapon("terra-big-heal-gun"){{
+                x = 5.5f;
+                y = -2.5f;
+                shootY = 4f;
+                reload = 50f;
+                mirror = false;
+                shootSound = Sounds.shootLaser;
+                rotate = true;
+                rotateSpeed = 3.2f;
+                shoot = new ShootPattern(){{
+                    shots = 4;
+                    shotDelay = 6f;
+                }};
+                bullet = new LaserBoltBulletType() {{
+                    damage = 45f;
+                    speed = 4.8f;
+                    lifetime = 35f;
+                    backColor = hitColor = Pal.heal;
+                    collidesTeam = true;
+                    healPercent = 1.5f;
                 }};
             }}
         );
