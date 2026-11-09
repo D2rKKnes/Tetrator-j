@@ -92,7 +92,7 @@ public class AdvancedStatusEffect extends StatusEffect{
                 unit.shield = Math.min(shieldHealCap, unit.shield + (-shieldDamage));
             }else{
                 if(!shieldTimer.containsKey(unit)){
-                    shieldTimer.put(unit, 1f * 0.8f);
+                    shieldTimer.put(unit, 20f);
                 }
 
                 float t = shieldTimer.get(unit, 0f);
