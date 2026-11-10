@@ -112,16 +112,16 @@ public class TerraVanillaUnitsOverride {
                 rotateSpeed = 3f;
                 ejectEffect = Fx.casing3Double;
                 shootSound = Sounds.shootRipple;
-                bullet = new ArtilleryBulletType(3f, 50, "shell"){{
+                bullet = new ArtilleryBulletType(3.6f, 50, "shell"){{
                     knockback = 3f;
-                    lifetime = 65f;
-                    maxRange = 250f;
+                    lifetime = 75f;
+                    maxRange = 210f;
                     width = height = 14f;
                     collides = true;
                     collidesTiles = true;
                     //collidesAir = true;
                     splashDamageRadius = 5.5f * 8f;
-                    splashDamage = 125f;
+                    splashDamage = 185f;
                     armorMultiplier = 0.4f;
                     backColor = Color.valueOf("cf6a53");
                     frontColor = Color.valueOf("ffa566");
@@ -131,10 +131,11 @@ public class TerraVanillaUnitsOverride {
                     hitSound = Sounds.explosionReactor;
                     hitSoundVolume = 1.2f;
                     hitEffect = new MultiEffect(TerraFx.smoothColorCircle(backColor, 5.5f * 8f, 60f), Fx.massiveExplosion, new ExplosionEffect(){{
-                        waveColor = smokeColor = sparkColor = frontColor;
+                        waveColor = sparkColor = frontColor;
+                        smokeColor = frontColor.cpy().a(0.8f);
                         waveRad = smokeRad = sparkRad = 6f * 8f;
                         smokes = 20;
-                        smokeSize = 15f;
+                        smokeSize = 18f;
                         lifetime = 100f;
                         waveLife = 25f;
                         sparkStroke = 2f;
@@ -156,7 +157,7 @@ public class TerraVanillaUnitsOverride {
                     fragLifeMin = 0.4f;
                     fragOffsetMax = 1.2f;
                     fragOnAbsorb = false;
-                    fragBullet = new BasicBulletType(4f, 12){{
+                    fragBullet = new BasicBulletType(4f, 30){{
                         lifetime = 11f;
                         width = height = 8;
                         shrinkX = shrinkY = 0.33f;
@@ -185,12 +186,13 @@ public class TerraVanillaUnitsOverride {
                 shootSound = Sounds.shootLaser;
                 rotate = true;
                 rotateSpeed = 3.2f;
+                inaccuracy = 5f;
                 shoot = new ShootPattern(){{
                     shots = 4;
                     shotDelay = 6f;
                 }};
                 bullet = new LaserBoltBulletType() {{
-                    damage = 45f;
+                    damage = 15f;
                     speed = 4.8f;
                     lifetime = 35f;
                     backColor = hitColor = Pal.heal;
