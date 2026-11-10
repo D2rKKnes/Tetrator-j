@@ -6,9 +6,14 @@ import mindustry.type.*;
 import mindustry.world.*;
 
 public class TerraSectorPresets {
-    public static SectorPreset verilus;
+    public static SectorPreset noLand, verilus;
 
     public static void load() {
+        noLand = new SectorPreset("noMansIslands", serpulo, 40){{
+            captureWave = 15;
+            difficulty = 4;
+        }};
+        
         verilus = new NoFileSectorPreset("verilus", Planets.verilus, 0){{
             alwaysUnlocked = false;
             addStartingItems = true;
