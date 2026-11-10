@@ -9,7 +9,7 @@ public class TerraSectorPresets {
     public static SectorPreset noLand, verilus;
 
     public static void load() {
-        noLand = new SectorPreset("noMansIslands", serpulo, 40){{
+        noLand = new SectorPreset("noMansIslands", Planets.serpulo, 40){{
             captureWave = 15;
             difficulty = 4;
         }};
