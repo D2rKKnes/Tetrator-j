@@ -90,6 +90,9 @@ public class TerraVanilaTree{
         vanillaNode(crateredBattleground, () -> {
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreRay)), () -> {});
         });
+        vanillaNode(ruinousShores, () -> {
+            node(TerraSectorPresets.noLand, Seq.with(new Research(metaglassWallLarge)), () -> {});
+        });
         vanillaNode(airFactory, () -> {
             node(alpha, () -> {
                 node(beta, Seq.with(new Research(coreFoundation)), () -> {
