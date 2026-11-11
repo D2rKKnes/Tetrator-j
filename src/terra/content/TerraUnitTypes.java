@@ -2193,7 +2193,7 @@ public class TerraUnitTypes {
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
-                        frontColor = Color.sapBullet;
+                        frontColor = Pal.sapBullet;
                         trailWidth = 1.5f;
                         trailLength = 5;
                         hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -2208,7 +2208,7 @@ public class TerraUnitTypes {
                             shootEffect = Fx.sparkShoot;
                             smokeEffect = Fx.shootBigSmoke;
                             hitColor = backColor = trailColor = Pal.bulletYellowBack;
-                            frontColor = Color.bulletYellow;
+                            frontColor = Pal.bulletYellow;
                             trailWidth = 1.5f;
                             trailLength = 5;
                             hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -2240,7 +2240,7 @@ public class TerraUnitTypes {
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
-                        frontColor = Color.sapBullet;
+                        frontColor = Pal.sapBullet;
                         trailWidth = 1.5f;
                         trailLength = 5;
                         hitEffect = despawnEffect = Fx.hitBulletColor;
@@ -2255,7 +2255,7 @@ public class TerraUnitTypes {
                             shootEffect = Fx.sparkShoot;
                             smokeEffect = Fx.shootBigSmoke;
                             hitColor = backColor = trailColor = Pal.bulletYellowBack;
-                            frontColor = Color.bulletYellow;
+                            frontColor = Pal.bulletYellow;
                             trailWidth = 1.5f;
                             trailLength = 5;
                             hitEffect = despawnEffect = Fx.hitBulletColor;
