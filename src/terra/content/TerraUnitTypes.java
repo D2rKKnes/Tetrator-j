@@ -1905,7 +1905,7 @@ public class TerraUnitTypes {
 
             legCount = 6;
             legSpeed = 0.18f;
-            legLength = 24f;
+            legLength = 21f;
             legBaseOffset = 10f;
             legMoveSpace = 1.2f;
             legForwardScl = 0.8f;
@@ -2068,7 +2068,7 @@ public class TerraUnitTypes {
                     x = -62f / 4f;
                     y = -22.5f / 4f;
                     shootY = 7f;
-                    reload = 50;
+                    reload = 70;
                     shake = 4f;
                     rotateSpeed = 2f;
                     ejectEffect = Fx.casing1;
@@ -2078,6 +2078,7 @@ public class TerraUnitTypes {
                     rotate = true;
                     shadow = 12f;
                     recoil = 3f;
+                    layerOffset = 0.002f;
     
                     shoot = new ShootSpread(3, 17f);
     
@@ -2178,8 +2179,9 @@ public class TerraUnitTypes {
                     shootCone = 360f;
     
                     bullet = new BasicBulletType(6f, 56){{
-                        homingPower = 0.19f;
+                        homingPower = 0.4f;
                         homingDelay = 4f;
+                        homingRange = 120f;
                         width = 14f;
                         height = 18f;
                         lifetime = 80f;
@@ -2192,9 +2194,10 @@ public class TerraUnitTypes {
                         hitEffect = despawnEffect = Fx.hitBulletColor;
                         status = StatusEffects.sapped;
                         statusDuration = 90f;
-                        spawnBullets.add(new BasicBulletType(6f, 56){{
-                            homingPower = 0.19f;
+                        spawnBullets.add(new BasicBulletType(5f, 56){{
+                            homingPower = 0.4f;
                             homingDelay = 4f;
+                            homingRange = 120f;
                             width = 14f;
                             height = 18f;
                             lifetime = 80f;
@@ -2224,9 +2227,10 @@ public class TerraUnitTypes {
                     inaccuracy = 8f;
                     shootCone = 360f;
     
-                    bullet = new BasicBulletType(6f, 56){{
-                        homingPower = 0.19f;
+                    bullet = new BasicBulletType(5f, 56){{
+                        homingPower = 0.4f;
                         homingDelay = 4f;
+                        homingRange = 120f;
                         width = 14f;
                         height = 18f;
                         lifetime = 80f;
@@ -2240,8 +2244,9 @@ public class TerraUnitTypes {
                         status = StatusEffects.sapped;
                         statusDuration = 90f;
                         spawnBullets.add(new BasicBulletType(6f, 56){{
-                            homingPower = 0.19f;
+                            homingPower = 0.4f;
                             homingDelay = 4f;
+                            homingRange = 120f;
                             width = 14f;
                             height = 18f;
                             lifetime = 80f;
@@ -2329,10 +2334,11 @@ public class TerraUnitTypes {
                     x = -118f / 4f;
                     shootY = 12.5f;
                     reload = 90f;
+                    shootCone = 15f;
                     recoil = 5f;
                     shake = 2f;
                     ejectEffect = Fx.casing4;
-                    shootSound = Sounds.shootReign;
+                    shootSound = Sounds.shootArtillerySapBig;
     
                     bullet = new ArtilleryBulletType(3f, 70){{
                         despawnSound = Sounds.explosionArtilleryShockBig;
@@ -2385,13 +2391,10 @@ public class TerraUnitTypes {
                             fragBullets = 2;
                             fragBullet = new FancyLaserBulletType() {{
                                 damage = 65f;
-                                // sideAngle = 5f;
-                                // sideWidth = 1f;
-                                // sideLength = 50f;
-                                healPercent = 6f;
+                                healPercent = 2f;
                                 collidesTeam = true;
                                 width = 24f;
-                                length = 175f;
+                                length = 125f;
                                 hitColor = lightningColor = Pal.heal;
                                 shootEffect = Fx.colorSpark;
                                 status = StatusEffects.electrified;
