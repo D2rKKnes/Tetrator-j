@@ -2352,7 +2352,7 @@ public class TerraUnitTypes {
                 }},
                 new Weapon("terra-mutilation-gun"){{
                     top = false;
-                    // mirror = false;
+                    mirror = false;
                     // flipSprite = true;
                     y = -0.25f;
                     x = -118f / 4f;
