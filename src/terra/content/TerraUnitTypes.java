@@ -1988,9 +1988,9 @@ public class TerraUnitTypes {
             legSpeed = 0.18f;
             legLength = 21f;
             legBaseOffset = 10f;
-            legMoveSpace = 1.2f;
+            legMoveSpace = 1.1f;
             legForwardScl = 0.8f;
-            legExtension = 2f;
+            legExtension = -6f;
             legSplashDamage = 115;
             legSplashRange = 60;
             hovering = true;
@@ -2414,8 +2414,8 @@ public class TerraUnitTypes {
                         backColor = Pal.bulletYellowBack;
                         frontColor = Pal.bulletYellow;
                         fragBullets = 14;
-                        fragBullet = new BulletType(5, 33){{
-                            lifetime = 30f;
+                        fragBullet = new BasicBulletType(5, 33){{
+                            lifetime = 17f;
                             collidesAir = false;
                             armorMultiplier = 0.2f;
                         }};
@@ -2465,7 +2465,7 @@ public class TerraUnitTypes {
                     shootY = 0f;
                     shootSound = Sounds.shootMissileLarge;
                     shootCone = 360f;
-                    reload = 180f;
+                    reload = 240f;
                     rotate = true;
                     rotateSpeed = 0.4f;
                     rotationLimit = 25f;
