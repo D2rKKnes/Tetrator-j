@@ -2350,10 +2350,10 @@ public class TerraUnitTypes {
                         buildingDamageMultiplier = 1.3f;
                     }};
                 }},
-                new Weapon("terra-mutilation-megagun"){{
-                    top = false;
-                    mirror = false;
-                    flipSprite = true;
+                new Weapon("terra-mutilation-gun"){{
+                    // top = false;
+                    // mirror = false;
+                    // flipSprite = true;
                     y = -0.25f;
                     x = -118f / 4f;
                     shootY = 12.5f;
