@@ -1928,7 +1928,7 @@ public class TerraUnitTypes {
             );
             abilities.addAll(
                 new RegenAbility(){{amount = 2f;}},
-                new ForceFieldAbility(90f, 0.8f, 5000f, 60f * 4, 7, 0),
+                new ForceFieldAbility(90f, 1.3f, 2000f, 60f * 4, 7, 0),
                 new SappingFieldAbility(TerraStatusEffects.sunBurn, 4.5f * 60f, 6 * 60f, 18f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
                     color(e.color);
                     stroke(e.fout() * 3f);
@@ -1941,90 +1941,12 @@ public class TerraUnitTypes {
                     });
                 })),
                 new LiquidExplodeAbility(){{liquid = Liquids.slag;}},
-                new EnergyFieldAbility(45f, 50f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f;}}
+                new EnergyFieldAbility(45f, 50f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f; effectRadius = 3.5f;}}
             );
             drawShields = false;
             constructor = LegsUnit::create;
 
             weapons.addAll(
-                new Weapon("terra-mutilation-gun"){{
-                    top = false;
-                    mirror = false;
-                    flipSprite = true;
-                    y = -0.25f;
-                    x = -118f / 4f;
-                    shootY = 12.5f;
-                    reload = 90f;
-                    shootCone = 15f;
-                    recoil = 5f;
-                    shake = 2f;
-                    ejectEffect = Fx.casing4;
-                    shootSound = Sounds.shootArtillerySapBig;
-    
-                    bullet = new ArtilleryBulletType(3f, 70){{
-                        despawnSound = Sounds.explosionArtilleryShockBig;
-                        hitEffect = Fx.sapExplosion;
-                        knockback = 0.8f;
-                        lifetime = 80f;
-                        width = height = 25f;
-                        collidesTiles = collides = true;
-                        ammoMultiplier = 4f;
-                        splashDamageRadius = 80f;
-                        splashDamage = 95f;
-                        backColor = Pal.sapBulletBack;
-                        frontColor = lightningColor = Pal.sapBullet;
-                        lightning = 5;
-                        lightningLength = 20;
-                        smokeEffect = Fx.shootBigSmoke2;
-                        hitShake = 10f;
-                        lightRadius = 40f;
-                        lightColor = Pal.sap;
-                        lightOpacity = 0.6f;
-    
-                        status = StatusEffects.sapped;
-                        statusDuration = 60f * 10;
-    
-                        fragLifeMin = 0.3f;
-                        fragBullets = 9;
-    
-                        fragBullet = new ArtilleryBulletType(2.3f, 40){{
-                            despawnSound = Sounds.explosionArtilleryShock;
-                            hitEffect = Fx.sapExplosion;
-                            knockback = 0.8f;
-                            lifetime = 90f;
-                            width = height = 20f;
-                            collidesTiles = false;
-                            splashDamageRadius = 70f;
-                            splashDamage = 50f;
-                            backColor = Color.valueOf("cf6a53");
-                            frontColor = lightningColor = Color.valueOf("ffa566");
-                            lightning = 2;
-                            lightningLength = 5;
-                            smokeEffect = Fx.shootBigSmoke2;
-                            hitShake = 5f;
-                            lightRadius = 30f;
-                            lightColor = Pal.sap;
-                            lightOpacity = 0.5f;
-    
-                            status = StatusEffects.melting;
-                            statusDuration = 60f * 5;
-
-                            fragBullets = 2;
-                            fragBullet = new FancyLaserBulletType() {{
-                                damage = 65f;
-                                healPercent = 2f;
-                                collidesTeam = true;
-                                width = 24f;
-                                length = 125f;
-                                hitColor = lightningColor = Pal.heal;
-                                shootEffect = Fx.colorSpark;
-                                status = StatusEffects.electrified;
-                                statusDuration = 150f;
-                                colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
-                            }};
-                        }};
-                    }};
-                }},
                 new Weapon("terra-mutilation-weapon"){{
                     shootSound = Sounds.shootCorvus;
                     chargeSound = Sounds.chargeCorvus;
@@ -2284,7 +2206,7 @@ public class TerraUnitTypes {
                         homingRange = 120f;
                         width = 14f;
                         height = 18f;
-                        lifetime = 80f;
+                        lifetime = 60f;
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
@@ -2295,12 +2217,13 @@ public class TerraUnitTypes {
                         status = StatusEffects.sapped;
                         statusDuration = 90f;
                         spawnBullets.add(new BasicBulletType(5f, 56){{
+                            showStats = true;
                             homingPower = 0.4f;
                             homingDelay = 4f;
                             homingRange = 120f;
                             width = 14f;
                             height = 18f;
-                            lifetime = 80f;
+                            lifetime = 60f;
                             shootEffect = Fx.sparkShoot;
                             smokeEffect = Fx.shootBigSmoke;
                             hitColor = backColor = trailColor = Pal.bulletYellowBack;
@@ -2333,7 +2256,7 @@ public class TerraUnitTypes {
                         homingRange = 120f;
                         width = 14f;
                         height = 18f;
-                        lifetime = 80f;
+                        lifetime = 60f;
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
@@ -2344,12 +2267,13 @@ public class TerraUnitTypes {
                         status = StatusEffects.sapped;
                         statusDuration = 90f;
                         spawnBullets.add(new BasicBulletType(6f, 56){{
+                            showStats = true;
                             homingPower = 0.4f;
                             homingDelay = 4f;
                             homingRange = 120f;
                             width = 14f;
                             height = 18f;
-                            lifetime = 80f;
+                            lifetime = 60f;
                             shootEffect = Fx.sparkShoot;
                             smokeEffect = Fx.shootBigSmoke;
                             hitColor = backColor = trailColor = Pal.bulletYellowBack;
@@ -2424,6 +2348,91 @@ public class TerraUnitTypes {
                         keepVelocity = false;
                         hittable = false;
                         buildingDamageMultiplier = 1.3f;
+                    }};
+                }},
+                new Weapon("terra-mutilation-gun"){{
+                    top = false;
+                    mirror = false;
+                    flipSprite = true;
+                    y = -0.25f;
+                    x = -118f / 4f;
+                }},
+                new Weapon("terra-mutilation-gun"){{
+                    top = false;
+                    mirror = false;
+                    flipSprite = true;
+                    y = -0.25f;
+                    x = -118f / 4f;
+                    shootY = 12.5f;
+                    reload = 90f;
+                    shootCone = 15f;
+                    recoil = 5f;
+                    shake = 2f;
+                    ejectEffect = Fx.casing4;
+                    shootSound = Sounds.shootArtillerySapBig;
+    
+                    bullet = new ArtilleryBulletType(3f, 70){{
+                        despawnSound = Sounds.explosionArtilleryShockBig;
+                        hitEffect = Fx.sapExplosion;
+                        knockback = 0.8f;
+                        lifetime = 80f;
+                        width = height = 25f;
+                        collidesTiles = collides = true;
+                        ammoMultiplier = 4f;
+                        splashDamageRadius = 80f;
+                        splashDamage = 95f;
+                        backColor = Pal.sapBulletBack;
+                        frontColor = lightningColor = Pal.sapBullet;
+                        lightning = 5;
+                        lightningLength = 20;
+                        smokeEffect = Fx.shootBigSmoke2;
+                        hitShake = 10f;
+                        lightRadius = 40f;
+                        lightColor = Pal.sap;
+                        lightOpacity = 0.6f;
+    
+                        status = StatusEffects.sapped;
+                        statusDuration = 60f * 10;
+    
+                        fragLifeMin = 0.3f;
+                        fragBullets = 7;
+    
+                        fragBullet = new ArtilleryBulletType(2.3f, 40){{
+                            despawnSound = Sounds.explosionArtilleryShock;
+                            hitEffect = Fx.sapExplosion;
+                            knockback = 0.8f;
+                            lifetime = 90f;
+                            width = height = 20f;
+                            collidesTiles = false;
+                            splashDamageRadius = 70f;
+                            splashDamage = 50f;
+                            backColor = Color.valueOf("cf6a53");
+                            frontColor = lightningColor = Color.valueOf("ffa566");
+                            lightning = 2;
+                            lightningLength = 5;
+                            smokeEffect = Fx.shootBigSmoke2;
+                            hitShake = 5f;
+                            lightRadius = 30f;
+                            lightColor = Pal.sap;
+                            lightOpacity = 0.5f;
+    
+                            status = StatusEffects.melting;
+                            statusDuration = 60f * 5;
+
+                            fragBullets = 2;
+                            fragBullet = new LaserBulletType() {{
+                                damage = 65f;
+                                healPercent = 2f;
+                                collidesTeam = true;
+                                width = 24f;
+                                length = 125f;
+                                hitColor = lightningColor = Pal.heal;
+                                shootEffect = Fx.colorSpark;
+                                status = StatusEffects.electrified;
+                                statusDuration = 150f;
+                                colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
+                            }};
+                        }};
                     }};
                 }}
             );
