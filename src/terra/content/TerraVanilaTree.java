@@ -91,7 +91,7 @@ public class TerraVanilaTree{
             node(TerraSectorPresets.verilus, Seq.with(new Research(coreRay)), () -> {});
         });
         vanillaNode(ruinousShores, () -> {
-            node(TerraSectorPresets.noLand, Seq.with(new Research(metaglassWallLarge)), () -> {});
+            node(TerraSectorPresets.noLand, Seq.with(new SectorComplete(fungalPass), new Research(metaglassWallLarge)), () -> {});
         });
         vanillaNode(airFactory, () -> {
             node(alpha, () -> {
