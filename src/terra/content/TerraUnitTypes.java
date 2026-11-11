@@ -1893,7 +1893,7 @@ public class TerraUnitTypes {
 
         mutilation = new UnitType("mutilation"){{
             hitSize = 32f;
-            health = 100128f;
+            health = 100000f;
             armor = 122f;
             stepShake = 2.5f;
             rotateSpeed = 1.3f;
@@ -1904,8 +1904,8 @@ public class TerraUnitTypes {
             stepSoundPitch = 0.8f;
 
             legCount = 6;
-            legSpeed = 0.15f;
-            legLength = 20f;
+            legSpeed = 0.18f;
+            legLength = 24f;
             legBaseOffset = 10f;
             legMoveSpace = 1.2f;
             legForwardScl = 0.8f;
@@ -1917,9 +1917,9 @@ public class TerraUnitTypes {
 
             speed = 0.2f;
 
-            mineTier = 5;
-            mineSpeed = 3f;
-            mineWalls = true;
+            // mineTier = 5;
+            // mineSpeed = 3f;
+            // mineWalls = true;
 
             drawShields = false;
             constructor = LegsUnit::create;
@@ -2065,8 +2065,8 @@ public class TerraUnitTypes {
                     }};
                 }},
                 new Weapon("terra-mutilation-large-mount"){{
-                    y = -62f / 4f;
-                    x = -22.5f / 4f;
+                    x = -62f / 4f;
+                    y = -22.5f / 4f;
                     shootY = 7f;
                     reload = 50;
                     shake = 4f;
@@ -2074,6 +2074,7 @@ public class TerraUnitTypes {
                     ejectEffect = Fx.casing1;
                     shootSound = Sounds.shootToxopidShotgun;
                     shootSoundVolume = 0.8f;
+                    mirror = false;
                     rotate = true;
                     shadow = 12f;
                     recoil = 3f;
@@ -2094,49 +2095,41 @@ public class TerraUnitTypes {
                         shootEffect = smokeEffect = Fx.sparkShoot;
                         status = StatusEffects.sapped;
                         statusDuration = 180f;
-                        int count = 6;
+                        int count = 5;
                         for(int j = 0; j < count; j++){
-                            int s = j;
-                            for(int i : Mathf.signs){
-                                float fin = 0.05f + (j + 1) / (float)count;
-                                float spd = 10f;
-                                float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
-                                boolean show = j == 0 && i > 0;
-                                spawnBullets.add(new BasicBulletType(spd * fin, 50){{
-                                    drag = 0.002f;
-                                    width = 9f;
-                                    height = 8f;
-                                    lifetime = life + 5f;
-                                    weaveRandom = false;
-                                    hitSize = 5f;
-                                    showStats = show;
-                                    hitColor = backColor = trailColor = Pal.heal;
-                                    frontColor = Color.white;
-                                    trailWidth = 2.5f;
-                                    trailLength = 5;
-                                    weaveScale = (3f + s/2f) / 1.2f;
-                                    weaveMag = i * (4f - fin * 2f);
-    
-                                    splashDamage = 75f;
-                                    splashDamageRadius = 30f;
-                                    healPercent = 0.5f;
-                                    collidesTeam = true;
-                                    despawnEffect = hitEffect = new ExplosionEffect(){{
-                                        lifetime = 50f;
-                                        waveStroke = 4f;
-                                        waveColor = sparkColor = trailColor;
-                                        waveRad = 30f;
-                                        smokeSize = 7f;
-                                        smokes = 6;
-                                        smokeSizeBase = 0f;
-                                        smokeColor = trailColor;
-                                        sparks = 5;
-                                        sparkRad = 30f;
-                                        sparkLen = 3f;
-                                        sparkStroke = 1.5f;
-                                    }};
-                                }});
-                            }
+                            float fin = 0.05f + (j + 1) / (float)count;
+                            float spd = 10f;
+                            float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
+                            boolean show = j == 0;
+                            spawnBullets.add(new BasicBulletType(spd * fin, 50){{
+                                drag = 0.002f;
+                                width = 9f;
+                                height = 8f;
+                                lifetime = life + 5f;
+                                weaveRandom = false;
+                                hitSize = 5f;
+                                showStats = show;
+                                hitColor = backColor = trailColor = Pal.heal;
+                                frontColor = Color.white;
+                                trailWidth = 2.5f;
+                                trailLength = 5;
+
+                                splashDamage = 75f;
+                                splashDamageRadius = 30f;
+                                healPercent = 0.5f;
+                                collidesTeam = true;
+                                despawnEffect = hitEffect = new ExplosionEffect(){{
+                                    lifetime = 50f;
+                                    waveStroke = 4f;
+                                    waveColor = sparkColor = trailColor;
+                                    waveRad = 30f;
+                                    smokes = 0;
+                                    sparks = 5;
+                                    sparkRad = 30f;
+                                    sparkLen = 3f;
+                                    sparkStroke = 1.5f;
+                                }};
+                            }});
                         }
                     }};
                 }},
@@ -2181,7 +2174,7 @@ public class TerraUnitTypes {
                     reload = 40f;
                     baseRotation = -30f;
                     layerOffset = -0.001f;
-                    inaccuracy = 25f;
+                    inaccuracy = 11f;
                     shootCone = 360f;
     
                     bullet = new BasicBulletType(6f, 56){{
@@ -2228,7 +2221,7 @@ public class TerraUnitTypes {
                     reload = 30f;
                     baseRotation = -45f;
                     layerOffset = -0.001f;
-                    inaccuracy = 20f;
+                    inaccuracy = 8f;
                     shootCone = 360f;
     
                     bullet = new BasicBulletType(6f, 56){{
@@ -2326,6 +2319,86 @@ public class TerraUnitTypes {
                         keepVelocity = false;
                         hittable = false;
                         buildingDamageMultiplier = 1.3f;
+                    }};
+                }},
+                new Weapon("terra-mutilation-gun"){{
+                    top = false;
+                    mirror = false;
+                    flipSprite = true;
+                    y = -0.25f;
+                    x = -118f / 4f;
+                    shootY = 12.5f;
+                    reload = 90f;
+                    recoil = 5f;
+                    shake = 2f;
+                    ejectEffect = Fx.casing4;
+                    shootSound = Sounds.shootReign;
+    
+                    bullet = new ArtilleryBulletType(3f, 70){{
+                        despawnSound = Sounds.explosionArtilleryShockBig;
+                        hitEffect = Fx.sapExplosion;
+                        knockback = 0.8f;
+                        lifetime = 80f;
+                        width = height = 25f;
+                        collidesTiles = collides = true;
+                        ammoMultiplier = 4f;
+                        splashDamageRadius = 80f;
+                        splashDamage = 95f;
+                        backColor = Pal.sapBulletBack;
+                        frontColor = lightningColor = Pal.sapBullet;
+                        lightning = 5;
+                        lightningLength = 20;
+                        smokeEffect = Fx.shootBigSmoke2;
+                        hitShake = 10f;
+                        lightRadius = 40f;
+                        lightColor = Pal.sap;
+                        lightOpacity = 0.6f;
+    
+                        status = StatusEffects.sapped;
+                        statusDuration = 60f * 10;
+    
+                        fragLifeMin = 0.3f;
+                        fragBullets = 9;
+    
+                        fragBullet = new ArtilleryBulletType(2.3f, 40){{
+                            despawnSound = Sounds.explosionArtilleryShock;
+                            hitEffect = Fx.sapExplosion;
+                            knockback = 0.8f;
+                            lifetime = 90f;
+                            width = height = 20f;
+                            collidesTiles = false;
+                            splashDamageRadius = 70f;
+                            splashDamage = 50f;
+                            backColor = Color.valueOf("cf6a53");
+                            frontColor = lightningColor = Color.valueOf("ffa566");
+                            lightning = 2;
+                            lightningLength = 5;
+                            smokeEffect = Fx.shootBigSmoke2;
+                            hitShake = 5f;
+                            lightRadius = 30f;
+                            lightColor = Pal.sap;
+                            lightOpacity = 0.5f;
+    
+                            status = StatusEffects.melting;
+                            statusDuration = 60f * 5;
+
+                            fragBullets = 2;
+                            fragBullet = new FancyLaserBulletType() {{
+                                damage = 65f;
+                                // sideAngle = 5f;
+                                // sideWidth = 1f;
+                                // sideLength = 50f;
+                                healPercent = 6f;
+                                collidesTeam = true;
+                                width = 24f;
+                                length = 175f;
+                                hitColor = lightningColor = Pal.heal;
+                                shootEffect = Fx.colorSpark;
+                                status = StatusEffects.electrified;
+                                statusDuration = 150f;
+                                colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
+                            }};
+                        }};
                     }};
                 }}
             );
