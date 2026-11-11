@@ -1904,28 +1904,35 @@ public class TerraUnitTypes {
             stepSoundPitch = 0.8f;
 
             legCount = 6;
-            legLength = 19f;
-            legBaseOffset = 11f;
-            legMoveSpace = 1.5f;
-            legForwardScl = 0.58f;
+            legSpeed = 0.15f;
+            legLength = 20f;
+            legBaseOffset = 10f;
+            legMoveSpace = 1.2f;
+            legForwardScl = 0.8f;
+            legSplashDamage = 115;
+            legSplashRange = 60;
             hovering = true;
             shadowElevation = 0.2f;
             groundLayer = Layer.legUnit;
 
             speed = 0.2f;
 
+            mineTier = 5;
+            mineSpeed = 3f;
+            mineWalls = true;
+
             drawShields = false;
             constructor = LegsUnit::create;
 
             weapons.addAll(
-                new Weapon("mutilation-weapon"){{
+                new Weapon("terra-mutilation-weapon"){{
                     shootSound = Sounds.shootCorvus;
                     chargeSound = Sounds.chargeCorvus;
                     soundPitchMin = 1f;
                     top = false;
                     mirror = false;
                     shake = 14f;
-                    shootY = 2f;
+                    shootY = 4f;
                     x = y = 0;
                     reload = 330f;
                     recoil = 0f;
@@ -1938,8 +1945,8 @@ public class TerraUnitTypes {
                     parentizeEffects = true;
     
                     bullet = new LaserBulletType(){{
-                        length = 460f;
-                        damage = 560f;
+                        length = 480f;
+                        damage = 600f;
                         width = 75f;
     
                         lifetime = 65f;
@@ -1965,13 +1972,13 @@ public class TerraUnitTypes {
                     }};
                 }},
                 new Weapon("terra-heal-hidden-launcher"){{
-                    reload = 125f + (6f * 7f);
+                    reload = 150f + (6f * 7f);
                     shootY = 0f;
                     x = -37 / 4f;
                     y = -78f / 4;
                     rotate = false;
                     shootCone = 360f;
-                    baseRotation = 180f - 45f;
+                    baseRotation = 180f + 45f;
                     mirror = false;
                     alternate = false;
                     layerOffset = -0.001f;
@@ -2043,26 +2050,104 @@ public class TerraUnitTypes {
                 }},
                 new Weapon("heal-weapon-mount"){{
                     shootSound = Sounds.shootLaser;
-                    reload = 10f;
+                    reload = 5f;
                     x = -29f / 4f;
                     y = -6f / 4f;
                     rotate = true;
                     mirror = false;
+                    inaccuracy = 7f;
                     bullet = new LaserBoltBulletType(5.8f, 25){{
                         lifetime = 40f;
-                        healPercent = 2.5f;
+                        healPercent = 1.5f;
                         collidesTeam = true;
                         backColor = Pal.heal;
                         frontColor = Color.white;
+                    }};
+                }},
+                new Weapon("terra-mutilation-large-mount"){{
+                    y = -62f / 4f;
+                    x = -22.5f / 4f;
+                    shootY = 7f;
+                    reload = 50;
+                    shake = 4f;
+                    rotateSpeed = 2f;
+                    ejectEffect = Fx.casing1;
+                    shootSound = Sounds.shootToxopidShotgun;
+                    shootSoundVolume = 0.8f;
+                    rotate = true;
+                    shadow = 12f;
+                    recoil = 3f;
+    
+                    shoot = new ShootSpread(3, 17f);
+    
+                    bullet = new ShrapnelBulletType(){{
+                        length = 90f;
+                        damage = 110f;
+                        width = 25f;
+                        serrationLenScl = 7f;
+                        serrationSpaceOffset = 60f;
+                        serrationFadeOffset = 0f;
+                        serrations = 10;
+                        serrationWidth = 6f;
+                        fromColor = Pal.sapBullet;
+                        toColor = Pal.sapBulletBack;
+                        shootEffect = smokeEffect = Fx.sparkShoot;
+                        status = StatusEffects.sapped;
+                        statusDuration = 180f;
+                        int count = 6;
+                        for(int j = 0; j < count; j++){
+                            int s = j;
+                            for(int i : Mathf.signs){
+                                float fin = 0.05f + (j + 1) / (float)count;
+                                float spd = 10f;
+                                float life = lifetime / Mathf.lerp(fin, 1f, 0.5f);
+                                boolean show = j == 0 && i > 0;
+                                spawnBullets.add(new BasicBulletType(spd * fin, 50){{
+                                    drag = 0.002f;
+                                    width = 9f;
+                                    height = 8f;
+                                    lifetime = life + 5f;
+                                    weaveRandom = false;
+                                    hitSize = 5f;
+                                    showStats = show;
+                                    hitColor = backColor = trailColor = Pal.heal;
+                                    frontColor = Color.white;
+                                    trailWidth = 2.5f;
+                                    trailLength = 5;
+                                    weaveScale = (3f + s/2f) / 1.2f;
+                                    weaveMag = i * (4f - fin * 2f);
+    
+                                    splashDamage = 75f;
+                                    splashDamageRadius = 30f;
+                                    healPercent = 0.5f;
+                                    collidesTeam = true;
+                                    despawnEffect = hitEffect = new ExplosionEffect(){{
+                                        lifetime = 50f;
+                                        waveStroke = 4f;
+                                        waveColor = sparkColor = trailColor;
+                                        waveRad = 30f;
+                                        smokeSize = 7f;
+                                        smokes = 6;
+                                        smokeSizeBase = 0f;
+                                        smokeColor = trailColor;
+                                        sparks = 5;
+                                        sparkRad = 30f;
+                                        sparkLen = 3f;
+                                        sparkStroke = 1.5f;
+                                    }};
+                                }});
+                            }
+                        }
                     }};
                 }},
                 new Weapon("atrax-weapon"){{
                     x = -76f / 4f;
                     y = 55f / 4f;
                     shootY = 4f;
-                    reload = 80f;
+                    reload = 130f;
                     mirror = false;
                     alternate = false;
+                    flipSprite = true;
                     shootSound = Sounds.shootAtrax;
                     rotate = true;
                     rotationLimit = 35f;
@@ -2071,8 +2156,8 @@ public class TerraUnitTypes {
                     inaccuracy = 5f;
     
                     shoot = new ShootPattern() {{
-                        shots = 25;
-                        shotDelay = 3;
+                        shots = 35;
+                        shotDelay = 2;
                     }};
         
                     bullet = new LiquidBulletType(Liquids.slag){{
@@ -2085,14 +2170,110 @@ public class TerraUnitTypes {
                         despawnHit = true;
                     }};
                 }},
+                new Weapon("terra-mutilation-mount"){{
+                    shootSound = Sounds.shootSpectre;
+                    ejectEffect = Fx.casing3;
+                    y = 12.5f / 4f;
+                    x = 98f / 4f;
+                    shootY = 7;
+                    recoil = 3f;
+                    mirror = false;
+                    reload = 40f;
+                    baseRotation = -30f;
+                    layerOffset = -0.001f;
+                    inaccuracy = 25f;
+                    shootCone = 360f;
+    
+                    bullet = new BasicBulletType(6f, 56){{
+                        homingPower = 0.19f;
+                        homingDelay = 4f;
+                        width = 14f;
+                        height = 18f;
+                        lifetime = 80f;
+                        shootEffect = Fx.sparkShoot;
+                        smokeEffect = Fx.shootBigSmoke;
+                        hitColor = backColor = trailColor = Pal.sapBulletBack;
+                        frontColor = Color.sapBullet;
+                        trailWidth = 1.5f;
+                        trailLength = 5;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        status = StatusEffects.sapped;
+                        statusDuration = 90f;
+                        spawnBullets.add(new BasicBulletType(6f, 56){{
+                            homingPower = 0.19f;
+                            homingDelay = 4f;
+                            width = 14f;
+                            height = 18f;
+                            lifetime = 80f;
+                            shootEffect = Fx.sparkShoot;
+                            smokeEffect = Fx.shootBigSmoke;
+                            hitColor = backColor = trailColor = Pal.bulletYellowBack;
+                            frontColor = Color.bulletYellow;
+                            trailWidth = 1.5f;
+                            trailLength = 5;
+                            hitEffect = despawnEffect = Fx.hitBulletColor;
+                            status = StatusEffects.melting;
+                            statusDuration = 90f;
+                        }});
+                    }};
+                }},
+                new Weapon("terra-mutilation-mount"){{
+                    shootSound = Sounds.shootSpectre;
+                    ejectEffect = Fx.casing3;
+                    y = -30.5f / 4f;
+                    x = 98f / 4f;
+                    shootY = 7;
+                    recoil = 3f;
+                    mirror = false;
+                    reload = 30f;
+                    baseRotation = -45f;
+                    layerOffset = -0.001f;
+                    inaccuracy = 20f;
+                    shootCone = 360f;
+    
+                    bullet = new BasicBulletType(6f, 56){{
+                        homingPower = 0.19f;
+                        homingDelay = 4f;
+                        width = 14f;
+                        height = 18f;
+                        lifetime = 80f;
+                        shootEffect = Fx.sparkShoot;
+                        smokeEffect = Fx.shootBigSmoke;
+                        hitColor = backColor = trailColor = Pal.sapBulletBack;
+                        frontColor = Color.sapBullet;
+                        trailWidth = 1.5f;
+                        trailLength = 5;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        status = StatusEffects.sapped;
+                        statusDuration = 90f;
+                        spawnBullets.add(new BasicBulletType(6f, 56){{
+                            homingPower = 0.19f;
+                            homingDelay = 4f;
+                            width = 14f;
+                            height = 18f;
+                            lifetime = 80f;
+                            shootEffect = Fx.sparkShoot;
+                            smokeEffect = Fx.shootBigSmoke;
+                            hitColor = backColor = trailColor = Pal.bulletYellowBack;
+                            frontColor = Color.bulletYellow;
+                            trailWidth = 1.5f;
+                            trailLength = 5;
+                            hitEffect = despawnEffect = Fx.hitBulletColor;
+                            status = StatusEffects.melting;
+                            statusDuration = 90f;
+                        }});
+                    }};
+                }},
                 new Weapon("artillery-mount"){{
                     y = 21f / 4f;
                     x = 40f / 4f;
                     reload = 40f;
-                    recoil = 4f;
+                    recoil = 2f;
                     shake = 2f;
                     mirror = false;
                     flipSprite = false;
+                    rotate = true;
+                    rotateSpeed = 5f;
                     ejectEffect = Fx.casing2;
                     shootSound = Sounds.shootArtillery;
                     bullet = new ArtilleryBulletType(2f, 50, "shell"){{
