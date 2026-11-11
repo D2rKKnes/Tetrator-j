@@ -1956,10 +1956,10 @@ public class TerraUnitTypes {
                     shake = 14f;
                     shootY = 4f;
                     x = y = 0;
-                    reload = 330f;
+                    reload = 300f;
                     recoil = 0f;
     
-                    cooldownTime = 330f;
+                    cooldownTime = 300f;
     
                     shootStatusDuration = 60f * 2f;
                     shootStatus = StatusEffects.slow;
@@ -1972,6 +1972,9 @@ public class TerraUnitTypes {
                         width = 75f;
     
                         lifetime = 65f;
+
+                        status = StatusEffects.electrified;
+                        statusDuration = 4f * 60f;
     
                         lightningSpacing = 35f;
                         lightningLength = 5;
@@ -2072,15 +2075,20 @@ public class TerraUnitTypes {
                 }},
                 new Weapon("heal-weapon-mount"){{
                     shootSound = Sounds.shootLaser;
-                    reload = 5f;
+                    reload = 10f;
                     x = -29f / 4f;
                     y = -6f / 4f;
                     rotate = true;
                     mirror = false;
                     inaccuracy = 7f;
+                    shoot = new ShootPattern() {{
+                        shots = 5;
+                        shotDelay = 0.2f;
+                    }};
                     bullet = new LaserBoltBulletType(5.8f, 25){{
-                        lifetime = 40f;
-                        healPercent = 1.5f;
+                        lifeScaleRandMin = 0.65f;
+                        lifetime = 50f;
+                        healPercent = 1f;
                         collidesTeam = true;
                         backColor = Pal.heal;
                         frontColor = Color.white;
@@ -2207,6 +2215,7 @@ public class TerraUnitTypes {
                         width = 14f;
                         height = 18f;
                         lifetime = 60f;
+                        lifesteal = 1.2f;
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
@@ -2257,6 +2266,7 @@ public class TerraUnitTypes {
                         width = 14f;
                         height = 18f;
                         lifetime = 60f;
+                        lifesteal = 1.2f;
                         shootEffect = Fx.sparkShoot;
                         smokeEffect = Fx.shootBigSmoke;
                         hitColor = backColor = trailColor = Pal.sapBulletBack;
@@ -2353,12 +2363,11 @@ public class TerraUnitTypes {
                 new Weapon("terra-mutilation-gun"){{
                     top = false;
                     mirror = false;
-                    // flipSprite = true;
                     y = -0.25f;
                     x = -118f / 4f;
                     shootY = 12.5f;
-                    reload = 90f;
-                    shootCone = 15f;
+                    reload = 45f;
+                    shootCone = 18f;
                     recoil = 5f;
                     shake = 2f;
                     ejectEffect = Fx.casing4;
@@ -2368,7 +2377,8 @@ public class TerraUnitTypes {
                         despawnSound = Sounds.explosionArtilleryShockBig;
                         hitEffect = Fx.sapExplosion;
                         knockback = 0.8f;
-                        lifetime = 80f;
+                        lifetime = 90f;
+                        lifeScaleRandMin = 0.8f;
                         width = height = 25f;
                         collidesTiles = collides = true;
                         ammoMultiplier = 4f;
