@@ -1891,10 +1891,91 @@ public class TerraUnitTypes {
             }
         };
 
+        
+        eclipseMissile = new MissileUnitType("eclipse-missile"){{
+            speed = 3.44f;
+            maxRange = 6f;
+            lifetime = 78f;
+            hitSize = 6f;
+            outlineColor = Pal.darkerMetal;
+            engineColor = trailColor = TerraStatusEffects.sunBurn.color;
+            engineLayer = Layer.effect;
+            engineSize = 1.5f;
+            engineOffset = 10f;
+            rotateSpeed = 2.3f;
+            trailLength = 15;
+            missileAccelTime = 0f;
+            lowAltitude = false;
+            loopSound = Sounds.loopMissileTrail;
+            loopSoundVolume = 0.5f;
+            deathSound = Sounds.explosionMissile;
+            targetAir = true;
+            targetUnderBlocks = false;
+
+            fogRadius = 9f;
+
+            health = 500;
+            armor = 7;
+            hidden = false;
+
+            abilities.add(new MoveEffectAbility(){{
+                effect = Fx.missileTrailSmokeSmall;
+                rotation = 180f;
+                y = -9f;
+                color = Color.grays(0.6f).lerp(trailColor, 0.4f).a(0.4f);
+                interval = 5f;
+            }});
+
+            weapons.add(new Weapon(){{
+                shootCone = 360f;
+                mirror = false;
+                reload = 1f;
+                deathExplosionEffect = Fx.massiveExplosion;
+                shootOnDeath = true;
+                shake = 3f;
+                bullet = new ExplosionBulletType(246f, 9f * 8){{
+                    hitColor = TerraStatusEffects.sunBurn.color;
+                    shootEffect = new WrapEffect(Fx.titanExplosionSmall, hitColor);
+                    smokeEffect = new WrapEffect(Fx.titanSmokeSmall, hitColor);
+                    collidesAir = true;
+                    status = StatusEffects.blasted;
+                    statusDuration = 200f;
+                    armorMultiplier = 0.5f;
+
+                    incendAmount = 5;
+                    incendChance = 1f;
+                    incendSpread = 3f * 8f;
+                    
+                    fragBullets = 20;
+                    fragLifeMin = 0.2f;
+                    fragOffsetMax = 1.6f;
+                    fragRandomSpread = 50f;
+                    fragBullet = new BasicBulletType(6.3f, 0){{
+                        lifetime = 19f;
+                        width = height = 8;
+                        shrinkX = shrinkY = 0.33f;
+                        incendAmount = 2;
+                        incendChance = 1f;
+                        incendSpread = 2f * 8f;
+                        trailChance = 1f;
+                        trailParam = 4f;
+                        trailEffect = Fx.ballfire;
+                        sprite = "terra-plasma";
+                        frontColor = Pal.lightFlame;
+                        backColor = hitColor = trailColor = Pal.darkFlame;
+                        hitEffect = despawnEffect = Fx.none;
+                        collides = reflectable = hittable = false;
+                        despawnHit = true;
+                    }};
+                }};
+            }});
+        }};
+        
         mutilation = new UnitType("mutilation"){{
+            hideDetails = false;
             hitSize = 32f;
             health = 100000f;
-            armor = 122f;
+            armor = 62f;
             stepShake = 2.5f;
             rotateSpeed = 1.3f;
             drownTimeMultiplier = 2f;
@@ -1909,6 +1990,7 @@ public class TerraUnitTypes {
             legBaseOffset = 10f;
             legMoveSpace = 1.2f;
             legForwardScl = 0.8f;
+            legExtension = 2f;
             legSplashDamage = 115;
             legSplashRange = 60;
             hovering = true;
@@ -1921,6 +2003,9 @@ public class TerraUnitTypes {
             // mineSpeed = 3f;
             // mineWalls = true;
 
+            buildSpeed = 5f;
+            buildBeamOffset = 0f;
+
             immunities = ObjectSet.with(
                 StatusEffects.sapped, StatusEffects.electrified, StatusEffects.shocked, TerraStatusEffects.energyOverload, TerraStatusEffects.zapped, 
                 StatusEffects.unmoving, StatusEffects.burning, StatusEffects.melting, TerraStatusEffects.shieldDamage, TerraStatusEffects.sunBurn,
@@ -1928,8 +2013,18 @@ public class TerraUnitTypes {
             );
             abilities.addAll(
                 new RegenAbility(){{amount = 2f;}},
-                new ForceFieldAbility(90f, 1.3f, 2000f, 60f * 4, 7, 0),
-                new SappingFieldAbility(TerraStatusEffects.sunBurn, 4.5f * 60f, 6 * 60f, 18f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
+                new ForceFieldAbility(90f, 1.3f, 2000f, 60f * 4, 7, 45f),
+                new StatusFieldAbility(TerraStatusEffects.regeneration, 150f, 360f, 15f * 8f){{
+                    color = Pal.heal; 
+                    activeEffect = new Effect(40, e -> {
+                        color(e.color);
+                        stroke(e.fout());
+                        Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
+                        stroke(e.fout() * 3f);
+                        Lines.circle(e.x, e.y, 15f * 8f);
+                    });
+                }},
+                new SappingFieldAbility(TerraStatusEffects.sunBurn, 300f, 240f, 18f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
                     color(e.color);
                     stroke(e.fout() * 3f);
                     Lines.circle(e.x, e.y, 18f * 8f);
@@ -1941,7 +2036,7 @@ public class TerraUnitTypes {
                     });
                 })),
                 new LiquidExplodeAbility(){{liquid = Liquids.slag;}},
-                new EnergyFieldAbility(45f, 50f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f; effectRadius = 3f;}}
+                new EnergyFieldAbility(45f, 30f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f; effectRadius = 3f; status = TerraStatusEffects.zapped;}}
             );
             drawShields = false;
             constructor = LegsUnit::create;
@@ -1976,18 +2071,18 @@ public class TerraUnitTypes {
                         status = StatusEffects.electrified;
                         statusDuration = 4f * 60f;
     
-                        lightningSpacing = 35f;
-                        lightningLength = 5;
+                        lightningSpacing = 25f;
+                        lightningLength = 10;
                         lightningDelay = 1.1f;
-                        lightningLengthRand = 15;
-                        lightningDamage = 50;
+                        lightningLengthRand = 10;
+                        lightningDamage = 75;
                         lightningAngleRand = 40f;
                         largeHit = true;
                         lightColor = lightningColor = Pal.heal;
     
                         chargeEffect = Fx.greenLaserCharge;
     
-                        healPercent = 25f;
+                        healPercent = 33.3f;
                         collidesTeam = true;
     
                         sideAngle = 15f;
@@ -2049,15 +2144,15 @@ public class TerraUnitTypes {
                 new PointDefenseWeapon("point-defense-mount"){{
                     x = 17f / 4f;
                     y = -29f / 4f;
-                    reload = 4f;
-                    targetInterval = 8f;
-                    targetSwitchInterval = 8f;
+                    reload = 3f;
+                    targetInterval = 6f;
+                    targetSwitchInterval = 6f;
                     mirror = false;
 
                     bullet = new BulletType(){{
                         shootEffect = Fx.sparkShoot;
                         hitEffect = Fx.pointHit;
-                        maxRange = 210f;
+                        maxRange = 230f;
                         damage = 40f;
                     }};
                 }},
@@ -2065,8 +2160,8 @@ public class TerraUnitTypes {
                     x = -64 / 4f;
                     y = -85f / 4f;
                     shootY = 6f;
-                    beamWidth = 0.8f;
-                    repairSpeed = 1.4f;
+                    beamWidth = 0.9f;
+                    repairSpeed = 3f;
                     mirror = false;
     
                     bullet = new BulletType(){{
@@ -2086,7 +2181,7 @@ public class TerraUnitTypes {
                         shotDelay = 0.2f;
                     }};
                     bullet = new LaserBoltBulletType(5.8f, 25){{
-                        lifeScaleRandMin = 0.65f;
+                        lifeScaleRandMin = 0.2f;
                         lifetime = 50f;
                         healPercent = 1f;
                         collidesTeam = true;
@@ -2164,14 +2259,13 @@ public class TerraUnitTypes {
                         }
                     }};
                 }},
-                new Weapon("atrax-weapon"){{
+                new Weapon("mutilation-small-mount"){{
                     x = -76f / 4f;
                     y = 55f / 4f;
                     shootY = 4f;
                     reload = 130f;
                     mirror = false;
                     alternate = false;
-                    flipSprite = true;
                     shootSound = Sounds.shootAtrax;
                     rotate = true;
                     rotationLimit = 35f;
@@ -2185,11 +2279,11 @@ public class TerraUnitTypes {
                     }};
         
                     bullet = new LiquidBulletType(Liquids.slag){{
-                        damage = 16;
+                        damage = 26;
                         speed = 2.4f;
-                        knockback = 0.65f;
+                        knockback = 0.85f;
                         shootEffect = Fx.shootSmall;
-                        lifetime = 67f;
+                        lifetime = 72f;
                         collidesAir = false;
                         despawnHit = true;
                     }};
@@ -2303,7 +2397,6 @@ public class TerraUnitTypes {
                     recoil = 2f;
                     shake = 2f;
                     mirror = false;
-                    flipSprite = false;
                     rotate = true;
                     rotateSpeed = 5f;
                     ejectEffect = Fx.casing2;
@@ -2320,6 +2413,12 @@ public class TerraUnitTypes {
                         splashDamage = 110f;
                         backColor = Pal.bulletYellowBack;
                         frontColor = Pal.bulletYellow;
+                        fragBullets = 14;
+                        fragBullet = new BulletType(5, 33){{
+                            lifetime = 30f;
+                            collidesAir = false;
+                            armorMultiplier = 0.2f;
+                        }};
                     }};
                 }},
                 new Weapon("terra-heavy-artillery"){{
@@ -2360,6 +2459,29 @@ public class TerraUnitTypes {
                         buildingDamageMultiplier = 1.3f;
                     }};
                 }},
+                new ConstructWeapon("terra-eclipse-missile"){{
+                    x = 64f / 4f;
+                    y = 31f / 4f;
+                    shootY = 0f;
+                    shootSound = Sounds.shootMissileLarge;
+                    shootCone = 360f;
+                    reload = 180f;
+                    rotate = true;
+                    rotateSpeed = 0.4f;
+                    rotationLimit = 25f;
+                    shootCone = 15f;
+                    mirror = false;
+                    predictTarget = false;
+                    layerOffset = -0.002f;
+                    bullet = new BulletType(){{
+                        shootEffect = smokeEffect = Fx.none;
+                        //shake = 1f;
+                        speed = 0.001f;
+                        keepVelocity = false;
+                        targetMissiles = false;
+                        spawnUnit = eclipseMissile;
+                    }};
+                }},
                 new Weapon("terra-mutilation-gun"){{
                     top = false;
                     mirror = false;
@@ -2380,7 +2502,7 @@ public class TerraUnitTypes {
                         lifetime = 90f;
                         lifeScaleRandMin = 0.8f;
                         width = height = 25f;
-                        collidesTiles = collides = true;
+                        collidesTiles = collides = collidesAir = true;
                         ammoMultiplier = 4f;
                         splashDamageRadius = 80f;
                         splashDamage = 95f;
@@ -4225,84 +4347,6 @@ public class TerraUnitTypes {
                     reloadMultiplier = 0.33f;
                     status = TerraStatusEffects.radited;
                     statusDuration = 200f;
-                }};
-            }});
-        }};
-        eclipseMissile = new MissileUnitType("eclipse-missile"){{
-            speed = 3.44f;
-            maxRange = 6f;
-            lifetime = 78f;
-            hitSize = 6f;
-            outlineColor = Pal.darkerMetal;
-            engineColor = trailColor = TerraStatusEffects.sunBurn.color;
-            engineLayer = Layer.effect;
-            engineSize = 1.5f;
-            engineOffset = 10f;
-            rotateSpeed = 2.3f;
-            trailLength = 15;
-            missileAccelTime = 0f;
-            lowAltitude = false;
-            loopSound = Sounds.loopMissileTrail;
-            loopSoundVolume = 0.5f;
-            deathSound = Sounds.explosionMissile;
-            targetAir = true;
-            targetUnderBlocks = false;
-
-            fogRadius = 9f;
-
-            health = 500;
-            armor = 7;
-            hidden = false;
-
-            abilities.add(new MoveEffectAbility(){{
-                effect = Fx.missileTrailSmokeSmall;
-                rotation = 180f;
-                y = -9f;
-                color = Color.grays(0.6f).lerp(trailColor, 0.4f).a(0.4f);
-                interval = 5f;
-            }});
-
-            weapons.add(new Weapon(){{
-                shootCone = 360f;
-                mirror = false;
-                reload = 1f;
-                deathExplosionEffect = Fx.massiveExplosion;
-                shootOnDeath = true;
-                shake = 3f;
-                bullet = new ExplosionBulletType(246f, 9f * 8){{
-                    hitColor = TerraStatusEffects.sunBurn.color;
-                    shootEffect = new WrapEffect(Fx.titanExplosionSmall, hitColor);
-                    smokeEffect = new WrapEffect(Fx.titanSmokeSmall, hitColor);
-                    collidesAir = true;
-                    status = StatusEffects.blasted;
-                    statusDuration = 200f;
-                    armorMultiplier = 0.5f;
-
-                    incendAmount = 5;
-                    incendChance = 1f;
-                    incendSpread = 3f * 8f;
-                    
-                    fragBullets = 20;
-                    fragLifeMin = 0.2f;
-                    fragOffsetMax = 1.6f;
-                    fragRandomSpread = 50f;
-                    fragBullet = new BasicBulletType(6.3f, 0){{
-                        lifetime = 19f;
-                        width = height = 8;
-                        shrinkX = shrinkY = 0.33f;
-                        incendAmount = 2;
-                        incendChance = 1f;
-                        incendSpread = 2f * 8f;
-                        trailChance = 1f;
-                        trailParam = 4f;
-                        trailEffect = Fx.ballfire;
-                        sprite = "terra-plasma";
-                        frontColor = Pal.lightFlame;
-                        backColor = hitColor = trailColor = Pal.darkFlame;
-                        hitEffect = despawnEffect = Fx.none;
-                        collides = reflectable = hittable = false;
-                        despawnHit = true;
-                    }};
                 }};
             }});
         }};
