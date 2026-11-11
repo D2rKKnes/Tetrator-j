@@ -1941,7 +1941,7 @@ public class TerraUnitTypes {
                     });
                 })),
                 new LiquidExplodeAbility(){{liquid = Liquids.slag;}},
-                new EnergyFieldAbility(45f, 50f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f; effectRadius = 3.5f;}}
+                new EnergyFieldAbility(45f, 50f, 22f * 8f){{x = -21f / 4f; y = -37f / 4f; sectors = 4; maxTargets = 35; healPercent = 2f; effectRadius = 3f;}}
             );
             drawShields = false;
             constructor = LegsUnit::create;
@@ -2350,14 +2350,7 @@ public class TerraUnitTypes {
                         buildingDamageMultiplier = 1.3f;
                     }};
                 }},
-                new Weapon("terra-mutilation-gun"){{
-                    top = false;
-                    mirror = false;
-                    flipSprite = true;
-                    y = -0.25f;
-                    x = -118f / 4f;
-                }},
-                new Weapon("terra-mutilation-gun"){{
+                new Weapon("terra-mutilation-megagun"){{
                     top = false;
                     mirror = false;
                     flipSprite = true;
@@ -2420,7 +2413,7 @@ public class TerraUnitTypes {
                             statusDuration = 60f * 5;
 
                             fragBullets = 2;
-                            fragBullet = new LaserBulletType() {{
+                            fragBullet = new FancyLaserBulletType() {{
                                 damage = 65f;
                                 healPercent = 2f;
                                 collidesTeam = true;
