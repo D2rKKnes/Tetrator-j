@@ -2048,22 +2048,22 @@ public class TerraUnitTypes {
                         maxRange = 150f;
                     }};
                 }},
-                new Weapon("heal-weapon-mount"){{
-                    shootSound = Sounds.shootLaser;
-                    reload = 5f;
-                    x = -29f / 4f;
-                    y = -6f / 4f;
-                    rotate = true;
-                    mirror = false;
-                    inaccuracy = 7f;
-                    bullet = new LaserBoltBulletType(5.8f, 25){{
-                        lifetime = 40f;
-                        healPercent = 1.5f;
-                        collidesTeam = true;
-                        backColor = Pal.heal;
-                        frontColor = Color.white;
-                    }};
-                }},
+                // new Weapon("heal-weapon-mount"){{
+                //     shootSound = Sounds.shootLaser;
+                //     reload = 5f;
+                //     x = -29f / 4f;
+                //     y = -6f / 4f;
+                //     rotate = true;
+                //     mirror = false;
+                //     inaccuracy = 7f;
+                //     bullet = new LaserBoltBulletType(5.8f, 25){{
+                //         lifetime = 40f;
+                //         healPercent = 1.5f;
+                //         collidesTeam = true;
+                //         backColor = Pal.heal;
+                //         frontColor = Color.white;
+                //     }};
+                // }},
                 new Weapon("terra-mutilation-large-mount"){{
                     x = -62f / 4f;
                     y = -22.5f / 4f;
@@ -2340,69 +2340,69 @@ public class TerraUnitTypes {
                     ejectEffect = Fx.casing4;
                     shootSound = Sounds.shootArtillerySapBig;
     
-                    // bullet = new ArtilleryBulletType(3f, 70){{
-                    //     despawnSound = Sounds.explosionArtilleryShockBig;
-                    //     hitEffect = Fx.sapExplosion;
-                    //     knockback = 0.8f;
-                    //     lifetime = 80f;
-                    //     width = height = 25f;
-                    //     collidesTiles = collides = true;
-                    //     ammoMultiplier = 4f;
-                    //     splashDamageRadius = 80f;
-                    //     splashDamage = 95f;
-                    //     backColor = Pal.sapBulletBack;
-                    //     frontColor = lightningColor = Pal.sapBullet;
-                    //     lightning = 5;
-                    //     lightningLength = 20;
-                    //     smokeEffect = Fx.shootBigSmoke2;
-                    //     hitShake = 10f;
-                    //     lightRadius = 40f;
-                    //     lightColor = Pal.sap;
-                    //     lightOpacity = 0.6f;
+                    bullet = new ArtilleryBulletType(3f, 70){{
+                        despawnSound = Sounds.explosionArtilleryShockBig;
+                        hitEffect = Fx.sapExplosion;
+                        knockback = 0.8f;
+                        lifetime = 80f;
+                        width = height = 25f;
+                        collidesTiles = collides = true;
+                        ammoMultiplier = 4f;
+                        splashDamageRadius = 80f;
+                        splashDamage = 95f;
+                        backColor = Pal.sapBulletBack;
+                        frontColor = lightningColor = Pal.sapBullet;
+                        lightning = 5;
+                        lightningLength = 20;
+                        smokeEffect = Fx.shootBigSmoke2;
+                        hitShake = 10f;
+                        lightRadius = 40f;
+                        lightColor = Pal.sap;
+                        lightOpacity = 0.6f;
     
-                    //     status = StatusEffects.sapped;
-                    //     statusDuration = 60f * 10;
+                        status = StatusEffects.sapped;
+                        statusDuration = 60f * 10;
     
-                    //     fragLifeMin = 0.3f;
-                    //     fragBullets = 9;
+                        fragLifeMin = 0.3f;
+                        fragBullets = 9;
     
-                    //     fragBullet = new ArtilleryBulletType(2.3f, 40){{
-                    //         despawnSound = Sounds.explosionArtilleryShock;
-                    //         hitEffect = Fx.sapExplosion;
-                    //         knockback = 0.8f;
-                    //         lifetime = 90f;
-                    //         width = height = 20f;
-                    //         collidesTiles = false;
-                    //         splashDamageRadius = 70f;
-                    //         splashDamage = 50f;
-                    //         backColor = Color.valueOf("cf6a53");
-                    //         frontColor = lightningColor = Color.valueOf("ffa566");
-                    //         lightning = 2;
-                    //         lightningLength = 5;
-                    //         smokeEffect = Fx.shootBigSmoke2;
-                    //         hitShake = 5f;
-                    //         lightRadius = 30f;
-                    //         lightColor = Pal.sap;
-                    //         lightOpacity = 0.5f;
+                        fragBullet = new ArtilleryBulletType(2.3f, 40){{
+                            despawnSound = Sounds.explosionArtilleryShock;
+                            hitEffect = Fx.sapExplosion;
+                            knockback = 0.8f;
+                            lifetime = 90f;
+                            width = height = 20f;
+                            collidesTiles = false;
+                            splashDamageRadius = 70f;
+                            splashDamage = 50f;
+                            backColor = Color.valueOf("cf6a53");
+                            frontColor = lightningColor = Color.valueOf("ffa566");
+                            lightning = 2;
+                            lightningLength = 5;
+                            smokeEffect = Fx.shootBigSmoke2;
+                            hitShake = 5f;
+                            lightRadius = 30f;
+                            lightColor = Pal.sap;
+                            lightOpacity = 0.5f;
     
-                    //         status = StatusEffects.melting;
-                    //         statusDuration = 60f * 5;
+                            status = StatusEffects.melting;
+                            statusDuration = 60f * 5;
 
-                    //         fragBullets = 2;
-                    //         fragBullet = new FancyLaserBulletType() {{
-                    //             damage = 65f;
-                    //             healPercent = 2f;
-                    //             collidesTeam = true;
-                    //             width = 24f;
-                    //             length = 125f;
-                    //             hitColor = lightningColor = Pal.heal;
-                    //             shootEffect = Fx.colorSpark;
-                    //             status = StatusEffects.electrified;
-                    //             statusDuration = 150f;
-                    //             colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
-                    //         }};
-                    //     }};
-                    // }};
+                            fragBullets = 2;
+                            fragBullet = new FancyLaserBulletType() {{
+                                damage = 65f;
+                                healPercent = 2f;
+                                collidesTeam = true;
+                                width = 24f;
+                                length = 125f;
+                                hitColor = lightningColor = Pal.heal;
+                                shootEffect = Fx.colorSpark;
+                                status = StatusEffects.electrified;
+                                statusDuration = 150f;
+                                colors = new Color[]{Pal.heal.cpy().a(0.4f), Pal.heal, Color.white};
+                            }};
+                        }};
+                    }};
                 }}
             );
         }};
