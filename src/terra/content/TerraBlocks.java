@@ -89,7 +89,7 @@ public class TerraBlocks{
     //turrets
     flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
-    basicAssembler, advancedAssembler, coreFactory, droneCentre, debugAssembler,
+    basicAssembler, advancedAssembler, coreFactory, droneCentre, debugAssembler, debugAssembler2,
     largePayloadConveyor,
     //other
     //NOTVA =---
