@@ -1963,9 +1963,26 @@ public class TerraBlocks{
                 new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
                 new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
                 new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
-                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780))
+                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780)),
+                //other
+                new UnitPlan(TerraUnitTypes.mutilation, 60f * 1500f, with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
+                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500, TerraItems.gammaCell, 200))
             );
             consumePower(20f / 60);
+        }};
+        debugAssembler2 = new UnitCrafter("debug-assembler-2"){{
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 60));
+            size = 7;
+            liquidCapacity = 10000;
+            areaSize = 20;
+            addPlan(TerraUnitTypes.mutilation, 60f * 1500f)
+                .item(ItemStack.with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
+                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500, TerraItems.gammaCell, 200))
+                .liquid(LiquidStack.with(Liquids.cryofluid, 6f, Liquids.slag, 1.5f))
+                .payload(PayloadStack.list(UnitTypes.corvus, 1, UnitTypes.toxopid, 1, UnitTypes.reign, 1, UnitTypes.eclipse, 1, 
+                                           UnitTypes.vela, 1, UnitTypes.quad, 1, UnitTypes.sei, 1, UnitTypes.aegires, 1, 
+                                           UnitTypes.quasar, 1, UnitTypes.fortress, 1, UnitTypes.mega, 1));
+            consumePower(5000f / 60);
         }};
         /*coreFactory = new UnitFactory("core-factory"){{
             requirements(Category.units, with(Items.silicon, 120, Items.copper, 80, Items.lead, 90, Items.titanium, 60));
