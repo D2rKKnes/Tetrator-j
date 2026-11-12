@@ -1990,7 +1990,6 @@ public class TerraUnitTypes {
             legBaseOffset = 10f;
             legMoveSpace = 1.1f;
             legForwardScl = 0.8f;
-            legExtension = -6f;
             legSplashDamage = 115;
             legSplashRange = 60;
             hovering = true;
@@ -2014,16 +2013,6 @@ public class TerraUnitTypes {
             abilities.addAll(
                 new RegenAbility(){{amount = 2f;}},
                 new ForceFieldAbility(90f, 1.3f, 2000f, 60f * 4, 7, 45f),
-                new StatusFieldAbility(TerraStatusEffects.regeneration, 150f, 360f, 15f * 8f){{
-                    color = Pal.heal; 
-                    activeEffect = new Effect(40, e -> {
-                        color(e.color);
-                        stroke(e.fout());
-                        Lines.circle(e.x, e.y, e.fin(Interp.circle) * e.rotation);
-                        stroke(e.fout() * 3f);
-                        Lines.circle(e.x, e.y, 15f * 8f);
-                    });
-                }},
                 new SappingFieldAbility(TerraStatusEffects.sunBurn, 300f, 240f, 18f * 8f, TerraStatusEffects.sunBurn.color, new Effect(90, e -> {
                     color(e.color);
                     stroke(e.fout() * 3f);
