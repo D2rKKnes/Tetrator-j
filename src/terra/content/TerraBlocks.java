@@ -1950,51 +1950,6 @@ public class TerraBlocks{
             droneType = TerraUnitTypes.basicAssemblyDrone;
             consumePower(2000f / 60);
         }};
-        //using only for cost param in units
-        debugAssembler = new UnitFactory("debug-assembler"){{
-            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 15));
-            size = 2;
-            plans = Seq.with(
-                //core
-                new UnitPlan(TerraUnitTypes.tau, 60f * 27.5f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.titaniumPlate, 50, TerraItems.diamondDust, 30)),
-                //purple
-                new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
-                new UnitPlan(TerraUnitTypes.dynamite, 60f * 30f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55)),
-                new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
-                new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
-                new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
-                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780)),
-                //other
-                new UnitPlan(TerraUnitTypes.mutilation, 60f * 1500f, with(
-                            // total needed 4 t5, 8 t4, 11 t3, 11 t2, 11 t1(2 dagger, 3 nova, 1 crawler, 1 flare, 2 mono, 1 risso, 1 retusa)
-                            Items.silicon, 5000 + (1000 * 4) + (850 * 8) + (130 * 11) + (40 * 11) + (10 * 2) + (30 * 3) + 8 + 15 + (30 * 2) + 20 + 15, //summ of all silicon from units cost including units that needed to craft other units (t1 -> t2 -> t3...)
-                            Items.plastanium, 1100 + (600 * 4) + (650 * 8), 
-                            Items.thorium, 3000, 
-                            Items.coal, 10, 
-                            Items.graphite, (40 * 11), 
-                            Items.lead, 2700 + (10 * 2) + (20 * 3) + (15 * 2), 
-                            Items.titanium, (750 * 8) + (80 * 11) + (20 * 3) + 20,
-                            Items.metaglass, (40 * 11) + 35,
-                            Items.surgeAlloy, 1800 + (500 * 4), 
-                            Items.phaseFabric, 900 + (350 * 4),
-                            TerraItems.darkSteel, 2200, TerraItems.diamondDust, 1750, TerraItems.titaniumPlate, 2500))
-            );
-            consumePower(20f / 60);
-        }};
-        debugAssembler2 = new UnitCrafter("debug-assembler-2"){{
-            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 60));
-            size = 7;
-            liquidCapacity = 10000;
-            areaSize = 20;
-            addPlan(TerraUnitTypes.mutilation, 60f * 1500f)
-                .item(ItemStack.with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
-                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500))
-                .liquid(LiquidStack.with(Liquids.cryofluid, 6f, Liquids.slag, 1.5f))
-                .payload(PayloadStack.list(UnitTypes.corvus, 1, UnitTypes.toxopid, 1, UnitTypes.reign, 1, UnitTypes.eclipse, 1, 
-                                           UnitTypes.vela, 1, UnitTypes.quad, 1, UnitTypes.sei, 1, UnitTypes.aegires, 1, 
-                                           UnitTypes.quasar, 1, UnitTypes.fortress, 1, UnitTypes.mega, 1));
-            consumePower(5000f / 60);
-        }};
         /*coreFactory = new UnitFactory("core-factory"){{
             requirements(Category.units, with(Items.silicon, 120, Items.copper, 80, Items.lead, 90, Items.titanium, 60));
             size = 3;
@@ -2588,8 +2543,52 @@ public class TerraBlocks{
         };
         
         //OTHER =---
-
-
+        //units
         
+        //using only for cost param in units
+        debugAssembler = new UnitFactory("debug-assembler"){{
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 15));
+            size = 2;
+            plans = Seq.with(
+                //core
+                new UnitPlan(TerraUnitTypes.tau, 60f * 27.5f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.titaniumPlate, 50, TerraItems.diamondDust, 30)),
+                //purple
+                new UnitPlan(TerraUnitTypes.wick, 60f * 15f, with(Items.silicon, 30, TerraItems.carbon, 20)),
+                new UnitPlan(TerraUnitTypes.dynamite, 60f * 30f, with(Items.silicon, 90, Items.graphite, 35, TerraItems.carbon, 55)),
+                new UnitPlan(TerraUnitTypes.incident, 60f * 60f, with(Items.silicon, 225, Items.graphite, 120, TerraItems.diamondDust, 75)),
+                new UnitPlan(TerraUnitTypes.catastrophe, 60f * 160f, with(Items.silicon, 850, Items.thorium, 700, Items.phaseFabric, 215, TerraItems.diamondGlass, 355)),
+                new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
+                new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780)),
+                //other
+                new UnitPlan(TerraUnitTypes.mutilation, 60f * 1500f, with(
+                            // total needed 4 t5, 8 t4, 11 t3, 11 t2, 11 t1(2 dagger, 3 nova, 1 crawler, 1 flare, 2 mono, 1 risso, 1 retusa)
+                            Items.silicon, 5000 + (1000 * 4) + (850 * 8) + (130 * 11) + (40 * 11) + (10 * 2) + (30 * 3) + 8 + 15 + (30 * 2) + 20 + 15, //summ of all silicon from units cost including units that needed to craft other units (t1 -> t2 -> t3...)
+                            Items.plastanium, 1100 + (600 * 4) + (650 * 8), 
+                            Items.thorium, 3000, 
+                            Items.coal, 10, 
+                            Items.graphite, (40 * 11), 
+                            Items.lead, 2700 + (10 * 2) + (20 * 3) + (15 * 2), 
+                            Items.titanium, (750 * 8) + (80 * 11) + (20 * 3) + 20,
+                            Items.metaglass, (40 * 11) + 35,
+                            Items.surgeAlloy, 1800 + (500 * 4), 
+                            Items.phaseFabric, 900 + (350 * 4),
+                            TerraItems.darkSteel, 2200, TerraItems.diamondDust, 1750, TerraItems.titaniumPlate, 2500))
+            );
+            consumePower(20f / 60);
+        }};
+        debugAssembler2 = new UnitCrafter("debug-assembler-2"){{
+            requirements(Category.units, BuildVisibility.debugOnly, with(TerraItems.titaniumPlate, 60));
+            size = 7;
+            liquidCapacity = 10000;
+            areaSize = 20;
+            addPlan(TerraUnitTypes.mutilation, 60f * 1500f)
+                .item(ItemStack.with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
+                                      TerraItems.darkSteel, 2200, TerraItems.diamondDust, 1750, TerraItems.titaniumPlate, 2500))
+                .liquid(LiquidStack.with(Liquids.cryofluid, 6f, Liquids.slag, 1.5f))
+                .payload(PayloadStack.list(UnitTypes.corvus, 1, UnitTypes.toxopid, 1, UnitTypes.reign, 1, UnitTypes.eclipse, 1, 
+                                           UnitTypes.vela, 1, UnitTypes.quad, 1, UnitTypes.sei, 1, UnitTypes.aegires, 1, 
+                                           UnitTypes.quasar, 1, UnitTypes.fortress, 1, UnitTypes.mega, 1));
+            consumePower(5000f / 60);
+        }};
     }
 }
