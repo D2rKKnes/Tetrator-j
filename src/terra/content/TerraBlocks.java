@@ -1965,8 +1965,19 @@ public class TerraBlocks{
                 new UnitPlan(TerraUnitTypes.inevitability, 60f * 300f, with(Items.silicon, 1900, TerraItems.thermoxite, 780, TerraItems.darkSteel, 1500, TerraItems.diamondGlass, 500)),
                 new UnitPlan(TerraUnitTypes.eternity, 60f * 1000f, with(TerraItems.tesseract, 10, TerraItems.darkSteel, 4800, TerraItems.thermoxite, 1800, TerraItems.diamondGlass, 3000, TerraItems.gammaCell, 800, TerraItems.titaniumPlate, 2780)),
                 //other
-                new UnitPlan(TerraUnitTypes.mutilation, 60f * 1500f, with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
-                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500, TerraItems.gammaCell, 200))
+                new UnitPlan(TerraUnitTypes.mutilation, 60f * 1500f, with(
+                            // total needed 4 t5, 8 t4, 11 t3, 11 t2, 11 t1(2 dagger, 3 nova, 1 crawler, 1 flare, 2 mono, 1 risso, 1 retusa)
+                            Items.silicon, 5000 + (1000 * 4) + (850 * 8) + (130 * 11) + (40 * 11) + (10 * 2) + (30 * 3) + 8 + 15 + (30 * 2) + 20 + 15, //summ of all silicon from units cost including units that needed to craft other units (t1 -> t2 -> t3...)
+                            Items.plastanium, 1100 + (600 * 4) + (650 * 8), 
+                            Items.thorium, 3000, 
+                            Items.coal, 10, 
+                            Items.graphite, (40 * 11), 
+                            Items.lead, 2700 + (10 * 2) + (20 * 3) + (15 * 2), 
+                            Items.titanium, (750 * 8) + (80 * 11) + (20 * 3) + 20,
+                            Items.metaglass, (40 * 11) + 35,
+                            Items.surgeAlloy, 1800 + (500 * 4), 
+                            Items.phaseFabric, 900 + (350 * 4),
+                            TerraItems.darkSteel, 2200, TerraItems.diamondDust, 1750, TerraItems.titaniumPlate, 2500))
             );
             consumePower(20f / 60);
         }};
@@ -1977,7 +1988,7 @@ public class TerraBlocks{
             areaSize = 20;
             addPlan(TerraUnitTypes.mutilation, 60f * 1500f)
                 .item(ItemStack.with(Items.silicon, 5000, Items.plastanium, 1100, Items.thorium, 3000, Items.lead, 2700, Items.surgeAlloy, 1800, Items.phaseFabric, 900,
-                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500, TerraItems.gammaCell, 200))
+                                      TerraItems.darkSteel, 1200, TerraItems.diamondDust, 750, TerraItems.titaniumPlate, 2500))
                 .liquid(LiquidStack.with(Liquids.cryofluid, 6f, Liquids.slag, 1.5f))
                 .payload(PayloadStack.list(UnitTypes.corvus, 1, UnitTypes.toxopid, 1, UnitTypes.reign, 1, UnitTypes.eclipse, 1, 
                                            UnitTypes.vela, 1, UnitTypes.quad, 1, UnitTypes.sei, 1, UnitTypes.aegires, 1, 
