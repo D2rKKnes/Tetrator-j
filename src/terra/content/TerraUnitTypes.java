@@ -2248,7 +2248,7 @@ public class TerraUnitTypes {
                         }
                     }};
                 }},
-                new Weapon("mutilation-small-mount"){{
+                new Weapon("terra-mutilation-small-mount"){{
                     x = -76f / 4f;
                     y = 55f / 4f;
                     shootY = 4f;
