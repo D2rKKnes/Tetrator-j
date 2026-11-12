@@ -1256,22 +1256,114 @@ public class TerraUnitTypes {
                 reload = 1124f;
                 mirror = false;
                 rotate = true;
-                rotationLimit = 100f;
+                rotationLimit = 140f;
                 x = 0f;
                 y = 160f / 4f;
                 shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
                 recoil = 0;
                 shake = 15f;
-                minWarmup = 0.97f;
-                parts.add(new BlackHolePart(){{
-                    color = Pal.suppress;
-                    size = 0f;
-                    sizeTo = 10f;
-                    edge = 0f;
-                    edgeTo = 14f * 1.2f;
-                    progress = growProgress = PartProgress.reload.inv().delay(0.2f);
-                }});
+                minWarmup = 0.994f;
+                targetInterval = 5f;
+                targetSwitchInterval = 10f;
+                parts.addAll(
+                    new BlackHolePart(){{
+                        color = Pal.suppress;
+                        size = 0f;
+                        sizeTo = 10f;
+                        edge = 0f;
+                        edgeTo = 14f * 1.2f;
+                        progress = growProgress = PartProgress.reload.inv().delay(0.2f);
+                    }},
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 3.4f;
+                        layer = Layer.effect;
+                        haloRotation = 0;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 1;
+                        triLengthTo = 7;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 3.4f;
+                        layer = Layer.effect;
+                        haloRotation = 0;
+                        shapeRotation = 180;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 1;
+                        triLengthTo = 1.5f;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                    
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 2f;
+                        layer = Layer.effect;
+                        haloRotation = 45;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 0;
+                        triLengthTo = 2;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 2f;
+                        layer = Layer.effect;
+                        haloRotation = 45;
+                        shapeRotation = 180;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 0;
+                        triLengthTo = 0.5f;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 2f;
+                        layer = Layer.effect;
+                        haloRotation = -45;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 0;
+                        triLengthTo = 2;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                    new HaloPart() {{
+                        tri = true;
+                        y = 18;
+                        radius = 2f;
+                        layer = Layer.effect;
+                        haloRotation = -45;
+                        shapeRotation = 180;
+                        haloRadius = haloRadiusTo = 18;
+                        strokeTo = 2;
+                        shapes = 1;
+                        triLength = 0;
+                        triLengthTo = 0.5f;
+                        color = Pal.suppress;
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                    }},
+                );
                 bullet = new BlackHoleBulletType(1.1f, 168f){{
                     lifetime = 300f;
                     shieldDamageMultiplier = 4f;
