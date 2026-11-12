@@ -1263,9 +1263,9 @@ public class TerraUnitTypes {
                 shootSound = TerraSounds.shootBlackhole;
                 shootY = 0;
                 recoil = 0;
-                shake = 15f;
+                shake = 25f;
                 minWarmup = 0.97f;
-                shootWarmupSpeed = 0.04f;
+                shootWarmupSpeed = 0.033f;
                 targetInterval = 5f;
                 targetSwitchInterval = 10f;
                 parts.addAll(
@@ -1275,7 +1275,7 @@ public class TerraUnitTypes {
                         sizeTo = 10f;
                         edge = 0f;
                         edgeTo = 14f * 1.2f;
-                        progress = growProgress = PartProgress.reload.inv().delay(0.2f).curve(Interp.smooth);
+                        progress = growProgress = PartProgress.reload.inv().delay(0.2f).clamp().curve(Interp.smooth);
                     }},
                     
                     new HaloPart() {{
@@ -1301,7 +1301,7 @@ public class TerraUnitTypes {
                         strokeTo = 2;
                         shapes = 1;
                         triLength = 2;
-                        triLengthTo = 2.5f;
+                        triLengthTo = 2f;
                         color = Pal.suppress;
                         progress = PartProgress.warmup.mul(PartProgress.reload.inv());
                     }},
