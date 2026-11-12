@@ -1362,7 +1362,7 @@ public class TerraUnitTypes {
                         triLengthTo = 0.5f;
                         color = Pal.suppress;
                         progress = PartProgress.warmup.mul(PartProgress.reload.inv());
-                    }},
+                    }}
                 );
                 bullet = new BlackHoleBulletType(1.1f, 168f){{
                     lifetime = 300f;
