@@ -1275,24 +1275,25 @@ public class TerraUnitTypes {
                         sizeTo = 10f;
                         edge = 0f;
                         edgeTo = 14f * 1.2f;
-                        progress = growProgress = PartProgress.reload.inv().delay(0.2f);
+                        progress = growProgress = PartProgress.reload.inv().delay(0.2f).curve(Interp.smooth);
                     }},
+                    
                     new HaloPart() {{
                         tri = true;
-                        radius = 7f;
+                        radius = 8f;
                         layer = Layer.effect;
                         haloRotation = 0;
                         haloRadius = haloRadiusTo = 19;
                         strokeTo = 2;
                         shapes = 1;
                         triLength = 2;
-                        triLengthTo = 17;
+                        triLengthTo = 22;
                         color = Pal.suppress;
                         progress = PartProgress.warmup.mul(PartProgress.reload.inv());
                     }},
                     new HaloPart() {{
                         tri = true;
-                        radius = 7f;
+                        radius = 8f;
                         layer = Layer.effect;
                         haloRotation = 0;
                         shapeRotation = 180;
@@ -1300,7 +1301,7 @@ public class TerraUnitTypes {
                         strokeTo = 2;
                         shapes = 1;
                         triLength = 2;
-                        triLengthTo = 3.5f;
+                        triLengthTo = 2.5f;
                         color = Pal.suppress;
                         progress = PartProgress.warmup.mul(PartProgress.reload.inv());
                     }},
@@ -1309,20 +1310,20 @@ public class TerraUnitTypes {
                         tri = true;
                         radius = 5f;
                         layer = Layer.effect;
-                        haloRotation = 45;
+                        haloRotation = 25;
                         haloRadius = haloRadiusTo = 19;
                         strokeTo = 2;
                         shapes = 1;
                         triLength = 0;
-                        triLengthTo = 4;
+                        triLengthTo = 6;
                         color = Pal.suppress;
-                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv()).delay(0.2f);
                     }},
                     new HaloPart() {{
                         tri = true;
                         radius = 5f;
                         layer = Layer.effect;
-                        haloRotation = 45;
+                        haloRotation = 25;
                         shapeRotation = 180;
                         haloRadius = haloRadiusTo = 19;
                         strokeTo = 2;
@@ -1330,26 +1331,26 @@ public class TerraUnitTypes {
                         triLength = 0;
                         triLengthTo = 1.5f;
                         color = Pal.suppress;
-                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv()).delay(0.2f);
                     }},
                     new HaloPart() {{
                         tri = true;
                         radius = 5f;
                         layer = Layer.effect;
-                        haloRotation = -45;
+                        haloRotation = -25;
                         haloRadius = haloRadiusTo = 19;
                         strokeTo = 2;
                         shapes = 1;
                         triLength = 0;
-                        triLengthTo = 4;
+                        triLengthTo = 6;
                         color = Pal.suppress;
-                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv()).delay(0.2f);
                     }},
                     new HaloPart() {{
                         tri = true;
                         radius = 5f;
                         layer = Layer.effect;
-                        haloRotation = -45;
+                        haloRotation = -25;
                         shapeRotation = 180;
                         haloRadius = haloRadiusTo = 19;
                         strokeTo = 2;
@@ -1357,7 +1358,7 @@ public class TerraUnitTypes {
                         triLength = 0;
                         triLengthTo = 1.5f;
                         color = Pal.suppress;
-                        progress = PartProgress.warmup.mul(PartProgress.reload.inv());
+                        progress = PartProgress.warmup.mul(PartProgress.reload.inv()).delay(0.2f);
                     }}
                 );
                 bullet = new BlackHoleBulletType(1.1f, 168f){{
