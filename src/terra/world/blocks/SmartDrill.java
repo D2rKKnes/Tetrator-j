@@ -182,7 +182,8 @@ public class SmartDrill extends Drill{
 
             //Don't mine something you can't mine.
             countOre(tile);
-            if(!itemArray.contains(i -> i == dominantItem)) configure(null);
+            if(dominantItem == null && returnItem != null && itemArray.size == 1) configure(returnItem);
+            else if(!itemArray.contains(i -> i == dominantItem)) configure(null);
         }
 
         @Override
