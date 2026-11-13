@@ -90,7 +90,8 @@ public class TerraVanillaOverride {
         Blocks.largeShieldProjector.requirements = with(Items.graphite, 6200 * 3, Items.thorium, 3000 * 3, Items.silicon, 5000 * 3, Items.phaseFabric, 3100 * 3, Items.surgeAlloy, 2200 * 3, Items.beryllium, 3800 * 3, Items.tungsten, 3800 * 3, Items.oxide, 2500 * 3, Items.carbide, 2200 * 3, Items.fissileMatter, 1200 * 3);
         Blocks.largeShieldProjector.researchCostMultiplier = 0.03f;
         Blocks.powerNode.requirements = with(Items.graphite, 2, Items.lead, 6);
-        Blocks.fuse.requirements = with(Items.lead, 225, Items.graphite, 225, Items.thorium, 100);
+        Blocks.rtgGeneratorrequirements = with();
+        Blocks.fuse.requirements = with(Items.lead, 100, Items.silicon, 75, Items.phaseFabric, 25, Items.titanium, 75, Items.thorium, 50);
         ((ItemTurret) Blocks.duo).ammoTypes.put(
             Items.titanium, new BasicBulletType(3.5f, 26){{
                 width = 9f;
