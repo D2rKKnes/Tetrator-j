@@ -1152,7 +1152,7 @@ public class TerraBlocks{
                     flameColor = Color.valueOf("bf92f9");
                     midColor = Color.valueOf("8a73c6");
                     flameRadiusScl = 2.5f;
-                    particleRad = 5f;
+                    particleRad = 5.5f;
                 }},
                 new DrawRotation(){{suffix = "-bottom-hole";}},
                 new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, -8f, 0f){{padLeft = 4f;}},
@@ -1338,7 +1338,6 @@ public class TerraBlocks{
             canOverdrive = false;
             consumePower(1.85f);
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
-            updateEffectChance = 0.006f;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawDrillMineBeam(){{
@@ -1371,7 +1370,8 @@ public class TerraBlocks{
                     Fill.square(e.x + x, e.y + y, e.fout() * new Rand(e.id).random(2.5f, 4), 45);
                 });
             });
-            updateEffectChance = 0.004f;
+            updateEffectChance = 0.06f;
+            drillEffectChance = 0.005f;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawDrillMineBeam(),
