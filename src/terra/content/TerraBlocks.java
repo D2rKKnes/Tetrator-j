@@ -1118,7 +1118,7 @@ public class TerraBlocks{
             enableRotate();
         }};
 
-        stabilizer = new MultiBlockCrafter("stabilizer") {{
+        stabilizer = new RecipeGenericCrafter("stabilizer") {{
             requirements(Category.crafting, ItemStack.with(Items.lead, 500, Items.phaseFabric, 150, TerraItems.darkSteel, 280, TerraItems.diamondGlass, 75, TerraItems.rawThermoxite, 300));
             addLink(2, 0, 1, 2, 1, 1, -1, 0, 1, -1, 1, 1);
 
