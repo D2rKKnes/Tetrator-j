@@ -77,9 +77,9 @@ public class TerraBlocks{
     sapt, antimatterCollider,
     //crafters
     sandExtractor, iceMelter, crystalIncubator,
-    bisiliconOven, darkSteelWorkshop, titaniumPress, 
+    bisiliconOven, darkSteelWorkshop, singularityForge, titaniumPress, 
     diamondCrusher, diamondCoverer,
-    multiMixer,
+    multiMixer, stabilizer, 
     //production
     graphiteMiner, graphiteMinerLarge, ventPump,
     mechanicalWell, electricalWell,
@@ -89,7 +89,7 @@ public class TerraBlocks{
     //turrets
     flight, dynamics, electricShock, ejection, fracture, aircraft,
     //units
-    basicAssembler, advancedAssembler, coreFactory, droneCentre, debugAssembler, debugAssembler2,
+    basicAssembler, advancedAssembler, coreFactory, droneCentre,
     largePayloadConveyor,
     //other
     //NOTVA =---
@@ -113,8 +113,9 @@ public class TerraBlocks{
     //logic
     primeProcessor,
     //COPIS =---
-    circularFurnace;
+    circularFurnace,
     //OTHER =---
+    debugAssembler, debugAssembler2;
     
     public static void load(){
         //VERILUS & SERPULO =---
