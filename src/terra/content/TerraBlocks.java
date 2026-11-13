@@ -1167,21 +1167,25 @@ public class TerraBlocks{
         singularityForge = new MultiBlockCrafter("singularity-forge") {{
             requirements(Category.crafting, ItemStack.with(Items.silicon, 4000, Items.titanium, 8000, Items.phaseFabric, 3500, TerraItems.titaniumPlate, 2800, TerraItems.gammaCell, 800, TerraItems.darkSteel, 2500, TerraItems.diamondGlass, 1750, TerraItems.thermoxite, 3000));
             addLink(
+                //pipes
                 p(3, 1), p(4, 1), p(3, -1), p(4, -1),
                 p(-3, 1), p(-4, 1), p(-3, -1), p(-4, -1),
                 p(1, 3), p(1, 4), p(-1, 3), p(-1, 4),
                 p(1, -3), p(1, -4), p(-1, -3), p(-1, -4),
 
+                //big blocks
                 p(5, 0), p(5, 1), p(5, -1), p(6, 0), p(6, 1), p(6, -1), p(7, 0), p(7, 1), p(7, -1), 
                 p(-5, 0), p(-5, 1), p(-5, -1), p(-6, 0), p(-6, 1), p(-6, -1), p(-7, 0), p(-7, 1), p(-7, -1), 
                 p(0, 5), p(1, 5), p(-1, 5), p(0, 6), p(1, 6), p(-1, 6), p(0, 7), p(1, 7), p(-1, 7), 
                 p(0, -5), p(1, -5), p(-1, -5), p(0, -6), p(1, -6), p(-1, -6), p(0, -7), p(1, -7), p(-1, -7), 
 
+                //small blocks
                 p(5, 2), p(5, 3), p(6, 2), p(6, 3), p(5, -2), p(5, -3), p(6, -2), p(6, -3), 
                 p(-5, 2), p(-5, 3), p(-6, 2), p(-6, 3), p(-5, -2), p(-5, -3), p(-6, -2), p(-6, -3), 
                 p(2, 5), p(3, 5), p(2, 6), p(3, 6), p(-2, 5), p(-3, 5), p(-2, 6), p(-3, 6), 
                 p(2, -5), p(3, -5), p(2, -6), p(3, -6), p(-2, -5), p(-3, -5), p(-2, -6), p(-3, -6), 
 
+                //corners
                 p(4, 4), p(5, 4), p(4, 5), p(5, 5), 
                 p(4, -4), p(5, -4), p(4, -5), p(5, -5), 
                 p(-4, 4), p(-5, 4), p(-4, 5), p(-5, 5), 
@@ -1191,22 +1195,21 @@ public class TerraBlocks{
             size = 5;
             hasLiquids = true;
             hasItems = true;
-            scaledHealth = 10000f;
+            scaledHealth = 50f;
             itemCapacity = 100;
-            liquidCapacity = 5000;
+            liquidCapacity = 500 * 8 * 2;
+            researchCostMultiplier = 0.13f;
 
             craftTime = 60f * 8f;
-            consumePower(8000f / 60f);
-            consumeItems(with(TerraItems.thermoxite, 6, TerraItems.darkSteel, 8, Items.fissileMatter, 24, TerraItems.diamondDust, 12));
-            consumeLiquid(Liquids.cryofluid, 5f);
+            consumePower(8000.0001f / 60f);
+            consumeItems(with(TerraItems.thermoxite, 16 * 3, TerraItems.darkSteel, 8 * 3, Items.fissileMatter, 24 * 3, TerraItems.diamondDust, 12 * 3));
+            consumeLiquids(with(Liquids.cryofluid, 5f, TerraLiquids.fissilePlasma, 500f / 60f));
             outputItem = new ItemStack(TerraItems.tesseract, 1);
             lightLiquid = Liquids.cryofluid;
 
             drawer = new DrawMulti(
                 new DrawRegion("-bottom")
             );
-
-            enableRotate();
         }};
 
         //production
@@ -1380,7 +1383,7 @@ public class TerraBlocks{
             itemCapacity = 20;
             drillTime = 145f;
             hardnessDrillMultiplier = 25f;
-            liquidBoostIntensity = 1.3f;
+            liquidBoostIntensity = 1.25f;
             canOverdrive = false;
             consumePower(1.85f);
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
