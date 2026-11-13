@@ -1118,6 +1118,59 @@ public class TerraBlocks{
             enableRotate();
         }};
 
+        stabilizer = new MultiBlockCrafter("stabilizer") {{
+            requirements(Category.crafting, ItemStack.with(Items.lead, 500, Items.phaseFabric, 150, TerraItems.darkSteel, 280, TerraItems.diamondGlass, 75, TerraItems.rawThermoxite, 300));
+            addLink(2, 0, 1, 2, 1, 1, -1, 0, 1, -1, 1, 1);
+
+            size = 2;
+            hasLiquids = true;
+            hasItems = true;
+            scaledHealth = 100f;
+            itemCapacity = 30;
+            liquidCapacity = 500;
+
+            consumePower(375f / 60f);
+            recipes.addAll(
+                new Recipe() {{
+                    inputItem = ItemStack.list(Items.phaseFabric, 1);
+                    inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 60f / 60f);
+                    outputItem = ItemStack.list(Items.fissileMatter, 1);
+                    craftTime = 30f;
+                }},
+                new Recipe() {{
+                    inputItem = ItemStack.list(TerraItems.fissileCrystals, 2, TerraItems.diamondGlass, 2, TerraItems.darkSteel, 1);
+                    inputLiquid = LiquidStack.list(TerraLiquids.fissilePlasma, 200f / 60f);
+                    outputItem = ItemStack.list(TerraItems.gammaCell, 1);
+                    craftTime = 90f;
+                }}
+            );
+            lightLiquid = TerraLiquids.fissilePlasma;
+
+            drawer = new DrawMulti(
+                new DrawRotation(){{
+                    suffix = "-bottom";
+                }},
+                new DrawArcSmelt(){{
+                    flameColor = Color.valueOf("bf92f9");
+                    midColor = Color.valueOf("8a73c6");
+                    flameRadiusScl = 2.5f;
+                    particleRad = 5f;
+                }},
+                new DrawRotation(){{
+                    suffix = "-bottom-hole";
+                }},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma){{padLeft = 8f;}},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma){{padRight = 8f;}},
+                new DrawRotation() {{
+                    suffix = "-rot";
+                    //xOffset = 4f;
+                    //drawType = DRAW_FULL;
+                }}
+            );
+
+            enableRotate();
+        }};
+
         //production
         graphiteMiner = new WallCrafter("graphite-miner"){{
             requirements(Category.production, with(Items.lead, 12));
@@ -1293,6 +1346,7 @@ public class TerraBlocks{
             canOverdrive = false;
             consumePower(1.85f);
             consumeLiquid(Liquids.cryofluid, 0.2f).boost();
+            updateEffectChance = 0.006f;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawDrillMineBeam(){{
@@ -1325,7 +1379,7 @@ public class TerraBlocks{
                     Fill.square(e.x + x, e.y + y, e.fout() * new Rand(e.id).random(2.5f, 4), 45);
                 });
             });
-            updateEffectChance = 0.06f;
+            updateEffectChance = 0.004f;
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
                 new DrawDrillMineBeam(),
