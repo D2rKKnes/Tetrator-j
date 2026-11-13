@@ -650,7 +650,7 @@ public class TerraBlocks{
             researchCostMultiplier = 0.1f;
             squareSprite = false;
             health = 14850;
-            armor = 15;
+            armor = 35;
             powerProduction = 325f;
             itemDuration = 20f;
             ambientSound = Sounds.loopPulse;
@@ -1192,23 +1192,27 @@ public class TerraBlocks{
                 p(-4, -4), p(-5, -4), p(-4, -5), p(-5, -5)
             );
 
+            //block is too big
+            clipSize = 15 * 8 + 10f;
+            
             size = 5;
             hasLiquids = true;
             hasItems = true;
-            scaledHealth = 50f;
-            itemCapacity = 100;
-            liquidCapacity = 500 * 8 * 2;
+            scaledHealth = 100f;
+            itemCapacity = 300;
+            liquidCapacity = (5 * 60) * 8 * 2;
             researchCostMultiplier = 0.13f;
 
             craftTime = 60f * 8f;
-            consumePower(8000.0001f / 60f);
+            consumePower(8000.0002f / 60f);
             consumeItems(with(TerraItems.thermoxite, 16 * 3, TerraItems.darkSteel, 8 * 3, Items.fissileMatter, 24 * 3, TerraItems.diamondDust, 12 * 3));
             consumeLiquid(Liquids.cryofluid, 5f);
             outputItem = new ItemStack(TerraItems.tesseract, 1);
             lightLiquid = Liquids.cryofluid;
 
             drawer = new DrawMulti(
-                new DrawRegion("-bottom")
+                new DrawRegion("-bottom"),
+                new DrawDefault()
             );
         }};
 
