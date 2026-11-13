@@ -40,6 +40,8 @@ public class LinkBlock extends Block {
         rebuildable = false;
         canOverdrive = false;
 
+        liquidCapacity = 200f;
+
         instantDeconstruct = true;
 
         hasItems = true;
@@ -63,9 +65,9 @@ public class LinkBlock extends Block {
         acceptsUnitPayloads = true;
         outputsPayload = false;
 
-        localizedName = Core.bundle.get(getContentType() + ".new-horizon-inner-entity.name", this.name);
-        description = Core.bundle.getOrNull(getContentType() + ".new-horizon-inner-entity.description");
-        details = Core.bundle.getOrNull(getContentType() + ".new-horizon-inner-entity.details");
+        localizedName = Core.bundle.get(getContentType() + ".terra-inner-entity.name", this.name);
+        description = Core.bundle.getOrNull(getContentType() + ".terra-inner-entity.description");
+        details = Core.bundle.getOrNull(getContentType() + ".terra-inner-entity.details");
     }
 
     public boolean canBreak(Tile tile) {
@@ -100,9 +102,7 @@ public class LinkBlock extends Block {
             if (link instanceof MultiBlockEntity) {
                 linkBuild = link;
                 items = link.items;
-                liquids = link.liquids;
-                //might not a good idea if do so
-                //block = link.block;
+                if (link.liquids != null) liquids = link.liquids;
             } else {
                 linkBuild = null;
                 tile.remove();
@@ -116,9 +116,12 @@ public class LinkBlock extends Block {
             }
         }
 
-        //skip draw
         @Override
         public void draw() {
+        }
+
+        @Override
+        public void drawLight() {
         }
 
         @Override
@@ -170,11 +173,7 @@ public class LinkBlock extends Block {
 
         @Override
         public int acceptStack(Item item, int amount, Teamc source) {
-            if (linkBuild != null) {
-                return linkBuild.acceptStack(item, amount, source);
-            } else {
-                return 0;
-            }
+            return linkBuild != null ? linkBuild.acceptStack(item, amount, source) : 0;
         }
 
         @Override
@@ -189,53 +188,37 @@ public class LinkBlock extends Block {
 
         @Override
         public float handleDamage(float amount) {
-            if (linkBuild != null) {
-                return linkBuild.handleDamage(amount);
-            } else {
-                return 0;
-            }
+            return linkBuild != null ? linkBuild.handleDamage(amount) : 0;
         }
 
         @Override
         public void damage(float damage) {
-            if (linkBuild != null) {
-                linkBuild.damage(damage);
-            }
+            if (linkBuild != null) linkBuild.damage(damage);
         }
 
         @Override
         public void handleItem(Building source, Item item) {
-            if (linkBuild != null) {
-                linkBuild.handleItem(source, item);
-            }
+            if (linkBuild != null) linkBuild.handleItem(source, item);
         }
 
         @Override
         public void handleStack(Item item, int amount, Teamc source) {
-            if (linkBuild != null) {
-                linkBuild.handleStack(item, amount, source);
-            }
+            if (linkBuild != null) linkBuild.handleStack(item, amount, source);
         }
 
         @Override
         public void handleLiquid(Building source, Liquid liquid, float amount) {
-            if (linkBuild != null) {
-                linkBuild.handleLiquid(source, liquid, amount);
-            }
+            if (linkBuild != null) linkBuild.handleLiquid(source, liquid, amount);
         }
 
         @Override
         public void handlePayload(Building source, Payload payload) {
-            if (linkBuild != null) {
-                linkBuild.handlePayload(source, payload);
-            }
+            if (linkBuild != null) linkBuild.handlePayload(source, payload);
         }
 
         @Override
         public void handleString(Object value) {
-            if (linkBuild != null) {
-                linkBuild.handleString(value);
-            }
+            if (linkBuild != null) linkBuild.handleString(value);
         }
 
         @Override
@@ -255,9 +238,7 @@ public class LinkBlock extends Block {
 
         @Override
         public void handleUnitPayload(Unit unit, Cons<Payload> grabber) {
-            if (linkBuild != null) {
-                linkBuild.handleUnitPayload(unit, grabber);
-            }
+            if (linkBuild != null) linkBuild.handleUnitPayload(unit, grabber);
         }
 
         @Override
