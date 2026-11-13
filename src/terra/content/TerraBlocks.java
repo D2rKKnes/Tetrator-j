@@ -1147,25 +1147,17 @@ public class TerraBlocks{
             lightLiquid = TerraLiquids.fissilePlasma;
 
             drawer = new DrawMulti(
-                new DrawRotation(){{
-                    suffix = "-bottom";
-                }},
+                new DrawRotation(){{suffix = "-bottom";}},
                 new DrawArcSmelt(){{
                     flameColor = Color.valueOf("bf92f9");
                     midColor = Color.valueOf("8a73c6");
                     flameRadiusScl = 2.5f;
                     particleRad = 5f;
                 }},
-                new DrawRotation(){{
-                    suffix = "-bottom-hole";
-                }},
-                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 16f, 0f){{padLeft = 8f;}},
-                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 16f, 0f){{padRight = 8f;}},
-                new DrawRotation() {{
-                    suffix = "-rot-0";
-                    //xOffset = 4f;
-                    //drawType = DRAW_FULL;
-                }}
+                new DrawRotation(){{suffix = "-bottom-hole";}},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, -8f, 0f){{padLeft = 4f;}},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 8f, 0f){{padRight = 4f;}},
+                new DrawRotation(){{suffix = "-rot-0";}}
             );
 
             enableRotate();
