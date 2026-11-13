@@ -2,6 +2,7 @@ package terra.world.blocks.multiblock;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
+import arc.math.Mathf;
 import arc.math.geom.Point2;
 import arc.math.geom.Vec2;
 import arc.struct.IntSeq;
@@ -21,6 +22,7 @@ import mindustry.world.blocks.payloads.Payload;
 import mindustry.world.blocks.payloads.PayloadConveyor;
 import mindustry.world.blocks.units.UnitAssembler;
 import mindustry.world.meta.Stat;
+import terra.world.blocks.multiblock.InnerBlock;
 import terra.world.blocks.multiblock.LinkBlock;
 import terra.world.blocks.multiblock.MultiBlock;
 import terra.world.blocks.multiblock.MultiBlockEntity;
@@ -29,13 +31,15 @@ import static mindustry.Vars.*;
 
 public abstract class BasicMultiBlock extends Block implements MultiBlock {
     public final int checkTimer = timers++;
-    public Seq<Point2> linkPos = new Seq<>();
-    public IntSeq linkSize = new IntSeq();
+    public IntSeq links = new IntSeq();
+    public int[] liquidOutputDirections = {-1};
     public boolean canMirror = true;
     public int[] rotations = {0, 1, 2, 3, 0, 1, 2, 3};
+    public LinkBlock link;
 
     public BasicMultiBlock(String name) {
         super(name);
+        link = new LinkBlock(name + "-link-entity");
     }
 
     public void enableRotate() {
@@ -58,39 +62,23 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
         super.init();
 
         if (scaledHealth > 0) {
-            int count = getTileCount();
+            int count = size * size + linkSize();
             health = (int) (scaledHealth * count);
             if (armor == 0) armor = count;
         }
-    }
 
-    public int getTileCount() {
-        int out = 0;
-        out += size * size;
-        for (int i = 0; i < linkSize().size; i++) {
-            out += linkSize().get(i) * linkSize().get(i);
-        }
-        return out;
+        link.liquidCapacity = liquidCapacity;
+        link.outputsLiquid = outputsLiquid;
     }
 
     @Override
-    public Seq<Point2> linkPos() {
-        return linkPos;
+    public LinkBlock linkBlock() {
+        return link;
     }
 
     @Override
-    public IntSeq linkSize() {
-        return linkSize;
-    }
-
-    @Override
-    public Block mirrorBlock() {
-        return this;
-    }
-
-    @Override
-    public boolean isMirror() {
-        return false;
+    public IntSeq links() {
+        return links;
     }
 
     @Override
@@ -114,9 +102,7 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
     @Override
     public void flipRotation(BuildPlan req, boolean x) {
         if (canMirror) {
-            if (mirrorBlock() != null) {
-                req.rotation = rotations[req.rotation + (x ? 0 : 4)];
-            }
+            req.rotation = rotations[req.rotation + (x ? 0 : 4)];
         } else {
             super.flipRotation(req, x);
         }
@@ -135,7 +121,7 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
             linkProximityMap = new Seq<>();
 
             if (instantBuild || (!state.rules.editor && state.rules.instantBuild && state.rules.infiniteResources)) {
-                linkEntities = setLinkBuild(this, block, tile, team, size, rotation);
+                linkEntities = setLinkBuild(this, tile, team, size, rotation);
                 linkCreated = true;
                 updateLinkProximity();
             }
@@ -150,11 +136,10 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
         public void updateLinkBlock() {
             if (isPayload()) return;
             if (!linkCreated) {
-                linkEntities = setLinkBuild(this, block, tile, team, size, rotation);
+                linkEntities = setLinkBuild(this, tile, team, size, rotation);
                 linkCreated = true;
                 updateLinkProximity();
             }
-            //period check to avoid invalid link entity, todo need improvement
             if (timer(checkTimer, 60)) {
                 boolean linkValid = true;
                 for (Tile t : getLinkTiles(tile, size, rotation)) {
@@ -172,9 +157,9 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
 
         @Override
         public void updateLinkProximity() {
+            if (linkProximityMap == null) linkProximityMap = new Seq<>();
             if (linkEntities != null) {
                 linkProximityMap.clear();
-                //add link entity's proximity
                 for (Building link : linkEntities) {
                     for (Building linkProx : link.proximity) {
                         if (linkProx != this && !linkEntities.contains(linkProx)) {
@@ -184,8 +169,6 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
                         }
                     }
                 }
-
-                //add self entity's proximity
                 for (Building prox : proximity) {
                     if (!linkEntities.contains(prox)) {
                         if (checkValidPair(prox, this)) {
@@ -227,7 +210,7 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
 
         @Override
         public boolean dump(Item todump) {
-            if (!block.hasItems || items.total() == 0 || linkProximityMap.size == 0 || (todump != null && !items.has(todump)))
+            if (linkProximityMap == null || linkProximityMap.size == 0 || !block.hasItems || items.total() == 0 || (todump != null && !items.has(todump)))
                 return false;
             int dump = dumpIndex;
             for (int i = 0; i < linkProximityMap.size; i++) {
@@ -262,6 +245,7 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
 
         @Override
         public void dumpLiquid(Liquid liquid, float scaling, int outputDir) {
+            if (linkProximityMap == null || linkProximityMap.size == 0) return;
             int dump = this.cdump;
             if (liquids.get(liquid) <= 0.0001f) return;
             if (!net.client() && state.isCampaign() && team == state.rules.defaultTeam) liquid.unlock();
@@ -271,19 +255,26 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
                 Building[] pair = linkProximityMap.get(idx);
                 Building target = pair[0];
                 Building source = pair[1];
-                if (outputDir != -1 && (outputDir + rotation) % 4 != relativeTo(target)) continue;
+                if (outputDir != -1 && Mathf.mod(relativeTo(target) - rotation, 4) != outputDir) continue;
                 target = target.getLiquidDestination(source, liquid);
                 if (target != null && target.block.hasLiquids && canDumpLiquid(target, liquid) && target.liquids != null) {
                     float ofract = target.liquids.get(liquid) / target.block.liquidCapacity;
                     float fract = liquids.get(liquid) / block.liquidCapacity;
-                    if (ofract < fract)
-                        transferLiquid(target, (fract - ofract) * block.liquidCapacity / scaling, liquid);
+                    if (ofract < fract) {
+                        float amount = (fract - ofract) * block.liquidCapacity / scaling;
+                        float flow = Math.min(target.block.liquidCapacity - target.liquids.get(liquid), amount);
+                        if (target.acceptLiquid(source, liquid)) {
+                            target.handleLiquid(source, liquid, flow);
+                            liquids.remove(liquid, flow);
+                        }
+                    }
                 }
             }
         }
 
         @Override
         public boolean dumpPayload(Payload todump) {
+            if (linkProximityMap == null || linkProximityMap.size == 0) return false;
             int dump = dumpIndex;
             for (int i = 0; i < linkProximityMap.size; ++i) {
                 int idx = (i + dump) % linkProximityMap.size;
@@ -291,7 +282,7 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
                 Building target = pair[0];
                 Building source = pair[1];
                 if (todump != null && getPayloads().get(todump.content()) > 0 && target.acceptPayload(source, todump)) {
-                    target.handlePayload(this, todump);
+                    target.handlePayload(source, todump);
                     getPayloads().remove(todump.content(), 1);
                     if (target instanceof PayloadConveyor.PayloadConveyorBuild) {
                         Fx.payloadDeposit.at(x, y, this.angleTo(target), new UnitAssembler.YeetData(new Vec2(target.x, target.y), todump.content()));
@@ -307,6 +298,10 @@ public abstract class BasicMultiBlock extends Block implements MultiBlock {
         @Override
         public void offload(Item item) {
             produced(item, 1);
+            if (linkProximityMap == null || linkProximityMap.size == 0) {
+                handleItem(this, item);
+                return;
+            }
             int dump = dumpIndex;
             for (int i = 0; i < linkProximityMap.size; i++) {
                 incrementDumpIndex(linkProximityMap.size);
