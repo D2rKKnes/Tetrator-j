@@ -105,6 +105,7 @@ public class TerraVerilusTree {
                                 });
                                 node(darkSteelWorkshop, Seq.with(new Objectives.Research(diamondGlass)), () -> {
                                     node(stabilizer, Seq.with(new Objectives.Research(antimatterCollider)), () -> {});
+                                    node(singularityForge, Seq.with(new AtWave(verilus, 75)), () -> {});
                                 });
                                 node(electricalWell, () -> {});
                                 node(ventPump, () -> {});
