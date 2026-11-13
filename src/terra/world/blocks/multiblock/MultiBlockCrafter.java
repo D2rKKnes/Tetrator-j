@@ -1,7 +1,6 @@
 package terra.world.blocks.multiblock;
 
 import arc.Core;
-import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.struct.EnumSet;
@@ -9,7 +8,6 @@ import arc.struct.Seq;
 import arc.util.Eachable;
 import arc.util.Nullable;
 import arc.util.Time;
-import arc.util.Tmp;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.content.Fx;
@@ -20,7 +18,6 @@ import mindustry.gen.Sounds;
 import mindustry.logic.LAccess;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
-import mindustry.type.Liquid;
 import mindustry.type.LiquidStack;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.draw.DrawDefault;
@@ -28,8 +25,6 @@ import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
-import terra.world.blocks.multiblock.BasicMultiBlock;
-import terra.world.blocks.multiblock.LinkBlock;
 
 import static mindustry.Vars.*;
 
@@ -41,9 +36,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
 
     public boolean dumpExtraLiquid = true;
     public boolean ignoreLiquidFullness = false;
-
-    public Seq<int[]> outputItemDirection = new Seq<>();
-    public Seq<int[]> outputLiquidDirection = new Seq<>();
 
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
@@ -68,14 +60,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
         flags = EnumSet.of(BlockFlag.factory);
     }
 
-    public void addOutputItemDirection(int xOffset, int yOffset, Item item) {
-        outputItemDirection.add(new int[]{xOffset, yOffset, item.id});
-    }
-
-    public void addOutputLiquidDirection(int xOffset, int yOffset, Liquid liquid) {
-        outputLiquidDirection.add(new int[]{xOffset, yOffset, liquid.id});
-    }
-
     @Override
     public void setStats() {
         stats.timePeriod = craftTime;
@@ -94,12 +78,8 @@ public class MultiBlockCrafter extends BasicMultiBlock {
     public void setBars() {
         super.setBars();
 
-        //set up liquid bars for liquid outputs
         if (outputLiquids != null && outputLiquids.length > 0) {
-            //no need for dynamic liquid bar
             removeBar("liquid");
-
-            //then display output buffer
             for (var stack : outputLiquids) {
                 addLiquidBar(stack.liquid);
             }
@@ -133,30 +113,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
     }
 
     @Override
-    public void drawOverlay(float x, float y, int rotation) {
-        super.drawOverlay(x, y, rotation);
-        for (int[] packed : outputItemDirection) {
-            MultiBlock.calculateRotatedOffsetPosition(Tmp.p1, packed[0], packed[1], size, 1, rotation);
-            Item item = content.item(packed[2]);
-            Draw.rect(item.fullIcon,
-                    x - (size + 1) % 2f * 4f + Tmp.p1.x * tilesize,
-                    y - (size + 1) % 2f * 4f + Tmp.p1.y * tilesize,
-                    6f, 6f
-            );
-        }
-
-        for (int[] packed : outputLiquidDirection) {
-            MultiBlock.calculateRotatedOffsetPosition(Tmp.p1, packed[0], packed[1], size, 1, rotation);
-            Liquid liquid = content.liquid(packed[2]);
-            Draw.rect(liquid.fullIcon,
-                    x - (size + 1) % 2f * 4f + Tmp.p1.x * tilesize,
-                    y - (size + 1) % 2f * 4f + Tmp.p1.y * tilesize,
-                    8f, 8f
-            );
-        }
-    }
-
-    @Override
     public boolean rotatedOutput(int x, int y) {
         return false;
     }
@@ -186,44 +142,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
         public float totalProgress;
         public float warmup;
 
-        public boolean isValidOutputItemBuilding(Building other, Item item) {
-            if (outputItemDirection.isEmpty()) return true;
-            for (int[] packed : outputItemDirection) {
-                if (item.id == packed[2]) {
-                    MultiBlock.calculateRotatedOffsetPosition(Tmp.p1, packed[0], packed[1], block.size, 1, rotation);
-                    Building b = world.build(Tmp.p1.x + tileX(), Tmp.p1.y + tileY());
-                    if (b == other || b instanceof LinkBlock.LinkBuild lb && lb.linkBuild == other) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public boolean isValidLiquidOutputBuilding(Building other, Liquid liquid) {
-            if (outputLiquidDirection.isEmpty()) return true;
-            for (int[] packed : outputLiquidDirection) {
-                if (liquid.id == packed[2]) {
-                    MultiBlock.calculateRotatedOffsetPosition(Tmp.p1, packed[0], packed[1], block.size, 1, rotation);
-                    Building b = world.build(Tmp.p1.x, Tmp.p1.y);
-                    if (b == other || b instanceof LinkBlock.LinkBuild lb && lb.linkBuild == other) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean canDump(Building to, Item item) {
-            return super.canDump(to, item) && isValidOutputItemBuilding(to, item);
-        }
-
-        @Override
-        public boolean canDumpLiquid(Building to, Liquid liquid) {
-            return super.canDumpLiquid(to, liquid) && isValidLiquidOutputBuilding(to, liquid);
-        }
-
         @Override
         public void draw() {
             drawer.draw(this);
@@ -231,7 +149,7 @@ public class MultiBlockCrafter extends BasicMultiBlock {
 
         @Override
         public void drawLight() {
-            super.drawLight();
+            if (liquids != null) super.drawLight();
             drawer.drawLight(this);
         }
 
@@ -252,17 +170,13 @@ public class MultiBlockCrafter extends BasicMultiBlock {
                             return false;
                         }
                     } else {
-                        //if there's still space left, it's not full for all liquids
                         allFull = false;
                     }
                 }
-
-                //if there is no space left for any liquid, it can't reproduce
                 if (allFull) {
                     return false;
                 }
             }
-
             return enabled;
         }
 
@@ -295,7 +209,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
                 return super.getProgressIncrease(baseTime);
             }
 
-            //limit progress increase by maximum amount of liquid it can produce
             float scaling = 1f, max = 1f;
             if (outputLiquids != null) {
                 max = 0f;
@@ -306,7 +219,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
                 }
             }
 
-            //when dumping excess take the maximum value instead of the minimum.
             return super.getProgressIncrease(baseTime) * (dumpExtraLiquid ? Math.min(max, 1f) : scaling);
         }
 
@@ -336,7 +248,7 @@ public class MultiBlockCrafter extends BasicMultiBlock {
             }
 
             if (wasVisible) {
-                craftEffect.at(x, y);
+                craftEffect.at(x, y, rotdeg());
             }
             progress %= 1f;
         }
@@ -350,8 +262,11 @@ public class MultiBlockCrafter extends BasicMultiBlock {
             }
 
             if (outputLiquids != null) {
-                for (LiquidStack liquid : outputLiquids) {
-                    dumpLiquid(liquid.liquid, 2f);
+                for (int i = 0; i < outputLiquids.length; i++) {
+                    LiquidStack liquid = outputLiquids[i];
+                    int direction = liquidOutputDirections != null && liquidOutputDirections.length > i
+                            ? liquidOutputDirections[i] : -1;
+                    dumpLiquid(liquid.liquid, 2f, direction);
                 }
             }
         }
@@ -359,7 +274,6 @@ public class MultiBlockCrafter extends BasicMultiBlock {
         @Override
         public double sense(LAccess sensor) {
             if (sensor == LAccess.progress) return progress();
-            //attempt to prevent wild total liquid fluctuation, at least for crafters
             if (sensor == LAccess.totalLiquids && outputLiquid != null) return liquids.get(outputLiquid.liquid);
             return super.sense(sensor);
         }
