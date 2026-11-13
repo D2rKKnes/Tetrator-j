@@ -1082,7 +1082,7 @@ public class TerraBlocks{
         }};
         multiMixer = new MultiBlockCrafter("multi-mixer") {{
             requirements(Category.crafting, ItemStack.with(Items.phaseFabric, 75, TerraItems.titaniumPlate, 180, Items.metaglass, 225));
-            addLink(2, 0, 1, 2, 1, 1);
+            addLink(p(2, 0), p(2, 1));
 
             size = 2;
             hasLiquids = true;
@@ -1120,7 +1120,7 @@ public class TerraBlocks{
 
         stabilizer = new RecipeGenericCrafter("stabilizer") {{
             requirements(Category.crafting, ItemStack.with(Items.lead, 500, Items.phaseFabric, 150, TerraItems.darkSteel, 280, TerraItems.diamondGlass, 75, TerraItems.rawThermoxite, 300));
-            addLink(2, 0, 1, 2, 1, 1, -1, 0, 1, -1, 1, 1);
+            addLink(p(2, 0), p(2, 1), p(-1, 0), p(-1, 1));
 
             size = 2;
             hasLiquids = true;
@@ -1159,10 +1159,10 @@ public class TerraBlocks{
                 new DrawRotation(){{
                     suffix = "-bottom-hole";
                 }},
-                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma){{padLeft = 8f;}},
-                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma){{padRight = 8f;}},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 16f, 0f){{padLeft = 8f;}},
+                new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 16f, 0f){{padRight = 8f;}},
                 new DrawRotation() {{
-                    suffix = "-rot";
+                    suffix = "-rot-0";
                     //xOffset = 4f;
                     //drawType = DRAW_FULL;
                 }}
