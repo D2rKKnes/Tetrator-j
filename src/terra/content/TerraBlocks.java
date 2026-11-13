@@ -645,7 +645,7 @@ public class TerraBlocks{
             consumeLiquids(LiquidStack.with(Liquids.water, 25f / 60f, TerraLiquids.carbonDioxide, 20f / 60f));
         }};
         antimatterCollider = new ImpactCollider("antimatter-collider"){{
-            requirements(Category.power, with(Items.lead, 3000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
+            requirements(Category.power, with(Items.lead, 3000, Items.silicon, 1250, Items.titanium, 4000, Items.thorium, 1280, TerraItems.diamondGlass, 880, TerraItems.darkSteel, 2200, TerraItems.thermoxite, 700));
             size = 7;
             researchCostMultiplier = 0.1f;
             squareSprite = false;
@@ -1158,6 +1158,52 @@ public class TerraBlocks{
                 new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, -8f, 0f){{padLeft = 4f;}},
                 new DrawLiquidTileRotated(TerraLiquids.fissilePlasma, 8f, 0f){{padRight = 4f;}},
                 new DrawRotation(){{suffix = "-rot-0";}}
+            );
+
+            enableRotate();
+        }};
+
+        //WIP
+        singularityForge = new MultiBlockCrafter("singularity-forge") {{
+            requirements(Category.crafting, ItemStack.with(Items.silicon, 4000, Items.titanium, 8000, Items.phaseFabric, 3500, TerraItems.titaniumPlate, 2800, TerraItems.gammaCell, 800, TerraItems.darkSteel, 2500, TerraItems.diamondGlass, 1750, TerraItems.thermoxite, 3000));
+            addLink(
+                p(3, 1), p(4, 1), p(3, -1), p(4, -1),
+                p(-3, 1), p(-4, 1), p(-3, -1), p(-4, -1),
+                p(1, 3), p(1, 4), p(-1, 3), p(-1, 4),
+                p(1, -3), p(1, -4), p(-1, -3), p(-1, -4),
+
+                p(5, 0), p(5, 1), p(5, -1), p(6, 0), p(6, 1), p(6, -1), p(7, 0), p(7, 1), p(7, -1), 
+                p(-5, 0), p(-5, 1), p(-5, -1), p(-6, 0), p(-6, 1), p(-6, -1), p(-7, 0), p(-7, 1), p(-7, -1), 
+                p(0, 5), p(1, 5), p(-1, 5), p(0, 6), p(1, 6), p(-1, 6), p(0, 7), p(1, 7), p(-1, 7), 
+                p(0, -5), p(1, -5), p(-1, -5), p(0, -6), p(1, -6), p(-1, -6), p(0, -7), p(1, -7), p(-1, -7), 
+
+                p(5, 2), p(5, 3), p(6, 2), p(6, 3), p(5, -2), p(5, -3), p(6, -2), p(6, -3), 
+                p(-5, 2), p(-5, 3), p(-6, 2), p(-6, 3), p(-5, -2), p(-5, -3), p(-6, -2), p(-6, -3), 
+                p(2, 5), p(3, 5), p(2, 6), p(3, 6), p(-2, 5), p(-3, 5), p(-2, 6), p(-3, 6), 
+                p(2, -5), p(3, -5), p(2, -6), p(3, -6), p(-2, -5), p(-3, -5), p(-2, -6), p(-3, -6), 
+
+                p(4, 4), p(5, 4), p(4, 5), p(5, 5), 
+                p(4, -4), p(5, -4), p(4, -5), p(5, -5), 
+                p(-4, 4), p(-5, 4), p(-4, 5), p(-5, 5), 
+                p(-4, -4), p(-5, -4), p(-4, -5), p(-5, -5)
+            );
+
+            size = 5;
+            hasLiquids = true;
+            hasItems = true;
+            scaledHealth = 10000f;
+            itemCapacity = 100;
+            liquidCapacity = 5000;
+
+            craftTime = 60f * 8f;
+            consumePower(8000f / 60f);
+            consumeItems(with(TerraItems.thermoxite, 6, TerraItems.darkSteel, 8, Items.fissileMatter, 24, TerraItems.diamondDust, 12));
+            consumeLiquid(Liquids.cryofluid, 5f);
+            outputItem = new ItemStack(TerraItems.tesseract, 1);
+            lightLiquid = Liquids.cryofluid;
+
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom")
             );
 
             enableRotate();
