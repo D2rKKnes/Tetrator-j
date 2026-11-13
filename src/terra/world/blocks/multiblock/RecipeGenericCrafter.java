@@ -97,9 +97,7 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
             }
         }
 
-
         craftTime = 60f;
-
         if (!liquidOutput.isEmpty()) outputsLiquid = true;
     }
 
@@ -176,32 +174,16 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
         public void updateRecipe() {
             for (int i = recipes.size - 1; i >= 0; i--) {
                 boolean valid = true;
-
                 for (ItemStack input : recipes.get(i).inputItem) {
-                    if (items.get(input.item) < input.amount) {
-                        valid = false;
-                        break;
-                    }
+                    if (items.get(input.item) < input.amount) { valid = false; break; }
                 }
-
-                for (LiquidStack input : recipes.get(i).inputLiquid) {
-                    if (liquids.get(input.liquid) < input.amount * Time.delta) {
-                        valid = false;
-                        break;
-                    }
+                if (valid) for (LiquidStack input : recipes.get(i).inputLiquid) {
+                    if (liquids.get(input.liquid) < input.amount * Time.delta) { valid = false; break; }
                 }
-
-                for (PayloadStack input : recipes.get(i).inputPayload) {
-                    if (getPayloads().get(input.item) < input.amount) {
-                        valid = false;
-                        break;
-                    }
+                if (valid) for (PayloadStack input : recipes.get(i).inputPayload) {
+                    if (getPayloads().get(input.item) < input.amount) { valid = false; break; }
                 }
-
-                if (valid) {
-                    recipeIndex = i;
-                    return;
-                }
+                if (valid) { recipeIndex = i; return; }
             }
             recipeIndex = -1;
         }
@@ -209,54 +191,38 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
         public boolean validRecipe() {
             if (recipeIndex < 0) return false;
             for (ItemStack input : recipes.get(recipeIndex).inputItem) {
-                if (items.get(input.item) < input.amount) {
-                    return false;
-                }
+                if (items.get(input.item) < input.amount) return false;
             }
-
             for (LiquidStack input : recipes.get(recipeIndex).inputLiquid) {
-                if (liquids.get(input.liquid) < input.amount * Time.delta) {
-                    return false;
-                }
+                if (liquids.get(input.liquid) < input.amount * Time.delta) return false;
             }
-
             for (PayloadStack input : recipes.get(recipeIndex).inputPayload) {
-                if (getPayloads().get(input.item) < input.amount) {
-                    return false;
-                }
+                if (getPayloads().get(input.item) < input.amount) return false;
             }
             return true;
         }
 
         @Override
         public void updateTile() {
-            // 更新当前有效 recipe
             if (!validRecipe()) updateRecipe();
-
-            // 调用父类 updateTile 处理基础逻辑
             super.updateTile();
 
             Recipe current = getRecipe();
             if (current == null) return;
 
-            // -------------------- 液体生产 --------------------
             if (efficiency > 0 && !current.outputLiquid.isEmpty()) {
-                // 根据工厂效率计算液体产出增量
                 float inc = getProgressIncrease(craftTime / current.craftTime);
                 current.outputLiquid.each(stack -> {
-                    // 每次只产出当前 recipe 对应的液体，避免混合其他 recipe
                     handleLiquid(this, stack.liquid, Math.min(stack.amount * inc, liquidCapacity - liquids.get(stack.liquid)));
                 });
             }
 
-            // -------------------- 物品生产 --------------------
             current.outputItem.each(stack -> {
                 if (items.get(stack.item) >= itemCapacity) {
                     items.set(stack.item, itemCapacity);
                 }
             });
         }
-
 
         @Override
         public void dumpOutputs() {
@@ -269,7 +235,11 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
                     dumpPayload(payload);
                 });
             }
-            liquidOutput.each(output -> dumpLiquid(output, 2f, -1));
+            for (int i = 0; i < liquidOutput.size; i++) {
+                int direction = liquidOutputDirections != null && liquidOutputDirections.length > i
+                        ? liquidOutputDirections[i] : -1;
+                dumpLiquid(liquidOutput.get(i), 2f, direction);
+            }
         }
 
         @Override
@@ -280,16 +250,12 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
                 boolean allFull = true;
                 for (var output : getRecipe().outputLiquid) {
                     if (liquids.get(output.liquid) >= liquidCapacity - 0.001f) {
-                        if (!dumpExtraLiquid) {
-                            return false;
-                        }
+                        if (!dumpExtraLiquid) return false;
                     } else {
                         allFull = false;
                     }
                 }
-                if (allFull) {
-                    return false;
-                }
+                if (allFull) return false;
             }
             return enabled;
         }
@@ -315,7 +281,7 @@ public class RecipeGenericCrafter extends MultiBlockCrafter {
 
             progress %= 1f;
 
-            if (wasVisible) craftEffect.at(x, y);
+            if (wasVisible) craftEffect.at(x, y, rotdeg());
             updateRecipe();
         }
 
