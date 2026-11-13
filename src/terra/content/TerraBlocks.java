@@ -1203,7 +1203,7 @@ public class TerraBlocks{
             craftTime = 60f * 8f;
             consumePower(8000.0001f / 60f);
             consumeItems(with(TerraItems.thermoxite, 16 * 3, TerraItems.darkSteel, 8 * 3, Items.fissileMatter, 24 * 3, TerraItems.diamondDust, 12 * 3));
-            consumeLiquids(with(Liquids.cryofluid, 5f, TerraLiquids.fissilePlasma, 500f / 60f));
+            consumeLiquids(new LiquidStack(Liquids.cryofluid, 5f, TerraLiquids.fissilePlasma, 500f / 60f));
             outputItem = new ItemStack(TerraItems.tesseract, 1);
             lightLiquid = Liquids.cryofluid;
 
