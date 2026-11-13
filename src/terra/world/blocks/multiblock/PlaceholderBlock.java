@@ -13,17 +13,13 @@ import mindustry.world.meta.BuildVisibility;
 public class PlaceholderBlock extends Block {
     public PlaceholderBlock(String name) {
         super(name);
-
         update = true;
         squareSprite = false;
-
         destructible = true;
         breakable = false;
         solid = true;
         rebuildable = false;
-
         inEditor = false;
-
         buildVisibility = BuildVisibility.hidden;
     }
 
@@ -49,7 +45,6 @@ public class PlaceholderBlock extends Block {
 
     @SuppressWarnings("InnerClassMayBeStatic")
     public class PlaceholderBuild extends Building {
-        //check for next tick
         public boolean checkTile = false;
         public Tile linkTile;
         public ConstructBlock.ConstructBuild linkBuild;
@@ -92,11 +87,7 @@ public class PlaceholderBlock extends Block {
 
         @Override
         public float handleDamage(float amount) {
-            if (linkBuild != null) {
-                return linkBuild.handleDamage(amount);
-            } else {
-                return 0;
-            }
+            return linkBuild != null ? linkBuild.handleDamage(amount) : 0;
         }
     }
 }
