@@ -87,6 +87,7 @@ public class TerraVerilusTree {
                                     node(photonPanelLarge, () -> {});
                                 });
                                 node(thoriumReactor, () -> {
+                                    node(rtgGenerator, () -> {});
                                     node(antimatterCollider, Seq.with(new AtWave(verilus, 50)), () -> {});
                                 });
                                 node(sapt, () -> {});
@@ -102,7 +103,9 @@ public class TerraVerilusTree {
                                         node(crystalIncubator, () -> {});
                                     });
                                 });
-                                node(darkSteelWorkshop, Seq.with(new Objectives.Research(diamondGlass)), () -> {});
+                                node(darkSteelWorkshop, Seq.with(new Objectives.Research(diamondGlass)), () -> {
+                                    node(stabilizer, Seq.with(new Objectives.Research(antimatterCollider)), () -> {});
+                                });
                                 node(electricalWell, () -> {});
                                 node(ventPump, () -> {});
                             });
