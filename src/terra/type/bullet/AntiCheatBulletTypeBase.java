@@ -145,9 +145,9 @@ public abstract class AntiCheatBulletTypeBase extends BulletType{
     }
 
     @Override
-    public void hitTile(Bullet b, Building build, float initialHealth, boolean direct){
+    public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct){
         hitBuildingAntiCheat(b, build);
-        super.hitTile(b, build, initialHealth, direct);
+        super.hitTile(b, build, x, y, initialHealth, direct);
     }
 
     @Override
@@ -159,14 +159,14 @@ public abstract class AntiCheatBulletTypeBase extends BulletType{
         bullet.time = 0f;
         if(owner instanceof Teamc tc) bullet.trueOwner = tc;
         bullet.initVel(angle, speed * velocityScl);
-        if(backMove){
+        if(super.backMove){
             bullet.set(x - bullet.vel.x * Time.delta, y - bullet.vel.y * Time.delta);
         }else{
             bullet.set(x, y);
         }
         bullet.lifetime = lifetime * lifetimeScl;
         bullet.data = data;
-        bullet.drag = drag;
+        bullet.drag = super.drag;
         bullet.hitSize = hitSize;
         bullet.damage = (damage < 0 ? this.damage : damage) * bullet.damageMultiplier();
         if(bullet.trail != null){
