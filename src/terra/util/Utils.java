@@ -305,7 +305,7 @@ public final class Utils{
                     float sx2 = Mathf.lerp(x, x2, f + ofs), sy2 = Mathf.lerp(y, y2, f + ofs);
                     rect.set(sx, sy, 0f, 0f).merge(sx2, sy2).grow(width * 2f);
                     rectAlt.set(sx2, sy2, 0f, 0f).merge(Mathf.lerp(x, x2, f + ofs * 2f), Mathf.lerp(y, y2, f + ofs * 2f)).grow(width * 2f);
-                    data.buildings.intersect(rect, b -> {
+                    data.buildingTree.intersect(rect, b -> {
                         Vec2 v = Intersector.nearestSegmentPoint(x, y, x2, y2, b.x, b.y, tV);
                         if(within.get(b, v) && !collidedEntities.contains(b.id)){
                             if(sort){
