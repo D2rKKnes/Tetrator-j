@@ -6,6 +6,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.pooling.*;
 import arc.util.pooling.Pool.*;
+import arc.util.Log.*;
 import mindustry.*;
 import mindustry.entities.units.*;
 import mindustry.game.EventType.*;
@@ -29,10 +30,9 @@ public class AntiCheat{
     private float lastTime = 0f;
 
     public void setup(){
-        Triggers.listen(Trigger.update, this::update);
+        Events.run(Trigger.update, this::update);
 
         Events.on(BlockBuildBeginEvent.class, event -> {
-            //sometimes doesn't work in sandbox mode.
             if(event.breaking && event.tile.build != null && event.unit != null && event.unit.team == event.tile.build.team){
                 removeBuilding(event.tile.build);
             }
@@ -72,7 +72,7 @@ public class AntiCheat{
             }
 
             unit.team.data().updateCount(unit.type, -1);
-            unit.clearCommand();
+            unit.clearCommands();
             unit.controller().removed(unit);
 
             Groups.unit.remove(unit);
@@ -98,8 +98,11 @@ public class AntiCheat{
                 building.x = building.y = Float.NaN;
             }
 
-            if(building.sound != null) building.sound.stop();
-            building.added = false;
+            try{
+                ReflectUtils.setField(building, ReflectUtils.findField(building.getClass(), "added", true), false);
+            }catch(Exception e){
+                print(LogLevel.info, " ", e);
+            }
         }
     }
 
@@ -153,7 +156,6 @@ public class AntiCheat{
             sampler.removeAll(samplerTmp);
             samplerTmp.clear();
         }
-        //something is updating this multiple times.
         if(Time.time > lastTime){
             buildingSeq.each(b -> b.counter > 10, b -> b.build.update());
             unitSeq.each(e -> e.counter > 10, e -> e.unit.update());
@@ -223,7 +225,6 @@ public class AntiCheat{
             if(ent != null){
                 ent.excludeDuration = 2 * 60f;
             }else{
-                //EntitySampler s = new EntitySampler(entity);
                 EntitySampler s = Pools.obtain(EntitySampler.class, EntitySampler::new);
                 s.entity = entity;
                 s.excludeDuration = 2 * 60f;
