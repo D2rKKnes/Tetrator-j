@@ -62,7 +62,7 @@ public class AntiCheat{
             try{
                 ReflectUtils.setField(unit, ReflectUtils.findField(unit.getClass(), "added", true), false);
             }catch(Exception e){
-                print(LogLevel.info, " ", e);
+                Log.err(e);
             }
             if(setNaN){
                 unit.x = unit.y = unit.rotation = Float.NaN;
@@ -72,7 +72,7 @@ public class AntiCheat{
             }
 
             unit.team.data().updateCount(unit.type, -1);
-            unit.clearCommands();
+            ((mindustry.ai.types.CommandAI) unit.controller()).clearCommands();
             unit.controller().removed(unit);
 
             Groups.unit.remove(unit);
@@ -101,7 +101,7 @@ public class AntiCheat{
             try{
                 ReflectUtils.setField(building, ReflectUtils.findField(building.getClass(), "added", true), false);
             }catch(Exception e){
-                print(LogLevel.info, " ", e);
+                Log.err(e);
             }
         }
     }
