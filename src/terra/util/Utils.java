@@ -292,6 +292,81 @@ public final class Utils{
     }
 
     /** @author EyeOfDarkness */
+    public static void collideLineLarge(Team team, float x, float y, float x2, float y2, float width, int segments, boolean sort, Boolf2<Sized, Vec2> within, HitHandler handler){
+        collidedEntities.clear();
+        hitEffects.clear();
+        for(TeamData data : state.teams.present){
+            if(data.team != team && data.buildings != null){
+                for(int i = 0; i < segments; i++){
+                    float ofs = 1f / segments;
+                    float f = i / (float)segments;
+                    float sx = Mathf.lerp(x, x2, f), sy = Mathf.lerp(y, y2, f);
+                    float sx2 = Mathf.lerp(x, x2, f + ofs), sy2 = Mathf.lerp(y, y2, f + ofs);
+                    rect.set(sx, sy, 0f, 0f).merge(sx2, sy2).grow(width * 2f);
+                    rectAlt.set(sx2, sy2, 0f, 0f).merge(Mathf.lerp(x, x2, f + ofs * 2f), Mathf.lerp(y, y2, f + ofs * 2f)).grow(width * 2f);
+                    data.buildings.intersect(rect, b -> {
+                        Vec2 v = Intersector.nearestSegmentPoint(x, y, x2, y2, b.x, b.y, tV);
+                        if(within.get(b, v) && !collidedEntities.contains(b.id)){
+                            if(sort){
+                                Hit h = Pools.obtain(Hit.class, Hit::new);
+                                h.ent = b;
+                                h.x = v.x;
+                                h.y = v.y;
+                                hitEffects.add(h);
+                            }else{
+                                handler.get(v.x, v.y, b, true);
+                            }
+                            b.hitbox(hitRect);
+                            if(rectAlt.overlaps(hitRect)){
+                                collidedEntities.add(b.id);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+        for(int i = 0; i < segments; i++){
+            float ofs = 1f / segments;
+            float f = i / (float)segments;
+            float sx = Mathf.lerp(x, x2, f), sy = Mathf.lerp(y, y2, f);
+            float sx2 = Mathf.lerp(x, x2, f + ofs), sy2 = Mathf.lerp(y, y2, f + ofs);
+            rect.set(sx, sy, 0f, 0f).merge(sx2, sy2).grow(width * 2f);
+            rectAlt.set(sx2, sy2, 0f, 0f).merge(Mathf.lerp(x, x2, f + ofs * 2f), Mathf.lerp(y, y2, f + ofs * 2f)).grow(width * 2f);
+            Groups.unit.intersect(rect.x, rect.y, rect.width, rect.height, u -> {
+                if(u.team == team) return;
+                Vec2 v = Intersector.nearestSegmentPoint(x, y, x2, y2, u.x, u.y, tV);
+                if(within.get(u, v) && !collidedEntities.contains(u.id)){
+                    if(sort){
+                        Hit h = Pools.obtain(Hit.class, Hit::new);
+                        h.ent = u;
+                        h.x = v.x;
+                        h.y = v.y;
+                        hitEffects.add(h);
+                    }else{
+                        handler.get(v.x, v.y, u, true);
+                    }
+                    u.hitbox(hitRect);
+                    if(rectAlt.overlaps(hitRect)){
+                        collidedEntities.add(u.id);
+                    }
+                }
+            });
+        }
+        if(sort){
+            hit = false;
+            hitEffects.sort(h -> h.ent.dst2(x, y));
+            hitEffects.removeAll(h -> {
+                if(!hit){
+                    hit = handler.get(h.x, h.y, h.ent, true);
+                }
+                Pools.free(h);
+                return true;
+            });
+        }
+        collidedEntities.clear();
+    }
+
+    /** @author EyeOfDarkness */
     public static void collideLineRawEnemyRatio(Team team, float x, float y, float x2, float y2, float width, Boolf3<Building, Float, Boolean> buildingCons, Boolf2<Unit, Float> unitCons, Floatc2 effectHandler){
         float minRatio = 0.05f;
         collideLineRawEnemy(team, x, y, x2, y2, width, (building, direct) -> {
