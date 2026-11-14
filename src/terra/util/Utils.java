@@ -48,7 +48,7 @@ public final class Utils{
     private static float cdist;
     private static int idx;
     private static final Vec2 tV = new Vec2(), tV2 = new Vec2();
-    private static final IntSet collidedBlocks = new IntSet();
+    private static final IntSet collidedBlocks = new IntSet(), collidedEntities = new IntSet(204);
     private static final Rect rect = new Rect(), rectAlt = new Rect(), hitRect = new Rect();
     private static final BoolGrid collideLineCollided = new BoolGrid();
     private static final IntSeq lineCast = new IntSeq(), lineCastNext = new IntSeq();
