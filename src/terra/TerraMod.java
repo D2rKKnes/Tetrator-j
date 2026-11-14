@@ -27,6 +27,7 @@ import terra.graphics.shaders.*;
 
 public class TerraMod extends Mod{
     public static Links.LinkEntry[] links;
+    public static AntiCheat antiCheat;
     public TerraMod(){
         Events.on(ClientLoadEvent.class, e -> {
             try{
@@ -59,6 +60,8 @@ public class TerraMod extends Mod{
             });
         });
 
+        antiCheat = new AntiCheat();
+
         Events.on(FileTreeInitEvent.class, e -> Core.app.post(TerraCacheLayer::load));
 
         Events.on(DisposeEvent.class, e -> {
@@ -68,6 +71,7 @@ public class TerraMod extends Mod{
     
     @Override
     public void init(){
+        antiCheat.setup();
         TerraShaders.load();
         TerraIcons.init();
         TerraSettings.init();
