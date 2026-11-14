@@ -34,6 +34,10 @@ public class TerraFx {
     private static final Rand rand = new Rand();
     private static float percent = 0;
     public static final Effect
+    endRegenDisable = new Effect(30f, e -> {
+        color(Color.valueOf("f53036"));
+        Fill.square(e.x, e.y, 2.5f * Interp.pow2In.apply(e.fslope()), 45f);
+    }),
     arcSmoke = new Effect(100f, 80f, e -> {
         rand.setSeed(e.id);
 
