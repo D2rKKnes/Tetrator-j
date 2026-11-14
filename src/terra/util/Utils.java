@@ -18,6 +18,7 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.world.*;
 import mindustry.content.*;
+import mindustry.game.Teams.TeamData;
 
 import java.io.*;
 import java.util.zip.*;
