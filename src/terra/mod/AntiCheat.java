@@ -58,7 +58,7 @@ public class AntiCheat{
         if(entity instanceof Drawc draw) Groups.draw.remove(draw);
         if(entity instanceof Syncc sync) Groups.sync.remove(sync);
         if(entity instanceof Unit unit){
-            if(terra.antiCheat != null && override) terra.antiCheat.removeUnit(unit);
+            if(TerraMod.antiCheat != null && override) TerraMod.antiCheat.removeUnit(unit);
             try{
                 ReflectUtils.setField(unit, ReflectUtils.findField(unit.getClass(), "added", true), false);
             }catch(Exception e){
@@ -93,7 +93,7 @@ public class AntiCheat{
         if(entity instanceof Building building){
             Groups.build.remove(building);
             building.tile.remove();
-            if(terra.antiCheat != null && override) terra.antiCheat.removeBuilding(building);
+            if(TerraMod.antiCheat != null && override) TerraMod.antiCheat.removeBuilding(building);
             if(setNaN){
                 building.x = building.y = Float.NaN;
             }
