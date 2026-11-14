@@ -159,14 +159,10 @@ public abstract class AntiCheatBulletTypeBase extends BulletType{
         bullet.time = 0f;
         if(owner instanceof Teamc tc) bullet.trueOwner = tc;
         bullet.initVel(angle, speed * velocityScl);
-        if(super.backMove){
-            bullet.set(x - bullet.vel.x * Time.delta, y - bullet.vel.y * Time.delta);
-        }else{
-            bullet.set(x, y);
-        }
+        bullet.set(x - bullet.vel.x * Time.delta, y - bullet.vel.y * Time.delta);
         bullet.lifetime = lifetime * lifetimeScl;
         bullet.data = data;
-        bullet.drag = super.drag;
+        //bullet.drag = drag;
         bullet.hitSize = hitSize;
         bullet.damage = (damage < 0 ? this.damage : damage) * bullet.damageMultiplier();
         if(bullet.trail != null){
