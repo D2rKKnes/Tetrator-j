@@ -1875,98 +1875,173 @@ public class TerraUnitTypes {
 
             abilities.add(new AdaptedHealAbility(Float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
 
+            parts.addAll(
+                new RegionPart("-blade"){{
+                    mirror = true;
+                    outline = false;
+                    moveX = 4f;
+                    x = 4f;
+                    moveY = -2f;
+                    moveRot = 135f;
+                    xScl = yScl = 0f;
+                    growX = growY = 1f;
+                    progress = PartProgress.warmup.mul(PartProgress.reload).delay(0.33f);
+                }},
+                new RegionPart("-blade-2"){{
+                    mirror = true;
+                    outline = false;
+                    moveX = 4.5f;
+                    x = 4f;
+                    moveY = -1.2f;
+                    moveRot = 105f;
+                    xScl = yScl = 0f;
+                    growX = growY = 1f;
+                    progress = PartProgress.warmup.mul(PartProgress.reload).delay(0.66f);
+                }},
+                new RegionPart("-half"){{
+                    mirror = true;
+                    outline = false;
+                    moveX = 3f;
+                    x = 4f;
+                    progress = PartProgress.warmup.mul(PartProgress.reload);
+                }},
+                new RegionPart("-none") {{
+                    mirror = under = drawRegion = false;
+                    x = y = 0f;
+                    children.addAll(
+                        new FlarePart(){{
+                            progress = PartProgress.warmup.mul(PartProgress.reload);
+                            color1 = healColor;
+                            radius = 0;
+                            radiusTo = 30;
+                            stroke = 5f;
+                        }}
+                    );
+                }}
+            );
+
             weapons.add(
-            new Weapon(){{
-                top = false;
-                reload = 1f;
-                x = 0f;
-                y = 0f;
-                shootY = 0f;
-                rotate = true;
-                rotateSpeed = Float.POSITIVE_INFINITY;
-                mirror = false;
-                recoil = 1f;
-                inaccuracy = 30f;
-                shoot = new ShootPattern(){{
-                    shots = 3;
-                    shotDelay = 0.2f;
-                }};
-                shootCone = inaccuracy + 5f;
-                shootSound = Sounds.shootAlpha;
+            // new Weapon(){{
+            //     top = false;
+            //     reload = 1f;
+            //     x = 0f;
+            //     y = 0f;
+            //     shootY = 0f;
+            //     rotate = true;
+            //     rotateSpeed = Float.POSITIVE_INFINITY;
+            //     mirror = false;
+            //     recoil = 1f;
+            //     inaccuracy = 30f;
+            //     shoot = new ShootPattern(){{
+            //         shots = 3;
+            //         shotDelay = 0.2f;
+            //     }};
+            //     shootCone = inaccuracy + 5f;
+            //     shootSound = Sounds.shootAlpha;
 
-                bullet = new BasicBulletType(15f, Float.POSITIVE_INFINITY){{
-                    sprite = "terra-star";
-                    keepVelocity = false;
-                    width = 16f;
-                    height = 16f;
-                    shrinkX = shrinkY = 0f;
-                    trailWidth = 1.2f;
-                    trailLength = 2;
-                    shootEffect = smokeEffect = Fx.none;
-                    hitEffect = despawnEffect = TerraFx.circleFadeSmall;
-                    backColor = trailColor = hitColor = Color.valueOf("f53036");
-                    frontColor = lightColor = Color.valueOf("ff786e");
+            //     bullet = new BasicBulletType(15f, Float.POSITIVE_INFINITY){{
+            //         sprite = "terra-star";
+            //         keepVelocity = false;
+            //         width = 16f;
+            //         height = 16f;
+            //         shrinkX = shrinkY = 0f;
+            //         trailWidth = 1.2f;
+            //         trailLength = 2;
+            //         shootEffect = smokeEffect = Fx.none;
+            //         hitEffect = despawnEffect = TerraFx.circleFadeSmall;
+            //         backColor = trailColor = hitColor = Color.valueOf("f53036");
+            //         frontColor = lightColor = Color.valueOf("ff786e");
 
-                    lifetime = 50f;
-                    armorMultiplier = 0f;
-                    pierce = true;
-                    pierceBuilding = true;
-                    homingPower = 0.014f;
-                    status = TerraStatusEffects.instantDeath;
-                    statusDuration = Float.POSITIVE_INFINITY;
-                }};
-            }},
-            new Weapon(){{
-                top = false;
-                reload = 40f;
-                x = 0f;
-                y = 0f;
-                shootY = 0f;
-                rotate = true;
-                rotateSpeed = Float.POSITIVE_INFINITY;
-                mirror = false;
-                recoil = 1f;
-                inaccuracy = 15f;
-                shootCone = inaccuracy + 5f;
-                shootSound = Sounds.explosionCleroi;
+            //         lifetime = 50f;
+            //         armorMultiplier = 0f;
+            //         pierce = true;
+            //         pierceBuilding = true;
+            //         homingPower = 0.014f;
+            //         status = TerraStatusEffects.instantDeath;
+            //         statusDuration = Float.POSITIVE_INFINITY;
+            //     }};
+            // }},
+            // new Weapon(){{
+            //     top = false;
+            //     reload = 40f;
+            //     x = 0f;
+            //     y = 0f;
+            //     shootY = 0f;
+            //     rotate = true;
+            //     rotateSpeed = Float.POSITIVE_INFINITY;
+            //     mirror = false;
+            //     recoil = 1f;
+            //     inaccuracy = 15f;
+            //     shootCone = inaccuracy + 5f;
+            //     shootSound = Sounds.explosionCleroi;
 
-                bullet = new BasicBulletType(8f, Float.POSITIVE_INFINITY){{
-                    sprite = "terra-star";
-                    keepVelocity = false;
-                    width = 32f;
-                    height = 32f;
-                    shrinkX = shrinkY = 0f;
-                    trailWidth = 1.6f;
-                    trailLength = 4;
-                    shootEffect = smokeEffect = Fx.none;
-                    hitEffect = despawnEffect = new Effect(80f, 100f, e -> {
-                        color(e.color, e.foutpow());
-                        Fill.circle(e.x, e.y, 15f + e.finpow() * 32f * 8f);
-                    }).layer(Layer.bullet + 2f);
-                    backColor = trailColor = hitColor = Color.valueOf("f53036");
-                    frontColor = lightColor = Color.valueOf("ff786e");
+            //     bullet = new BasicBulletType(8f, Float.POSITIVE_INFINITY){{
+            //         sprite = "terra-star";
+            //         keepVelocity = false;
+            //         width = 32f;
+            //         height = 32f;
+            //         shrinkX = shrinkY = 0f;
+            //         trailWidth = 1.6f;
+            //         trailLength = 4;
+            //         shootEffect = smokeEffect = Fx.none;
+            //         hitEffect = despawnEffect = new Effect(80f, 100f, e -> {
+            //             color(e.color, e.foutpow());
+            //             Fill.circle(e.x, e.y, 15f + e.finpow() * 32f * 8f);
+            //         }).layer(Layer.bullet + 2f);
+            //         backColor = trailColor = hitColor = Color.valueOf("f53036");
+            //         frontColor = lightColor = Color.valueOf("ff786e");
 
-                    splashDamage = damage;
-                    splashDamageRadius = 32f * 8f;
-                    lifetime = 100f;
-                    armorMultiplier = 0f;
-                    homingPower = 0.04f;
-                    status = TerraStatusEffects.instantDeath;
-                    statusDuration = Float.POSITIVE_INFINITY;
-                }};
-            }},
-            new RepairBeamWeapon(){{
-                mirror = false;
-                shootY = x = y = 0f;
-                beamWidth = 1f;
-                repairSpeed = Float.POSITIVE_INFINITY;
-                targetBuildings = true;
-                shootCone = 360f;
-                healColor = laserColor = Color.valueOf("f53036");
-                bullet = new BulletType(){{
-                    maxRange = 30f * 8;
-                }};
-            }});
+            //         splashDamage = damage;
+            //         splashDamageRadius = 32f * 8f;
+            //         lifetime = 100f;
+            //         armorMultiplier = 0f;
+            //         homingPower = 0.04f;
+            //         status = TerraStatusEffects.instantDeath;
+            //         statusDuration = Float.POSITIVE_INFINITY;
+            //     }};
+            // }},
+            // new RepairBeamWeapon(){{
+            //     mirror = false;
+            //     shootY = x = y = 0f;
+            //     beamWidth = 1f;
+            //     repairSpeed = Float.POSITIVE_INFINITY;
+            //     targetBuildings = true;
+            //     shootCone = 360f;
+            //     healColor = laserColor = Color.valueOf("f53036");
+            //     bullet = new BulletType(){{
+            //         maxRange = 30f * 8;
+            //     }};
+            // }});
+                new Weapon(){{
+                    top = false;
+                    reload = (3 + 9) * 60f;
+                    x = y = 0f;
+                    shootY = 0f;
+                    rotate = false;
+                    mirror = false;
+                    recoil = 0f;
+                    shoot.firstShotDelay = 3f * 60f;
+                    shootCone = 150f;
+                    shootSound = TerraSounds.ExoelectricDisintegrationRayFire;
+                    chargeSound = TerraSounds.ExoelectricDisintegrationRayChargeUp;
+                    continuous = true;
+    
+                    bullet = new ContinuousLaserBulletType(){{
+                        damage = Float.POSITIVE_INFINITY;
+                        status = TerraStatusEffects.instantDeath;
+                        statusDuration = Float.POSITIVE_INFINITY;
+                        length = 4000f;
+                        width = 500f;
+                        fadeTime = 15f;
+                        drawSize = length * 4f;
+                        lifetime = 8.5f * 60f;
+                        shake = 1f;
+                        smokeEffect = despawnEffect = hitEffect = Fx.none;
+    
+                        colors = new Color[]{Color.valueOf("ff786e").a(.2f), Color.valueOf("ff786e").a(.5f), Color.valueOf("f53036"), Color.white};
+                    }};
+                }},
+            );
         }                     
             @Override
             public void init() {
