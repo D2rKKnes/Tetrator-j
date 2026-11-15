@@ -2040,7 +2040,7 @@ public class TerraUnitTypes {
     
                         colors = new Color[]{Color.valueOf("ff786e").a(.2f), Color.valueOf("ff786e").a(.5f), Color.valueOf("f53036"), Color.white};
                     }};
-                }},
+                }}
             );
         }                     
             @Override
