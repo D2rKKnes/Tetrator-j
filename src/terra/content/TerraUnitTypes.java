@@ -1903,7 +1903,7 @@ public class TerraUnitTypes {
                     outline = false;
                     moveX = -3f;
                     x = -4f;
-                    oveRot = -15f;
+                    moveRot = -15f;
                     progress = PartProgress.charge.mul(PartProgress.reload);
                 }},
                 new RegionPart("-none") {{
