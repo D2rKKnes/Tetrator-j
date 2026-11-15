@@ -18,7 +18,8 @@ public class TerraSounds {
 
     public static Sound
             railGunCharge, acceleratinglaserloop, jumpIn, shockwave,
-            shootHeavy, shootBlackhole, shootFastLaser, shootLaunch, shootAlt2, shootElectro;
+            shootHeavy, shootBlackhole, shootFastLaser, shootLaunch, shootAlt2, shootElectro,
+            ExoelectricDisintegrationRayChargeUp, ExoelectricDisintegrationRayFire; //why i don't rename this
 
     public static void load() {
         try {
