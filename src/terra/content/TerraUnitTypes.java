@@ -1857,9 +1857,9 @@ public class TerraUnitTypes {
             lightRadius = 12f * 3;
             health = armor = Float.POSITIVE_INFINITY;
             targetFlags = new BlockFlag[]{BlockFlag.core, null};
-            engineSize = 3f;
+            engineSize = 0f;
             engineOffset = 0f;
-            trailLength = 5;
+            //trailLength = 5;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
@@ -1871,7 +1871,7 @@ public class TerraUnitTypes {
             
             constructor = UnitEntity::create;
             outlines = false;
-            faceTarget = false;
+            //faceTarget = false;
 
             abilities.add(new AdaptedHealAbility(Float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
 
@@ -1885,7 +1885,7 @@ public class TerraUnitTypes {
                     moveRot = 135f;
                     xScl = yScl = 0f;
                     growX = growY = 1f;
-                    progress = PartProgress.warmup.mul(PartProgress.reload).delay(0.33f);
+                    progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.33f);
                 }},
                 new RegionPart("-blade-2"){{
                     mirror = true;
@@ -1896,25 +1896,26 @@ public class TerraUnitTypes {
                     moveRot = 105f;
                     xScl = yScl = 0f;
                     growX = growY = 1f;
-                    progress = PartProgress.warmup.mul(PartProgress.reload).delay(0.66f);
+                    progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.66f);
                 }},
                 new RegionPart("-half"){{
                     mirror = true;
                     outline = false;
-                    moveX = 3f;
-                    x = 4f;
-                    progress = PartProgress.warmup.mul(PartProgress.reload);
+                    moveX = -3f;
+                    x = -4f;
+                    oveRot = -15f;
+                    progress = PartProgress.charge.mul(PartProgress.reload);
                 }},
                 new RegionPart("-none") {{
                     mirror = under = drawRegion = false;
                     x = y = 0f;
                     children.addAll(
                         new FlarePart(){{
-                            progress = PartProgress.warmup.mul(PartProgress.reload);
+                            progress = PartProgress.charge.mul(PartProgress.reload);
                             color1 = healColor;
                             radius = 0;
-                            radiusTo = 30;
-                            stroke = 5f;
+                            radiusTo = 100;
+                            stroke = 8f;
                         }}
                     );
                 }}
@@ -2021,9 +2022,10 @@ public class TerraUnitTypes {
                     mirror = false;
                     recoil = 0f;
                     shoot.firstShotDelay = 3f * 60f;
-                    shootCone = 150f;
-                    shootSound = TerraSounds.ExoelectricDisintegrationRayFire;
+                    shootCone = 20f;
+                    initialShootSound = TerraSounds.ExoelectricDisintegrationRayFire;
                     chargeSound = TerraSounds.ExoelectricDisintegrationRayChargeUp;
+                    soundPitchMin = 1f;
                     continuous = true;
     
                     bullet = new ContinuousLaserBulletType(){{
@@ -2034,7 +2036,7 @@ public class TerraUnitTypes {
                         width = 500f;
                         fadeTime = 15f;
                         drawSize = length * 4f;
-                        lifetime = 8.5f * 60f;
+                        lifetime = 8.75f * 60f;
                         shake = 1f;
                         smokeEffect = despawnEffect = hitEffect = Fx.none;
     
