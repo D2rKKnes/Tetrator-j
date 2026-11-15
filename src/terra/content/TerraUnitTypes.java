@@ -1875,52 +1875,6 @@ public class TerraUnitTypes {
 
             abilities.add(new AdaptedHealAbility(Float.POSITIVE_INFINITY, 30f, 30f * 8, healColor){{selfHealReloadTime = 0f;}});
 
-            parts.addAll(
-                new RegionPart("-blade"){{
-                    mirror = true;
-                    outline = false;
-                    moveX = 4f;
-                    x = 4f;
-                    moveY = -2f;
-                    moveRot = 135f;
-                    xScl = yScl = 0f;
-                    growX = growY = 1f;
-                    progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.33f);
-                }},
-                new RegionPart("-blade-2"){{
-                    mirror = true;
-                    outline = false;
-                    moveX = 4.5f;
-                    x = 4f;
-                    moveY = -1.2f;
-                    moveRot = 105f;
-                    xScl = yScl = 0f;
-                    growX = growY = 1f;
-                    progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.66f);
-                }},
-                new RegionPart("-half"){{
-                    mirror = true;
-                    outline = false;
-                    moveX = -3f;
-                    x = -4f;
-                    moveRot = -15f;
-                    progress = PartProgress.charge.mul(PartProgress.reload);
-                }},
-                new RegionPart("-none") {{
-                    mirror = under = drawRegion = false;
-                    x = y = 0f;
-                    children.addAll(
-                        new FlarePart(){{
-                            progress = PartProgress.charge.mul(PartProgress.reload);
-                            color1 = healColor;
-                            radius = 0;
-                            radiusTo = 100;
-                            stroke = 8f;
-                        }}
-                    );
-                }}
-            );
-
             weapons.add(
             // new Weapon(){{
             //     top = false;
@@ -2015,7 +1969,7 @@ public class TerraUnitTypes {
             // }});
                 new Weapon(){{
                     top = false;
-                    reload = (3 + 9) * 60f;
+                    reload = 600f;
                     x = y = 0f;
                     shootY = 0f;
                     rotate = false;
@@ -2027,6 +1981,52 @@ public class TerraUnitTypes {
                     chargeSound = TerraSounds.ExoelectricDisintegrationRayChargeUp;
                     soundPitchMin = 1f;
                     continuous = true;
+
+                    parts.addAll(
+                        new RegionPart("-blade"){{
+                            mirror = true;
+                            outline = false;
+                            moveX = 5f;
+                            x = 4f;
+                            moveY = -2f;
+                            moveRot = 135f;
+                            xScl = yScl = 0f;
+                            growX = growY = 1f;
+                            progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.33f);
+                        }},
+                        new RegionPart("-blade-2"){{
+                            mirror = true;
+                            outline = false;
+                            moveX = 5.5f;
+                            x = 4f;
+                            moveY = -1.2f;
+                            moveRot = 105f;
+                            xScl = yScl = 0f;
+                            growX = growY = 1f;
+                            progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.66f);
+                        }},
+                        new RegionPart("-half"){{
+                            mirror = true;
+                            outline = false;
+                            moveX = -3f;
+                            x = -4f;
+                            moveRot = 15f;
+                            progress = PartProgress.charge.mul(PartProgress.reload);
+                        }},
+                        new RegionPart("-none") {{
+                            mirror = under = drawRegion = false;
+                            x = y = 0f;
+                            children.addAll(
+                                new FlarePart(){{
+                                    progress = PartProgress.charge.mul(PartProgress.reload);
+                                    color1 = Color.valueOf("f53036");
+                                    radius = 0;
+                                    radiusTo = 300;
+                                    stroke = 2f;
+                                }}
+                            );
+                        }}
+                    );
     
                     bullet = new ContinuousLaserBulletType(){{
                         damage = Float.POSITIVE_INFINITY;
