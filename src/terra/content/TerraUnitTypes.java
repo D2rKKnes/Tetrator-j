@@ -1967,7 +1967,7 @@ public class TerraUnitTypes {
             //         maxRange = 30f * 8;
             //     }};
             // }});
-                new Weapon(){{
+                new Weapon("terra-my-doom-weapon"){{
                     top = false;
                     reload = 600f;
                     x = y = 0f;
@@ -2022,7 +2022,7 @@ public class TerraUnitTypes {
                                     color1 = Color.valueOf("f53036");
                                     radius = 0;
                                     radiusTo = 300;
-                                    stroke = 2f;
+                                    stroke = 3f;
                                 }}
                             );
                         }}
