@@ -321,7 +321,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             Lines.stroke(w * inout);
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
-        Draw.z(Layer.bullet);
+        //Draw.z(Layer.bullet);
 
         rand.setSeed(b.id * 999L + 7452);
         for(int i = 0; i < 5; i++){
