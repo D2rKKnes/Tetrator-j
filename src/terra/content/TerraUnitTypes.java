@@ -1969,7 +1969,7 @@ public class TerraUnitTypes {
             // }});
                 new Weapon("terra-my-doom-weapon"){{
                     top = false;
-                    reload = 600f;
+                    reload = cooldownTime = 600f;
                     x = y = 0f;
                     shootY = 0f;
                     rotate = false;
@@ -1992,7 +1992,7 @@ public class TerraUnitTypes {
                             moveRot = 135f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
-                            progress = growProgress = PartProgress.charge.add(PartProgress.reload).delay(0.33f);
+                            progress = growProgress = PartProgress.charge.add(PartProgress.heat).delay(0.33f);
                         }},
                         new RegionPart("-blade-2"){{
                             mirror = true;
@@ -2003,7 +2003,7 @@ public class TerraUnitTypes {
                             moveRot = 105f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
-                            progress = growProgress = PartProgress.charge.add(PartProgress.reload).delay(0.66f);
+                            progress = growProgress = PartProgress.charge.add(PartProgress.heat).delay(0.66f);
                         }},
                         new RegionPart("-half"){{
                             mirror = true;
@@ -2011,14 +2011,14 @@ public class TerraUnitTypes {
                             moveX = -3f;
                             x = -4f;
                             moveRot = 15f;
-                            progress = PartProgress.charge.add(PartProgress.reload);
+                            progress = PartProgress.charge.add(PartProgress.heat);
                         }},
                         new RegionPart("-none") {{
                             mirror = under = drawRegion = false;
                             x = y = 0f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.charge.add(PartProgress.reload);
+                                    progress = PartProgress.charge.add(PartProgress.heat);
                                     color1 = Color.valueOf("f53036");
                                     radius = 0;
                                     radiusTo = 300;
