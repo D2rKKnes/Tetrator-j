@@ -272,7 +272,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
 
-        Draw.z(Layer.effect + 1f);
+        Draw.z(Layer.bullet - 1f);
         for(int i = 0; i < 40; i++){
             boolean alt = i < 17;
             float as    = alt ? 1f : 2.25f;
