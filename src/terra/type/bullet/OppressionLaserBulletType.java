@@ -27,7 +27,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
     private static final Rand rand = new Rand(), rand2 = new Rand();
     private static final FloatSeq lines = new FloatSeq();
 
-    public static final Color scarColor = Color.valueOf("ff786e");
+    public static final Color scarColor = Color.valueOf("f64046");
     public static final Color endColor  = Color.valueOf("f53036");
     private static final Color[] lightningColors = {Color.white, scarColor, Color.black};
 
@@ -95,7 +95,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
         hittable = collides = absorbable = keepVelocity = false;
         impact = true;
         pierceShields = pierce = true;
-        lifetime = 9f * 60f;
+        lifetime = 8.5f * 60f;
         knockback = 9f;
         shootEffect = oppressionCharge;
 
@@ -195,7 +195,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
         float sin   = Mathf.absin(Time.time, 3f, 0.35f);
         Color col = Tmp.c1.set(scarColor).mul(1f + sin);
         Draw.color(col);
-        Draw.blend(Blending.additive);
+        Draw.blend();
         for(int i = 0; i < shape.length; i += 4){
             if(i < shape.length - 4){
                 for(int j = 0; j < quad.length; j += 2){
@@ -272,7 +272,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
 
-        Draw.blend(Blending.normal);
+        Draw.z(Layer.effect + 0.01f);
         for(int i = 0; i < 40; i++){
             boolean alt = i < 17;
             float as    = alt ? 1f : 2.25f;
@@ -321,8 +321,8 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             Lines.stroke(w * inout);
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
+        Draw.z(Layer.bullet);
 
-        Draw.blend(Blending.additive);
         rand.setSeed(b.id * 999L + 7452);
         for(int i = 0; i < 5; i++){
             float d = rand.random(30f, 50f);
