@@ -195,7 +195,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
         float sin   = Mathf.absin(Time.time, 3f, 0.35f);
         Color col = Tmp.c1.set(scarColor).mul(1f + sin);
         Draw.color(col);
-        Draw.blend();
+        Draw.blend(Blending.additive);
         for(int i = 0; i < shape.length; i += 4){
             if(i < shape.length - 4){
                 for(int j = 0; j < quad.length; j += 2){
@@ -272,6 +272,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
 
+        Draw.blend(Blending.normal);
         for(int i = 0; i < 40; i++){
             boolean alt = i < 17;
             float as    = alt ? 1f : 2.25f;
@@ -321,6 +322,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
 
+        Draw.blend(Blending.additive);
         rand.setSeed(b.id * 999L + 7452);
         for(int i = 0; i < 5; i++){
             float d = rand.random(30f, 50f);
