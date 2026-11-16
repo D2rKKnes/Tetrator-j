@@ -2004,7 +2004,7 @@ public class TerraUnitTypes {
                             moveRot = -105f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
-                            progress = growProgress = PartProgress.charge.add(PartProgress.heat).delay(0.4f.curve(0f, 0.3f));
+                            progress = growProgress = PartProgress.charge.add(PartProgress.heat).delay(0.4f).curve(0f, 0.3f);
                         }},
                         new RegionPart("-half"){{
                             mirror = true;
