@@ -72,7 +72,9 @@ public class AntiCheat{
             }
 
             unit.team.data().updateCount(unit.type, -1);
-            ((mindustry.ai.types.CommandAI) unit.controller()).clearCommands();
+            if(unit.controller() instanceof mindustry.ai.types.CommandAI ai){
+                ai.clearCommands();
+            }
             unit.controller().removed(unit);
 
             Groups.unit.remove(unit);
