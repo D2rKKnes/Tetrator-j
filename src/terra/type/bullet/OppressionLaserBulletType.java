@@ -27,8 +27,8 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
     private static final Rand rand = new Rand(), rand2 = new Rand();
     private static final FloatSeq lines = new FloatSeq();
 
-    public static final Color scarColor = Color.valueOf("f64046");
-    public static final Color endColor  = Color.valueOf("f53036");
+    public static final Color scarColor = Color.valueOf("f53036");
+    public static final Color endColor  = Color.valueOf("ff786e");
     private static final Color[] lightningColors = {Color.white, scarColor, Color.black};
 
     protected float length = 5000f, width = 440f, cone = 380f, endLength = 750f;
@@ -272,7 +272,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
             drawLine(b, p.apply(f1) * trns + l, p.apply(f2) * trns + l, pos2);
         }
 
-        Draw.z(Layer.effect + 0.01f);
+        Draw.z(Layer.effect + 1f);
         for(int i = 0; i < 40; i++){
             boolean alt = i < 17;
             float as    = alt ? 1f : 2.25f;
