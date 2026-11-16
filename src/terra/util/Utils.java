@@ -297,7 +297,7 @@ public final class Utils{
         collidedEntities.clear();
         hitEffects.clear();
         for(TeamData data : state.teams.present){
-            if(data.team != team && data.buildingsTree != null){
+            if(data.team != team && data.buildingTree != null){
                 for(int i = 0; i < segments; i++){
                     float ofs = 1f / segments;
                     float f = i / (float)segments;
