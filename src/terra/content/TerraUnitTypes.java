@@ -2000,7 +2000,7 @@ public class TerraUnitTypes {
                             outline = false;
                             moveX = 6.5f;
                             x = 4f;
-                            moveY = -1.2f;
+                            moveY = -0.3f;
                             moveRot = -105f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
