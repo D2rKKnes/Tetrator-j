@@ -1992,7 +1992,7 @@ public class TerraUnitTypes {
                             moveRot = 135f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
-                            progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.33f);
+                            progress = growProgress = PartProgress.charge.add(PartProgress.reload).delay(0.33f);
                         }},
                         new RegionPart("-blade-2"){{
                             mirror = true;
@@ -2003,7 +2003,7 @@ public class TerraUnitTypes {
                             moveRot = 105f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
-                            progress = growProgress = PartProgress.charge.mul(PartProgress.reload).delay(0.66f);
+                            progress = growProgress = PartProgress.charge.add(PartProgress.reload).delay(0.66f);
                         }},
                         new RegionPart("-half"){{
                             mirror = true;
@@ -2011,37 +2011,24 @@ public class TerraUnitTypes {
                             moveX = -3f;
                             x = -4f;
                             moveRot = 15f;
-                            progress = PartProgress.charge.mul(PartProgress.reload);
+                            progress = PartProgress.charge.add(PartProgress.reload);
                         }},
                         new RegionPart("-none") {{
                             mirror = under = drawRegion = false;
                             x = y = 0f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.charge.mul(PartProgress.reload);
+                                    progress = PartProgress.charge.add(PartProgress.reload);
                                     color1 = Color.valueOf("f53036");
                                     radius = 0;
                                     radiusTo = 300;
-                                    stroke = 3f;
+                                    stroke = 3.5f;
                                 }}
                             );
                         }}
                     );
     
-                    bullet = new ContinuousLaserBulletType(){{
-                        damage = Float.POSITIVE_INFINITY;
-                        status = TerraStatusEffects.instantDeath;
-                        statusDuration = Float.POSITIVE_INFINITY;
-                        length = 4000f;
-                        width = 500f;
-                        fadeTime = 15f;
-                        drawSize = length * 4f;
-                        lifetime = 8.75f * 60f;
-                        shake = 1f;
-                        smokeEffect = despawnEffect = hitEffect = Fx.none;
-    
-                        colors = new Color[]{Color.valueOf("ff786e").a(.2f), Color.valueOf("ff786e").a(.5f), Color.valueOf("f53036"), Color.white};
-                    }};
+                    bullet = new OppressionLaserBulletType();
                 }}
             );
         }                     
