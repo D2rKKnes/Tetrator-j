@@ -18,6 +18,7 @@ import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
 
+//Original code from ProjectUnity
 public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
     private static final int detail = 26;
     private static final float timeMul = 4f;
@@ -131,14 +132,15 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
                   x - tx2, y - ty2);
     }
 
-    @Override
-    public float range(){
-        return length / 3f;
-    }
+    // @Override
+    // public float range(){
+    //     return length / 3f;
+    // }
 
     @Override
     public void init(){
         super.init();
+        range = length / 3f;
         drawSize = length * 2f;
     }
 
