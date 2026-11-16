@@ -2000,7 +2000,7 @@ public class TerraUnitTypes {
                             outline = false;
                             moveX = 6.5f;
                             x = 4f;
-                            moveY = -0.3f;
+                            moveY = 2f;
                             moveRot = -105f;
                             xScl = yScl = 0f;
                             growX = growY = 1f;
@@ -2029,7 +2029,11 @@ public class TerraUnitTypes {
                             );
                         }}
                     );
-                    bullet = new OppressionLaserBulletType();
+                    bullet = new OppressionLaserBulletType(){{
+                        damage = Float.POSITIVE_INFINITY;
+                        status = TerraStatusEffects.instantDeath;
+                        statusDuration = Float.POSITIVE_INFINITY;
+                    }};
                 }},
                 new RepairBeamWeapon(){{
                     mirror = false;
