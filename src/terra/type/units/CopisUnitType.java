@@ -1,5 +1,13 @@
 package terra.type.unit;
 
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import arc.util.*;
+import arc.func.Cons;
+import arc.*;
 import mindustry.content.*;
 import mindustry.entities.abilities.*;
 import mindustry.graphics.*;
