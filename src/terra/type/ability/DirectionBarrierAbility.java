@@ -22,6 +22,7 @@ public class DirectionBarrierAbility extends Ability{
     public boolean shrapnelSpawn = false;
     public TextureRegion shieldRegion;
     public String shieldSuffix = "-barrier";
+    public float layerOffset = 1f;
 
     public int shields;
     public float[] shieldAngles;
@@ -182,7 +183,7 @@ public class DirectionBarrierAbility extends Ability{
         float size = (Math.max(shieldRegion.width, shieldRegion.height) * Draw.scl) * 1.3f;
         Lines.stroke(1.5f);
         for(int i = 0; i < shields; i++){
-            Draw.z(z - 0.0098f);
+            Draw.z(z + layerOffset);
             Tmp.v3.trns(shieldAngles[i], distanceRadius);
             Tmp.v3.add(unit);
             float offset = available[i] ? 2f : 1.5f;
@@ -202,7 +203,7 @@ public class DirectionBarrierAbility extends Ability{
             Draw.color(Pal.shadow);
             Draw.rect(unit.type.softShadowRegion, Tmp.v3.x, Tmp.v3.y, size, size);
 
-            Draw.z(z - 0.0099f);
+            Draw.z(z + layerOffset - 0.001f);
             float engScl = shieldSize / 6f;
             float liveScl = (engScl - (engScl / 4f)) + Mathf.absin(Time.time, 2f, engScl / 4f);
             Tmp.v3.trns(shieldAngles[i], distanceRadius - engScl);
