@@ -2580,10 +2580,10 @@ public class TerraUnitTypes {
                         }};
                     }};
                 }},
-                new Weapon("terra-heavy-artillery"){{
+                new Weapon("terra-mutilation-flamethrower"){{
                     x = 70f / 4f;
                     y = -4.5f / 4f;
-                    shootY = 8f;
+                    shootY = 8.5f;
                     recoil = 1f;
                     recoilTime = 30f;
                     reload = 3f;
@@ -2616,6 +2616,27 @@ public class TerraUnitTypes {
                         keepVelocity = false;
                         hittable = false;
                         buildingDamageMultiplier = 1.3f;
+                        spawnBullets.add(new BasicBulletType(4.3f, 0){{
+                            lifetime = 19f;
+                            inaccuracy = 30f;
+                            lifeScaleRandMin = 0.2f;
+                            velocityScaleRandMin = 0.33f;
+                            createChance = 0.1f;
+                            width = height = 8;
+                            shrinkX = shrinkY = 0.33f;
+                            incendAmount = 2;
+                            incendChance = 1f;
+                            incendSpread = 2f * 8f;
+                            trailChance = 1f;
+                            trailParam = 4f;
+                            trailEffect = Fx.ballfire;
+                            sprite = "terra-plasma";
+                            frontColor = Pal.lightFlame;
+                            backColor = hitColor = trailColor = Pal.darkFlame;
+                            hitEffect = despawnEffect = Fx.none;
+                            collides = reflectable = hittable = false;
+                            despawnHit = true;
+                        }});
                     }};
                 }},
                 new ConstructWeapon("terra-eclipse-missile"){{
