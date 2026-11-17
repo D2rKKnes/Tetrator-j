@@ -13,7 +13,7 @@ public class CopisUnitType extends UnitType{
 
     public CopisUnitType(String name){
         super(name);
-        outlineColor = TerraPal.copisOutlime;
+        outlineColor = TerraPal.copisOutline;
         immunities.addAll(StatusEffects.burning, StatusEffects.melting, TerraStatusEffects.sunBurn, StatusEffects.corroded, TerraStatusEffects.radited);
         envDisabled = Env.none;
         healColor = TerraPal.pinkFront;
