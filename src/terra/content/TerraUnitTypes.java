@@ -16,6 +16,7 @@ import terra.type.bullet.*;
 import terra.type.weapons.*;
 import terra.type.ability.*;
 import terra.type.units.*;
+import terra.graphics.*;
 import mindustry.Vars;
 import mindustry.ai.*;
 import mindustry.ai.types.*;
@@ -1869,7 +1870,7 @@ public class TerraUnitTypes {
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
             researchCostMultiplier = 0f;
-            healColor = engineColor = trailColor = lightColor = Color.valueOf("f53036");
+            healColor = engineColor = trailColor = lightColor = TerraPal.endFront;
             deathExplosionEffect = new WrapEffect(TerraFx.circleFade, engineColor);
             envDisabled = Env.none;
             envEnabled = Env.any;
@@ -2025,8 +2026,8 @@ public class TerraUnitTypes {
                             children.addAll(
                                 new FlarePart(){{
                                     progress = PartProgress.charge.add(PartProgress.heat).curve(Interp.fastSlow);
-                                    color1 = Color.valueOf("f53036");
-                                    color2 = Color.valueOf("ff786e");
+                                    color1 = TerraPal.endFront;
+                                    color2 = TerraPal.endBack;
                                     radius = 0;
                                     radiusTo = 300;
                                     stroke = 5f;
@@ -2047,7 +2048,7 @@ public class TerraUnitTypes {
                     repairSpeed = Float.POSITIVE_INFINITY;
                     targetBuildings = true;
                     shootCone = 360f;
-                    healColor = laserColor = Color.valueOf("f53036");
+                    healColor = laserColor = TerraPal.endFront;
                     bullet = new BulletType(){{
                         maxRange = 30f * 8;
                     }};
@@ -2748,7 +2749,7 @@ public class TerraUnitTypes {
             );
         }};
 
-        Color greenLight = Color.valueOf("92dd7e");
+        //Color greenLight = Color.valueOf("92dd7e");
 
         flow = new ErekirUnitType("flow"){{
             speed = 1.3f;
@@ -2794,7 +2795,7 @@ public class TerraUnitTypes {
                     lightOpacity = 0.5f;
                     trailWidth = 1.1f;
                     trailLength = 7;
-                    trailColor = backColor = hitColor = lightColor = greenLight;
+                    trailColor = backColor = hitColor = lightColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = TerraFx.circleFadeSmall;
                 }};
@@ -2806,7 +2807,7 @@ public class TerraUnitTypes {
             lifetime = 90f;
             hitSize = 3f;
             outlineColor = Pal.darkOutline;
-            engineColor = trailColor = lightColor = greenLight;
+            engineColor = trailColor = lightColor = TerraPal.greenLight;
             engineLayer = Layer.effect;
             engineSize = 1.5f;
             engineOffset = 3f;
@@ -2833,7 +2834,7 @@ public class TerraUnitTypes {
                 shootOnDeath = true;
                 shake = 0.4f;
                 bullet = new ExplosionBulletType(76f, 22f){{ //damage, radius!
-                    hitColor = greenLight;
+                    hitColor = TerraPal.greenLight;
                     collidesAir = true;
                 }};
             }});
@@ -2914,7 +2915,7 @@ public class TerraUnitTypes {
                 cooldownTime = 40f;
                 shootSound = Sounds.shootArc;
                 bullet = new ChainLightningBulletType() {{
-                    lightningColor = hitColor = greenLight;
+                    lightningColor = hitColor = TerraPal.greenLight;
                     range = 120;
                     width = 7;
                     shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
@@ -2956,7 +2957,7 @@ public class TerraUnitTypes {
                     width = 12f;
                     height = 16f;
                     shrinkY = 0.1f;
-                    hitColor = lightColor = trailColor = backColor = greenLight;
+                    hitColor = lightColor = trailColor = backColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     trailWidth = 1.7f;
                     trailLength = 8;
@@ -3008,7 +3009,7 @@ public class TerraUnitTypes {
                     sideWidth = 1f;
                     sideLength = 70f;
                     length = 130f;
-                    colors = new Color[]{greenLight.cpy().a(0.4f), greenLight, Color.white};
+                    colors = new Color[]{TerraPal.greenLight.cpy().a(0.4f), TerraPal.greenLight, Color.white};
                 }};
             }},
             new Weapon("terra-green-flak-weapon"){{
@@ -3061,18 +3062,18 @@ public class TerraUnitTypes {
                     shootEffect = Fx.shootBig;
                     shrinkY = shrinkX = 0;
                     trailEffect = new Effect(10f, e -> {
-                        color(greenLight);
+                        color(TerraPal.greenLight);
                         for (int s : Mathf.signs) {
                             Drawf.tri(e.x, e.y, 2.5f, 14f * e.fslope(), e.rotation + 90f * s);
                         }
                     });
                     hitEffect = new Effect(20f, 100f, e -> {
                         e.scaled(7f, b -> {
-                            color(greenLight, b.fout());
+                            color(TerraPal.greenLight, b.fout());
                             Fill.circle(e.x, e.y, radius);
                         });
 
-                        color(greenLight);
+                        color(TerraPal.greenLight);
                         stroke(e.fout() * 3f);
                         Lines.circle(e.x, e.y, radius);
 
@@ -3088,14 +3089,14 @@ public class TerraUnitTypes {
                         Fill.circle(e.x, e.y, 12f * e.fout());
                         color();
                         Fill.circle(e.x, e.y, 6f * e.fout());
-                        Drawf.light(e.x, e.y, radius * 1.6f, greenLight, e.fout());
+                        Drawf.light(e.x, e.y, radius * 1.6f, TerraPal.greenLight, e.fout());
                     });
                     healAmount = 0;
                     trailRotation = true;
                     trailInterval = 3f;
                     trailLength = 6;
                     trailWidth = 2.3f;
-                    lightningColor = backColor = trailColor = hitColor = greenLight;
+                    lightningColor = backColor = trailColor = hitColor = TerraPal.greenLight;
                 }};
             }});
         }};
@@ -3129,7 +3130,7 @@ public class TerraUnitTypes {
                 lifetime = Fx.overdriveWave.lifetime;
                 sizeFrom = 7f;
                 sizeTo = 0f;
-                colorFrom = colorTo = greenLight;
+                colorFrom = colorTo = TerraPal.greenLight;
                 length = hitSize * 2;
             }})));
             parts.add(new HoverPart(){{
@@ -3142,7 +3143,7 @@ public class TerraUnitTypes {
                 circles = 3;
                 sides = 360;
                 layerOffset = -0.001f;
-                color = greenLight;
+                color = TerraPal.greenLight;
             }},
             new HoverPart(){{
                 x = 0f;
@@ -3154,7 +3155,7 @@ public class TerraUnitTypes {
                 circles = 2;
                 sides = 360;
                 layerOffset = -0.001f;
-                color = greenLight;
+                color = TerraPal.greenLight;
             }});
             weapons.add(new Weapon("terra-center"){{
                 reload = 262f;
@@ -3174,7 +3175,7 @@ public class TerraUnitTypes {
                         mirror = false;
                         layerOffset = 50f;
                         progress = growProgress = PartProgress.recoil;
-                        color = greenLight;
+                        color = TerraPal.greenLight;
                         xScl = yScl = 0.4f;
                         growX = growY = -xScl;
                     }}
@@ -3184,7 +3185,7 @@ public class TerraUnitTypes {
                     sprite = "terra-plasma";
                     width = height = 18f;
                     shrinkY = 0f;
-                    backColor = trailColor = hitColor = lightColor = greenLight;
+                    backColor = trailColor = hitColor = lightColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     lightOpacity = 0.8f;
                     shootEffect = smokeEffect = hitEffect = despawnEffect = Fx.none;
@@ -3203,7 +3204,7 @@ public class TerraUnitTypes {
                         circles = 3;
                         sides = 360;
                         layerOffset = -0.001f;
-                        color = greenLight;
+                        color = TerraPal.greenLight;
                     }});
                     trailInterval = 4f;
                     trailLength = 22;
@@ -3221,7 +3222,7 @@ public class TerraUnitTypes {
                         sprite = "terra-plasma";
                         width = height = 18f;
                         shrinkY = 0f;
-                        backColor = trailColor = hitColor = lightColor = greenLight;
+                        backColor = trailColor = hitColor = lightColor = TerraPal.greenLight;
                         frontColor = Color.white;
                         lightOpacity = 0.8f;
                         splashDamage = 60f;
@@ -3243,7 +3244,7 @@ public class TerraUnitTypes {
                             circles = 3;
                             sides = 360;
                             layerOffset = -0.001f;
-                            color = greenLight;
+                            color = TerraPal.greenLight;
                         }});
                         intervalBullets = fragBullets = 5;
                         intervalDelay = 3f;
@@ -3254,7 +3255,7 @@ public class TerraUnitTypes {
                             sprite = "terra-plasma";
                             width = height = 5f;
                             shrinkY = shrinkX = 0.3f;
-                            backColor = trailColor = hitColor = lightColor = greenLight;
+                            backColor = trailColor = hitColor = lightColor = TerraPal.greenLight;
                             frontColor = Color.white;
                             lightOpacity = 0.3f;
                             reflectable = false;
@@ -3314,7 +3315,7 @@ public class TerraUnitTypes {
                     weaveMag = 1.5f;
                     weaveScale = 6f;
                     homingPower = 0.14f;
-                    trailColor = backColor = hitColor = lightColor = greenLight;
+                    trailColor = backColor = hitColor = lightColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = TerraFx.circleFade;
                 }};
@@ -3349,7 +3350,7 @@ public class TerraUnitTypes {
                     splashDamage = 38f;
                     blockArmorMultiplier = 0.7f;
                     lifetime = 37f;
-                    trailColor = backColor = hitColor = greenLight;
+                    trailColor = backColor = hitColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     hitEffect = despawnEffect = Fx.blastExplosion;
                 }};
@@ -3382,7 +3383,7 @@ public class TerraUnitTypes {
                     width = 16f;
                     height = 21f;
                     shrinkY = 0f;
-                    hitColor = lightColor = lightningColor = trailColor = backColor = greenLight;
+                    hitColor = lightColor = lightningColor = trailColor = backColor = TerraPal.greenLight;
                     frontColor = Color.white;
                     trailWidth = 2f;
                     trailLength = 13;
@@ -3408,7 +3409,7 @@ public class TerraUnitTypes {
             hitSize = 12f;
             rotateSpeed = 4f;
             health = 1000;
-            armor = 5f;
+            armor = 6f;
             stepShake = 0.05f;
 
             stepSound = Sounds.walkerStepSmall;
@@ -3430,11 +3431,11 @@ public class TerraUnitTypes {
             shadowElevation = 0.2f;
             groundLayer = Layer.legUnit - 1f;
 
-            abilities.add(new DirectionBarrierAbility(2, 0.05f, 13f, 150f, 15f / 60f, 20f / 60f, 14f, Color.valueOf("8b7be8")));
+            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 15f, TerraPal.violetFront));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
-                shootSoundVolume = 0.5f;
+                shootSoundVolume = 0.4f;
                 x = -19f / 4f;
                 y = 11f / 4f;
                 shootY = 5f;
@@ -3444,9 +3445,54 @@ public class TerraUnitTypes {
                 cooldownTime = 25f;
                 smoothReloadSpeed = 0.15f;
                 recoil = 2f;
+                inaccuracy = 0.5f;
                 shoot = new ShootPattern(){{
                     shots = 4;
                     shotDelay = 5f;
+                    firstShotDelay = 15f;
+                }};
+                parts.addAll(
+                    new RegionPart("-none") {{
+                        mirror = under = drawRegion = false;
+                        x = 0f;
+                        y = 3.5f;
+                        children.addAll(
+                            new FlarePart(){{
+                                progress = PartProgress.charge.curve(Interp.fastSlow);
+                                color1 = TerraPal.violetBack;
+                                color2 = TerraPal.violetFront;
+                                radius = 0;
+                                radiusTo = 5;
+                                stroke = 1.6f;
+                                sides = 2;
+                                moveY = 1.5f;
+                            }}
+                        );
+                    }}
+                );
+                bullet = new BasicBulletType(5.8f, 32.5f){{
+                    lifetime = 68f;
+                    //sprite = "terra-strike";
+                    reflectable = false;
+                    followAimSpeed = 4.8f;
+                    width = 8f;
+                    height = 9f;
+                    shrinkY = 0f;
+                    hitColor = lightColor = lightningColor = trailColor = backColor = TerraPal.violetBack;
+                    frontColor = TerraPal.violetFront;
+                    trailWidth = 0.9f;
+                    trailLength = 4;
+                    armorMultiplier = 0.8f;
+                    blockArmorMultiplier = 1.1f;
+                    parts.add(new FlarePart(){{
+                        //progress = PartProgress.charge.curve(Interp.fastSlow);
+                        color1 = TerraPal.violetBack;
+                        color2 = TerraPal.violetFront;
+                        radius = 5;
+                        radiusTo = 5;
+                        stroke = 1.6f;
+                        sides = 2;
+                    }});
                 }};
             }});
         }};
