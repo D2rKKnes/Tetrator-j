@@ -60,6 +60,11 @@ public class TerraUnitTypes {
     //doom & despair
     calamity, 
     endSpawn, endGuard, endBattleship, end,
+    //violet copis
+    invader, 
+    //pink copis
+    //lime copis
+    //blue copis
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
@@ -3394,6 +3399,50 @@ public class TerraUnitTypes {
                     smokeEffect = Fx.shootSmokeSquareBig;
                     despawnSound = Sounds.unitExplode1;
                 }};
+            }});
+        }};
+
+        invader = new ErekirUnitType("invader"){{
+            speed = 1.1f;
+            drag = 0.1f;
+            hitSize = 12f;
+            rotateSpeed = 4f;
+            health = 1000;
+            armor = 5f;
+            stepShake = 0.05f;
+
+            stepSound = Sounds.walkerStepSmall;
+
+            legCount = 4;
+            legLength = 14f;
+            lockLegBase = true;
+            legContinuousMove = true;
+            legExtension = -3f;
+            legBaseOffset = 5f;
+            legMaxLength = 1.1f;
+            legMinLength = 0.2f;
+            legLengthScl = 0.95f;
+            legForwardScl = 0.7f;
+
+            legMoveSpace = 1f;
+            hovering = true;
+
+            shadowElevation = 0.2f;
+            groundLayer = Layer.legUnit - 1f;
+
+            abilities.add(new DirectionBarrierAbility(2, 3f, 12f, 150f, 15f / 60f, 0.1f, 10f, Color.valueOf("8b7be8")));
+
+            weapons.add(new Weapon("terra-violet-mount"){{
+                shootSound = TerraSounds.shootFastLaser;
+                x = -19f / 4f;
+                y = 11f / 4f;
+                shootY = 5f;
+                reload = 45f;
+                layerOffset = -0.002f;
+                heatColor = Color.red;
+                cooldownTime = 25f;
+                smoothReloadSpeed = 0.15f;
+                recoil = 2f;
             }});
         }};
 
