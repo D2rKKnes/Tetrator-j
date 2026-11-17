@@ -1,4 +1,4 @@
-package terra.type.unit;
+package terra.type.units;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
