@@ -140,7 +140,7 @@ public class OppressionLaserBulletType extends AntiCheatBulletTypeBase{
     @Override
     public void init(){
         super.init();
-        range = length / 3f;
+        range = length * 0.9f;
         drawSize = length * 2f;
     }
 
