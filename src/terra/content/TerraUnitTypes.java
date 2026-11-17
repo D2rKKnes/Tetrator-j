@@ -3402,7 +3402,7 @@ public class TerraUnitTypes {
             }});
         }};
 
-        invader = new ErekirUnitType("invader"){{
+        invader = new CopisUnitType("invader"){{
             speed = 1.1f;
             drag = 0.1f;
             hitSize = 12f;
@@ -3430,10 +3430,11 @@ public class TerraUnitTypes {
             shadowElevation = 0.2f;
             groundLayer = Layer.legUnit - 1f;
 
-            abilities.add(new DirectionBarrierAbility(2, 3f, 12f, 150f, 15f / 60f, 0.1f, 10f, Color.valueOf("8b7be8")));
+            abilities.add(new DirectionBarrierAbility(2, 0.05f, 12f, 150f, 15f / 60f, 20f / 60f, 13.5f, Color.valueOf("8b7be8")));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
+                shootSoundVolume = 0.5f;
                 x = -19f / 4f;
                 y = 11f / 4f;
                 shootY = 5f;
@@ -3443,6 +3444,10 @@ public class TerraUnitTypes {
                 cooldownTime = 25f;
                 smoothReloadSpeed = 0.15f;
                 recoil = 2f;
+                shoot = new ShootPattern() {{
+                    shots = 4;
+                    shotDelay = 5f;
+                }});
             }});
         }};
 
