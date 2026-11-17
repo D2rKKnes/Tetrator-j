@@ -3123,7 +3123,7 @@ public class TerraUnitTypes {
             immunities = ObjectSet.with(
                 StatusEffects.burning, StatusEffects.melting, StatusEffects.wet, StatusEffects.slow, StatusEffects.corroded
             );
-            abilities.add(new SappingFieldAbility(StatusEffects.corroded, 3 * 60f, 5 * 60f, hitSize * 2, greenLight, new MultiEffect(Fx.overdriveWave, new ParticleEffect(){{
+            abilities.add(new SappingFieldAbility(StatusEffects.corroded, 3 * 60f, 5 * 60f, hitSize * 2, TerraPal.greenLight, new MultiEffect(Fx.overdriveWave, new ParticleEffect(){{
                 particles = 28; 
                 cone = 360f; 
                 interp = Interp.circleOut; 
@@ -3277,7 +3277,7 @@ public class TerraUnitTypes {
                             trailInterval = lifetime / 2 + 0.01f;
                             createChance = 0.8f;
                         }};
-                        hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, greenLight), new Effect(60f, 100f, e -> {
+                        hitEffect = despawnEffect = new MultiEffect(TerraFx.circleFadeBig, new WrapEffect(Fx.shootQuellPulse, TerraPal.greenLight), new Effect(60f, 100f, e -> {
                             float circleRad = 5f + e.finpow() * 40f;
                             color(e.color, e.foutpow());
                             Fill.circle(e.x, e.y, circleRad);
