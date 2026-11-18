@@ -3433,7 +3433,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 15.5f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 16f, TerraPal.violetFront));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
@@ -3443,8 +3443,6 @@ public class TerraUnitTypes {
                 shootY = 5f;
                 reload = 45f;
                 layerOffset = -0.002f;
-                heatColor = Color.red;
-                cooldownTime = 25f;
                 smoothReloadSpeed = 0.15f;
                 recoil = 2f;
                 inaccuracy = 1f;
@@ -3463,33 +3461,56 @@ public class TerraUnitTypes {
                                 progress = PartProgress.charge.curve(Interp.fastSlow);
                                 color1 = TerraPal.violetFront;
                                 radius = 0;
-                                radiusTo = 8;
-                                stroke = 2f;
+                                radiusTo = 9;
+                                stroke = 2.5f;
                                 sides = 2;
                                 moveY = 1.5f;
                             }}
                         );
                     }}
                 );
-                bullet = new BasicBulletType(5.2f, 32.5f){{
+                bullet = new BasicBulletType(5.2f, 35f){{
                     lifetime = 25f;
                     sprite = "circle-bullet";
                     reflectable = false;
-                    width = 8f;
-                    height = 7f;
+                    width = 3.5f;
+                    height = 3.5f;
                     shrinkY = 0f;
-                    hitColor = lightColor = lightningColor = trailColor = backColor = TerraPal.violetFront;
+                    hitColor = lightColor = trailColor = backColor = TerraPal.violetFront;
                     frontColor = Color.white;
-                    trailWidth = 0.9f;
+                    trailWidth = 1.1f;
                     trailLength = 4;
                     armorMultiplier = 0.8f;
                     blockArmorMultiplier = 1.1f;
                     parts.add(new FlarePart(){{
                         color1 = TerraPal.violetFront;
-                        radius = radiusTo = 8;
-                        stroke = 2f;
+                        radius = radiusTo = 9;
+                        stroke = 2.5f;
                         sides = 2;
                     }});
+                    shootEffect = Fx.none;
+                    smokeEffect = Fx.shootSmokeSquare;
+                    despawnEffect = hitEffect = new Effect(15, e -> {
+                        Draw.z(Layer.effect);
+                        color(Color.white, TerraPal.violetFront, e.fin());
+                        stroke(0.5f + e.fout());
+                        randLenVectors(e.id, 5, e.fin() * 15f, (x, y) -> {
+                            float ang = Mathf.angle(x, y);
+                            lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f);
+                        });
+                        Drawf.light(e.x, e.y, 20f, e.color, 0.6f * e.fout());
+
+                        stroke(1f);
+                        float rad = Mathf.lerp(9f, 0f, e.fin());
+                        Draw.color(TerraPal.violetFront);
+                        for(int j = 0; j < 2; j++){
+                            Drawf.tri(e.x, e.y, 2.5f, rad, e.rotation + j * 180f);
+                        }
+                        Draw.color(Color.white);
+                        for(int j = 0; j < 2; j++){
+                            Drawf.tri(e.x, e.y, 2.5f * 0.5f, rad * 0.5f, e.rotation + j * 180f);
+                        }
+                    });
                 }};
             }});
         }};
