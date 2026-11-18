@@ -70,6 +70,18 @@ public class DirectionBarrierAbility extends Ability{
     }
 
     @Override
+    public void addStats(Table t){
+        super.addStats(t);
+        t.add(abilityStat("barriercount", shields));
+        t.row(); 
+        t.add(abilityStat("barrierhealth", Strings.autoFixed(health, 2)));
+        t.row();
+        t.add(abilityStat("regen", Strings.autoFixed(regen * 60f, 2)));
+        t.row();
+        t.add(abilityStat("barrierdownregen", Strings.autoFixed(disableRegen * 60f, 2)));
+    }
+
+    @Override
     public Ability copy(){
         DirectionBarrierAbility instance = new DirectionBarrierAbility(shields, shieldSpeed, shieldSize, maxHealth, shieldRegen, disableRegen, distanceRadius, healthBarColor);
         instance.explosiveReflectDamageMultiplier = explosiveReflectDamageMultiplier;
