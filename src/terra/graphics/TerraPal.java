@@ -15,12 +15,13 @@ public class TerraPal{
 
     violetFront = Color.valueOf("8b7be8"),
     violetBack = Color.valueOf("6957d1"),
-    limeFront = Color.valueOf("000000"),
-    limeBack = Color.valueOf("000000"),
+    limeFront = Color.valueOf("c1f179"),
+    limeBack = Color.valueOf("84b23f"),
     pinkFront = Color.valueOf("fa88d6"),
-    pinkBack = Color.valueOf("000000"),
-    blueFront = Color.valueOf("000000"),
-    blueBack = Color.valueOf("000000"),
+    pinkBack = Color.valueOf("c5439c"),
+    
+    blueFront = Color.valueOf("8aa3f4"),
+    blueBack = Color.valueOf("6974c4"),
     endFront = Color.valueOf("f53036"),
     endBack = Color.valueOf("ff786e"),
     greenLight = Color.valueOf("92dd7e")
