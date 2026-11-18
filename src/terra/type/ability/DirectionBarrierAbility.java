@@ -1,10 +1,13 @@
 package terra.type.ability;
 
 import arc.*;
+import arc.audio.*;
+import arc.func.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
+import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.content.*;
@@ -13,6 +16,7 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
+import mindustry.ui.*;
 
 public class DirectionBarrierAbility extends Ability{
     protected final float shieldWidth = 7f;
@@ -23,6 +27,9 @@ public class DirectionBarrierAbility extends Ability{
     public TextureRegion shieldRegion;
     public String shieldSuffix = "-barrier";
     public float layerOffset = 1f;
+    public Sound breakSound = Sounds.shieldBreakSmall;
+    public Sound hitSound = Sounds.shieldHit;
+    public float hitSoundVolume = 0.08f;
 
     public int shields;
     public float[] shieldAngles;
@@ -74,9 +81,9 @@ public class DirectionBarrierAbility extends Ability{
         super.addStats(t);
         t.add(abilityStat("barriercount", shields));
         t.row(); 
-        t.add(abilityStat("barrierhealth", Strings.autoFixed(health, 2)));
+        t.add(abilityStat("barrierhealth", Strings.autoFixed(maxHealth, 2)));
         t.row();
-        t.add(abilityStat("regen", Strings.autoFixed(regen * 60f, 2)));
+        t.add(abilityStat("regen", Strings.autoFixed(shieldRegen * 60f, 2)));
         t.row();
         t.add(abilityStat("barrierdownregen", Strings.autoFixed(disableRegen * 60f, 2)));
     }
@@ -139,7 +146,12 @@ public class DirectionBarrierAbility extends Ability{
                             hitTimes[n.id] = blinkTime;
                             b.team(unit.team());
                             b.rotation(angC);
-                            if(healths[n.id] < 0) available[n.id] = false;
+                            if(healths[n.id] < 0){
+                                available[n.id] = false;
+                                breakSound.at(b.x, b.y);
+                            }else{
+                                hitSound.at(b.x, b.y, 1f + Mathf.range(0.1f), hitSoundVolume);
+                            }
                         }
                     });
                 }
