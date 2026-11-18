@@ -3503,11 +3503,11 @@ public class TerraUnitTypes {
                         float rad = Mathf.lerp(9f, 0f, e.fin());
                         Draw.color(TerraPal.violetFront);
                         for(int j = 0; j < 2; j++){
-                            Drawf.tri(e.x, e.y, 2.5f, rad, 90f + j * 180f);
+                            Drawf.tri(e.x, e.y, 2.5f, rad, j * 180f);
                         }
                         Draw.color(Color.white);
                         for(int j = 0; j < 2; j++){
-                            Drawf.tri(e.x, e.y, 2.5f * 0.5f, rad * 0.5f, 90f + j * 180f);
+                            Drawf.tri(e.x, e.y, 2.5f * 0.5f, rad * 0.5f, j * 180f);
                         }
                     });
                 }};
