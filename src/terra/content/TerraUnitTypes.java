@@ -3404,7 +3404,7 @@ public class TerraUnitTypes {
         }};
 
         invader = new CopisUnitType("invader"){{
-            speed = 1.1f;
+            speed = 1.0f;
             drag = 0.1f;
             hitSize = 12f;
             rotateSpeed = 4f;
@@ -3415,6 +3415,7 @@ public class TerraUnitTypes {
             stepSound = Sounds.walkerStepSmall;
 
             legCount = 4;
+            legGroupSize = 1;
             legLength = 14f;
             lockLegBase = true;
             legContinuousMove = true;
@@ -3430,8 +3431,9 @@ public class TerraUnitTypes {
 
             shadowElevation = 0.2f;
             groundLayer = Layer.legUnit - 1f;
+            constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 15f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 15.5f, TerraPal.violetFront));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
@@ -3445,11 +3447,11 @@ public class TerraUnitTypes {
                 cooldownTime = 25f;
                 smoothReloadSpeed = 0.15f;
                 recoil = 2f;
-                inaccuracy = 0.5f;
+                inaccuracy = 1f;
                 shoot = new ShootPattern(){{
                     shots = 4;
                     shotDelay = 5f;
-                    firstShotDelay = 15f;
+                    firstShotDelay = 20f;
                 }};
                 parts.addAll(
                     new RegionPart("-none") {{
@@ -3459,38 +3461,33 @@ public class TerraUnitTypes {
                         children.addAll(
                             new FlarePart(){{
                                 progress = PartProgress.charge.curve(Interp.fastSlow);
-                                color1 = TerraPal.violetBack;
-                                color2 = TerraPal.violetFront;
+                                color1 = TerraPal.violetFront;
                                 radius = 0;
-                                radiusTo = 5;
-                                stroke = 1.6f;
+                                radiusTo = 8;
+                                stroke = 2f;
                                 sides = 2;
                                 moveY = 1.5f;
                             }}
                         );
                     }}
                 );
-                bullet = new BasicBulletType(5.8f, 32.5f){{
-                    lifetime = 68f;
-                    //sprite = "terra-strike";
+                bullet = new BasicBulletType(5.2f, 32.5f){{
+                    lifetime = 25f;
+                    sprite = "circle-bullet";
                     reflectable = false;
-                    followAimSpeed = 4.8f;
                     width = 8f;
-                    height = 9f;
+                    height = 7f;
                     shrinkY = 0f;
-                    hitColor = lightColor = lightningColor = trailColor = backColor = TerraPal.violetBack;
-                    frontColor = TerraPal.violetFront;
+                    hitColor = lightColor = lightningColor = trailColor = backColor = TerraPal.violetFront;
+                    frontColor = Color.white;
                     trailWidth = 0.9f;
                     trailLength = 4;
                     armorMultiplier = 0.8f;
                     blockArmorMultiplier = 1.1f;
                     parts.add(new FlarePart(){{
-                        //progress = PartProgress.charge.curve(Interp.fastSlow);
-                        color1 = TerraPal.violetBack;
-                        color2 = TerraPal.violetFront;
-                        radius = 5;
-                        radiusTo = 5;
-                        stroke = 1.6f;
+                        color1 = TerraPal.violetFront;
+                        radius = radiusTo = 8;
+                        stroke = 2f;
                         sides = 2;
                     }});
                 }};
