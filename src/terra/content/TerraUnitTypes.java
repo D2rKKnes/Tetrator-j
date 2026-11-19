@@ -3544,7 +3544,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 350f, 25f / 60f, 40f / 60f, 23f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 500f, 40f / 60f, 60f / 60f, 23f, TerraPal.violetFront));
 
             weapons.add(
                 new Weapon("terra-violet-laser-weapon"){{
