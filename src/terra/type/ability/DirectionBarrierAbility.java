@@ -122,21 +122,22 @@ public class DirectionBarrierAbility extends Ability{
             }
             nodes.add(ts);
         }
-        if(timer.get(1.5f)){
-            Groups.bullet.intersect(Tmp.r1.x, Tmp.r1.y, Tmp.r1.width, Tmp.r1.height, b -> {
-                if(b.team != unit.team && b.type.reflectable && !(b.type instanceof ContinuousLaserBulletType || b.type instanceof LaserBulletType) && !b.type.scaleLife && b.vel().len() > 0.1f){
-                    b.hitbox(Tmp.r2);
-                    Tmp.r3.set(Tmp.r2).grow(shieldWidth).move(b.vel.x / 2f, b.vel.y / 2f);
-                    Tmp.r2.grow(shieldWidth);
-                    nodes.each(n -> {
-                        if(!available[n.id]) return;
+        //if(timer.get(1.5f)){
+        Groups.bullet.intersect(Tmp.r1.x, Tmp.r1.y, Tmp.r1.width, Tmp.r1.height, b -> {
+            if(b.team != unit.team && b.type.absorbable && !(b.type instanceof ContinuousLaserBulletType || b.type instanceof LaserBulletType) && !b.type.scaleLife && b.vel().len() > 0.1f){
+                b.hitbox(Tmp.r2);
+                Tmp.r3.set(Tmp.r2).grow(shieldWidth).move(b.vel.x / 2f, b.vel.y / 2f);
+                Tmp.r2.grow(shieldWidth);
+                nodes.each(n -> {
+                    if(!available[n.id]) return;
 
-                        if(Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r2) != null || Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r3) != null){
-                            float d = getBulletDamage(b.type) * (b.damage() / (b.type.damage * b.damageMultiplier()));
-                            healths[n.id] -= d;
+                    if(Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r2) != null || Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r3) != null){
+                        float d = getBulletDamage(b.type) * (b.damage() / (b.type.damage * b.damageMultiplier()));
+                        healths[n.id] -= d;
+                        if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
                             float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
-
+        
                             if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn){
                                 for(int i = 0; i < 3; i++){
                                     float off = (i * 20f - (3 - 1) * 20f / 2f);
@@ -146,17 +147,20 @@ public class DirectionBarrierAbility extends Ability{
                             hitTimes[n.id] = blinkTime;
                             b.team(unit.team());
                             b.rotation(angC);
-                            if(healths[n.id] < 0){
-                                available[n.id] = false;
-                                breakSound.at(b.x, b.y);
-                            }else{
-                                hitSound.at(b.x, b.y, 1f + Mathf.range(0.1f), hitSoundVolume);
-                            }
+                        }else{
+                            b.absorb();
                         }
-                    });
-                }
-            });
-        }
+                        if(healths[n.id] < 0){
+                            available[n.id] = false;
+                            breakSound.at(b.x, b.y);
+                        }else{
+                            hitSound.at(b.x, b.y, 1f + Mathf.range(0.1f), hitSoundVolume);
+                        }
+                    }
+                });
+            }
+        });
+        //}
         for(int i = 0; i < shields; i++){
             if(available[i]){
                 healths[i] = Math.min(healths[i] + (shieldRegen * Time.delta), maxHealth);
