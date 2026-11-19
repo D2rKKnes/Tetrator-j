@@ -1,5 +1,6 @@
 package terra.type.bullet;
 
+import arc.audio.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -16,17 +17,17 @@ public class TeslaBulletType extends BasicBulletType {
     public float auraStroke = 2f;
     public float auraAlpha = 0.2f;
 
-    public float lightningDamage = -1f;
-    public float lightningInterval = 10f;
-    public float lightningWidth = 5f;
-    public float lightningChance = 1f;
-    public Sound lightningShootSound = Sounds.shootArc;
-    public float lightningSoundVolume = 0.2f;
+    public float auraLightningDamage = -1f;
+    public float auraLightningInterval = 10f;
+    public float auraLightningWidth = 5f;
+    public float auraLightningChance = 1f;
+    public Sound auraLightningShootSound = Sounds.shootArc;
+    public float auraLightningSoundVolume = 0.2f;
 
     public Color auraColor = backColor;
-    public Color lightningColor = auraColor;
+    public Color auraLightningColor = auraColor;
 
-    protected float lightningTimer = 0f;
+    protected float auraLightningTimer = 0f;
 
     public TeslaBulletType(float speed, float damage) {
         super(speed, damage);
@@ -35,25 +36,25 @@ public class TeslaBulletType extends BasicBulletType {
         this.shrinkY = 0f;
         this.sprite = "circle-bullet";
         this.auraColor = backColor;
-        this.lightningColor = auraColor;
+        this.auraLightningColor = auraColor;
     }
 
     @Override
     public void init(Bullet b) {
         super.init(b);
-        lightningTimer = 0f;
+        auraLightningTimer = 0f;
     }
 
     @Override
     public void update(Bullet b) {
         super.update(b);
 
-        if (lightningChance <= 0f) return;
+        if (auraLightningChance <= 0f) return;
 
-        lightningTimer += Time.delta;
-        if (lightningTimer >= lightningInterval) {
-            lightningTimer = 0f;
-            if (Mathf.chance(lightningChance)) {
+        auraLightningTimer += Time.delta;
+        if (auraLightningTimer >= auraLightningInterval) {
+            auraLightningTimer = 0f;
+            if (Mathf.chance(auraLightningChance)) {
                 spawnLightning(b);
             }
         }
@@ -63,20 +64,20 @@ public class TeslaBulletType extends BasicBulletType {
         float angle = Mathf.random(360f);
         float endX = b.x + Mathf.cosDeg(angle) * auraRadius;
         float endY = b.y + Mathf.sinDeg(angle) * auraRadius;
-        Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage,
+        Lightning.create(b, auraLightningColor, auraLightningDamage < 0 ? damage : auraLightningDamage,
                 b.x, b.y, angle, (int) auraRadius);
-        if (lightningShootSound != null) {
-            lightningShootSound.at(b.x, b.y, 1f, lightningSoundVolume);
+        if (auraLightningShootSound != null) {
+            auraLightningShootSound.at(b.x, b.y, 1f, auraLightningSoundVolume);
         }
         int steps = Math.max(1, (int) (auraRadius / 4f));
         for (int i = 1; i <= steps; i++) {
             float t = i / (float) steps;
             float px = Mathf.lerp(b.x, endX, t);
             float py = Mathf.lerp(b.y, endY, t);
-            Damage.damage(b.team, px, py, lightningWidth,
-                    lightningDamage < 0 ? damage : lightningDamage);
-            if (status != StatusEffect.none) {
-                mindustry.entities.Units.nearby(b.team, px, py, lightningWidth, unit -> {
+            Damage.damage(b.team, px, py, auraLightningWidth,
+                    auraLightningDamage < 0 ? damage : auraLightningDamage);
+            if (status != null) {
+                mindustry.entities.Units.nearby(b.team, px, py, auraLightningWidth, unit -> {
                     if (unit != null && unit.isValid()) {
                         unit.apply(status, statusDuration);
                     }
