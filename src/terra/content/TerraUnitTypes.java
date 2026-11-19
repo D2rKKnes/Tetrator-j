@@ -3621,7 +3621,7 @@ public class TerraUnitTypes {
                             alpha(auraAlpha * e.fout());
                             Fill.circle(e.x, e.y, e.fout() * auraRadius);
                             alpha(1f);
-                            Drawf.light(b.x, b.y, auraRadius * 1.3f * e.fout(), e.color, 0.7f);
+                            Drawf.light(e.x, e.y, auraRadius * 1.3f * e.fout(), e.color, 0.7f);
                             color(Color.white, TerraPal.violetFront, e.fin());
                             randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
                                 float ang = Mathf.angle(x, y);
