@@ -743,7 +743,7 @@ public final class Utils{
         for(Vec2 p : lines){
             Fill.circle(e.x + p.x, e.y + p.y, Lines.getStroke() / 2f);
         }
-    });
+    }).followParent(true);
     public static void lightningSingle(Entityc parent, float x, float y, float r, float angle, float spread, int n, Color color){
         if(n < 2) return;
         Seq<Vec2> lines = new Seq<>();
@@ -755,7 +755,15 @@ public final class Utils{
             float offset = Mathf.range(spread);
             lines.add(new Vec2(x, y).mulAdd(dir, r * progress).mulAdd(perp, offset));
         }
-        lines.add(new Vec2().trns(angle, r).add(x, y));
-        Effect.create(followLightning, x, y, angle, color, lines, parent);
+        lines.add(new Vec2().trns(angle, r));
+        EffectState state = EffectState.create();
+        state.effect = followLightning;
+        state.x = x;
+        state.y = y;
+        state.rotation = angle;
+        state.color.set(color);
+        state.data = lines;
+        state.parent = parent;
+        state.add();
     }
 }
