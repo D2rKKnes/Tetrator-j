@@ -753,11 +753,10 @@ public final class Utils{
         Seq<Vec2> lines = new Seq<>();
         Vec2 dir = new Vec2().trns(angle, 1f);
         Vec2 perp = new Vec2(-dir.y, dir.x);
-        lines.add(new Vec2(x, y));
+        lines.add(new Vec2(0, 0));
         for(int i = 1; i < n - 1; i++){
             float progress = (float)i / (n - 1);
-            float offset = Mathf.range(spread);
-            lines.add(new Vec2(x, y).mulAdd(dir, r * progress).mulAdd(perp, offset));
+            lines.add(new Vec2().mulAdd(dir, r * progress).mulAdd(perp, Mathf.range(spread)));
         }
         lines.add(new Vec2().trns(angle, r));
         followLightning.at(x, y, angle, color, new Object[]{parent, lines});
