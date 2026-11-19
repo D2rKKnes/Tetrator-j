@@ -83,7 +83,7 @@ public class TeslaBulletType extends BasicBulletType {
         float endX = b.x + Mathf.cosDeg(angle) * auraRadius;
         float endY = b.y + Mathf.sinDeg(angle) * auraRadius;
         float maxWidth = auraLightningWidth * 1.25f;
-        Utils.lightningSingle(b.x, b.y, auraRadius, maxWidth, auraLightningBrokenness, auraLightningColor);
+        Utils.lightningSingle(b.x, b.y, auraRadius, angle, maxWidth, auraLightningBrokenness, auraLightningColor);
         if (auraLightningSound != null) {
             auraLightningSound.at(b.x, b.y, Mathf.random(auraLightningSoundPitchMin, auraLightningSoundPitchMax), auraLightningSoundVolume);
         }
