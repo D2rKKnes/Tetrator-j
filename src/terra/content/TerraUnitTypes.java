@@ -3544,16 +3544,17 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 350f, 25f / 60f, 40f / 60f, 22f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 350f, 25f / 60f, 40f / 60f, 23f, TerraPal.violetFront));
 
             weapons.add(
                 new Weapon("terra-violet-laser-weapon"){{
-                    shootSound = Sounds.beamPlasma;
-                    shootSoundVolume = 0.3f;
+                    shootSound = Sounds.beamPlasmaSmall;
+                    shootSoundVolume = 0.5f;
+                    initialShootSound = Sounds.shootBeamPlasmaSmall;
                     x = -29f / 4f;
                     y = 11f / 4f;
                     shootY = 1.25f;
-                    reload = 90f;
+                    reload = cooldownTime = 90f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
                     recoil = 2.5f;
@@ -3563,13 +3564,22 @@ public class TerraUnitTypes {
                     rotationLimit = 40f;
                     alternate = false;
                     bullet = new ContinuousLaserBulletType(){{
-                        damage = 15f;
+                        damage = 20f;
                         length = 90f;
                         width = 3.75f;
-                        hitEffect = Fx.hitMeltHeal;
+                        hitEffect = new Effect(12, e -> {
+                            color(TerraPal.violetFront);
+                            stroke(e.fout() * 2f);
+                    
+                            randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
+                                float ang = Mathf.angle(x, y);
+                                lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+                            });
+                        });
                         drawSize = 300f;
                         lifetime = 50f;
                         shake = 1f;
+                        incendAmount = 0;
                         smokeEffect = shootEffect = Fx.none;
     
                         colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
@@ -3577,28 +3587,47 @@ public class TerraUnitTypes {
                 }},
                 new Weapon("terra-small-tesla-mount"){{
                     shootSound = TerraSounds.shootFastLaser;
+                    shootSoundVolume = 0.75f;
                     x = 0f;
                     y = -3f / 4f;
                     shootY = 2f;
                     reload = 75f;
                     recoil = 1f;
                     rotate = true;
-                    rotateSpeed = 5f;
+                    rotateSpeed = 6f;
                     mirror = false;
-                    bullet = new TeslaBulletType(2.7f, 90){{
+                    bullet = new TeslaBulletType(2.7f, 135){{
                         lifetime = 100f;
                         reflectable = false;
                         hitColor = lightColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
                         frontColor = Color.white;
-                        smokeEffect = Fx.shootSmokeSquare;
                         trailWidth = 2f;
                         trailLength = 4;
+                        minShootVelocity = 0.8f;
+                        maxShootVelocity = 1.33f;
+                        
                         auraRadius = 30f;
                         auraAlpha = 0.3f;
                         auraLightningDamage = 55f;
-                        auraLightningInterval = 8f;
+                        auraLightningInterval = 12f;
                         auraLightningChance = 0.9f;
                         auraLightningSoundVolume = 0.2f;
+                        
+                        smokeEffect = Fx.shootSmokeSquare;
+                        despawnEffect = hitEffect = new Effect(25, e -> {
+                            Draw.z(Layer.effect);
+                            color(TerraPal.violetFront, TerraPal.violetBack, e.fin());
+                            stroke(2f * e.fout());
+                            Lines.circle(e.x, e.y, e.fin() * auraRadius);
+                            alpha(auraAlpha * e.fout());
+                            Fill.circle(e.x, e.y, e.fin() * auraRadius);
+                            alpha(1f);
+                            color(Color.white, TerraPal.violetFront, e.fin());
+                            randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
+                                float ang = Mathf.angle(x, y);
+                                lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+                            });
+                        });
                     }};
                 }}
             );
