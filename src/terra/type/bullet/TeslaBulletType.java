@@ -59,6 +59,7 @@ public class TeslaBulletType extends BasicBulletType {
     public void init(Bullet b) {
         super.init(b);
         auraLightningTimer = 0f;
+        clipSize = auraRadius * 2.5f;
     }
 
     @Override
