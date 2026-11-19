@@ -744,7 +744,7 @@ public final class Utils{
             Fill.circle(e.x + p.x, e.y + p.y, Lines.getStroke() / 2f);
         }
     }).followParent(true);
-    public static void lightningSingle(Entityc parent, float x, float y, float r, float angle, float spread, int n, Color color){
+    public static void lightningSingle(Posc parent, float x, float y, float r, float angle, float spread, int n, Color color){
         if(n < 2) return;
         Seq<Vec2> lines = new Seq<>();
         Vec2 dir = new Vec2().trns(angle, 1f);
