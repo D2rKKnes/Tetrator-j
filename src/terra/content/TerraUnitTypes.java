@@ -62,10 +62,10 @@ public class TerraUnitTypes {
     calamity, 
     endSpawn, endGuard, endBattleship, end,
     //violet copis
-    invader, 
+    invader, raider, 
     //pink copis
     //lime copis
-    //blue copis
+    //red copis
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
@@ -3512,6 +3512,88 @@ public class TerraUnitTypes {
                     });
                 }};
             }});
+        }};
+        raider = new CopisUnitType("raider"){{
+            speed = 0.87f;
+            drag = 0.1f;
+            hitSize = 15f;
+            rotateSpeed = 3.5f;
+            health = 3500;
+            armor = 11f;
+            stepShake = 0.1f;
+
+            stepSound = Sounds.walkerStepSmall;
+            stepSoundPitch = 0.85f;
+
+            legCount = 4;
+            legGroupSize = 1;
+            legLength = 21f;
+            lockLegBase = true;
+            legContinuousMove = true;
+            legExtension = -3f;
+            legBaseOffset = 6f;
+            legMaxLength = 1.1f;
+            legMinLength = 0.2f;
+            legLengthScl = 0.95f;
+            legForwardScl = 0.7f;
+
+            legMoveSpace = 1f;
+            hovering = true;
+
+            shadowElevation = 0.25f;
+            groundLayer = Layer.legUnit - 1f;
+            constructor = LegsUnit::create;
+
+            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 350f, 25f / 60f, 40f / 60f, 22f, TerraPal.violetFront));
+
+            weapons.add(
+                new Weapon("terra-violet-laser-weapon"){{
+                    shootSound = Sounds.beamPlasma;
+                    shootSoundVolume = 0.3f;
+                    x = -29f / 4f;
+                    y = 11f / 4f;
+                    shootY = 0f;
+                    reload = 90f;
+                    layerOffset = -0.002f;
+                    smoothReloadSpeed = 0.15f;
+                    recoil = 2.5f;
+                    continuous = true;
+                    bullet = new ContinuousLaserBulletType(){{
+                        damage = 15f;
+                        length = 90f;
+                        width = 4f;
+                        hitEffect = Fx.hitMeltHeal;
+                        drawSize = 300f;
+                        lifetime = 50f;
+                        shake = 1f;
+                        despawnEffect = Fx.smokeCloud;
+                        smokeEffect = Fx.none;
+    
+                        colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
+                    }};
+                }},
+                new Weapon("terra-small-tesla-mount"){{
+                    shootSound = TerraSounds.shootFastLaser;
+                    x = 0f;
+                    y = -3f / 4f;
+                    shootY = 2f;
+                    reload = 75f;
+                    recoil = 1f;
+                    bullet = new TeslaBulletType(2.4f, 90){{
+                        lifetime = 150f;
+                        reflectable = false;
+                        hitColor = lightColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
+                        frontColor = Color.white;
+                        trailWidth = 2f;
+                        trailLength = 2;
+                        auraRadius = 32f;
+                        auraLightningDamage = 50f;
+                        auraLightningInterval = 8f;
+                        auraLightningChance = 0.9f;
+                        auraLightningSoundVolume = 0.2f;
+                    }};
+                }}
+            );
         }};
 
         // calamity = new UnitType("calamity"){{
