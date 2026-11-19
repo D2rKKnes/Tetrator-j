@@ -3553,7 +3553,7 @@ public class TerraUnitTypes {
                     initialShootSound = Sounds.shootBeamPlasmaSmall;
                     x = -29f / 4f;
                     y = 11f / 4f;
-                    shootY = 3f;
+                    shootY = 5f;
                     reload = cooldownTime = 90f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
