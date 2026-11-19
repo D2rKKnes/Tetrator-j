@@ -84,6 +84,18 @@ public class TeslaBulletType extends BasicBulletType {
         }
     }
 
+    @Override
+    public void removed(Bullet b) {
+        super.removed(b);
+        if (b.hit && !b.absorbed) {
+            despawnEffect.at(b.x, b.y, b.rotation(), hitColor);
+            if (despawnSound != null && despawnSound != Sounds.none) {
+                despawnSound.at(b, 1f + Mathf.range(hitSoundPitchRange));
+            }
+            Effect.shake(despawnShake, despawnShake, b);
+        }
+    }
+
     protected void spawnLightning(Bullet b) {
         float angle = Mathf.random(360f);
         float endX = b.x + Mathf.cosDeg(angle) * auraRadius;
