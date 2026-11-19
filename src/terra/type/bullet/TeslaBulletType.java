@@ -11,20 +11,36 @@ import mindustry.gen.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.type.*;
+import terra.util.*;
 
 public class TeslaBulletType extends BasicBulletType {
+    //I recommend setting it to at least 2–3 times the size of the bullet itself.
     public float auraRadius = 24f;
     public float auraStroke = 2f;
+    //How transparent inner part is
     public float auraAlpha = 0.2f;
 
+    //If set to -1, lightnings will use bullet damage instead
     public float auraLightningDamage = -1f;
+    //In ticks
     public float auraLightningInterval = 10f;
-    public float auraLightningWidth = 5f;
+    //How wide lightnings will be
+    public float auraLightningWidth = 6f;
+    //Сhance that a single, individual lightning bolt will be created
     public float auraLightningChance = 1f;
-    public Sound auraLightningShootSound = Sounds.shootArc;
+    //Sound when lightnings was created
+    public Sound auraLightningSound = Sounds.shootArc;
     public float auraLightningSoundVolume = 0.2f;
+    public float auraLightningSoundPitchMin = 0.9f;
+    public float auraLightningSoundPitchMax = 1.1f;
+    //How "broken" lightnings will be
+    public int auraLightningBrokenness = 12;
+    //Number of lightnings. Set to 0 to disable lightning.
+    public int auraLightnings = 2;
 
+    //Color of aura. If not set, uses backColor of bullet instead
     public Color auraColor = backColor;
+    //Color of lightnings. If not set, uses auraColor instead
     public Color auraLightningColor = auraColor;
 
     protected float auraLightningTimer = 0f;
@@ -54,8 +70,10 @@ public class TeslaBulletType extends BasicBulletType {
         auraLightningTimer += Time.delta;
         if (auraLightningTimer >= auraLightningInterval) {
             auraLightningTimer = 0f;
-            if (Mathf.chance(auraLightningChance)) {
-                spawnLightning(b);
+            for (int i = 0; i < auraLightnings; i++) {
+                if (Mathf.chance(auraLightningChance)) {
+                    spawnLightning(b);
+                }     
             }
         }
     }
@@ -64,10 +82,10 @@ public class TeslaBulletType extends BasicBulletType {
         float angle = Mathf.random(360f);
         float endX = b.x + Mathf.cosDeg(angle) * auraRadius;
         float endY = b.y + Mathf.sinDeg(angle) * auraRadius;
-        Lightning.create(b, auraLightningColor, auraLightningDamage < 0 ? damage : auraLightningDamage,
-                b.x, b.y, angle, (int) auraRadius);
-        if (auraLightningShootSound != null) {
-            auraLightningShootSound.at(b.x, b.y, 1f, auraLightningSoundVolume);
+        float maxWidth = auraLightningWidth * 1.25f;
+        Utils.lightningSingle(b.x, b.y, auraRadius, maxWidth, auraLightningBrokenness, auraLightningColor);
+        if (auraLightningSound != null) {
+            auraLightningSound.at(b.x, b.y, Mathf.random(auraLightningSoundPitchMin, auraLightningSoundPitchMax), auraLightningSoundVolume);
         }
         int steps = Math.max(1, (int) (auraRadius / 4f));
         for (int i = 1; i <= steps; i++) {
