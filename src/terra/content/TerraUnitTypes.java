@@ -3552,22 +3552,25 @@ public class TerraUnitTypes {
                     shootSoundVolume = 0.3f;
                     x = -29f / 4f;
                     y = 11f / 4f;
-                    shootY = 0f;
+                    shootY = 1.25f;
                     reload = 90f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
                     recoil = 2.5f;
                     continuous = true;
+                    rotate = true;
+                    rotateSpeed = 2f;
+                    rotationLimit = 40f;
+                    alternate = false;
                     bullet = new ContinuousLaserBulletType(){{
                         damage = 15f;
                         length = 90f;
-                        width = 4f;
+                        width = 3.75f;
                         hitEffect = Fx.hitMeltHeal;
                         drawSize = 300f;
                         lifetime = 50f;
                         shake = 1f;
-                        despawnEffect = Fx.smokeCloud;
-                        smokeEffect = Fx.none;
+                        smokeEffect = shootEffect = Fx.none;
     
                         colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
                     }};
@@ -3579,15 +3582,20 @@ public class TerraUnitTypes {
                     shootY = 2f;
                     reload = 75f;
                     recoil = 1f;
-                    bullet = new TeslaBulletType(2.4f, 90){{
-                        lifetime = 150f;
+                    rotate = true;
+                    rotateSpeed = 5f;
+                    mirror = false;
+                    bullet = new TeslaBulletType(2.7f, 90){{
+                        lifetime = 100f;
                         reflectable = false;
                         hitColor = lightColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
                         frontColor = Color.white;
+                        smokeEffect = Fx.shootSmokeSquare;
                         trailWidth = 2f;
-                        trailLength = 2;
-                        auraRadius = 32f;
-                        auraLightningDamage = 50f;
+                        trailLength = 4;
+                        auraRadius = 30f;
+                        auraAlpha = 0.3f;
+                        auraLightningDamage = 55f;
                         auraLightningInterval = 8f;
                         auraLightningChance = 0.9f;
                         auraLightningSoundVolume = 0.2f;
