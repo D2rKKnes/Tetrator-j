@@ -180,7 +180,7 @@ public class DirectionBarrierAbility extends Ability{
     @Override
     public void update(Unit unit){
         if(unit.isShooting()){
-            float size = 2f * Mathf.atan2(shieldSize / 2f, distanceRadius) * Mathf.radiansToDegrees; //((shieldSize * Mathf.PI2) / Mathf.sqrt(distanceRadius / 1.5f));
+            float size = 2f * Mathf.atan2(shieldSize / 2f, distanceRadius); //((shieldSize * Mathf.PI2) / Mathf.sqrt(distanceRadius / 1.5f));
             for(int i = 0; i < shields; i++){
                 float ang = Mathf.mod((i * size - (shields - 1f) * size / 2f) + unit.rotation, 360f);
                 shieldAngles[i] = Mathf.slerpDelta(shieldAngles[i], ang, shieldSpeed);
