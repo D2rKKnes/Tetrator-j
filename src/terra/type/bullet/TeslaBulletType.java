@@ -10,6 +10,7 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.content.*;
 import mindustry.entities.*;
+import mindustry.graphics.*;
 import mindustry.type.*;
 import terra.util.*;
 
@@ -59,7 +60,7 @@ public class TeslaBulletType extends BasicBulletType {
     public void init(Bullet b) {
         super.init(b);
         auraLightningTimer = 0f;
-        clipSize = auraRadius * 2.5f;
+        drawSize = auraRadius * 2.5f;
     }
 
     @Override
