@@ -728,22 +728,26 @@ public final class Utils{
         Fx.lightning.at(x, y, start, color, lines);
     }
     public static final Effect followLightning = new Effect(10f, 500f, e -> {
-        if(!(e.data instanceof Seq)) return;
-        Seq<Vec2> lines = e.data();
-    
+        if(!(e.data instanceof Object[] arr) || arr.length < 2) return;
+        Posc parent = (Posc)arr[0];
+        Seq<Vec2> lines = (Seq<Vec2>)arr[1];
+        
+        float px = (parent != null && parent.isAdded()) ? parent.getX() : e.x;
+        float py = (parent != null && parent.isAdded()) ? parent.getY() : e.y;
+        
         Lines.stroke(3f * e.fout());
         Draw.color(e.color, Color.white, e.fin());
-    
+        
         for(int i = 0; i < lines.size - 1; i++){
             Vec2 cur = lines.get(i);
             Vec2 next = lines.get(i + 1);
-            Lines.line(e.x + cur.x, e.y + cur.y, e.x + next.x, e.y + next.y, false);
+            Lines.line(px + cur.x, py + cur.y, px + next.x, py + next.y, false);
         }
-    
+        
         for(Vec2 p : lines){
-            Fill.circle(e.x + p.x, e.y + p.y, Lines.getStroke() / 2f);
+            Fill.circle(px + p.x, py + p.y, Lines.getStroke() / 2f);
         }
-    }).followParent(true);
+    });
     public static void lightningSingle(Posc parent, float x, float y, float r, float angle, float spread, int n, Color color){
         if(n < 2) return;
         Seq<Vec2> lines = new Seq<>();
@@ -756,14 +760,6 @@ public final class Utils{
             lines.add(new Vec2(x, y).mulAdd(dir, r * progress).mulAdd(perp, offset));
         }
         lines.add(new Vec2().trns(angle, r));
-        EffectState state = EffectState.create();
-        state.effect = followLightning;
-        state.x = x;
-        state.y = y;
-        state.rotation = angle;
-        state.color.set(color);
-        state.data = lines;
-        state.parent = parent;
-        state.add();
+        followLightning.at(x, y, angle, color, new Object[]{parent, lines});
     }
 }
