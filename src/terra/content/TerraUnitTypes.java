@@ -3553,7 +3553,7 @@ public class TerraUnitTypes {
                     initialShootSound = Sounds.shootBeamPlasmaSmall;
                     x = -29f / 4f;
                     y = 11f / 4f;
-                    shootY = 1.25f;
+                    shootY = 3f;
                     reload = cooldownTime = 90f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
@@ -3564,8 +3564,8 @@ public class TerraUnitTypes {
                     rotationLimit = 40f;
                     alternate = false;
                     bullet = new ContinuousLaserBulletType(){{
-                        damage = 20f;
-                        length = 90f;
+                        damage = 25f;
+                        length = 95f;
                         width = 3.75f;
                         hitEffect = new Effect(12, e -> {
                             color(TerraPal.violetFront);
@@ -3603,14 +3603,13 @@ public class TerraUnitTypes {
                         frontColor = Color.white;
                         trailWidth = 2f;
                         trailLength = 4;
-                        minShootVelocity = 0.8f;
-                        maxShootVelocity = 1.33f;
+                        keepVelocity = false;
                         
                         auraRadius = 30f;
                         auraAlpha = 0.3f;
                         auraLightningDamage = 55f;
-                        auraLightningInterval = 12f;
-                        auraLightningChance = 0.9f;
+                        auraLightningInterval = 8f;
+                        auraLightningChance = 0.75f;
                         auraLightningSoundVolume = 0.2f;
                         
                         smokeEffect = Fx.shootSmokeSquare;
@@ -3618,10 +3617,11 @@ public class TerraUnitTypes {
                             Draw.z(Layer.effect);
                             color(TerraPal.violetFront, TerraPal.violetBack, e.fin());
                             stroke(2f * e.fout());
-                            Lines.circle(e.x, e.y, e.fin() * auraRadius);
+                            Lines.circle(e.x, e.y, e.fout() * auraRadius);
                             alpha(auraAlpha * e.fout());
-                            Fill.circle(e.x, e.y, e.fin() * auraRadius);
+                            Fill.circle(e.x, e.y, e.fout() * auraRadius);
                             alpha(1f);
+                            Drawf.light(b.x, b.y, auraRadius * 1.3f * e.fout(), e.color, 0.7f);
                             color(Color.white, TerraPal.violetFront, e.fin());
                             randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
                                 float ang = Mathf.angle(x, y);
