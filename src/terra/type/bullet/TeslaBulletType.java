@@ -35,7 +35,7 @@ public class TeslaBulletType extends BasicBulletType {
     public float auraLightningSoundPitchMin = 0.9f;
     public float auraLightningSoundPitchMax = 1.1f;
     //How "broken" lightnings will be
-    public int auraLightningBrokenness = 12;
+    public int auraLightningBrokenness = 6;
     //Number of lightnings. Set to 0 to disable lightning.
     public int auraLightnings = 2;
 
@@ -85,7 +85,7 @@ public class TeslaBulletType extends BasicBulletType {
         float endX = b.x + Mathf.cosDeg(angle) * auraRadius;
         float endY = b.y + Mathf.sinDeg(angle) * auraRadius;
         float maxWidth = auraLightningWidth * 1.25f;
-        Utils.lightningSingle(b.x, b.y, auraRadius, angle, maxWidth, auraLightningBrokenness, auraLightningColor);
+        Utils.lightningSingle(b, b.x, b.y, auraRadius, angle, maxWidth, auraLightningBrokenness, auraLightningColor);
         if (auraLightningSound != null) {
             auraLightningSound.at(b.x, b.y, Mathf.random(auraLightningSoundPitchMin, auraLightningSoundPitchMax), auraLightningSoundVolume);
         }
