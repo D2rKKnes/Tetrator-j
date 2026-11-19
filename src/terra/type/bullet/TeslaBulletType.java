@@ -52,6 +52,10 @@ public class TeslaBulletType extends BasicBulletType {
         this.height = 8f;
         this.shrinkY = 0f;
         this.sprite = "circle-bullet";
+        this.pierce = true;
+        this.pierceCap = 3;
+        this.pierceBuilding = true;
+        this.laserAbsorb = true;
         this.auraColor = backColor;
         this.auraLightningColor = auraColor;
     }
