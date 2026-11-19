@@ -115,6 +115,8 @@ public class TeslaBulletType extends BasicBulletType {
         Draw.alpha(1f);
         Lines.stroke(auraStroke);
         Lines.circle(b.x, b.y, auraRadius);
+
+        Drawf.light(b.x, b.y, auraRadius * 1.3f, auraColor, 0.7f);
       
         Draw.reset();
     }
