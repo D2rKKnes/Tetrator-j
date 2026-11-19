@@ -756,6 +756,6 @@ public final class Utils{
             lines.add(new Vec2(x, y).mulAdd(dir, r * progress).mulAdd(perp, offset));
         }
         lines.add(new Vec2().trns(angle, r).add(x, y));
-        followLightning.create(x, y, angle, color, lines).parent = parent;
+        Effect.create(followLightning, x, y, angle, color, lines, parent);
     }
 }
