@@ -727,4 +727,18 @@ public final class Utils{
         lines.add(new Vec2().trns(end, r).add(x, y));
         Fx.lightning.at(x, y, start, color, lines);
     }
+    public static void lightningSingle(float x, float y, float r, float angle, float spread, int n, Color color){
+        if(n < 2) return;
+        Seq<Vec2> lines = new Seq<>();
+        Vec2 dir = new Vec2().trns(angle, 1f);
+        Vec2 perp = new Vec2(-dir.y, dir.x);
+        lines.add(new Vec2(x, y));
+        for(int i = 1; i < n - 1; i++){
+            float progress = (float)i / (n - 1);
+            float offset = Mathf.range(spread);
+            lines.add(new Vec2(x, y).mulAdd(dir, r * progress).mulAdd(perp, offset));
+        }
+        lines.add(new Vec2().trns(angle, r).add(x, y));
+        Fx.lightning.at(x, y, angle, color, lines);
+    }
 }
