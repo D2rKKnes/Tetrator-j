@@ -3613,7 +3613,8 @@ public class TerraUnitTypes {
                         auraLightningSoundVolume = 0.2f;
                         
                         smokeEffect = Fx.shootSmokeSquare;
-                        despawnEffect = hitEffect = new Effect(25, e -> {
+                        hitEffect = Fx.hitBulletColor;
+                        despawnEffect = new Effect(25, e -> {
                             Draw.z(Layer.effect);
                             color(TerraPal.violetFront, TerraPal.violetBack, e.fin());
                             stroke(2f * e.fout());
