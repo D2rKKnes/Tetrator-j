@@ -3433,7 +3433,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 20f / 60f, 16f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 10f / 60f, 16f, TerraPal.violetFront));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
@@ -3519,7 +3519,7 @@ public class TerraUnitTypes {
             hitSize = 15f;
             rotateSpeed = 3.5f;
             health = 3500;
-            armor = 11f;
+            armor = 13f;
             stepShake = 0.1f;
 
             stepSound = Sounds.walkerStepSmall;
@@ -3544,7 +3544,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 500f, 40f / 60f, 60f / 60f, 23f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 400f, 40f / 60f, 30f / 60f, 23f, TerraPal.violetFront));
 
             weapons.add(
                 new Weapon("terra-violet-laser-weapon"){{
@@ -3564,7 +3564,7 @@ public class TerraUnitTypes {
                     rotationLimit = 40f;
                     alternate = false;
                     bullet = new ContinuousLaserBulletType(){{
-                        damage = 25f;
+                        damage = 32f;
                         length = 95f;
                         width = 3.75f;
                         hitEffect = new Effect(12, e -> {
@@ -3607,12 +3607,13 @@ public class TerraUnitTypes {
                         
                         auraRadius = 30f;
                         auraAlpha = 0.3f;
+                        auraDelay = 15f;
                         auraLightningDamage = 55f;
                         auraLightningInterval = 8f;
-                        auraLightningChance = 0.75f;
-                        auraLightningSoundVolume = 0.2f;
+                        auraLightningChance = 0.8f;
+                        auraLightningSoundVolume = 0.25f;
                         
-                        smokeEffect = Fx.shootSmokeSquare;
+                        smokeEffect = Fx.shootSmokeSquareBig;
                         hitEffect = Fx.hitBulletColor;
                         despawnEffect = new Effect(25, e -> {
                             Draw.z(Layer.effect);
@@ -3622,7 +3623,7 @@ public class TerraUnitTypes {
                             alpha(auraAlpha * e.fout());
                             Fill.circle(e.x, e.y, e.fout() * auraRadius);
                             alpha(1f);
-                            Drawf.light(e.x, e.y, auraRadius * 1.3f * e.fout(), e.color, 0.7f);
+                            Drawf.light(e.x, e.y, auraRadius * 5f * e.fout(), e.color, lightOpacity);
                             color(Color.white, TerraPal.violetFront, e.fin());
                             randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
                                 float ang = Mathf.angle(x, y);
