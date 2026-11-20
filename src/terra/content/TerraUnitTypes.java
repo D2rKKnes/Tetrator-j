@@ -3571,11 +3571,12 @@ public class TerraUnitTypes {
                             y = 1f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.reload.curve(Interp.fastSlow);
+                                    progress = PartProgress.reload.curve(Interp.fastSlow).curve(0f, 0.3f);
                                     color1 = TerraPal.violetFront;
                                     radius = 0;
-                                    radiusTo = 11;
-                                    stroke = 3.5f;
+                                    radiusTo = 10;
+                                    stroke = 3f;
+                                    rotation = 45f;
                                 }}
                             );
                         }}
