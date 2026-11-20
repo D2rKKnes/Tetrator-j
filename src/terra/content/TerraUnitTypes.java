@@ -3433,7 +3433,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 15f / 60f, 10f / 60f, 16f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(2, 0.07f, 13f, 150f, 2f, 15f / 60f, 10f / 60f, 16f, TerraPal.violetFront));
 
             weapons.add(new Weapon("terra-violet-mount"){{
                 shootSound = TerraSounds.shootFastLaser;
@@ -3469,7 +3469,7 @@ public class TerraUnitTypes {
                         );
                     }}
                 );
-                bullet = new BasicBulletType(5.2f, 35f){{
+                bullet = new BasicBulletType(5.2f, 34f){{
                     lifetime = 30f;
                     sprite = "circle-bullet";
                     reflectable = false;
@@ -3527,11 +3527,11 @@ public class TerraUnitTypes {
 
             legCount = 4;
             legGroupSize = 1;
-            legLength = 21f;
+            legLength = 23f;
             lockLegBase = true;
             legContinuousMove = true;
             legExtension = -3f;
-            legBaseOffset = 6f;
+            legBaseOffset = 4.5f;
             legMaxLength = 1.1f;
             legMinLength = 0.2f;
             legLengthScl = 0.95f;
@@ -3544,7 +3544,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 400f, 40f / 60f, 30f / 60f, 23f, TerraPal.violetFront));
+            abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 400f, 6f, 40f / 60f, 30f / 60f, 23f, TerraPal.violetFront));
 
             weapons.add(
                 new Weapon("terra-violet-laser-weapon"){{
@@ -3580,6 +3580,10 @@ public class TerraUnitTypes {
                         lifetime = 50f;
                         shake = 1f;
                         incendAmount = 0;
+                        lightningDamage = 40f;
+                        lightningChance = 0.8f;
+                        lightningLength = (int)(length / 8f);
+                        lightningLengthRand = 5;
                         smokeEffect = shootEffect = Fx.none;
     
                         colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
