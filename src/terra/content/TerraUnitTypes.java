@@ -3531,7 +3531,7 @@ public class TerraUnitTypes {
             lockLegBase = true;
             legContinuousMove = true;
             legExtension = -3f;
-            legBaseOffset = 4.5f;
+            legBaseOffset = 4f;
             legMaxLength = 1.1f;
             legMinLength = 0.2f;
             legLengthScl = 0.95f;
@@ -3580,14 +3580,24 @@ public class TerraUnitTypes {
                         lifetime = 50f;
                         shake = 1f;
                         incendAmount = 0;
-                        lightningDamage = 40f;
-                        //lightningChance = 0.8f;
-                        lightning = 1;
-                        lightningLength = (int)(length / 8f);
-                        lightningLengthRand = 5;
                         smokeEffect = shootEffect = Fx.none;
     
                         colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
+                        intervalBullets = 1;
+                        bulletInterval = 6f;
+                        intervalRandomSpread = 0f;
+                        intervalBullet = new BulletType(){{
+                            speed = damage = 0f;
+                            keepVelocity = false;
+                            instantDisappear = true;
+                            createChance = 0.8f;
+                            lightningColor = TerraPal.violetFront;
+                            lightningCone = 35f;
+                            lightningDamage = 40f;
+                            lightning = 1;
+                            lightningLength = 9;
+                            lightningLengthRand = 3;
+                        }};
                     }};
                 }},
                 new Weapon("terra-small-tesla-mount"){{
@@ -3604,7 +3614,7 @@ public class TerraUnitTypes {
                     bullet = new TeslaBulletType(2.7f, 135){{
                         lifetime = 100f;
                         reflectable = false;
-                        hitColor = lightColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
+                        hitColor = lightColor = lightningColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
                         frontColor = Color.white;
                         trailWidth = 2f;
                         trailLength = 4;
