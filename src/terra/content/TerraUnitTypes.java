@@ -3563,10 +3563,28 @@ public class TerraUnitTypes {
                     rotateSpeed = 2f;
                     rotationLimit = 40f;
                     alternate = false;
+                    
+                    parts.addAll(
+                        new RegionPart("-none") {{
+                            mirror = under = drawRegion = false;
+                            x = 0f;
+                            y = 1f;
+                            children.addAll(
+                                new FlarePart(){{
+                                    progress = PartProgress.reload.curve(Interp.fastSlow);
+                                    color1 = TerraPal.violetFront;
+                                    radius = 0;
+                                    radiusTo = 11;
+                                    stroke = 3.5f;
+                                }}
+                            );
+                        }}
+                    );
                     bullet = new ContinuousLaserBulletType(){{
                         damage = 32f;
                         length = 95f;
                         width = 3.75f;
+                        lightColor = lightningColor = TerraPal.violetFront;
                         hitEffect = new Effect(12, e -> {
                             color(TerraPal.violetFront);
                             stroke(e.fout() * 2f);
@@ -3584,12 +3602,13 @@ public class TerraUnitTypes {
     
                         colors = new Color[]{TerraPal.violetBack.cpy().a(.2f), TerraPal.violetFront.cpy().a(.5f), TerraPal.violetFront, Color.white};
                         intervalBullets = 1;
-                        bulletInterval = 6f;
+                        bulletInterval = 4f;
                         intervalRandomSpread = 0f;
                         intervalBullet = new BulletType(){{
                             speed = damage = 0f;
                             keepVelocity = false;
                             instantDisappear = true;
+                            hitEffect = despawnEffect = shootEffect = smokeEffect = Fx.none;
                             createChance = 0.8f;
                             lightningColor = TerraPal.violetFront;
                             lightningCone = 35f;
