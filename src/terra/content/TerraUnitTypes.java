@@ -3571,7 +3571,7 @@ public class TerraUnitTypes {
                             y = 1f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.reload.curve(Interp.fastSlow).curve(0f, 0.3f);
+                                    progress = PartProgress.reload.curve(0.7f, 0.3f).curve(Interp.fastSlow);
                                     color1 = TerraPal.violetFront;
                                     radius = 0;
                                     radiusTo = 10;
