@@ -3581,7 +3581,8 @@ public class TerraUnitTypes {
                         shake = 1f;
                         incendAmount = 0;
                         lightningDamage = 40f;
-                        lightningChance = 0.8f;
+                        //lightningChance = 0.8f;
+                        lightning = 1;
                         lightningLength = (int)(length / 8f);
                         lightningLengthRand = 5;
                         smokeEffect = shootEffect = Fx.none;
