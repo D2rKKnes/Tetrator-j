@@ -129,7 +129,7 @@ public class DirectionBarrierAbility extends Ability{
         }
         //if(timer.get(1.5f)){
         Groups.bullet.intersect(Tmp.r1.x, Tmp.r1.y, Tmp.r1.width, Tmp.r1.height, b -> {
-            if(b.team != unit.team && b.type.absorbable && !(b.type instanceof ContinuousLaserBulletType || b.type instanceof LaserBulletType) && !b.type.scaleLife && b.vel().len() > 0.1f){
+            if(b.team != unit.team && b.type.absorbable && !(b.type instanceof ContinuousLaserBulletType || b.type instanceof LaserBulletType || b.type instanceof LightningBulletType) && !b.type.scaleLife && b.vel().len() > 0.1f){
                 b.hitbox(Tmp.r2);
                 Tmp.r3.set(Tmp.r2).grow(shieldWidth).move(b.vel.x / 2f, b.vel.y / 2f);
                 Tmp.r2.grow(shieldWidth);
@@ -137,8 +137,11 @@ public class DirectionBarrierAbility extends Ability{
                     if(!available[n.id]) return;
 
                     if(Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r2) != null || Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r3) != null){
-                        float rawDamage = getBulletDamage(b.type) * (b.damage() / (b.type.damage * b.damageMultiplier()));
+                        float baseDamage = b.type.damage * b.damageMultiplier();
+                        float rawDamage = baseDamage > 0.0001f ? getBulletDamage(b.type) * (b.damage() / baseDamage) : Math.max(b.damage(), getBulletDamage(b.type));
+                        if(Float.isNaN(rawDamage) || rawDamage < 0f) rawDamage = 0f;
                         float d = b.type.pierceArmor ? rawDamage : Damage.applyArmor(rawDamage, armor * b.type.armorMultiplier);
+                        if(Float.isNaN(d)) d = 0f;
                         healths[n.id] -= d;
                         if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
