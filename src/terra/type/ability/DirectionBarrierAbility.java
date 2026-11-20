@@ -95,7 +95,7 @@ public class DirectionBarrierAbility extends Ability{
 
     @Override
     public Ability copy(){
-        DirectionBarrierAbility instance = new DirectionBarrierAbility(shields, shieldSpeed, shieldSize, maxHealth, shieldRegen, disableRegen, distanceRadius, healthBarColor);
+        DirectionBarrierAbility instance = new DirectionBarrierAbility(shields, shieldSpeed, shieldSize, maxHealth, armor, shieldRegen, disableRegen, distanceRadius, healthBarColor);
         instance.explosiveReflectDamageMultiplier = explosiveReflectDamageMultiplier;
         instance.explosiveDamageThreshold = explosiveDamageThreshold;
         instance.healthBarOffset = healthBarOffset;
