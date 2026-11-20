@@ -15,11 +15,13 @@ import mindustry.type.*;
 import terra.util.*;
 
 public class TeslaBulletType extends BasicBulletType {
-    //I recommend setting it to at least 2–3 times the size of the bullet itself.
+    //I recommend setting it to at least 2–3 times the size of the bullet.
     public float auraRadius = 24f;
     public float auraStroke = 2f;
     //How transparent inner part is
     public float auraAlpha = 0.2f;
+    public float auraDelay = 10f;
+    public Interp auraDelayInterp = Interp.fastSlow;
 
     //If set to -1, lightnings will use bullet damage instead
     public float auraLightningDamage = -1f;
@@ -44,8 +46,6 @@ public class TeslaBulletType extends BasicBulletType {
     //Color of lightnings. If not set, uses auraColor instead
     public Color auraLightningColor = auraColor;
 
-    protected float auraLightningTimer = 0f;
-
     public TeslaBulletType(float speed, float damage) {
         super(speed, damage);
         this.width = 8f;
@@ -55,7 +55,7 @@ public class TeslaBulletType extends BasicBulletType {
         this.pierce = true;
         this.pierceCap = 3;
         this.pierceBuilding = true;
-        this.laserAbsorb = true;
+        this.laserBullet = true;
         this.auraColor = backColor;
         this.auraLightningColor = auraColor;
     }
@@ -63,7 +63,6 @@ public class TeslaBulletType extends BasicBulletType {
     @Override
     public void init(Bullet b) {
         super.init(b);
-        auraLightningTimer = 0f;
         drawSize = auraRadius * 2.5f;
     }
 
@@ -71,15 +70,14 @@ public class TeslaBulletType extends BasicBulletType {
     public void update(Bullet b) {
         super.update(b);
 
+        if (b.time < auraDelay) return;
         if (auraLightningChance <= 0f) return;
 
-        auraLightningTimer += Time.delta;
-        if (auraLightningTimer >= auraLightningInterval) {
-            auraLightningTimer = 0f;
+        if (b.timer(0, auraLightningInterval)) {
             for (int i = 0; i < auraLightnings; i++) {
                 if (Mathf.chance(auraLightningChance)) {
                     spawnLightning(b);
-                }     
+                }
             }
         }
     }
@@ -125,16 +123,17 @@ public class TeslaBulletType extends BasicBulletType {
     @Override
     public void draw(Bullet b) {
         super.draw(b);
+        float scale = auraDelay <= 0f ? 1f : auraDelayInterp.apply(Mathf.clamp(b.time / auraDelay));
         Draw.color(auraColor);
         Draw.alpha(auraAlpha);
-        Fill.circle(b.x, b.y, auraRadius);
+        Fill.circle(b.x, b.y, auraRadius * scale);
       
         Draw.color(auraColor);
         Draw.alpha(1f);
         Lines.stroke(auraStroke);
-        Lines.circle(b.x, b.y, auraRadius);
+        Lines.circle(b.x, b.y, auraRadius * scale);
 
-        Drawf.light(b.x, b.y, auraRadius * 1.3f, auraColor, 0.7f);
+        Drawf.light(b.x, b.y, Math.max(18f, auraRadius * 5f) * scale, auraColor, lightOpacity);
       
         Draw.reset();
     }
