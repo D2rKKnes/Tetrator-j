@@ -37,6 +37,7 @@ public class DirectionBarrierAbility extends Ability{
     public float[] hitTimes;
     public boolean[] available;
     public float maxHealth;
+    public float armor;
     public float disableRegen;
     public float shieldRegen;
     public float distanceRadius;
@@ -49,7 +50,7 @@ public class DirectionBarrierAbility extends Ability{
     public float healthBarOffset = 4f;
     public Color healthBarColor = Color.white;
 
-    public DirectionBarrierAbility(int shields, float speed, float size, float health, float regen, float disableRegen, float distance, Color color){
+    public DirectionBarrierAbility(int shields, float speed, float size, float health, float armor, float regen, float disableRegen, float distance, Color color){
         shieldSpeed = speed;
         shieldSize = size;
         maxHealth = health;
@@ -62,6 +63,7 @@ public class DirectionBarrierAbility extends Ability{
         available = new boolean[shields];
         this.disableRegen = disableRegen;
         this.shields = shields;
+        this.armor = armor;
 
         for(int i = 0; i < shields; i++){
             shieldAngles[i] = 0f;
@@ -70,8 +72,8 @@ public class DirectionBarrierAbility extends Ability{
             available[i] = true;
         }
     }
-    public DirectionBarrierAbility(int shields, float speed, float size, float health, float regen, float disableRegen, float distance, Color color, BulletType bullet){
-        this(shields, speed, size, health, regen, disableRegen, distance, color);
+    public DirectionBarrierAbility(int shields, float speed, float size, float health, float armor, float regen, float disableRegen, float distance, Color color, BulletType bullet){
+        this(shields, speed, size, health, armor, regen, disableRegen, distance, color);
         shrapnel = bullet;
         shrapnelSpawn = true;
     }
@@ -82,6 +84,8 @@ public class DirectionBarrierAbility extends Ability{
         t.add(abilityStat("barriercount", shields));
         t.row(); 
         t.add(abilityStat("barrierhealth", Strings.autoFixed(maxHealth, 2)));
+        t.row();
+        t.add(abilityStat("barrierarmor", Strings.autoFixed(armor, 2)));
         t.row();
         t.add(abilityStat("regen", Strings.autoFixed(shieldRegen * 60f, 2)));
         t.row();
@@ -132,7 +136,8 @@ public class DirectionBarrierAbility extends Ability{
                     if(!available[n.id]) return;
 
                     if(Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r2) != null || Geometry.raycastRect(n.nodeA.x, n.nodeA.y, n.nodeB.x, n.nodeB.y, Tmp.r3) != null){
-                        float d = getBulletDamage(b.type) * (b.damage() / (b.type.damage * b.damageMultiplier()));
+                        float rawDamage = getBulletDamage(b.type) * (b.damage() / (b.type.damage * b.damageMultiplier()));
+                        float d = b.type.pierceArmor ? rawDamage : Damage.applyArmor(rawDamage, armor * b.type.armorMultiplier);
                         healths[n.id] -= d;
                         if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
