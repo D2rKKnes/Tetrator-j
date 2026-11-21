@@ -90,7 +90,7 @@ public class ModDamage {
         });
     }
 
-    public static void chain(Position origin, Unit current, IntSeq collided, Sound hitSound, Effect hitEffect, float power, float initialPower, float width, float distanceDamageFalloff, float pierceDamageFactor, int branches, float segmentLength, float arc, Color color) {
-        chain(origin, null, Team.derelict, current, collided, hitSound, hitEffect, power, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
+    public static void chain(Position origin, Unit current, IntSeq collided, Sound hitSound, float hitSoundPitch, float hitSoundPitchRange, float hitSoundVolume, Effect hitEffect, float power, float initialPower, float width, float distanceDamageFalloff, float pierceDamageFactor, int branches, float segmentLength, float arc, Color color) {
+        chain(origin, null, Team.derelict, current, collided, hitSound, hitSoundPitch, hitSoundPitchRange, hitSoundVolume, hitEffect, power, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
     }
 }
