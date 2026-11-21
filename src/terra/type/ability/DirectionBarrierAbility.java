@@ -24,6 +24,8 @@ public class DirectionBarrierAbility extends Ability{
     protected final float blinkTime = 5f;
 
     public BulletType shrapnel;
+    public int shrapnels = 3;
+    public float shrapnelSpread = 20f;
     public boolean shrapnelSpawn = false;
     public TextureRegion shieldRegion;
     public String shieldSuffix = "-barrier";
@@ -78,6 +80,14 @@ public class DirectionBarrierAbility extends Ability{
         shrapnel = bullet;
         shrapnelSpawn = true;
     }
+    public DirectionBarrierAbility(int shields, float speed, float size, float health, float armor, float regen, float disableRegen, float distance, Color color, BulletType bullet, float bullets, float bulletDamage, float damageThreshold){
+        this(shields, speed, size, health, armor, regen, disableRegen, distance, color);
+        shrapnel = bullet;
+        shrapnels = bullets;
+        explosiveReflectDamageMultiplier = bulletDamage;
+        explosiveDamageThreshold = damageThreshold;
+        shrapnelSpawn = true;
+    }
 
     @Override
     public void addStats(Table t){
@@ -101,6 +111,8 @@ public class DirectionBarrierAbility extends Ability{
         instance.healthBarOffset = healthBarOffset;
         instance.healthBarColor = healthBarColor;
         instance.shrapnel = shrapnel;
+        instance.shrapnels = shrapnels;
+        instance.shrapnelSpread = shrapnelSpread;
         instance.shrapnelSpawn = shrapnelSpawn;
         instance.shieldSuffix = shieldSuffix;
         return instance;
@@ -147,9 +159,9 @@ public class DirectionBarrierAbility extends Ability{
                             b.damage(b.damage() / 1.5f);
                             float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
         
-                            if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn){
-                                for(int i = 0; i < 3; i++){
-                                    float off = (i * 20f - (3 - 1) * 20f / 2f);
+                            if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn && shrapnel != null && shrapnels > 0){
+                                for(int i = 0; i < shrapnels; i++){
+                                    float off = (i - (shrapnels - 1) / 2f) * shrapnelSpread;
                                     shrapnel.create(unit, unit.team, b.x, b.y, angC + off, d * explosiveReflectDamageMultiplier, 1f, 1f, null);
                                 }
                             }
