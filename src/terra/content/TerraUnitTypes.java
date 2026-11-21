@@ -3636,8 +3636,6 @@ public class TerraUnitTypes {
                         reflectable = false;
                         hitColor = lightColor = lightningColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
                         frontColor = Color.white;
-                        trailWidth = 2f;
-                        trailLength = 4;
                         keepVelocity = false;
                         
                         auraRadius = 30f;
@@ -3687,10 +3685,10 @@ public class TerraUnitTypes {
             legLength = 46f;
             lockLegBase = true;
             legContinuousMove = true;
-            legExtension = -1f;
+            legExtension = -5f;
             legBaseOffset = 7.5f;
-            legMaxLength = 1.15f;
-            legMinLength = 0.2f;
+            legMaxLength = 1.2f;
+            legMinLength = 0.25f;
             legLengthScl = 0.95f;
             legForwardScl = 0.9f;
 
@@ -3721,7 +3719,7 @@ public class TerraUnitTypes {
                     shootSoundVolume = 1.1f;
                     soundPitchMin = 0.2f;
                     soundPitchMax = 0.4f;
-                    chargeSound = Sounds.chargeVela;
+                    //chargeSound = Sounds.chargeVela;
                     x = 43f / 4f;
                     y = 22f / 4f;
                     shootY = 11f;
@@ -3748,7 +3746,7 @@ public class TerraUnitTypes {
                             y = 11f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.charge.inv().add(PartProgress.heat).curve(Interp.fastSlow);
+                                    progress = PartProgress.charge.add(PartProgress.heat).curve(Interp.fastSlow);
                                     color1 = TerraPal.violetFront;
                                     radius = 0;
                                     radiusTo = 11;
@@ -3764,6 +3762,8 @@ public class TerraUnitTypes {
                         width = 7;
                         shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
                         hitEffect = Fx.hitBulletColor;
+                        hitSoundPitch = 0.3f;
+                        hitSoundVolume = 0.3f;
                         arc = 0.15f;
                         targetRange = 50;
                         damage = 65;
@@ -3786,12 +3786,11 @@ public class TerraUnitTypes {
                     shootCone = 360f;
                     
                     shoot = new ShootPattern(){{
-                        shots = 4;
-                        shotDelay = 5f;
-                        firstShotDelay = 20f;
+                        shots = 5;
+                        shotDelay = 4f;
                     }};
                     bullet = new BasicBulletType(5.2f, 34f){{
-                        lifetime = 90f;
+                        lifetime = 85f;
                         sprite = "circle-bullet";
                         reflectable = false;
                         width = 4f;
@@ -3853,8 +3852,6 @@ public class TerraUnitTypes {
                         reflectable = false;
                         hitColor = lightColor = lightningColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
                         frontColor = Color.white;
-                        trailWidth = 2f;
-                        trailLength = 4;
                         keepVelocity = false;
                         width = height = 12f;
                         pierceCap = 4;
