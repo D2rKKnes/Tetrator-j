@@ -84,7 +84,7 @@ public class ChainLightningBulletType extends BulletType {
 
         for (int i = 0; i < Math.min(chainLightning, units.size); i++) {
             Unit unit = units.get(i);
-            if(!unit.targetable(b.team) || !(collidesTeam || unit.team != b.team)) break;
+            if(!unit.targetable(b.team) || !(collidesTeam || unit.team != b.team)) continue;
             float dst = unit.dst(b);
             if(dst > range) break;
             float dst2 = unit.dst(aimPos);
