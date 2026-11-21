@@ -85,7 +85,7 @@ public class ModDamage {
                 float newDamage = power - distanceDamageFalloff * current.dst(u);
                 Log.info(Core.bundle.format("Old power was: {0}, while new one is {1}", power, newPower));
                 if(newPower < 0) return;
-                chain(current, u, collided, hitSound, hitEffect, newDamage * numberMultiplier, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
+                chain(current, tPos, team, u, collided, hitSound, hitEffect, newDamage * numberMultiplier, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
             });
         });
     }
