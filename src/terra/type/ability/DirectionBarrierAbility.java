@@ -80,7 +80,7 @@ public class DirectionBarrierAbility extends Ability{
         shrapnel = bullet;
         shrapnelSpawn = true;
     }
-    public DirectionBarrierAbility(int shields, float speed, float size, float health, float armor, float regen, float disableRegen, float distance, Color color, BulletType bullet, float bullets, float bulletDamage, float damageThreshold){
+    public DirectionBarrierAbility(int shields, float speed, float size, float health, float armor, float regen, float disableRegen, float distance, Color color, BulletType bullet, int bullets, float bulletDamage, float damageThreshold){
         this(shields, speed, size, health, armor, regen, disableRegen, distance, color);
         shrapnel = bullet;
         shrapnels = bullets;
