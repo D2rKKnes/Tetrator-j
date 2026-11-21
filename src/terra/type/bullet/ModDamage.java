@@ -21,10 +21,10 @@ import mindustry.gen.Unit;
 public class ModDamage {
     public static Seq<Unit> list = new Seq<>();
 
-    public static void chain(Position origin, @Nullable Position targetPos, Team team, Unit current, IntSeq collided, Sound hitSound, Effect hitEffect, float power, float initialPower, float width, float distanceDamageFalloff, float pierceDamageFactor, int branches, float segmentLength, float arc, Color color){
+    public static void chain(Position origin, @Nullable Position targetPos, Team team, Unit current, IntSeq collided, Sound hitSound, float hitSoundPitch, float hitSoundPitchRange, float hitSoundVolume, Effect hitEffect, float power, float initialPower, float width, float distanceDamageFalloff, float pierceDamageFactor, int branches, float segmentLength, float arc, Color color){
 
         current.damage(power);
-        hitSound.at(current.x, current.y, Mathf.random(0.8f, 1.1f));
+        hitSound.at(current.x, current.y, hitSoundPitch + Mathf.range(hitSoundPitchRange), hitSoundVolume);
         //Scales down width based on percent of power left
         float w = width * power/(initialPower);
 
@@ -85,7 +85,7 @@ public class ModDamage {
                 float newDamage = power - distanceDamageFalloff * current.dst(u);
                 Log.info(Core.bundle.format("Old power was: {0}, while new one is {1}", power, newPower));
                 if(newPower < 0) return;
-                chain(current, tPos, team, u, collided, hitSound, hitEffect, newDamage * numberMultiplier, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
+                chain(current, tPos, team, u, collided, hitSound, hitSoundPitch, hitSoundPitchRange, hitSoundVolume, hitEffect, newDamage * numberMultiplier, initialPower, width, distanceDamageFalloff, pierceDamageFactor, branches, segmentLength, arc, color);
             });
         });
     }
