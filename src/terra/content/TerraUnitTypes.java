@@ -3701,7 +3701,6 @@ public class TerraUnitTypes {
 
             abilities.add(new DirectionBarrierAbility(6, 0.045f, 20f, 750f, 10f, 65f / 60f, 45f / 60f, 33f, TerraPal.violetFront, new ShrapnelBulletType(){{
                 length = 90f;
-                //damage = 110f; //damage auto. scales
                 width = 25f;
                 serrationLenScl = 6f;
                 serrationSpaceOffset = 40f;
@@ -3711,7 +3710,7 @@ public class TerraUnitTypes {
                 fromColor = TerraPal.violetFront;
                 toColor = TerraPal.violetBack;
                 shootEffect = smokeEffect = Fx.sparkShoot;
-            }}));
+            }}, 2, 0.5f, 50f));
 
             weapons.add(
                 new Weapon("terra-violet-large-mount"){{
@@ -3773,7 +3772,7 @@ public class TerraUnitTypes {
                     }};
                 }},
                 new Weapon("terra-small-tesla-mount"){{
-                    shootSound = TerraSounds.shootFastLaser;
+                    shootSound = Sounds.shootLaser;
                     shootSoundVolume = 0.3f;
                     x = 36f / 4f;
                     y = -31f / 4f;
