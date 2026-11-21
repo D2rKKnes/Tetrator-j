@@ -94,7 +94,7 @@ public class ChainLightningBulletType extends BulletType {
         }
 
         list.each(u -> {
-            ModDamage.chain(new Vec2(b.x, b.y), u, new IntSeq(), hitSound, hitEffect, b.damage, b.damage, width, distanceDamageFalloff, jumpDamageFactor, branches, segmentLength, arc, lightningColor);
+            ModDamage.chain(new Vec2(b.x, b.y), null, b.team, u, new IntSeq(), hitSound, hitEffect, b.damage, b.damage, width, distanceDamageFalloff, jumpDamageFactor, branches, segmentLength, arc, lightningColor);
         });
 
         if(charges <= 0) return;
