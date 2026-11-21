@@ -3684,11 +3684,11 @@ public class TerraUnitTypes {
 
             legCount = 4;
             legGroupSize = 2;
-            legLength = 38f;
+            legLength = 46f;
             lockLegBase = true;
             legContinuousMove = true;
-            legExtension = -3f;
-            legBaseOffset = 7f;
+            legExtension = -1f;
+            legBaseOffset = 7.5f;
             legMaxLength = 1.15f;
             legMinLength = 0.2f;
             legLengthScl = 0.95f;
@@ -3701,7 +3701,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit;
             constructor = LegsUnit::create;
 
-            abilities.add(new DirectionBarrierAbility(6, 0.045f, 20f, 750f, 10f, 65f / 60f, 45f / 60f, 30f, TerraPal.violetFront, new ShrapnelBulletType(){{
+            abilities.add(new DirectionBarrierAbility(6, 0.045f, 20f, 750f, 10f, 65f / 60f, 45f / 60f, 33f, TerraPal.violetFront, new ShrapnelBulletType(){{
                 length = 90f;
                 //damage = 110f; //damage auto. scales
                 width = 25f;
@@ -3719,6 +3719,8 @@ public class TerraUnitTypes {
                 new Weapon("terra-violet-large-mount"){{
                     shootSound = Sounds.shootArc;
                     shootSoundVolume = 1.1f;
+                    soundPitchMin = 0.2f;
+                    soundPitchMax = 0.4f;
                     chargeSound = Sounds.chargeVela;
                     x = 43f / 4f;
                     y = 22f / 4f;
@@ -3731,10 +3733,11 @@ public class TerraUnitTypes {
                     rotate = true;
                     rotateSpeed = 1.7f;
                     rotationLimit = 25f;
+                    shake = 3f;
 
                     shoot = new ShootPattern(){{
-                        shots = 15;
-                        shotDelay = 1f;
+                        shots = 12;
+                        shotDelay = 1.5f;
                         firstShotDelay = 45f;
                     }};
                     
@@ -3745,7 +3748,7 @@ public class TerraUnitTypes {
                             y = 11f;
                             children.addAll(
                                 new FlarePart(){{
-                                    progress = PartProgress.charge.add(PartProgress.reload).curve(Interp.fastSlow);
+                                    progress = PartProgress.charge.inv().add(PartProgress.heat).curve(Interp.fastSlow);
                                     color1 = TerraPal.violetFront;
                                     radius = 0;
                                     radiusTo = 11;
@@ -3757,13 +3760,13 @@ public class TerraUnitTypes {
                     );
                     bullet = new ChainLightningBulletType() {{
                         lightningColor = hitColor = TerraPal.violetFront;
-                        range = 115;
+                        range = 145;
                         width = 7;
                         shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
                         hitEffect = Fx.hitBulletColor;
                         arc = 0.15f;
-                        targetRange = 30;
-                        damage = 75;
+                        targetRange = 50;
+                        damage = 65;
                         jumpDamageFactor = 0.7f;
                         chainLightning = 2;
                         segmentLength = 4;
@@ -3788,7 +3791,7 @@ public class TerraUnitTypes {
                         firstShotDelay = 20f;
                     }};
                     bullet = new BasicBulletType(5.2f, 34f){{
-                        lifetime = 60f;
+                        lifetime = 90f;
                         sprite = "circle-bullet";
                         reflectable = false;
                         width = 4f;
@@ -3800,8 +3803,8 @@ public class TerraUnitTypes {
                         trailLength = 7;
                         armorMultiplier = 0.5f;
                         homingRange = 640f;
-                        homingPower = 0.1f;
-                        homingDelay = 10f;
+                        homingPower = 0.15f;
+                        homingDelay = 8f;
                         parts.add(new FlarePart(){{
                             color1 = TerraPal.violetFront;
                             radius = radiusTo = 10;
@@ -3836,7 +3839,7 @@ public class TerraUnitTypes {
                 new Weapon("terra-large-tesla-mount"){{
                     shootSound = TerraSounds.shootFastLaser;
                     soundPitchMin = 0.4f;
-                    soundPitchMax = 0.55f;
+                    soundPitchMax = 0.5f;
                     x = 0f;
                     y = -2f;
                     shootY = 0f;
@@ -3845,7 +3848,7 @@ public class TerraUnitTypes {
                     rotate = true;
                     rotateSpeed = 3f;
                     mirror = false;
-                    bullet = new TeslaBulletType(1.4f, 135){{
+                    bullet = new TeslaBulletType(1.55f, 215){{
                         lifetime = 180f;
                         reflectable = false;
                         hitColor = lightColor = lightningColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
@@ -3854,17 +3857,18 @@ public class TerraUnitTypes {
                         trailLength = 4;
                         keepVelocity = false;
                         width = height = 12f;
+                        pierceCap = 4;
                         
                         auraRadius = 45f;
                         auraStroke = 3f;
-                        auraAlpha = 0.2f;
+                        auraAlpha = 0.25f;
                         auraDelay = 20f;
                         auraLightnings = 5;
                         auraLightningBrokenness = 10;
-                        auraLightningDamage = 65f;
-                        auraLightningInterval = 10f;
+                        auraLightningDamage = 80f;
+                        auraLightningInterval = 9f;
                         auraLightningChance = 0.75f;
-                        auraLightningSoundVolume = 0.15f;
+                        auraLightningSoundVolume = 0.2f;
                         
                         smokeEffect = Fx.shootSmokeSquareBig;
                         hitEffect = Fx.hitBulletColor;
