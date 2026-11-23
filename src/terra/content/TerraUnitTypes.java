@@ -4176,6 +4176,7 @@ public class TerraUnitTypes {
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
                     bullet = new TeslaBulletType(0f, 240){{
+                        rangeOverride = xRand;
                         createChance = 0.8f;
                         lifetime = 160f;
                         reflectable = false;
