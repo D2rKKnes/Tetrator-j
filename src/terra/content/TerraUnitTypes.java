@@ -4175,16 +4175,8 @@ public class TerraUnitTypes {
                     minWarmup = 0.9f;
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
-                    ejectEffect = new Effect(45f, 300f, e -> {
-                        Draw.color(Color.white, TerraPal.violetFront, e.fin());
-                        Lines.stroke(1.5f * e.fout());
-                    
-                        Angles.randLenVectors(e.id, 20, 16f, (x, y) -> {
-                            Lines.lineAngle(e.x + x, e.y + y + 40f * e.finpow(), 90f, 8f * e.fout());
-                        });
-                    });
                     bullet = new TeslaBulletType(0f, 240){{
-                        rangeOverride = xRand / 2f;
+                        rangeOverride = xRand * 0.65f;
                         createChance = 0.75f;
                         lifetime = 160f;
                         reflectable = false;
@@ -4205,15 +4197,7 @@ public class TerraUnitTypes {
                         auraLightningChance = 0.6f;
                         auraLightningSoundVolume = 0.25f;
                         
-                        smokeEffect = Fx.none;
-                        shootEffect = new Effect(45f, 300f, e -> {
-                            Draw.color(Color.white, TerraPal.violetFront, e.fout());
-                            Lines.stroke(1.5f * e.fslope());
-                        
-                            Angles.randLenVectors(e.id, 20, 16f, (x, y) -> {
-                                Lines.lineAngle(e.x + x, e.y + y + 40f * e.foutpow(), 90f, 8f * e.fin());
-                            });
-                        });
+                        smokeEffect = shootEffect = Fx.none;
                         hitEffect = Fx.hitBulletColor;
                         despawnEffect = new Effect(25, e -> {
                             Draw.z(Layer.effect);
@@ -4231,7 +4215,13 @@ public class TerraUnitTypes {
                             });
                         });
                     }};
-                }}
+                }                            
+                    @Override
+                    protected void shoot(Unit unit, WeaponMount mount, float shootX, float shootY, float rotation){
+                        super.shoot(unit, mount, shootX, shootY, rotation);
+                        TerraFx.devastatorEject.at(unit.x + Angles.trnsx(unit.rotation - 90f, x, y), unit.y + Angles.trnsy(unit.rotation - 90f, x, y), rotation, TerraPal.violetFront, unit);
+                    }
+                }
             );
         }};
 
