@@ -15,6 +15,7 @@ import terra.util.*;
 
 /** @author EyeOfDarkness */
 public class AcceleratingLaserBulletType extends BulletType {
+    public float shake = 0f;
     public float maxLength = 1000f;
     public float laserSpeed = 15f;
     public float accel = 25f;
@@ -103,8 +104,12 @@ public class AcceleratingLaserBulletType extends BulletType {
 
     @Override
     public void update(Bullet b){
-        super.update(b);
+        //super.update(b);
         boolean timer = b.timer(0, 5f);
+        if(shake > 0f){
+            Effect.shake(shake, shake, b);
+        }
+        updateBulletInterval(b);
 
         if(b.data instanceof LaserData){
             LaserData vec = (LaserData)b.data;
