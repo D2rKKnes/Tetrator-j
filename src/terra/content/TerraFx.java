@@ -38,6 +38,15 @@ public class TerraFx {
         color(Color.valueOf("f53036"));
         Fill.square(e.x, e.y, 2.5f * Interp.pow2In.apply(e.fslope()), 45f);
     }),
+    devastatorEject = new Effect(45f, 300f, e -> {
+        rand.setSeed(e.id);
+        Draw.color(Color.white, TerraPal.violetFront, e.fin());
+        stroke(1.5f * e.fout());
+    
+        randLenVectors(e.id, 12, 2f, 7f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, 90f + rand.random(-3f, 3f), 8f * e.fout());
+        });
+    }),
     arcSmoke = new Effect(100f, 80f, e -> {
         rand.setSeed(e.id);
 
