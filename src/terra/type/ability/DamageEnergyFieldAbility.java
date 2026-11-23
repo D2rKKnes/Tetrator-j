@@ -16,6 +16,7 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
+import terra.content.*;
 import terra.graphics.TerraPal;
 
 import static mindustry.Vars.*;
