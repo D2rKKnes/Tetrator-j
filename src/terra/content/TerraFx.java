@@ -19,6 +19,7 @@ import mindustry.entities.effect.MultiEffect;
 import mindustry.graphics.*;
 import mindustry.type.UnitType;
 import mindustry.ui.Fonts;
+import terra.graphics.*;
 
 import java.util.Arrays;
 
