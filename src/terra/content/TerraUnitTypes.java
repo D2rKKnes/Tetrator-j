@@ -4027,7 +4027,7 @@ public class TerraUnitTypes {
                     reload = 70f;
                     inaccuracy = 20f;
                     shootCone = 10f;
-                    mirror = false
+                    mirror = false;
                     rotate = true;
                     rotateSpeed = 3.6f;
                     rotationLimit = 60f;
