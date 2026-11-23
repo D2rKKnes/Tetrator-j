@@ -3979,11 +3979,12 @@ public class TerraUnitTypes {
                         }}
                     );
                     bullet = new AcceleratingLaserBulletType(52f){{
-                        maxLength = 230f;
-                        maxRange = 230f;
+                        maxLength = 190f;
+                        maxRange = 190f;
                         oscOffset = 0.3f;
-                        lifetime = 110;
+                        lifetime = 130f;
                         width = 10f;
+                        shake = 3f;
                         collisionWidth = 7f;
                         // status = TerraStatusEffects.energyOverload;
                         // statusDuration = 120f;
@@ -4000,7 +4001,6 @@ public class TerraUnitTypes {
                         }));
 
                         intervalBullets = 1;
-                        intervalDelay = 25f;
                         bulletInterval = 2.5f;
                         intervalRandomSpread = 0f;
                         intervalBullet = new BulletType(){{
@@ -4041,7 +4041,7 @@ public class TerraUnitTypes {
                             -13.5f / 4f, 2f, 0f
                         };
                     }};
-                    bullet = new BasicBulletType(3f, 67){{
+                    bullet = new BasicBulletType(3.4f, 67){{
                         lifetime = 55f;
                         splashDamage = damage * 0.6f;
                         splashDamageRadius = 5f * 8f;
@@ -4069,14 +4069,14 @@ public class TerraUnitTypes {
                             frontColor = Color.white;
                             keepVelocity = false;
                             
-                            auraRadius = 5f * 8f;
+                            auraRadius = 25f;
                             auraStroke = 2f;
                             auraAlpha = 0.2f;
                             auraDelay = 10f;
-                            auraLightnings = 2;
+                            auraLightnings = 3;
                             auraLightningDamage = 40f;
-                            auraLightningInterval = 15f;
-                            auraLightningChance = 0.6f;
+                            auraLightningInterval = 10f;
+                            auraLightningChance = 0.666f;
                             auraLightningSoundVolume = 0.2f;
                             
                             smokeEffect = shootEffect = Fx.none;
@@ -4106,25 +4106,22 @@ public class TerraUnitTypes {
                     x = 35f / 4f;
                     y = -61f / 4f;
                     shootY = 1f;
-                    reload = 15f;
+                    reload = 8f;
                     recoil = 2f;
                     rotate = true;
                     alternate = false;
                     rotateSpeed = 8f;
-                    inaccuracy = 25f;
                     predictTarget = false;
-                    controllable = false;
-                    autoTarget = true;
                     
                     bullet = new RailBulletType() {{
                         length = 222f;
-                        damage = 90f;
-                        collidesGround = false;
+                        damage = 60f;
+                        //collidesGround = false;
                         shieldDamageMultiplier = 1.2f;
                         armorMultiplier = 0.8f;
                         hitColor = TerraPal.violetFront;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
-                        smokeEffect = TerraFx.shootRing2;
+                        smokeEffect = TerraFx.shootRing;
                         hitEffect = Fx.hitBulletColor;
                         endEffect = new Effect(14f, e -> {
                             color(e.color);
