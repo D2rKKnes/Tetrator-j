@@ -3544,6 +3544,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit - 1f;
             constructor = LegsUnit::create;
 
+            immunities.addAll(StatusEffects.shocked);
             abilities.add(new DirectionBarrierAbility(3, 0.05f, 18f, 400f, 6f, 40f / 60f, 30f / 60f, 23f, TerraPal.violetFront));
 
             weapons.add(
@@ -3699,6 +3700,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit;
             constructor = LegsUnit::create;
 
+            immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped);
             abilities.add(new DirectionBarrierAbility(6, 0.045f, 20f, 750f, 10f, 65f / 60f, 45f / 60f, 33f, TerraPal.violetFront, new ShrapnelBulletType(){{
                 length = 90f;
                 width = 25f;
@@ -3919,6 +3921,7 @@ public class TerraUnitTypes {
             groundLayer = Layer.legUnit + 1f;
             constructor = LegsUnit::create;
 
+            immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
             abilities.add(new DirectionBarrierAbility(3, 0.03f, 36f, 3000f, 20f, 150f / 60f, 90f / 60f, 45f, TerraPal.violetFront, new ShrapnelBulletType(){{
                 length = 110f;
                 width = 35f;
@@ -3951,7 +3954,7 @@ public class TerraUnitTypes {
                     x = -69f / 4f;
                     y = 14f / 4f;
                     shootY = 5f;
-                    reload = cooldownTime = 140f;
+                    reload = cooldownTime = 120f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
                     recoil = 2.5f;
@@ -4001,20 +4004,20 @@ public class TerraUnitTypes {
                         }));
 
                         intervalBullets = 1;
+                        intervalDelay = 20;
                         bulletInterval = 2.5f;
                         intervalRandomSpread = 0f;
                         intervalBullet = new BulletType(){{
-                            shake = 2f;
                             speed = damage = 0f;
                             keepVelocity = false;
                             instantDisappear = true;
                             hitEffect = despawnEffect = shootEffect = smokeEffect = Fx.none;
                             createChance = 0.85f;
                             lightningColor = TerraPal.violetFront;
-                            lightningCone = 35f;
+                            lightningCone = 30f;
                             lightningDamage = 80f;
                             lightning = 1;
-                            lightningLength = 13;
+                            lightningLength = 16;
                             lightningLengthRand = 5;
                         }};
                     }};
@@ -4026,7 +4029,7 @@ public class TerraUnitTypes {
                     y = 37f / 4f;
                     shootY = 0f;
                     reload = 70f;
-                    inaccuracy = 50f;
+                    inaccuracy = 70f;
                     shootCone = 10f;
                     mirror = false;
                     rotate = true;
@@ -4049,7 +4052,7 @@ public class TerraUnitTypes {
                         scaledSplashDamage = true;
                         sprite = "terra-strike";
                         drag = -0.004f;
-                        followAimSpeed = 4.2f;
+                        followAimSpeed = 2f;
                         width = 10f;
                         height = 13f;
                         shrinkY = 0.1f;
@@ -4119,8 +4122,7 @@ public class TerraUnitTypes {
                         length = 165f;
                         damage = 60f;
                         //collidesGround = false;
-                        shieldDamageMultiplier = 1.2f;
-                        armorMultiplier = 0.8f;
+                        shieldDamageMultiplier = 1.5f;
                         hitColor = TerraPal.violetFront;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
                         smokeEffect = TerraFx.shootRing;
@@ -4166,7 +4168,7 @@ public class TerraUnitTypes {
                     mirror = rotate = false;
                     shootCone = 360f;
                     shoot = new ShootPattern(){{
-                        shots = 12;
+                        shots = 9;
                         shotDelay = 0f;
                     }};
                     minWarmup = 0.9f;
