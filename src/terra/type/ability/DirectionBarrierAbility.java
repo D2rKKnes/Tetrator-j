@@ -155,6 +155,7 @@ public class DirectionBarrierAbility extends Ability{
                         float d = b.type.pierceArmor ? rawDamage : Damage.applyArmor(rawDamage, armor * b.type.armorMultiplier);
                         if(Float.isNaN(d)) d = 0f;
                         healths[n.id] -= d;
+                        float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
                         if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
                             
@@ -165,7 +166,6 @@ public class DirectionBarrierAbility extends Ability{
                             b.absorb();
                         }
                         if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn && shrapnel != null && shrapnels > 0){
-                            float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
                             for(int i = 0; i < shrapnels; i++){
                                 float off = (i - (shrapnels - 1) / 2f) * shrapnelSpread;
                                 shrapnel.create(unit, unit.team, b.x, b.y, angC + off, d * explosiveReflectDamageMultiplier, 1f, 1f, null);
