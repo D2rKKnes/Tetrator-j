@@ -103,6 +103,7 @@ public class AcceleratingLaserBulletType extends BulletType {
 
     @Override
     public void update(Bullet b){
+        super.update(b);
         boolean timer = b.timer(0, 5f);
 
         if(b.data instanceof LaserData){
