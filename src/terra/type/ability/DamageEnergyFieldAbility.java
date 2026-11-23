@@ -41,9 +41,9 @@ public class DamageEnergyFieldAbility extends Ability{
     protected float timer, curStroke;
     protected boolean anyNearby = false;
 
-    EnergyFieldAbility(){}
+    DamageEnergyFieldAbility(){}
 
-    public EnergyFieldAbility(float damage, float reload, float range){
+    public DamageEnergyFieldAbility(float damage, float reload, float range){
         this.damage = damage;
         this.reload = reload;
         this.range = range;
