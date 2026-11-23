@@ -3934,12 +3934,10 @@ public class TerraUnitTypes {
                 toColor = TerraPal.violetBack;
                 shootEffect = smokeEffect = Fx.sparkShoot;
             }}, 4, 0.75f, 65f));
-            abilities.add(new EnergyFieldAbility(35f, 25f, 150f){{
+            abilities.add(new DamageEnergyFieldAbility(35f, 25f, 150f){{
                 status = TerraStatusEffects.energyOverload;
                 statusDuration = 60f * 3f;
                 maxTargets = 15;
-                healPercent = 0f;
-                displayHeal = false;
                 y = -0.75f;
                 color = TerraPal.violetFront;
                 sectors = 3;
@@ -3954,7 +3952,8 @@ public class TerraUnitTypes {
                     x = -69f / 4f;
                     y = 14f / 4f;
                     shootY = 5f;
-                    reload = cooldownTime = 120f;
+                    reload = 120f;
+                    cooldownTime = (reload * 2f) * 0.9f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
                     recoil = 2.5f;
@@ -3981,13 +3980,13 @@ public class TerraUnitTypes {
                             );
                         }}
                     );
-                    bullet = new AcceleratingLaserBulletType(52f){{
+                    bullet = new AcceleratingLaserBulletType(55f){{
                         maxLength = 180f;
                         maxRange = 180f;
                         oscOffset = 0.3f;
                         lifetime = 140f;
                         width = 10f;
-                        shake = 3f;
+                        shake = 2f;
                         collisionWidth = 7f;
                         // status = TerraStatusEffects.energyOverload;
                         // statusDuration = 120f;
@@ -4014,10 +4013,10 @@ public class TerraUnitTypes {
                             hitEffect = despawnEffect = shootEffect = smokeEffect = Fx.none;
                             createChance = 0.85f;
                             lightningColor = TerraPal.violetFront;
-                            lightningCone = 30f;
-                            lightningDamage = 80f;
+                            lightningCone = 20f;
+                            lightningDamage = 70f;
                             lightning = 1;
-                            lightningLength = 16;
+                            lightningLength = 17;
                             lightningLengthRand = 5;
                         }};
                     }};
@@ -4116,12 +4115,14 @@ public class TerraUnitTypes {
                     alternate = false;
                     rotateSpeed = 8f;
                     predictTarget = false;
+                    controllable = false;
+                    autoTarget = true;
                     recoil = 0.5f;
                     
                     bullet = new RailBulletType() {{
                         length = 165f;
                         damage = 60f;
-                        //collidesGround = false;
+                        collidesGround = false;
                         shieldDamageMultiplier = 1.5f;
                         hitColor = TerraPal.violetFront;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
