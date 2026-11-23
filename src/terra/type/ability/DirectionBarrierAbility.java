@@ -29,10 +29,10 @@ public class DirectionBarrierAbility extends Ability{
     public boolean shrapnelSpawn = false;
     public TextureRegion shieldRegion;
     public String shieldSuffix = "-barrier";
-    public float layerOffset = 1f;
+    public float layerOffset = 0.1f;
     public Sound breakSound = Sounds.shieldBreakSmall;
     public Sound hitSound = Sounds.shieldHit;
-    public float hitSoundVolume = 0.08f;
+    public float hitSoundVolume = 0.13f;
 
     public int shields;
     public float[] shieldAngles;
@@ -157,19 +157,19 @@ public class DirectionBarrierAbility extends Ability{
                         healths[n.id] -= d;
                         if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
-                            float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
-        
-                            if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn && shrapnel != null && shrapnels > 0){
-                                for(int i = 0; i < shrapnels; i++){
-                                    float off = (i - (shrapnels - 1) / 2f) * shrapnelSpread;
-                                    shrapnel.create(unit, unit.team, b.x, b.y, angC + off, d * explosiveReflectDamageMultiplier, 1f, 1f, null);
-                                }
-                            }
+                            
                             hitTimes[n.id] = blinkTime;
                             b.team(unit.team());
                             b.rotation(angC);
                         }else{
                             b.absorb();
+                        }
+                        if(explosiveReflectDamageMultiplier > 0f && d >= explosiveDamageThreshold && shrapnelSpawn && shrapnel != null && shrapnels > 0){
+                            float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
+                            for(int i = 0; i < shrapnels; i++){
+                                float off = (i - (shrapnels - 1) / 2f) * shrapnelSpread;
+                                shrapnel.create(unit, unit.team, b.x, b.y, angC + off, d * explosiveReflectDamageMultiplier, 1f, 1f, null);
+                            }
                         }
                         if(healths[n.id] < 0){
                             available[n.id] = false;
