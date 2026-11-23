@@ -44,8 +44,8 @@ public class TerraFx {
         Draw.color(Color.white, TerraPal.violetFront, e.fin());
         stroke(1.5f * e.fout());
     
-        randLenVectors(e.id, 12, 2f, 7f, (x, y) -> {
-            lineAngle(e.x + x, e.y + y, 90f + rand.random(-3f, 3f), 8f * e.fout());
+        randLenVectors(e.id, 12, 16f * e.fin(), 90, 7.5f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
         });
     }),
     arcSmoke = new Effect(100f, 80f, e -> {
