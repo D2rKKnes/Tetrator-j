@@ -1,4 +1,4 @@
-package terra.type.abilities;
+package terra.type.ability;
 
 import arc.*;
 import arc.audio.*;
