@@ -3979,10 +3979,10 @@ public class TerraUnitTypes {
                         }}
                     );
                     bullet = new AcceleratingLaserBulletType(52f){{
-                        maxLength = 190f;
-                        maxRange = 190f;
+                        maxLength = 180f;
+                        maxRange = 180f;
                         oscOffset = 0.3f;
-                        lifetime = 130f;
+                        lifetime = 140f;
                         width = 10f;
                         shake = 3f;
                         collisionWidth = 7f;
@@ -4004,6 +4004,7 @@ public class TerraUnitTypes {
                         bulletInterval = 2.5f;
                         intervalRandomSpread = 0f;
                         intervalBullet = new BulletType(){{
+                            shake = 2f;
                             speed = damage = 0f;
                             keepVelocity = false;
                             instantDisappear = true;
@@ -4025,7 +4026,7 @@ public class TerraUnitTypes {
                     y = 37f / 4f;
                     shootY = 0f;
                     reload = 70f;
-                    inaccuracy = 20f;
+                    inaccuracy = 50f;
                     shootCone = 10f;
                     mirror = false;
                     rotate = true;
@@ -4041,10 +4042,10 @@ public class TerraUnitTypes {
                             -13.5f / 4f, 2f, 0f
                         };
                     }};
-                    bullet = new BasicBulletType(3.4f, 67){{
+                    bullet = new BasicBulletType(3.4f, 45){{
                         lifetime = 55f;
                         splashDamage = damage * 0.6f;
-                        splashDamageRadius = 5f * 8f;
+                        splashDamageRadius = 4f * 8f;
                         scaledSplashDamage = true;
                         sprite = "terra-strike";
                         drag = -0.004f;
@@ -4112,9 +4113,10 @@ public class TerraUnitTypes {
                     alternate = false;
                     rotateSpeed = 8f;
                     predictTarget = false;
+                    recoil = 0.5f;
                     
                     bullet = new RailBulletType() {{
-                        length = 222f;
+                        length = 165f;
                         damage = 60f;
                         //collidesGround = false;
                         shieldDamageMultiplier = 1.2f;
@@ -4170,7 +4172,7 @@ public class TerraUnitTypes {
                     minWarmup = 0.9f;
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
-                    bullet = new TeslaBulletType(0f, 215){{
+                    bullet = new TeslaBulletType(0f, 240){{
                         createChance = 0.8f;
                         lifetime = 160f;
                         reflectable = false;
