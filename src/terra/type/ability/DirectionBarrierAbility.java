@@ -155,11 +155,10 @@ public class DirectionBarrierAbility extends Ability{
                         float d = b.type.pierceArmor ? rawDamage : Damage.applyArmor(rawDamage, armor * b.type.armorMultiplier);
                         if(Float.isNaN(d)) d = 0f;
                         healths[n.id] -= d;
+                        hitTimes[n.id] = blinkTime;
                         float angC = (((shieldAngles[n.id] + 90f) * 2f) - b.rotation()) + Mathf.range(15f);
                         if(b.type.reflectable){
                             b.damage(b.damage() / 1.5f);
-                            
-                            hitTimes[n.id] = blinkTime;
                             b.team(unit.team());
                             b.rotation(angC);
                         }else{
@@ -247,6 +246,8 @@ public class DirectionBarrierAbility extends Ability{
                 Lines.lineAngleCenter(Tmp.v3.x, Tmp.v3.y, shieldAngles[i] + 90f, Mathf.clamp(healths[i] / maxHealth) * shieldSize);
             }
 
+            Tmp.v3.trns(shieldAngles[i], distanceRadius);
+            Tmp.v3.add(unit);
             Draw.z(Math.min(Layer.darkness, z - 1f));
             Draw.mixcol();
             Draw.color(Pal.shadow);
