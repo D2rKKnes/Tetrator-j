@@ -4028,7 +4028,7 @@ public class TerraUnitTypes {
                     y = 37f / 4f;
                     shootY = 0f;
                     reload = 70f;
-                    inaccuracy = 70f;
+                    inaccuracy = 50f;
                     shootCone = 10f;
                     mirror = false;
                     rotate = true;
@@ -4115,14 +4115,14 @@ public class TerraUnitTypes {
                     alternate = false;
                     rotateSpeed = 8f;
                     predictTarget = false;
-                    controllable = false;
-                    autoTarget = true;
+                    // controllable = false;
+                    // autoTarget = true;
                     recoil = 0.5f;
                     
                     bullet = new RailBulletType() {{
                         length = 165f;
-                        damage = 60f;
-                        collidesGround = false;
+                        damage = 50f;
+                        // collidesGround = false;
                         shieldDamageMultiplier = 1.5f;
                         hitColor = TerraPal.violetFront;
                         shootEffect = new MultiEffect(Fx.shootBigColor, Fx.colorSpark);
@@ -4175,9 +4175,17 @@ public class TerraUnitTypes {
                     minWarmup = 0.9f;
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
+                    ejectEffect = new Effect(45f, 300f, e -> {
+                        Draw.color(Color.white, TerraPal.violetFront, e.fin());
+                        Lines.stroke(1.5f * e.fout());
+                    
+                        Angles.randLenVectors(e.id, 20, 16f, (x, y) -> {
+                            Lines.lineAngle(e.x + x, e.y + y + 40f * e.finpow(), 90f, 8f * e.fout());
+                        });
+                    });
                     bullet = new TeslaBulletType(0f, 240){{
-                        rangeOverride = xRand;
-                        createChance = 0.8f;
+                        rangeOverride = xRand / 2f;
+                        createChance = 0.75f;
                         lifetime = 160f;
                         reflectable = false;
                         hitColor = lightColor = lightningColor = trailColor = backColor = auraColor = auraLightningColor = TerraPal.violetFront;
@@ -4186,7 +4194,7 @@ public class TerraUnitTypes {
                         width = height = 12f;
                         pierceCap = 5;
                         
-                        auraRadius = 40f;
+                        auraRadius = 42f;
                         auraStroke = 3f;
                         auraAlpha = 0.25f;
                         auraDelay = 20f;
@@ -4197,7 +4205,15 @@ public class TerraUnitTypes {
                         auraLightningChance = 0.6f;
                         auraLightningSoundVolume = 0.25f;
                         
-                        smokeEffect = shootEffect = Fx.none;
+                        smokeEffect = Fx.none;
+                        shootEffect = new Effect(45f, 300f, e -> {
+                            Draw.color(Color.white, TerraPal.violetFront, e.fout());
+                            Lines.stroke(1.5f * e.fslope());
+                        
+                            Angles.randLenVectors(e.id, 20, 16f, (x, y) -> {
+                                Lines.lineAngle(e.x + x, e.y + y + 40f * e.foutpow(), 90f, 8f * e.fin());
+                            });
+                        });
                         hitEffect = Fx.hitBulletColor;
                         despawnEffect = new Effect(25, e -> {
                             Draw.z(Layer.effect);
