@@ -12,13 +12,14 @@ public class TerraPal{
     fissile = Color.valueOf("bcff73"),
 
     copisOutline = Color.valueOf("36334d"),
-
     violetFront = Color.valueOf("8b7be8"),
     violetBack = Color.valueOf("6957d1"),
     limeFront = Color.valueOf("c1f179"),
     limeBack = Color.valueOf("84b23f"),
     pinkFront = Color.valueOf("fa88d6"),
     pinkBack = Color.valueOf("c5439c"),
+    redFront = Color.valueOf("f46b60"),
+    redBack = Color.valueOf("e12a30"),
     
     blueFront = Color.valueOf("8aa3f4"),
     blueBack = Color.valueOf("6974c4"),
