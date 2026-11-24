@@ -113,7 +113,10 @@ public class TerraBlocks{
     //logic
     primeProcessor,
     //COPIS =---
+    //crafters
     circularFurnace,
+    //storage
+    coreResistance, 
     //OTHER =---
     debugAssembler, debugAssembler2;
     
@@ -2639,6 +2642,32 @@ public class TerraBlocks{
             @Override
             public void drawPlanRegion(BuildPlan plan, Eachable<BuildPlan> list) {
                 Draw.rect(this.fullRegion, plan.drawx(), plan.drawy());
+            }
+        };
+
+        //storage
+        coreResistance = new CoreBlock("core-resistance"){{
+            requirements(Category.effect, with(TerraItems.tantalium, 1200, TerraItems.ruthenium, 1000, TerraItems.xAlloy, 800));
+            //alwaysUnlocked = true;
+            unitType = TerraUnitTypes.dart;
+            health = 10000;
+            itemCapacity = 5000;
+            size = 4;
+
+            unitCapModifier = 15;
+            researchCostMultiplier = 0.05f;
+        }
+            public TextureRegion fullRegion;
+                                                                                 
+            @Override
+            public void load() {
+                super.load();
+                this.fullRegion = Core.atlas.find(this.name + "-full");
+            }
+        
+            @Override
+            public TextureRegion[] icons() {
+                return new TextureRegion[]{this.fullRegion};
             }
         };
         
