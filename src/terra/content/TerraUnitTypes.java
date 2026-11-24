@@ -67,6 +67,8 @@ public class TerraUnitTypes {
     //pink copis
     //lime copis
     //red copis
+    dart, 
+    //other copis
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
     aircraftThoriumMissile, aircraftThermoxiteMissile, aircraftFissileMissile, 
@@ -1436,8 +1438,6 @@ public class TerraUnitTypes {
         }};
 
         //BLUE
-        Color blueTerraFront = Color.valueOf("8aa3f4");
-        Color blueTerraBack = Color.valueOf("6974c4");
         charge = new UnitType("charge"){{
             flying = true;
             speed = 2.3f;
@@ -1449,7 +1449,7 @@ public class TerraUnitTypes {
             engineSize = engineOffset = 0f;
             itemCapacity = 15;
             constructor = UnitEntity::create;
-            healColor = blueTerraFront;
+            healColor = TerraPal.blueFront;
             outlineColor = Pal.darkerMetal;
             setEnginesMirror(
                 new UnitEngine(22f / 4f, -12f / 4f, 2f, -90f)
@@ -1464,7 +1464,7 @@ public class TerraUnitTypes {
                 rotate = true;
                 shootSound = Sounds.shootArc;
                 bullet = new ChainLightningBulletType() {{
-                    lightningColor = hitColor = blueTerraFront;
+                    lightningColor = hitColor = TerraPal.blueFront;
                     range = 90;
                     width = 6;
                     shootEffect = new MultiEffect(Fx.colorSparkBig, Fx.shootBigColor);
@@ -4224,6 +4224,87 @@ public class TerraUnitTypes {
                     }
                 }
             );
+        }};
+
+        dart = new CopisUnitType("dart"){{
+            controller = u -> u.team.isAI() ? new BuilderAI(true, 400f) : new CommandAI();
+            flying = true;
+            targetBuildingsMobile = false;
+            isEnemy = false;
+            speed = 4.2f;
+            rotateSpeed = 9f;
+            drag = 0.06f;
+            accel = 0.11f;
+            hitSize = 8f;
+            health = 650;
+            armor = 4;
+            mineSpeed = 5f;
+            mineTier = 2;
+            mineWalls = true;
+            buildSpeed = 1f;
+            fogRadius = 0f;
+            engineSize = 2.5f;
+            engineOffset = 3f;
+            trailLength = 5;
+            constructor = UnitEntity::create;
+
+            weapons.add(new Weapon("terra-red-micro-weapon"){{
+                shootSound = Sounds.shootLaser;
+                shootSoundVolume = 1.4f;
+                x = -22.5f / 4f;
+                y = 8.5f / 4f;
+                shootY = 3f;
+                reload = 35f;
+                layerOffset = -0.002f;
+                recoil = 1.5f;
+                inaccuracy = 5f;
+                shoot = new ShootPattern(){{
+                    shots = 2;
+                    shotDelay = 5f;
+                }};
+                bullet = new BasicBulletType(4.6f, 22f){{
+                    lifetime = 35f;
+                    homingPower = 0.05f;
+                    buildingDamageMultiplier = 0f;
+                    sprite = "circle-bullet";
+                    reflectable = false;
+                    width = 3f;
+                    height = 3f;
+                    shrinkY = 0f;
+                    hitColor = lightColor = trailColor = backColor = TerraPal.redFront;
+                    frontColor = Color.white;
+                    trailWidth = 1.1f;
+                    trailLength = 4;
+                    parts.add(new FlarePart(){{
+                        color1 = TerraPal.redFront;
+                        radius = radiusTo = 8;
+                        stroke = 2f;
+                        sides = 2;
+                    }});
+                    smokeEffect = Fx.shootSmokeSquare;
+                    despawnEffect = hitEffect = new Effect(15, e -> {
+                        Draw.z(Layer.effect);
+                        color(Color.white, TerraPal.redFront, e.fin());
+                        stroke(0.5f + e.fout());
+                        randLenVectors(e.id, 5, e.fin() * 15f, (x, y) -> {
+                            float ang = Mathf.angle(x, y);
+                            lineAngle(e.x + x, e.y + y, ang, e.fout() * 3 + 1f);
+                        });
+                        Drawf.light(e.x, e.y, 20f, e.color, 0.6f * e.fout());
+
+                        stroke(1f);
+                        float rad = Mathf.lerp(8f, 0f, e.fin());
+                        Draw.color(TerraPal.redFront);
+                        for(int j = 0; j < 2; j++){
+                            Drawf.tri(e.x, e.y, 2f, rad, j * 180f);
+                        }
+                        Draw.color(Color.white);
+                        for(int j = 0; j < 2; j++){
+                            Drawf.tri(e.x, e.y, 2f * 0.5f, rad * 0.5f, j * 180f);
+                        }
+                    });
+                }};
+            }});
         }};
 
         // calamity = new UnitType("calamity"){{
