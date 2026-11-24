@@ -2648,9 +2648,13 @@ public class TerraBlocks{
         //storage
         coreResistance = new CoreBlock("core-resistance"){{
             requirements(Category.effect, with(TerraItems.tantalium, 1200, TerraItems.ruthenium, 1000, TerraItems.xAlloy, 800));
-            //alwaysUnlocked = true;
+            alwaysUnlocked = true;
+            isFirstTier = true;
+            incinerateNonBuildable = true;
+            thrusterLength = 34/4f;
             unitType = TerraUnitTypes.dart;
             health = 10000;
+            armor = 10f;
             itemCapacity = 5000;
             size = 4;
 
