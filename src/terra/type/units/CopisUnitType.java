@@ -14,9 +14,9 @@ public class CopisUnitType extends UnitType{
     public CopisUnitType(String name){
         super(name);
         outlineColor = TerraPal.copisOutline;
-        immunities.addAll(StatusEffects.burning, StatusEffects.melting, TerraStatusEffects.sunBurn, StatusEffects.corroded, TerraStatusEffects.radited);
+        immunities.addAll(StatusEffects.burning, StatusEffects.melting, TerraStatusEffects.sunBurn, StatusEffects.corroded, TerraStatusEffects.leadCorroded);
         envDisabled = Env.none;
         healColor = TerraPal.pinkFront;
-        researchCostMultiplier = 10f;
+        researchCostMultiplier = 20f;
     }
 }
