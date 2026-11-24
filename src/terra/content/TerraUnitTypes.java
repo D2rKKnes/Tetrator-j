@@ -1864,9 +1864,10 @@ public class TerraUnitTypes {
             lightRadius = 12f * 3;
             health = armor = Float.POSITIVE_INFINITY;
             targetFlags = new BlockFlag[]{BlockFlag.core, null};
-            engineSize = 0f;
+            engineSize = 2f;
             engineOffset = 0f;
-            //trailLength = 5;
+            trailLength = 5;
+            engineLayer = Layer.bullet - 1f;
             itemCapacity = 2147483647;
             fogRadius = Float.POSITIVE_INFINITY;
             lowAltitude = false;
@@ -4236,12 +4237,12 @@ public class TerraUnitTypes {
             drag = 0.06f;
             accel = 0.11f;
             hitSize = 8f;
-            health = 650;
+            health = 600;
             armor = 4;
             mineSpeed = 5f;
             mineTier = 2;
             mineWalls = true;
-            buildSpeed = 1f;
+            buildSpeed = 1.5f;
             fogRadius = 0f;
             engineSize = 2.5f;
             engineOffset = 3f;
@@ -4263,7 +4264,7 @@ public class TerraUnitTypes {
                     shotDelay = 5f;
                 }};
                 bullet = new BasicBulletType(4.6f, 22f){{
-                    lifetime = 35f;
+                    lifetime = 30f;
                     homingPower = 0.05f;
                     buildingDamageMultiplier = 0f;
                     sprite = "circle-bullet";
