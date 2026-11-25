@@ -109,9 +109,9 @@ public class TerraUnitTypes {
             lifetime = 60f * 60f;
 
             parts.add(new RingPart(){{
-                x = engineOffset * -1f;
+                y = engineOffset * -1f;
                 stroke = 1.5f;
-                radius = engineSize * 1.2f;
+                radius = engineSize * 1.3f;
                 progress = PartProgress.life;
             }});
 
@@ -208,9 +208,9 @@ public class TerraUnitTypes {
             lifetime = 2400f;
 
             parts.add(new RingPart(){{
-                x = engineOffset * -1f;
+                y = engineOffset * -1f;
                 stroke = 1.5f;
-                radius = engineSize * 1.2f;
+                radius = engineSize * 1.3f;
                 progress = PartProgress.life;
             }});
 
@@ -4198,8 +4198,8 @@ public class TerraUnitTypes {
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
                     parts.add(new RingPart(){{
-                        stroke = 1.5f;
-                        radius = 3f;
+                        stroke = 1f;
+                        radius = 3.25f;
                         color = TerraPal.violetFront;
                         colorTo = TerraPal.violetBack;
                         progress = PartProgress.reload;
