@@ -10,12 +10,15 @@ import mindustry.entities.part.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import java.util.WeakHashMap;
 
 public class EnginePart extends DrawPart {
-    public float size = 1f, trailLength = 0f, trailScl = 1f;
+    public float size = 1f, minScl = 0f, trailLength = 0f, trailScl = 1f;
     public float x = 0f, y = 0f, rot = -90f;
     public float layer = -1f, layerOffset = 0f;
-    public @Nullable Color color;
+    public boolean mirror = false;
+    public PartProgress progress = PartProgress.warmup;
+    public @Nullable Color color, trailColor;
     public Color colorInner = Color.white;
 
     private final WeakHashMap<Object, Trail[]> trails = new WeakHashMap<>();
@@ -23,7 +26,7 @@ public class EnginePart extends DrawPart {
 
     @Override
     public void draw(PartParams params) {
-        float scale = Mathf.clamp(progress.get(params));
+        float scale = Mathf.lerp(minScl, 1f, Mathf.clamp(progress.get(params)));
         if (scale <= 0.0001f || size <= 0f) return;
 
         Object owner = findOwner(params);
@@ -83,9 +86,9 @@ public class EnginePart extends DrawPart {
         Draw.reset();
         Draw.z(z);
     }
+
     private @Nullable Object findOwner(PartParams params) {
         foundOwner = null;
-
         Groups.unit.intersect(params.x - 16f, params.y - 16f, 32f, 32f, u -> {
             if (foundOwner != null) return;
             if (Mathf.equal(u.x, params.x, 0.01f) && Mathf.equal(u.y, params.y, 0.01f)) {
