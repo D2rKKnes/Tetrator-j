@@ -109,7 +109,9 @@ public class TerraUnitTypes {
             lifetime = 60f * 60f;
 
             parts.add(new RingPart(){{
-                radius = hitSize * 1.5f;
+                x = engineOffset * -1f;
+                stroke = 1.5f;
+                radius = engineSize * 1.2f;
                 progress = PartProgress.life;
             }});
 
@@ -206,7 +208,9 @@ public class TerraUnitTypes {
             lifetime = 2400f;
 
             parts.add(new RingPart(){{
-                radius = hitSize * 1.5f;
+                x = engineOffset * -1f;
+                stroke = 1.5f;
+                radius = engineSize * 1.2f;
                 progress = PartProgress.life;
             }});
 
@@ -628,6 +632,10 @@ public class TerraUnitTypes {
                 new UnitEngine(4f, 4f, 2f, 45f),
                 new UnitEngine(4f, -4f, 2f, 315f)
             );
+            parts.add(new RingPart(){{
+                radius = hitSize * 1.35f;
+                progress = PartProgress.life;
+            }});
 
             weapons.add(new Weapon(){{
                 mirror = false;
@@ -4178,7 +4186,7 @@ public class TerraUnitTypes {
                     x = 0f;
                     y = -0.75f;
                     shootY = 0f;
-                    reload = 360f;
+                    reload = 390f;
                     recoil = 0f;
                     mirror = rotate = false;
                     shootCone = 360f;
@@ -4189,6 +4197,13 @@ public class TerraUnitTypes {
                     minWarmup = 0.9f;
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
+                    parts.add(new RingPart(){{
+                        stroke = 1.5f;
+                        radius = 3f;
+                        color = TerraPal.violetFront;
+                        colorTo = TerraPal.violetBack;
+                        progress = PartProgress.reload;
+                    }});
                     bullet = new TeslaBulletType(0f, 240){{
                         createChance = 0.75f;
                         lifetime = 160f;
@@ -5534,6 +5549,11 @@ public class TerraUnitTypes {
             targetPriority = -1f;
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
+
+            parts.add(new RingPart(){{
+                radius = hitSize * 1.25f;
+                progress = PartProgress.life;
+            }});
 
             weapons.add(new ConstructWeapon("terra-omura-missile"){{
                 x = 18f / 4f;
