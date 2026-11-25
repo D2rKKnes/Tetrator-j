@@ -78,64 +78,64 @@ public class TerraUnitTypes {
     latumFAKE, myDoom, flareC, omuraDrone, mutilation;
 
     public static void load() {
-        flareC = new UnitType("flare-c"){{
-            speed = 2.7f;
-            accel = 0.08f;
-            drag = 0.04f;
-            flying = true;
-            health = 70;
-            engineOffset = 5.75f;
-            targetFlags = new BlockFlag[]{BlockFlag.generator, null};
-            hitSize = 9;
-            itemCapacity = 0;
-            circleTarget = true;
-            omniMovement = false;
-            rotateSpeed = 5f;
-            circleTargetRadius = 60f;
-            wreckSoundVolume = 0.7f;
+        // flareC = new UnitType("flare-c"){{
+        //     speed = 2.7f;
+        //     accel = 0.08f;
+        //     drag = 0.04f;
+        //     flying = true;
+        //     health = 70;
+        //     engineOffset = 5.75f;
+        //     targetFlags = new BlockFlag[]{BlockFlag.generator, null};
+        //     hitSize = 9;
+        //     itemCapacity = 0;
+        //     circleTarget = true;
+        //     omniMovement = false;
+        //     rotateSpeed = 5f;
+        //     circleTargetRadius = 60f;
+        //     wreckSoundVolume = 0.7f;
 
-            moveSound = Sounds.loopThruster;
-            moveSoundPitchMin = 0.3f;
-            moveSoundPitchMax = 1.5f;
-            moveSoundVolume = 0.2f;
+        //     moveSound = Sounds.loopThruster;
+        //     moveSoundPitchMin = 0.3f;
+        //     moveSoundPitchMax = 1.5f;
+        //     moveSoundVolume = 0.2f;
 
-            playerControllable = false;
-            logicControllable = false;
-            useUnitCap = false;
-            hidden = true;
-            constructor = TimedKillUnit::create;
-            targetPriority = -1f;
-            outlineColor = Pal.darkerMetal;
-            lifetime = 60f * 60f;
+        //     playerControllable = false;
+        //     logicControllable = false;
+        //     useUnitCap = false;
+        //     hidden = true;
+        //     constructor = TimedKillUnit::create;
+        //     targetPriority = -1f;
+        //     outlineColor = Pal.darkerMetal;
+        //     lifetime = 60f * 60f;
 
-            parts.add(new RingPart(){{
-                y = engineOffset * -1f;
-                stroke = 1.5f;
-                radius = engineSize * 1.3f;
-                progress = PartProgress.life;
-            }});
+        //     parts.add(new RingPart(){{
+        //         y = engineOffset * -1f;
+        //         stroke = 1f;
+        //         radius = engineSize * 1.6f;
+        //         progress = PartProgress.life;
+        //     }});
 
-            weapons.add(new Weapon(){{
-                y = 1f;
-                x = 0f;
-                minShootVelocity = 2f;
-                shootCone = 10f;
-                reload = 80f;
-                shoot.shots = 3;
-                shoot.shotDelay = 3f;
-                ejectEffect = Fx.casing1;
-                mirror = false;
-                bullet = new BasicBulletType(2.5f, 9){{
-                    inaccuracy = 4f;
-                    width = 7f;
-                    height = 9f;
-                    lifetime = 32f;
-                    shootEffect = Fx.shootSmall;
-                    smokeEffect = Fx.shootSmallSmoke;
-                    ammoMultiplier = 2;
-                }};
-            }});
-        }};
+        //     weapons.add(new Weapon(){{
+        //         y = 1f;
+        //         x = 0f;
+        //         minShootVelocity = 2f;
+        //         shootCone = 10f;
+        //         reload = 80f;
+        //         shoot.shots = 3;
+        //         shoot.shotDelay = 3f;
+        //         ejectEffect = Fx.casing1;
+        //         mirror = false;
+        //         bullet = new BasicBulletType(2.5f, 9){{
+        //             inaccuracy = 4f;
+        //             width = 7f;
+        //             height = 9f;
+        //             lifetime = 32f;
+        //             shootEffect = Fx.shootSmall;
+        //             smokeEffect = Fx.shootSmallSmoke;
+        //             ammoMultiplier = 2;
+        //         }};
+        //     }});
+        // }};
         
         wick = new UnitType("wick"){{
             flying = true;
@@ -209,8 +209,8 @@ public class TerraUnitTypes {
 
             parts.add(new RingPart(){{
                 y = engineOffset * -1f;
-                stroke = 1.5f;
-                radius = engineSize * 1.3f;
+                stroke = 1f;
+                radius = engineSize * 1.6f;
                 progress = PartProgress.life;
             }});
 
@@ -633,7 +633,8 @@ public class TerraUnitTypes {
                 new UnitEngine(4f, -4f, 2f, 315f)
             );
             parts.add(new RingPart(){{
-                radius = hitSize * 1.35f;
+                layer = Layer.flyingUnit + 1f;
+                radius = hitSize * 0.66f;
                 progress = PartProgress.life;
             }});
 
@@ -3941,7 +3942,7 @@ public class TerraUnitTypes {
             shadowElevation = 0.45f;
             groundLayer = Layer.legUnit + 1f;
             constructor = LegsUnit::create;
-            range = 100f;
+            range = 105f;
 
             immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
             abilities.add(new DirectionBarrierAbility(3, 0.03f, 36f, 3000f, 20f, 150f / 60f, 90f / 60f, 45f, TerraPal.violetFront, new ShrapnelBulletType(){{
@@ -4205,6 +4206,7 @@ public class TerraUnitTypes {
                         progress = PartProgress.reload;
                     }});
                     bullet = new TeslaBulletType(0f, 240){{
+                        rangeOverride = xRand;
                         createChance = 0.75f;
                         lifetime = 160f;
                         reflectable = false;
@@ -4289,7 +4291,7 @@ public class TerraUnitTypes {
                     shots = 2;
                     shotDelay = 5f;
                 }};
-                bullet = new BasicBulletType(4.6f, 22f){{
+                bullet = new BasicBulletType(4.65f, 22f){{
                     lifetime = 30f;
                     homingPower = 0.05f;
                     buildingDamageMultiplier = 0f;
@@ -5550,10 +5552,10 @@ public class TerraUnitTypes {
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
 
-            parts.add(new RingPart(){{
-                radius = hitSize * 1.25f;
-                progress = PartProgress.life;
-            }});
+            // parts.add(new RingPart(){{
+            //     radius = hitSize * 1.25f;
+            //     progress = PartProgress.life;
+            // }});
 
             weapons.add(new ConstructWeapon("terra-omura-missile"){{
                 x = 18f / 4f;
