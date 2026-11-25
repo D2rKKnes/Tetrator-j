@@ -16,6 +16,7 @@ import terra.type.bullet.*;
 import terra.type.weapons.*;
 import terra.type.ability.*;
 import terra.type.units.*;
+import terra.type.part.*;
 import terra.graphics.*;
 import mindustry.Vars;
 import mindustry.ai.*;
@@ -106,6 +107,11 @@ public class TerraUnitTypes {
             targetPriority = -1f;
             outlineColor = Pal.darkerMetal;
             lifetime = 60f * 60f;
+
+            parts.add(new RingPart(){{
+                radius = hitSize * 1.5f;
+                progress = PartProgress.life;
+            }});
 
             weapons.add(new Weapon(){{
                 y = 1f;
@@ -198,6 +204,11 @@ public class TerraUnitTypes {
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
             lifetime = 2400f;
+
+            parts.add(new RingPart(){{
+                radius = hitSize * 1.5f;
+                progress = PartProgress.life;
+            }});
 
             weapons.add(new Weapon(){{
                 shootOnDeath = true;
@@ -3922,6 +3933,7 @@ public class TerraUnitTypes {
             shadowElevation = 0.45f;
             groundLayer = Layer.legUnit + 1f;
             constructor = LegsUnit::create;
+            range = 100f;
 
             immunities.addAll(StatusEffects.shocked, StatusEffects.electrified, TerraStatusEffects.zapped, TerraStatusEffects.energyOverload);
             abilities.add(new DirectionBarrierAbility(3, 0.03f, 36f, 3000f, 20f, 150f / 60f, 90f / 60f, 45f, TerraPal.violetFront, new ShrapnelBulletType(){{
@@ -4178,7 +4190,6 @@ public class TerraUnitTypes {
                     shootWarmupSpeed = 0.03f;
                     xRand = yRand = hitSize * 5f;
                     bullet = new TeslaBulletType(0f, 240){{
-                        rangeOverride = xRand * 0.65f;
                         createChance = 0.75f;
                         lifetime = 160f;
                         reflectable = false;
