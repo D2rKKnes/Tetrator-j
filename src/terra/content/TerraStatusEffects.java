@@ -46,10 +46,18 @@ public class TerraStatusEffects{
     common, uncommon, rare, epic, legendary, mythical;
     
     public static void load(){
-        energyOverload = new StatusEffect("energy-overload"){{
+        energyOverload = new StatusEffect("energy-overload"){
+            @Override
+            public void update(Unit unit, StatusEntry entry){
+                super.update(unit, entry);
+                if(Mathf.chanceDelta(0.075f)){
+                    Utils.lightningCircle(unit.x, unit.y, Math.max(unit.hitSize / 2f + 4f, 8f), Math.max(4, (int) unit.hitSize / 9 + 2), color);
+                }
+            }
+            {
             color = Color.valueOf("bf92f9");
-            speedMultiplier = 0.7f;
-            reloadMultiplier = 0.4f;
+            speedMultiplier = 0.65f;
+            reloadMultiplier = 0.7f;
             transitionDamage = 14f;
             damage = 0.6f;
             effect = Fx.circleColorSpark;
