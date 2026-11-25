@@ -17,6 +17,7 @@ public class EnginePart extends DrawPart {
     public float x = 0f, y = 0f, rot = -90f;
     public float layer = -1f, layerOffset = 0f;
     public boolean mirror = false;
+    public boolean drawCap = true;
     public PartProgress progress = PartProgress.warmup;
     public @Nullable Color color, trailColor;
     public Color colorInner = Color.white;
