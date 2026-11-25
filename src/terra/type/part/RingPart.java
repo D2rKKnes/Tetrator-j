@@ -14,6 +14,7 @@ public class RingPart extends DrawPart {
     public float radius = 10f, stroke = 2f;
     public float x = 0f, y = 0f, angle = 90f;
     public boolean clockwise = true;
+    public boolean rotate = false;
     public float layer = Layer.effect;
     public float layerOffset = 0f;
 
@@ -42,11 +43,12 @@ public class RingPart extends DrawPart {
         int activeSides = Mathf.ceil(sides * remaining);
         float stepAngle = 360f / sides;
         float dir = clockwise ? -1f : 1f;
+        float baseAngle = angle + (rotate ? params.rotation - 90f : 0f);
 
         float innerR = Math.max(0f, radius - stroke / 2f);
         float outerR = radius + stroke / 2f;
         for (int i = 0; i < activeSides; i++) {
-            float a1 = angle + params.rotation - 90f + dir * (i * stepAngle);
+            float a1 = baseAngle + dir * (i * stepAngle);
             float currentStep = Math.min(stepAngle, totalAngle - i * stepAngle);
             float a2 = a1 + dir * currentStep;
 
