@@ -56,7 +56,7 @@ public class TerraMod extends Mod{
                 if(uSize <= 9 && unit.flying && unit.killable && unit.createWreck && !unit.hidden){
                     FallenUnit fau = new FallenUnit("terra-fallen-" + unit.name);
                     fau.unitName = unit.name;
-                    //fau.size = uSize;
+                    //fau.size = uSize; 
                     if (unit.getTotalRequirements() != null && unit.getTotalRequirements().length > 0) {
                         Seq<ItemStack> reqs = new Seq<>();
                         for (ItemStack stack : unit.getTotalRequirements()) {
