@@ -3578,7 +3578,8 @@ public class TerraUnitTypes {
                     x = -29f / 4f;
                     y = 11f / 4f;
                     shootY = 5f;
-                    reload = cooldownTime = 90f;
+                    reload = 90f;
+                    cooldownTime = (reload * 2f) * 0.9f;
                     layerOffset = -0.002f;
                     smoothReloadSpeed = 0.15f;
                     recoil = 2.5f;
@@ -4265,7 +4266,7 @@ public class TerraUnitTypes {
             drownTimeMultiplier = 1.75f;
             segments = 3;
             drawBody = false;
-            crushDamage = 0.75f;
+            crushDamage = 0.6f;
             aiController = HugAI::new;
             constructor = CrawlUnit::create;
             targetAir = false;
@@ -4273,30 +4274,47 @@ public class TerraUnitTypes {
             segmentScl = 3f;
             segmentPhase = 5f;
             segmentMag = 0.5f;
-            speed = 1.25f;
+            segmentMaxRot = 35f;
+            speed = 1.2f;
+
+            immunities.addAll(StatusEffects.muddy, StatusEffects.tarred, TerraStatusEffects.wet);
 
             weapons.add(new Weapon("terra-red-small-mount"){{
                 shootSound = Sounds.shootArtillery;
                 x = 0f;
                 y = -2.5f / 4f;
-                shootY = 3f;
+                shootY = 2f;
                 reload = 60f;
                 mirror = false;
                 rotate = true;
-                rotateSpeed = 2f;
+                rotateSpeed = 5f;
                 recoil = 1f;
-                bullet = new ArtilleryBulletType(2f, 20, "shell"){{
-                    hitEffect = Fx.blastExplosion;
-                    knockback = 0.8f;
-                    splashDamageRadius = 3f * 8f;
-                    splashDamage = 65f;
+                bullet = new ArtilleryBulletType(2f, 30, "shell"){{
+                    hitEffect = TerraFx.redExplosion;
+                    knockback = 1f;
+                    splashDamageRadius = 4f * 8f;
+                    splashDamage = 75f;
                     maxRange = 13f * 8f;
-                    lifetime = (maxRange / 2f) - (splashDamageRadius - 8f) / 2f;
+                    lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
                     width = height = 9f;
                     collides = true;
                     collidesTiles = true;
                     backColor = TerraPal.redBack;
-                    frontColor = TerraPal.redFront;
+                    frontColor = trailColor = TerraPal.redFront;
+                    fragBullets = 4;
+                    fragBullet = ArtilleryBulletType(1.75f, 10, "shell"){{
+                        hitEffect = TerraFx.redExplosion;
+                        knockback = 0.25f;
+                        splashDamageRadius = 2.5f * 8f;
+                        splashDamage = 30f;
+                        maxRange = 5f * 8f;
+                        lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
+                        width = height = 5f;
+                        collides = true;
+                        collidesTiles = true;
+                        backColor = TerraPal.redBack;
+                        frontColor = trailColor = TerraPal.redFront;
+                    }};
                 }};
             }});
         }};
