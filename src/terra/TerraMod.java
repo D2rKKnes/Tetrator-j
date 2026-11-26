@@ -53,10 +53,10 @@ public class TerraMod extends Mod{
                 }
 
                 int uSize = Math.max(1, (int) (unit.hitSize / 8f));
-                if(uSize <= 16 && unit.flying && unit.killable && unit.createWreck){
-                    FallenUnit fau = new FallenUnit("fallen-" + unit.name);
+                if(uSize <= 9 && unit.flying && unit.killable && unit.createWreck && !unit.hidden){
+                    FallenUnit fau = new FallenUnit("terra-fallen-" + unit.name);
                     fau.unitName = unit.name;
-                    fau.size = uSize;
+                    //fau.size = uSize;
                     if (unit.getTotalRequirements() != null && unit.getTotalRequirements().length > 0) {
                         Seq<ItemStack> reqs = new Seq<>();
                         for (ItemStack stack : unit.getTotalRequirements()) {
