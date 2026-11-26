@@ -4258,7 +4258,7 @@ public class TerraUnitTypes {
         }};
 
         noise = new CopisUnitType("noise"){{
-            health = 800;
+            health = 1100;
             armor = 8;
             hitSize = 9f;
             omniMovement = false;
@@ -4302,7 +4302,7 @@ public class TerraUnitTypes {
                     backColor = TerraPal.redBack;
                     frontColor = trailColor = TerraPal.redFront;
                     fragBullets = 4;
-                    fragBullet = ArtilleryBulletType(1.75f, 10, "shell"){{
+                    fragBullet = new ArtilleryBulletType(1.75f, 10, "shell"){{
                         hitEffect = TerraFx.redExplosion;
                         knockback = 0.25f;
                         splashDamageRadius = 2.5f * 8f;
