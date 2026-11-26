@@ -48,6 +48,24 @@ public class TerraFx {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 0.5f);
         });
     }),
+    redExplosion = new Effect(26, e -> {
+        color(TerraPal.redFront);
+        e.scaled(6, i -> {
+            stroke(3f * i.fout());
+            Lines.circle(e.x, e.y, 3f + i.fin() * 15f);
+        });
+        color(Pal.darkerGray);
+        randLenVectors(e.id, 5, 2f + 23f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+        });
+        color(TerraPal.redBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 1, 4, 1f + 23f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+        });
+        Drawf.light(e.x, e.y, 45f, TerraPal.redBack, 0.8f * e.fout());
+    }),
     arcSmoke = new Effect(100f, 80f, e -> {
         rand.setSeed(e.id);
 
