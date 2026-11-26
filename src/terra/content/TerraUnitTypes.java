@@ -207,11 +207,13 @@ public class TerraUnitTypes {
             healColor = Pal.suppress;
             outlineColor = Pal.darkerMetal;
             lifetime = 2400f;
+            lowAltitude = true;
 
             parts.add(new RingPart(){{
-                y = engineOffset * -1f;
+                y = -1f;
                 stroke = 1f;
-                radius = engineSize * 1.6f;
+                radius = engineSize * 1.4f;
+                //layer = Layer.flyingUnit + 1f;
                 progress = PartProgress.life;
             }});
 
@@ -635,7 +637,8 @@ public class TerraUnitTypes {
             );
             parts.add(new RingPart(){{
                 layer = Layer.flyingUnit + 1f;
-                radius = hitSize * 0.66f;
+                stroke = 1f;
+                radius = hitSize * 0.25f;
                 progress = PartProgress.life;
             }});
 
@@ -4293,7 +4296,7 @@ public class TerraUnitTypes {
                     hitEffect = TerraFx.redExplosion;
                     knockback = 1f;
                     splashDamageRadius = 4f * 8f;
-                    splashDamage = 75f;
+                    splashDamage = 85f;
                     maxRange = 13f * 8f;
                     lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
                     width = height = 9f;
@@ -4306,8 +4309,8 @@ public class TerraUnitTypes {
                         hitEffect = TerraFx.redExplosion;
                         knockback = 0.25f;
                         splashDamageRadius = 2.5f * 8f;
-                        splashDamage = 30f;
-                        maxRange = 5f * 8f;
+                        splashDamage = 34f;
+                        maxRange = 6f * 8f;
                         lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
                         width = height = 5f;
                         collides = true;
