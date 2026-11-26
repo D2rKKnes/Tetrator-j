@@ -53,22 +53,31 @@ public class TerraMod extends Mod{
                 }
 
                 int uSize = Math.max(1, (int) (unit.hitSize / 8f));
-                if(uSize <= 9 && unit.flying && unit.killable && unit.createWreck && !unit.hidden){
+                if(uSize <= 9 && unit.flying && unit.killable && unit.createWreck && !unit.hidden 
+                   && unit != TerraUnitTypes.eternity && unit != TerraUnitTypes.omuraDrone && unit != TerraUnitTypes.endSpawn 
+                   || unit == UnitTypes.elude || unit == TerraUnitTypes.wick){
                     FallenUnit fau = new FallenUnit("terra-fallen-" + unit.name);
                     fau.unitName = unit.name;
-                    //fau.size = uSize; 
-                    if (unit.getTotalRequirements() != null && unit.getTotalRequirements().length > 0) {
-                        Seq<ItemStack> reqs = new Seq<>();
-                        for (ItemStack stack : unit.getTotalRequirements()) {
-                            int amount = stack.amount / 2;
-                            if (amount > 0) {
-                                reqs.add(new ItemStack(stack.item, amount));
-                            }
-                        }
-                        if (reqs.any()) {
-                            fau.requirements = reqs.toArray(ItemStack.class);
-                        }
-                    }
+                    // fau.instantDeconstruct = false;
+                    // fau.size = uSize; 
+                    // if(uSize > 1){
+                    // fau.alwaysReplace = false;
+                    // }
+                    // if(uSize > 2){
+                    //     fau.unitMoveBreakable = false;
+                    // }
+                    // if (unit.getTotalRequirements() != null && unit.getTotalRequirements().length > 0) {
+                    //     Seq<ItemStack> reqs = new Seq<>();
+                    //     for (ItemStack stack : unit.getTotalRequirements()) {
+                    //         int amount = stack.amount / 2;
+                    //         if (amount > 0) {
+                    //             reqs.add(new ItemStack(stack.item, amount));
+                    //         }
+                    //     }
+                    //     if (reqs.any()) {
+                    //         fau.requirements = reqs.toArray(ItemStack.class);
+                    //     }
+                    // }
                     fau.init();
                     if (!Vars.headless) {
                         fau.load();
