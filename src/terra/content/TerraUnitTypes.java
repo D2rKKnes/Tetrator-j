@@ -68,7 +68,8 @@ public class TerraUnitTypes {
     //pink copis
     //lime copis
     //red copis
-    dart, 
+    noise, push, shake, aftershock,
+    dart, arrow,
     //other copis
     //missiles
     flightLeadMissile, flightTitaniumMissile, flightMetaglassMissile, 
@@ -4255,6 +4256,51 @@ public class TerraUnitTypes {
             );
         }};
 
+        noise = new CopisUnitType("noise"){{
+            health = 800;
+            armor = 8;
+            hitSize = 9f;
+            omniMovement = false;
+            rotateSpeed = 2.4f;
+            drownTimeMultiplier = 1.75f;
+            segments = 3;
+            drawBody = false;
+            crushDamage = 0.5f;
+            aiController = HugAI::new;
+            constructor = CrawlUnit::create;
+            targetAir = false;
+
+            segmentScl = 3f;
+            segmentPhase = 5f;
+            segmentMag = 0.5f;
+            speed = 1.25f;
+
+            weapons.add(new Weapon("terra-red-small-mount"){{
+                shootSound = Sounds.shootArtillery;
+                x = 0f;
+                y = -2.5f / 4f;
+                shootY = 3f;
+                reload = 60f;
+                mirror = false;
+                rotate = true;
+                rotateSpeed = 2f;
+                recoil = 1f;
+                bullet = new ArtilleryBulletType(2f, 20, "shell"){{
+                    hitEffect = Fx.blastExplosion;
+                    knockback = 0.8f;
+                    splashDamageRadius = 3f * 8f;
+                    splashDamage = 65f;
+                    maxRange = 13f * 8f;
+                    lifetime = (maxRange / 2f) - (splashDamageRadius - 8f) / 2f;
+                    width = height = 9f;
+                    collides = true;
+                    collidesTiles = true;
+                    backColor = TerraPal.redBack;
+                    frontColor = TerraPal.redFront;
+                }};
+            }});
+        }};
+        
         dart = new CopisUnitType("dart"){{
             controller = u -> u.team.isAI() ? new BuilderAI(true, 400f) : new CommandAI();
             flying = true;
