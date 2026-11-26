@@ -4277,7 +4277,7 @@ public class TerraUnitTypes {
             segmentMaxRot = 35f;
             speed = 1.2f;
 
-            immunities.addAll(StatusEffects.muddy, StatusEffects.tarred, TerraStatusEffects.wet);
+            immunities.addAll(StatusEffects.muddy, StatusEffects.tarred, StatusEffects.wet);
 
             weapons.add(new Weapon("terra-red-small-mount"){{
                 shootSound = Sounds.shootArtillery;
