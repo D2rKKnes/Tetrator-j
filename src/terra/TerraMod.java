@@ -16,7 +16,7 @@ import mindustry.ui.dialogs.JoinDialog.*;
 import mindustry.ui.fragments.*;
 import mindustry.content.*;
 import terra.content.*;
-import terra.world.blocks.RouterSorter;
+import terra.world.blocks.*;
 import terra.world.blocks.multiblock.InnerBlock;
 import terra.type.units.EntityRegister;
 import terra.maps.planets.*;
