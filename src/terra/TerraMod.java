@@ -51,6 +51,30 @@ public class TerraMod extends Mod{
                         unit.description = newDesc;
                     }
                 }
+
+                int uSize = Math.max(1, (int) (unit.hitSize / 8f));
+                if(uSize <= 16 && unit.flying && unit.killable && unit.createWreck){
+                    FallenUnit fau = new FallenUnit("fallen-" + unit.name);
+                    fau.unitName = unit.name;
+                    fau.size = uSize;
+                    if (unit.getTotalRequirements() != null && unit.getTotalRequirements().length > 0) {
+                        Seq<ItemStack> reqs = new Seq<>();
+                        for (ItemStack stack : unit.getTotalRequirements()) {
+                            int amount = stack.amount / 2;
+                            if (amount > 0) {
+                                reqs.add(new ItemStack(stack.item, amount));
+                            }
+                        }
+                        if (reqs.any()) {
+                            fau.requirements = reqs.toArray(ItemStack.class);
+                        }
+                    }
+                    fau.init();
+                    if (!Vars.headless) {
+                        fau.load();
+                    }
+                    fau.localizedName = (Core.bundle.get("block.terra-fallen-unit-placeholder") + ": " + unit.localizedName);
+                }
             }
             
             Planets.verilus.generator = new VerilusAsteroidGenerator();
