@@ -66,6 +66,11 @@ public class TerraFx {
         });
         Drawf.light(e.x, e.y, 45f, TerraPal.redBack, 0.8f * e.fout());
     }),
+    smokeRise = new Effect(150f, 150f, e -> {
+        color(Color.gray, Tmp.c2.set(Pal.darkishGray).a(0f), e.fin());
+        float size = 7f + e.fin()*8f;
+        rect("circle", e.x+e.fin()*26f, e.y+e.fin() * 30f, size, size);
+    }),
     arcSmoke = new Effect(100f, 80f, e -> {
         rand.setSeed(e.id);
 
