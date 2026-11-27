@@ -66,7 +66,9 @@ public class TerraUnitTypes {
     //violet copis
     invader, raider, besieger, devastator, doomBringer, 
     //pink copis
+    glow, shine, aureole, radiance, 
     //lime copis
+    fever, disease, pandemic, plague, 
     //red copis
     noise, push, shake, aftershock,
     dart, arrow,
@@ -4258,6 +4260,53 @@ public class TerraUnitTypes {
                     }
                 }
             );
+        }};
+
+        fever = new CopisUnitType("fever"){{
+            flying = true;
+            speed = 2f;
+            rotateSpeed = 7f;
+            drag = 0.05f;
+            accel = 0.06f;
+            hitSize = 12f;
+            health = 900;
+            armor = 7;
+            engineSize = 3.5f;
+            engineOffset = 1f;
+            engineLayer = Layer.effect;
+            trailLength = 5;
+            constructor = UnitEntity::create;
+
+            weapons.add(new Weapon("terra-lime-micro-launcher"){{
+                shootSound = Sounds.shootMissile;
+                x = 26.5f / 4f;
+                y = 6f / 4f;
+                shootY = 1.5f / 4f;
+                reload = 20f;
+                inaccuracy = 5f;
+                velocityRnd = 0.2f;
+                bullet = new MissileBulletType(4f, 44){{
+                    width = 8f;
+                    height = 8f;
+                    shrinkY = 0f;
+                    drag = -0.003f;
+                    homingRange = 60f;
+                    scaleKeepVelocity = true;
+                    splashDamageRadius = 2.5f * 8f;
+                    splashDamage = 30f;
+                    lifetime = 50f;
+                    trailColor = backColor = TerraPal.limeBack;
+                    frontColor = TerraPal.limeFront;
+                    hitEffect = Fx.blastExplosion;
+                    despawnEffect = Fx.blastExplosion;
+                    weaveScale = 4f;
+                    weaveMag = 1f;
+                    puddles = 9;
+                    puddleRange = 3.5f * 8f;
+                    puddleAmount = 20f;
+                    puddleLiquid = TerraLiquids.acid;
+                }};
+            }});
         }};
 
         noise = new CopisUnitType("noise"){{
