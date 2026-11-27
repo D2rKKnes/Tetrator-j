@@ -4271,7 +4271,7 @@ public class TerraUnitTypes {
             hitSize = 12f;
             health = 900;
             armor = 7;
-            engineSize = 2.5f;
+            engineSize = 2.65f;
             engineOffset = 1f;
             //engineLayer = Layer.effect;
             lowAltitude = true;
@@ -4289,7 +4289,7 @@ public class TerraUnitTypes {
                 velocityRnd = 0.2f;
                 rotate = true;
                 rotateSpeed = 3.4f;
-                bullet = new MissileBulletType(4f, 34){{
+                bullet = new MissileBulletType(4f, 31){{
                     width = 8f;
                     height = 8f;
                     shrinkY = 0f;
@@ -4306,7 +4306,7 @@ public class TerraUnitTypes {
                     weaveMag = 1f;
                     puddles = 4;
                     puddleRange = 2f * 8f;
-                    puddleAmount = 10f;
+                    puddleAmount = 20f;
                     puddleLiquid = TerraLiquids.acid;
                     status = TerraStatusEffects.acidCorroded;
                     statusDuration = 30f;
