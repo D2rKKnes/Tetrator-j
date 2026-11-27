@@ -71,7 +71,7 @@ public class TerraLiquids{
         acid = new Liquid("acid", Color.valueOf("c1f179")){{
             viscosity = 0.4f;
             boilPoint = 8f;
-            effect = TerraStatusEffects.radited;
+            effect = TerraStatusEffects.acidCorroded;
             incinerable = coolant = false;
         }};
     }
