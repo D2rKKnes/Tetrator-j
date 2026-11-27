@@ -4301,7 +4301,7 @@ public class TerraUnitTypes {
                             moveX = 0f;
                             moveY = 2f;
                             moveRot = -40f;
-                            rot = 180f;
+                            rotation = 180f;
                             y = -2f;
                         }}
                     );
