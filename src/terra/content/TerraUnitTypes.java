@@ -4296,23 +4296,22 @@ public class TerraUnitTypes {
                         new RegionPart("-string"){{
                             progress = PartProgress.warmup;
                             mirror = true;
-                            under = true;
                             layerOffset = -0.001f;
                             heatColor = TerraPal.pinkFront;
-                            moveX = 4f;
-                            moveY = 2f + moveX;
-                            moveRot = -25f;
+                            moveX = 7f;
+                            moveY = 4f;
+                            moveRot = -10f;
                             rotation = 180f;
                             y = -2f;
                             moves.addAll(
                                 new PartMove(){{
                                     progress = PartProgress.reload;
-                                    rot = -15;
+                                    rot = -35;
                                 }}
                             );
                         }}
                     );
-                    bullet = new FlakBulletType(2.5f, 45){{
+                    bullet = new FlakBulletType(2.5f, 85){{
                         sprite = "missile-large";
                         //for targeting
                         collidesGround = collidesAir = true;
@@ -4327,7 +4326,7 @@ public class TerraUnitTypes {
                         despawnSound = Sounds.explosion;
     
                         splashDamageRadius = 30f;
-                        splashDamage = 35f;
+                        splashDamage = 55f;
                         healPercent = 1.8f;
                         collidesTeam = true;
     
@@ -4361,10 +4360,10 @@ public class TerraUnitTypes {
 
                         fragLifeMin = 1f;
                         fragVelocityMin = 1;
-                        fragBullets = 10;
+                        fragBullets = 8;
                         fragRandomSpread = 0;
-                        fragSpread = 36;
-                        fragBullet = new BasicBulletType(4.5f, 22){{
+                        fragSpread = 360f / 8f;
+                        fragBullet = new BasicBulletType(4.5f, 28){{
                             buildingDamageMultiplier = 0.5f;
                             lifetime = 40f;
                             width = 4.5f;
@@ -4390,12 +4389,12 @@ public class TerraUnitTypes {
                     y = -7f / 4f;
                     shootY = 6.5f;
                     cooldownTime = 30f;
-                    beamWidth = 0.8f;
-                    repairSpeed = 40f / 60f;
+                    beamWidth = 0.6f;
+                    repairSpeed = 30f / 60f;
                     laserColor = healColor = TerraPal.pinkFront;
     
                     bullet = new BulletType(){{
-                        maxRange = 160f;
+                        maxRange = 100f;
                     }};
                 }}
             );
