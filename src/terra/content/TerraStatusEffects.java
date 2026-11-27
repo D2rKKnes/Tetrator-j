@@ -42,6 +42,7 @@ public class TerraStatusEffects{
     energyOverload, zapped, singularEvaporation, impactStun, radited, extinction, crystalization, graviforce, graviforce2,
     warped, warpPower, warpHell, shockwaveImpact, hyperdrive, delta32, deltaImmunized, purification, anviled, quantumBeam,
     regeneration, superRegeneration, shieldRegen, shieldDamage, speedup, instantDeath, leadCorroded, ending, sunBurn,
+    acidCorroded, 
     
     common, uncommon, rare, epic, legendary, mythical;
     
@@ -140,6 +141,16 @@ public class TerraStatusEffects{
                     unit.damage(transitionDamage);
                 });
             });
+        }};
+
+        acidCorroded = new AdvancedStatusEffect("acid-corroded"){{
+            color = Color.valueOf("c1f179");
+            speedMultiplier = 0.8f;
+            reloadMultiplier = 0.75f;
+            damage = 50f / 60f;
+            movementDamage = 25f / 60f;
+            effectChance = 0.1f;
+            effect = Fx.corrosionVapor;
         }};
 
         singularEvaporation = new StatusEffect("singular-evaporation"){{
