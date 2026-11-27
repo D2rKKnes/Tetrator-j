@@ -73,7 +73,7 @@ public class TerraFx {
             Lines.circle(e.x, e.y, 3f + i.fin() * 15f);
         });
         color(TerraPal.limeBack);
-        randLenVectors(e.id, 13, 2f + 23f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 9, 2f + 23f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
         });
         Drawf.light(e.x, e.y, 45f, TerraPal.limeFront, 0.8f * e.fout());
