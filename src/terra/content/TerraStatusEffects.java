@@ -147,8 +147,8 @@ public class TerraStatusEffects{
             color = Color.valueOf("c1f179");
             speedMultiplier = 0.8f;
             reloadMultiplier = 0.75f;
-            damage = 50f / 60f;
-            movementDamage = 25f / 60f;
+            damage = 30f / 60f;
+            movementDamage = 20f / 60f;
             effectChance = 0.1f;
             effect = Fx.corrosionVapor;
         }};
