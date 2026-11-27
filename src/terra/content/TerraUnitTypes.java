@@ -4266,8 +4266,8 @@ public class TerraUnitTypes {
             flying = true;
             speed = 2.3f;
             rotateSpeed = 7f;
-            drag = 0.03f;
-            accel = 0.03f;
+            drag = 0.05f;
+            accel = 0.05f;
             hitSize = 14f;
             health = 950;
             armor = 6;
@@ -4277,7 +4277,7 @@ public class TerraUnitTypes {
             constructor = UnitEntity::create;
             abilities.addAll(
                 new RegenAbility() {{
-                    amount = 20f / 60f;
+                    amount = 25f / 60f;
                 }}
             );
             
@@ -4297,15 +4297,22 @@ public class TerraUnitTypes {
                             progress = PartProgress.warmup;
                             mirror = true;
                             under = true;
+                            layerOffset = -0.001f;
                             heatColor = TerraPal.pinkFront;
-                            moveX = 0f;
-                            moveY = 2f;
-                            moveRot = -40f;
+                            moveX = 4f;
+                            moveY = 2f + moveX;
+                            moveRot = -25f;
                             rotation = 180f;
                             y = -2f;
+                            moves.addAll(
+                                new PartMove(){{
+                                    progress = PartProgress.reload;
+                                    rot = -15;
+                                }}
+                            );
                         }}
                     );
-                    bullet = new FlakBulletType(2.5f, 33){{
+                    bullet = new FlakBulletType(2.5f, 45){{
                         sprite = "missile-large";
                         //for targeting
                         collidesGround = collidesAir = true;
@@ -4320,9 +4327,11 @@ public class TerraUnitTypes {
                         despawnSound = Sounds.explosion;
     
                         splashDamageRadius = 30f;
-                        splashDamage = 25f;
+                        splashDamage = 35f;
+                        healPercent = 1.8f;
+                        collidesTeam = true;
     
-                        lifetime = 80f;
+                        lifetime = 65f;
                         backColor = lightColor = trailColor = TerraPal.pinkFront;
                         frontColor = Color.white;
     
@@ -4355,14 +4364,16 @@ public class TerraUnitTypes {
                         fragBullets = 10;
                         fragRandomSpread = 0;
                         fragSpread = 36;
-                        fragBullet = new BasicBulletType(5, 15){{
+                        fragBullet = new BasicBulletType(4.5f, 22){{
                             buildingDamageMultiplier = 0.5f;
-                            lifetime = 50f;
+                            lifetime = 40f;
                             width = 4.5f;
                             weaveRandom = false;
-                            weaveMag = 40;
+                            weaveMag = 20;
                             weaveScale = -5;
                             height = 8;
+                            healPercent = 0.25f;
+                            collidesTeam = true;
                                     
                             pierce = true;
                             sprite = "missile-large";
@@ -4378,7 +4389,8 @@ public class TerraUnitTypes {
                     x = 19f / 4f;
                     y = -7f / 4f;
                     shootY = 6.5f;
-                    beamWidth = 1.1f;
+                    cooldownTime = 30f;
+                    beamWidth = 0.8f;
                     repairSpeed = 40f / 60f;
                     laserColor = healColor = TerraPal.pinkFront;
     
