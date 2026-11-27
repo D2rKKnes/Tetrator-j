@@ -4265,17 +4265,19 @@ public class TerraUnitTypes {
         fever = new CopisUnitType("fever"){{
             flying = true;
             speed = 2f;
-            rotateSpeed = 7f;
+            rotateSpeed = 5f;
             drag = 0.05f;
             accel = 0.06f;
             hitSize = 12f;
             health = 900;
             armor = 7;
-            engineSize = 3.5f;
+            engineSize = 2.5f;
             engineOffset = 1f;
-            engineLayer = Layer.effect;
-            trailLength = 5;
+            //engineLayer = Layer.effect;
+            lowAltitude = true;
+            trailLength = 9;
             constructor = UnitEntity::create;
+            immunities.addAll(TerraStatusEffects.acidCorroded);
 
             weapons.add(new Weapon("terra-lime-micro-launcher"){{
                 shootSound = Sounds.shootMissile;
@@ -4285,7 +4287,9 @@ public class TerraUnitTypes {
                 reload = 20f;
                 inaccuracy = 5f;
                 velocityRnd = 0.2f;
-                bullet = new MissileBulletType(4f, 44){{
+                rotate = true;
+                rotateSpeed = 3.4f;
+                bullet = new MissileBulletType(4f, 34){{
                     width = 8f;
                     height = 8f;
                     shrinkY = 0f;
@@ -4293,18 +4297,19 @@ public class TerraUnitTypes {
                     homingRange = 60f;
                     scaleKeepVelocity = true;
                     splashDamageRadius = 2.5f * 8f;
-                    splashDamage = 30f;
+                    splashDamage = 16f;
                     lifetime = 50f;
                     trailColor = backColor = TerraPal.limeBack;
                     frontColor = TerraPal.limeFront;
-                    hitEffect = Fx.blastExplosion;
-                    despawnEffect = Fx.blastExplosion;
+                    hitEffect = despawnEffect = TerraFx.acidExplosion;
                     weaveScale = 4f;
                     weaveMag = 1f;
-                    puddles = 9;
-                    puddleRange = 3.5f * 8f;
-                    puddleAmount = 20f;
+                    puddles = 4;
+                    puddleRange = 2f * 8f;
+                    puddleAmount = 10f;
                     puddleLiquid = TerraLiquids.acid;
+                    status = TerraStatusEffects.acidCorroded;
+                    statusDuration = 30f;
                 }};
             }});
         }};
@@ -4341,12 +4346,12 @@ public class TerraUnitTypes {
                 rotate = true;
                 rotateSpeed = 5f;
                 recoil = 1f;
-                bullet = new ArtilleryBulletType(2f, 30, "shell"){{
+                bullet = new ArtilleryBulletType(2f, 40, "shell"){{
                     hitEffect = TerraFx.redExplosion;
                     knockback = 1f;
                     splashDamageRadius = 4f * 8f;
                     splashDamage = 85f;
-                    maxRange = 13f * 8f;
+                    maxRange = 15f * 8f;
                     lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
                     width = height = 9f;
                     collides = true;
@@ -4354,11 +4359,11 @@ public class TerraUnitTypes {
                     backColor = TerraPal.redBack;
                     frontColor = trailColor = TerraPal.redFront;
                     fragBullets = 4;
-                    fragBullet = new ArtilleryBulletType(1.75f, 10, "shell"){{
+                    fragBullet = new ArtilleryBulletType(1.75f, 15, "shell"){{
                         hitEffect = TerraFx.redExplosion;
                         knockback = 0.25f;
                         splashDamageRadius = 2.5f * 8f;
-                        splashDamage = 34f;
+                        splashDamage = 40f;
                         maxRange = 6f * 8f;
                         lifetime = (maxRange / speed) - (splashDamageRadius - 8f) / speed;
                         width = height = 5f;
