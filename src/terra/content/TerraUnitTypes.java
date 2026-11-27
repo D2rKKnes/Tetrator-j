@@ -4266,24 +4266,28 @@ public class TerraUnitTypes {
             flying = true;
             speed = 2.3f;
             rotateSpeed = 7f;
-            drag = 0.08f;
+            drag = 0.03f;
             accel = 0.03f;
             hitSize = 14f;
             health = 950;
             armor = 6;
             engineSize = 3f;
             engineOffset = 7f;
-            //engineLayer = Layer.effect;
             lowAltitude = true;
             constructor = UnitEntity::create;
-
+            abilities.addAll(
+                new RegenAbility() {{
+                    amount = 20f / 60f;
+                }}
+            );
+            
             weapons.add(
                 new Weapon("terra-glow-weapon"){{
                     shootSound = Sounds.shootMissilePlasma;
                     x = 0f;
                     y = 0f;
                     shootY = 7f;
-                    reload = 20f;
+                    reload = 90f;
                     recoil = 0f;
                     inaccuracy = 1f;
                     velocityRnd = 0.1f;
@@ -4330,14 +4334,14 @@ public class TerraUnitTypes {
                         trailWidth = 4f;
                         trailLength = 21;
     
-                        fragBullets = 3;
+                        fragBullets = 6;
                         fragVelocityMin = 0.3f;
     
-                        fragBullet = new MissileBulletType(3.9f, 20){{
+                        fragBullet = new MissileBulletType(3.2f, 20){{
                             homingPower = 0.2f;
                             weaveMag = 4;
                             weaveScale = 4;
-                            lifetime = 60f;
+                            lifetime = 30f;
                             keepVelocity = false;
                             shootEffect = Fx.shootHeal;
                             smokeEffect = Fx.hitLaser;
@@ -4355,7 +4359,7 @@ public class TerraUnitTypes {
                             trailLength = 15;
                             trailChance = -1f;
     
-                            healPercent = 2.8f;
+                            healPercent = 0.8f;
                             collidesTeam = true;
                             backColor = TerraPal.pinkFront;
     
