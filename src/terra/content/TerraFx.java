@@ -66,6 +66,18 @@ public class TerraFx {
         });
         Drawf.light(e.x, e.y, 45f, TerraPal.redBack, 0.8f * e.fout());
     }),
+    acidExplosion = new Effect(50, e -> {
+        color(TerraPal.limeFront);
+        e.scaled(6, i -> {
+            stroke(3f * i.fout());
+            Lines.circle(e.x, e.y, 3f + i.fin() * 15f);
+        });
+        color(TerraPal.limeBack);
+        randLenVectors(e.id, 13, 2f + 23f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+        });
+        Drawf.light(e.x, e.y, 45f, TerraPal.limeFront, 0.8f * e.fout());
+    }),
     smokeRise = new Effect(150f, 150f, e -> {
         color(Color.gray, Tmp.c2.set(Pal.darkishGray).a(0f), e.fin());
         float size = 7f + e.fin()*8f;
