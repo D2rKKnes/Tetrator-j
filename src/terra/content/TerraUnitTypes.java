@@ -4305,8 +4305,8 @@ public class TerraUnitTypes {
                     weaveScale = 4f;
                     weaveMag = 1f;
                     puddles = 4;
-                    puddleRange = 2f * 8f;
-                    puddleAmount = 20f;
+                    puddleRange = 2.25f * 8f;
+                    puddleAmount = 13f;
                     puddleLiquid = TerraLiquids.acid;
                     status = TerraStatusEffects.acidCorroded;
                     statusDuration = 30f;
