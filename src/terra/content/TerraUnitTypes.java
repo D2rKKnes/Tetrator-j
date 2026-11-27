@@ -4288,9 +4288,23 @@ public class TerraUnitTypes {
                     y = 0f;
                     shootY = 7f;
                     reload = 90f;
+                    cooldownTime = reload * 1.75f;
                     recoil = 0f;
                     inaccuracy = 1f;
                     velocityRnd = 0.1f;
+                    parts.addAll(
+                        new RegionPart("-string"){{
+                            progress = PartProgress.warmup;
+                            mirror = true;
+                            under = true;
+                            heatColor = TerraPal.pinkFront;
+                            moveX = 0f;
+                            moveY = 2f;
+                            moveRot = -40f;
+                            rot = 180f;
+                            y = -2f;
+                        }}
+                    );
                     bullet = new FlakBulletType(2.5f, 33){{
                         sprite = "missile-large";
                         //for targeting
@@ -4334,49 +4348,29 @@ public class TerraUnitTypes {
                         trailWidth = 4f;
                         trailLength = 21;
     
-                        fragBullets = 6;
-                        fragVelocityMin = 0.3f;
-    
-                        fragBullet = new MissileBulletType(3.2f, 20){{
-                            homingPower = 0.2f;
-                            weaveMag = 4;
-                            weaveScale = 4;
-                            lifetime = 30f;
-                            keepVelocity = false;
-                            shootEffect = Fx.shootHeal;
-                            smokeEffect = Fx.hitLaser;
-                            splashDamage = 13f;
-                            splashDamageRadius = 20f;
+                        buildingDamageMultiplier = 0.5f;
+
+                        fragLifeMin = 1f;
+                        fragVelocityMin = 1;
+                        fragBullets = 10;
+                        fragRandomSpread = 0;
+                        fragSpread = 36;
+                        fragBullet = new BasicBulletType(5, 15){{
+                            buildingDamageMultiplier = 0.5f;
+                            lifetime = 50f;
+                            width = 4.5f;
+                            weaveRandom = false;
+                            weaveMag = 40;
+                            weaveScale = -5;
+                            height = 8;
+                                    
+                            pierce = true;
+                            sprite = "missile-large";
+                            backColor = hitColor = trailColor = TerraPal.pinkFront;
                             frontColor = Color.white;
-                            hitSound = Sounds.none;
-    
-                            lightColor = TerraPal.pinkFront;
-                            lightRadius = 40f;
-                            lightOpacity = 0.7f;
-    
-                            trailColor = TerraPal.pinkFront;
-                            trailWidth = 2.5f;
-                            trailLength = 15;
-                            trailChance = -1f;
-    
-                            healPercent = 0.8f;
-                            collidesTeam = true;
-                            backColor = TerraPal.pinkFront;
-    
-                            despawnEffect = Fx.none;
-                            hitEffect = new ExplosionEffect(){{
-                                lifetime = 20f;
-                                waveStroke = 2f;
-                                waveColor = TerraPal.pinkFront;
-                                waveRad = 12f;
-                                smokeSize = 0f;
-                                smokeSizeBase = 0f;
-                                sparkColor = TerraPal.pinkFront;
-                                sparks = 9;
-                                sparkRad = 35f;
-                                sparkLen = 4f;
-                                sparkStroke = 1.5f;
-                            }};
+                            trailWidth = 2f;
+                            trailLength = 6;
+                            hitEffect = despawnEffect = Fx.hitBulletColor;
                         }};
                     }};
                 }},
