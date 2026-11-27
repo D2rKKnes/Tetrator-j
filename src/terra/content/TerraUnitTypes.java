@@ -4262,6 +4262,135 @@ public class TerraUnitTypes {
             );
         }};
 
+        glow = new CopisUnitType("glow"){{
+            flying = true;
+            speed = 2.3f;
+            rotateSpeed = 7f;
+            drag = 0.08f;
+            accel = 0.03f;
+            hitSize = 14f;
+            health = 950;
+            armor = 6;
+            engineSize = 3f;
+            engineOffset = 7f;
+            //engineLayer = Layer.effect;
+            lowAltitude = true;
+            constructor = UnitEntity::create;
+
+            weapons.add(
+                new Weapon("terra-glow-weapon"){{
+                    shootSound = Sounds.shootMissilePlasma;
+                    x = 0f;
+                    y = 0f;
+                    shootY = 7f;
+                    reload = 20f;
+                    recoil = 0f;
+                    inaccuracy = 1f;
+                    velocityRnd = 0.1f;
+                    bullet = new FlakBulletType(2.5f, 33){{
+                        sprite = "missile-large";
+                        //for targeting
+                        collidesGround = collidesAir = true;
+                        explodeRange = 40f;
+                        width = height = 10f;
+                        shrinkY = 0f;
+                        drag = -0.003f;
+                        homingRange = 60f;
+                        keepVelocity = false;
+                        lightRadius = 60f;
+                        lightOpacity = 0.7f;
+                        despawnSound = Sounds.explosion;
+    
+                        splashDamageRadius = 30f;
+                        splashDamage = 25f;
+    
+                        lifetime = 80f;
+                        backColor = lightColor = trailColor = TerraPal.pinkFront;
+                        frontColor = Color.white;
+    
+                        hitEffect = new ExplosionEffect(){{
+                            lifetime = 28f;
+                            waveStroke = 6f;
+                            waveLife = 10f;
+                            waveRadBase = 7f;
+                            waveColor = backColor;
+                            waveRad = 30f;
+                            smokes = 6;
+                            smokeColor = Color.white;
+                            sparkColor = backColor;
+                            sparks = 6;
+                            sparkRad = 35f;
+                            sparkStroke = 1.5f;
+                            sparkLen = 4f;
+                        }};
+    
+                        weaveScale = 8f;
+                        weaveMag = 1f;
+    
+                        trailWidth = 4f;
+                        trailLength = 21;
+    
+                        fragBullets = 3;
+                        fragVelocityMin = 0.3f;
+    
+                        fragBullet = new MissileBulletType(3.9f, 20){{
+                            homingPower = 0.2f;
+                            weaveMag = 4;
+                            weaveScale = 4;
+                            lifetime = 60f;
+                            keepVelocity = false;
+                            shootEffect = Fx.shootHeal;
+                            smokeEffect = Fx.hitLaser;
+                            splashDamage = 13f;
+                            splashDamageRadius = 20f;
+                            frontColor = Color.white;
+                            hitSound = Sounds.none;
+    
+                            lightColor = TerraPal.pinkFront;
+                            lightRadius = 40f;
+                            lightOpacity = 0.7f;
+    
+                            trailColor = TerraPal.pinkFront;
+                            trailWidth = 2.5f;
+                            trailLength = 15;
+                            trailChance = -1f;
+    
+                            healPercent = 2.8f;
+                            collidesTeam = true;
+                            backColor = TerraPal.pinkFront;
+    
+                            despawnEffect = Fx.none;
+                            hitEffect = new ExplosionEffect(){{
+                                lifetime = 20f;
+                                waveStroke = 2f;
+                                waveColor = TerraPal.pinkFront;
+                                waveRad = 12f;
+                                smokeSize = 0f;
+                                smokeSizeBase = 0f;
+                                sparkColor = TerraPal.pinkFront;
+                                sparks = 9;
+                                sparkRad = 35f;
+                                sparkLen = 4f;
+                                sparkStroke = 1.5f;
+                            }};
+                        }};
+                    }};
+                }},
+                new RepairBeamWeapon("terra-pink-heal-mount"){{
+                    x = 19f / 4f;
+                    y = -7f / 4f;
+                    shootY = 6.5f;
+                    beamWidth = 1.1f;
+                    repairSpeed = 40f / 60f;
+                    laserColor = healColor = TerraPal.pinkFront;
+    
+                    bullet = new BulletType(){{
+                        maxRange = 160f;
+                    }};
+                }}
+            );
+        }};
+
         fever = new CopisUnitType("fever"){{
             flying = true;
             speed = 2f;
