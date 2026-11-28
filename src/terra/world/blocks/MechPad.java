@@ -30,8 +30,6 @@ public class MechPad extends Block{
         super(name);
         update = configurable = true;
         hasItems = solid = false;
-        ambientSound = Sounds.respawning;
-        ambientSoundVolume = 0.08f;
     }
     
     @Override
