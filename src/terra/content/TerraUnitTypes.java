@@ -4292,6 +4292,7 @@ public class TerraUnitTypes {
                     recoil = 0f;
                     inaccuracy = 1f;
                     velocityRnd = 0.1f;
+                    mirror = false;
                     parts.addAll(
                         new RegionPart("-string"){{
                             progress = PartProgress.warmup;
